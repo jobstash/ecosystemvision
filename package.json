@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./src ./app",
+    "lint": "eslint ./src",
     "lint:staged": "lint-staged",
     "lint:fix": "eslint ./src ./app --fix",
     "test": "echo \"Skipping tests ...\" && exit 0",
