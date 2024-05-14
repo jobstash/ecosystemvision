@@ -22,3 +22,7 @@ export const A11Y = {
     },
   },
 } as const;
+
+export const QUERY_STALETIME = {
+  DEFAULT: 1000 * 60 * 60, // 1 hr
+} as const;

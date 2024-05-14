@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { showFullscreenNavAtom } from '@/shared/atoms/show-fullscreen-nav-atom';
+import { showFullscreenNavAtom } from '@/shared/atoms';
 
 export const useCloseNav = () => {
   const [showNav, setShowNav] = useAtom(showFullscreenNavAtom);

@@ -2,7 +2,7 @@
 
 import { useAtomValue } from 'jotai';
 
-import { showFullscreenNavAtom } from '@/shared/atoms/show-fullscreen-nav-atom';
+import { showFullscreenNavAtom } from '@/shared/atoms';
 
 interface Props {
   children: React.ReactNode;
