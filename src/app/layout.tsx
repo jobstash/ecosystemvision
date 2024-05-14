@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import { lato, roboto } from '@/shared/core/fonts';
+import { Nav } from '@/shared/components/nav';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 
@@ -22,7 +23,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html lang="en" className={`${lato.variable} ${roboto.variable}`}>
     <body className={inter.className}>
       <NextUIProvider>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <Nav />
+          {children}
+        </ReactQueryProvider>
       </NextUIProvider>
     </body>
   </html>

@@ -21,8 +21,7 @@ const classNames = {
 };
 
 const NotFound = () => (
-  // TODO: Adjust left-padding after nav implementation
-  <div className="flex min-h-screen w-full items-center justify-center">
+  <div className="flex min-h-screen w-full items-center justify-center md:pl-[212px]">
     <ErrorAction
       isTransparent
       textContent={textContent}
