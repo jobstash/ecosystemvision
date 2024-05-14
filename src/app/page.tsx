@@ -1,9 +1,3 @@
-const Home = () => {
-  return (
-    <main>
-      <p>Henlo</p>
-    </main>
-  );
-};
+const Home = () => null;
 
 export default Home;
