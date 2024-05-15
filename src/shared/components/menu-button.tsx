@@ -3,7 +3,7 @@
 import { Button } from '@nextui-org/button';
 import { useSetAtom } from 'jotai';
 
-import { showFullscreenNavAtom } from '@/shared/atoms';
+import { showFullscreenNavAtom } from '@/shared/core/atoms';
 
 export const MenuButton = () => {
   const setShowNav = useSetAtom(showFullscreenNavAtom);
