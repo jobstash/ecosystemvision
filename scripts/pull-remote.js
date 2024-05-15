@@ -6,7 +6,9 @@
 const util = require('node:util');
 const exec = util.promisify(require('node:child_process').exec);
 
-const MAIN_BRANCH = 'main'(async function () {
+const MAIN_BRANCH = 'main';
+
+(async function () {
   try {
     // Get branch name
     const { stdout: branchName } = await exec(
