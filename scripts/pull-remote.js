@@ -6,18 +6,18 @@
 const util = require('node:util');
 const exec = util.promisify(require('node:child_process').exec);
 
-(async function () {
+const MAIN_BRANCH = 'main'(async function () {
   try {
     // Get branch name
     const { stdout: branchName } = await exec(
       'git rev-parse --abbrev-ref HEAD',
     );
 
-    // Checkout app-router
-    await exec('git checkout app-router');
+    // Checkout main
+    await exec(`git checkout ${MAIN_BRANCH}`);
 
-    // Pull origin app-router
-    await exec('git pull origin app-router');
+    // Pull origin main
+    await exec(`git pull origin ${MAIN_BRANCH}`);
 
     // Delete local feature-branch
     await exec(`git branch -D ${branchName}`);
