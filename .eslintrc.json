@@ -33,7 +33,7 @@
                 "^@/shared/core",
                 "^@/shared/utils",
                 "^@/shared/atoms",
-                "^@/shared/api",
+                "^@/shared/data",
                 "^@/shared/hooks",
                 "^@/shared/components",
                 "^@/shared/providers"
@@ -43,7 +43,7 @@
                 "^(@)(/.*/core|$)",
                 "^(@)(/.*/utils|$)",
                 "^(@)(/.*/atoms|$)",
-                "^(@)(/.*/api|$)",
+                "^(@)(/.*/data|$)",
                 "^(@)(/.*/hooks|$)",
                 "^(@)(/.*/components|$)",
                 "^(@)(/.*/providers|$)"

@@ -9,10 +9,9 @@ import { getQueryClient } from '@/shared/utils/get-query-client';
 import { orgQueryKeys } from '@/orgs/core/query-keys';
 import { initOrgAtom, orgTotalCountAtom } from '@/orgs/core/atoms';
 import { initPathAtom } from '@/shared/core/atoms';
+import { getOrgDetails } from '@/orgs/data/get-org-details';
 
 import { useOrgListQuery } from './use-org-list-query';
-
-import { getOrgDetails } from '@/orgs/data/get-org-details';
 
 export const useOrgList = () => {
   const queryClient = getQueryClient();
