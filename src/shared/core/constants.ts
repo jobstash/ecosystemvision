@@ -26,3 +26,13 @@ export const A11Y = {
 export const QUERY_STALETIME = {
   DEFAULT: 1000 * 60 * 60, // 1 hr
 } as const;
+
+export const JOB_SENIORITY_MAP = {
+  Intern: '1',
+  Junior: '2',
+  Senior: '3',
+  Lead: '4',
+  Head: '5',
+} as const;
+
+export const JOB_SENIORITY_SET = new Set(Object.keys(JOB_SENIORITY_MAP));
