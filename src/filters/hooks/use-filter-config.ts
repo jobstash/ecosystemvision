@@ -1,23 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { QUERY_STALETIME, RouteSection } from '@/shared/core/constants';
-import { MW_URL } from '@/shared/core/envs';
-import { mwGET } from '@/shared/utils/mw-get';
 
 import { filterQueryKeys } from '@/filters/core/query-keys';
-import { filterConfigResponseSchema } from '@/filters/core/schemas';
 import { sanitizeFilterParams } from '@/filters/utils/sanitize-filter-params';
-
-const getFilterConfig = async (path: `/${RouteSection}`) => {
-  const url = `${MW_URL}${path}/filters`;
-
-  return mwGET({
-    url,
-    label: 'getFilterConfig',
-    responseSchema: filterConfigResponseSchema,
-    options: { next: { revalidate: 60 * 60 } },
-  });
-};
+import { getFilterConfig } from '@/filters/data/get-filter-config';
 
 export const useFilterConfig = (
   searchParams: string | Record<string, string>,
