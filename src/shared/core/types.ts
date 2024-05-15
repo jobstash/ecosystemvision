@@ -6,3 +6,8 @@ export type InfoTagProps = {
 };
 
 export type EnabledTagsConfig<T> = Partial<Record<keyof T, boolean>>;
+
+export type ErrorBoundaryProps = {
+  error: Error & { digest?: string };
+  reset: () => void;
+};
