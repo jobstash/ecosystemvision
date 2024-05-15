@@ -10,7 +10,9 @@
     "lint:staged": "lint-staged",
     "lint:fix": "eslint ./src ./app --fix",
     "test": "echo \"Skipping tests ...\" && exit 0",
-    "prepare": "husky"
+    "prepare": "husky",
+    "push": "git push origin $(git rev-parse --abbrev-ref HEAD)",
+    "pull": "node scripts/pull-remote.js"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^14.2.3",
