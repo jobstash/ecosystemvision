@@ -2,8 +2,7 @@ import { Skeleton } from '@nextui-org/skeleton';
 
 import { InfoTagProps } from '@/shared/core/types';
 import { cn } from '@/shared/utils/cn';
-
-import { ExternalIcon } from '../icons/external-icon';
+import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
 import { InfoTagLink } from './info-tag-link';
 
