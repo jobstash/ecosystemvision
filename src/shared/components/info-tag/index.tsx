@@ -1,11 +1,11 @@
-import { Button } from '@nextui-org/button';
-import { Link } from '@nextui-org/link';
 import { Skeleton } from '@nextui-org/skeleton';
 
 import { InfoTagProps } from '@/shared/core/types';
 import { cn } from '@/shared/utils/cn';
 
-import { ExternalIcon } from './icons/external-icon';
+import { ExternalIcon } from '../icons/external-icon';
+
+import { InfoTagLink } from './info-tag-link';
 
 const DEFAULT_CLASSNAME =
   'flex h-6 shrink-0 items-center gap-x-2 rounded-[4px] py-1 pr-2 lg:rounded-md';
@@ -37,17 +37,7 @@ export const InfoTag = (props: Props) => {
   );
 
   if (link) {
-    return (
-      <Button
-        as={Link}
-        className={className}
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {content}
-      </Button>
-    );
+    return <InfoTagLink className={className} href={link} content={content} />;
   }
 
   return <div className={className}>{content}</div>;
