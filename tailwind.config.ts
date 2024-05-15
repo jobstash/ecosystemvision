@@ -5,7 +5,7 @@ const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/components/(button|link|skeleton|spinner).js',
+    './node_modules/@nextui-org/theme/dist/components/(button|link|skeleton|spinner|input).js',
   ],
   safelist: [
     {
