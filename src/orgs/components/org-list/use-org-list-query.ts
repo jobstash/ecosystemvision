@@ -1,30 +1,11 @@
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { QUERY_STALETIME } from '@/shared/core/constants';
-import { MW_URL, PAGE_SIZE } from '@/shared/core/envs';
-import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search-params';
-import { mwGET } from '@/shared/utils/mw-get';
 
 import { OrgQueryKeys, orgQueryKeys } from '@/orgs/core/query-keys';
-import { OrgListQueryPage, orgListQueryPageSchema } from '@/orgs/core/schemas';
+import { OrgListQueryPage } from '@/orgs/core/schemas';
+import { getOrgList } from '@/orgs/data/get-org-list';
 import { useFiltersContext } from '@/filters/providers/filters-provider/context';
-
-const getOrgList = async (
-  page: number,
-  searchParams: string | Record<string, string>,
-) => {
-  const url = createUrlWithSearchParams(
-    `${MW_URL}/organizations/list?page=${page}&limit=${PAGE_SIZE}`,
-    searchParams,
-  );
-
-  return mwGET({
-    url,
-    label: 'getOrgList',
-    responseSchema: orgListQueryPageSchema,
-    options: { next: { revalidate: 60 * 60 } },
-  });
-};
 
 export const useOrgListQuery = () => {
   const { filterParamsString } = useFiltersContext();
