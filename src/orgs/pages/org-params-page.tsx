@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 
 import { ROUTE_TABS } from '@/shared/core/constants';
