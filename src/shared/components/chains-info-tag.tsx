@@ -3,10 +3,9 @@ import { useMemo } from 'react';
 import { Avatar, AvatarGroup } from '@nextui-org/avatar';
 import { Tooltip } from '@nextui-org/tooltip';
 
+import { Chain } from '@/shared/core/schemas';
 import { getPluralText } from '@/shared/utils/get-plural-text';
-
-import { Chain } from '../core/schemas';
-import { useIsMobile, useIsXs } from '../hooks/use-media-query';
+import { useIsMobile, useIsXs } from '@/shared/hooks/use-media-query';
 
 import { ChainsIcon } from './icons/chains-icon';
 import { InfoTag } from './info-tag';
