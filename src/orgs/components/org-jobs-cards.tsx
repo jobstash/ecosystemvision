@@ -5,9 +5,8 @@ import { Divider } from '@/shared/components/divider';
 import { Heading } from '@/shared/components/heading';
 import { Text } from '@/shared/components/text';
 
+import { OrgJob } from '@/orgs/core/schemas';
 import { JobCardInfoTags } from '@/jobs/components/job-card/info-tags';
-
-import { OrgJob } from '../core/schemas';
 
 const CTA_TEXT = 'Explore Job';
 
