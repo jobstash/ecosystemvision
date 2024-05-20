@@ -8,39 +8,6 @@ import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 import { InfoTags } from '@/shared/components/info-tags';
 
-interface Props {
-  fundingRounds: FundingRound[];
-}
-
-export const FundingRounds = ({ fundingRounds }: Props) => {
-  const count = fundingRounds.length;
-
-  if (!count) return null;
-
-  return (
-    <>
-      <Divider />
-
-      <Heading text={HEADING_TEXT} className="text-lg font-semibold" />
-
-      <div className="flex flex-col justify-center gap-2">
-        {fundingRounds.map((fundingRound, i) => (
-          <>
-            <div key={fundingRound.id} className="flex flex-wrap lg:h-6">
-              <InfoTags
-                isCompact
-                tags={createFundingRoundTags(fundingRound)}
-                classNames={{ wrapper: 'gap-y-0' }}
-              />
-            </div>
-            {i !== count - 1 && <DashedLine />}
-          </>
-        ))}
-      </div>
-    </>
-  );
-};
-
 const HEADING_TEXT = 'Funding Rounds';
 
 const createFundingRoundTags = (fundingRound: FundingRound) => {
@@ -75,3 +42,36 @@ const DashedLine = () => (
     <hr className="border-t border-dashed border-white/20" />
   </div>
 );
+
+interface Props {
+  fundingRounds: FundingRound[];
+}
+
+export const FundingRounds = ({ fundingRounds }: Props) => {
+  const count = fundingRounds.length;
+
+  if (!count) return null;
+
+  return (
+    <>
+      <Divider />
+
+      <Heading text={HEADING_TEXT} className="text-lg font-semibold" />
+
+      <div className="flex flex-col justify-center gap-2">
+        {fundingRounds.map((fundingRound, i) => (
+          <>
+            <div key={fundingRound.id} className="flex flex-wrap lg:h-6">
+              <InfoTags
+                isCompact
+                tags={createFundingRoundTags(fundingRound)}
+                classNames={{ wrapper: 'gap-y-0' }}
+              />
+            </div>
+            {i !== count - 1 && <DashedLine />}
+          </>
+        ))}
+      </div>
+    </>
+  );
+};

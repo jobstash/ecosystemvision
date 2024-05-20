@@ -7,6 +7,19 @@ import { Heading } from '@/shared/components/heading';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 import { InfoTags } from '@/shared/components/info-tags';
 
+const HEADING_TEXT = 'Investors';
+
+const createInvestorsTags = (investors: Investor[]) => {
+  const tags: InfoTagProps[] = investors.map(({ name }) => ({
+    text: name,
+    icon: <PaperbillIcon />,
+    link: `${FRONTEND_URL}/jobs?investors=${normalizeString(name)}`,
+    showExternalIcon: false,
+  }));
+
+  return tags;
+};
+
 interface Props {
   investors: Investor[];
 }
@@ -27,17 +40,4 @@ export const Investors = ({ investors }: Props) => {
       <InfoTags tags={tags} />
     </>
   );
-};
-
-const HEADING_TEXT = 'Investors';
-
-const createInvestorsTags = (investors: Investor[]) => {
-  const tags: InfoTagProps[] = investors.map(({ name }) => ({
-    text: name,
-    icon: <PaperbillIcon />,
-    link: `${FRONTEND_URL}/jobs?investors=${normalizeString(name)}`,
-    showExternalIcon: false,
-  }));
-
-  return tags;
 };
