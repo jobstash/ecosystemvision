@@ -1,3 +1,5 @@
+'use client';
+
 import { Spinner } from '@nextui-org/spinner';
 
 import { HREFS, ROUTE_TABS } from '@/shared/core/constants';
