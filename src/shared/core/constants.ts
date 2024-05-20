@@ -5,6 +5,23 @@ export const ROUTE_SECTIONS = {
 } as const;
 export type RouteSection = (typeof ROUTE_SECTIONS)[keyof typeof ROUTE_SECTIONS];
 
+export const ROUTE_TABS = {
+  SHARED: {
+    DETAILS: 'details',
+    ORG: 'organization',
+  },
+  JOBS: {
+    PROJECTS: 'projects',
+    COMPETITORS: 'competitors',
+    OTHER_JOBS: 'other-jobs',
+  },
+  ORGS: {
+    PROJECTS: 'projects',
+    JOBS: 'jobs',
+    REVIEWS: 'reviews',
+  },
+};
+
 export const HREFS = {
   HOME_PAGE: '/',
   JOBS_PAGE: `/${ROUTE_SECTIONS.JOBS}`,
