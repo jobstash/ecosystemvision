@@ -32,8 +32,8 @@ export const InfoTags = ({
   const wrapperClassName = cn(DEFAULT_WRAPPER_CLASSNAME, classNames?.wrapper);
   const content = (
     <>
-      {tags.map((tag) => (
-        <InfoTag key={tag.text} tag={tag} isCompact={isCompact} />
+      {tags.map((tag, i) => (
+        <InfoTag key={`${tag.text}-${i}`} tag={tag} isCompact={isCompact} />
       ))}
     </>
   );
