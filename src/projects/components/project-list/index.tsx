@@ -38,7 +38,6 @@ export const ProjectList = () => {
         <>
           <div>
             <p>Init project card</p>
-            <p>{JSON.stringify({ filterParamsString })}</p>
           </div>
 
           <VirtualWrapper count={projects.length}>

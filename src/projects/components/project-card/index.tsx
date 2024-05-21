@@ -22,7 +22,7 @@ interface Props {
 export const ProjectCard = ({ project, isInit, filterParamsString }: Props) => {
   const { id, website, logo, name, chains } = project;
 
-  const src = getLogoUrl(website, logo);
+  const src = getLogoUrl(website || '', logo);
   const { upperTags, midTags } = createProjectTags(project);
 
   return (
