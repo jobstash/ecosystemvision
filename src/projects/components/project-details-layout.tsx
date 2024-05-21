@@ -4,8 +4,8 @@ import { HREFS } from '@/shared/core/constants';
 import { getQueryClient } from '@/shared/utils/get-query-client';
 import { DetailsPanelLayout } from '@/shared/components/details-panel/layout';
 
-import { projectQueryKeys } from '../core/query-keys';
-import { getProjectDetails } from '../data/get-project-details';
+import { projectQueryKeys } from '@/projects/core/query-keys';
+import { getProjectDetails } from '@/projects/data/get-project-details';
 
 import { InitProjectDetailsSyncer } from './init-project-details-syncer';
 import { ProjectDetailsPanelHeader } from './project-details-panel-header';

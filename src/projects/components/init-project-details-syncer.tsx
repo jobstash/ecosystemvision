@@ -6,8 +6,8 @@ import { useAtom } from 'jotai';
 
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
 
-import { activeProjectIdAtom, initProjectAtom } from '../core/atoms';
-import { useProjectDetails } from '../hooks/use-project-details';
+import { activeProjectIdAtom, initProjectAtom } from '@/projects/core/atoms';
+import { useProjectDetails } from '@/projects/hooks/use-project-details';
 
 interface Props {
   id: string;
