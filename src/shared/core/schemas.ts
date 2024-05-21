@@ -145,7 +145,7 @@ export const projectInfoSchema = z
   .object({
     id: z.string().uuid(),
     name: z.string(),
-    website: z.string(),
+    website: z.string().nullable(),
     logo: z.string().nullable(),
     chains: z.array(chainSchema),
     hacks: z.array(hackSchema),

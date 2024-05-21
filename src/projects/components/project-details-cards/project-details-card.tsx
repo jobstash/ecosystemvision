@@ -27,7 +27,7 @@ interface Props {
 export const ProjectDetailsCard = ({ project, hasActions }: Props) => {
   const { name, website, logo, description, chains } = project;
 
-  const src = getLogoUrl(website, logo);
+  const src = getLogoUrl(website || '', logo);
 
   const tags = createProjectInfoTagProps(project);
   const auditTags = createProjectAuditTags(project);
