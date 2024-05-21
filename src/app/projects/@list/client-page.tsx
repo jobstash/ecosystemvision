@@ -10,6 +10,14 @@ import {
 } from '@/projects/core/atoms';
 import { FiltersProvider } from '@/filters/providers/filters-provider';
 
+const FiltersSection = dynamic(() =>
+  import('@/filters/components/filters-section').then((m) => m.FiltersSection),
+);
+
+const ProjectList = dynamic(() =>
+  import('@/projects/components/project-list').then((m) => m.ProjectList),
+);
+
 interface Props {
   rawSearchParams: Record<string, string>;
 }
@@ -30,11 +38,3 @@ export const ProjectListClientPage = ({ rawSearchParams }: Props) => {
     </FiltersProvider>
   );
 };
-
-const FiltersSection = dynamic(() =>
-  import('@/filters/components/filters-section').then((m) => m.FiltersSection),
-);
-
-const ProjectList = dynamic(() =>
-  import('@/projects/components/project-list').then((m) => m.ProjectList),
-);
