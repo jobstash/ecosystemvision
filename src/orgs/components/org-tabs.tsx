@@ -50,11 +50,6 @@ const createTabs = (org: OrgDetails) => {
     });
   }
 
-  tabs.push({
-    text: 'Reviews',
-    href: `/${ROUTE_TABS.ORGS.REVIEWS}`,
-  });
-
   return tabs.map((tab) => ({
     ...tab,
     href: `${HREFS.ORGS_PAGE}/${org.orgId}${tab.href}`,
