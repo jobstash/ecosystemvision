@@ -1,5 +1,6 @@
+import Link from 'next/link';
+
 import { Button } from '@nextui-org/button';
-import { Link } from '@nextui-org/link';
 
 import { cn } from '@/shared/utils/cn';
 import { getGradientBorderStyle } from '@/shared/utils/get-gradient-border-style';
