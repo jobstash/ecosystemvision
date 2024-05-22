@@ -1,6 +1,5 @@
 import { ProjectAllInfo } from '@/shared/core/schemas';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
-import { BookmarkButton } from '@/shared/components/bookmark-button';
 import { ChainsInfoTag } from '@/shared/components/chains-info-tag';
 import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
 import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
@@ -39,7 +38,6 @@ export const ProjectDetailsCard = ({ project, hasActions }: Props) => {
           <Heading text={name} className="text-lg font-bold" />
         </LogoTitle>
         <DetailsPanelActionsWrapper className="shrink-0 gap-4">
-          <BookmarkButton />
           <ShareButton />
         </DetailsPanelActionsWrapper>
       </div>
