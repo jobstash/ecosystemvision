@@ -32,12 +32,11 @@ export const FilterToggler = ({ children, countSection }: Props) => {
     <>
       <div className="flex items-center justify-between">
         <Button
-          startContent={
-            initializedFilters && !isPendingFilters && <FilterIcon />
-          }
+          startContent={<FilterIcon />}
           style={toggleStyle}
           onClick={toggleOpen}
-          isLoading={!initializedFilters || isPendingFilters}
+          isDisabled={!initializedFilters || isPendingFilters}
+          className="px-3"
         >
           {buttonText}
         </Button>

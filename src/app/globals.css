@@ -18,6 +18,8 @@
 html {
 	background-color: #141317;
 	color: #fff;
+
+	overflow-y: scroll;
 }
 
 

@@ -47,6 +47,8 @@ export const FilterConfigMapper = () => {
         if (isRangeFilter) {
           const paramValues = getRangeParamValues(filterSearchParams, config);
 
+          if (isNaN(paramValues.min) && isNaN(paramValues.max)) return null;
+
           return (
             <RangeInput
               key={config.label}

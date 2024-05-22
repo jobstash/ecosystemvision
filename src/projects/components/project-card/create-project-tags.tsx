@@ -80,12 +80,12 @@ export const createProjectTags = (project: ProjectInfo) => {
     for (const audit of audits) {
       const issueCount = audit.techIssues ?? 0;
       const title = audit.name;
+      const issuesText = issueCount
+        ? ' (' + issueCount + ` ${getPluralText('issue', issueCount)})`
+        : '';
+
       midTags.push({
-        text: `${getPluralText('Audit', issueCount)}: ${title}${
-          issueCount
-            ? ' (' + issueCount + ` ${getPluralText('issue', issueCount)})`
-            : ''
-        }`,
+        text: `Audit${issuesText}: ${title}`,
         icon: <AuditsIcon />,
         link: audit.link ?? undefined,
       });
