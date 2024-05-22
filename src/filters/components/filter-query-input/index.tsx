@@ -2,6 +2,7 @@
 
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
+import { Kbd } from '@nextui-org/kbd';
 import { Spinner } from '@nextui-org/spinner';
 
 import { SearchInputIcon } from '@/shared/components/icons/seach-input-icon';
@@ -24,7 +25,7 @@ export const FilterQueryInput = ({ placeholder }: Props) => {
 
   const endContent = (
     <Button aria-label="Search" className="bg-transparent" onClick={applyQuery}>
-      Search
+      <Kbd keys={['enter']}>Search</Kbd>
     </Button>
   );
 
