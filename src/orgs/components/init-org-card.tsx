@@ -2,10 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Spinner } from '@nextui-org/spinner';
 import { useAtomValue } from 'jotai';
 
 import { HREFS } from '@/shared/core/constants';
+import { CardSkeleton } from '@/shared/components/card-skeleton';
 
 import { OrgListItem } from '@/orgs/core/schemas';
 import { getFundingRoundsData } from '@/orgs/utils/get-funding-rounds-data';
@@ -55,5 +55,5 @@ export const InitOrgCard = ({ filterParamsString }: Props) => {
   }
 
   // Defaults to a skeleton
-  return <Spinner size="sm" color="white" />;
+  return <CardSkeleton />;
 };

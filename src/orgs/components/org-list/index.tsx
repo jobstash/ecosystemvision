@@ -1,11 +1,12 @@
 import { cn } from '@/shared/utils/cn';
 import { reloadPage } from '@/shared/utils/reload-page';
+import { CardSkeleton } from '@/shared/components/card-skeleton';
 import { InternalErrorResult } from '@/shared/components/internal-error-result';
+import { Loader } from '@/shared/components/loader';
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { InitOrgCard } from '@/orgs/components/init-org-card';
 import { OrgCard } from '@/orgs/components/org-card';
-import { Loader } from '@/projects/components/loader';
 import { useFiltersContext } from '@/filters/providers/filters-provider/context';
 
 import { useOrgList } from './use-org-list';
@@ -29,7 +30,7 @@ export const OrgList = () => {
   return (
     <>
       {isPending ? (
-        <Loader />
+        <CardSkeleton />
       ) : (
         isSuccess &&
         (hasOrgs ? (
