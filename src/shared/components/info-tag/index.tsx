@@ -30,7 +30,9 @@ export const InfoTag = (props: Props) => {
   const content = (
     <>
       {icon}
-      <span className="text-sm lg:text-xs">{text}</span>
+      <span className="max-w-[32ch] self-start truncate text-sm md:max-w-[44ch] lg:text-xs">
+        {text}
+      </span>
       {showExternalIcon && <ExternalIcon />}
     </>
   );
