@@ -35,7 +35,9 @@ export const FilterQueryInput = ({ placeholder }: Props) => {
   return (
     <form onSubmit={onSubmit}>
       <Input
-        disabled={isPending}
+        // TEMP: disabled until contents get fixed
+        isDisabled
+        // disabled={isPending}
         placeholder={placeholder}
         className="bg-darkest-gray dark:hover:bg-darker-gray"
         startContent={startContent}

@@ -39,15 +39,12 @@ export const OrgCard = (props: Props) => {
         prefetch={true}
         className="flex flex-col gap-3 p-6"
       >
-        <div className="flex items-center justify-between">
-          <LogoTitle src={src}>
-            <div className="flex flex-col">
-              <h3 className="font-lato text-lg font-bold">{name}</h3>
-              <h4 className="font-lato text-sm text-white/60">{location}</h4>
-            </div>
-          </LogoTitle>
-          <p>{'<Leave Review>'}</p>
-        </div>
+        <LogoTitle src={src}>
+          <div className="flex flex-col">
+            <h3 className="font-lato text-lg font-bold">{name}</h3>
+            <h4 className="font-lato text-sm text-white/60">{location}</h4>
+          </div>
+        </LogoTitle>
 
         {hasTags && <Divider />}
 
