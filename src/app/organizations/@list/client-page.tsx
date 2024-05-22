@@ -8,8 +8,15 @@ import { orgFiltersSearchParamsAtom } from '@/filters/core/atoms';
 import { orgTotalCountAtom } from '@/orgs/core/atoms';
 import { FiltersProvider } from '@/filters/providers/filters-provider';
 
-const FiltersSection = dynamic(() =>
-  import('@/filters/components/filters-section').then((m) => m.FiltersSection),
+const FiltersSection = dynamic(
+  () =>
+    import('@/filters/components/filters-section').then(
+      (m) => m.FiltersSection,
+    ),
+  {
+    // Prevent layout shift while fetching bundle (or maybe add skeleton)
+    loading: () => <div className="h-24" />,
+  },
 );
 
 const OrgList = dynamic(() =>

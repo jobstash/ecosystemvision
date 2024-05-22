@@ -2,7 +2,9 @@
 
 import { cn } from '@/shared/utils/cn';
 import { reloadPage } from '@/shared/utils/reload-page';
+import { CardSkeleton } from '@/shared/components/card-skeleton';
 import { InternalErrorResult } from '@/shared/components/internal-error-result';
+import { Loader } from '@/shared/components/loader';
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { InitProjectCard } from '@/projects/components/init-project-card';
@@ -31,7 +33,7 @@ export const ProjectList = () => {
       {error && <InternalErrorResult onReset={reloadPage} />}
 
       {isPending ? (
-        <p>Card Skeleton</p>
+        <CardSkeleton />
       ) : isSuccess && hasProjects ? (
         <>
           <InitProjectCard filterParamsString={filterParamsString} />
@@ -48,7 +50,7 @@ export const ProjectList = () => {
 
           {hasNextPage ? (
             <div ref={inViewRef}>
-              <p>Card Skeleton</p>
+              <Loader />
             </div>
           ) : (
             <p>TODO: No more projects UI</p>

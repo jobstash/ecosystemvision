@@ -2,10 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Spinner } from '@nextui-org/spinner';
 import { useAtomValue } from 'jotai';
 
 import { HREFS } from '@/shared/core/constants';
+import { CardSkeleton } from '@/shared/components/card-skeleton';
 
 import { initProjectAtom } from '@/projects/core/atoms';
 import { initPathAtom } from '@/shared/core/atoms';
@@ -40,5 +40,5 @@ export const InitProjectCard = ({ filterParamsString }: Props) => {
   }
 
   // Defaults to a skeleton
-  return <Spinner size="sm" color="white" />;
+  return <CardSkeleton />;
 };
