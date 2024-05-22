@@ -1,9 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Button } from '@nextui-org/button';
-import { Link } from '@nextui-org/link';
 
 import { cn } from '@/shared/utils/cn';
 
