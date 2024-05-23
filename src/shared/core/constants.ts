@@ -1,5 +1,4 @@
 export const ROUTE_SECTIONS = {
-  JOBS: 'jobs' as const,
   ORGS: 'organizations' as const,
   PROJECTS: 'projects' as const,
 } as const;
@@ -24,7 +23,6 @@ export const ROUTE_TABS = {
 
 export const HREFS = {
   HOME_PAGE: '/',
-  JOBS_PAGE: `/${ROUTE_SECTIONS.JOBS}`,
   ORGS_PAGE: `/${ROUTE_SECTIONS.ORGS}`,
   PROJECTS_PAGE: `/${ROUTE_SECTIONS.PROJECTS}`,
 } as const;
