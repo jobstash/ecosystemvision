@@ -10,6 +10,10 @@ import { useFiltersContext } from '@/filters/providers/filters-provider/context'
 export const useProjectListQuery = () => {
   const { filterParamsString } = useFiltersContext();
 
+  const searchParams = filterParamsString.startsWith('?')
+    ? filterParamsString.slice(1)
+    : filterParamsString;
+
   return useInfiniteQuery<
     ProjectListQueryPage,
     Error,
@@ -17,9 +21,9 @@ export const useProjectListQuery = () => {
     ReturnType<ProjectQueryKeys['list']>,
     number
   >({
-    queryKey: projectQueryKeys.list(filterParamsString),
+    queryKey: projectQueryKeys.list(searchParams),
     queryFn: async ({ pageParam }) =>
-      getProjectList({ page: pageParam, searchParams: filterParamsString }),
+      getProjectList({ page: pageParam, searchParams }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
       page > 0 && data.length > 0 ? page + 1 : undefined,
