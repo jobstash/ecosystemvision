@@ -10,6 +10,10 @@ import { useFiltersContext } from '@/filters/providers/filters-provider/context'
 export const useOrgListQuery = () => {
   const { filterParamsString } = useFiltersContext();
 
+  const searchParams = filterParamsString.startsWith('?')
+    ? filterParamsString.slice(1)
+    : filterParamsString;
+
   return useInfiniteQuery<
     OrgListQueryPage,
     Error,
@@ -17,8 +21,8 @@ export const useOrgListQuery = () => {
     ReturnType<OrgQueryKeys['list']>,
     number
   >({
-    queryKey: orgQueryKeys.list(filterParamsString),
-    queryFn: async ({ pageParam }) => getOrgList(pageParam, filterParamsString),
+    queryKey: orgQueryKeys.list(searchParams),
+    queryFn: async ({ pageParam }) => getOrgList(pageParam, searchParams),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
       page > 0 && data.length > 0 ? page + 1 : undefined,
