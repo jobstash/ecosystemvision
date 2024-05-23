@@ -1,10 +1,27 @@
+'use client';
+
 import { Button } from '@nextui-org/button';
 
-export const ShareButton = () => {
+import { FRONTEND_URL } from '@/shared/core/envs';
+
+interface Props {
+  id: string;
+  routeSection: 'organizations' | 'projects';
+}
+
+export const ShareButton = ({ id, routeSection }: Props) => {
+  const onClick = () => {
+    if (typeof navigator !== 'undefined') {
+      const path = `${FRONTEND_URL}/${routeSection}/${id}/details`;
+      navigator.clipboard.writeText(path);
+    }
+  };
+
   return (
     <Button
       isIconOnly
       className="flex w-10 items-center justify-center rounded-md bg-white/10"
+      onClick={onClick}
     >
       <svg
         width="24"

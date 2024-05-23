@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { ProjectAllInfo } from '@/shared/core/schemas';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { ChainsInfoTag } from '@/shared/components/chains-info-tag';
@@ -37,7 +38,7 @@ export const ProjectDetailsCard = ({ project, actions }: Props) => {
           <Heading text={name} className="text-lg font-bold" />
         </LogoTitle>
         <DetailsPanelActionsWrapper className="shrink-0 gap-4">
-          <ShareButton />
+          <ShareButton id={project.id} routeSection={ROUTE_SECTIONS.PROJECTS} />
         </DetailsPanelActionsWrapper>
       </div>
 
