@@ -1,3 +1,4 @@
+import { JOBSTASH_URL } from '@/shared/core/envs';
 import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
 import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
 import { DetailsPanelCTA } from '@/shared/components/details-panel/cta';
@@ -35,7 +36,11 @@ export const OrgJobsCards = ({ jobs }: Props) => {
             </div>
           )}
           <DetailsPanelActionsWrapper>
-            <DetailsPanelCTA text={CTA_TEXT} />
+            <DetailsPanelCTA
+              isNewTab
+              text={CTA_TEXT}
+              href={`${JOBSTASH_URL}/jobs/${job.shortUUID}/details`}
+            />
           </DetailsPanelActionsWrapper>
         </DetailsPanelCardWrapper>
       ))}
