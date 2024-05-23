@@ -13,7 +13,7 @@ interface Props {
 
 export const FiltersSection = ({ countAtom, searchPlaceholder }: Props) => {
   return (
-    <div className="flex h-24 flex-col gap-4">
+    <div className="flex min-h-24 flex-col gap-4">
       <FilterQueryInput placeholder={searchPlaceholder} />
 
       <FilterToggler countSection={<TotalCount countAtom={countAtom} />}>
