@@ -13,7 +13,7 @@ const createInvestorsTags = (investors: Investor[]) => {
   const tags: InfoTagProps[] = investors.map(({ name }) => ({
     text: name,
     icon: <PaperbillIcon />,
-    link: `${FRONTEND_URL}/jobs?investors=${normalizeString(name)}`,
+    link: `${FRONTEND_URL}/organizations?investors=${normalizeString(name)}`,
     showExternalIcon: false,
   }));
 
