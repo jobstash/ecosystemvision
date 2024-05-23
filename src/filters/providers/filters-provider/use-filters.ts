@@ -36,7 +36,8 @@ export const useFilters = (props: Props) => {
   }, [filterSearchParams, initializedFilters, setAtomValue]);
 
   const filterConfigs = data ?? [];
-  const filterParamsString = filterSearchParams.toString();
+  const filterParamsString =
+    filterSearchParams.size > 0 ? `?${filterSearchParams.toString()}` : '';
   const isPendingFilters = isPendingData || isPendingTransition;
 
   return {
