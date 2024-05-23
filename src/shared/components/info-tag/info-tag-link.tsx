@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import { Button } from '@nextui-org/button';
 
 interface Props {
@@ -9,7 +11,9 @@ interface Props {
 }
 
 export const InfoTagLink = ({ className, href, content }: Props) => {
-  const onClick = () => {
+  const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     window.open(href, '_blank');
   };
 
