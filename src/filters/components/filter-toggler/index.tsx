@@ -14,8 +14,8 @@ interface Props {
 
 export const FilterToggler = ({ children, countSection }: Props) => {
   const {
-    // initializedFilters,
-    // isPendingFilters,
+    initializedFilters,
+    isPendingFilters,
     toggleStyle,
     buttonText,
     toggleOpen,
@@ -35,9 +35,7 @@ export const FilterToggler = ({ children, countSection }: Props) => {
           startContent={<FilterIcon />}
           style={toggleStyle}
           onClick={toggleOpen}
-          // TEMP: disabled until contents get fixed
-          isDisabled
-          // isDisabled={!initializedFilters || isPendingFilters}
+          isDisabled={!initializedFilters || isPendingFilters}
           className="px-3"
         >
           {buttonText}
