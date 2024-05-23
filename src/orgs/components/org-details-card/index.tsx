@@ -6,7 +6,7 @@ import { Text } from '@/shared/components/text';
 
 import { Actions } from './actions';
 import { FundingRounds } from './funding-rounds';
-// import { Investors } from './investors';
+import { Investors } from './investors';
 
 interface Props {
   org: {
@@ -19,12 +19,7 @@ interface Props {
 }
 
 export const OrgDetailsCard = ({
-  org: {
-    name,
-    description,
-    fundingRounds,
-    // investors
-  },
+  org: { name, description, fundingRounds, investors },
   hasActions,
 }: Props) => {
   return (
@@ -33,7 +28,7 @@ export const OrgDetailsCard = ({
       <Divider />
       <Text text={description} />
       <FundingRounds fundingRounds={fundingRounds} />
-      {/* <Investors investors={investors} /> */}
+      <Investors investors={investors} />
       {hasActions && <Actions />}
     </DetailsPanelCardWrapper>
   );
