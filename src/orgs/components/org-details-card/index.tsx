@@ -4,7 +4,6 @@ import { Divider } from '@/shared/components/divider';
 import { Heading } from '@/shared/components/heading';
 import { Text } from '@/shared/components/text';
 
-import { Actions } from './actions';
 import { FundingRounds } from './funding-rounds';
 import { Investors } from './investors';
 
@@ -15,12 +14,12 @@ interface Props {
     fundingRounds: FundingRound[];
     investors: Investor[];
   };
-  hasActions?: boolean;
+  actions?: React.ReactNode;
 }
 
 export const OrgDetailsCard = ({
   org: { name, description, fundingRounds, investors },
-  hasActions,
+  actions,
 }: Props) => {
   return (
     <DetailsPanelCardWrapper>
@@ -29,7 +28,12 @@ export const OrgDetailsCard = ({
       <Text text={description} />
       <FundingRounds fundingRounds={fundingRounds} />
       <Investors investors={investors} />
-      {hasActions && <Actions />}
+      {actions && (
+        <>
+          <Divider />
+          {actions}
+        </>
+      )}
     </DetailsPanelCardWrapper>
   );
 };

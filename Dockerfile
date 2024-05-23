@@ -16,7 +16,11 @@ COPY . .
 RUN yarn global add pnpm
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_MW_URL=https://middleware.jobstash.xyz
-ENV NEXT_PUBLIC_FRONTEND_URL=https://jobstash.xyz
+ENV NEXT_PUBLIC_JOBSTASH_URL=https://jobstash.xyz
+
+# TODO: Update this to https://projects.fyi when going public
+ENV NEXT_PUBLIC_FRONTEND_URL=https://projectsfyi-hqvspqnnhq-ew.a.run.app/
+
 ENV NEXT_PUBLIC_PAGE_SIZE=20
 RUN pnpm build
 

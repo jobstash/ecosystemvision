@@ -1,9 +1,11 @@
+import React from 'react';
+
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { ProjectAllInfo } from '@/shared/core/schemas';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { ChainsInfoTag } from '@/shared/components/chains-info-tag';
 import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
 import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
-import { DetailsPanelCTA } from '@/shared/components/details-panel/cta';
 import { Divider } from '@/shared/components/divider';
 import { Heading } from '@/shared/components/heading';
 import { InfoTags } from '@/shared/components/info-tags';
@@ -16,14 +18,12 @@ import { createProjectInfoTagProps } from '@/projects/utils/create-project-info-
 
 import { ProjectDetailsCardLinks } from './links';
 
-const CTA_TEXT = 'Explore Project';
-
 interface Props {
   project: ProjectAllInfo;
-  hasActions?: boolean;
+  actions?: React.ReactNode;
 }
 
-export const ProjectDetailsCard = ({ project, hasActions }: Props) => {
+export const ProjectDetailsCard = ({ project, actions }: Props) => {
   const { name, website, logo, description, chains } = project;
 
   const src = getLogoUrl(website || '', logo);
@@ -38,7 +38,7 @@ export const ProjectDetailsCard = ({ project, hasActions }: Props) => {
           <Heading text={name} className="text-lg font-bold" />
         </LogoTitle>
         <DetailsPanelActionsWrapper className="shrink-0 gap-4">
-          <ShareButton />
+          <ShareButton id={project.id} routeSection={ROUTE_SECTIONS.PROJECTS} />
         </DetailsPanelActionsWrapper>
       </div>
 
@@ -64,13 +64,10 @@ export const ProjectDetailsCard = ({ project, hasActions }: Props) => {
 
       <ChainsInfoTag chains={chains} />
 
-      {hasActions && (
+      {actions && (
         <>
           <Divider />
-
-          <DetailsPanelActionsWrapper>
-            <DetailsPanelCTA text={CTA_TEXT} />
-          </DetailsPanelActionsWrapper>
+          {actions}
         </>
       )}
     </DetailsPanelCardWrapper>
