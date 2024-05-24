@@ -1,11 +1,15 @@
 import { FundingRound, Investor } from '@/shared/core/schemas';
+import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
 import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
+import { DetailsPanelCTA } from '@/shared/components/details-panel/cta';
 import { Divider } from '@/shared/components/divider';
 import { Heading } from '@/shared/components/heading';
 import { Text } from '@/shared/components/text';
 
 import { FundingRounds } from './funding-rounds';
 import { Investors } from './investors';
+
+const CTA_TEXT = 'Explore Organization';
 
 interface Props {
   org: {
@@ -14,12 +18,12 @@ interface Props {
     fundingRounds: FundingRound[];
     investors: Investor[];
   };
-  actions?: React.ReactNode;
+  actionHref?: string;
 }
 
 export const OrgDetailsCard = ({
   org: { name, description, fundingRounds, investors },
-  actions,
+  actionHref,
 }: Props) => {
   return (
     <DetailsPanelCardWrapper>
@@ -28,10 +32,12 @@ export const OrgDetailsCard = ({
       <Text text={description} />
       <FundingRounds fundingRounds={fundingRounds} />
       <Investors investors={investors} />
-      {actions && (
+      {actionHref && (
         <>
           <Divider />
-          {actions}
+          <DetailsPanelActionsWrapper>
+            <DetailsPanelCTA text={CTA_TEXT} href={actionHref} />
+          </DetailsPanelActionsWrapper>
         </>
       )}
     </DetailsPanelCardWrapper>

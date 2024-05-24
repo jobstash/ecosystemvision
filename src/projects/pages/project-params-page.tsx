@@ -4,10 +4,18 @@ import dynamic from 'next/dynamic';
 
 import { ROUTE_TABS } from '@/shared/core/constants';
 import { FRONTEND_URL } from '@/shared/core/envs';
-import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
-import { DetailsPanelCTA } from '@/shared/components/details-panel/cta';
 
 import { useProjectDetails } from '@/projects/hooks/use-project-details';
+
+const ProjectDetailsCard = dynamic(() =>
+  import(
+    '@/projects/components/project-details-cards/project-details-card'
+  ).then((m) => m.ProjectDetailsCard),
+);
+
+const OrgDetailsCard = dynamic(() =>
+  import('@/orgs/components/org-details-card').then((m) => m.OrgDetailsCard),
+);
 
 interface Props {
   params: {
@@ -29,27 +37,10 @@ export const ProjectParamsPage = ({ params: { id, tab } }: Props) => {
     return (
       <OrgDetailsCard
         org={data.organization}
-        actions={
-          <DetailsPanelActionsWrapper>
-            <DetailsPanelCTA
-              text="Explore Organization"
-              href={`${FRONTEND_URL}/organizations/${data.organization.orgId}/details`}
-            />
-          </DetailsPanelActionsWrapper>
-        }
+        actionHref={`${FRONTEND_URL}/organizations/${data.organization.orgId}/details`}
       />
     );
   }
 
   return null;
 };
-
-const ProjectDetailsCard = dynamic(() =>
-  import(
-    '@/projects/components/project-details-cards/project-details-card'
-  ).then((m) => m.ProjectDetailsCard),
-);
-
-const OrgDetailsCard = dynamic(() =>
-  import('@/orgs/components/org-details-card').then((m) => m.OrgDetailsCard),
-);
