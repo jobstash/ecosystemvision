@@ -24,7 +24,12 @@ export const FilterQueryInput = ({ placeholder }: Props) => {
   );
 
   const endContent = (
-    <Button aria-label="Search" className="bg-transparent" onClick={applyQuery}>
+    <Button
+      aria-label="Search"
+      className="bg-transparent"
+      isDisabled={isPending}
+      onClick={applyQuery}
+    >
       <Kbd keys={['enter']}>Search</Kbd>
     </Button>
   );
@@ -36,7 +41,7 @@ export const FilterQueryInput = ({ placeholder }: Props) => {
     <form onSubmit={onSubmit}>
       <Input
         size="lg"
-        disabled={isPending}
+        isDisabled={isPending}
         placeholder={placeholder}
         className="bg-darkest-gray dark:hover:bg-darker-gray"
         startContent={startContent}

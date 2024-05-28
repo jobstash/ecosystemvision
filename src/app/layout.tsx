@@ -1,7 +1,10 @@
 import './globals.css';
+import '@mantine/core/styles.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 
 import { lato, roboto } from '@/shared/core/fonts';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
@@ -23,13 +26,18 @@ interface RootLayoutProps {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html lang="en" className={`${lato.variable} ${roboto.variable}`}>
+    <head>
+      <ColorSchemeScript />
+    </head>
     <body className={inter.className}>
-      <NextUIProvider>
-        <ReactQueryProvider>
-          <Nav />
-          {children}
-        </ReactQueryProvider>
-      </NextUIProvider>
+      <MantineProvider>
+        <NextUIProvider>
+          <ReactQueryProvider>
+            <Nav />
+            {children}
+          </ReactQueryProvider>
+        </NextUIProvider>
+      </MantineProvider>
 
       <PageScrollDisabler />
       <InitPathSyncer />
