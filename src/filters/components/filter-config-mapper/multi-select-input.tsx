@@ -2,126 +2,130 @@
 
 import { useState } from 'react';
 
-import { Select, SelectItem } from '@nextui-org/select';
+import { MultiSelect } from '@mantine/core';
 import { useAtom } from 'jotai';
 
 import { JOB_SENIORITY_MAP } from '@/shared/core/constants';
-import { Selection } from '@/shared/core/types';
 import { getCountText } from '@/shared/utils/get-count-text';
 import { normalizeString } from '@/shared/utils/normalize-string';
 
 import { MultiSelectFilterConfig } from '@/filters/core/schemas';
 import { useFiltersContext } from '@/filters/providers/filters-provider/context';
 
-interface MultiSelectInputProps {
-  config: MultiSelectFilterConfig;
-  paramValue: string;
-}
-
-// Get values from JOB_SENIORITY_MAP and use corresponding labels as value
 // e.g. '2' would be key, and 'Junior' would be the value
 const seniorityMap = new Map(
   Object.entries(JOB_SENIORITY_MAP).map(([key, value]) => [value, key]),
 );
-
 const SENIORITY_OPTIONS = Array.from(seniorityMap.values());
-
 type SeniorityMapKey =
   (typeof JOB_SENIORITY_MAP)[keyof typeof JOB_SENIORITY_MAP];
 
-const useMultiSelectInput = (props: MultiSelectInputProps) => {
-  const { config, paramValue } = props;
-  const { label, paramKey, options: configOptions } = config;
-
-  const isSeniority = paramKey === 'seniority';
-  const options = isSeniority ? SENIORITY_OPTIONS : configOptions;
+// Handles current filter param values in url
+const getInitialValues = (
+  props: MultiSelectInputProps,
+  isSeniority: boolean,
+) => {
+  const {
+    config: { options: configOptions },
+    paramValue,
+  } = props;
 
   // Derive original string from normalized values
   const normalizedMap = new Map();
   for (const option of configOptions) {
     normalizedMap.set(normalizeString(option), option);
   }
-
+  const initialValues: string[] = [];
   const paramValues = paramValue.split(',');
-
-  const initValues: string[] = [];
   for (const v of paramValues) {
     // Handle seniority mapping - otherwise do normalized mapping
     if (isSeniority) {
       const value = seniorityMap.get(v as SeniorityMapKey);
       if (value) {
-        initValues.push(value);
+        initialValues.push(value);
       }
     } else if (normalizedMap.has(v)) {
-      initValues.push(normalizedMap.get(v));
+      initialValues.push(normalizedMap.get(v));
     }
   }
 
-  const [value, setValue] = useState<Selection>(new Set(initValues));
+  return initialValues;
+};
+
+export const useMultiSelectInput = (props: MultiSelectInputProps) => {
+  const {
+    config: { label: configLabel, paramKey, options: configOptions },
+  } = props;
+  const isSeniority = paramKey === 'seniority';
+
+  const initialValues = getInitialValues(props, isSeniority);
+
+  const [value, setValue] = useState<string[]>(initialValues);
 
   const { atom } = useFiltersContext();
-  const [filterParams, setFilterParams] = useAtom(atom);
+  const [filterParams, setFilterParms] = useAtom(atom);
 
-  const onSelectionChange = (keys: Selection) => {
-    setValue(keys);
+  const onChange = (newValue: string[]) => {
+    setValue(newValue);
 
-    // Map set values into normalized string
-    const values = Array.from((keys as Set<string>).values())
+    // Map values into normalized string
+    const normalizedValues = newValue
       .map((v) => {
-        if (paramKey === 'seniority') {
+        if (isSeniority) {
           return JOB_SENIORITY_MAP[v as keyof typeof JOB_SENIORITY_MAP];
         } else {
           return normalizeString(v);
         }
       })
       .filter(Boolean) as string[];
+    const hasValues = normalizedValues.length > 0;
 
-    // Immutable search param
-    const newParams = new URLSearchParams(filterParams);
-
-    // With values -> Update filter param
-    // Without values -> Clear param
-    if (values.length > 0) {
-      // TODO: handle seniority
-      newParams.set(paramKey, values.join(','));
-    } else {
-      newParams.delete(paramKey);
-    }
-
-    // Save changes
-    setFilterParams(newParams);
+    // Update filter params if has values, otherwise clear
+    const newFilterParams = new URLSearchParams(filterParams);
+    hasValues
+      ? newFilterParams.set(paramKey, normalizedValues.join(','))
+      : newFilterParams.delete(paramKey);
+    setFilterParms(newFilterParams);
   };
 
-  const labelText = getCountText(label, (value as Set<string>).size);
+  const label = getCountText(configLabel, value.length);
+  const options = isSeniority ? SENIORITY_OPTIONS : configOptions;
 
   return {
-    labelText,
+    label,
     value,
-    onSelectionChange,
     options,
+    onChange,
   };
 };
 
+interface MultiSelectInputProps {
+  config: MultiSelectFilterConfig;
+  paramValue: string;
+}
+
 export const MultiSelectInput = (props: MultiSelectInputProps) => {
-  const { labelText, value, onSelectionChange, options } =
-    useMultiSelectInput(props);
+  const { label, value, options, onChange } = useMultiSelectInput(props);
 
   return (
-    <Select
-      size="sm"
-      label={labelText}
-      selectionMode="multiple"
+    <MultiSelect
+      searchable
+      hidePickedOptions
+      // We'll use label as placeholder for now.
+      // Later on we'll refactor other filter components too look the same.
+      placeholder={label}
+      size="lg"
       classNames={{
-        trigger: 'bg-darkest-gray',
+        input:
+          'bg-darkest-gray border-none rounded-lg text-white/80 text-base ',
+        inputField: 'placeholder:text-base',
+        dropdown: 'bg-darkest-gray border-none text-white/80',
+        option: 'text-base hover:bg-dark-gray',
+        pill: 'bg-dark-gray text-white/80 text-sm',
       }}
-      selectedKeys={value}
-      onSelectionChange={onSelectionChange}
-    >
-      {options.map((option) => (
-        <SelectItem key={option} value={option}>
-          {option}
-        </SelectItem>
-      ))}
-    </Select>
+      data={options}
+      value={value}
+      onChange={onChange}
+    />
   );
 };
