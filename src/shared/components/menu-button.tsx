@@ -5,7 +5,11 @@ import { useSetAtom } from 'jotai';
 
 import { showFullscreenNavAtom } from '@/shared/core/atoms';
 
-export const MenuButton = () => {
+interface Props {
+  testId?: string;
+}
+
+export const MenuButton = ({ testId }: Props) => {
   const setShowNav = useSetAtom(showFullscreenNavAtom);
 
   const openNav = () => {
@@ -13,7 +17,12 @@ export const MenuButton = () => {
   };
 
   return (
-    <Button isIconOnly className="md:hidden" onClick={openNav}>
+    <Button
+      isIconOnly
+      className="md:hidden"
+      onClick={openNav}
+      data-testid={testId}
+    >
       <svg
         width="32"
         height="33"

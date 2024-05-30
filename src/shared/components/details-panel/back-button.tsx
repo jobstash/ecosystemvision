@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { A11Y } from '@/shared/core/constants';
+import { A11Y, TEST_IDS } from '@/shared/core/constants';
 
 interface Props {
   href: string;
@@ -19,5 +19,9 @@ export const DetailsPanelBackButton = ({
     router.push(href, { scroll: false });
   };
 
-  return <span onClick={onClick}>{text}</span>;
+  return (
+    <span onClick={onClick} data-testid={TEST_IDS.DETAILS_BACK}>
+      {text}
+    </span>
+  );
 };
