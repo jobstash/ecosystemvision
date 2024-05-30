@@ -2,6 +2,8 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
 
+import { TEST_IDS } from '../core/constants';
+
 import { MenuButton } from './menu-button';
 
 interface Props {
@@ -18,7 +20,7 @@ export const MobileHeader = ({ left, className }: Props) => {
       )}
     >
       {left}
-      <MenuButton />
+      <MenuButton testId={TEST_IDS.MOBILE_MENU} />
     </div>
   );
 };

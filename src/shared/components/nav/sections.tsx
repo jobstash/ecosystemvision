@@ -1,4 +1,4 @@
-import { A11Y, HREFS } from '@/shared/core/constants';
+import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
 import { HandbagIcon } from '@/shared/components/icons/handbag-icon';
 import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
@@ -12,12 +12,12 @@ const SECTIONS = [
     bartabs: [
       {
         icon: <HandbagIcon />,
-        text: A11Y.LINK.SIDEBAR.ORGS,
+        text: A11Y.LINK.NAV.ORGS,
         href: HREFS.ORGS_PAGE,
       },
       {
         icon: <UsersThreeIcon />,
-        text: A11Y.LINK.SIDEBAR.PROJECTS,
+        text: A11Y.LINK.NAV.PROJECTS,
         href: HREFS.PROJECTS_PAGE,
       },
     ],
@@ -30,7 +30,10 @@ interface Props {
 
 export const NavSections = ({ isMobile }: Props) => {
   return (
-    <nav className="flex flex-col gap-6 md:w-[180px] md:gap-12">
+    <nav
+      className="flex flex-col gap-6 md:w-[180px] md:gap-12"
+      data-testid={TEST_IDS.NAV_SECTION}
+    >
       <div className="flex items-center justify-between">
         <Brand />
         {isMobile && <CloseButton />}

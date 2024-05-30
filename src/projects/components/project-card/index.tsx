@@ -9,6 +9,7 @@ import { Divider } from '@/shared/components/divider';
 import { InfoTags } from '@/shared/components/info-tags';
 import { LogoTitle } from '@/shared/components/logo-title';
 
+import { PROJECT_TEST_IDS } from '@/projects/core/constants';
 import { activeProjectIdAtom } from '@/projects/core/atoms';
 
 import { createProjectTags } from './create-project-tags';
@@ -30,6 +31,7 @@ export const ProjectCard = ({ project, isInit, filterParamsString }: Props) => {
       <Link
         href={`${HREFS.PROJECTS_PAGE}/${id}/details${filterParamsString}`}
         scroll={false}
+        data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
         data-uuid={id}
         data-is-init={isInit ?? undefined}
         prefetch={true}

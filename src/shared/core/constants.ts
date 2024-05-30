@@ -30,8 +30,7 @@ export const HREFS = {
 export const A11Y = {
   LINK: {
     BACK: 'Back',
-    SIDEBAR: {
-      JOBS: 'Jobs',
+    NAV: {
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
     },
@@ -51,3 +50,9 @@ export const JOB_SENIORITY_MAP = {
 } as const;
 
 export const JOB_SENIORITY_SET = new Set(Object.keys(JOB_SENIORITY_MAP));
+
+export const TEST_IDS = {
+  MOBILE_MENU: 'mobile-menu',
+  DETAILS_BACK: 'details-back',
+  NAV_SECTION: 'nav-section',
+} as const;
