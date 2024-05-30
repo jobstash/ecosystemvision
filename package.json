@@ -12,7 +12,12 @@
     "test": "echo \"Skipping tests ...\" && exit 0",
     "prepare": "husky",
     "push": "git push origin $(git rev-parse --abbrev-ref HEAD)",
-    "pull": "node scripts/pull-remote.js"
+    "pull": "node scripts/pull-remote.js",
+    "e2e": "npx playwright test",
+    "e2e:report": "npx playwright show-report --host=0.0.0.0",
+    "e2e:h": "npx playwright test --headed --project=chromium",
+    "e2e:h:m": "npx playwright test --headed --project=chromium.mobile",
+    "e2e:h:t": "npx playwright test --headed --project=chromium.tablet"
   },
   "dependencies": {
     "@mantine/core": "^7.10.0",
@@ -35,11 +40,13 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.1",
     "@tanstack/eslint-plugin-query": "^5.35.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
