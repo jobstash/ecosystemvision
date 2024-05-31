@@ -7,7 +7,7 @@ import {
   assertPageUrl,
   clickNavButton,
   openMobileNav,
-} from './helpers';
+} from '../helpers';
 
 const pageLinks = [
   { name: A11Y.LINK.NAV.ORGS, href: HREFS.ORGS_PAGE },
