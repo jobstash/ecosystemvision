@@ -7,3 +7,7 @@ export const assertActiveAttribute = async (
   locator: Locator,
   isActive: boolean,
 ) => expect(locator).toHaveAttribute('data-active', isActive.toString());
+
+export const assertInitCardNotVisible = async (page: Page) => {
+  await expect(page.locator('[data-is-init="true"]')).toBeHidden();
+};
