@@ -22,9 +22,9 @@ export const DetailsPanelHeader = ({ org }: Props) => {
   return (
     <div className="flex flex-col gap-4">
       <LogoTitle src={src} name={name} />
-      <InfoTags isDraggable tags={tags} />
+      <InfoTags isDraggable isCompact tags={tags} />
       <Text text={summary} />
-      <InfoTags isDraggable tags={socials} />
+      <InfoTags isDraggable isCompact tags={socials} />
     </div>
   );
 };
