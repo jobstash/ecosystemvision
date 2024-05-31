@@ -4,7 +4,7 @@ import { A11Y, TEST_IDS } from '@/shared/core/constants';
 
 import { assertActiveAttribute } from './common-helpers';
 
-const getNavLocator = (page: Page, name: string) => {
+export const getNavLocator = (page: Page, name: string) => {
   const button = page.getByRole('button', { name: name });
   return page.getByTestId(TEST_IDS.NAV_SECTION).locator(button);
 };
