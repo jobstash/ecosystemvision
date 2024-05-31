@@ -63,7 +63,6 @@ export const FundingRounds = ({ fundingRounds }: Props) => {
           <>
             <div key={fundingRound.id} className="flex flex-wrap lg:h-6">
               <InfoTags
-                isCompact
                 tags={createFundingRoundTags(fundingRound)}
                 classNames={{ wrapper: 'gap-y-0' }}
               />

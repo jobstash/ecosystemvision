@@ -19,7 +19,7 @@ export const InfoTagLink = ({ className, href, content }: Props) => {
 
   return (
     <Button className={className} onClick={onClick}>
-      {content}
+      <div className="flex items-center gap-x-2">{content}</div>
     </Button>
   );
 };

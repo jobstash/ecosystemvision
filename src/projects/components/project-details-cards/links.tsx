@@ -23,7 +23,7 @@ export const ProjectDetailsCardLinks = ({ project }: Props) => {
         htmlTag="h3"
       />
 
-      <InfoTags isDraggable tags={tags} />
+      <InfoTags isDraggable isCompact tags={tags} />
     </>
   );
 };

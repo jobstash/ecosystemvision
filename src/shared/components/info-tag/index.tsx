@@ -10,7 +10,7 @@ const DEFAULT_CLASSNAME =
   'flex h-6 shrink-0 items-center gap-x-2 rounded-[4px] py-1 pr-2 lg:rounded-md';
 const LINK_CLASSNAME =
   'bg-white/10 hover:bg-white/40 cursor-pointer duration-300 transition-all px-2';
-const COMPACT_CLASSNAME = 'h-10 sm:h-12 lg:h-6';
+const COMPACT_CLASSNAME = 'h-10 sm:h-12 md:h-6';
 
 interface Props {
   tag: InfoTagProps;
@@ -24,13 +24,13 @@ export const InfoTag = (props: Props) => {
   const className = cn(
     DEFAULT_CLASSNAME,
     { [LINK_CLASSNAME]: !!link },
-    { [COMPACT_CLASSNAME]: !isCompact },
+    { [COMPACT_CLASSNAME]: isCompact },
   );
 
   const content = (
     <>
       {icon}
-      <span className="max-w-[32ch] self-start truncate text-sm md:max-w-[44ch] lg:text-xs">
+      <span className="max-w-[32ch] truncate text-sm md:max-w-[44ch] lg:text-xs">
         {text}
       </span>
       {showExternalIcon && <ExternalIcon />}

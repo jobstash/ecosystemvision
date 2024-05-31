@@ -57,7 +57,7 @@ export const ProjectDetailsCard = ({ project, actionHref }: Props) => {
 
       <Divider />
 
-      <InfoTags isCompact tags={tags} />
+      <InfoTags tags={tags} />
 
       {auditTags.length > 0 && <Divider />}
 

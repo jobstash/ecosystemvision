@@ -48,7 +48,7 @@ export const OrgCard = (props: Props) => {
 
         {hasTags && <Divider />}
 
-        <InfoTags isCompact tags={tags} />
+        <InfoTags tags={tags} />
       </Link>
     </CardWrapper>
   );
