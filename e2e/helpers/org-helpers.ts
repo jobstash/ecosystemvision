@@ -4,6 +4,7 @@ import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 
 import { ORG_TEST_IDS } from '@/orgs/core/constants';
 
+import { getRandomInt } from './common-helpers';
 import { getNavLocator } from './nav-helpers';
 
 export const navigateToOrgDetails = async (page: Page, n: number) => {
@@ -30,4 +31,54 @@ export const navigateBackToOrgListPage = async (page: Page) => {
 export const navigateToOrgListPage = async (page: Page) => {
   await getNavLocator(page, A11Y.LINK.NAV.ORGS).click();
   await expect(page).toHaveURL(HREFS.ORGS_PAGE);
+};
+
+export const getOrgCardId = async (page: Page, n: number) => {
+  const id = await page
+    .getByTestId(ORG_TEST_IDS.ORG_CARD)
+    .nth(n)
+    .getAttribute('data-uuid');
+
+  expect(id).not.toBeNull();
+
+  return id as string;
+};
+
+export const getFirstTwoOrgIds = async (page: Page) => {
+  const id1 = await getOrgCardId(page, 0);
+  const id2 = await getOrgCardId(page, 1);
+  return [id1, id2];
+};
+
+export const reloadToOrgDetails = (page: Page, id: string) =>
+  page.goto(`/organizations/${id}/details`);
+
+export const assertOrgCardsSwapped = async (
+  page: Page,
+  id1: string,
+  id2: string,
+) => {
+  const [firstId, secondId] = await getFirstTwoOrgIds(page);
+  expect(firstId).toBe(id2);
+  expect(secondId).toBe(id1);
+};
+
+export const assertOrgListDeduped = async (
+  page: Page,
+  idToExclude: string,
+): Promise<void> => {
+  const allCards = await page.getByTestId(ORG_TEST_IDS.ORG_CARD).all();
+  const cardIds = await Promise.all(
+    allCards
+      .slice(1) // Exclude init card
+      .map(async (card) => await card.getAttribute('data-uuid')),
+  );
+
+  expect(cardIds.indexOf(idToExclude)).toBe(-1);
+};
+
+export const clickOrgCardExceptFirstTwo = async (page: Page) => {
+  const allCards = await page.getByTestId(ORG_TEST_IDS.ORG_CARD).all();
+  const [min, max] = [0, allCards.length - 3];
+  await allCards.splice(2)[getRandomInt(min, max)].click();
 };
