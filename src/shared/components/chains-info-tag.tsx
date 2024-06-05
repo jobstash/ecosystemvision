@@ -57,7 +57,13 @@ export const ChainsInfoTag = ({ chains, max }: Props) => {
 
       <AvatarGroup max={maxChainCount} renderCount={renderCount}>
         {chains.map(({ name, logo }) => (
-          <Tooltip key={name} content={name}>
+          <Tooltip
+            key={name}
+            content={name}
+            classNames={{
+              base: 'text-white font-medium',
+            }}
+          >
             <Avatar
               name={name}
               src={logo ?? ''}
