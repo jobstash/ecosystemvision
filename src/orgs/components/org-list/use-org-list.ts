@@ -40,10 +40,10 @@ export const useOrgList = () => {
     if (isSuccess && data) {
       const items = data.pages.flatMap((d) => d.data);
       for (const item of items) {
-        const { orgId } = item;
+        const { normalizedName: slug } = item;
         queryClient.prefetchQuery({
-          queryKey: orgQueryKeys.details(orgId),
-          queryFn: () => getOrgDetails(orgId),
+          queryKey: orgQueryKeys.details(slug),
+          queryFn: () => getOrgDetails(slug),
         });
       }
     }
@@ -65,7 +65,7 @@ export const useOrgList = () => {
 
   // Dedupe init-card if not list-page ssr
   const orgs = !isOrgListSSR
-    ? allOrgs.filter((d) => d.orgId !== initOrg?.orgId)
+    ? allOrgs.filter((d) => d.normalizedName !== initOrg?.normalizedName)
     : allOrgs;
 
   return {

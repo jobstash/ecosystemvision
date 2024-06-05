@@ -39,10 +39,10 @@ const OrgListPage = async ({ searchParams: rawSearchParams }: Props) => {
   await Promise.all(
     orgListResult.pages
       .flatMap((page) => page.data)
-      .map(({ orgId }) =>
+      .map(({ normalizedName: slug }) =>
         queryClient.prefetchQuery({
-          queryKey: orgQueryKeys.details(orgId),
-          queryFn: () => getOrgDetails(orgId),
+          queryKey: orgQueryKeys.details(slug),
+          queryFn: () => getOrgDetails(slug),
         }),
       ),
   );

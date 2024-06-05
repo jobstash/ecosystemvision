@@ -5,8 +5,8 @@ import { orgDetailsSchema } from '@/orgs/core/schemas';
 
 const label = 'getOrgDetails';
 
-export const getOrgDetails = async (orgId: string) => {
-  const url = `${MW_URL}/organizations/details/${orgId}`;
+export const getOrgDetails = async (slug: string) => {
+  const url = `${MW_URL}/organizations/details/slug/${slug}`;
 
   return mwGET({
     url,
