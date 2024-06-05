@@ -31,6 +31,7 @@ export const DetailsPanelTab = ({ href, isActive, text }: TabProps) => {
       data-active={isActive}
       className={wrapperClassName}
       style={linkStyle}
+      scroll={false}
     >
       <span className={contentClassName}>{text}</span>
     </Button>
