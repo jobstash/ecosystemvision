@@ -9,7 +9,7 @@ import { LogoTitle } from '@/shared/components/logo-title';
 
 import { ORG_TEST_IDS } from '@/orgs/core/constants';
 import { OrgListItem } from '@/orgs/core/schemas';
-import { activeOrgIdAtom } from '@/orgs/core/atoms';
+import { activeOrgSlugAtom } from '@/orgs/core/atoms';
 
 import { createOrgCardTags } from './create-org-card-tags';
 
@@ -21,20 +21,20 @@ interface Props {
 
 export const OrgCard = (props: Props) => {
   const { orgItem, isInit = false, filterParamsString = '' } = props;
-  const { orgId, url, logoUrl, name, location } = orgItem;
+  const { normalizedName: slug, url, logoUrl, name, location } = orgItem;
 
   const src = getLogoUrl(url, logoUrl);
   const tags = createOrgCardTags(orgItem);
   const hasTags = tags.length > 0;
-  const linkHref = `${HREFS.ORGS_PAGE}/${orgId}/details${filterParamsString}`;
+  const linkHref = `${HREFS.ORGS_PAGE}/${slug}/details${filterParamsString}`;
 
   return (
-    <CardWrapper id={orgId} idAtom={activeOrgIdAtom}>
+    <CardWrapper id={slug} idAtom={activeOrgSlugAtom}>
       <Link
         href={linkHref}
         scroll={false}
         data-testid={ORG_TEST_IDS.ORG_CARD}
-        data-uuid={orgId}
+        data-uuid={slug}
         data-is-init={isInit ?? undefined}
         prefetch={true}
         className="flex flex-col gap-3 p-6"

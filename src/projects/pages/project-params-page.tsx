@@ -37,7 +37,7 @@ export const ProjectParamsPage = ({ params: { id, tab } }: Props) => {
     return (
       <OrgDetailsCard
         org={data.organization}
-        actionHref={`${FRONTEND_URL}/organizations/${data.organization.orgId}/details`}
+        actionHref={`${FRONTEND_URL}/organizations/${data.organization.normalizedName}/details`}
       />
     );
   }

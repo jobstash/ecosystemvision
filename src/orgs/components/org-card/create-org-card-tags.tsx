@@ -12,7 +12,7 @@ import { OrgListItem } from '@/orgs/core/schemas';
 
 export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
   const {
-    orgId,
+    normalizedName: slug,
     headcountEstimate,
     jobCount,
     projectCount,
@@ -21,7 +21,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
   } = orgListItem;
 
   const tags: InfoTagProps[] = [];
-  const baseRoute = `/organizations/${orgId}`;
+  const baseRoute = `/organizations/${slug}`;
 
   if (jobCount > 0) {
     tags.push({

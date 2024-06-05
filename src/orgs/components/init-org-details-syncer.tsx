@@ -6,7 +6,7 @@ import { useAtom } from 'jotai';
 
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
 
-import { activeOrgIdAtom, initOrgAtom } from '@/orgs/core/atoms';
+import { activeOrgSlugAtom, initOrgAtom } from '@/orgs/core/atoms';
 import { useOrgDetails } from '@/orgs/hooks/use-org-details';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const InitOrgDetailsSyncer = ({ id }: Props) => {
-  const [activeOrgId, setActiveOrgId] = useAtom(activeOrgIdAtom);
+  const [activeOrgSlug, setActiveOrgSlug] = useAtom(activeOrgSlugAtom);
   const [initOrg, setInitOrg] = useAtom(initOrgAtom);
 
   const isDesktop = useIsDesktop();
@@ -30,10 +30,10 @@ export const InitOrgDetailsSyncer = ({ id }: Props) => {
 
   // Set active org ID on desktop
   useEffect(() => {
-    if (isDesktop && !activeOrgId && data) {
-      setActiveOrgId(data.orgId);
+    if (isDesktop && !activeOrgSlug && data) {
+      setActiveOrgSlug(data.normalizedName);
     }
-  }, [activeOrgId, data, isDesktop, setActiveOrgId]);
+  }, [activeOrgSlug, data, isDesktop, setActiveOrgSlug]);
 
   return null;
 };

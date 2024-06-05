@@ -1,6 +1,6 @@
 export const orgQueryKeys = {
   all: ['orgs'] as const,
-  details: (orgId: string) => [...orgQueryKeys.all, 'details', orgId] as const,
+  details: (slug: string) => [...orgQueryKeys.all, 'details', slug] as const,
   list: (params: string | Record<string, string>) => {
     const searchParams =
       typeof params === 'string'

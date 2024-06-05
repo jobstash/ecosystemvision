@@ -52,6 +52,8 @@ const createTabs = (org: OrgDetails) => {
 
   return tabs.map((tab) => ({
     ...tab,
-    href: `${HREFS.ORGS_PAGE}/${org.orgId}${tab.href}`,
+    href: encodeURI(
+      `${HREFS.ORGS_PAGE}/${org.normalizedName}${tab.href}`,
+    ).toString(),
   }));
 };

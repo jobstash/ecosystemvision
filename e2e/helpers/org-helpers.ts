@@ -19,7 +19,7 @@ export const navigateToOrgDetails = async (page: Page, n: number) => {
 
 export const navigateBackToOrgListPage = async (page: Page) => {
   // Assert mobile/tablet devices are currently on details-page
-  await expect(page).toHaveURL(/\/organizations\/\d+\/details/);
+  await expect(page).toHaveURL(/\/organizations\/[^/]+\/details/);
 
   // Click back button
   await page.getByTestId(TEST_IDS.DETAILS_BACK).click();
