@@ -15,6 +15,7 @@ export type Tag = z.infer<typeof tagSchema>;
 
 export const investorSchema = z.object({
   id: z.string().uuid(),
+  normalizedName: z.string(),
   name: z.string(),
 });
 export type Investor = z.infer<typeof investorSchema>;
@@ -97,6 +98,7 @@ export const orgInfoSchema = z
   .object({
     id: z.string().uuid(),
     name: z.string(),
+    normalizedName: z.string(),
     orgId: z.string(),
     summary: z.string(),
     description: z.string(),
@@ -110,6 +112,7 @@ export type OrgInfo = z.infer<typeof orgInfoSchema>;
 export const chainSchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
+  normalizedName: z.string(),
   logo: z.string().nullable(),
 });
 export type Chain = z.infer<typeof chainSchema>;
@@ -145,6 +148,7 @@ export const projectInfoSchema = z
   .object({
     id: z.string().uuid(),
     name: z.string(),
+    normalizedName: z.string(),
     website: z.string().nullable(),
     logo: z.string().nullable(),
     chains: z.array(chainSchema),

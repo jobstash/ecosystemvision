@@ -15,6 +15,7 @@ export const orgListItemSchema = orgInfoSchema
   .pick({
     orgId: true,
     name: true,
+    normalizedName: true,
     location: true,
     headcountEstimate: true,
     logoUrl: true,
