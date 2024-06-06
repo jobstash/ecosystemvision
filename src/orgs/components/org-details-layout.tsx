@@ -13,23 +13,23 @@ import { OrgTabs } from './org-tabs';
 
 interface Props {
   children: React.ReactNode;
-  id: string;
+  slug: string;
 }
 
-export const OrgDetailsLayout = async ({ children, id }: Props) => {
+export const OrgDetailsLayout = async ({ children, slug }: Props) => {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: orgQueryKeys.details(id),
-    queryFn: () => getOrgDetails(id),
+    queryKey: orgQueryKeys.details(slug),
+    queryFn: () => getOrgDetails(slug),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <DetailsPanelLayout backHref={HREFS.ORGS_PAGE}>
-        <InitOrgDetailsSyncer id={id} />
-        <OrgDetailsPanelHeader id={id} />
-        <OrgTabs id={id} />
+        <InitOrgDetailsSyncer slug={slug} />
+        <OrgDetailsPanelHeader slug={slug} />
+        <OrgTabs slug={slug} />
         {children}
       </DetailsPanelLayout>
     </HydrationBoundary>

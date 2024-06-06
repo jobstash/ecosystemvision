@@ -10,11 +10,11 @@ import { OrgDetails } from '@/orgs/core/schemas';
 import { useOrgDetails } from '@/orgs/hooks/use-org-details';
 
 interface Props {
-  id: string;
+  slug: string;
 }
 
-export const OrgTabs = ({ id }: Props) => {
-  const { data } = useOrgDetails(id);
+export const OrgTabs = ({ slug }: Props) => {
+  const { data } = useOrgDetails(slug);
 
   if (!data) return <Spinner size="sm" color="white" />;
 

@@ -10,16 +10,16 @@ import { activeOrgSlugAtom, initOrgAtom } from '@/orgs/core/atoms';
 import { useOrgDetails } from '@/orgs/hooks/use-org-details';
 
 interface Props {
-  id: string;
+  slug: string;
 }
 
-export const InitOrgDetailsSyncer = ({ id }: Props) => {
+export const InitOrgDetailsSyncer = ({ slug }: Props) => {
   const [activeOrgSlug, setActiveOrgSlug] = useAtom(activeOrgSlugAtom);
   const [initOrg, setInitOrg] = useAtom(initOrgAtom);
 
   const isDesktop = useIsDesktop();
 
-  const { data } = useOrgDetails(id);
+  const { data } = useOrgDetails(slug);
 
   // Initialize org details
   useEffect(() => {
@@ -28,7 +28,7 @@ export const InitOrgDetailsSyncer = ({ id }: Props) => {
     }
   }, [data, initOrg, setInitOrg]);
 
-  // Set active org ID on desktop
+  // Set active org slug on desktop
   useEffect(() => {
     if (isDesktop && !activeOrgSlug && data) {
       setActiveOrgSlug(data.normalizedName);

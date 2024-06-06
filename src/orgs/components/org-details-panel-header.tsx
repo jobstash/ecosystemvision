@@ -7,11 +7,11 @@ import { DetailsPanelHeader } from '@/shared/components/details-panel/header';
 import { useOrgDetails } from '@/orgs/hooks/use-org-details';
 
 interface Props {
-  id: string;
+  slug: string;
 }
 
-export const OrgDetailsPanelHeader = ({ id }: Props) => {
-  const { data } = useOrgDetails(id);
+export const OrgDetailsPanelHeader = ({ slug }: Props) => {
+  const { data } = useOrgDetails(slug);
 
   if (!data) return <Spinner size="sm" color="white" />;
 
