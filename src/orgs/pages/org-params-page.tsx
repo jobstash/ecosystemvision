@@ -22,13 +22,13 @@ const OrgJobsCards = dynamic(() =>
 
 interface Props {
   params: {
-    id: string;
+    slug: string;
     tab: string;
   };
 }
 
-export const OrgParamsPage = ({ params: { id, tab } }: Props) => {
-  const { data } = useOrgDetails(id);
+export const OrgParamsPage = ({ params: { slug, tab } }: Props) => {
+  const { data } = useOrgDetails(slug);
 
   if (!data) return null;
   if (tab === ROUTE_TABS.SHARED.DETAILS) return <OrgDetailsCard org={data} />;

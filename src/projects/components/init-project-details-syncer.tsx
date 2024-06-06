@@ -10,16 +10,16 @@ import { activeProjectSlugAtom, initProjectAtom } from '@/projects/core/atoms';
 import { useProjectDetails } from '@/projects/hooks/use-project-details';
 
 interface Props {
-  id: string;
+  slug: string;
 }
 
-export const InitProjectDetailsSyncer = ({ id }: Props) => {
+export const InitProjectDetailsSyncer = ({ slug }: Props) => {
   const [activeSlug, setActiveSlug] = useAtom(activeProjectSlugAtom);
   const [initProject, setInitProject] = useAtom(initProjectAtom);
 
   const isDesktop = useIsDesktop();
 
-  const { data } = useProjectDetails(id);
+  const { data } = useProjectDetails(slug);
 
   // Initialize project details
   useEffect(() => {
@@ -28,7 +28,7 @@ export const InitProjectDetailsSyncer = ({ id }: Props) => {
     }
   }, [data, initProject, setInitProject]);
 
-  // Set active project ID on desktop
+  // Set active project slug on desktop
   useEffect(() => {
     if (isDesktop && !activeSlug && data) {
       setActiveSlug(data.normalizedName);

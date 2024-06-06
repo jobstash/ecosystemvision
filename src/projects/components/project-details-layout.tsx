@@ -12,24 +12,24 @@ import { ProjectDetailsPanelHeader } from './project-details-panel-header';
 import { ProjectTabs } from './project-tabs';
 
 interface Props {
-  id: string;
+  slug: string;
   children: React.ReactNode;
 }
 
-export const ProjectDetailsLayout = async ({ id, children }: Props) => {
+export const ProjectDetailsLayout = async ({ slug, children }: Props) => {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: projectQueryKeys.details(id),
-    queryFn: () => getProjectDetails(id),
+    queryKey: projectQueryKeys.details(slug),
+    queryFn: () => getProjectDetails(slug),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <DetailsPanelLayout backHref={HREFS.PROJECTS_PAGE}>
-        <InitProjectDetailsSyncer id={id} />
-        <ProjectDetailsPanelHeader id={id} />
-        <ProjectTabs id={id} />
+        <InitProjectDetailsSyncer slug={slug} />
+        <ProjectDetailsPanelHeader slug={slug} />
+        <ProjectTabs slug={slug} />
         {children}
       </DetailsPanelLayout>
     </HydrationBoundary>
