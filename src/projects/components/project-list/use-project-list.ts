@@ -40,10 +40,10 @@ export const useProjectList = () => {
     if (isSuccess && data) {
       const items = data.pages.flatMap((d) => d.data);
       for (const item of items) {
-        const { id } = item;
+        const { normalizedName: slug } = item;
         queryClient.prefetchQuery({
-          queryKey: projectQueryKeys.details(id),
-          queryFn: () => getProjectDetails({ projectId: id }),
+          queryKey: projectQueryKeys.details(slug),
+          queryFn: () => getProjectDetails(slug),
         });
       }
     }
@@ -65,7 +65,9 @@ export const useProjectList = () => {
 
   // Dedupe init-card if not list-page ssr
   const projects = !isProjectListSSR
-    ? allProjects.filter((d) => d.id !== initProject?.id)
+    ? allProjects.filter(
+        (d) => d.normalizedName !== initProject?.normalizedName,
+      )
     : allProjects;
 
   return {

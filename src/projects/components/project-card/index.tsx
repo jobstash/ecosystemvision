@@ -10,7 +10,7 @@ import { InfoTags } from '@/shared/components/info-tags';
 import { LogoTitle } from '@/shared/components/logo-title';
 
 import { PROJECT_TEST_IDS } from '@/projects/core/constants';
-import { activeProjectIdAtom } from '@/projects/core/atoms';
+import { activeProjectSlugAtom } from '@/projects/core/atoms';
 
 import { createProjectTags } from './create-project-tags';
 
@@ -21,18 +21,18 @@ interface Props {
 }
 
 export const ProjectCard = ({ project, isInit, filterParamsString }: Props) => {
-  const { id, website, logo, name, chains } = project;
+  const { normalizedName: slug, website, logo, name, chains } = project;
 
   const src = getLogoUrl(website || '', logo);
   const { upperTags, midTags } = createProjectTags(project);
 
   return (
-    <CardWrapper id={id} idAtom={activeProjectIdAtom}>
+    <CardWrapper id={slug} idAtom={activeProjectSlugAtom}>
       <Link
-        href={`${HREFS.PROJECTS_PAGE}/${id}/details${filterParamsString}`}
+        href={`${HREFS.PROJECTS_PAGE}/${slug}/details${filterParamsString}`}
         scroll={false}
         data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
-        data-uuid={id}
+        data-uuid={slug}
         data-is-init={isInit ?? undefined}
         prefetch={true}
         className="flex flex-col gap-3 p-6"

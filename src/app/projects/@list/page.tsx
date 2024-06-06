@@ -37,10 +37,10 @@ const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
   await Promise.all(
     projectListResult.pages
       .flatMap((page) => page.data)
-      .map(({ id: projectId }) =>
+      .map(({ normalizedName: slug }) =>
         queryClient.prefetchQuery({
-          queryKey: projectQueryKeys.details(projectId),
-          queryFn: () => getProjectDetails({ projectId }),
+          queryKey: projectQueryKeys.details(slug),
+          queryFn: () => getProjectDetails(slug),
         }),
       ),
   );
