@@ -5,10 +5,10 @@ import { QUERY_STALETIME } from '@/shared/core/constants';
 import { projectQueryKeys } from '@/projects/core/query-keys';
 import { getProjectDetails } from '@/projects/data/get-project-details';
 
-export const useProjectDetails = (projectId: string) => {
+export const useProjectDetails = (slug: string) => {
   return useQuery({
-    queryKey: projectQueryKeys.details(projectId),
-    queryFn: () => getProjectDetails({ projectId }),
+    queryKey: projectQueryKeys.details(slug),
+    queryFn: () => getProjectDetails(slug),
     staleTime: QUERY_STALETIME.DEFAULT,
   });
 };

@@ -3,12 +3,8 @@ import { mwGET } from '@/shared/utils/mw-get';
 
 import { projectDetailsSchema } from '@/projects/core/schemas';
 
-interface Props {
-  projectId: string;
-}
-
-export const getProjectDetails = ({ projectId }: Props) => {
-  const url = `${MW_URL}/projects/details/${projectId}`;
+export const getProjectDetails = (slug: string) => {
+  const url = `${MW_URL}/projects/details/slug/${slug}`;
 
   return mwGET({
     url,

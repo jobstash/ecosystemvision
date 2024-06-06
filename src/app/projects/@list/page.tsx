@@ -6,6 +6,7 @@ import { getQueryClient } from '@/shared/utils/get-query-client';
 import { filterQueryKeys } from '@/filters/core/query-keys';
 import { projectQueryKeys } from '@/projects/core/query-keys';
 import { getFilterConfig } from '@/filters/data/get-filter-config';
+import { getProjectDetails } from '@/projects/data/get-project-details';
 import { getProjectList } from '@/projects/data/get-project-list';
 
 import { ProjectListClientPage } from './client-page';
@@ -17,9 +18,9 @@ interface Props {
 const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
   const queryClient = getQueryClient();
 
-  await Promise.all([
+  const [projectListResult] = await Promise.all([
     // Prefetch list
-    queryClient.prefetchInfiniteQuery({
+    queryClient.fetchInfiniteQuery({
       queryKey: projectQueryKeys.list(rawSearchParams),
       queryFn: async ({ pageParam }) =>
         getProjectList({ page: pageParam, searchParams: rawSearchParams }),
@@ -31,6 +32,18 @@ const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
       queryFn: () => getFilterConfig(`/${ROUTE_SECTIONS.PROJECTS}`),
     }),
   ]);
+
+  // Prefetch details for each org item
+  await Promise.all(
+    projectListResult.pages
+      .flatMap((page) => page.data)
+      .map(({ normalizedName: slug }) =>
+        queryClient.prefetchQuery({
+          queryKey: projectQueryKeys.details(slug),
+          queryFn: () => getProjectDetails(slug),
+        }),
+      ),
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

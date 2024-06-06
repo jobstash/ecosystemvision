@@ -1,7 +1,7 @@
 export const projectQueryKeys = {
   all: ['projects'] as const,
-  details: (projectId: string) =>
-    [...projectQueryKeys.all, 'details', projectId] as const,
+  details: (slug: string) =>
+    [...projectQueryKeys.all, 'details', slug] as const,
   list: (params: string | Record<string, string>) => {
     const searchParams =
       typeof params === 'string'
@@ -10,8 +10,8 @@ export const projectQueryKeys = {
 
     return [...projectQueryKeys.all, 'list', searchParams] as const;
   },
-  competitors: (projectId: string) =>
-    [...projectQueryKeys.all, 'competitors', projectId] as const,
+  competitors: (slug: string) =>
+    [...projectQueryKeys.all, 'competitors', slug] as const,
 };
 
 export type ProjectQueryKeys = typeof projectQueryKeys;

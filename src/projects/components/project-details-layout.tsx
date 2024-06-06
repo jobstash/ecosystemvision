@@ -21,7 +21,7 @@ export const ProjectDetailsLayout = async ({ id, children }: Props) => {
 
   await queryClient.prefetchQuery({
     queryKey: projectQueryKeys.details(id),
-    queryFn: () => getProjectDetails({ projectId: id }),
+    queryFn: () => getProjectDetails(id),
   });
 
   return (

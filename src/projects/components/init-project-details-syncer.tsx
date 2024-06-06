@@ -6,7 +6,7 @@ import { useAtom } from 'jotai';
 
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
 
-import { activeProjectIdAtom, initProjectAtom } from '@/projects/core/atoms';
+import { activeProjectSlugAtom, initProjectAtom } from '@/projects/core/atoms';
 import { useProjectDetails } from '@/projects/hooks/use-project-details';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const InitProjectDetailsSyncer = ({ id }: Props) => {
-  const [activeId, setActiveId] = useAtom(activeProjectIdAtom);
+  const [activeSlug, setActiveSlug] = useAtom(activeProjectSlugAtom);
   const [initProject, setInitProject] = useAtom(initProjectAtom);
 
   const isDesktop = useIsDesktop();
@@ -30,10 +30,10 @@ export const InitProjectDetailsSyncer = ({ id }: Props) => {
 
   // Set active project ID on desktop
   useEffect(() => {
-    if (isDesktop && !activeId && data) {
-      setActiveId(data.id);
+    if (isDesktop && !activeSlug && data) {
+      setActiveSlug(data.normalizedName);
     }
-  }, [activeId, data, isDesktop, setActiveId]);
+  }, [activeSlug, data, isDesktop, setActiveSlug]);
 
   return null;
 };
