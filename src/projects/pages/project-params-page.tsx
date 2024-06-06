@@ -19,13 +19,13 @@ const OrgDetailsCard = dynamic(() =>
 
 interface Props {
   params: {
-    id: string;
+    slug: string;
     tab: string;
   };
 }
 
-export const ProjectParamsPage = ({ params: { id, tab } }: Props) => {
-  const { data } = useProjectDetails(id);
+export const ProjectParamsPage = ({ params: { slug, tab } }: Props) => {
+  const { data } = useProjectDetails(slug);
 
   if (!data) return null;
 

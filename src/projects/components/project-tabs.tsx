@@ -2,11 +2,11 @@ import { HREFS, ROUTE_TABS } from '@/shared/core/constants';
 import { DetailsPanelTabs } from '@/shared/components/details-panel/tabs';
 
 interface Props {
-  id: string;
+  slug: string;
 }
 
-export const ProjectTabs = ({ id }: Props) => {
-  const prefix = `${HREFS.PROJECTS_PAGE}/${id}`;
+export const ProjectTabs = ({ slug }: Props) => {
+  const prefix = `${HREFS.PROJECTS_PAGE}/${slug}`;
   const tabs = projectTabs.map((tab) => ({
     ...tab,
     href: `${prefix}${tab.href}`,
