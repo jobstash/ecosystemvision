@@ -17,7 +17,9 @@
     "e2e:report": "npx playwright show-report --host=0.0.0.0",
     "e2e:h": "npx playwright test --headed --project=chromium",
     "e2e:h:m": "npx playwright test --headed --project=chromium.mobile",
-    "e2e:h:t": "npx playwright test --headed --project=chromium.tablet"
+    "e2e:h:t": "npx playwright test --headed --project=chromium.tablet",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@mantine/core": "^7.10.0",
@@ -40,7 +42,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.6.1",
     "@playwright/test": "^1.44.1",
+    "@storybook/addon-essentials": "^8.2.5",
+    "@storybook/addon-interactions": "^8.2.5",
+    "@storybook/addon-links": "^8.2.5",
+    "@storybook/addon-onboarding": "^8.2.5",
+    "@storybook/blocks": "^8.2.5",
+    "@storybook/nextjs": "^8.2.5",
+    "@storybook/react": "^8.2.5",
+    "@storybook/test": "^8.2.5",
     "@tanstack/eslint-plugin-query": "^5.35.6",
     "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
@@ -55,6 +66,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^12.1.0",
+    "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
@@ -62,6 +74,7 @@
     "postcss-preset-mantine": "^1.15.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.2.5",
+    "storybook": "^8.2.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
