@@ -7,7 +7,6 @@ import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { InitOrgCard } from '@/orgs/components/init-org-card';
 import { OrgCard } from '@/orgs/components/org-card';
-import { useFiltersContext } from '@/filters/providers/filters-provider/context';
 
 import { useOrgList } from './use-org-list';
 
@@ -23,25 +22,21 @@ export const OrgList = () => {
 
   const hasOrgs = orgs.length > 0;
 
-  const { isPendingFilters, filterParamsString } = useFiltersContext();
-
-  const isPending = isPendingFilters || isPendingOrgs;
-
   return (
     <>
-      {isPending ? (
+      {isPendingOrgs ? (
         <CardSkeleton />
       ) : (
         isSuccess &&
         (hasOrgs ? (
           <>
-            <InitOrgCard filterParamsString={filterParamsString} />
+            <InitOrgCard />
             <VirtualWrapper count={orgs.length}>
               {(index) => (
                 <div className={cn({ 'pt-8': index > 0 })}>
                   <OrgCard
                     orgItem={orgs[index]}
-                    filterParamsString={filterParamsString}
+                    // TODO: filterParamsString
                   />
                 </div>
               )}

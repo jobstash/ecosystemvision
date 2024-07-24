@@ -12,11 +12,7 @@ import { initPathAtom } from '@/shared/core/atoms';
 
 import { ProjectCard } from './project-card';
 
-interface Props {
-  filterParamsString: string;
-}
-
-export const InitProjectCard = ({ filterParamsString }: Props) => {
+export const InitProjectCard = () => {
   const pathname = usePathname();
 
   const initPath = useAtomValue(initPathAtom);
@@ -34,7 +30,7 @@ export const InitProjectCard = ({ filterParamsString }: Props) => {
       <ProjectCard
         isInit
         project={initProject}
-        filterParamsString={filterParamsString}
+        // TODO: filterParamsString
       />
     );
   }

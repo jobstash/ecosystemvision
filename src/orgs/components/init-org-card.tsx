@@ -14,11 +14,7 @@ import { initPathAtom } from '@/shared/core/atoms';
 
 import { OrgCard } from './org-card';
 
-interface Props {
-  filterParamsString: string;
-}
-
-export const InitOrgCard = ({ filterParamsString }: Props) => {
+export const InitOrgCard = () => {
   const pathname = usePathname();
 
   const initPath = useAtomValue(initPathAtom);
@@ -49,7 +45,7 @@ export const InitOrgCard = ({ filterParamsString }: Props) => {
       <OrgCard
         isInit
         orgItem={orgItem}
-        filterParamsString={filterParamsString}
+        // TODO: filterParamsString
       />
     );
   }

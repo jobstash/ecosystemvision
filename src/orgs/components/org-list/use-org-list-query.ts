@@ -5,14 +5,10 @@ import { QUERY_STALETIME } from '@/shared/core/constants';
 import { OrgQueryKeys, orgQueryKeys } from '@/orgs/core/query-keys';
 import { OrgListQueryPage } from '@/orgs/core/schemas';
 import { getOrgList } from '@/orgs/data/get-org-list';
-import { useFiltersContext } from '@/filters/providers/filters-provider/context';
 
 export const useOrgListQuery = () => {
-  const { filterParamsString } = useFiltersContext();
-
-  const searchParams = filterParamsString.startsWith('?')
-    ? filterParamsString.slice(1)
-    : filterParamsString;
+  // TODO: filter search params string
+  const searchParams = '';
 
   return useInfiniteQuery<
     OrgListQueryPage,

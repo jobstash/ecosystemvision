@@ -1,5 +1,4 @@
 import '../src/app/globals.css';
-import '@mantine/core/styles.css';
 
 import type { Preview } from '@storybook/react';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';

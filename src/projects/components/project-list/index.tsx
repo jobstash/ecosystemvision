@@ -9,7 +9,6 @@ import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { InitProjectCard } from '@/projects/components/init-project-card';
 import { ProjectCard } from '@/projects/components/project-card';
-import { useFiltersContext } from '@/filters/providers/filters-provider/context';
 
 import { useProjectList } from './use-project-list';
 
@@ -24,25 +23,21 @@ export const ProjectList = () => {
   } = useProjectList();
   const hasProjects = projects.length > 0;
 
-  const { isPendingFilters, filterParamsString } = useFiltersContext();
-
-  const isPending = [isPendingFilters, isPendingList].includes(true);
-
   return (
     <>
       {error && <InternalErrorResult onReset={reloadPage} />}
 
-      {isPending ? (
+      {isPendingList ? (
         <CardSkeleton />
       ) : isSuccess && hasProjects ? (
         <>
-          <InitProjectCard filterParamsString={filterParamsString} />
+          <InitProjectCard />
           <VirtualWrapper count={projects.length}>
             {(index) => (
               <div className={cn({ 'pt-8': index > 0 })}>
                 <ProjectCard
                   project={projects[index]}
-                  filterParamsString={filterParamsString}
+                  // TODO: filterParamsString
                 />
               </div>
             )}
