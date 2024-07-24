@@ -1,11 +1,8 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { getQueryClient } from '@/shared/utils/get-query-client';
 
-import { filterQueryKeys } from '@/filters/core/query-keys';
 import { projectQueryKeys } from '@/projects/core/query-keys';
-import { getFilterConfig } from '@/filters/data/get-filter-config';
 import { getProjectDetails } from '@/projects/data/get-project-details';
 import { getProjectList } from '@/projects/data/get-project-list';
 
@@ -26,11 +23,6 @@ const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
         getProjectList({ page: pageParam, searchParams: rawSearchParams }),
       initialPageParam: 1,
     }),
-    // Prefetch filter config
-    queryClient.prefetchQuery({
-      queryKey: filterQueryKeys.list(rawSearchParams, ROUTE_SECTIONS.PROJECTS),
-      queryFn: () => getFilterConfig(`/${ROUTE_SECTIONS.PROJECTS}`),
-    }),
   ]);
 
   // Prefetch details for each org item
@@ -47,7 +39,7 @@ const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProjectListClientPage rawSearchParams={rawSearchParams} />
+      <ProjectListClientPage />
     </HydrationBoundary>
   );
 };

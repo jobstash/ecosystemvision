@@ -5,14 +5,9 @@ import { QUERY_STALETIME } from '@/shared/core/constants';
 import { ProjectQueryKeys, projectQueryKeys } from '@/projects/core/query-keys';
 import { ProjectListQueryPage } from '@/projects/core/schemas';
 import { getProjectList } from '@/projects/data/get-project-list';
-import { useFiltersContext } from '@/filters/providers/filters-provider/context';
-
 export const useProjectListQuery = () => {
-  const { filterParamsString } = useFiltersContext();
-
-  const searchParams = filterParamsString.startsWith('?')
-    ? filterParamsString.slice(1)
-    : filterParamsString;
+  // TODO: filter search params string
+  const searchParams = '';
 
   return useInfiniteQuery<
     ProjectListQueryPage,
