@@ -23,9 +23,6 @@ const MAIN_BRANCH = 'main';
 
     // Delete local feature-branch
     await exec(`git branch -D ${branchName}`);
-
-    // Delete remote feature-branch
-    await exec(`HUSKY=0 git push origin :${branchName}`);
   } catch (error) {
     console.error('remove-branch error =', error);
   }
