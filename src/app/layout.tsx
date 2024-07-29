@@ -13,8 +13,9 @@ import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Projects.fyi',
-  description: 'Projects.fyi',
+  title: 'Ecosystem Vision',
+  description:
+    'Explore and visualize grants and ecosystem trends with actionable insights.',
 };
 
 interface RootLayoutProps {
