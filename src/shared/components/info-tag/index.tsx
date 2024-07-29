@@ -9,7 +9,7 @@ import { InfoTagLink } from './info-tag-link';
 const DEFAULT_CLASSNAME =
   'flex h-6 shrink-0 items-center gap-x-2 rounded-[4px] py-1 pr-2 lg:rounded-md';
 const LINK_CLASSNAME =
-  'bg-white/10 hover:bg-white/40 cursor-pointer duration-300 transition-all px-2';
+  'bg-white/10 cursor-pointer duration-300 transition-all px-2';
 const COMPACT_CLASSNAME = 'h-10 sm:h-12 md:h-6';
 
 interface Props {

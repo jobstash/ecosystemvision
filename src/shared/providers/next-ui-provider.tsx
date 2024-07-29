@@ -9,7 +9,7 @@ export const NextUIProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <BaseProvider navigate={router.push}>
-      <main className="bg-base-dark text-white dark">{children}</main>
+      <main>{children}</main>
     </BaseProvider>
   );
 };
