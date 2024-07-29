@@ -64,4 +64,5 @@ export const TEST_IDS = {
   MOBILE_MENU: 'mobile-menu',
   DETAILS_BACK: 'details-back',
   NAV_SECTION: 'nav-section',
+  DETAILS_PANEL_TABS: 'details-panel-tabs',
 } as const;

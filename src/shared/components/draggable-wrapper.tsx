@@ -7,6 +7,8 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
 
+import { TEST_IDS } from '../core/constants';
+
 interface Props {
   children: ReactNode;
   className?: ClassValue;
@@ -22,7 +24,12 @@ export const DraggableWrapper = (props: Props) => {
   );
 
   return (
-    <div className={cn(WRAPPER_CLASSNAME, className)} ref={ref} {...events}>
+    <div
+      className={cn(WRAPPER_CLASSNAME, className)}
+      ref={ref}
+      data-testid={TEST_IDS.DETAILS_PANEL_TABS}
+      {...events}
+    >
       {children}
     </div>
   );
