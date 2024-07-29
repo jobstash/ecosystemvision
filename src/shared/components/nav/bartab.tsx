@@ -30,8 +30,9 @@ export const Bartab = (props: BartabProps) => {
   };
 
   const buttonClassName = cn('justify-start hover:bg-white/15', {
-    'bg-white/5': !isActive,
-    'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive || isMobile,
+    'bg-transparent': isMobile,
+    'bg-white/5': !isActive && !isMobile,
+    'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive && !isMobile,
   });
 
   return (
