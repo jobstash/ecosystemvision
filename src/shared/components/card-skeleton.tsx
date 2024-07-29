@@ -4,7 +4,7 @@ import { Divider } from './divider';
 
 export const CardSkeleton = () => {
   return (
-    <div className="flex flex-col gap-3 rounded-3xl bg-darkest-gray p-6">
+    <div className="flex flex-col gap-3 rounded-3xl bg-white/5 p-6">
       <div className="flex w-full items-center justify-between">
         <Skeleton className="h-6 w-9/12 rounded-md md:w-6/12" />
         <Skeleton className="h-6 w-2/12 rounded-md" />

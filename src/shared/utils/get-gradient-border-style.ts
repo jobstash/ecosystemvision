@@ -1,20 +1,13 @@
-const PRIMARY_START_COLOR = '#8743FF';
-const PRIMARY_END_COLOR = '#4136F1';
-const SECONDARY_START_COLOR = '#363638';
-const SECONDARY_END_COLOR = '#27272A';
-const BASE_BACKGROUND_COLOR = '#1e1e1e';
+const START_COLOR = '#1f1f28';
+const END_COLOR = '#4136F1';
+const BASE_BACKGROUND_COLOR = '#191919';
 const TRANSPARENT_BORDER = '2px solid transparent';
 const BASE_BACKGROUND_GRADIENT_DIRECTION = '90deg';
-const BORDER_GRADIENT_DIRECTION = '270deg';
+const BORDER_GRADIENT_DIRECTION = '330deg';
 
-export const getGradientBorderStyle = (
-  isPrimary = true,
-): React.CSSProperties => {
-  const startColor = isPrimary ? PRIMARY_START_COLOR : SECONDARY_START_COLOR;
-  const endColor = isPrimary ? PRIMARY_END_COLOR : SECONDARY_END_COLOR;
-
+export const getGradientBorderStyle = (): React.CSSProperties => {
   return {
-    background: `linear-gradient(${BASE_BACKGROUND_GRADIENT_DIRECTION}, ${BASE_BACKGROUND_COLOR}, ${BASE_BACKGROUND_COLOR}) padding-box, linear-gradient(${BORDER_GRADIENT_DIRECTION}, ${startColor}, ${endColor}) border-box`,
+    background: `linear-gradient(${BASE_BACKGROUND_GRADIENT_DIRECTION}, ${BASE_BACKGROUND_COLOR}, ${BASE_BACKGROUND_COLOR}) padding-box, linear-gradient(${BORDER_GRADIENT_DIRECTION}, ${START_COLOR}, ${END_COLOR}) border-box`,
     border: TRANSPARENT_BORDER,
   };
 };

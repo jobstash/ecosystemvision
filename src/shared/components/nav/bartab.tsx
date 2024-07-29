@@ -29,8 +29,9 @@ export const Bartab = (props: BartabProps) => {
     closeNav();
   };
 
-  const buttonClassName = cn('justify-start bg-none', {
-    'bg-gradient-to-l from-[#8743FF] to-[#4136F1]': isActive || isMobile,
+  const buttonClassName = cn('justify-start hover:bg-white/15', {
+    'bg-white/5': !isActive,
+    'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive || isMobile,
   });
 
   return (

@@ -22,7 +22,10 @@ interface RootLayoutProps {
 }
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
-  <html lang="en" className={`${lato.variable} ${roboto.variable}`}>
+  <html
+    lang="en"
+    className={`bg-[#0D0D0D] ${lato.variable} ${roboto.variable}`}
+  >
     <body className={inter.className}>
       <NextUIProvider>
         <ReactQueryProvider>

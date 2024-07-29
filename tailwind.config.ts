@@ -22,12 +22,9 @@ const config: Config = {
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         'base-dark': 'var(--color-base-dark)',
-        'dark-gray': 'rgb(var(--color-dark-gray) / <alpha-value>)',
-        'darker-gray': 'rgb(var(--color-darker-gray) / <alpha-value>)',
-        'darkest-gray': 'rgb(var(--color-darkest-gray) / <alpha-value>)',
+        'dark-gray': 'var(--color-dark-gray)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
-        'mid-primary': 'rgb(var(--color-mid-primary) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',
         skill3: '#E2BF2B',

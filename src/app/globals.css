@@ -4,20 +4,15 @@
 
 @layer base {
 	:root {
-		--color-base-dark: #141317;
+		--color-base-dark: 13 13 13; /* #0D0D0D */
+		--color-dark-gray: 25 25 25; /* #191919 */
 		--color-white: 255 255 255;
-		--color-darkest-gray: 30 30 30;
-		--color-darker-gray: 41 41 41;
-		--color-dark-gray: 52 52 52;
-		--color-primary: 135 67 255; /* #8743FF */
-		--color-mid-primary: 102 61 249; /* #663DF9 */
-		--color-secondary: 65 54 241; /* #4136F1 */
+		--color-primary: 65 54 241; /* #4136F1 */
+		--color-secondary: 135 67 255; /* #8743FF */
 	}
 }
 
 html {
-	background-color: #141317;
-	color: #fff;
 	overflow-y: scroll;
 	scrollbar-gutter: stable;
 }

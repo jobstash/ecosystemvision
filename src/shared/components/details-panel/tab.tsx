@@ -15,7 +15,7 @@ export const DetailsPanelTab = ({ href, isActive, text }: TabProps) => {
   const linkStyle = isActive ? getGradientBorderStyle() : undefined;
 
   const wrapperClassName =
-    'flex h-10 shrink-0 items-center justify-center rounded-lg border border-white/20 px-4 py-2 sm:h-12 md:h-8';
+    'flex h-10 shrink-0 items-center justify-center rounded-lg border border-white/10 px-4 py-2 sm:h-12 md:h-8';
 
   const contentClassName = cn(
     `rounded-lg border border-transparent font-lato text-sm`,

@@ -9,9 +9,9 @@ interface Props {
 }
 
 const CARD_WRAPPER_BASE_CLASS =
-  'rounded-3xl bg-darkest-gray transition-all duration-300 hover:bg-darker-gray';
+  'rounded-3xl bg-white/5 transition-all duration-300 hover:bg-white/10';
 const CARD_WRAPPER_ACTIVE_CLASS =
-  'bg-gradient-to-l from-primary to-secondary hover:brightness-125';
+  'bg-gradient-to-l from-[#0D0D0D] to-primary hover:brightness-125';
 
 export const CardWrapper = (props: Props) => {
   const { id, idAtom, children } = props;
