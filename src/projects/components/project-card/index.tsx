@@ -20,16 +20,18 @@ interface Props {
   filterParamsString?: string;
 }
 
-export const ProjectCard = ({ project, isInit, filterParamsString }: Props) => {
+export const ProjectCard = (props: Props) => {
+  const { project, isInit, filterParamsString = '' } = props;
   const { normalizedName: slug, website, logo, name, chains } = project;
 
   const src = getLogoUrl(website || '', logo);
   const { upperTags, midTags } = createProjectTags(project);
+  const href = `${HREFS.PROJECTS_PAGE}/${slug}/details${filterParamsString}`;
 
   return (
     <CardWrapper id={slug} idAtom={activeProjectSlugAtom}>
       <Link
-        href={`${HREFS.PROJECTS_PAGE}/${slug}/details${filterParamsString}`}
+        href={href}
         scroll={false}
         data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
         data-uuid={slug}
