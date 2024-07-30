@@ -21,7 +21,7 @@ const classNames = {
 };
 
 const NotFound = () => (
-  <div className="flex min-h-screen w-full items-center justify-center md:pl-[212px]">
+  <div className="flex min-h-screen w-full items-center justify-center">
     <ErrorAction
       isTransparent
       textContent={textContent}
