@@ -3,8 +3,6 @@ import { Brand } from '@/shared/components/brand';
 import { HandbagIcon } from '@/shared/components/icons/handbag-icon';
 import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
 
-import { SquareIcon } from '../icons/square-icon';
-
 import { Bartab } from './bartab';
 import { CloseButton } from './close-button';
 
@@ -21,21 +19,6 @@ const SECTIONS = [
         icon: <UsersThreeIcon />,
         text: A11Y.LINK.NAV.PROJECTS,
         href: HREFS.PROJECTS_PAGE,
-      },
-      {
-        icon: <SquareIcon />,
-        text: A11Y.LINK.NAV.INVESTORS,
-        href: HREFS.INVESTORS_PAGE,
-      },
-      {
-        icon: <SquareIcon />,
-        text: A11Y.LINK.NAV.COMMUNITIES,
-        href: HREFS.COMMUNITIES_PAGE,
-      },
-      {
-        icon: <SquareIcon />,
-        text: A11Y.LINK.NAV.CHAINS,
-        href: HREFS.CHAINS_PAGE,
       },
     ],
   },
