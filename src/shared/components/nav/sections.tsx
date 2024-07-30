@@ -1,9 +1,6 @@
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
-import { HandbagIcon } from '@/shared/components/icons/handbag-icon';
-import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
-
-import { SquareIcon } from '../icons/square-icon';
+import { HomeIcon } from '@/shared/components/icons/home-icon';
 
 import { Bartab } from './bartab';
 import { CloseButton } from './close-button';
@@ -13,29 +10,16 @@ const SECTIONS = [
     label: 'Discover',
     bartabs: [
       {
-        icon: <HandbagIcon />,
         text: A11Y.LINK.NAV.ORGS,
         href: HREFS.ORGS_PAGE,
       },
       {
-        icon: <UsersThreeIcon />,
         text: A11Y.LINK.NAV.PROJECTS,
         href: HREFS.PROJECTS_PAGE,
       },
       {
-        icon: <SquareIcon />,
-        text: A11Y.LINK.NAV.INVESTORS,
-        href: HREFS.INVESTORS_PAGE,
-      },
-      {
-        icon: <SquareIcon />,
-        text: A11Y.LINK.NAV.COMMUNITIES,
-        href: HREFS.COMMUNITIES_PAGE,
-      },
-      {
-        icon: <SquareIcon />,
-        text: A11Y.LINK.NAV.CHAINS,
-        href: HREFS.CHAINS_PAGE,
+        text: A11Y.LINK.NAV.GRANTS,
+        href: HREFS.GRANTS_PAGE,
       },
     ],
   },
@@ -56,20 +40,21 @@ export const NavSections = ({ isMobile }: Props) => {
         {isMobile && <CloseButton />}
       </div>
 
+      <Bartab
+        icon={<HomeIcon />}
+        text={A11Y.LINK.NAV.HOME}
+        href={HREFS.HOME_PAGE}
+        isMobile={isMobile}
+      />
+
       {SECTIONS.map(({ label, bartabs }) => (
         <div key={label} className="flex flex-col gap-4">
           <h2 className="text-white/75 md:pb-0 md:text-xs md:text-[#9CA3AF]">
             {label}
           </h2>
           <div className="flex flex-col gap-4 px-2 md:gap-3 md:px-0">
-            {bartabs.map(({ text, icon, href }) => (
-              <Bartab
-                key={text}
-                icon={icon}
-                text={text}
-                href={href}
-                isMobile={isMobile}
-              />
+            {bartabs.map(({ text, href }) => (
+              <Bartab key={text} text={text} href={href} isMobile={isMobile} />
             ))}
           </div>
         </div>

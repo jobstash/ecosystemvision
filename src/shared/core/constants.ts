@@ -1,9 +1,7 @@
 export const ROUTE_SECTIONS = {
   ORGS: 'organizations' as const,
   PROJECTS: 'projects' as const,
-  INVESTORS: 'investors' as const,
-  COMMUNITIES: 'communities' as const,
-  CHAINS: 'chains' as const,
+  GRANTS: 'grants' as const,
 } as const;
 export type RouteSection = (typeof ROUTE_SECTIONS)[keyof typeof ROUTE_SECTIONS];
 
@@ -28,20 +26,17 @@ export const HREFS = {
   HOME_PAGE: '/',
   ORGS_PAGE: `/${ROUTE_SECTIONS.ORGS}`,
   PROJECTS_PAGE: `/${ROUTE_SECTIONS.PROJECTS}`,
-  INVESTORS_PAGE: `/${ROUTE_SECTIONS.INVESTORS}`,
-  COMMUNITIES_PAGE: `/${ROUTE_SECTIONS.COMMUNITIES}`,
-  CHAINS_PAGE: `/${ROUTE_SECTIONS.CHAINS}`,
+  GRANTS_PAGE: `/${ROUTE_SECTIONS.GRANTS}`,
 } as const;
 
 export const A11Y = {
   LINK: {
     BACK: 'Back',
     NAV: {
+      HOME: 'Home/Search',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
-      INVESTORS: 'Investors',
-      COMMUNITIES: 'Communities',
-      CHAINS: 'Chains',
+      GRANTS: 'Grant Programs',
     },
   },
 } as const;
