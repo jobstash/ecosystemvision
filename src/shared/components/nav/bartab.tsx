@@ -10,14 +10,14 @@ import { cn } from '@/shared/utils/cn';
 import { useCloseNav } from './use-close-nav';
 
 interface BartabProps {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   text: string;
   href: string;
   isMobile?: boolean;
 }
 
 export const Bartab = (props: BartabProps) => {
-  const { icon, text, href, isMobile = false } = props;
+  const { icon = null, text, href, isMobile = false } = props;
 
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
