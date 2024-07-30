@@ -1,6 +1,7 @@
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
 import { HandbagIcon } from '@/shared/components/icons/handbag-icon';
+import { HomeIcon } from '@/shared/components/icons/home-icon';
 import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
 
 import { Bartab } from './bartab';
@@ -38,6 +39,13 @@ export const NavSections = ({ isMobile }: Props) => {
         <Brand />
         {isMobile && <CloseButton />}
       </div>
+
+      <Bartab
+        icon={<HomeIcon />}
+        text={A11Y.LINK.NAV.HOME}
+        href={HREFS.HOME_PAGE}
+        isMobile={isMobile}
+      />
 
       {SECTIONS.map(({ label, bartabs }) => (
         <div key={label} className="flex flex-col gap-4">

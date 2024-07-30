@@ -31,6 +31,7 @@ export const A11Y = {
   LINK: {
     BACK: 'Back',
     NAV: {
+      HOME: 'Home/Search',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
     },
