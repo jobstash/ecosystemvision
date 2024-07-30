@@ -1,5 +1,6 @@
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
+import { GrantIcon } from '@/shared/components/icons/grant-icon';
 import { HandbagIcon } from '@/shared/components/icons/handbag-icon';
 import { HomeIcon } from '@/shared/components/icons/home-icon';
 import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
@@ -20,6 +21,11 @@ const SECTIONS = [
         icon: <UsersThreeIcon />,
         text: A11Y.LINK.NAV.PROJECTS,
         href: HREFS.PROJECTS_PAGE,
+      },
+      {
+        icon: <GrantIcon />,
+        text: A11Y.LINK.NAV.GRANTS,
+        href: HREFS.GRANTS_PAGE,
       },
     ],
   },

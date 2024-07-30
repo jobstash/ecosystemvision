@@ -20,7 +20,7 @@ export const Bartab = (props: BartabProps) => {
   const { icon, text, href, isMobile = false } = props;
 
   const pathname = usePathname();
-  const isActive = href === pathname.slice(0, href.length);
+  const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
   const { closeNav } = useCloseNav();
 
