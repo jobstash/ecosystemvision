@@ -6,10 +6,9 @@ import { formatNumber } from '@/shared/utils/format-number';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/types';
-
-import { DiscordIcon } from '../icons/discord-icon';
-import { TwitterIcon } from '../icons/twitter-icon';
-import { WebIcon } from '../icons/web-icon';
+import { DiscordIcon } from '@/grants/components/icons/discord-icon';
+import { TwitterIcon } from '@/grants/components/icons/twitter-icon';
+import { WebIcon } from '@/grants/components/icons/web-icon';
 
 interface Props {
   grant: Grant;
