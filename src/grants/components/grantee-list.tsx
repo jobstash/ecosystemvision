@@ -1,4 +1,4 @@
-import { GranteeItem } from './grantee-item';
+import { GranteeItem } from './grantee-item/grantee-item';
 
 interface Props {
   grantId: string;
