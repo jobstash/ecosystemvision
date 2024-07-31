@@ -17,7 +17,6 @@ RUN yarn global add pnpm
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_MW_URL=https://middleware.jobstash.xyz
 ENV NEXT_PUBLIC_JOBSTASH_URL=https://ecosystem.vision
-
 ENV NEXT_PUBLIC_FRONTEND_URL=https://ecosystem.vision
 
 ENV NEXT_PUBLIC_PAGE_SIZE=20
