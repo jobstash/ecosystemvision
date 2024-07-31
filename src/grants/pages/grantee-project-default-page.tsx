@@ -11,7 +11,7 @@ export const GranteeProjectDefaultPage = ({ granteeId }: Props) => {
   // TODO: JOB-684
   return (
     <div className="flex flex-col">
-      <span>{`Grantee Project Default Page for grantee#${granteeId}`}</span>
+      <span>{`TODO: Fetch Summary Page for project 1 of grantee#${granteeId}`}</span>
     </div>
   );
 };

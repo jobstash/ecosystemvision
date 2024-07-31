@@ -1,4 +1,4 @@
-import { GrantButtonGroup } from './grant-button-group';
+import { GrantButtonGroup } from '@/grants/components/grant-button-group';
 
 interface Props {
   grantId: string;

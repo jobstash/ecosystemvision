@@ -1,5 +1,5 @@
 import { GranteeCard } from '@/grants/components/grantee-card';
-import { ProjectSelection } from '@/grants/components/project-selection';
+import { ProjectSelection } from '@/grants/components/grantee-project/project-selection';
 
 interface Props {
   grantId: string;
