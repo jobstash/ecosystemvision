@@ -1,3 +1,5 @@
+import { fakeGrant } from '@/grants/testutils/fake-grant';
+
 import { GrantItem } from './grant-item';
 
 export const GrantList = () => {
@@ -6,7 +8,7 @@ export const GrantList = () => {
   return (
     <div className="flex flex-col gap-4">
       {Array.from({ length: 64 }).map((_, index) => (
-        <GrantItem key={index} id={`${index + 1}`} />
+        <GrantItem key={index} grant={fakeGrant} />
       ))}
     </div>
   );
