@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 
 import { cn } from '@/shared/utils/cn';
 
-import { GRANT_TEST_IDS } from '../../core/constants';
+import { GRANT_TEST_IDS } from '@/grants/core/constants';
 
 interface Props {
   granteeId: string;
