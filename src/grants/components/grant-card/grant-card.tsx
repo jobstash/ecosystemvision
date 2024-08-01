@@ -9,5 +9,5 @@ interface Props {
 
 export const GrantCard = ({ grant }: Props) => {
   // TODO: JOB-678
-  return <GrantItem grant={grant} cta={<GrantCardCTA {...grant} />} />;
+  return <GrantItem isCard grant={grant} cta={<GrantCardCTA {...grant} />} />;
 };
