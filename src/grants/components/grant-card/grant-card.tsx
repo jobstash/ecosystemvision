@@ -3,13 +3,15 @@ import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/types';
-
-import { DetailItemProps, DetailItems } from '../ui/base/detail-item';
-import { DetailValueAmount } from '../ui/base/detail-value-amount';
-import { DetailValueAvatars } from '../ui/base/detail-value-avatars';
-import { DetailValueTexts } from '../ui/base/detail-value-text';
-import { Title } from '../ui/base/title';
-import { WebLinks } from '../ui/base/web-links';
+import {
+  DetailItemProps,
+  DetailItems,
+} from '@/grants/components/ui/base/detail-item';
+import { DetailValueAmount } from '@/grants/components/ui/base/detail-value-amount';
+import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-avatars';
+import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
+import { Title } from '@/grants/components/ui/base/title';
+import { WebLinks } from '@/grants/components/ui/base/web-links';
 
 const createTopItems = ({
   grantees,

@@ -15,8 +15,7 @@ import { DetailValueAmount } from '@/grants/components/ui/base/detail-value-amou
 import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-avatars';
 import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
 import { Title } from '@/grants/components/ui/base/title';
-
-import { WebLinks } from '../ui/base/web-links/web-links';
+import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
 
 const CaretRightIcon = () => (
   <svg
