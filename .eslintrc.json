@@ -69,7 +69,7 @@
         // Override react defaults
         "react/boolean-prop-naming": [
           "error",
-          { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }
+          { "rule": "^(is|has|should|show)[A-Z]([A-Za-z0-9]?)+" }
         ],
         "react/react-in-jsx-scope": "off",
         "react/function-component-definition": [
