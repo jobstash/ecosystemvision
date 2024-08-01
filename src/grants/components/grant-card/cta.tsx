@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { Button } from '@nextui-org/react';
 
 import { Grant } from '@/grants/core/types';
-import { DiscordIcon } from '@/grants/components/icons/discord-icon';
-import { TwitterIcon } from '@/grants/components/icons/twitter-icon';
-import { WebIcon } from '@/grants/components/icons/web-icon';
+import { DiscordIcon } from '@/grants/components/ui/icons/discord-icon';
+import { TwitterIcon } from '@/grants/components/ui/icons/twitter-icon';
+import { WebIcon } from '@/grants/components/ui/icons/web-icon';
 
 const icons = {
   url: WebIcon,
