@@ -2,17 +2,16 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { fakeGrant } from '@/grants/testutils/fake-grant';
 
-import { GrantItem } from './grant-item';
+import { GrantListItem } from './grant-list-item';
 
-const meta: Meta<typeof GrantItem> = {
-  component: GrantItem,
+const meta: Meta<typeof GrantListItem> = {
+  component: GrantListItem,
   args: {
     grant: fakeGrant,
-    cta: null,
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof GrantItem>;
+type Story = StoryObj<typeof GrantListItem>;
 
 export const Default: Story = {};
