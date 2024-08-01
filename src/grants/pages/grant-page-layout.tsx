@@ -1,6 +1,8 @@
 import { GrantBackButton } from '@/grants/components/grant-back-button';
 import { GrantCard } from '@/grants/components/grant-card';
 
+import { fakeGrant } from '@/grants/testutils/fake-grant';
+
 interface Props {
   children: React.ReactNode;
   list: React.ReactNode;
@@ -12,11 +14,14 @@ export const GrantPageLayout = ({
   list,
   params: { grantId },
 }: Props) => {
+  // TODO: fetch grant using grantId
+  const grant = fakeGrant;
+
   return (
     <div className="flex flex-col gap-8 p-8">
       <GrantBackButton fallbackUrl="/grants" />
 
-      <GrantCard id={grantId} />
+      <GrantCard grant={grant} />
 
       <span>{`Grantee List of grant#${grantId}`}</span>
 
