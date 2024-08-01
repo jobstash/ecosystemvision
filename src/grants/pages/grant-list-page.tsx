@@ -1,4 +1,4 @@
-import { GrantList } from '@/grants/components/grant-list';
+import { GrantList } from '@/grants/components/grant-list/grant-list';
 
 export const GrantListPage = () => {
   return (

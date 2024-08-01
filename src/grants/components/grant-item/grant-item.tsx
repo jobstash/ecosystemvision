@@ -1,17 +1,15 @@
 import Link from 'next/link';
 
-import { Avatar, AvatarGroup, Button } from '@nextui-org/react';
+import { Avatar, AvatarGroup } from '@nextui-org/react';
 
 import { formatNumber } from '@/shared/utils/format-number';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/types';
-import { DiscordIcon } from '@/grants/components/icons/discord-icon';
-import { TwitterIcon } from '@/grants/components/icons/twitter-icon';
-import { WebIcon } from '@/grants/components/icons/web-icon';
 
 interface Props {
-  grant: Grant;
+  grant: Omit<Grant, 'logo' | 'url' | 'discord' | 'twitter'>;
+  cta: React.ReactNode;
 }
 
 export const GrantItem = (props: Props) => {
@@ -28,11 +26,8 @@ export const GrantItem = (props: Props) => {
       categories,
       type,
       reputations,
-      logo,
-      url,
-      discord,
-      twitter,
     },
+    cta,
   } = props;
 
   const href = `/grants/${id}`;
@@ -95,28 +90,7 @@ export const GrantItem = (props: Props) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
-        <div className="flex size-32 items-center justify-center bg-white/5">
-          <span>LOGO HERE: {logo}</span>
-        </div>
-        <div className="flex items-center gap-3">
-          {url && (
-            <Button size="sm" as={Link} href={url} isIconOnly>
-              <WebIcon />
-            </Button>
-          )}
-          {discord && (
-            <Button size="sm" as={Link} href={discord} isIconOnly>
-              <DiscordIcon />
-            </Button>
-          )}
-          {twitter && (
-            <Button size="sm" as={Link} href={twitter} isIconOnly>
-              <TwitterIcon />
-            </Button>
-          )}
-        </div>
-      </div>
+      {cta}
     </Link>
   );
 };
