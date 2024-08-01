@@ -9,6 +9,41 @@ interface Props {
   cta: React.ReactNode;
 }
 
+type Detail = { label: string; value: string | number };
+const DetailItem = ({ label, value }: Detail) => (
+  <span>{`${label} ${value}`}</span>
+);
+
+const List = ({ label, items }: { label: string; items: string[] }) => (
+  <div className="flex shrink-0 items-center gap-4">
+    <span>{label}</span>
+    {items.map((item) => (
+      <span key={item}>{item}</span>
+    ))}
+  </div>
+);
+
+type Network = { name: string; logo: string | null };
+const Networks = ({ networks }: { networks: Network[] }) => (
+  <div className="flex items-center gap-3">
+    <span>Networks</span>
+    <AvatarGroup size="sm">
+      {networks.map(({ name, logo }) => (
+        <Avatar
+          key={name}
+          showFallback
+          name={name}
+          src={logo ?? ''}
+          classNames={{
+            base: 'bg-zinc-700',
+            fallback: 'bg-white/5',
+          }}
+        />
+      ))}
+    </AvatarGroup>
+  </div>
+);
+
 export const GrantItemContent = ({ grant, cta }: Props) => {
   const {
     name,
@@ -28,49 +63,29 @@ export const GrantItemContent = ({ grant, cta }: Props) => {
       <div className="flex flex-col gap-3">
         <span>{name}</span>
         <div className="flex items-center gap-6">
-          <span>{`Grantees ${grantees}`}</span>
-          <div className="flex items-center gap-3">
-            <span>Networks</span>
-            <AvatarGroup size="sm">
-              {networks.map(({ name, logo }) => (
-                <Avatar
-                  key={name}
-                  showFallback
-                  name={name}
-                  src={logo ?? ''}
-                  classNames={{
-                    base: 'bg-zinc-700',
-                    fallback: 'bg-white/5',
-                  }}
-                />
-              ))}
-            </AvatarGroup>
-          </div>
-          <span>{`Ecosystem ${ecosystem}`}</span>
-          <span>{`Total Funds $${formatNumber(totalFunds)}`}</span>
-          <span>{`Total Disbursed Funds $${formatNumber(totalDisbursedFunds)}`}</span>
+          <DetailItem label="Grantees" value={grantees} />
+          <Networks networks={networks} />
+          <DetailItem label="Ecosystem" value={ecosystem} />
+          <DetailItem
+            label="Total Funds"
+            value={`$${formatNumber(totalFunds)}`}
+          />
+          <DetailItem
+            label="Total Disbursed Funds"
+            value={`$${formatNumber(totalDisbursedFunds)}`}
+          />
         </div>
 
         <div className="flex items-start gap-4">
           <span>{summary}</span>
-          <div className="flex shrink-0 items-center gap-4">
-            <span>Categories</span>
-            {categories.map((category) => (
-              <span key={category}>{category}</span>
-            ))}
-          </div>
+          <List label="Categories" items={categories} />
           <div className="flex shrink-0 gap-4">
             <span>Type</span>
-            <span className="">{type}</span>
+            <span>{type}</span>
           </div>
         </div>
 
-        <div className="flex gap-4">
-          <span>Reputations</span>
-          {reputations.map((reputation) => (
-            <span key={reputation}>{reputation}</span>
-          ))}
-        </div>
+        <List label="Reputations" items={reputations} />
       </div>
 
       {cta}
