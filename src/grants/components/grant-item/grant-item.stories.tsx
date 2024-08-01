@@ -8,6 +8,7 @@ const meta: Meta<typeof GrantItem> = {
   component: GrantItem,
   args: {
     grant: fakeGrant,
+    cta: null,
   },
 };
 
