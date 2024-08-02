@@ -34,20 +34,24 @@ export const DetailItem = ({
 interface DetailItemsProps {
   items: DetailItemProps[];
   classNames?: {
-    root: ClassValue;
-  };
+    container?: ClassValue;
+  } & DetailItemProps['classNames'];
 }
 
 export const DetailItems = ({ items, classNames }: DetailItemsProps) => {
   const rootClassName = cn(
     'flex flex-wrap items-center gap-4',
-    classNames?.root,
+    classNames?.container,
   );
 
   return (
     <div className={rootClassName}>
       {items.map((itemProps, index) => (
-        <DetailItem key={index} {...itemProps} />
+        <DetailItem
+          key={index}
+          classNames={{ root: classNames?.root, label: classNames?.label }}
+          {...itemProps}
+        />
       ))}
     </div>
   );
