@@ -1,8 +1,7 @@
 import { ClassValue } from 'clsx';
 
+import { TEST_IDS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
-
-import { TEST_IDS } from '../core/constants';
 
 import { MenuButton } from './menu-button';
 

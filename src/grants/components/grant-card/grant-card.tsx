@@ -20,7 +20,7 @@ const createTopItems = ({
   totalFunds,
   totalDisbursedFunds,
 }: Grant): DetailItemProps[] => [
-  { icon: <PaperbillIcon />, label: 'Grantees', value: grantees },
+  { icon: <PaperbillIcon />, label: 'Grantees', value: grantees.length },
   { label: 'Networks', value: <DetailValueAvatars items={networks} /> },
   { label: 'Ecosystem', value: ecosystem },
   { label: 'Total Funds', value: <DetailValueAmount amount={totalFunds} /> },

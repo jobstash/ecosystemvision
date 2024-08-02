@@ -5,9 +5,8 @@ import { useDraggable } from 'react-use-draggable-scroll';
 
 import { ClassValue } from 'clsx';
 
+import { TEST_IDS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
-
-import { TEST_IDS } from '../core/constants';
 
 interface Props {
   children: ReactNode;
