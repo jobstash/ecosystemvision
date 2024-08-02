@@ -7,12 +7,17 @@ import { cn } from '@/shared/utils/cn';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   granteeId: string;
   children: React.ReactNode;
 }
 
-export const ClientWrapper = ({ granteeId, children }: Props) => {
+export const ClientWrapper = ({
+  granteeId,
+  children,
+  className,
+  ...props
+}: Props) => {
   const params = useParams();
 
   const href = `/grants/${params.grantId}/grantees/${granteeId}`;
@@ -25,9 +30,14 @@ export const ClientWrapper = ({ granteeId, children }: Props) => {
       data-testid={GRANT_TEST_IDS.GRANTEE_ITEM}
       data-uuid={params.granteeId}
       prefetch={true}
-      className={cn('rounded-lg bg-white/5 px-4 py-12', {
-        'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive,
-      })}
+      className={cn(
+        'bg-white/5',
+        {
+          'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive,
+        },
+        className,
+      )}
+      {...props}
     >
       {children}
     </Link>
