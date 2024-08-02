@@ -26,7 +26,7 @@ export const GrantPageLayout = ({
       <span>{`Grantee List of grant#${grantId}`}</span>
 
       <div className="flex gap-8">
-        <div className="w-full lg:w-4/12">{list}</div>
+        <div className="w-full shrink-0 lg:w-4/12">{list}</div>
 
         {children}
       </div>

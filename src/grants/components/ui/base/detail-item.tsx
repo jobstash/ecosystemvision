@@ -46,8 +46,8 @@ export const DetailItems = ({ items, classNames }: DetailItemsProps) => {
 
   return (
     <div className={rootClassName}>
-      {items.map((itemProps) => (
-        <DetailItem key={itemProps.label} {...itemProps} />
+      {items.map((itemProps, index) => (
+        <DetailItem key={index} {...itemProps} />
       ))}
     </div>
   );
