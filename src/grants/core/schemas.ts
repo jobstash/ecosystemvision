@@ -39,7 +39,7 @@ export const granteeSchema = z.object({
 export type Grantee = z.infer<typeof granteeSchema>;
 
 export const grantListQueryPageSchema = z.object({
-  page: z.number(),
+  page: z.number().optional(),
   data: z.array(grantSchema),
 });
 export type GrantListQueryPage = z.infer<typeof grantListQueryPageSchema>;

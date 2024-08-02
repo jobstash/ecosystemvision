@@ -1,5 +1,7 @@
 'use client';
 
+import { useMemo } from 'react';
+
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { GrantListItem } from './grant-list-item';
@@ -10,15 +12,19 @@ export const GrantList = () => {
 
   const { grants, error, inViewRef, hasNextPage, isPending } = useGrantList();
 
-  if (isPending) return <p>Loading Grants ...</p>;
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
-  if (!grants.length) return <p>No grants found.</p>;
+  const lastItem = useMemo(() => {
+    if (error) return <p>Error: {error.message}</p>;
 
-  const lastItem = hasNextPage ? (
-    <div ref={inViewRef}>Loading more...</div>
-  ) : (
-    <p>No more grants available.</p>
-  );
+    if (!hasNextPage) return <p>No more grants available.</p>;
+
+    return <div ref={inViewRef}>Loading more...</div>;
+  }, [error, hasNextPage, inViewRef]);
+
+  if (isPending) return <p>Loading Grants ...</p>;
+
+  if (!grants.length) {
+    return error ? <p>Error: {error.message}</p> : <p>No grants found.</p>;
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -29,6 +35,7 @@ export const GrantList = () => {
           </div>
         )}
       </VirtualWrapper>
+
       {lastItem}
     </div>
   );
