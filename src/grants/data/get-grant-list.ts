@@ -4,7 +4,7 @@ import { mwGET } from '@/shared/utils/mw-get';
 
 import { grantListQueryPageSchema } from '@/grants/core/schemas';
 
-export const getGrantList = (page: number, searchParams = '') => {
+export const getGrantList = async (page: number, searchParams = '') => {
   const url = createUrlWithSearchParams(
     `${MW_URL}/grants/list?page=${page}&limit=${PAGE_SIZE}`,
     searchParams,
