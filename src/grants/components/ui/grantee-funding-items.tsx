@@ -3,7 +3,7 @@ import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
-import { Grantee } from '@/grants/core/types';
+import { Grantee } from '@/grants/core/schemas';
 
 import { DetailItemProps, DetailItems } from './base/detail-item';
 import { DetailValueText } from './base/detail-value-text';

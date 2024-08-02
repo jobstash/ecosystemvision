@@ -6,7 +6,7 @@ import { getWebsiteText } from '@/shared/utils/get-website-text';
 import { Divider } from '@/shared/components/divider';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
-import { Grantee } from '@/grants/core/types';
+import { Grantee } from '@/grants/core/schemas';
 import { GranteeFundingItems } from '@/grants/components/ui/grantee-funding-items';
 import { GranteeLogoTitle } from '@/grants/components/ui/grantee-logo-title';
 

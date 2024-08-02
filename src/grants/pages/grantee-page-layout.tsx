@@ -2,7 +2,7 @@ import { GranteeCard } from '@/grants/components/grantee-card/grantee-card';
 import { ProjectSelectionClientWrapper } from '@/grants/components/grantee-project/project-selection-client-wrapper';
 import { ProjectTabSelection } from '@/grants/components/grantee-project/project-tab-selection';
 
-import { fakeGrant } from '../testutils/fake-grant';
+import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
 interface Props {
   grantId: string;
@@ -13,9 +13,8 @@ interface Props {
 export const GranteePageLayout = ({ grantId, granteeId, children }: Props) => {
   const baseHref = `/grants/${grantId}/grantees/${granteeId}/projects`;
 
-  // TODO: fetch grant
-  const grant = fakeGrant;
-  const grantee = grant.grantees.find((g) => g.id === granteeId)!;
+  // TODO: fetch grantee
+  const grantee = fakeGrantee;
 
   // TODO: fetch projects
   const projects = [
