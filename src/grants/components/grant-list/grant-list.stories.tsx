@@ -7,6 +7,7 @@ import { mockGrantListQuery } from '@/grants/testutils/mock-grant-list-query';
 import { GrantList } from './grant-list';
 
 const meta: Meta<typeof GrantList> = {
+  title: 'grants/components/grant-list',
   component: GrantList,
   args: {},
   parameters: {
