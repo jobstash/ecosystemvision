@@ -1,6 +1,8 @@
-import { GranteeCard } from '@/grants/components/grantee-card';
+import { GranteeCard } from '@/grants/components/grantee-card/grantee-card';
 import { ProjectSelectionClientWrapper } from '@/grants/components/grantee-project/project-selection-client-wrapper';
 import { ProjectTabSelection } from '@/grants/components/grantee-project/project-tab-selection';
+
+import { fakeGrant } from '../testutils/fake-grant';
 
 interface Props {
   grantId: string;
@@ -10,6 +12,10 @@ interface Props {
 
 export const GranteePageLayout = ({ grantId, granteeId, children }: Props) => {
   const baseHref = `/grants/${grantId}/grantees/${granteeId}/projects`;
+
+  // TODO: fetch grant
+  const grant = fakeGrant;
+  const grantee = grant.grantees.find((g) => g.id === granteeId)!;
 
   // TODO: fetch projects
   const projects = [
@@ -35,7 +41,7 @@ export const GranteePageLayout = ({ grantId, granteeId, children }: Props) => {
 
   return (
     <div className="flex w-max flex-col gap-4 lg:grow">
-      <GranteeCard granteeId={granteeId} />
+      <GranteeCard grantee={grantee} />
 
       <div className="flex w-full gap-4 bg-white/5 p-4">
         {projects.map(({ id, name }) => (
