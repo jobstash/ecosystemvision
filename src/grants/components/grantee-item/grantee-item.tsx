@@ -6,9 +6,11 @@ import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { Grantee } from '@/grants/core/types';
-
-import { DetailItemProps, DetailItems } from '../ui/base/detail-item';
-import { CaretRightIcon } from '../ui/icons/caret-right-icon';
+import {
+  DetailItemProps,
+  DetailItems,
+} from '@/grants/components/ui/base/detail-item';
+import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 import { ClientWrapper } from './client-wrapper';
 
