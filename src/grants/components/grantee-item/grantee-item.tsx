@@ -2,6 +2,8 @@ import { Avatar } from '@nextui-org/react';
 
 import { formatNumber } from '@/shared/utils/format-number';
 import { shortTimestamp } from '@/shared/utils/short-timestamp';
+import { BankIcon } from '@/shared/components/icons/bank-icon';
+import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { Grantee } from '@/grants/core/types';
 
@@ -18,8 +20,16 @@ const createFundingItems = ({
   lastFunding,
   fundingDate,
 }: Grantee): DetailItemProps[] => [
-  { icon: null, label: 'Last Funding', value: `$${formatNumber(lastFunding)}` },
-  { icon: null, label: 'Funding Date', value: shortTimestamp(fundingDate) },
+  {
+    icon: <PaperbillIcon />,
+    label: 'Last Funding',
+    value: `$${formatNumber(lastFunding)}`,
+  },
+  {
+    icon: <BankIcon />,
+    label: 'Funding Date',
+    value: shortTimestamp(fundingDate),
+  },
 ];
 
 export const GranteeItem = ({ grantee }: Props) => {
