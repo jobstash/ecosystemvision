@@ -2,6 +2,12 @@ import '../src/app/globals.css';
 
 import type { Preview } from '@storybook/react';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+
+// Initialize MSW
+initialize();
+
+const loaders: Preview['loaders'] = [mswLoader];
 
 const parameters: Preview['parameters'] = {
   controls: {

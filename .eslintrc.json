@@ -26,6 +26,8 @@
               ["^\\u0000"],
               // `react`, `next
               ["^(react|next)"],
+              // test dependencies
+              ["^(@storybook/react|msw)"],
               // Other npm libraries.
               ["^@?\\w"],
               // Internal packages
