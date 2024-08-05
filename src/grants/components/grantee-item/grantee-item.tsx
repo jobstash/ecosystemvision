@@ -1,4 +1,4 @@
-import { Grantee } from '@/grants/core/types';
+import { Grantee } from '@/grants/core/schemas';
 import { GranteeFundingItems } from '@/grants/components/ui/grantee-funding-items';
 import { GranteeLogoTitle } from '@/grants/components/ui/grantee-logo-title';
 import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';

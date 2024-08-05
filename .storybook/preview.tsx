@@ -2,6 +2,21 @@ import '../src/app/globals.css';
 
 import type { Preview } from '@storybook/react';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
+import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
+import { useEffect, useReducer } from 'react';
+
+// Initialize MSW
+initialize({
+  onUnhandledRequest({ method, url }) {
+    if (url.startsWith('/api')) {
+      console.error(`Unhandled ${method} request to "${url}"`);
+    }
+  },
+});
+
+const loaders: Preview['loaders'] = [mswLoader];
 
 const parameters: Preview['parameters'] = {
   controls: {
@@ -19,17 +34,51 @@ const parameters: Preview['parameters'] = {
   },
 };
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+      retry: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});
+
+const Providers = ({ children }: { children: React.ReactNode }) => (
+  <NextUIProvider>
+    <ReactQueryProvider queryClient={queryClient}>
+      {children}
+    </ReactQueryProvider>
+  </NextUIProvider>
+);
+
+const ClearReactQuery = () => {
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    return () => {
+      queryClient.resetQueries();
+    };
+  }, []);
+
+  return null;
+};
+
 const decorators: Preview['decorators'] = [
   (Story) => (
-    <NextUIProvider>
+    <Providers>
       <Story />
-    </NextUIProvider>
+      <ClearReactQuery />
+    </Providers>
   ),
 ];
 
 const preview: Preview = {
   parameters,
   decorators,
+  loaders,
 };
 
 export default preview;

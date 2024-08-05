@@ -1,6 +1,4 @@
-import { Grant } from '@/grants/core/types';
-
-import { fakeGrantee } from './fake-grantee';
+import { Grant } from '@/grants/core/schemas';
 
 export const fakeGrant: Grant = {
   id: 'thank-arb',
@@ -35,8 +33,5 @@ export const fakeGrant: Grant = {
   url: 'https://www.arbitrumhub.io/grant-hub/thrive/grants/thank-arb/',
   twitter: 'https://x.com/arbitrumdao_hub',
   discord: 'https://discord.com/',
-  grantees: Array.from({ length: 32 }).map((_, index) => ({
-    ...fakeGrantee,
-    id: `grantee-${index + 1}`,
-  })),
+  granteesCount: 17,
 };

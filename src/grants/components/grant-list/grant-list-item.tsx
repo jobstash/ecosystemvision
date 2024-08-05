@@ -6,7 +6,7 @@ import { Divider } from '@/shared/components/divider';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
-import { Grant } from '@/grants/core/types';
+import { Grant } from '@/grants/core/schemas';
 import {
   DetailItemProps,
   DetailItems,
@@ -19,13 +19,13 @@ import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
 import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 const createTopItems = ({
-  grantees,
+  granteesCount,
   networks,
   ecosystem,
   totalFunds,
   totalDisbursedFunds,
 }: Grant): DetailItemProps[] => [
-  { icon: <PaperbillIcon />, label: 'Grantees', value: grantees.length },
+  { icon: <PaperbillIcon />, label: 'Grantees', value: granteesCount },
   { label: 'Networks', value: <DetailValueAvatars items={networks} /> },
   { label: 'Ecosystem', value: ecosystem },
   { label: 'Total Funds', value: <DetailValueAmount amount={totalFunds} /> },

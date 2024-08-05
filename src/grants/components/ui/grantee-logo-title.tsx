@@ -3,7 +3,7 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
 
-import { Grantee } from '@/grants/core/types';
+import { Grantee } from '@/grants/core/schemas';
 
 interface Props extends Pick<Grantee, 'name' | 'logo' | 'category'> {
   classNames?: {

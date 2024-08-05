@@ -1,4 +1,4 @@
-import { Grantee } from '@/grants/core/types';
+import { Grantee } from '@/grants/core/schemas';
 
 import { GranteeItem } from './grantee-item/grantee-item';
 

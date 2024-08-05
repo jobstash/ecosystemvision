@@ -1,4 +1,4 @@
-import { Grantee } from '@/grants/core/types';
+import { Grantee } from '@/grants/core/schemas';
 
 export const fakeGrantee: Grantee = {
   id: 'grantee-1',
