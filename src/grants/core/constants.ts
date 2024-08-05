@@ -8,4 +8,5 @@ export const GRANT_TEST_IDS = {
 
 export const GRANT_QUERY_URLS = {
   GRANT_LIST: `${MW_URL}/grants/list`,
+  GRANTEE_LIST: `${MW_URL}/grantees/list`,
 } as const;
