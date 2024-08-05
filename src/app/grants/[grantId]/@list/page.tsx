@@ -1,4 +1,4 @@
-import GranteeList from '@/grants/components/grantee-list';
+import { GranteeList } from '@/grants/components/grantee-list';
 
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 

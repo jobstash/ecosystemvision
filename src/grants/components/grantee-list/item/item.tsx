@@ -9,7 +9,7 @@ interface Props {
   grantee: Grantee;
 }
 
-export const GranteeItem = ({ grantee }: Props) => {
+export const GranteeListItem = ({ grantee }: Props) => {
   // TODO: JOB-680
 
   const { id, name, logo, category } = grantee;
