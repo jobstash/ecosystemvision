@@ -8,7 +8,7 @@ const meta: Meta<typeof GrantCard> = {
   title: 'grants/components/grant-card',
   component: GrantCard,
   args: {
-    grant: fakeGrant,
+    grant: fakeGrant(),
   },
 };
 

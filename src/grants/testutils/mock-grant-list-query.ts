@@ -12,7 +12,7 @@ export const mockGrantListQuery = (
   mockInfiniteListQuery(
     {
       url: GRANT_QUERY_URLS.GRANT_LIST,
-      data: Array.from({ length: 10 }).map(() => fakeGrant),
+      data: Array.from({ length: 10 }).map(() => fakeGrant()),
     },
     result,
     options,

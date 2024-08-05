@@ -1,37 +1,42 @@
+import { faker } from '@faker-js/faker';
+
+import { capitalize } from '@/shared/utils/capitalize';
+
+import { fakeNullable } from '@/shared/testutils/fake-nullable';
+
 import { Grant } from '@/grants/core/schemas';
 
-export const fakeGrant: Grant = {
-  id: 'thank-arb',
-  name: 'ThankArb Grant Program',
-  networks: [
-    {
-      name: 'Ethereum',
-      logo: null,
-    },
-    {
-      name: 'Solana',
-      logo: null,
-    },
-  ],
-  ecosystem: 'Solana',
-  totalFunds: 17_000_000,
-  totalDisbursedFunds: 17_000_000,
-  summary:
-    'The 01 Exchange grants program, in collaboration with the Solana Foundation, is open to everyone in the community and provides on-going opportunities to contribute to the 01 and Solana ecosystem.',
-  categories: ['DEX', 'Communities', 'Reasearch', 'DeFi'],
-  type: 'Direct Grants',
-  reputations: [
-    '🎯 Clear Goal',
-    '✨ Smooth Application',
-    '⚖️ Fair Rounds',
-    '🛠 Easy Tech',
-    '🤝 Supportive Team',
-    '🏆 Great Reviewers',
-    '💰 Fast Disbursement',
-  ],
-  logo: null,
-  url: 'https://www.arbitrumhub.io/grant-hub/thrive/grants/thank-arb/',
-  twitter: 'https://x.com/arbitrumdao_hub',
-  discord: 'https://discord.com/',
-  granteesCount: 17,
-};
+faker.seed(420);
+
+const emojiPool = ['🎯', '✨', '⚖️', '🛠', '🤝', '🏆', '💰'];
+
+export const fakeGrant = (): Grant => ({
+  id: faker.string.uuid(),
+  name: faker.company.name(),
+  networks: Array.from({ length: faker.number.int({ min: 0, max: 4 }) }).map(
+    () => ({
+      name: capitalize(faker.company.buzzNoun()),
+      logo: fakeNullable(faker.image.url()),
+    }),
+  ),
+  ecosystem: capitalize(faker.company.buzzNoun()),
+  totalFunds: faker.number.int({ min: 500_000, max: 200_000_000 }),
+  totalDisbursedFunds: faker.number.int({ min: 500_000, max: 10_000_000 }),
+  summary: faker.lorem.paragraph({ min: 3, max: 8 }),
+  categories: Array.from({ length: faker.number.int({ min: 1, max: 6 }) }).map(
+    () => faker.commerce.department(),
+  ),
+  type: faker.lorem.words({ min: 1, max: 2 }),
+  reputations: Array.from({ length: faker.number.int({ min: 1, max: 6 }) }).map(
+    () => `${faker.helpers.arrayElement(emojiPool)} faker.company.buzzPhrase()`,
+  ),
+  logo: fakeNullable(faker.image.url()),
+  url: faker.internet.url(),
+  twitter: fakeNullable(
+    `https://x.com/${faker.internet.userName().toLocaleLowerCase()}`,
+  ),
+  discord: fakeNullable(
+    `https://discord.com/${faker.internet.userName().toLocaleLowerCase()}`,
+  ),
+  granteesCount: faker.number.int({ min: 1, max: 100 }),
+});
