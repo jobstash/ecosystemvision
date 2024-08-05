@@ -1,19 +1,47 @@
-import { Grantee } from '@/grants/core/schemas';
+'use client';
+
+import { useParams } from 'next/navigation';
+import { useMemo } from 'react';
+
+import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { GranteeListItem } from './item';
+import { useGranteeList } from './use-grantee-list';
 
-interface Props {
-  grantees: Grantee[];
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const GranteeList = ({ grantees }: Props) => {
+export const GranteeList = () => {
   // TODO: JOB-681
+
+  const params = useParams();
+
+  const { grantees, error, inViewRef, hasNextPage, isPending } = useGranteeList(
+    params.grantId as string,
+  );
+
+  const lastItem = useMemo(() => {
+    if (error) return <p>Error: {error.message}</p>;
+
+    if (!hasNextPage) return <p>No more grantees available.</p>;
+
+    return <div ref={inViewRef}>Loading more...</div>;
+  }, [error, hasNextPage, inViewRef]);
+
+  if (isPending) return <p>Loading Grants ...</p>;
+
+  if (!grantees.length) {
+    return error ? <p>Error: {error.message}</p> : <p>No grantees found.</p>;
+  }
+
   return (
     <div className="flex flex-col gap-4">
-      {grantees.map((grantee) => (
-        <GranteeListItem key={grantee.id} grantee={grantee} />
-      ))}
+      <VirtualWrapper count={grantees.length}>
+        {(index) => (
+          <div className="pt-8">
+            <GranteeListItem grantee={grantees[index]} />
+          </div>
+        )}
+      </VirtualWrapper>
+
+      {lastItem}
     </div>
   );
 };
