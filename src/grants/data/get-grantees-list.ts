@@ -3,18 +3,28 @@ import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { GRANT_QUERY_URLS } from '@/grants/core/constants';
-import { grantListQueryPageSchema } from '@/grants/core/schemas';
+import { granteeListQueryPageSchema } from '@/grants/core/schemas';
 
-export const getGrantList = async (page: number, searchParams = '') => {
+interface Props {
+  page: number;
+  searchParams?: string;
+  grantId: string;
+}
+
+export const getGranteesList = async ({
+  page,
+  grantId,
+  searchParams = '',
+}: Props) => {
   const url = createUrlWithSearchParams(
-    `${GRANT_QUERY_URLS.GRANT_LIST}?page=${page}&limit=${PAGE_SIZE}`,
+    `${GRANT_QUERY_URLS.GRANTEE_LIST}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
     searchParams,
   );
 
   return mwGET({
     url,
     label: 'getGrantList',
-    responseSchema: grantListQueryPageSchema,
+    responseSchema: granteeListQueryPageSchema,
     options: { next: { revalidate: 60 * 60 } },
   });
 };
