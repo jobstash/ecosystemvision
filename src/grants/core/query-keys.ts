@@ -8,6 +8,14 @@ export const grantQueryKeys = {
 
     return [...grantQueryKeys.all, 'list', searchParams] as const;
   },
-};
+  grantees: (grantId: string, params: string | Record<string, string>) => {
+    const searchParams =
+      typeof params === 'string'
+        ? params
+        : new URLSearchParams(params).toString();
+
+    return [...grantQueryKeys.all, 'grantees', grantId, searchParams] as const;
+  },
+} as const;
 
 export type GrantQueryKeys = typeof grantQueryKeys;
