@@ -8,7 +8,7 @@ const meta: Meta<typeof GrantListItem> = {
   title: 'grants/components/grant-list-item',
   component: GrantListItem,
   args: {
-    grant: fakeGrant,
+    grant: fakeGrant(),
   },
 };
 

@@ -14,7 +14,7 @@ export const GranteePageLayout = ({ grantId, granteeId, children }: Props) => {
   const baseHref = `/grants/${grantId}/grantees/${granteeId}/projects`;
 
   // TODO: fetch grantee
-  const grantee = fakeGrantee;
+  const grantee = fakeGrantee();
 
   // TODO: fetch projects
   const projects = [

@@ -15,7 +15,7 @@ export const GrantPageLayout = ({
   params: { grantId },
 }: Props) => {
   // TODO: fetch grant using grantId
-  const grant = fakeGrant;
+  const grant = fakeGrant();
 
   return (
     <div className="flex flex-col gap-8 p-8">
