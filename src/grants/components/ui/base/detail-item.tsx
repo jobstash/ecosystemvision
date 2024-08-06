@@ -1,6 +1,7 @@
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
+import { Divider } from '@/shared/components/divider';
 
 export interface DetailItemProps {
   label?: string;
@@ -19,22 +20,26 @@ export const DetailItem = ({
   classNames,
 }: DetailItemProps) => {
   return (
-    <div className={cn('flex items-center gap-2', classNames?.root)}>
-      <div className={cn('hidden')}>{icon}</div>
+    <div className={cn('flex flex-wrap items-center', classNames?.root)}>
+      {icon && <div className={cn('hidden')}>{icon}</div>}
+
+      {label === 'Description' && <Divider className="mb-3"/>}
 
       {label && (
         <span
           className={cn(
-            'text-labels/75',
+            'pr-2 text-labels/75',
             classNames?.label,
             label === 'Description' ? 'hidden' : '',
           )}
         >
-          {label}:
+          {label}
         </span>
       )}
 
       {value}
+      {label === 'Description' && <Divider className="mt-3" />}
+
     </div>
   );
 };
@@ -48,7 +53,7 @@ interface DetailItemsProps {
 
 export const DetailItems = ({ items, classNames }: DetailItemsProps) => {
   const rootClassName = cn(
-    'flex flex-wrap items-center gap-x-4 gap-y-1.5',
+    'flex flex-wrap',
     classNames?.container,
   );
 

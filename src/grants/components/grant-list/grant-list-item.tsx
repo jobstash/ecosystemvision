@@ -24,12 +24,12 @@ const createTopItems = ({
   totalFunds,
   totalDisbursedFunds,
 }: Grant): DetailItemProps[] => [
-  { icon: <PaperbillIcon />, label: 'Grantees', value: granteesCount },
-  { label: 'Networks', value: <DetailValueAvatars items={networks} /> },
-  { label: 'Ecosystem', value: ecosystem },
-  { label: 'Total Funds', value: <DetailValueAmount amount={totalFunds} /> },
+  { icon: <PaperbillIcon />, label: 'Grantees:', value: granteesCount },
+  { label: 'Networks:', value: <DetailValueAvatars items={networks} /> },
+  { label: 'Ecosystem:', value: ecosystem },
+  { label: 'Total Funds:', value: <DetailValueAmount amount={totalFunds} /> },
   {
-    label: 'Total Disbursed Funds',
+    label: 'Total Disbursed Funds:',
     value: <DetailValueAmount amount={totalDisbursedFunds} />,
   },
 ];
@@ -72,7 +72,7 @@ const createLowerItems = ({ reputations }: Grant): DetailItemProps[] => [
     value: (
       <DetailValueTexts
         items={reputations}
-        classNames={{ text: 'bg-white/10 border-none rounded-lg' }}
+        classNames={{ text: 'bg-[#808080]/20 py-0.5 border-none rounded-lg' }}
       />
     ),
   },
@@ -97,11 +97,11 @@ export const GrantListItem = ({ grant }: Props) => {
     <Link
       prefetch
       href={href}
-      className=" flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 "
+      className="flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#0D0D0D] to-[#191919] p-4 text-13 text-white transition-all duration-300 md:p-5 "
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_ITEM}
     >
-      <div className="flex gap-x-4 pb-6">
+      <div className="flex w-full items-center gap-x-4 pb-6">
         <div className="size-8 shrink-0">
           <Avatar
             classNames={{
@@ -115,24 +115,37 @@ export const GrantListItem = ({ grant }: Props) => {
         <Title>{name}</Title>
       </div>
 
-      <div className="flex flex-wrap gap-y-3 pb-3">
+      <div className="flex w-full flex-wrap gap-4">
         <WebLinks links={{ url, discord, twitter }} />
-        <DetailItems items={topItems} />
-        <Divider />
+
+        <DetailItems
+          items={topItems}
+          classNames={{
+            container: 'gap-x-4 gap-y-1.5',
+            label: 'pr-2',
+          }}
+        />
+
+        <DetailItems
+          items={midItems}
+          classNames={{
+            label: 'w-full pb-1 md:pb-0 md:w-auto',
+            root: 'w-full md:w-auto',
+            container: 'gap-y-3 md:gap-x-6',
+          }}
+        />
+
+        <DetailItems
+          items={lowerItems}
+          classNames={{
+            root: '',
+          }}
+        />
       </div>
-
-      
-      <DetailItems items={midItems} />
-      
-      
-      <DetailItems items={lowerItems} />
-
-      <div className="flex w-full items-center justify-center">
-        <div className="flex flex-wrap items-center gap-4">
-          <Button color="primary">
-            <span>Apply</span>
-          </Button>
-        </div>
+      <div className="flex w-full pt-4 md:pt-6">
+        <Button className="w-full bg-white font-semibold text-black">
+          <span>Apply</span>
+        </Button>
       </div>
     </Link>
   );

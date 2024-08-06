@@ -28,12 +28,12 @@ export const DetailValueTexts = ({
   textProps,
   classNames,
 }: TextsProps) => (
-  <div className={cn('flex items-center gap-4', classNames?.root)}>
+  <div className={cn('flex items-center gap-3', classNames?.root)}>
     {items.map((item, index) => (
       <DetailValueText
         key={index}
         {...textProps}
-        className={cn('rounded-full px-1 text-10', classNames?.text)}
+        className={cn('rounded-lg px-1 text-10', classNames?.text)}
       >
         {item}
       </DetailValueText>
