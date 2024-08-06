@@ -98,31 +98,36 @@ export const GrantListItem = ({ grant }: Props) => {
     <Link
       prefetch
       href={href}
-      className="flex items-center justify-between gap-6 rounded-lg bg-white/5 p-6 transition-all duration-300 hover:bg-white/10"
+      className=" flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 "
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_ITEM}
     >
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-4">
-          <div className="size-10">
-            <Avatar showFallback radius="sm" src={logo ?? ''} name={name} />
-          </div>
-          <Title>{name}</Title>
+      <div className="flex gap-x-4 pb-6">
+        <div className="size-8 shrink-0">
+          <Avatar
+            classNames={{
+              base: 'bg-black w-8 h-8 rounded',
+            }}
+            showFallback
+            src={logo ?? ''}
+            name={name}
+          />
         </div>
-
-        <div className="flex flex-wrap items-center gap-4">
-          <WebLinks links={{ url, discord, twitter }} />
-          <DetailItems items={topItems} />
-        </div>
-
-        <Divider />
-        <DetailItems items={midItems} />
-        <Divider />
-        <DetailItems items={lowerItems} />
+        <Title>{name}</Title>
       </div>
 
+      <div className="flex flex-wrap gap-y-3">
+        <WebLinks links={{ url, discord, twitter }} />
+        <DetailItems items={topItems} />
+      </div>
+
+      <Divider />
+      <DetailItems items={midItems} />
+      <Divider />
+      <DetailItems items={lowerItems} />
+
       <div className="flex size-40 items-center justify-center">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <Button color="primary">
             <span>Apply</span>
           </Button>

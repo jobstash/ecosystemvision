@@ -19,6 +19,9 @@ const config: Config = {
       lg: '1280px',
     },
     extend: {
+      fontSize: {
+        '13': '13px'
+      },
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         'base-dark': 'var(--color-base-dark)',
