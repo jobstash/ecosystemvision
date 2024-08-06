@@ -6,8 +6,6 @@ import { fakeNullable } from '@/shared/testutils/fake-nullable';
 
 import { Grant } from '@/grants/core/schemas';
 
-faker.seed(420);
-
 const emojiPool = ['🎯', '✨', '⚖️', '🛠', '🤝', '🏆', '💰'];
 
 export const fakeGrant = (): Grant => ({

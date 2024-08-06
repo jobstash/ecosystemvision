@@ -1,5 +1,5 @@
 import { GranteeCard } from '@/grants/components/grantee-card/grantee-card';
-import { ProjectSelectionClientWrapper } from '@/grants/components/grantee-project/project-selection-client-wrapper';
+import { ProjectSelections } from '@/grants/components/grantee-project/project-selection';
 import { ProjectTabSelection } from '@/grants/components/grantee-project/project-tab-selection';
 
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
@@ -15,47 +15,18 @@ export const GranteePageLayout = ({ grantId, granteeId, children }: Props) => {
 
   // TODO: fetch grantee
   const grantee = fakeGrantee();
-
-  // TODO: fetch projects
-  const projects = [
-    {
-      id: '1',
-      name: 'Project 1',
-      summary: 'todo',
-      impactMetrics: 'todo',
-      githubMetrics: 'todo',
-      codeMetrics: 'todo',
-      contactAddress: 'todo',
-    },
-    {
-      id: '2',
-      name: 'Project 2',
-      summary: 'todo',
-      impactMetrics: 'todo',
-      githubMetrics: 'todo',
-      codeMetrics: 'todo',
-      contactAddress: 'todo',
-    },
-  ];
+  const projects = grantee.projects;
+  const hasProject = projects.length > 0;
 
   return (
     <div className="flex w-max flex-col gap-4 lg:grow">
       <GranteeCard grantee={grantee} />
 
-      <div className="flex w-full gap-4 bg-white/5 p-4">
-        {projects.map(({ id, name }) => (
-          <ProjectSelectionClientWrapper
-            key={id}
-            firstId={projects[0].id}
-            baseHref={baseHref}
-            projectId={id}
-          >
-            {name}
-          </ProjectSelectionClientWrapper>
-        ))}
-      </div>
+      <ProjectSelections baseHref={baseHref} projects={projects} />
 
-      <ProjectTabSelection projects={projects} baseHref={baseHref} />
+      {hasProject && (
+        <ProjectTabSelection defaultId={projects[0]} baseHref={baseHref} />
+      )}
 
       {children}
     </div>

@@ -4,8 +4,6 @@ import { fakeNullable } from '@/shared/testutils/fake-nullable';
 
 import { Grantee } from '@/grants/core/schemas';
 
-faker.seed(69);
-
 export const fakeGrantee = (): Grantee => ({
   id: faker.string.uuid(),
   name: faker.company.name(),
@@ -14,5 +12,10 @@ export const fakeGrantee = (): Grantee => ({
   summary: faker.lorem.paragraph({ min: 3, max: 8 }),
   url: faker.internet.url(),
   lastFunding: faker.number.int({ min: 500_000, max: 200_000_000 }),
-  fundingDate: faker.date.past(5).getTime(),
+  fundingDate: faker.date
+    .past({ years: faker.number.int({ min: 2, max: 4 }) })
+    .getTime(),
+  projects: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }).map(
+    () => faker.internet.domainWord(),
+  ),
 });

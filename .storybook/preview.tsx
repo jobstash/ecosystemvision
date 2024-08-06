@@ -68,10 +68,12 @@ const ClearReactQuery = () => {
 
 const decorators: Preview['decorators'] = [
   (Story) => (
-    <Providers>
-      <Story />
-      <ClearReactQuery />
-    </Providers>
+    <div className="min-h-screen">
+      <Providers>
+        <Story />
+        <ClearReactQuery />
+      </Providers>
+    </div>
   ),
 ];
 

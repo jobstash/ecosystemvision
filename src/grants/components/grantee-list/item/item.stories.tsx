@@ -1,8 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { faker } from '@faker-js/faker';
+
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
 import { GranteeListItem } from './item';
+
+faker.seed(69);
 
 const meta: Meta<typeof GranteeListItem> = {
   title: 'grants/components/grantee-list-item',
