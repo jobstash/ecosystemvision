@@ -20,10 +20,11 @@ export const DetailItem = ({
 }: DetailItemProps) => {
   return (
     <div className={cn('flex items-center gap-2', classNames?.root)}>
-      {icon}
+    
+      <div className={cn('hidden')}>{icon}</div>
 
       {label && (
-        <span className={cn('text-white/80', classNames?.label)}>{label}:</span>
+        <span className={cn('text-labels/75', classNames?.label)}>{label}:</span>
       )}
 
       {value}

@@ -20,17 +20,17 @@ const icons = {
 };
 
 export const WebLinks = ({ links, classNames }: Props) => {
+  console.log('Links:', links);
   return (
-    <div className={cn('flex items-center gap-1', classNames?.root)}>
+    <div className={cn('flex items-center gap-4', classNames?.root)}>
       {Object.entries(links).map(([key, value]) => {
         if (!value) return null;
         const icon = icons[key as keyof typeof icons];
         return (
           <ExternalLinkButton
             key={key}
-            size="sm"
             isIconOnly
-            className={cn(classNames?.button)}
+            className={cn('h-auto w-auto min-w-0 rounded-md bg-transparent',classNames?.button)}
             href={value}
           >
             {icon}

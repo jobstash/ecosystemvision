@@ -26,6 +26,7 @@ const config: Config = {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         'base-dark': 'var(--color-base-dark)',
         'dark-gray': 'var(--color-dark-gray)',
+        labels: 'rgb(var(--color-labels) / <alpha-value>)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         skill1: '#F7FD36',
