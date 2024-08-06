@@ -48,7 +48,7 @@ const createMidItems = ({
         items={categories}
         classNames={{
           root: 'text-[#B1FFB1]',
-          text: 'border-2 border-[#B1FFB1]',
+          text: 'border border-[#B1FFB1]',
         }}
       />
     ),
@@ -60,7 +60,7 @@ const createMidItems = ({
         items={[type]}
         classNames={{
           root: 'text-[#60BCFF]',
-          text: 'border-2 border-[#60BCFF]',
+          text: 'border border-[#60BCFF]',
         }}
       />
     ),
@@ -116,22 +116,23 @@ export const GrantListItem = ({ grant }: Props) => {
         <Title>{name}</Title>
       </div>
 
-      <div className="flex flex-wrap gap-y-3">
+      <div className="flex flex-wrap gap-y-3 pb-3">
         <WebLinks links={{ url, discord, twitter }} />
         <DetailItems items={topItems} />
+        <Divider />
       </div>
 
-      <Divider />
+      
       <DetailItems items={midItems} />
-      <Divider />
+      
+      
       <DetailItems items={lowerItems} />
 
-      <div className="flex size-40 items-center justify-center">
+      <div className="flex w-full items-center justify-center">
         <div className="flex flex-wrap items-center gap-4">
           <Button color="primary">
             <span>Apply</span>
           </Button>
-          <CaretRightIcon />
         </div>
       </div>
     </Link>

@@ -20,6 +20,7 @@ const config: Config = {
     },
     extend: {
       fontSize: {
+        '10': '10px',
         '13': '13px'
       },
       colors: {

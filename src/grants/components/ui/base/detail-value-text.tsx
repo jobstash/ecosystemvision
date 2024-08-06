@@ -33,7 +33,7 @@ export const DetailValueTexts = ({
       <DetailValueText
         key={index}
         {...textProps}
-        className={cn('rounded-xl px-2 py-1 text-sm', classNames?.text)}
+        className={cn('rounded-full px-1 text-10', classNames?.text)}
       >
         {item}
       </DetailValueText>
