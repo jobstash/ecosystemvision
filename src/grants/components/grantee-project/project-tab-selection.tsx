@@ -2,64 +2,38 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
 
-import { cn } from '@nextui-org/react';
+import { cn, Skeleton } from '@nextui-org/react';
 
 import { ROUTE_TABS } from '@/shared/core/constants';
 
-interface Project {
-  id: string;
-  name: string;
-  summary: string;
-  impactMetrics: string;
-  githubMetrics: string;
-  codeMetrics: string;
-  contactAddress: string;
-}
+import { useGranteeProject } from '@/grants/hooks/use-grantee-project';
+
+const SHARED_CLASSNAME = 'flex w-full gap-4 p-4';
+
 interface Props {
-  projects: Project[];
+  defaultId: string;
   baseHref: string;
 }
 
-const tabConfig = [
-  { key: 'summary', text: 'Overall Summary', tab: 'summary' },
-  { key: 'impactMetrics', text: 'Impact Metrics', tab: 'impact-metrics' },
-  { key: 'githubMetrics', text: 'Github Metrics', tab: 'github-metrics' },
-  { key: 'codeMetrics', text: 'Code Metrics', tab: 'code-metrics' },
-  { key: 'contactAddress', text: 'Contact Address', tab: 'contact' },
-];
-
-const createTabs = (project: Project, baseHref: string, projectId: string) => {
-  const hrefPrefix = `${baseHref}/${projectId}`;
-  return tabConfig
-    .filter((config) => project[config.key as keyof Project])
-    .map(({ text, tab }) => ({
-      text,
-      href: `${hrefPrefix}/${tab}`,
-      tab,
-    }));
-};
-
-export const ProjectTabSelection = ({ projects, baseHref }: Props) => {
+export const ProjectTabSelection = ({ defaultId, baseHref }: Props) => {
   const params = useParams();
 
-  const projectId = params.projectId || projects[0].id;
+  const projectId = (params.projectId as string) || defaultId;
   const activeTab = params.tab || ROUTE_TABS.GRANTS.SUMMARY;
-  const project = projects.find((project) => project.id === projectId);
 
-  const tabs = useMemo(() => {
-    if (!project) return [];
-    return createTabs(project, baseHref, projectId as string);
-  }, [baseHref, project, projectId]);
+  const { data } = useGranteeProject(projectId);
 
-  if (projects.length === 0 || !project) return null;
+  if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-14')} />;
 
-  if (!tabs) return null;
+  const tabs = data.data.tabs.map((t) => ({
+    ...t,
+    href: `${baseHref}/${projectId}/${t.tab}`,
+  }));
 
   return (
-    <div className="flex w-full gap-4 bg-white/5 p-4">
-      {tabs.map(({ text, href, tab }) => (
+    <div className={cn(SHARED_CLASSNAME, 'bg-white/5')}>
+      {tabs.map(({ label, tab, href }) => (
         <Link
           key={href}
           href={href}
@@ -70,7 +44,7 @@ export const ProjectTabSelection = ({ projects, baseHref }: Props) => {
             'bg-primary': activeTab === tab,
           })}
         >
-          {text}
+          {label}
         </Link>
       ))}
     </div>
