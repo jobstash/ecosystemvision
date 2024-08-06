@@ -30,7 +30,7 @@ export const DetailItem = ({
           className={cn(
             'pr-2 text-labels/75',
             classNames?.label,
-            label === 'Description' ? 'hidden' : '',
+            label === 'Description' ? 'hidden lg:block' : '',
           )}
         >
           {label}

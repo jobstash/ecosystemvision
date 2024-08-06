@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 import { Avatar, Button } from '@nextui-org/react';
 
-import { Divider } from '@/shared/components/divider';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
@@ -16,6 +15,7 @@ import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-ava
 import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
+import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 const createTopItems = ({
   granteesCount,
@@ -97,55 +97,60 @@ export const GrantListItem = ({ grant }: Props) => {
     <Link
       prefetch
       href={href}
-      className="flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#0D0D0D] to-[#191919] p-4 text-13 text-white transition-all duration-300 md:p-5 "
+      className="flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap"
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_ITEM}
     >
-      <div className="flex w-full items-center gap-x-4 pb-6">
-        <div className="size-8 shrink-0">
-          <Avatar
+      <div className="lg:pr-16">
+        <div className="flex w-full items-center gap-x-4 pb-6">
+          <div className="size-8 shrink-0 lg:size-10">
+            <Avatar
+              classNames={{
+                base: 'bg-black w-8 h-8 rounded lg:w-10 lg:h-10',
+              }}
+              showFallback
+              src={logo ?? ''}
+              name={name}
+            />
+          </div>
+          <Title>{name}</Title>
+        </div>
+
+        <div className="flex w-full flex-wrap gap-4 lg:gap-5">
+          <WebLinks links={{ url, discord, twitter }} />
+
+          <DetailItems
+            items={topItems}
             classNames={{
-              base: 'bg-black w-8 h-8 rounded',
+              container: 'flex-wrap gap-x-4 gap-y-1.5 lg:gap-x-5',
+              label: 'pr-2',
             }}
-            showFallback
-            src={logo ?? ''}
-            name={name}
+          />
+
+          <DetailItems
+            items={midItems}
+            classNames={{
+              label: 'w-full pb-1 md:pb-0 md:w-auto',
+              root: 'w-full md:w-auto',
+              container: 'gap-y-3 md:gap-x-6',
+            }}
+          />
+
+          <DetailItems
+            items={lowerItems}
+            classNames={{
+              root: '',
+            }}
           />
         </div>
-        <Title>{name}</Title>
       </div>
-
-      <div className="flex w-full flex-wrap gap-4">
-        <WebLinks links={{ url, discord, twitter }} />
-
-        <DetailItems
-          items={topItems}
-          classNames={{
-            container: 'gap-x-4 gap-y-1.5',
-            label: 'pr-2',
-          }}
-        />
-
-        <DetailItems
-          items={midItems}
-          classNames={{
-            label: 'w-full pb-1 md:pb-0 md:w-auto',
-            root: 'w-full md:w-auto',
-            container: 'gap-y-3 md:gap-x-6',
-          }}
-        />
-
-        <DetailItems
-          items={lowerItems}
-          classNames={{
-            root: '',
-          }}
-        />
-      </div>
-      <div className="flex w-full pt-4 md:pt-6">
-        <Button className="w-full bg-white font-semibold text-black">
+      <div className="flex w-full items-center gap-4 pt-4 md:pt-6 lg:max-w-[180px] lg:pt-0">
+        <Button className="mx-auto w-full bg-white font-semibold text-black">
           <span>Apply</span>
         </Button>
+        <div className="hidden lg:flex">
+          <CaretRightIcon />
+        </div>
       </div>
     </Link>
   );
