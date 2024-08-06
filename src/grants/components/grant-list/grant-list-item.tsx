@@ -16,7 +16,6 @@ import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-ava
 import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
-import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 const createTopItems = ({
   granteesCount,
