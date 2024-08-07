@@ -14,16 +14,16 @@ const createFundingItems = ({
 }: Grantee): DetailItemProps[] => [
   {
     icon: <PaperbillIcon />,
-    label: 'Last Funding',
+    label: 'Last Funding:',
     value: (
-      <DetailValueText className="text-sm">{`$${formatNumber(lastFunding)}`}</DetailValueText>
+      <DetailValueText>{`$${formatNumber(lastFunding)}`}</DetailValueText>
     ),
   },
   {
     icon: <BankIcon />,
-    label: 'Funding Date',
+    label: 'Funding Date:',
     value: (
-      <DetailValueText className="text-sm">
+      <DetailValueText>
         {shortTimestamp(fundingDate)}
       </DetailValueText>
     ),
@@ -37,5 +37,10 @@ interface Props {
 export const GranteeFundingItems = ({ grantee }: Props) => {
   const fundingItems = createFundingItems(grantee);
 
-  return <DetailItems items={fundingItems} classNames={{ label: 'text-sm' }} />;
+  return (
+    <DetailItems
+      items={fundingItems}
+      classNames={{ container: 'gap-x-4 gap-y-1.5', root: 'text-13' }}
+    />
+  );
 };

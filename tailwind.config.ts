@@ -30,6 +30,7 @@ const config: Config = {
         labels: 'rgb(var(--color-labels) / <alpha-value>)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
         divider: 'rgb(var(--color-border) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',

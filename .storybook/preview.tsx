@@ -27,7 +27,7 @@ const parameters: Preview['parameters'] = {
   },
   backgrounds: {
     default: 'default',
-    values: [{ name: 'default', value: '#141317' }],
+    values: [{ name: 'default', value: '#070708' }],
   },
   nextjs: {
     appDirectory: true,
