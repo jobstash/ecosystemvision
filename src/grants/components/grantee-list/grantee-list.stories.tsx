@@ -1,10 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { faker } from '@faker-js/faker';
+
 import { MockInfiniteQueryResult } from '@/shared/testutils/misc';
 
 import { mockGranteeListQuery } from '@/grants/testutils/mock-grantee-list-query';
 
 import { GranteeList } from './grantee-list';
+
+faker.seed(69);
 
 const meta: Meta<typeof GranteeList> = {
   title: 'grants/components/grantee-list',

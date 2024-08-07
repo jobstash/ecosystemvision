@@ -73,7 +73,7 @@ export const mockInfiniteListQuery = <T>(
       }
 
       default: {
-        return internalErrorResponse;
+        throw new Error(`Unhandled mock query result: ${result}`);
       }
     }
   });

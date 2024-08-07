@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { genericResponseSchema } from '@/shared/core/schemas';
+
 export const grantSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -34,6 +36,7 @@ export const granteeSchema = z.object({
   url: z.string().nullable(),
   lastFunding: z.number(),
   fundingDate: z.number(),
+  projects: z.array(z.string()),
 });
 
 export type Grantee = z.infer<typeof granteeSchema>;
@@ -49,3 +52,36 @@ export const granteeListQueryPageSchema = z.object({
   data: z.array(granteeSchema),
 });
 export type GranteeListQueryPage = z.infer<typeof granteeListQueryPageSchema>;
+
+export const statItemSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+});
+
+type StatItem = z.infer<typeof statItemSchema> & {
+  stats?: StatItem[];
+};
+
+export const granteeStatItemSchema: z.ZodType<StatItem> = statItemSchema.extend(
+  {
+    stats: z.lazy(() => granteeStatItemSchema.array()).optional(),
+  },
+);
+
+export const granteeTabItemSchema = z.object({
+  label: z.string(),
+  tab: z.string(),
+  stats: z.array(granteeStatItemSchema),
+});
+
+export const granteeProjectSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  tabs: z.array(granteeTabItemSchema),
+});
+export type GranteeProject = z.infer<typeof granteeProjectSchema>;
+
+export const granteeProjectDTOSchema = genericResponseSchema.extend({
+  data: granteeProjectSchema,
+});
+export type GranteeProjectDTO = z.infer<typeof granteeProjectDTOSchema>;
