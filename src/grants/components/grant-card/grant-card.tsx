@@ -85,12 +85,12 @@ export const GrantCard = ({ grant }: Props) => {
 
   return (
     <div
-      className="flex items-center justify-between gap-6 rounded-lg bg-gradient-to-l from-[#0D0D0D] to-primary p-6"
+      className="to-base-dark/20 flex items-center justify-between gap-6 rounded-lg bg-gradient-to-tr from-tertiary/20 p-6 text-13 lg:bg-gradient-to-t"
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >
       <div className="flex flex-col gap-4">
-        <Title>{name}</Title>
+        <Title className='text-2xl font-bold'>{name}</Title>
         <DetailItems items={topItems} />
         <Divider />
         <DetailItems items={midItems} />
