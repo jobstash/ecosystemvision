@@ -101,7 +101,7 @@ export const GrantListItem = ({ grant }: Props) => {
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_ITEM}
     >
-      <div className="lg:pr-16">
+      <div className="lg:pr-12">
         <div className="flex w-full items-center gap-x-4 pb-6">
           <div className="size-8 shrink-0 lg:size-10">
             <Avatar
@@ -130,21 +130,21 @@ export const GrantListItem = ({ grant }: Props) => {
           <DetailItems
             items={midItems}
             classNames={{
-              label: 'w-full pb-1 md:pb-0 md:w-auto',
-              root: 'w-full md:w-auto',
-              container: 'gap-y-3 md:gap-x-6',
+              label: 'w-full pb-2 md:pb-0 md:w-auto lg:w-full lg:pb-2',
+              root: 'w-full md:w-auto first:border-y first:border-divider/10 first:py-3 lg:first:border-0 lg:first:py-0 lg:items-start lg:first:max-w-xl lg:flex-col lg:items-start lg:max-w-64',
+              container: 'gap-y-3 md:gap-x-6 lg:border-y lg:grow lg:py-4 lg:border-divider/10 lg:w-full',
             }}
           />
 
           <DetailItems
             items={lowerItems}
             classNames={{
-              root: '',
+              label: 'pb-2 md:pb-0',
             }}
           />
         </div>
       </div>
-      <div className="flex w-full items-center gap-4 pt-4 md:pt-6 lg:max-w-[180px] lg:pt-0">
+      <div className="flex w-full items-center gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
         <Button className="mx-auto w-full bg-white font-semibold text-black">
           <span>Apply</span>
         </Button>

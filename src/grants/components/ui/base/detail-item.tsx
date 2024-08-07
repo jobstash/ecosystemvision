@@ -23,7 +23,7 @@ export const DetailItem = ({
     <div className={cn('flex flex-wrap items-center', classNames?.root)}>
       {icon && <div className={cn('hidden')}>{icon}</div>}
 
-      {label === 'Description' && <Divider className="mb-3"/>}
+      {/* {label === 'Description' && <Divider className="mb-3"/>} */}
 
       {label && (
         <span
@@ -37,8 +37,8 @@ export const DetailItem = ({
         </span>
       )}
 
-      {value}
-      {label === 'Description' && <Divider className="mt-3" />}
+      <div>{value}</div>
+      {/* {label === 'Description' && <Divider className="mt-3" />} */}
 
     </div>
   );

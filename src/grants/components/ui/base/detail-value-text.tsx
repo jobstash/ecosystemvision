@@ -28,7 +28,7 @@ export const DetailValueTexts = ({
   textProps,
   classNames,
 }: TextsProps) => (
-  <div className={cn('flex items-center gap-3', classNames?.root)}>
+  <div className={cn('flex flex-wrap items-center gap-3', classNames?.root)}>
     {items.map((item, index) => (
       <DetailValueText
         key={index}
