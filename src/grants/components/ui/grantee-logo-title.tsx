@@ -21,13 +21,13 @@ export const GranteeLogoTitle = (props: Props) => {
   return (
     <div
       className={cn(
-        'flex items-center [&>*]:self-center',
+        'flex items-center md:pb-4',
         classNames?.root,
       )}
     >
-      <div className={cn('', classNames?.logoWrapper)}>
+      <div className={cn('md:pr-4', classNames?.logoWrapper)}>
         <Avatar
-          className={cn('hidden h-full w-full', classNames?.logo)}
+          className={cn('hidden md:block md:h-16 md:w-16 md:rounded-[24px]', classNames?.logo)}
           showFallback
           src={logo ?? ''}
           name={name}
@@ -35,8 +35,8 @@ export const GranteeLogoTitle = (props: Props) => {
       </div>
 
       <div className={cn('flex flex-col', classNames?.titleWrapper)}>
-        <span className={cn('text-2xl font-bold leading-6', classNames?.title)}>{name}</span>
-        <span className={cn('hidden', classNames?.category)}>
+        <span className={cn('text-2xl font-bold leading-6 md:text-base md:font-medium', classNames?.title)}>{name}</span>
+        <span className={cn('hidden text-cool-gray md:block md:text-13', classNames?.category)}>
           {category}
         </span>
       </div>

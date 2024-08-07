@@ -20,7 +20,7 @@ export const GranteeCard = ({ grantee }: Props) => {
   const { logo, name, url, category, summary } = grantee;
 
   return (
-    <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300">
+    <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
       <GranteeLogoTitle
         name={name}
         logo={logo}
@@ -44,7 +44,7 @@ export const GranteeCard = ({ grantee }: Props) => {
         </Button>
       )}
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 md:border-t md:border-divider/25 md:pt-4">
         <span className='text-13 text-white'>Funding Details</span>
         <GranteeFundingItems grantee={grantee} />
       </div>

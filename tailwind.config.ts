@@ -27,6 +27,7 @@ const config: Config = {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         'base-dark': 'var(--color-base-dark)',
         'dark-gray': 'var(--color-dark-gray)',
+        'cool-gray': 'rgb(var(--color-cool-gray))',
         labels: 'rgb(var(--color-labels) / <alpha-value>)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
