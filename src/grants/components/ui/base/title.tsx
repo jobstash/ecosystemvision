@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@/shared/utils/cn';
 
-const DEFAULT_CLASSNAME = 'font-bold text-3xl';
+const DEFAULT_CLASSNAME = 'font-semibold text-base lg:text-xl';
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;

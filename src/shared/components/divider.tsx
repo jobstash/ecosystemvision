@@ -6,7 +6,7 @@ interface Props {
   className?: ClassValue;
 }
 
-const DIVIDER_CONTAINER_CLASS = 'flex h-4 items-center';
+const DIVIDER_CONTAINER_CLASS = 'w-full';
 const DIVIDER_LINE_CLASS = 'w-full border-t border-white/10';
 
 export const Divider = (props: Props) => {

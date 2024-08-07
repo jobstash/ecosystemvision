@@ -9,6 +9,8 @@
 		--color-white: 255 255 255;
 		--color-primary: 65 54 241; /* #4136F1 */
 		--color-secondary: 135 67 255; /* #8743FF */
+		--color-labels: 239 239 239; /* #EFEFEF */
+		--color-border: 240 238 237; /* #F0EEED */
 	}
 }
 

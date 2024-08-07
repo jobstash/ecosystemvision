@@ -19,12 +19,18 @@ const config: Config = {
       lg: '1280px',
     },
     extend: {
+      fontSize: {
+        '10': '10px',
+        '13': '13px'
+      },
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         'base-dark': 'var(--color-base-dark)',
         'dark-gray': 'var(--color-dark-gray)',
+        labels: 'rgb(var(--color-labels) / <alpha-value>)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        divider: 'rgb(var(--color-border) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',
         skill3: '#E2BF2B',

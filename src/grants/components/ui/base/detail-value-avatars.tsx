@@ -15,7 +15,7 @@ interface Props extends AvatarProps {
 
 export const DetailValueAvatars = ({ items, avatarProps }: Props) => {
   return (
-    <AvatarGroup size="sm" {...avatarProps?.group}>
+    <AvatarGroup  {...avatarProps?.group}>
       {items.map(({ name, logo }) => (
         <Avatar
           key={name}
@@ -23,7 +23,7 @@ export const DetailValueAvatars = ({ items, avatarProps }: Props) => {
           name={name}
           src={logo ?? ''}
           classNames={{
-            base: 'bg-zinc-700',
+            base: 'h-5 w-5',
             fallback: 'bg-white/5',
           }}
           {...avatarProps?.avatar}

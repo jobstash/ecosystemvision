@@ -1,7 +1,6 @@
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
-
 export interface DetailItemProps {
   label?: string;
   value: React.ReactNode;
@@ -19,14 +18,23 @@ export const DetailItem = ({
   classNames,
 }: DetailItemProps) => {
   return (
-    <div className={cn('flex items-center gap-2', classNames?.root)}>
-      {icon}
+    <div className={cn('flex flex-wrap items-center', classNames?.root)}>
+      {icon && <div className={cn('hidden')}>{icon}</div>}
 
       {label && (
-        <span className={cn('text-white/80', classNames?.label)}>{label}:</span>
+        <span
+          className={cn(
+            'pr-2 text-labels/75',
+            classNames?.label,
+            label === 'Description' ? 'hidden lg:block' : '',
+          )}
+        >
+          {label}
+        </span>
       )}
 
-      {value}
+      <div>{value}</div>
+
     </div>
   );
 };
@@ -40,7 +48,7 @@ interface DetailItemsProps {
 
 export const DetailItems = ({ items, classNames }: DetailItemsProps) => {
   const rootClassName = cn(
-    'flex flex-wrap items-center gap-4',
+    'flex flex-wrap',
     classNames?.container,
   );
 
