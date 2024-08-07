@@ -1,8 +1,6 @@
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
-import { Divider } from '@/shared/components/divider';
-
 export interface DetailItemProps {
   label?: string;
   value: React.ReactNode;
@@ -23,8 +21,6 @@ export const DetailItem = ({
     <div className={cn('flex flex-wrap items-center', classNames?.root)}>
       {icon && <div className={cn('hidden')}>{icon}</div>}
 
-      {/* {label === 'Description' && <Divider className="mb-3"/>} */}
-
       {label && (
         <span
           className={cn(
@@ -38,7 +34,6 @@ export const DetailItem = ({
       )}
 
       <div>{value}</div>
-      {/* {label === 'Description' && <Divider className="mt-3" />} */}
 
     </div>
   );
