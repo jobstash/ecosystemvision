@@ -20,7 +20,6 @@ const icons = {
 };
 
 export const WebLinks = ({ links, classNames }: Props) => {
-  console.log('Links:', links);
   return (
     <div className={cn('flex items-center gap-x-4', classNames?.root)}>
       {Object.entries(links).map(([key, value]) => {
