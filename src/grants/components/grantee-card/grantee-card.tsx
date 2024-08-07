@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Button } from '@nextui-org/react';
 
 import { getWebsiteText } from '@/shared/utils/get-website-text';
-import { Divider } from '@/shared/components/divider';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
 import { Grantee } from '@/grants/core/schemas';
