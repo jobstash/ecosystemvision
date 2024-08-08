@@ -21,7 +21,8 @@ const config: Config = {
     extend: {
       fontSize: {
         '10': '10px',
-        '13': '13px'
+        '13': '13px',
+        '32': '32px',
       },
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',

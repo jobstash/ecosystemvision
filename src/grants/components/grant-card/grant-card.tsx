@@ -1,4 +1,3 @@
-import { Divider } from '@/shared/components/divider';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
@@ -85,24 +84,26 @@ export const GrantCard = ({ grant }: Props) => {
 
   return (
     <div
-      className="to-base-dark/20 flex items-center justify-between gap-6 rounded-lg bg-gradient-to-tr from-tertiary/20 p-6 text-13 lg:bg-gradient-to-t"
+      className="to-base-dark/20 flex items-center justify-between gap-6 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 text-13 lg:rounded-lg lg:bg-gradient-to-t"
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >
       <div className="flex flex-col gap-4">
-        <Title className='text-2xl font-bold'>{name}</Title>
-        <DetailItems items={topItems} />
-        <Divider />
+        <Title className="text-2xl font-bold lg:text-32">{name}</Title>
+        <div className="flex flex-wrap">
+          <WebLinks
+            links={{ url, discord, twitter }}
+          />
+          <DetailItems items={topItems} />
+        </div>
         <DetailItems items={midItems} />
-        <Divider />
         <DetailItems items={lowerItems} />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="hidden flex-col gap-4 lg:flex">
         <div className="flex size-32 items-center justify-center bg-white/5">
           <span>LOGO HERE: {logo}</span>
         </div>
-        <WebLinks links={{ url, discord, twitter }} />
       </div>
     </div>
   );
