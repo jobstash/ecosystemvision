@@ -1,5 +1,5 @@
 import { GranteeCard } from '@/grants/components/grantee-card/grantee-card';
-import { ProjectSelections } from '@/grants/components/grantee-project/project-selection';
+import { ProjectSelections } from '@/grants/components/grantee-project/project-selections';
 import { ProjectTabSelection } from '@/grants/components/grantee-project/project-tab-selection';
 
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
