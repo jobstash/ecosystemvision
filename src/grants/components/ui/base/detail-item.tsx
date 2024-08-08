@@ -19,7 +19,7 @@ export const DetailItem = ({
 }: DetailItemProps) => {
   return (
     <div className={cn('flex flex-wrap items-center', classNames?.root)}>
-      {icon && <div className={cn('hidden')}>{icon}</div>}
+      {icon && <div className={cn('pr-2')}>{icon}</div>}
 
       {label && (
         <span
@@ -34,7 +34,6 @@ export const DetailItem = ({
       )}
 
       <div>{value}</div>
-
     </div>
   );
 };
@@ -47,10 +46,7 @@ interface DetailItemsProps {
 }
 
 export const DetailItems = ({ items, classNames }: DetailItemsProps) => {
-  const rootClassName = cn(
-    'flex flex-wrap',
-    classNames?.container,
-  );
+  const rootClassName = cn('flex flex-wrap', classNames?.container);
 
   return (
     <div className={rootClassName}>

@@ -6,11 +6,13 @@
 	:root {
 		--color-base-dark: 13 13 13; /* #0D0D0D */
 		--color-dark-gray: 25 25 25; /* #191919 */
-		--color-white: 255 255 255;
+		--color-cool-gray: 156 163 175; /* #9CA3AF */
+		--color-white: 255 255 255;	/* #FFFFFF */
 		--color-primary: 65 54 241; /* #4136F1 */
 		--color-secondary: 135 67 255; /* #8743FF */
 		--color-labels: 239 239 239; /* #EFEFEF */
 		--color-border: 240 238 237; /* #F0EEED */
+		--color-tertiary: 219 217 251; /* #DBD9FB */
 	}
 }
 

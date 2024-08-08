@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Button } from '@nextui-org/react';
 
 import { getWebsiteText } from '@/shared/utils/get-website-text';
-import { Divider } from '@/shared/components/divider';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
 import { Grantee } from '@/grants/core/schemas';
@@ -20,37 +19,32 @@ export const GranteeCard = ({ grantee }: Props) => {
   const { logo, name, url, category, summary } = grantee;
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg bg-gradient-to-l from-[#0D0D0D] to-primary p-6 transition-all duration-300">
+    <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
       <GranteeLogoTitle
         name={name}
         logo={logo}
         category={category}
         classNames={{
-          root: 'h-16',
-          logoWrapper: 'size-16',
         }}
       />
 
-      <span>{summary}</span>
+      <span className='text-13 text-white/75'>{summary}</span>
 
       {url && (
         <Button
-          size="sm"
           as={Link}
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-fit items-center gap-2 bg-white/10 text-sm"
+          className="flex h-auto w-fit items-center gap-1 rounded bg-white/10 p-1"
         >
-          <span>{getWebsiteText(url).hostname}</span>
+          <span className='text-13 leading-4'>{getWebsiteText(url).hostname}</span>
           <ExternalIcon />
         </Button>
       )}
 
-      <Divider />
-
-      <div className="flex flex-col gap-2">
-        <span>Funding Details</span>
+      <div className="flex flex-col gap-2 md:border-t md:border-divider/25 md:pt-4">
+        <span className='text-13 text-white'>Funding Details</span>
         <GranteeFundingItems grantee={grantee} />
       </div>
     </div>
