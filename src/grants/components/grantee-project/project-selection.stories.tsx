@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 
 import { MockQueryResult } from '@/shared/testutils/misc';
 
-import { ProjectSelections } from '@/grants/components/grantee-project/project-selection';
+import { ProjectSelections } from '@/grants/components/grantee-project/project-selections';
 
 import { mockGranteeProjectQuery } from '@/grants/testutils/mock-grantee-project-query';
 
@@ -30,14 +30,6 @@ const meta: Meta<typeof ProjectSelections> = {
 export default meta;
 type Story = StoryObj<typeof ProjectSelections>;
 
-export const Success: Story = {
-  parameters: {
-    msw: {
-      handlers: [mockGranteeProjectQuery(MockQueryResult.SUCCESS)],
-    },
-  },
-};
-
 export const Loading: Story = {
   parameters: {
     msw: {
@@ -46,6 +38,32 @@ export const Loading: Story = {
           networkDelay: 'infinite',
         }),
       ],
+    },
+  },
+};
+
+export const FirstProjectActive: Story = {
+  parameters: {
+    nextjs: {
+      navigation: {
+        segments: [['projectId', 'project-1']],
+      },
+    },
+    msw: {
+      handlers: [mockGranteeProjectQuery(MockQueryResult.SUCCESS)],
+    },
+  },
+};
+
+export const SecondProjectActive: Story = {
+  parameters: {
+    nextjs: {
+      navigation: {
+        segments: [['projectId', 'project-2']],
+      },
+    },
+    msw: {
+      handlers: [mockGranteeProjectQuery(MockQueryResult.SUCCESS)],
     },
   },
 };
