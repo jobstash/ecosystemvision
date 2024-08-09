@@ -17,7 +17,9 @@ export const grantSchema = z.object({
   summary: z.string(),
   categories: z.array(z.string()),
   type: z.string(),
-  reputations: z.array(z.string()),
+  reputations: z.array(
+    z.object({ text: z.string(), logo: z.string().nullable() }),
+  ),
   logo: z.string().nullable(),
   url: z.string().nullable(),
   twitter: z.string().nullable(),

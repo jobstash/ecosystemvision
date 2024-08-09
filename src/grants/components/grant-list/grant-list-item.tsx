@@ -12,6 +12,7 @@ import {
 } from '@/grants/components/ui/base/detail-item';
 import { DetailValueAmount } from '@/grants/components/ui/base/detail-value-amount';
 import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-avatars';
+import { DetailValueTags } from '@/grants/components/ui/base/detail-value-tags';
 import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
@@ -69,12 +70,7 @@ const createMidItems = ({
 const createLowerItems = ({ reputations }: Grant): DetailItemProps[] => [
   {
     label: 'Reputations',
-    value: (
-      <DetailValueTexts
-        items={reputations}
-        classNames={{ text: 'bg-[#808080]/20 py-0.5 border-none rounded-lg' }}
-      />
-    ),
+    value: <DetailValueTags items={reputations} />,
   },
 ];
 
@@ -113,7 +109,7 @@ export const GrantListItem = ({ grant }: Props) => {
               name={name}
             />
           </div>
-          <Title className='lg:text-xl'>{name}</Title>
+          <Title className="lg:text-xl">{name}</Title>
         </div>
 
         <div className="flex w-full flex-wrap gap-4 lg:gap-5">
@@ -132,7 +128,8 @@ export const GrantListItem = ({ grant }: Props) => {
             classNames={{
               label: 'w-full pb-2 md:pb-0 md:w-auto lg:w-full lg:pb-2',
               root: 'w-full md:w-auto first:border-y first:border-divider/10 first:py-3 lg:first:border-0 lg:first:py-0 lg:items-start lg:first:max-w-xl lg:flex-col lg:items-start lg:max-w-64',
-              container: 'gap-y-3 md:gap-x-6 lg:border-y lg:grow lg:py-4 lg:border-divider/10 lg:w-full',
+              container:
+                'gap-y-3 md:gap-x-6 lg:border-y lg:grow lg:py-4 lg:border-divider/10 lg:w-full',
             }}
           />
 
