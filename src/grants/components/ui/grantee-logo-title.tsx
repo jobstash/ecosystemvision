@@ -27,7 +27,7 @@ export const GranteeLogoTitle = (props: Props) => {
     >
       <div className={cn('md:pr-4', classNames?.logoWrapper)}>
         <Avatar
-          className={cn('mr-3 h-8 w-8 rounded md:h-16 md:w-16 md:rounded-[24px]', classNames?.logo)}
+          className={cn('mr-3 h-8 w-8 rounded-xl md:h-16 md:w-16 md:rounded-[24px]', classNames?.logo)}
           showFallback
           src={logo ?? ''}
           name={name}

@@ -14,8 +14,9 @@
 		--color-labels: 239 239 239; /* #EFEFEF */
 		--color-border: 240 238 237; /* #F0EEED */
 		--color-tertiary: 219 217 251; /* #DBD9FB */
+		--color-grantee-item: 117 112 141; 	 
 	}
-}
+}	
 
 html {
 	overflow-y: scroll;
