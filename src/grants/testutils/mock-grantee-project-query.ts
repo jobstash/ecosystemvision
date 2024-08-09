@@ -28,7 +28,7 @@ export const mockGranteeProjectQuery = (
       const successResponse = HttpResponse.json({
         success: true,
         message: 'Grantee project retrieved successfully',
-        data: fakeGranteeProject({ id: projectId, name: 'Project 420' }),
+        data: fakeGranteeProject({ id: projectId }),
       });
       const internalErrorResponse = HttpResponse.json(
         { message: errMsg.INTERNAL },
