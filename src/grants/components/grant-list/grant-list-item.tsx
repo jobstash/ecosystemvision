@@ -113,7 +113,7 @@ export const GrantListItem = ({ grant }: Props) => {
               name={name}
             />
           </div>
-          <Title>{name}</Title>
+          <Title className='lg:text-xl'>{name}</Title>
         </div>
 
         <div className="flex w-full flex-wrap gap-4 lg:gap-5">

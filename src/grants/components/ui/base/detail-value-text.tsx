@@ -35,7 +35,7 @@ export const DetailValueTexts = ({
         {...textProps}
         className={cn('rounded-lg px-1 text-10', classNames?.text)}
       >
-        {item}
+       {item}
       </DetailValueText>
     ))}
   </div>
