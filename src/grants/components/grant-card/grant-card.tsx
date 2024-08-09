@@ -118,7 +118,7 @@ export const GrantCard = ({ grant }: Props) => {
       </div>
 
       <div className="hidden flex-col gap-4 lg:flex">
-        <div className="flex size-[144px] items-center justify-center rounded-xl bg-red-500">
+        <div className="flex size-[144px] items-center justify-center overflow-hidden rounded-xl">
           <Avatar
           classNames={{
             base: 'bg-black w-8 h-8 rounded h-[144px] w-[144px]',
