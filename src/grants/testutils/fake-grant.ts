@@ -6,8 +6,6 @@ import { fakeNullable } from '@/shared/testutils/fake-nullable';
 
 import { Grant } from '@/grants/core/schemas';
 
-const emojiPool = ['🎯', '✨', '⚖️', '🛠', '🤝', '🏆', '💰'];
-
 export const fakeGrant = (): Grant => ({
   id: faker.string.uuid(),
   name: faker.company.name(),
@@ -25,9 +23,12 @@ export const fakeGrant = (): Grant => ({
     () => faker.commerce.department(),
   ),
   type: faker.lorem.words({ min: 1, max: 2 }),
-  reputations: Array.from({ length: faker.number.int({ min: 1, max: 6 }) }).map(
-    () => `${faker.helpers.arrayElement(emojiPool)} faker.company.buzzPhrase()`,
-  ),
+  reputations: Array.from({
+    length: faker.number.int({ min: 2, max: 10 }),
+  }).map(() => ({
+    text: `${faker.lorem.words(faker.number.int({ min: 1, max: 3 }))}`,
+    logo: faker.image.urlPicsumPhotos(),
+  })),
   logo: fakeNullable(faker.image.url()),
   url: faker.internet.url(),
   twitter: fakeNullable(

@@ -10,6 +10,7 @@ import {
 } from '@/grants/components/ui/base/detail-item';
 import { DetailValueAmount } from '@/grants/components/ui/base/detail-value-amount';
 import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-avatars';
+import { DetailValueTags } from '@/grants/components/ui/base/detail-value-tags';
 import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links';
@@ -62,12 +63,7 @@ const createMidItems = ({ summary, categories, type }: Grant) => [
 const createLowerItems = ({ reputations }: Grant): DetailItemProps[] => [
   {
     label: 'Reputations',
-    value: (
-      <DetailValueTexts
-        items={reputations}
-        classNames={{ text: 'bg-white/10 border-none rounded-lg' }}
-      />
-    ),
+    value: <DetailValueTags items={reputations} />,
   },
 ];
 
@@ -108,8 +104,9 @@ export const GrantCard = ({ grant }: Props) => {
               'gap-y-4 md:gap-x-6 lg:border-y md:border-t md:border-divider/25 md:pt-4 lg:grow lg:py-4 lg:border-divider/10 lg:w-full',
           }}
         />
-        <div className='border-t border-divider/10 pt-4 lg:border-none lg:pt-0'>
-          <DetailItems items={lowerItems}
+        <div className="border-t border-divider/10 pt-4 lg:border-none lg:pt-0">
+          <DetailItems
+            items={lowerItems}
             classNames={{
               label: 'hidden md:flex',
             }}
@@ -120,13 +117,13 @@ export const GrantCard = ({ grant }: Props) => {
       <div className="hidden flex-col gap-4 lg:flex">
         <div className="flex size-[144px] items-center justify-center overflow-hidden rounded-xl">
           <Avatar
-          classNames={{
-            base: 'bg-black w-8 h-8 rounded h-[144px] w-[144px]',
-          }}
-          showFallback
-          src={logo ?? ''}
-          name={name}
-        />
+            classNames={{
+              base: 'bg-black w-8 h-8 rounded h-[144px] w-[144px]',
+            }}
+            showFallback
+            src={logo ?? ''}
+            name={name}
+          />
         </div>
       </div>
     </div>
