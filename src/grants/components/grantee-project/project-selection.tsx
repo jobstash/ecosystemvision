@@ -28,15 +28,15 @@ export const ProjectSelection = ({ firstId, projectId, baseHref }: Props) => {
 
   const { data } = useGranteeProject(paramsProjectId ?? firstId);
 
-  if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-14')} />;
+  if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-[48px] rounded-2xl')} />;
 
   return (
     <Link
       prefetch
       href={href}
       scroll={false}
-      className={cn(SHARED_CLASSNAME, 'bg-white/5', {
-        'bg-primary': isActive,
+      className={cn(SHARED_CLASSNAME, 'rounded-2xl bg-medium-gray  px-0 py-3  text-base font-semibold', {
+        'is-active': isActive,
       })}
     >
       {data.data.name}
