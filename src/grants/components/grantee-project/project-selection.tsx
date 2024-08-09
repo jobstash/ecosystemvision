@@ -35,7 +35,7 @@ export const ProjectSelection = ({ firstId, projectId, baseHref }: Props) => {
       prefetch
       href={href}
       scroll={false}
-      className={cn(SHARED_CLASSNAME, 'rounded-2xl bg-medium-gray  px-0 py-3  text-base font-semibold', {
+      className={cn(SHARED_CLASSNAME, 'rounded-2xl bg-medium-gray px-3 py-3 text-center  text-base font-semibold', {
         'is-active': isActive,
       })}
     >
