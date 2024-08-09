@@ -53,25 +53,24 @@ export const granteeListQueryPageSchema = z.object({
 });
 export type GranteeListQueryPage = z.infer<typeof granteeListQueryPageSchema>;
 
-export const statItemSchema = z.object({
+export const baseStatSchema = z.object({
   label: z.string(),
   value: z.string(),
 });
 
-type StatItem = z.infer<typeof statItemSchema> & {
-  stats?: StatItem[];
+type BaseStat = z.infer<typeof baseStatSchema> & {
+  stats?: BaseStat[];
 };
 
-export const granteeStatItemSchema: z.ZodType<StatItem> = statItemSchema.extend(
-  {
-    stats: z.lazy(() => granteeStatItemSchema.array()).optional(),
-  },
-);
+export const granteeStatSchema: z.ZodType<BaseStat> = baseStatSchema.extend({
+  stats: z.lazy(() => granteeStatSchema.array()).optional(),
+});
+export type GranteeStat = z.infer<typeof granteeStatSchema>;
 
 export const granteeTabItemSchema = z.object({
   label: z.string(),
   tab: z.string(),
-  stats: z.array(granteeStatItemSchema),
+  stats: z.array(granteeStatSchema),
 });
 
 export const granteeProjectSchema = z.object({
