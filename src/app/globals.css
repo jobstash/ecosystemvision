@@ -4,6 +4,7 @@
 
 @layer base {
 	:root {
+		/* TODO: review values of the variables primary/secondary */
 		--color-base-dark: 13 13 13; /* #0D0D0D */
 		--color-dark-gray: 25 25 25; /* #191919 */
 		--color-cool-gray: 156 163 175; /* #9CA3AF */

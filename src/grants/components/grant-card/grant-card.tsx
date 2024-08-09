@@ -1,4 +1,5 @@
-import { Divider } from '@/shared/components/divider';
+import { Avatar } from '@nextui-org/react';
+
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
@@ -39,7 +40,7 @@ const createMidItems = ({ summary, categories, type }: Grant) => [
         items={categories}
         classNames={{
           root: 'text-[#B1FFB1]',
-          text: 'border-2 border-[#B1FFB1]',
+          text: 'border border-[#B1FFB1]',
         }}
       />
     ),
@@ -51,7 +52,7 @@ const createMidItems = ({ summary, categories, type }: Grant) => [
         items={[type]}
         classNames={{
           root: 'text-[#60BCFF]',
-          text: 'border-2 border-[#60BCFF]',
+          text: 'border border-[#60BCFF]',
         }}
       />
     ),
@@ -85,24 +86,48 @@ export const GrantCard = ({ grant }: Props) => {
 
   return (
     <div
-      className="to-base-dark/20 flex items-center justify-between gap-6 rounded-lg bg-gradient-to-tr from-tertiary/20 p-6 text-13 lg:bg-gradient-to-t"
+      className="to-base-dark/20 flex items-center justify-between gap-6 rounded-b-lg bg-gradient-to-t from-tertiary/20 p-6 text-13 lg:rounded-lg lg:bg-gradient-to-t lg:p-5"
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >
-      <div className="flex flex-col gap-4">
-        <Title className='text-2xl font-bold'>{name}</Title>
-        <DetailItems items={topItems} />
-        <Divider />
-        <DetailItems items={midItems} />
-        <Divider />
-        <DetailItems items={lowerItems} />
+      <div className="flex grow flex-col gap-4 lg:pr-24">
+        <Title className="text-2xl font-bold lg:text-32">{name}</Title>
+        <div className="flex flex-wrap gap-4">
+          <WebLinks links={{ url, discord, twitter }} />
+          <DetailItems
+            items={topItems}
+            classNames={{ container: 'gap-x-4 gap-y-1.5', root: 'text-13' }}
+          />
+        </div>
+        <DetailItems
+          items={midItems}
+          classNames={{
+            label: 'w-full pb-2 md:pb-0 md:w-auto lg:w-full lg:pb-2',
+            root: 'w-full md:w-auto first:text-white/75 lg:first:border-0 lg:first:py-0 lg:items-start lg:first:max-w-xl lg:flex-col lg:items-start',
+            container:
+              'gap-y-4 md:gap-x-6 lg:border-y md:border-t md:border-divider/25 md:pt-4 lg:grow lg:py-4 lg:border-divider/10 lg:w-full',
+          }}
+        />
+        <div className='border-t border-divider/10 pt-4 lg:border-none lg:pt-0'>
+          <DetailItems items={lowerItems}
+            classNames={{
+              label: 'hidden md:flex',
+            }}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <div className="flex size-32 items-center justify-center bg-white/5">
-          <span>LOGO HERE: {logo}</span>
+      <div className="hidden flex-col gap-4 lg:flex">
+        <div className="flex size-[144px] items-center justify-center overflow-hidden rounded-xl">
+          <Avatar
+          classNames={{
+            base: 'bg-black w-8 h-8 rounded h-[144px] w-[144px]',
+          }}
+          showFallback
+          src={logo ?? ''}
+          name={name}
+        />
         </div>
-        <WebLinks links={{ url, discord, twitter }} />
       </div>
     </div>
   );
