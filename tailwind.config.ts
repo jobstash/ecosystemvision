@@ -34,6 +34,7 @@ const config: Config = {
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
         divider: 'rgb(var(--color-border) / <alpha-value>)',
+        'grantee-item': 'rgb(var(--color-grantee-item) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',
         skill3: '#E2BF2B',

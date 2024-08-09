@@ -17,10 +17,17 @@ export const GranteeListItem = ({ grantee }: Props) => {
   return (
     <ClientWrapper
       granteeId={id}
-      className="flex items-center justify-between gap-4 rounded-lg p-4"
+      className="flex items-center justify-between gap-4 rounded-[20px] bg-gradient-to-tr from-grantee-item/25 to-black p-6"
     >
       <div className="flex flex-col gap-4">
-        <GranteeLogoTitle name={name} logo={logo} category={category} />
+        <GranteeLogoTitle
+          name={name}
+          logo={logo}
+          category={category}
+          classNames={{
+            root: '[&_*]:!text-13 [&_*]:!block'
+          }}
+        />
         <GranteeFundingItems grantee={grantee} />
       </div>
       <CaretRightIcon />
