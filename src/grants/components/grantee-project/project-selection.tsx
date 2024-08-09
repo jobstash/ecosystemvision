@@ -28,7 +28,7 @@ export const ProjectSelection = ({ firstId, projectId, baseHref }: Props) => {
 
   const { data } = useGranteeProject(paramsProjectId ?? firstId);
 
-  if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-[48px] rounded-2xl')} />;
+  if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-[48px] rounded-2xl lg:h-[56px]')} />;
 
   return (
     <Link
