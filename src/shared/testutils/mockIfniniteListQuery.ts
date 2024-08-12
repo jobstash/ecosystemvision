@@ -11,11 +11,12 @@ import {
 interface EndpointOptions<T> {
   url: string;
   data: T;
+  overrideFirstPageData?: T;
   limit?: number;
 }
 
 export const mockInfiniteListQuery = <T>(
-  { url, data }: EndpointOptions<T>,
+  { url, data, overrideFirstPageData }: EndpointOptions<T>,
   result: MockInfiniteQueryResult,
   options?: MswOptions,
 ) =>
@@ -28,7 +29,10 @@ export const mockInfiniteListQuery = <T>(
     const page = Number(url.searchParams.get('page')) || 0;
 
     const emptyResponse = HttpResponse.json({ page: -1, data: [] });
-    const successResponse = HttpResponse.json({ page, data });
+    const successResponse = HttpResponse.json({
+      page,
+      data: page === 1 ? overrideFirstPageData || data : data,
+    });
     const internalErrorResponse = HttpResponse.json(
       { message: errMsg.INTERNAL },
       { status: 500 },

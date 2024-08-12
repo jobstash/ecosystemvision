@@ -12,7 +12,7 @@ export const fakeGrant = (): Grant => ({
   networks: Array.from({ length: faker.number.int({ min: 0, max: 4 }) }).map(
     () => ({
       name: capitalize(faker.company.buzzNoun()),
-      logo: fakeNullable(faker.image.url()),
+      logo: faker.image.url(),
     }),
   ),
   ecosystem: capitalize(faker.company.buzzNoun()),
@@ -29,7 +29,7 @@ export const fakeGrant = (): Grant => ({
     text: `${faker.lorem.words(faker.number.int({ min: 1, max: 3 }))}`,
     logo: faker.image.urlPicsumPhotos(),
   })),
-  logo: fakeNullable(faker.image.url()),
+  logo: faker.image.url(),
   url: faker.internet.url(),
   twitter: fakeNullable(
     `https://x.com/${faker.internet.userName().toLocaleLowerCase()}`,

@@ -1,20 +1,15 @@
+import { Grantee } from '@/grants/core/schemas';
 import { GranteeCard } from '@/grants/components/grantee-card/grantee-card';
 import { ProjectSelections } from '@/grants/components/grantee-project/project-selections';
 import { ProjectTabSelection } from '@/grants/components/grantee-project/project-tab-selection';
 
-import { fakeGrantee } from '@/grants/testutils/fake-grantee';
-
 interface Props {
-  grantId: string;
-  granteeId: string;
+  baseHref: string;
+  grantee: Grantee;
   children: React.ReactNode;
 }
 
-export const GranteePageLayout = ({ grantId, granteeId, children }: Props) => {
-  const baseHref = `/grants/${grantId}/grantees/${granteeId}/projects`;
-
-  // TODO: fetch grantee
-  const grantee = fakeGrantee();
+export const GranteePageLayout = ({ baseHref, grantee, children }: Props) => {
   const projects = grantee.projects;
   const hasProject = projects.length > 0;
 
