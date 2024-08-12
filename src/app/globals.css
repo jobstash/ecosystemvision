@@ -58,3 +58,24 @@ html {
 .swiper {
 	@apply px-5 -mx-5
 }
+
+.testimonial-swiper .swiper-pagination {
+	@apply relative bottom-auto top-auto text-left my-12
+}
+
+.testimonial-swiper .swiper-button-prev, 
+.testimonial-swiper .swiper-button-next {
+	@apply  bg-white/20 rounded-full w-12 h-12 flex items-center justify-center z-20
+}
+
+.testimonial-swiper .swiper-button-next {
+	@apply right-5 bottom-8 top-auto
+}
+
+.testimonial-swiper .swiper-button-prev {
+	@apply right-20 left-auto bottom-8 top-auto
+}
+
+.testimonial-swiper .swiper-pagination-bullet {
+	@apply bg-white/80
+}

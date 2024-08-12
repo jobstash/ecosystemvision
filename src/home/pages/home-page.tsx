@@ -21,6 +21,7 @@ export const HomePage = () => {
           className="absolute right-0 top-0 z-0 w-[730px]"
           width={728}
           height={686}
+          priority  
         />
         <section className="relative z-10">
           <div>
@@ -29,7 +30,7 @@ export const HomePage = () => {
               Professional
             </h1>
             <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
-            <h2 className="w-full pb-10 text-base lg:w-2/3">
+            <h2 className="w-full pb-12 text-base lg:w-2/3">
               Join our exclusive network to connect with industry leaders, earn
               money by being contacted as a verified representative, and stay
               ahead in the Web3 ecosystem. Dynamic contact fees ensure fair
@@ -130,7 +131,7 @@ export const HomePage = () => {
             />
           </div>
           <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
-          <div className="testiominal-swiper">
+          <div className="testimonial-swiper">
             <MySwiper
               spaceBetween={32}
               hasNavigation={true}
@@ -138,7 +139,7 @@ export const HomePage = () => {
             >
               <SwiperSlide>
                 <div className="flex h-full grow flex-col">
-                  <p className="text-base font-normal">
+                  <p className="grow pb-8 text-base font-normal">
                     &ldquo;Connecting with verified professionals on this
                     platform has significantly accelerated our project
                     timelines. The transparency and ease of finding reliable
@@ -148,50 +149,99 @@ export const HomePage = () => {
                     showFallback
                     src={'placeholder.png'}
                     classNames={{
-                      base: 'h-14 w-14',
+                      base: 'h-14 w-14 mb-4',
                       fallback: 'bg-red-500',
                     }}
                   />
+                  <div>
+                    <div className='text-base font-semibold leading-tight'>John D.</div>
+                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
                 <div className="flex h-full grow flex-col">
-                  <p className="text-base font-normal">
+                  <p className="grow pb-8 text-base font-normal">
                     &quot;The detailed grant impact analysis provided us with
                     invaluable insights, helping us secure additional funding
                     and drive our project forward.&rdquo;
                   </p>
+                  <Avatar
+                    showFallback
+                    src={'placeholder.png'}
+                    classNames={{
+                      base: 'h-14 w-14 mb-4',
+                      fallback: 'bg-red-500',
+                    }}
+                  />
+                  <div>
+                    <div className='text-base font-semibold'>John D.</div>
+                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
                 <div className="flex h-full grow flex-col">
-                  <p className="text-base font-normal">
+                  <p className="grow pb-8 text-base font-normal">
                     &quot;The detailed grant impact analysis provided us with
                     invaluable insights, helping us secure additional funding
                     and drive our project forward.&rdquo;
                   </p>
+                  <Avatar
+                    showFallback
+                    src={'placeholder.png'}
+                    classNames={{
+                      base: 'h-14 w-14 mb-4',
+                      fallback: 'bg-red-500',
+                    }}
+                  />
+                  <div>
+                    <div className='text-base font-semibold'>John D.</div>
+                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
                 <div className="flex h-full grow flex-col">
-                  <h3 className="text-base font-semibold">
-                    Access Comprehensive Ecosystem Data
-                  </h3>
-                  <p className="text-base font-normal">
+                  <p className="grow pb-8 text-base font-normal">
                     Explore detailed data on projects and organizations within
                     diverse crypto ecosystems and networks, enabling informed
                     decision-making.
                   </p>
+                  <Avatar
+                    showFallback
+                    src={'placeholder.png'}
+                    classNames={{
+                      base: 'h-14 w-14 mb-4',
+                      fallback: 'bg-red-500',
+                    }}
+                  />
+                  <div>
+                    <div className='text-base font-semibold'>John D.</div>
+                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
                 <div className="flex h-full grow flex-col">
-                  <p className="text-base font-normal">
+                  <p className="grow pb-8 text-base font-normal">
                     &ldquo;Connecting with verified professionals on this
                     platform has significantly accelerated our project
                     timelines. The transparency and ease of finding reliable
                     contacts are unparalleled.&rdquo;
                   </p>
+                  <Avatar
+                    showFallback
+                    src={'placeholder.png'}
+                    classNames={{
+                      base: 'h-14 w-14 mb-4',
+                      fallback: 'bg-red-500',
+                    }}
+                  />
+                  <div>
+                    <div className='text-base font-semibold'>John D.</div>
+                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
+                  </div>
                 </div>
               </SwiperSlide>
             </MySwiper>
@@ -201,7 +251,7 @@ export const HomePage = () => {
             href={''}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-auto mt-14 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
+            className="mx-auto mt-6 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
           >
             <span className="text-base font-medium">
               Join Now and Start Earning
@@ -209,7 +259,7 @@ export const HomePage = () => {
           </Button>
           <div className="mt-20 h-px bg-custom-mobile lg:bg-custom"></div>
         </section>
-        <section className="relative pt-20">
+        <section className="relative pb-96 pt-20">
           <div className="relative z-10">
             <h2 className="pb-6 text-32 font-medium leading-tight">
               Grant Impact Analysis: A Collaboration with Ecosystem Vision and
@@ -233,17 +283,17 @@ export const HomePage = () => {
               </span>
             </Button>
           </div>
-          <div className="aspect-h-16 aspect-w-9 relative">
+          <div className="aspect-h-16 aspect-w-9 absolute inset-x-0 bottom-0 -mx-5 w-screen">
             <Image
               src={'/bg-image.jpg'}
               alt={'placeholder'}
               width={728}
               height={686}
-              className="absolute inset-0 object-cover object-center"
+              className="absolute inset-0 object-cover object-bottom	"
             />
           </div>
         </section>
-        <section className="relative z-10">
+        <section className="relative z-10 pt-20">
           <h2 className="pb-6 text-32 font-medium leading-tight">
             Real Success Stories from Web3 Professionals
           </h2>
@@ -274,7 +324,7 @@ export const HomePage = () => {
             </p>
           </div>
         </section>
-        <section>
+        <section className='py-20'>
           <h2 className="pb-6 text-32 font-medium leading-tight">
             Discover Leading Organizations in Web3
           </h2>
