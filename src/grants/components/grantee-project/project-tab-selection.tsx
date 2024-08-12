@@ -5,8 +5,6 @@ import { useParams } from 'next/navigation';
 
 import { cn, Skeleton } from '@nextui-org/react';
 
-import { ROUTE_TABS } from '@/shared/core/constants';
-
 import { useGranteeProject } from '@/grants/hooks/use-grantee-project';
 
 const SHARED_CLASSNAME = 'flex w-full gap-4 p-4';
@@ -18,13 +16,13 @@ interface Props {
 
 export const ProjectTabSelection = ({ defaultId, baseHref }: Props) => {
   const params = useParams();
-
   const projectId = (params.projectId as string) || defaultId;
-  const activeTab = params.tab || ROUTE_TABS.GRANTS.SUMMARY;
 
   const { data } = useGranteeProject(projectId);
-
   if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-14')} />;
+
+  const activeTab = params.tab;
+  if (!activeTab) return null;
 
   const tabs = data.data.tabs.map((t) => ({
     ...t,

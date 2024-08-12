@@ -1,10 +1,5 @@
-import { ROUTE_TABS } from '@/shared/core/constants';
-
-import { CodeMetrics } from '@/grants/components/grantee-project/code-metrics';
-import { Contact } from '@/grants/components/grantee-project/contact';
-import { GithubMetrics } from '@/grants/components/grantee-project/github-metrics';
-import { ImpactMetrics } from '@/grants/components/grantee-project/impact-metrics';
-import { Summary } from '@/grants/components/grantee-project/summary';
+import { getGranteeProject } from '@/grants/data/get-grantee-project';
+import { GranteeProjectStats } from '@/grants/components/grantee-project/project-stats';
 
 interface Props {
   params: {
@@ -13,17 +8,13 @@ interface Props {
   };
 }
 
-const tabComponents = {
-  [ROUTE_TABS.GRANTS.SUMMARY]: Summary,
-  [ROUTE_TABS.GRANTS.IMPACT_METRICS]: ImpactMetrics,
-  [ROUTE_TABS.GRANTS.GITHUB_METRICS]: GithubMetrics,
-  [ROUTE_TABS.GRANTS.CODE_METRICS]: CodeMetrics,
-  [ROUTE_TABS.GRANTS.CONTACT]: Contact,
-};
-
-export const GranteeProjectTabsPage = ({
+export const GranteeProjectTabsPage = async ({
   params: { projectId, tab },
 }: Props) => {
-  const Component = tabComponents[tab];
-  return Component ? <Component projectId={projectId} /> : null;
+  const { data } = await getGranteeProject(projectId);
+
+  const projectTab = data.tabs.find((t) => t.tab === tab);
+  if (!projectTab) return null;
+
+  return <GranteeProjectStats stats={projectTab.stats} />;
 };

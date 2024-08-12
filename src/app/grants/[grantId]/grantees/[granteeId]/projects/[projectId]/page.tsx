@@ -1,14 +1,15 @@
-import { Summary } from '@/grants/components/grantee-project/summary';
+import { getGranteeProject } from '@/grants/data/get-grantee-project';
+import { GranteeProjectStats } from '@/grants/components/grantee-project/project-stats';
 
 interface Props {
   params: { grantId: string; granteeId: string; projectId: string };
 }
 
-const ProjectIdPage = ({ params: { projectId } }: Props) => {
-  return (
-    <div className="flex flex-col gap-8">
-      <Summary projectId={projectId} />
-    </div>
-  );
+const ProjectIdPage = async ({ params: { projectId } }: Props) => {
+  const { data } = await getGranteeProject(projectId);
+
+  if (data.tabs.length === 0) return null;
+
+  return <GranteeProjectStats stats={data.tabs[0].stats} />;
 };
 export default ProjectIdPage;
