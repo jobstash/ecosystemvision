@@ -1,6 +1,5 @@
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
-import { HomeIcon } from '@/shared/components/icons/home-icon';
 
 import { Bartab } from './bartab';
 import { CloseButton } from './close-button';
@@ -41,7 +40,6 @@ export const NavSections = ({ isMobile }: Props) => {
       </div>
 
       <Bartab
-        icon={<HomeIcon />}
         text={A11Y.LINK.NAV.HOME}
         href={HREFS.HOME_PAGE}
         isMobile={isMobile}

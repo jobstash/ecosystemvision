@@ -40,7 +40,7 @@ export const A11Y = {
   LINK: {
     BACK: 'Back',
     NAV: {
-      HOME: 'Home/Search',
+      HOME: 'Home',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
       GRANTS: 'Grant Programs',
