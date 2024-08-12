@@ -10,10 +10,12 @@ import { GRANT_TEST_IDS } from '@/grants/core/constants';
 interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   granteeId: string;
   children: React.ReactNode;
+  isActiveBypass?: boolean;
 }
 
 export const ClientWrapper = ({
   granteeId,
+  isActiveBypass,
   children,
   className,
   ...props
@@ -21,7 +23,7 @@ export const ClientWrapper = ({
   const params = useParams();
 
   const href = `/grants/${params.grantId}/grantees/${granteeId}`;
-  const isActive = params.granteeId === granteeId;
+  const isActive = isActiveBypass || params.granteeId === granteeId;
 
   return (
     <Link
