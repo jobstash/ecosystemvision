@@ -1,9 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@nextui-org/react';
 
+import MySwiper from '@/shared/components/swiper';
+
 export const HomePage = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   return (
     <div>
       <main className="relative max-w-[1340px] overflow-hidden px-5 pt-12 text-white lg:px-7 lg:pt-20">
@@ -46,6 +54,7 @@ export const HomePage = () => {
           ecosystem.vision • Lev Kormych • Lev Kormych • Lev Kormych •
         </section>
         <section className="pt-10 lg:pt-20">
+          {isMounted && <MySwiper />}
           <div className="-mx-5 flex lg:flex-wrap">
             <div className="basis-2/3 px-5 lg:w-1/4">
               <div className="rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
