@@ -26,8 +26,12 @@ export const grantSchema = z.object({
   discord: z.string().nullable(),
   granteesCount: z.number(),
 });
-
 export type Grant = z.infer<typeof grantSchema>;
+
+export const grantDTOSchema = genericResponseSchema.extend({
+  data: grantSchema,
+});
+export type GrantDTO = z.infer<typeof grantDTOSchema>;
 
 export const granteeSchema = z.object({
   id: z.string(),
