@@ -313,7 +313,7 @@ export const HomePage = () => {
               Discover More Success Stories
             </span>
           </Button>
-          <div className="w-[230px] rounded-xl border-t border-white bg-innovate p-5">
+          <div className="ml-5 mt-16 w-[230px] rotate-12 rounded-xl border-t border-white bg-innovate p-5">
             <h2 className="pb-6 text-base leading-tight">
               RuHow CryptoInnovate Connected with Top Talent
             </h2>
@@ -344,7 +344,7 @@ export const HomePage = () => {
           >
             <span className="text-base font-medium">Explore Organizations</span>
           </Button>
-          <div className="aspect-h-16 aspect-w-9 relative">
+          <div className="aspect-h-5 aspect-w-4 relative mt-14">
             <Image
               src={'/space.jpg'}
               alt={'placeholder'}
@@ -375,7 +375,7 @@ export const HomePage = () => {
             <span className="text-base font-medium">Discover Programs</span>
           </Button>
         </section>
-        <section>
+        <section className='py-20'>
           <h2 className="pb-6 text-32 font-medium leading-tight">
             Join Now and Start Earning
           </h2>
