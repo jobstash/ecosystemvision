@@ -20,13 +20,6 @@ export const ROUTE_TABS = {
     JOBS: 'jobs',
     REVIEWS: 'reviews',
   },
-  GRANTS: {
-    SUMMARY: 'summary',
-    IMPACT_METRICS: 'impact-metrics',
-    GITHUB_METRICS: 'github-metrics',
-    CODE_METRICS: 'code-metrics',
-    CONTACT: 'contact',
-  },
 };
 
 export const HREFS = {
