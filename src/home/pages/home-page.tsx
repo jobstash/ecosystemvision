@@ -4,11 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@nextui-org/react';
 
-import MySwiper from '@/shared/components/swiper';
+import MySwiper from '../components/swiper';
 
 export const HomePage = () => {
   const [isMounted, setIsMounted] = useState(false);
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
