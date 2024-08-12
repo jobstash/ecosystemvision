@@ -144,23 +144,23 @@ export const HomePage = () => {
         <div>
           <div>
             <p>
-              "Connecting with verified professionals on this platform has
+              &ldquo;Connecting with verified professionals on this platform has
               significantly accelerated our project timelines. The transparency
-              and ease of finding reliable contacts are unparalleled."
+              and ease of finding reliable contacts are unparalleled.&rdquo;
             </p>
           </div>
           <div>
             <p>
-              "The detailed grant impact analysis provided us with invaluable
+              &quot;The detailed grant impact analysis provided us with invaluable
               insights, helping us secure additional funding and drive our
-              project forward."
+              project forward.&rdquo;
             </p>
           </div>
           <div>
             <p>
-              "Identifying key investment opportunities and understanding the
+              &quot; Identifying key investment opportunities and understanding the
               ecosystem landscape has never been easier. This platform is a
-              must-have for any serious investor."
+              must-have for any serious investor.&rdquo;
             </p>
           </div>
         </div>
