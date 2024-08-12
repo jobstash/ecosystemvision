@@ -1,32 +1,30 @@
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';;
+import React from 'react';
 
-const MySwiper = () => {
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper } from 'swiper/react';;
+
+interface MySwiperProps {
+  children: React.ReactNode;
+  spaceBetween?: number;
+  hasNavigation?: boolean;
+  hasPagination?: boolean;
+}
+
+const MySwiper: React.FC<MySwiperProps> = ({ children, spaceBetween = 20, hasNavigation = false, hasPagination = false }) => {
   return (
     <Swiper
       modules={[Navigation, Pagination]}
-      spaceBetween={50}
-      slidesPerView={3}
-      navigation
-      pagination={{ clickable: true }}
+      spaceBetween={spaceBetween}
+      slidesPerView={1.3}
+      autoHeight={false}
+      navigation={hasNavigation}
+      pagination={hasPagination}
     >
-      <SwiperSlide>
-        <div>Slide 1</div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div>Slide 2</div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div>Slide 3</div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div>Slide 4</div>
-      </SwiperSlide>
+      {children}
     </Swiper>
   );
 };

@@ -44,3 +44,17 @@ html {
 .is-active {
 	@apply bg-gradient-to-r from-white/100 text-black to-light-gray
 }
+
+/* remove padding in storybook to easily work on the homepage */
+.sb-main-padded {
+    padding: 0 !important; 
+}
+
+/* TODO: refactor global css to include multiple different stylesheets */
+.swiper-slide {
+	@apply h-auto
+}
+
+.swiper {
+	@apply px-5 -mx-5
+}
