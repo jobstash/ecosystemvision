@@ -8,8 +8,7 @@ import { Inter } from 'next/font/google';
 
 import { lato, roboto } from '@/shared/core/fonts';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
-import { Nav } from '@/shared/components/nav';
-import { NavSpaceLayout } from '@/shared/components/nav-space-layout';
+import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
@@ -34,8 +33,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
     <body className={inter.className}>
       <NextUIProvider>
         <ReactQueryProvider>
-          <Nav />
-          <NavSpaceLayout>{children}</NavSpaceLayout>
+          <NavLayout>{children}</NavLayout>
         </ReactQueryProvider>
       </NextUIProvider>
 
