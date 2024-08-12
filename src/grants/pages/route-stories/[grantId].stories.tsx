@@ -34,7 +34,7 @@ const meta: Meta<typeof Component> = {
     nextjs: {
       navigation: {
         pathname: `/grants/${grantProgram.id}`,
-        segments: ['grantId', grantProgram.id],
+        segments: [['grantId', grantProgram.id]],
       },
     },
     msw: {

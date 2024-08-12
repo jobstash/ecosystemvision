@@ -7,6 +7,8 @@ import { cn } from '@nextui-org/react';
 
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
+import { ClientWrapper } from '@/grants/components/grantee-list/item/client-wrapper';
+
 import { GranteeListItem } from './item';
 import { useGranteeList } from './use-grantee-list';
 
@@ -14,10 +16,11 @@ export const GranteeList = () => {
   // TODO: JOB-681
 
   const params = useParams();
+  const paramsGrantId = params.grantId as string;
+  const paramsGranteeId = params.granteeId as string | undefined;
 
-  const { grantees, error, inViewRef, hasNextPage, isPending } = useGranteeList(
-    params.grantId as string,
-  );
+  const { grantees, error, inViewRef, hasNextPage, isPending } =
+    useGranteeList(paramsGrantId);
 
   const lastItem = useMemo(() => {
     if (error) return <p>Error: {error.message}</p>;
@@ -38,7 +41,13 @@ export const GranteeList = () => {
       <VirtualWrapper count={grantees.length}>
         {(index) => (
           <div className={cn({ 'pt-8': index > 0 })}>
-            <GranteeListItem grantee={grantees[index]} />
+            <ClientWrapper
+              granteeId={grantees[index].id}
+              isActiveBypass={index === 0 && !paramsGranteeId}
+              className="flex items-center justify-between gap-4 rounded-[20px] bg-gradient-to-tr from-grantee-item/25 to-black p-6"
+            >
+              <GranteeListItem grantee={grantees[index]} />
+            </ClientWrapper>
           </div>
         )}
       </VirtualWrapper>
