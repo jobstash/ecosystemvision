@@ -19,10 +19,18 @@ const config: Config = {
       lg: '1280px',
     },
     extend: {
+      borderRadius: {
+        '20': '20px',
+      },
+      backgroundImage: {
+        'custom': 'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(197, 197, 197, 0.434343) 28%, rgba(153, 153, 153, 0) 49.5%)',
+        'custom-mobile': 'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(197, 197, 197, 0.434343) 49.56%)',
+      },
       fontSize: {
         '10': '10px',
         '13': '13px',
         '32': '32px',
+        '64': '64px'
       },
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',
@@ -37,6 +45,9 @@ const config: Config = {
         tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
         divider: 'rgb(var(--color-border) / <alpha-value>)',
         'grantee-item': 'rgb(var(--color-grantee-item) / <alpha-value>)',
+        'gradient-1': 'rgb(var(--color-gradient-1) / <alpha-value>)',
+        'gradient-2': 'rgb(var(--color-gradient-2) / <alpha-value>)',
+        'innovate' : 'rgb(var(--color-innovate) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',
         skill3: '#E2BF2B',
@@ -72,7 +83,11 @@ const config: Config = {
     },
   },
   darkMode: 'class',
+  corePlugins: {
+    aspectRatio: false,
+  },
   plugins: [
+    require('@tailwindcss/aspect-ratio'),
     nextui({
       defaultTheme: 'dark',
       defaultExtendTheme: 'dark',
