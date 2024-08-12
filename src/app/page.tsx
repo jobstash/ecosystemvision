@@ -1,3 +1,1 @@
-const Home = () => null;
-
-export default Home;
+export { HomePage as default } from '@/home/pages/home-page';

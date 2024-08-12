@@ -32,7 +32,7 @@ export const Bartab = (props: BartabProps) => {
   const buttonClassName = cn('justify-start hover:bg-white/15', {
     'bg-transparent': isMobile,
     'bg-white/5': !isActive && !isMobile,
-    'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive && !isMobile,
+    'is-active': isActive && !isMobile,
   });
 
   return (
@@ -46,7 +46,11 @@ export const Bartab = (props: BartabProps) => {
       onClick={handleClick}
       data-active={isActive}
     >
-      <span className="text-2xl text-white md:text-sm md:font-semibold">
+      <span
+        className={cn('text-2xl text-white md:text-sm', {
+          'text-black': isActive && !isMobile,
+        })}
+      >
         {text}
       </span>
     </Button>
