@@ -44,8 +44,12 @@ export const granteeSchema = z.object({
   fundingDate: z.number(),
   projects: z.array(z.string()),
 });
-
 export type Grantee = z.infer<typeof granteeSchema>;
+
+export const granteeDTOSchema = genericResponseSchema.extend({
+  data: granteeSchema,
+});
+export type GranteeDTO = z.infer<typeof granteeDTOSchema>;
 
 export const grantListQueryPageSchema = z.object({
   page: z.number().optional(),
