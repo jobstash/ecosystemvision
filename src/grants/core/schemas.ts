@@ -26,8 +26,12 @@ export const grantSchema = z.object({
   discord: z.string().nullable(),
   granteesCount: z.number(),
 });
-
 export type Grant = z.infer<typeof grantSchema>;
+
+export const grantDTOSchema = genericResponseSchema.extend({
+  data: grantSchema,
+});
+export type GrantDTO = z.infer<typeof grantDTOSchema>;
 
 export const granteeSchema = z.object({
   id: z.string(),
@@ -40,8 +44,12 @@ export const granteeSchema = z.object({
   fundingDate: z.number(),
   projects: z.array(z.string()),
 });
-
 export type Grantee = z.infer<typeof granteeSchema>;
+
+export const granteeDTOSchema = genericResponseSchema.extend({
+  data: granteeSchema,
+});
+export type GranteeDTO = z.infer<typeof granteeDTOSchema>;
 
 export const grantListQueryPageSchema = z.object({
   page: z.number().optional(),
@@ -64,15 +72,16 @@ type BaseStat = z.infer<typeof baseStatSchema> & {
   stats?: BaseStat[];
 };
 
-export const granteeStatSchema: z.ZodType<BaseStat> = baseStatSchema.extend({
-  stats: z.lazy(() => granteeStatSchema.array()).optional(),
-});
-export type GranteeStat = z.infer<typeof granteeStatSchema>;
+export const granteeProjectStatSchema: z.ZodType<BaseStat> =
+  baseStatSchema.extend({
+    stats: z.lazy(() => granteeProjectStatSchema.array()).optional(),
+  });
+export type GranteeProjectStat = z.infer<typeof granteeProjectStatSchema>;
 
 export const granteeTabItemSchema = z.object({
   label: z.string(),
   tab: z.string(),
-  stats: z.array(granteeStatSchema),
+  stats: z.array(granteeProjectStatSchema),
 });
 
 export const granteeProjectSchema = z.object({

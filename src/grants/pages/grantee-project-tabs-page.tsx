@@ -1,20 +1,10 @@
-import { getGranteeProject } from '@/grants/data/get-grantee-project';
+import { GranteeProjectStat } from '@/grants/core/schemas';
 import { GranteeProjectStats } from '@/grants/components/grantee-project/project-stats';
 
 interface Props {
-  params: {
-    projectId: string;
-    tab: string;
-  };
+  stats: GranteeProjectStat[];
 }
 
-export const GranteeProjectTabsPage = async ({
-  params: { projectId, tab },
-}: Props) => {
-  const { data } = await getGranteeProject(projectId);
-
-  const projectTab = data.tabs.find((t) => t.tab === tab);
-  if (!projectTab) return null;
-
-  return <GranteeProjectStats stats={projectTab.stats} />;
+export const GranteeProjectTabsPage = async ({ stats }: Props) => {
+  return <GranteeProjectStats stats={stats} />;
 };

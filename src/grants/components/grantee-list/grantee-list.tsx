@@ -3,6 +3,8 @@
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 
+import { cn } from '@nextui-org/react';
+
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { GranteeListItem } from './item';
@@ -35,7 +37,7 @@ export const GranteeList = () => {
     <div className="flex flex-col gap-4">
       <VirtualWrapper count={grantees.length}>
         {(index) => (
-          <div className="pt-8">
+          <div className={cn({ 'pt-8': index > 0 })}>
             <GranteeListItem grantee={grantees[index]} />
           </div>
         )}

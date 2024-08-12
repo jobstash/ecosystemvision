@@ -19,3 +19,15 @@ export const fakeGrantee = (): Grantee => ({
     () => faker.internet.domainWord(),
   ),
 });
+
+export const fakeGrantees = ({
+  length = 10,
+  firstId,
+}: { length?: number; firstId?: string } = {}): Grantee[] =>
+  Array.from({ length }).map((_, index) => {
+    const grantee = fakeGrantee();
+    if (firstId && index === 0) {
+      grantee.id = firstId;
+    }
+    return grantee;
+  });

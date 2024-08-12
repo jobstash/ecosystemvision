@@ -8,6 +8,9 @@ export const grantQueryKeys = {
 
     return [...grantQueryKeys.all, 'list', searchParams] as const;
   },
+  details: (grantId: string) => {
+    return [...grantQueryKeys.all, 'grant', grantId] as const;
+  },
   grantees: (grantId: string, params: string | Record<string, string>) => {
     const searchParams =
       typeof params === 'string'

@@ -1,9 +1,9 @@
 import { cn } from '@/shared/utils/cn';
 
-import { GranteeStat } from '@/grants/core/schemas';
+import { GranteeProjectStat } from '@/grants/core/schemas';
 
 interface Props {
-  granteeStat: GranteeStat;
+  granteeStat: GranteeProjectStat;
   level?: number;
 }
 

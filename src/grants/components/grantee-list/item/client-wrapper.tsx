@@ -33,7 +33,7 @@ export const ClientWrapper = ({
       className={cn(
         'bg-white/5',
         {
-          'bg-gradient-to-l from-[#0D0D0D] to-primary': isActive,
+          'is-active': isActive,
         },
         className,
       )}
