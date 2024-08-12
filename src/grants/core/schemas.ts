@@ -72,15 +72,16 @@ type BaseStat = z.infer<typeof baseStatSchema> & {
   stats?: BaseStat[];
 };
 
-export const granteeStatSchema: z.ZodType<BaseStat> = baseStatSchema.extend({
-  stats: z.lazy(() => granteeStatSchema.array()).optional(),
-});
-export type GranteeStat = z.infer<typeof granteeStatSchema>;
+export const granteeProjectStatSchema: z.ZodType<BaseStat> =
+  baseStatSchema.extend({
+    stats: z.lazy(() => granteeProjectStatSchema.array()).optional(),
+  });
+export type GranteeProjectStat = z.infer<typeof granteeProjectStatSchema>;
 
 export const granteeTabItemSchema = z.object({
   label: z.string(),
   tab: z.string(),
-  stats: z.array(granteeStatSchema),
+  stats: z.array(granteeProjectStatSchema),
 });
 
 export const granteeProjectSchema = z.object({

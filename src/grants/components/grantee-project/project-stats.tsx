@@ -1,8 +1,8 @@
-import { GranteeStat } from '@/grants/core/schemas';
+import { GranteeProjectStat } from '@/grants/core/schemas';
 import { GranteeStatItem } from '@/grants/components/grant-stat-item';
 
 interface Props {
-  stats: GranteeStat[];
+  stats: GranteeProjectStat[];
 }
 
 export const GranteeProjectStats = ({ stats }: Props) => {
