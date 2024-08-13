@@ -12,7 +12,7 @@ interface Props {
 
 export const Text = (props: Props) => {
   const { text, className, htmlTag = 'span' } = props;
-  const textClassName = cn('font-roboto text-sm text-white/70', className);
+  const textClassName = cn('text-sm text-white/70', className);
 
   return createElement(htmlTag, { className: textClassName }, text);
 };

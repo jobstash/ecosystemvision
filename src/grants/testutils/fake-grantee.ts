@@ -4,7 +4,7 @@ import { fakeNullable } from '@/shared/testutils/fake-nullable';
 
 import { Grantee } from '@/grants/core/schemas';
 
-export const fakeGrantee = (): Grantee => ({
+export const fakeGrantee = (partial: Partial<Grantee> = {}): Grantee => ({
   id: faker.string.uuid(),
   name: faker.company.name(),
   logo: fakeNullable(faker.image.url()),
@@ -18,6 +18,7 @@ export const fakeGrantee = (): Grantee => ({
   projects: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }).map(
     () => faker.internet.domainWord(),
   ),
+  ...partial,
 });
 
 export const fakeGrantees = ({

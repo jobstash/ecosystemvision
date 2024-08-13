@@ -1,13 +1,13 @@
-import { Lato, Roboto } from 'next/font/google';
+import { Inter_Tight, Space_Grotesk } from 'next/font/google';
 
-export const roboto = Roboto({
+export const interTight = Inter_Tight({
   weight: ['400', '700'],
   subsets: ['latin'],
-  variable: '--font-roboto',
+  variable: '--font-inter-tight',
 });
 
-export const lato = Lato({
+export const grotesk = Space_Grotesk({
   weight: ['400', '700'],
   subsets: ['latin'],
-  variable: '--font-lato',
+  variable: '--font-space-grotesk',
 });

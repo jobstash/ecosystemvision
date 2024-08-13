@@ -41,8 +41,8 @@ export const OrgCard = (props: Props) => {
       >
         <LogoTitle src={src}>
           <div className="flex flex-col">
-            <h3 className="font-lato text-lg font-bold">{name}</h3>
-            <h4 className="font-lato text-sm text-white/60">{location}</h4>
+            <h3 className="text-lg font-bold">{name}</h3>
+            <h4 className="text-sm text-white/60">{location}</h4>
           </div>
         </LogoTitle>
 

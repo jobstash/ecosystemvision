@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import { lato, roboto } from '@/shared/core/fonts';
+import { grotesk, interTight } from '@/shared/core/fonts';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
 import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
@@ -29,7 +29,7 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
-    className={`bg-[#0D0D0D] ${lato.variable} ${roboto.variable}`}
+    className={`bg-[#0D0D0D] ${interTight.variable} ${grotesk.variable}`}
   >
     <body className={inter.className}>
       <NextUIProvider>

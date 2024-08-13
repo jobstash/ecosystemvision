@@ -6,7 +6,7 @@ import { fakeNullable } from '@/shared/testutils/fake-nullable';
 
 import { Grant } from '@/grants/core/schemas';
 
-export const fakeGrant = (): Grant => ({
+export const fakeGrant = (partial: Partial<Grant> = {}): Grant => ({
   id: faker.string.uuid(),
   name: faker.company.name(),
   networks: Array.from({ length: faker.number.int({ min: 0, max: 4 }) }).map(
@@ -38,4 +38,5 @@ export const fakeGrant = (): Grant => ({
     `https://discord.com/${faker.internet.userName().toLocaleLowerCase()}`,
   ),
   granteesCount: faker.number.int({ min: 1, max: 100 }),
+  ...partial,
 });
