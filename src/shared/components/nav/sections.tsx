@@ -31,7 +31,7 @@ interface Props {
 export const NavSections = ({ isMobile }: Props) => {
   return (
     <nav
-      className="flex flex-col gap-6 md:w-[180px] md:gap-12"
+      className="flex flex-col gap-6 md:gap-12"
       data-testid={TEST_IDS.NAV_SECTION}
     >
       <div className="flex items-center justify-between">

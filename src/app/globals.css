@@ -16,7 +16,12 @@
 		--color-labels: 239 239 239; /* #EFEFEF */
 		--color-border: 240 238 237; /* #F0EEED */
 		--color-tertiary: 219 217 251; /* #DBD9FB */
-		--color-grantee-item: 117 112 141; 	 
+		--color-grantee-item: 117 112 141; 	
+		
+		/* HP variables to rearrange */
+		--color-gradient-1: 117 117 117; /* #757575 */
+		--color-gradient-2: 117 112 141; /* #75708D */
+		--color-innovate: 31 31 38; /* #1F1F26 */
 	}
 }
 
@@ -38,4 +43,9 @@ html {
 
 .is-active {
 	@apply bg-gradient-to-r from-white/100 text-black to-light-gray
+}
+
+/* remove padding in storybook to easily work on the homepage */
+.sb-main-padded {
+    padding: 0 !important; 
 }

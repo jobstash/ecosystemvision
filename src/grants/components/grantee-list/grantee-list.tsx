@@ -44,7 +44,7 @@ export const GranteeList = () => {
             <ClientWrapper
               granteeId={grantees[index].id}
               isActiveBypass={index === 0 && !paramsGranteeId}
-              className="flex items-center justify-between gap-4 rounded-[20px] bg-gradient-to-tr from-grantee-item/25 to-black p-6"
+              className="flex items-center justify-between gap-4 rounded-20 bg-gradient-to-tr from-grantee-item/25 to-black p-6"
             >
               <GranteeListItem grantee={grantees[index]} />
             </ClientWrapper>

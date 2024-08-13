@@ -20,7 +20,7 @@ export const CloseButton = () => {
     <Button
       isIconOnly
       aria-label="Close Nav"
-      className={cn('md:hidden', { hidden: !showNav })}
+      className={cn('lg:hidden', { hidden: !showNav })}
       onClick={handleClick}
       variant="light"
     >
