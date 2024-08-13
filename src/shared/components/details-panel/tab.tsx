@@ -17,12 +17,9 @@ export const DetailsPanelTab = ({ href, isActive, text }: TabProps) => {
   const wrapperClassName =
     'flex h-10 shrink-0 items-center justify-center rounded-lg border border-white/10 px-4 py-2 sm:h-12 md:h-8';
 
-  const contentClassName = cn(
-    `rounded-lg border border-transparent font-lato text-sm`,
-    {
-      'border-0': isActive, // Prevent active border layout shift
-    },
-  );
+  const contentClassName = cn(`rounded-lg border border-transparent text-sm`, {
+    'border-0': isActive, // Prevent active border layout shift
+  });
 
   return (
     <Button

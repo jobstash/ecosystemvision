@@ -22,7 +22,7 @@ const CHAIN_COUNTS = {
 const AvatarGroupCount = ({ count }: { count: number }) => (
   <Tooltip content={`${count} other ${getPluralText('chain', count)}`}>
     <div className="z-10 ml-[-10px] flex size-[30px] items-center justify-center rounded-full bg-[#E5ECF6]">
-      <Text className="font-lato text-sm text-black" text={`+${count}`} />
+      <Text className="text-sm text-black" text={`+${count}`} />
     </div>
   </Tooltip>
 );
