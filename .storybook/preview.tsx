@@ -1,7 +1,8 @@
+import '../src/app/globals.css';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../src/app/globals.css';
 
 import type { Preview } from '@storybook/react';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';

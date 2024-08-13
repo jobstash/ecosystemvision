@@ -1,11 +1,9 @@
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+'use client';
 
 import React from 'react';
 
 import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper } from 'swiper/react';;
+import { Swiper } from 'swiper/react';
 
 interface MySwiperProps {
   children: React.ReactNode;
@@ -14,7 +12,12 @@ interface MySwiperProps {
   hasPagination?: boolean;
 }
 
-const MySwiper: React.FC<MySwiperProps> = ({ children, spaceBetween = 20, hasNavigation = false, hasPagination = false }) => {
+export const MySwiper: React.FC<MySwiperProps> = ({
+  children,
+  spaceBetween = 20,
+  hasNavigation = false,
+  hasPagination = false,
+}) => {
   return (
     <Swiper
       modules={[Navigation, Pagination]}
@@ -29,4 +32,4 @@ const MySwiper: React.FC<MySwiperProps> = ({ children, spaceBetween = 20, hasNav
   );
 };
 
-export default MySwiper;
+export { SwiperSlide } from 'swiper/react';
