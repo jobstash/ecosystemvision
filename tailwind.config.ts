@@ -51,8 +51,8 @@ const config: Config = {
         skill12: '#EC88E1',
       },
       fontFamily: {
-        roboto: ['var(--font-roboto)'],
-        lato: ['var(--font-lato)'],
+        ['inter-tight']: ['var(--font-inter-tight)'],
+        grotesk: ['var(--font-space-grotesk)'],
       },
       keyframes: {
         spin: {

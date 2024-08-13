@@ -9,7 +9,7 @@ interface Props {
 }
 
 const CONTAINER_CLASSNAME = 'flex items-center gap-3';
-const NAME_CLASSNAME = 'font-lato font-bold';
+const NAME_CLASSNAME = 'font-bold';
 
 export const LogoTitle = (props: Props) => {
   const { src, name, children } = props;

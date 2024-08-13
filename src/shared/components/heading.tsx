@@ -10,7 +10,7 @@ interface Props {
 }
 
 const DEFAULT_TAG = 'h2';
-const BASE_CLASS_NAME = 'font-lato text-xl font-bold';
+const BASE_CLASS_NAME = 'text-xl font-bold';
 
 export const Heading = (props: Props) => {
   const { text, className, htmlTag = DEFAULT_TAG } = props;
