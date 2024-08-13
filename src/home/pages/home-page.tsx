@@ -1,15 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Avatar } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
-import { SwiperSlide } from 'swiper/react';
 
-import { AccessIcon } from '../components/icons/access';
-import { EarnIcon } from '../components/icons/earn';
-import { GainIcon } from '../components/icons/gain';
-import { TrackIcon } from '../components/icons/track';
-import MySwiper from '../components/swiper';
+import { FeatureSwiper } from '@/home/components/feature-swiper';
+import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
 export const HomePage = () => {
   return (
@@ -21,7 +16,7 @@ export const HomePage = () => {
           className="absolute right-0 top-0 z-0 w-[730px]"
           width={728}
           height={686}
-          priority  
+          priority
         />
         <section className="relative z-10">
           <div>
@@ -48,69 +43,15 @@ export const HomePage = () => {
             </span>
           </Button>
         </section>
-        <section className="relative z-10 -ml-24 flex -rotate-[4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 lg:text-5xl">
+        <section className="relative z-10 -ml-24 flex rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 lg:text-5xl">
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • Lev Kormych • Lev Kormych • Lev Kormych •
         </section>
-        <section className="lg:pt-20">
-          <MySwiper spaceBetween={40}>
-            <SwiperSlide>
-              <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
-                <EarnIcon />
-                <h3 className="text-base font-semibold">
-                  Earn and Connect as a Verified Professional
-                </h3>
-                <p className="text-base font-normal">
-                  Monetize your expertise by being available for contact as a
-                  verified professional. Earn money and build trust as a
-                  representative of your organization, eliminating scammers and
-                  impostors.
-                </p>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
-                <GainIcon />
-                <h3 className="text-base font-semibold">
-                  Gain Investor Insights
-                </h3>
-                <p className="text-base font-normal">
-                  Discover where top investors are putting their money, explore
-                  similar ecosystems and verticals, and understand the funding
-                  stages of various organizations.
-                </p>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
-                <TrackIcon />
-                <h3 className="text-base font-semibold">
-                  Track Grant Program Impact
-                </h3>
-                <p className="text-base font-normal">
-                  Analyze the impact of grant programs, including our
-                  collaboration with ThankArb, and identify new grant
-                  opportunities within the ecosystem.
-                </p>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
-                <AccessIcon />
-                <h3 className="text-base font-semibold">
-                  Access Comprehensive Ecosystem Data
-                </h3>
-                <p className="text-base font-normal">
-                  Explore detailed data on projects and organizations within
-                  diverse crypto ecosystems and networks, enabling informed
-                  decision-making.
-                </p>
-              </div>
-            </SwiperSlide>
-          </MySwiper>
-        </section>
+
+        <FeatureSwiper />
+
         <section className="pt-20">
           <h2 className="pb-6 text-32 leading-tight">
             Connect, Earn, and Grow with Verified Web3 Professionals
@@ -131,121 +72,9 @@ export const HomePage = () => {
             />
           </div>
           <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
-          <div className="testimonial-swiper">
-            <MySwiper
-              spaceBetween={32}
-              hasNavigation={true}
-              hasPagination={true}
-            >
-              <SwiperSlide>
-                <div className="flex h-full grow flex-col">
-                  <p className="grow pb-8 text-base font-normal">
-                    &ldquo;Connecting with verified professionals on this
-                    platform has significantly accelerated our project
-                    timelines. The transparency and ease of finding reliable
-                    contacts are unparalleled.&rdquo;
-                  </p>
-                  <Avatar
-                    showFallback
-                    src={'placeholder.png'}
-                    classNames={{
-                      base: 'h-14 w-14 mb-4',
-                      fallback: 'bg-red-500',
-                    }}
-                  />
-                  <div>
-                    <div className='text-base font-semibold leading-tight'>John D.</div>
-                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex h-full grow flex-col">
-                  <p className="grow pb-8 text-base font-normal">
-                    &quot;The detailed grant impact analysis provided us with
-                    invaluable insights, helping us secure additional funding
-                    and drive our project forward.&rdquo;
-                  </p>
-                  <Avatar
-                    showFallback
-                    src={'placeholder.png'}
-                    classNames={{
-                      base: 'h-14 w-14 mb-4',
-                      fallback: 'bg-red-500',
-                    }}
-                  />
-                  <div>
-                    <div className='text-base font-semibold'>John D.</div>
-                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex h-full grow flex-col">
-                  <p className="grow pb-8 text-base font-normal">
-                    &quot;The detailed grant impact analysis provided us with
-                    invaluable insights, helping us secure additional funding
-                    and drive our project forward.&rdquo;
-                  </p>
-                  <Avatar
-                    showFallback
-                    src={'placeholder.png'}
-                    classNames={{
-                      base: 'h-14 w-14 mb-4',
-                      fallback: 'bg-red-500',
-                    }}
-                  />
-                  <div>
-                    <div className='text-base font-semibold'>John D.</div>
-                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex h-full grow flex-col">
-                  <p className="grow pb-8 text-base font-normal">
-                    Explore detailed data on projects and organizations within
-                    diverse crypto ecosystems and networks, enabling informed
-                    decision-making.
-                  </p>
-                  <Avatar
-                    showFallback
-                    src={'placeholder.png'}
-                    classNames={{
-                      base: 'h-14 w-14 mb-4',
-                      fallback: 'bg-red-500',
-                    }}
-                  />
-                  <div>
-                    <div className='text-base font-semibold'>John D.</div>
-                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex h-full grow flex-col">
-                  <p className="grow pb-8 text-base font-normal">
-                    &ldquo;Connecting with verified professionals on this
-                    platform has significantly accelerated our project
-                    timelines. The transparency and ease of finding reliable
-                    contacts are unparalleled.&rdquo;
-                  </p>
-                  <Avatar
-                    showFallback
-                    src={'placeholder.png'}
-                    classNames={{
-                      base: 'h-14 w-14 mb-4',
-                      fallback: 'bg-red-500',
-                    }}
-                  />
-                  <div>
-                    <div className='text-base font-semibold'>John D.</div>
-                    <span className='text-13 font-thin text-white/70'>Project Lead at CryptoInnovate</span>
-                  </div>
-                </div>
-              </SwiperSlide>
-            </MySwiper>
-          </div>
+
+          <TestimonialSwiper />
+
           <Button
             as={Link}
             href={''}
@@ -324,7 +153,7 @@ export const HomePage = () => {
             </p>
           </div>
         </section>
-        <section className='py-20'>
+        <section className="py-20">
           <h2 className="pb-6 text-32 font-medium leading-tight">
             Discover Leading Organizations in Web3
           </h2>
@@ -363,7 +192,7 @@ export const HomePage = () => {
             insights into total value locked (TVL), financial metrics, network
             deployments, and ecosystem details. Utilize advanced sorting and
             filtering to identify high-impact projects and understand their
-            significance within the Web3 landscape..
+            significance within the Web3 landscape@/home
           </p>
           <Button
             as={Link}
@@ -375,7 +204,7 @@ export const HomePage = () => {
             <span className="text-base font-medium">Discover Programs</span>
           </Button>
         </section>
-        <section className='py-20'>
+        <section className="py-20">
           <h2 className="pb-6 text-32 font-medium leading-tight">
             Join Now and Start Earning
           </h2>
