@@ -9,29 +9,25 @@ import {
 } from '@/shared/testutils/misc';
 
 import { GRANT_QUERY_URLS } from '@/grants/core/constants';
-import { GranteeProject } from '@/grants/core/schemas';
 
-import { fakeGranteeProject } from '@/grants/testutils/fake-grantee-project';
+import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
-export const mockGranteeProjectQuery = (
+export const mockGranteeQuery = (
   result: MockQueryResult,
-  options?: MswOptions & {
-    data?: GranteeProject;
-  },
+  options?: MswOptions,
 ) =>
   http.get(
-    `${GRANT_QUERY_URLS.GRANTEE_PROJECT}/:projectId`,
+    `${GRANT_QUERY_URLS.GRANTEE_DETAILS}/:granteeId`,
     async ({ params }) => {
       const { networkDelay } = options || DEFAULT_MSW_OPTIONS;
-
       await delay(networkDelay);
 
-      const projectId = params.projectId as string;
+      const granteeId = params.granteeId as string;
 
       const successResponse = HttpResponse.json({
         success: true,
-        message: 'Grantee project retrieved successfully',
-        data: options?.data || fakeGranteeProject({ id: projectId }),
+        message: 'Grantee retrieved successfully',
+        data: fakeGrantee({ id: granteeId }),
       });
 
       const internalErrorResponse = HttpResponse.json(
