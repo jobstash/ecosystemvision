@@ -8,24 +8,24 @@ import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
 export const HomePage = () => {
   return (
-    <div>
-      <main className="relative max-w-[1340px] overflow-hidden px-5 pt-12 text-white lg:px-7 lg:pt-20">
+    <div className="pt-[70px] font-inter-tight">
+      <main className="relative max-w-[1340px] overflow-hidden px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
         <Image
           src={'/header-image.png'}
           alt={'Ecosystem.vision'}
-          className="absolute right-0 top-0 z-0 w-[730px]"
+          className="absolute right-0 top-0 z-0 w-[730px]  md:-translate-y-1/3 md:translate-x-1/3"
           width={728}
           height={686}
           priority
         />
         <section className="relative z-10">
           <div>
-            <h1 className="w-full text-32 font-medium leading-tight lg:w-1/2 lg:text-64">
+            <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-11/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64">
               Unlock Earnings and Influence in Web3: Become a Verified
               Professional
             </h1>
             <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
-            <h2 className="w-full pb-12 text-base lg:w-2/3">
+            <h2 className="w-full pb-12 text-base font-normal leading-5	 lg:w-2/3">
               Join our exclusive network to connect with industry leaders, earn
               money by being contacted as a verified representative, and stay
               ahead in the Web3 ecosystem. Dynamic contact fees ensure fair
@@ -36,14 +36,14 @@ export const HomePage = () => {
             href={''}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
+            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">
               Join Now and Start Earning
             </span>
           </Button>
         </section>
-        <section className="relative z-10 -ml-24 flex rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 lg:text-5xl">
+        <section className="relative z-10 -ml-24 flex rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 md:text-4xl lg:text-5xl">
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
@@ -52,11 +52,11 @@ export const HomePage = () => {
 
         <FeatureSwiper />
 
-        <section className="pt-20">
-          <h2 className="pb-6 text-32 leading-tight">
+        <section className="pt-20 md:pt-40">
+          <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight">
             Connect, Earn, and Grow with Verified Web3 Professionals
           </h2>
-          <p className="text-bae">
+          <p className="text-base leading-5 md:w-2/3">
             Accelerate your projects and earn money by connecting with verified
             professionals in top Web3 companies. Dynamic pricing ensures fair
             compensation, while rigorous verification through GitHub activity or
@@ -88,13 +88,13 @@ export const HomePage = () => {
           </Button>
           <div className="mt-20 h-px bg-custom-mobile lg:bg-custom"></div>
         </section>
-        <section className="relative pb-96 pt-20">
+        <section className="relative pt-20 md:pt-40">
           <div className="relative z-10">
-            <h2 className="pb-6 text-32 font-medium leading-tight">
+            <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight">
               Grant Impact Analysis: A Collaboration with Ecosystem Vision and
               the Cartographer Syndicates
             </h2>
-            <p className="pb-12 text-base">
+            <p className="pb-12 text-base leading-5 md:w-2/3">
               Gain deep insights into the effectiveness of grant programs with
               our detailed metrics and analyses. Our collaboration with
               ThankArb, Ecosystem Vision, and the Cartographer Syndicate
@@ -105,14 +105,14 @@ export const HomePage = () => {
               href={''}
               target="_blank"
               rel="noopener noreferrer"
-              className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
+              className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
             >
               <span className="text-base font-medium">
                 Explore Grant Impact
               </span>
             </Button>
           </div>
-          <div className="aspect-h-16 aspect-w-9 absolute inset-x-0 bottom-0 -mx-5 w-screen">
+          <div className="aspect-h-7 aspect-w-5 bottom-0 mt-12 md:-mt-32 lg:absolute lg:inset-x-0 lg:-mx-5 lg:w-screen">
             <Image
               src={'/bg-image.jpg'}
               alt={'placeholder'}
@@ -122,42 +122,48 @@ export const HomePage = () => {
             />
           </div>
         </section>
-        <section className="relative z-10 pt-20">
-          <h2 className="pb-6 text-32 font-medium leading-tight">
-            Real Success Stories from Web3 Professionals
-          </h2>
-          <p className="pb-12 text-base">
-            Read success stories of how our platform has helped users connect
-            with verified professionals, access valuable data, and drive their
-            projects forward.
-          </p>
-          <Button
-            as={Link}
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
-          >
-            <span className="text-base font-medium">
-              Discover More Success Stories
-            </span>
-          </Button>
-          <div className="ml-5 mt-16 w-[230px] rotate-12 rounded-xl border-t border-white bg-innovate p-5">
-            <h2 className="pb-6 text-base leading-tight">
-              RuHow CryptoInnovate Connected with Top Talent
-            </h2>
-            <p className="text-xs text-white/75">
-              CryptoInnovate used our platform to find and connect with verified
-              developers and industry experts, resulting in a 30% increase in
-              project efficiency and faster time-to-market.
-            </p>
+        <section className="relative z-10 pt-20 md:pt-40">
+          <div className="flex flex-wrap">
+            <div className="md:w-1/2">
+              <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-40 md:leading-tight">
+                Real Success Stories from Web3 Professionals
+              </h2>
+              <p className="pb-12 text-base leading-5">
+                Read success stories of how our platform has helped users
+                connect with verified professionals, access valuable data, and
+                drive their projects forward.
+              </p>
+              <Button
+                as={Link}
+                href={''}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
+              >
+                <span className="text-base font-medium">
+                  Discover More Success Stories
+                </span>
+              </Button>
+            </div>
+            <div className="md:flex md:w-1/2 md:items-center md:justify-center">
+              <div className="ml-5 mt-16 w-[230px] rotate-12 rounded-xl border-t border-white bg-innovate p-5 md:mt-0">
+                <h2 className="pb-6 text-base leading-tight">
+                  RuHow CryptoInnovate Connected with Top Talent
+                </h2>
+                <p className="text-xs text-white/75">
+                  CryptoInnovate used our platform to find and connect with
+                  verified developers and industry experts, resulting in a 30%
+                  increase in project efficiency and faster time-to-market.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
         <section className="py-20">
-          <h2 className="pb-6 text-32 font-medium leading-tight">
+          <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight">
             Discover Leading Organizations in Web3
           </h2>
-          <p className="pb-12 text-base">
+          <p className="pb-12 text-base leading-5 md:w-2/3">
             Gain access to detailed profiles of over 6,500 leading Web3
             organizations. Our data includes comprehensive company summaries,
             URLs, social media handles, documentation, grant information, and
@@ -169,11 +175,11 @@ export const HomePage = () => {
             href={''}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
+            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">Explore Organizations</span>
           </Button>
-          <div className="aspect-h-5 aspect-w-4 relative mt-14">
+          <div className="aspect-h-5 aspect-w-4 relative mt-14 md:aspect-h-9 md:aspect-w-16">
             <Image
               src={'/space.jpg'}
               alt={'placeholder'}
@@ -184,10 +190,10 @@ export const HomePage = () => {
           </div>
         </section>
         <section>
-          <h2 className="pb-6 text-32 font-medium leading-tight">
+          <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-[57px]">
             Explore Top Grant Programs
           </h2>
-          <p className="pb-12 text-base">
+          <p className="pb-12 text-base leading-5 md:w-2/3">
             Access detailed data on over 4,000 top Web3 projects, including
             insights into total value locked (TVL), financial metrics, network
             deployments, and ecosystem details. Utilize advanced sorting and
@@ -199,13 +205,13 @@ export const HomePage = () => {
             href={''}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
+            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">Discover Programs</span>
           </Button>
         </section>
         <section className="py-20">
-          <h2 className="pb-6 text-32 font-medium leading-tight">
+          <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-[57px]">
             Join Now and Start Earning
           </h2>
           <Button
@@ -213,15 +219,14 @@ export const HomePage = () => {
             href={''}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
+            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
-            <span className="text-base font-medium">
+            <span className="text-base font-medium ">
               Join Now and Start Earning
             </span>
           </Button>
         </section>
       </main>
-      <footer>here I guess we will include a footer</footer>
     </div>
   );
 };

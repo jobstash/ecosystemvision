@@ -10,6 +10,11 @@ interface MySwiperProps {
   spaceBetween?: number;
   hasNavigation?: boolean;
   hasPagination?: boolean;
+  breakpoints?: {
+    [width: number]: {
+      slidesPerView: number;
+    };
+  };
 }
 
 export const MySwiper: React.FC<MySwiperProps> = ({
@@ -17,6 +22,7 @@ export const MySwiper: React.FC<MySwiperProps> = ({
   spaceBetween = 20,
   hasNavigation = false,
   hasPagination = false,
+  breakpoints,
 }) => {
   return (
     <Swiper
@@ -26,6 +32,7 @@ export const MySwiper: React.FC<MySwiperProps> = ({
       autoHeight={false}
       navigation={hasNavigation}
       pagination={hasPagination}
+      breakpoints={breakpoints}
     >
       {children}
     </Swiper>
