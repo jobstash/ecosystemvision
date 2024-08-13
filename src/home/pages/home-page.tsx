@@ -8,8 +8,8 @@ import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
 export const HomePage = () => {
   return (
-    <div className="pt-[70px] font-inter-tight">
-      <main className="relative max-w-[1340px] overflow-hidden px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
+    <div className="pt-[70px] font-inter-tight lg:pt-0">
+      <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
         <Image
           src={'/header-image.png'}
           alt={'Ecosystem.vision'}
@@ -20,12 +20,12 @@ export const HomePage = () => {
         />
         <section className="relative z-10">
           <div>
-            <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-11/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64">
+            <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-11/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
               Unlock Earnings and Influence in Web3: Become a Verified
               Professional
             </h1>
             <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
-            <h2 className="w-full pb-12 text-base font-normal leading-5	 lg:w-2/3">
+            <h2 className="w-full pb-12 text-base font-normal leading-5	lg:w-2/3 lg:text-xl">
               Join our exclusive network to connect with industry leaders, earn
               money by being contacted as a verified representative, and stay
               ahead in the Web3 ecosystem. Dynamic contact fees ensure fair
@@ -53,25 +53,33 @@ export const HomePage = () => {
         <FeatureSwiper />
 
         <section className="pt-20 md:pt-40">
-          <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight">
-            Connect, Earn, and Grow with Verified Web3 Professionals
-          </h2>
-          <p className="text-base leading-5 md:w-2/3">
-            Accelerate your projects and earn money by connecting with verified
-            professionals in top Web3 companies. Dynamic pricing ensures fair
-            compensation, while rigorous verification through GitHub activity or
-            professional email guarantees a secure and scam-free environment.
-          </p>
-          <div className="aspect-h-1 aspect-w-1 relative mt-16">
-            <Image
-              src={'/placeholder.png'}
-              alt={'placeholder'}
-              width={65}
-              height={65}
-              className="absolute inset-0 size-full object-cover object-center"
-            />
+          <div className="flex flex-wrap lg:items-center">
+            <div className="md:w-2/5 lg:w-2/5 lg:pr-24">
+              <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight">
+                Connect, Earn, and Grow with Verified Web3 Professionals
+              </h2>
+              <p className="text-base leading-5">
+                Accelerate your projects and earn money by connecting with
+                verified professionals in top Web3 companies. Dynamic pricing
+                ensures fair compensation, while rigorous verification through
+                GitHub activity or professional email guarantees a secure and
+                scam-free environment.
+              </p>
+            </div>
+            <div className="lg:w-3/5">
+              <div className="aspect-h-1 aspect-w-1 relative mt-16 lg:mt-0">
+                <Image
+                  src={'/placeholder.png'}
+                  alt={'placeholder'}
+                  width={65}
+                  height={65}
+                  className="absolute inset-0 size-full object-cover object-center"
+                />
+              </div>
+            </div>
           </div>
-          <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
+
+          <div className="my-10 h-px bg-custom-mobile lg:my-20 lg:bg-custom"></div>
 
           <TestimonialSwiper />
 
@@ -112,7 +120,7 @@ export const HomePage = () => {
               </span>
             </Button>
           </div>
-          <div className="aspect-h-7 aspect-w-5 bottom-0 mt-12 md:-mt-32 lg:absolute lg:inset-x-0 lg:-mx-5 lg:w-screen">
+          <div className="aspect-h-7 aspect-w-5 bottom-0 mt-12 md:-mt-32 ">
             <Image
               src={'/bg-image.jpg'}
               alt={'placeholder'}

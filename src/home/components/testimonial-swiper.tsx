@@ -18,7 +18,7 @@ export const TestimonialSwiper = () => {
       <MySwiper spaceBetween={32} hasNavigation={true} hasPagination={true} breakpoints={breakpoints}>
         <SwiperSlide>
           <div className="flex h-full grow flex-col">
-            <p className="grow pb-8 text-base font-normal leading-5">
+            <p className="grow pb-8 text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">
               &ldquo;Connecting with verified professionals on this platform has
               significantly accelerated our project timelines. The transparency
               and ease of finding reliable contacts are unparalleled.&rdquo;
@@ -43,7 +43,7 @@ export const TestimonialSwiper = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="flex h-full grow flex-col">
-            <p className="grow pb-8 text-base font-normal leading-5">
+            <p className="grow pb-8 text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">
               &quot;The detailed grant impact analysis provided us with
               invaluable insights, helping us secure additional funding and
               drive our project forward.&rdquo;
@@ -66,7 +66,7 @@ export const TestimonialSwiper = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="flex h-full grow flex-col">
-            <p className="grow pb-8 text-base font-normal leading-5">
+            <p className="grow pb-8 text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">
               &quot;The detailed grant impact analysis provided us with
               invaluable insights, helping us secure additional funding and
               drive our project forward.&rdquo;
@@ -89,7 +89,7 @@ export const TestimonialSwiper = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="flex h-full grow flex-col">
-            <p className="grow pb-8 text-base font-normal leading-5">
+            <p className="grow pb-8 text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">
               Explore detailed data on projects and organizations within diverse
               crypto ecosystems and networks, enabling informed decision-making.
             </p>
@@ -111,7 +111,7 @@ export const TestimonialSwiper = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="flex h-full grow flex-col">
-            <p className="grow pb-8 text-base font-normal leading-5">
+            <p className="grow pb-8 text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">
               &ldquo;Connecting with verified professionals on this platform has
               significantly accelerated our project timelines. The transparency
               and ease of finding reliable contacts are unparalleled.&rdquo;
