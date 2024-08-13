@@ -13,9 +13,11 @@ interface Props {
 export const GranteePageLayout = ({ baseHref, grantee, children }: Props) => {
   const projects = grantee.projects;
 
+  // TODO: move this to GrantPageLayout and delete this
+
   return (
     <div className="flex w-max flex-col gap-4 lg:grow">
-      <GranteeCard grantee={grantee} />
+      <GranteeCard />
 
       <ProjectSelections baseHref={baseHref} projects={projects} />
 

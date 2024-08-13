@@ -2,7 +2,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { useGranteeListQuery } from '@/grants/hooks/use-grantee-list-query';
 
-export const useGranteeList = (grantId: string) => {
+export const useGranteeList = (grantId?: string) => {
   const { data, error, fetchNextPage, hasNextPage, isPending, isFetching } =
     useGranteeListQuery(grantId);
 
