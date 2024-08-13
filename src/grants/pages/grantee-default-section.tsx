@@ -1,10 +1,12 @@
-import { Grantee } from '@/grants/core/schemas';
+import { Grantee, GranteeProjectStat } from '@/grants/core/schemas';
+import { GranteeProjectStats } from '@/grants/components/grantee-project/project-stats';
 
 import { GranteePageLayout } from '@/grants/pages/grantee-page-layout';
 
 interface Props {
   grantId: string;
   grantee: Grantee;
+  stats: GranteeProjectStat[];
 }
 
 /**
@@ -14,7 +16,7 @@ interface Props {
  * - /grants/:grantId/grantees/:granteeId
  * - /grants/:grantId/grantees/:granteeId/projects
  * */
-export const GranteeDefaultSection = ({ grantId, grantee }: Props) => {
+export const GranteeDefaultSection = ({ grantId, grantee, stats }: Props) => {
   // TODO: JOB-683
   // TODO: JOB-684
 
@@ -22,7 +24,7 @@ export const GranteeDefaultSection = ({ grantId, grantee }: Props) => {
 
   return (
     <GranteePageLayout baseHref={baseHref} grantee={grantee}>
-      <p>TODO: IDK</p>
+      <GranteeProjectStats stats={stats} />
     </GranteePageLayout>
   );
 };

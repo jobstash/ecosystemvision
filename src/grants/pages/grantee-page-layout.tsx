@@ -6,6 +6,7 @@ import { ProjectTabSelection } from '@/grants/components/grantee-project/project
 interface Props {
   baseHref: string;
   grantee: Grantee;
+  // TODO: Project
   children: React.ReactNode;
 }
 
