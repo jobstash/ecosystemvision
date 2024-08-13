@@ -11,7 +11,6 @@ interface Props {
 
 export const GranteePageLayout = ({ baseHref, grantee, children }: Props) => {
   const projects = grantee.projects;
-  const hasProject = projects.length > 0;
 
   return (
     <div className="flex w-max flex-col gap-4 lg:grow">
@@ -19,9 +18,7 @@ export const GranteePageLayout = ({ baseHref, grantee, children }: Props) => {
 
       <ProjectSelections baseHref={baseHref} projects={projects} />
 
-      {hasProject && (
-        <ProjectTabSelection defaultId={projects[0]} baseHref={baseHref} />
-      )}
+      <ProjectTabSelection defaultId={projects[0]} baseHref={baseHref} />
 
       {children}
     </div>

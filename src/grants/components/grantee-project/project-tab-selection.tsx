@@ -21,7 +21,7 @@ export const ProjectTabSelection = ({ defaultId, baseHref }: Props) => {
   const { data } = useGranteeProject(projectId);
   if (!data) return <Skeleton className={cn(SHARED_CLASSNAME, 'h-14')} />;
 
-  const activeTab = params.tab;
+  const activeTab = params.tab || data.data.tabs[0].tab;
   if (!activeTab) return null;
 
   const tabs = data.data.tabs.map((t) => ({
