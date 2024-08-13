@@ -6,6 +6,7 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 import { useEffect, useReducer } from 'react';
+import { grotesk, interTight } from '@/shared/core/fonts';
 
 // Initialize MSW
 initialize({
@@ -68,7 +69,7 @@ const ClearReactQuery = () => {
 
 const decorators: Preview['decorators'] = [
   (Story) => (
-    <div className="min-h-screen">
+    <div className={`${interTight.variable} ${grotesk.variable}`}>
       <Providers>
         <Story />
         <ClearReactQuery />
