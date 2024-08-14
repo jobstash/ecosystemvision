@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useRef } from 'react';
 
 import { cn } from '@/shared/utils/cn';
 
@@ -12,22 +13,35 @@ interface Props {
   projectId: string;
   href: string;
   isActiveBypass: boolean;
+  showError: () => void;
 }
 
 export const ProjectSelection = ({
   projectId,
   href,
   isActiveBypass,
+  showError,
 }: Props) => {
   const { projectId: paramsProjectId } = useParams() as { projectId: string };
 
-  const { data } = useGranteeProject(projectId);
+  const { data, error, isLoading } = useGranteeProject(projectId);
 
-  if (!data) {
+  const errorRef = useRef(false);
+
+  if (isLoading) {
     return <ProjectSelectionItemSkeleton />;
   }
 
+  // Parent component will handle error display
+  if (error?.message && !errorRef.current) {
+    errorRef.current = true;
+    showError();
+    return null;
+  }
+
   const isActive = isActiveBypass || paramsProjectId === projectId;
+
+  if (!data) return null;
 
   return (
     <Link

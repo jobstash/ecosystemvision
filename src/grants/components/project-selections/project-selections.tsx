@@ -1,6 +1,9 @@
 'use client';
 
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
+
+import { errMsg } from '@/shared/core/errors';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { ProjectSelectionItemSkeleton } from '@/grants/components/project-selections/project-selection-item-skeleton';
@@ -15,6 +18,9 @@ export const ProjectSelections = () => {
     granteeId?: string;
   };
 
+  const [hasError, setHasError] = useState(false);
+  const showError = () => setHasError(true);
+
   const { granteeData, isLoading, errorMessage } = useGranteeFetch(
     grantId,
     granteeId,
@@ -27,6 +33,10 @@ export const ProjectSelections = () => {
         <ProjectSelectionItemSkeleton />
       </div>
     );
+  }
+
+  if (hasError) {
+    return <p>Error: {errMsg.INTERNAL}</p>;
   }
 
   if (errorMessage) {
@@ -47,6 +57,7 @@ export const ProjectSelections = () => {
           projectId={projectId}
           href={`${baseHref}/${projectId}`}
           isActiveBypass={!granteeId && index === 0}
+          showError={showError}
         />
       ))}
     </div>
