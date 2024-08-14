@@ -19,6 +19,9 @@ export const grantQueryKeys = {
 
     return [...grantQueryKeys.all, 'grantees', grantId, searchParams] as const;
   },
+  grantee: (granteeId: string) => {
+    return [...grantQueryKeys.all, 'grantee', granteeId] as const;
+  },
   project: (projectId: string) =>
     [...grantQueryKeys.all, 'project', projectId] as const,
 } as const;

@@ -9,12 +9,13 @@ import {
 } from '@/shared/testutils/misc';
 
 import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { Grantee } from '@/grants/core/schemas';
 
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
 export const mockGranteeQuery = (
   result: MockQueryResult,
-  options?: MswOptions,
+  options?: MswOptions & { data?: Grantee },
 ) =>
   http.get(
     `${GRANT_QUERY_URLS.GRANTEE_DETAILS}/:granteeId`,
@@ -27,7 +28,7 @@ export const mockGranteeQuery = (
       const successResponse = HttpResponse.json({
         success: true,
         message: 'Grantee retrieved successfully',
-        data: fakeGrantee({ id: granteeId }),
+        data: options?.data || fakeGrantee({ id: granteeId }),
       });
 
       const internalErrorResponse = HttpResponse.json(
