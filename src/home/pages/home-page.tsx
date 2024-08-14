@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { Button } from '@nextui-org/react';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
+import { Footer } from '@/home/components/footer';
+import { FlashIcon } from '@/home/components/icons/flash';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
 export const HomePage = () => {
@@ -13,7 +15,7 @@ export const HomePage = () => {
         <Image
           src={'/header-image.png'}
           alt={'Ecosystem.vision'}
-          className="absolute right-0 top-0 z-0 w-[730px]  md:-translate-y-1/3 md:translate-x-1/3"
+          className="absolute right-0 top-0 z-0 w-[730px] max-w-fit -translate-y-1/2 translate-x-1/2  md:-translate-y-1/3 md:translate-x-1/3"
           width={728}
           height={686}
           priority
@@ -43,7 +45,7 @@ export const HomePage = () => {
             </span>
           </Button>
         </section>
-        <section className="relative z-10 -ml-24 flex rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 md:text-4xl lg:text-5xl">
+        <section className="relative z-10 ml-[-300px] flex w-[200vw] rotate-[-4deg] whitespace-nowrap pb-12 pt-14 text-2xl uppercase tracking-tight text-white/10 md:text-4xl lg:text-5xl">
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
@@ -66,7 +68,7 @@ export const HomePage = () => {
                 scam-free environment.
               </p>
             </div>
-            <div className="lg:w-3/5">
+            <div className="w-full lg:w-3/5">
               <div className="aspect-h-1 aspect-w-1 relative mt-16 lg:mt-0">
                 <Image
                   src={'/placeholder.png'}
@@ -96,7 +98,7 @@ export const HomePage = () => {
           </Button>
           <div className="mt-20 h-px bg-custom-mobile lg:bg-custom"></div>
         </section>
-        <section className="relative pt-20 md:pt-40">
+        <section className="relative pt-16 md:pt-20">
           <div className="relative z-10">
             <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight">
               Grant Impact Analysis: A Collaboration with Ecosystem Vision and
@@ -154,11 +156,14 @@ export const HomePage = () => {
               </Button>
             </div>
             <div className="md:flex md:w-1/2 md:items-center md:justify-center">
-              <div className="ml-5 mt-16 w-[230px] rotate-12 rounded-xl border-t border-white bg-innovate p-5 md:mt-0">
-                <h2 className="pb-6 text-base leading-tight">
+              <div className="ml-5 mt-16 w-[220px] rotate-12 rounded-xl border-t border-white bg-innovate p-5 md:mt-0">
+                <div className="mb-3 flex size-8 items-center justify-center rounded-md border-t bg-[#17171A]">
+                  <FlashIcon />
+                </div>
+                <h2 className="pb-6 text-base leading-tight text-[#EAEAEA]">
                   RuHow CryptoInnovate Connected with Top Talent
                 </h2>
-                <p className="text-xs text-white/75">
+                <p className="pb-4 text-xs text-white/75">
                   CryptoInnovate used our platform to find and connect with
                   verified developers and industry experts, resulting in a 30%
                   increase in project efficiency and faster time-to-market.
@@ -218,23 +223,36 @@ export const HomePage = () => {
             <span className="text-base font-medium">Discover Programs</span>
           </Button>
         </section>
-        <section className="py-20">
-          <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-[57px]">
-            Join Now and Start Earning
-          </h2>
-          <Button
-            as={Link}
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
-          >
-            <span className="text-base font-medium ">
+        <section className="relative my-32 text-center">
+          <div className='absolute inset-0 flex items-center justify-center'>
+            <Image
+              src={'/header-image.png'}
+              alt={'Ecosystem.vision'}
+              className=""
+              width={224}
+              height={209}
+              priority
+            />
+          </div>
+          <div className='relative z-10'>
+            <h2 className="mx-auto w-2/3 pb-3 font-grotesk text-2xl font-medium leading-8 tracking-tighter antialiased md:text-48 md:leading-[57px]">
               Join Now and Start Earning
-            </span>
-          </Button>
+            </h2>
+            <Button
+              as={Link}
+              href={''}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto h-auto w-full max-w-[140px] rounded bg-white py-1 font-medium text-black"
+            >
+              <span className="text-[8px] font-medium ">
+                Join Now and Start Earning
+              </span>
+            </Button>
+          </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
