@@ -5,8 +5,7 @@ import { useParams } from 'next/navigation';
 
 import { cn } from '@nextui-org/react';
 
-import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
-import { useGranteeProject } from '@/grants/hooks/use-grantee-project';
+import { useGranteeProjectFetch } from '@/grants/hooks/use-grantee-project-fetch';
 
 const SHARED_CLASSNAME = 'flex w-full gap-4 p-4';
 
@@ -18,17 +17,10 @@ export const ProjectTabSelection = () => {
     tab?: string;
   };
 
-  const { granteeData, isLoading, errorMessage } = useGranteeFetch(
-    grantId,
-    granteeId,
-  );
+  const { granteeData, projectData, isLoading, errorMessage } =
+    useGranteeProjectFetch({ grantId, granteeId, projectId });
 
-  const defaultProjectId = granteeData?.data.projects[0];
-  const { data: projectData, isLoading: isLoadingProject } = useGranteeProject(
-    projectId || defaultProjectId,
-  );
-
-  if (isLoading || isLoadingProject) {
+  if (isLoading) {
     return <p>{'TODO: Loading UI <ProjectTabSelection />'}</p>;
   }
 
