@@ -8,8 +8,7 @@ import { Button } from '@nextui-org/react';
 import { getWebsiteText } from '@/shared/utils/get-website-text';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
-import { useGranteeDetails } from '@/grants/hooks/use-grantee-details';
-import { useGranteeListQuery } from '@/grants/hooks/use-grantee-list-query';
+import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { GranteeFundingItems } from '@/grants/components/ui/grantee-funding-items';
 import { GranteeLogoTitle } from '@/grants/components/ui/grantee-logo-title';
 
@@ -19,30 +18,16 @@ export const GranteeCard = () => {
     granteeId?: string;
   };
 
-  // Determine if the grantee list fetch should be enabled based on the presence of granteeId
-  const shouldFetchGranteeList = !granteeId;
+  const { granteeData, isLoading, errorMessage } = useGranteeFetch(
+    grantId,
+    granteeId,
+  );
 
-  const {
-    data: granteesData,
-    isLoading: isGranteesLoading,
-    error: granteesError,
-  } = useGranteeListQuery(grantId, shouldFetchGranteeList);
-  const granteeItem = granteesData?.pages.flatMap((page) => page.data).at(0);
-
-  const {
-    data: granteeData,
-    isLoading: isGranteeLoading,
-    error: granteeError,
-  } = useGranteeDetails(granteeId ?? granteeItem?.id);
-
-  // Render loading state
-  if (isGranteesLoading || isGranteeLoading) {
-    return <p>Loading...</p>;
+  if (isLoading) {
+    return <p>{'Loading <GranteeCard />...'}</p>;
   }
 
-  // Handle errors
-  if (granteesError || granteeError) {
-    const errorMessage = granteesError?.message || granteeError?.message;
+  if (errorMessage) {
     return <p>Error: {errorMessage}</p>;
   }
 
