@@ -13,9 +13,10 @@ import { ProjectSelection } from './project-selection';
 const WRAPPER_CLASSNAME = 'flex w-full gap-3 rounded-20 bg-white/5 p-3';
 
 export const ProjectSelections = () => {
-  const { grantId, granteeId } = useParams() as {
+  const { grantId, granteeId, projectId } = useParams() as {
     grantId: string;
     granteeId?: string;
+    projectId?: string;
   };
 
   const [hasError, setHasError] = useState(false);
@@ -51,12 +52,12 @@ export const ProjectSelections = () => {
 
   return (
     <div className={WRAPPER_CLASSNAME}>
-      {granteeData.data.projects.map((projectId, index) => (
+      {granteeData.data.projects.map((id, index) => (
         <ProjectSelection
-          key={projectId}
-          projectId={projectId}
-          href={`${baseHref}/${projectId}`}
-          isActiveBypass={!granteeId && index === 0}
+          key={id}
+          projectId={id}
+          href={`${baseHref}/${id}`}
+          isActiveBypass={!projectId && index === 0}
           showError={showError}
         />
       ))}
