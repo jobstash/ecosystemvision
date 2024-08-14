@@ -9,10 +9,14 @@ import {
 } from '@/shared/testutils/misc';
 
 import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { Grant } from '@/grants/core/schemas';
 
 import { fakeGrant } from '@/grants/testutils/fake-grant';
 
-export const mockGrantQuery = (result: MockQueryResult, options?: MswOptions) =>
+export const mockGrantQuery = (
+  result: MockQueryResult,
+  options?: MswOptions & { data?: Grant },
+) =>
   http.get(`${GRANT_QUERY_URLS.GRANT_DETAILS}/:grantId`, async ({ params }) => {
     const { networkDelay } = options || DEFAULT_MSW_OPTIONS;
     await delay(networkDelay);
@@ -22,7 +26,7 @@ export const mockGrantQuery = (result: MockQueryResult, options?: MswOptions) =>
     const successResponse = HttpResponse.json({
       success: true,
       message: 'Grant retrieved successfully',
-      data: fakeGrant({ id: grantId }),
+      data: options?.data || fakeGrant({ id: grantId }),
     });
 
     const internalErrorResponse = HttpResponse.json(

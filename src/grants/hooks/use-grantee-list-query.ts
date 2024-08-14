@@ -6,7 +6,7 @@ import { GrantQueryKeys, grantQueryKeys } from '@/grants/core/query-keys';
 import { GranteeListQueryPage } from '@/grants/core/schemas';
 import { getGranteesList } from '@/grants/data/get-grantees-list';
 
-export const useGranteeListQuery = (grantId: string) => {
+export const useGranteeListQuery = (grantId?: string, enabled = true) => {
   // TODO: filter search params string
   const searchParams = '';
 
@@ -17,14 +17,15 @@ export const useGranteeListQuery = (grantId: string) => {
     ReturnType<GrantQueryKeys['grantees']>,
     number
   >({
-    queryKey: grantQueryKeys.grantees(grantId, searchParams),
+    queryKey: grantQueryKeys.grantees(grantId!, searchParams),
     queryFn: async ({ pageParam }) =>
-      getGranteesList({ page: pageParam, grantId, searchParams }),
+      getGranteesList({ page: pageParam, grantId: grantId!, searchParams }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
       typeof page === 'number' && page > 0 && data.length > 0
         ? page + 1
         : undefined,
     staleTime: QUERY_STALETIME.DEFAULT,
+    enabled: !!grantId && enabled,
   });
 };
