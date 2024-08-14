@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { errMsg } from '@/shared/core/errors';
 
-import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
+import { useGranteeProjectFetch } from '@/grants/hooks/use-grantee-project-fetch';
 import { ProjectSelectionItemSkeleton } from '@/grants/components/project-selections/project-selection-item-skeleton';
 
 import { ProjectSelection } from './project-selection';
@@ -22,10 +22,12 @@ export const ProjectSelections = () => {
   const [hasError, setHasError] = useState(false);
   const showError = () => setHasError(true);
 
-  const { granteeData, isLoading, errorMessage } = useGranteeFetch(
-    grantId,
-    granteeId,
-  );
+  const { granteeData, projectData, isLoading, errorMessage } =
+    useGranteeProjectFetch({
+      grantId,
+      granteeId,
+      projectId,
+    });
 
   if (isLoading) {
     return (
@@ -40,12 +42,12 @@ export const ProjectSelections = () => {
     return <p>Error: {errMsg.INTERNAL}</p>;
   }
 
-  if (errorMessage) {
-    return <p>Error: {errorMessage}</p>;
-  }
+  // This component is stacked with others. Top most component renders the error.
+  if (errorMessage) return null;
+  if (!granteeData?.data) return null;
 
-  if (!granteeData?.data) {
-    return <p>TODO: No Grantee UI</p>;
+  if (!projectData?.data) {
+    return <p>TODO: No Grantee Project UI</p>;
   }
 
   const baseHref = `/grants/${grantId}/grantees/${granteeData.data.id}/projects`;

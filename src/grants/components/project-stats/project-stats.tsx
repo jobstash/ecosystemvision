@@ -20,17 +20,10 @@ export const GranteeProjectStats = () => {
     return <p>{'TODO: Loading UI <ProjectStats />'}</p>;
   }
 
-  if (errorMessage) {
-    return <p>Error: {errorMessage}</p>;
-  }
-
-  if (!granteeData?.data) {
-    return <p>TODO: No Grantee UI</p>;
-  }
-
-  if (!projectData?.data) {
-    return <p>TODO: No Grantee Project UI</p>;
-  }
+  // This component is stacked with others. Top most component renders the error.
+  if (errorMessage) return null;
+  if (!granteeData?.data) return null;
+  if (!projectData?.data) return null;
 
   // If for some reason the project has no tabs, return null
   if (projectData.data.tabs.length === 0) return null;

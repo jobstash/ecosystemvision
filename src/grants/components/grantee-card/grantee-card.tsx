@@ -28,7 +28,7 @@ export const GranteeCard = () => {
   }
 
   if (errorMessage) {
-    return <p>Error: {errorMessage}</p>;
+    return <p>{`TODO: <GranteeCardErrorUI /> "${errorMessage}"`}</p>;
   }
 
   if (!granteeData?.data) {

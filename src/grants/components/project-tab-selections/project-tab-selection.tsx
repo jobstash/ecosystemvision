@@ -24,17 +24,10 @@ export const ProjectTabSelection = () => {
     return <p>{'TODO: Loading UI <ProjectTabSelection />'}</p>;
   }
 
-  if (errorMessage) {
-    return <p>Error: {errorMessage}</p>;
-  }
-
-  if (!granteeData?.data) {
-    return <p>TODO: No Grantee UI</p>;
-  }
-
-  if (!projectData?.data) {
-    return <p>TODO: No Grantee Project UI</p>;
-  }
+  // This component is stacked with others. Top most component renders the error.
+  if (errorMessage) return null;
+  if (!granteeData?.data) return null;
+  if (!projectData?.data) return null;
 
   // If for some reason the project has no tabs, return null
   if (projectData.data.tabs.length === 0) return null;
@@ -59,7 +52,7 @@ export const ProjectTabSelection = () => {
           prefetch={true}
           className={cn('flex grow justify-center rounded-lg px-4 py-4', {
             'bg-white/5': activeTab !== tab,
-            'bg-primary': activeTab === tab,
+            'is-active': activeTab === tab,
           })}
         >
           {label}
