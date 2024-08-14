@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@nextui-org/react';
+import Spline from '@splinetool/react-spline/next';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
@@ -12,14 +13,15 @@ export const HomePage = () => {
   return (
     <div className="pt-[70px] font-inter-tight lg:pt-0">
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
-        <Image
+        {/* <Image
           src={'/header-image.png'}
           alt={'Ecosystem.vision'}
           className="absolute right-0 top-0 z-0 w-[730px] max-w-fit -translate-y-1/2 translate-x-1/2  md:-translate-y-1/3 md:translate-x-1/3"
           width={728}
           height={686}
           priority
-        />
+        /> */}
+        <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
         <section className="relative z-10">
           <div>
             <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-11/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
@@ -223,7 +225,7 @@ export const HomePage = () => {
           </Button>
         </section>
         <section className="relative my-32 text-center md:my-48">
-          <div className='absolute inset-0 flex items-center justify-center'>
+          <div className="absolute inset-0 flex items-center justify-center">
             <Image
               src={'/header-image.png'}
               alt={'Ecosystem.vision'}
@@ -233,7 +235,7 @@ export const HomePage = () => {
               priority
             />
           </div>
-          <div className='relative z-10'>
+          <div className="relative z-10">
             <h2 className="mx-auto w-2/3 pb-3 font-grotesk text-2xl font-medium leading-8 tracking-tighter antialiased md:pb-6 md:text-48 md:leading-[57px]">
               Join Now and Start Earning
             </h2>
