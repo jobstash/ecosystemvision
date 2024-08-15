@@ -18,7 +18,7 @@ export const Nav = () => {
       </FullscreenWrapper>
 
       {/* Desktop Sidebar Nav */}
-      <div className="fixed left-0 top-0 z-50 hidden h-full w-[264px] shrink-0 flex-col p-8 lg:flex">
+      <div className="fixed left-0 top-0 z-50 hidden h-full w-[264px] shrink-0 flex-col bg-[#070708] p-8 lg:flex">
         <NavSections />
       </div>
     </nav>
