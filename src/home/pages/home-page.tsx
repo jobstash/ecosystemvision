@@ -11,7 +11,7 @@ import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 export const HomePage = () => {
   return (
     <div className="pt-[70px] font-inter-tight lg:pt-0">
-      <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
+      <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 md:pt-24 lg:px-7 lg:pt-20">
         <Image
           src={'/header-image.png'}
           alt={'Ecosystem.vision'}
@@ -26,8 +26,8 @@ export const HomePage = () => {
               Unlock Earnings and Influence in Web3: Become a Verified
               Professional
             </h1>
-            <div className="my-10 h-px bg-custom-mobile lg:bg-custom"></div>
-            <h2 className="w-full pb-12 text-base font-normal leading-5	lg:w-2/3 lg:text-xl">
+            <div className="my-10 h-px bg-custom"></div>
+            <h2 className="w-full pb-12 text-base font-normal leading-5 md:w-10/12 	lg:w-2/3 lg:text-xl">
               Join our exclusive network to connect with industry leaders, earn
               money by being contacted as a verified representative, and stay
               ahead in the Web3 ecosystem. Dynamic contact fees ensure fair
@@ -45,7 +45,7 @@ export const HomePage = () => {
             </span>
           </Button>
         </section>
-        <section className="relative z-10 ml-[-300px] flex w-[200vw] rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 md:text-4xl lg:text-5xl">
+        <section className="relative z-10 ml-[-300px] flex w-[200vw] rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 md:pb-20 md:text-4xl lg:pb-24 lg:pt-0 lg:text-5xl">
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
           ecosystem.vision • ecosystem.vision • ecosystem.vision •
@@ -53,13 +53,13 @@ export const HomePage = () => {
 
         <FeatureSwiper />
 
-        <section className="pt-20 md:pt-40">
+        <section className="pt-20 md:pt-32">
           <div className="flex flex-wrap lg:items-center">
             <div className="md:w-3/5 lg:w-2/5 lg:pr-24">
-              <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight">
+              <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight lg:text-48">
                 Connect, Earn, and Grow with Verified Web3 Professionals
               </h2>
-              <p className="text-base leading-5">
+              <p className="text-base leading-5 lg:text-xl lg:leading-tight">
                 Accelerate your projects and earn money by connecting with
                 verified professionals in top Web3 companies. Dynamic pricing
                 ensures fair compensation, while rigorous verification through
@@ -72,15 +72,15 @@ export const HomePage = () => {
                 <Image
                   src={'/placeholder.png'}
                   alt={'placeholder'}
-                  width={65}
-                  height={65}
+                  width={749}
+                  height={776}
                   className="absolute inset-0 size-full object-cover object-center"
                 />
               </div>
             </div>
           </div>
 
-          <div className="my-10 h-px bg-custom-mobile lg:my-20 lg:bg-custom"></div>
+          <div className="my-10 h-px bg-custom-mobile md:my-14 lg:my-20 lg:bg-custom"></div>
 
           <TestimonialSwiper />
 
@@ -99,11 +99,11 @@ export const HomePage = () => {
         </section>
         <section className="relative pt-16 md:pt-20">
           <div className="relative z-10">
-            <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight">
+            <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight lg:text-48">
               Grant Impact Analysis: A Collaboration with Ecosystem Vision and
               the Cartographer Syndicates
             </h2>
-            <p className="pb-12 text-base leading-5 md:w-2/3">
+            <p className="pb-12 text-base leading-5 md:w-10/12 lg:w-2/3 lg:text-xl lg:leading-tight">
               Gain deep insights into the effectiveness of grant programs with
               our detailed metrics and analyses. Our collaboration with
               ThankArb, Ecosystem Vision, and the Cartographer Syndicate
@@ -125,8 +125,8 @@ export const HomePage = () => {
             <Image
               src={'/bg-image.jpg'}
               alt={'placeholder'}
-              width={728}
-              height={686}
+              width={1599}
+              height={1521}
               className="absolute inset-0 object-cover object-bottom	"
             />
           </div>
@@ -134,10 +134,10 @@ export const HomePage = () => {
         <section className="relative z-10 pt-20 md:pt-40">
           <div className="flex flex-wrap">
             <div className="md:w-1/2">
-              <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-40 md:leading-tight">
+              <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-40 md:leading-tight lg:text-48">
                 Real Success Stories from Web3 Professionals
               </h2>
-              <p className="pb-12 text-base leading-5">
+              <p className="pb-12 text-base leading-5 lg:text-xl lg:leading-tight">
                 Read success stories of how our platform has helped users
                 connect with verified professionals, access valuable data, and
                 drive their projects forward.
@@ -171,59 +171,76 @@ export const HomePage = () => {
             </div>
           </div>
         </section>
-        <section className="py-20 md:pt-40">
-          <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight">
-            Discover Leading Organizations in Web3
-          </h2>
-          <p className="pb-12 text-base leading-5 ">
-            Gain access to detailed profiles of over 6,500 leading Web3
-            organizations. Our data includes comprehensive company summaries,
-            URLs, social media handles, documentation, grant information, and
-            venture capital investments. Sort by recent funding, industry, and
-            more to discover the perfect partners and opportunities.
-          </p>
-          <Button
-            as={Link}
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
-          >
-            <span className="text-base font-medium">Explore Organizations</span>
-          </Button>
-          <div className="aspect-h-5 aspect-w-4 relative mt-14 md:aspect-h-9 md:aspect-w-16 md:mt-40">
+        <section className="pb-20 pt-28 md:pb-32 lg:flex lg:flex-wrap lg:items-start lg:pt-40">
+          <div className="hidden lg:flex lg:w-1/3">
+            <div className="aspect-h-1 aspect-w-1 relative w-full">
+              <Image
+                src={'/app.png'}
+                alt={'app'}
+                width={403}
+                height={452}
+                className="absolute inset-0 object-contain object-center"
+              />
+            </div>
+          </div>
+          <div className="lg:w-2/3 lg:px-14">
+            <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight lg:text-48">
+              Discover Leading Organizations in Web3
+            </h2>
+            <p className="pb-12 text-base leading-5 lg:text-xl lg:leading-tight">
+              Gain access to detailed profiles of over 6,500 leading Web3
+              organizations. Our data includes comprehensive company summaries,
+              URLs, social media handles, documentation, grant information, and
+              venture capital investments. Sort by recent funding, industry, and
+              more to discover the perfect partners and opportunities.
+            </p>
+            <Button
+              as={Link}
+              href={''}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
+            >
+              <span className="text-base font-medium">
+                Explore Organizations
+              </span>
+            </Button>
+          </div>
+        </section>
+        <section className="relative">
+          <div className="aspect-h-5 aspect-w-4 relative mb-16 md:aspect-h-11 md:aspect-w-16 lg:ml-[-264px] lg:w-screen">
             <Image
               src={'/space.jpg'}
               alt={'placeholder'}
-              width={728}
-              height={686}
+              width={1595}
+              height={839}
               className="absolute inset-0 object-cover object-center"
             />
           </div>
+          <div className='lg:lefft-0 lg:absolute lg:top-0 lg:w-1/3 lg:translate-y-1/2'>
+            <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-tight lg:text-48">
+              Explore Top Grant Programs
+            </h2>
+            <p className="pb-12 text-base leading-5 lg:text-xl lg:leading-tight">
+              Access detailed data on over 4,000 top Web3 projects, including
+              insights into total value locked (TVL), financial metrics, network
+              deployments, and ecosystem details. Utilize advanced sorting and
+              filtering to identify high-impact projects and understand their
+              significance within the Web3 landscape@/home
+            </p>
+            <Button
+              as={Link}
+              href={''}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
+            >
+              <span className="text-base font-medium">Discover Programs</span>
+            </Button>
+          </div>
         </section>
-        <section>
-          <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-[57px]">
-            Explore Top Grant Programs
-          </h2>
-          <p className="pb-12 text-base leading-5">
-            Access detailed data on over 4,000 top Web3 projects, including
-            insights into total value locked (TVL), financial metrics, network
-            deployments, and ecosystem details. Utilize advanced sorting and
-            filtering to identify high-impact projects and understand their
-            significance within the Web3 landscape@/home
-          </p>
-          <Button
-            as={Link}
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
-          >
-            <span className="text-base font-medium">Discover Programs</span>
-          </Button>
-        </section>
-        <section className="relative my-32 text-center md:my-48">
-          <div className='absolute inset-0 flex items-center justify-center'>
+        <section className="relative my-32 text-center md:mb-64 md:mt-48 lg:mb-72 lg:mt-64">
+          <div className="absolute inset-0 flex items-center justify-center">
             <Image
               src={'/header-image.png'}
               alt={'Ecosystem.vision'}
@@ -233,7 +250,7 @@ export const HomePage = () => {
               priority
             />
           </div>
-          <div className='relative z-10'>
+          <div className="relative z-10">
             <h2 className="mx-auto w-2/3 pb-3 font-grotesk text-2xl font-medium leading-8 tracking-tighter antialiased md:pb-6 md:text-48 md:leading-[57px]">
               Join Now and Start Earning
             </h2>
