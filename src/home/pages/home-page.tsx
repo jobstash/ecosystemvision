@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@nextui-org/react';
+import Spline from '@splinetool/react-spline/next';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
@@ -12,6 +13,8 @@ import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 export const HomePage = () => {
   return (
     <div className="pt-[70px] font-inter-tight lg:pt-0">
+      <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
+        {/* <Image
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 md:pt-24 lg:px-7 lg:pt-20">
         <Image
           src={'/header-image.png'}
@@ -20,7 +23,8 @@ export const HomePage = () => {
           width={728}
           height={686}
           priority
-        />
+        /> */}
+        <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
         <section className="relative z-10">
           <div>
             <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-11/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
@@ -238,7 +242,28 @@ export const HomePage = () => {
             </Button>
           </div>
         </section>
-        <section className="relative my-32 text-center md:mb-64 md:mt-48 lg:mb-72 lg:mt-64">
+        <section>
+          <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-[57px]">
+            Explore Top Grant Programs
+          </h2>
+          <p className="pb-12 text-base leading-5">
+            Access detailed data on over 4,000 top Web3 projects, including
+            insights into total value locked (TVL), financial metrics, network
+            deployments, and ecosystem details. Utilize advanced sorting and
+            filtering to identify high-impact projects and understand their
+            significance within the Web3 landscape@/home
+          </p>
+          <Button
+            as={Link}
+            href={''}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
+          >
+            <span className="text-base font-medium">Discover Programs</span>
+          </Button>
+        </section>
+        <section className="relative my-32 text-center md:my-48">
           <div className="absolute inset-0 flex items-center justify-center">
             <Image
               src={'/header-image.png'}
