@@ -29,7 +29,7 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
-    className={`bg-[#0D0D0D] ${interTight.variable} ${grotesk.variable}`}
+    className={`bg-[#070708] ${interTight.variable} ${grotesk.variable}`}
   >
     <body className={inter.className}>
       <NextUIProvider>

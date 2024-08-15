@@ -19,7 +19,7 @@ export const MenuButton = ({ testId }: Props) => {
   return (
     <Button
       isIconOnly
-      className="bg-transparent lg:hidden"
+      className="-mr-2 bg-transparent lg:hidden"
       onClick={openNav}
       data-testid={testId}
     >
