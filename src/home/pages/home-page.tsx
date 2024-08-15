@@ -1,8 +1,9 @@
+import dynamic from 'next/dynamic'
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { Suspense } from 'react';
 
 import { Button } from '@nextui-org/react';
-import Spline from '@splinetool/react-spline/next';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
@@ -10,24 +11,23 @@ import { FlashIcon } from '@/home/components/icons/flash';
 import { Marquee } from '@/home/components/marquee';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: true,
+  loading: () => <p>Loading ...</p>,
+});
+
 export const HomePage = () => {
   return (
     <div className="pt-[70px] font-inter-tight lg:pt-0">
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
-        {/* <Image
-      <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 md:pt-24 lg:px-7 lg:pt-20">
-        <Image
-          src={'/header-image.png'}
-          alt={'Ecosystem.vision'}
-          className="absolute right-0 top-0 z-0 w-[730px] max-w-fit -translate-y-1/2 translate-x-1/2  md:-translate-y-1/3 md:translate-x-1/3"
-          width={728}
-          height={686}
-          priority
-        /> */}
-        <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
-        <section className="relative z-10">
+        <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:translate-x-1/3 lg:translate-y-[-40%] ">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
+          </Suspense>
+        </div>
+        <section className="pointer-events-none relative z-10 ">
           <div>
-            <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-11/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
+            <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-9/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
               Unlock Earnings and Influence in Web3: Become a Verified
               Professional
             </h1>
@@ -50,7 +50,7 @@ export const HomePage = () => {
             </span>
           </Button>
         </section>
-        <section className="relative z-10  flex  rotate-[-4deg]  py-12 text-2xl uppercase tracking-tight text-white/10 md:pb-20 md:text-4xl lg:pb-12 lg:text-5xl">
+        <section className="relative z-10  -ml-20  flex rotate-[-4deg]  py-12 text-2xl uppercase tracking-tight text-white/10 md:pb-20 md:text-4xl lg:pb-12 lg:text-5xl">
           <Marquee />
         </section>
 
@@ -220,7 +220,7 @@ export const HomePage = () => {
               className="absolute inset-0 object-cover object-center"
             />
           </div>
-          <div className='lg:lefft-0 lg:absolute lg:top-0 lg:w-1/3 lg:translate-y-1/2'>
+          <div className="lg:lefft-0 lg:absolute lg:top-0 lg:w-1/3 lg:translate-y-1/2">
             <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-tight lg:text-48">
               Explore Top Grant Programs
             </h2>
