@@ -1,10 +1,24 @@
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { getQueryClient } from '@/shared/utils/get-query-client';
+
+import { grantQueryKeys } from '@/grants/core/query-keys';
+import { getGrantDetails } from '@/grants/data/get-grant-details';
 import { useGrantListQuery } from '@/grants/hooks/use-grant-list-query';
 
 export const useGrantList = () => {
-  const { data, error, fetchNextPage, hasNextPage, isPending, isFetching } =
-    useGrantListQuery();
+  const queryClient = getQueryClient();
+
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isPending,
+    isFetching,
+    isSuccess,
+  } = useGrantListQuery();
 
   // Next page fetch on scroll
   const { ref: inViewRef } = useInView({
@@ -12,6 +26,20 @@ export const useGrantList = () => {
     onChange: (inView) => {
       if (inView && !error && !isFetching) fetchNextPage();
     },
+  });
+
+  // Prefetch grant details
+  useEffect(() => {
+    if (isSuccess && data) {
+      const items = data.pages.flatMap((d) => d.data);
+      for (const item of items) {
+        const { id } = item;
+        queryClient.prefetchQuery({
+          queryKey: grantQueryKeys.details(id),
+          queryFn: () => getGrantDetails(id),
+        });
+      }
+    }
   });
 
   return {
