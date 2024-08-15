@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { Suspense } from 'react';
@@ -10,13 +11,16 @@ import { FlashIcon } from '@/home/components/icons/flash';
 import { Marquee } from '@/home/components/marquee';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
-const Spline = React.lazy(() => import('@splinetool/react-spline'));
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: true,
+  loading: () => <p>Loading ...</p>,
+});
 
 export const HomePage = () => {
   return (
     <div className="pt-[70px] font-inter-tight lg:pt-0">
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
-        <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:-translate-y-1/3 lg:translate-x-1/3 ">
+        <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:translate-x-1/3 lg:translate-y-[-40%] ">
           <Suspense fallback={<div>Loading...</div>}>
             <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
           </Suspense>
