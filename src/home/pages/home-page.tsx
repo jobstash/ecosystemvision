@@ -6,6 +6,7 @@ import { Button } from '@nextui-org/react';
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
 import { FlashIcon } from '@/home/components/icons/flash';
+import { Marquee } from '@/home/components/marquee';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
 export const HomePage = () => {
@@ -45,10 +46,8 @@ export const HomePage = () => {
             </span>
           </Button>
         </section>
-        <section className="relative z-10 ml-[-300px] flex w-[200vw] rotate-[-4deg] whitespace-nowrap py-12 text-2xl uppercase tracking-tight text-white/10 md:pb-20 md:text-4xl lg:pb-24 lg:pt-0 lg:text-5xl">
-          ecosystem.vision • ecosystem.vision • ecosystem.vision •
-          ecosystem.vision • ecosystem.vision • ecosystem.vision •
-          ecosystem.vision • ecosystem.vision • ecosystem.vision •
+        <section className="relative z-10  flex  rotate-[-4deg]  py-12 text-2xl uppercase tracking-tight text-white/10 md:pb-20 md:text-4xl lg:pb-12 lg:text-5xl">
+          <Marquee />
         </section>
 
         <FeatureSwiper />
