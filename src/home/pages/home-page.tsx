@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { Suspense } from 'react';
 
 import { Button } from '@nextui-org/react';
-import Spline from '@splinetool/react-spline';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
@@ -10,16 +10,16 @@ import { FlashIcon } from '@/home/components/icons/flash';
 import { Marquee } from '@/home/components/marquee';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
+
 export const HomePage = () => {
   return (
     <div className="pt-[70px] font-inter-tight lg:pt-0">
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
         <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:-translate-y-1/3 lg:translate-x-1/3 ">
-          <Spline
-            scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" 
-            width={900}
-            height={900}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
+          </Suspense>
         </div>
         <section className="pointer-events-none relative z-10 ">
           <div>
