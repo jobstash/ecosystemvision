@@ -8,7 +8,7 @@ export const GRANT_TEST_IDS = {
 
 export const GRANT_QUERY_URLS = {
   GRANT_DETAILS: `${MW_URL}/grants/details`,
-  GRANT_LIST: `${MW_URL}/grants/list`,
+  GRANT_LIST: `${MW_URL}/grants`,
   GRANTEE_DETAILS: `${MW_URL}/grantees/details`,
   GRANTEE_LIST: `${MW_URL}/grantees/list`,
   GRANTEE_PROJECT: `${MW_URL}/grantees/project`,

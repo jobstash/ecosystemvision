@@ -3,18 +3,27 @@ import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { GRANT_QUERY_URLS } from '@/grants/core/constants';
-import { grantListQueryPageSchema } from '@/grants/core/schemas';
+import {
+  grantDtoInfiniteListPageSchema,
+  GrantInfiniteListPage,
+} from '@/grants/core/schemas';
+import { dtoToGrant } from '@/grants/utils/dto-to-grant';
 
-export const getGrantList = async (page: number, searchParams = '') => {
+export const getGrantList = async (
+  page: number,
+  searchParams = '',
+): Promise<GrantInfiniteListPage> => {
   const url = createUrlWithSearchParams(
     `${GRANT_QUERY_URLS.GRANT_LIST}?page=${page}&limit=${PAGE_SIZE}`,
     searchParams,
   );
 
-  return mwGET({
+  const response = await mwGET({
     url,
     label: 'getGrantList',
-    responseSchema: grantListQueryPageSchema,
+    responseSchema: grantDtoInfiniteListPageSchema,
     options: { next: { revalidate: 60 * 60 } },
   });
+
+  return { ...response, data: response.data.map(dtoToGrant) };
 };
