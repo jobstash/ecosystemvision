@@ -2,6 +2,8 @@
 
 import { useMemo } from 'react';
 
+import { Spinner } from '@nextui-org/react';
+
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { GrantListItem } from './grant-list-item';
@@ -17,7 +19,11 @@ export const GrantList = () => {
 
     if (!hasNextPage) return <p>No more grants available.</p>;
 
-    return <div ref={inViewRef}>Loading more...</div>;
+    return (
+      <div ref={inViewRef} className="flex w-full justify-center">
+        <Spinner color="white" />
+      </div>
+    );
   }, [error, hasNextPage, inViewRef]);
 
   if (isPending) return <p>Loading Grants ...</p>;
