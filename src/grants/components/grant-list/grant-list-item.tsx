@@ -3,88 +3,14 @@ import Link from 'next/link';
 import { Avatar, Button } from '@nextui-org/react';
 
 import { cn } from '@/shared/utils/cn';
-import { conditionalItem } from '@/shared/utils/conditional-item';
-import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
-import {
-  DetailItemProps,
-  DetailItems,
-} from '@/grants/components/ui/base/detail-item';
-import { DetailValueAmount } from '@/grants/components/ui/base/detail-value-amount';
-import { DetailValueAvatars } from '@/grants/components/ui/base/detail-value-avatars';
-import { DetailValueTags } from '@/grants/components/ui/base/detail-value-tags';
-import { DetailValueTexts } from '@/grants/components/ui/base/detail-value-text';
+import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
+import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
 import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
-
-const createTopItems = ({
-  granteesCount,
-  networks,
-  ecosystem,
-  totalFunds,
-  totalDisbursedFunds,
-}: Grant): DetailItemProps[] => [
-  ...conditionalItem(granteesCount > 0, {
-    icon: <PaperbillIcon />,
-    label: 'Grantees:',
-    value: granteesCount,
-  }),
-  ...conditionalItem(networks.length > 0, {
-    label: 'Networks:',
-    value: <DetailValueAvatars items={networks} />,
-  }),
-  ...conditionalItem(!!ecosystem, { label: 'Ecosystem:', value: ecosystem }),
-  ...conditionalItem(totalFunds > 0, {
-    label: 'Total Funds:',
-    value: <DetailValueAmount amount={totalFunds} />,
-  }),
-  ...conditionalItem(totalDisbursedFunds > 0, {
-    label: 'Total Disbursed Funds:',
-    value: <DetailValueAmount amount={totalDisbursedFunds} />,
-  }),
-];
-
-const createMidItems = ({
-  summary,
-  categories,
-  type,
-}: Grant): DetailItemProps[] => [
-  ...conditionalItem(!!summary, { label: 'Summary:', value: summary }),
-  ...conditionalItem(categories.length > 0, {
-    label: 'Categories',
-    value: (
-      <DetailValueTexts
-        items={categories}
-        classNames={{
-          root: 'text-[#B1FFB1]',
-          text: 'border border-[#B1FFB1]',
-        }}
-      />
-    ),
-  }),
-  ...conditionalItem(!!type, {
-    label: 'Type',
-    value: (
-      <DetailValueTexts
-        items={[type]}
-        classNames={{
-          root: 'text-[#60BCFF]',
-          text: 'border border-[#60BCFF]',
-        }}
-      />
-    ),
-  }),
-];
-
-const createLowerItems = ({ reputations }: Grant): DetailItemProps[] => [
-  ...conditionalItem(reputations.length > 0, {
-    label: 'Reputations',
-    value: <DetailValueTags items={reputations} />,
-  }),
-];
 
 interface Props {
   grant: Grant;
@@ -93,24 +19,25 @@ interface Props {
 export const GrantListItem = ({ grant }: Props) => {
   // TODO: JOB-679
 
-  const { id, name, logo, url, discord, twitter } = grant;
-
-  const href = `/grants/${id}`;
-
-  const topItems = createTopItems(grant);
-  const hasTopItems = topItems.length > 0;
-
-  const midItems = createMidItems(grant);
-
-  const lowerItems = createLowerItems(grant);
-  const hasLowerItems = lowerItems.length > 0;
-
-  const hasWebLinks = !!url || !!discord || !!twitter;
+  const {
+    id,
+    logo,
+    name,
+    url,
+    discord,
+    twitter,
+    topItems,
+    hasTopItems,
+    midItems,
+    lowerItems,
+    hasLowerItems,
+    hasWebLinks,
+  } = getGrantCardData(grant);
 
   return (
     <Link
       prefetch
-      href={href}
+      href={`/grants/${id}`}
       className="flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap"
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_ITEM}
@@ -156,12 +83,14 @@ export const GrantListItem = ({ grant }: Props) => {
             }}
           />
 
-          <DetailItems
-            items={lowerItems}
-            classNames={{
-              label: 'pb-2 md:pb-0',
-            }}
-          />
+          {hasLowerItems && (
+            <DetailItems
+              items={lowerItems}
+              classNames={{
+                label: 'pb-2 md:pb-0',
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="flex w-full items-center justify-end gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
