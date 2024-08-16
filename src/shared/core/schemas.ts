@@ -182,3 +182,9 @@ export const competitorsResponseSchema = z
     data: z.array(competitorSchema),
   })
   .merge(genericResponseSchema);
+
+export const infiniteListPageSchema = z.object({
+  page: z.number(),
+  count: z.number(),
+  total: z.number(),
+});

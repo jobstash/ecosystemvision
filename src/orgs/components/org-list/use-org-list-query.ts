@@ -3,7 +3,7 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { OrgQueryKeys, orgQueryKeys } from '@/orgs/core/query-keys';
-import { OrgListQueryPage } from '@/orgs/core/schemas';
+import { OrgInfiniteListPage } from '@/orgs/core/schemas';
 import { getOrgList } from '@/orgs/data/get-org-list';
 
 export const useOrgListQuery = () => {
@@ -11,9 +11,9 @@ export const useOrgListQuery = () => {
   const searchParams = '';
 
   return useInfiniteQuery<
-    OrgListQueryPage,
+    OrgInfiniteListPage,
     Error,
-    InfiniteData<OrgListQueryPage, number>,
+    InfiniteData<OrgInfiniteListPage, number>,
     ReturnType<OrgQueryKeys['list']>,
     number
   >({

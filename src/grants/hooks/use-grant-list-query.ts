@@ -3,7 +3,7 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { GrantQueryKeys, grantQueryKeys } from '@/grants/core/query-keys';
-import { GrantListQueryPage } from '@/grants/core/schemas';
+import { GrantInfiniteListPage } from '@/grants/core/schemas';
 import { getGrantList } from '@/grants/data/get-grant-list';
 
 export const useGrantListQuery = () => {
@@ -11,9 +11,9 @@ export const useGrantListQuery = () => {
   const searchParams = '';
 
   return useInfiniteQuery<
-    GrantListQueryPage,
+    GrantInfiniteListPage,
     Error,
-    InfiniteData<GrantListQueryPage, number>,
+    InfiniteData<GrantInfiniteListPage, number>,
     ReturnType<GrantQueryKeys['list']>,
     number
   >({

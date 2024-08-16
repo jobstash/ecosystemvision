@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import {
   fundingRoundSchema,
+  infiniteListPageSchema,
   investorSchema,
   orgInfoSchema,
   projectAllInfoSchema,
@@ -9,14 +10,13 @@ import {
   tagSchema,
 } from '@/shared/core/schemas';
 
-export const projectListQueryPageSchema = z.object({
-  page: z.number(),
-  count: z.number(),
-  total: z.number(),
+export const projectInfiniteListPageSchema = infiniteListPageSchema.extend({
   data: z.array(projectInfoSchema),
 });
 
-export type ProjectListQueryPage = z.infer<typeof projectListQueryPageSchema>;
+export type ProjectInfiniteListPage = z.infer<
+  typeof projectInfiniteListPageSchema
+>;
 
 export const projectOrgSchema = z
   .object({
