@@ -97,6 +97,24 @@ export type GrantDtoInfiniteListPage = z.infer<
   typeof grantDtoInfiniteListPageSchema
 >;
 
+// Grantee item matches what's returned from api. No need to differentiate as dto
+export const granteeItemSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  logoUrl: z.string().nullable(),
+  lastFundingDate: z.number(),
+  lastFundingAmount: z.number(),
+});
+export type GranteeItem = z.infer<typeof granteeItemSchema>;
+
+export const granteeInfiniteListPageSchema = z.object({
+  page: z.number().optional(),
+  data: z.array(granteeItemSchema),
+});
+export type GranteeInfiniteListPage = z.infer<
+  typeof granteeInfiniteListPageSchema
+>;
+
 export const granteeSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -109,17 +127,6 @@ export const granteeSchema = z.object({
   projects: z.array(z.string()),
 });
 export type Grantee = z.infer<typeof granteeSchema>;
-
-export const granteeDTOSchema = genericResponseSchema.extend({
-  data: granteeSchema,
-});
-export type GranteeDTO = z.infer<typeof granteeDTOSchema>;
-
-export const granteeListQueryPageSchema = z.object({
-  page: z.number().optional(),
-  data: z.array(granteeSchema),
-});
-export type GranteeListQueryPage = z.infer<typeof granteeListQueryPageSchema>;
 
 export const baseStatSchema = z.object({
   label: z.string(),

@@ -3,7 +3,10 @@ import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { grantQueryUrls } from '@/grants/core/query-urls';
-import { granteeListQueryPageSchema } from '@/grants/core/schemas';
+import {
+  GranteeInfiniteListPage,
+  granteeInfiniteListPageSchema,
+} from '@/grants/core/schemas';
 
 interface Props {
   page: number;
@@ -15,7 +18,7 @@ export const getGranteeList = async ({
   page,
   grantId,
   searchParams = '',
-}: Props) => {
+}: Props): Promise<GranteeInfiniteListPage> => {
   const url = createUrlWithSearchParams(
     `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
     searchParams,
@@ -24,7 +27,7 @@ export const getGranteeList = async ({
   return mwGET({
     url,
     label: 'getGranteeList',
-    responseSchema: granteeListQueryPageSchema,
+    responseSchema: granteeInfiniteListPageSchema,
     options: { next: { revalidate: 60 * 60 } },
   });
 };

@@ -5,7 +5,11 @@ import { faker } from '@faker-js/faker';
 import { MockInfiniteQueryResult } from '@/shared/testutils/misc';
 
 import { fakeGrant } from '@/grants/testutils/fake-grant';
-import { fakeGrantee, fakeGrantees } from '@/grants/testutils/fake-grantee';
+import {
+  fakeGrantee,
+  fakeGranteeItem,
+  fakeGrantees,
+} from '@/grants/testutils/fake-grantee';
 import { mockGranteeListQuery } from '@/grants/testutils/mock-grantee-list-query';
 
 import { GranteeList } from './grantee-list';
@@ -14,7 +18,10 @@ faker.seed(69);
 
 const grant = fakeGrant();
 const grantee = fakeGrantee();
-const grantees = [grantee, ...fakeGrantees().slice(1)];
+const grantees = [
+  { ...fakeGranteeItem(), id: grantee.id },
+  ...fakeGrantees().slice(1),
+];
 
 const meta: Meta<typeof GranteeList> = {
   title: 'grants/components/grantee-list',

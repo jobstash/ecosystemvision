@@ -8,7 +8,11 @@ import {
 } from '@/shared/testutils/misc';
 
 import { fakeGrant } from '@/grants/testutils/fake-grant';
-import { fakeGrantee, fakeGrantees } from '@/grants/testutils/fake-grantee';
+import {
+  fakeGrantee,
+  fakeGranteeItem,
+  fakeGrantees,
+} from '@/grants/testutils/fake-grantee';
 import { fakeGranteeProject } from '@/grants/testutils/fake-grantee-project';
 import { mockGranteeListQuery } from '@/grants/testutils/mock-grantee-list-query';
 import { mockGranteeProjectQuery } from '@/grants/testutils/mock-grantee-project-query';
@@ -20,7 +24,10 @@ faker.seed(420);
 
 const grant = fakeGrant();
 const grantee = fakeGrantee();
-const grantees = [grantee, ...fakeGrantees().slice(1)];
+const grantees = [
+  { ...fakeGranteeItem(), id: grantee.id },
+  ...fakeGrantees().slice(1),
+];
 const granteeProject = fakeGranteeProject({ id: grantee.projects[0] });
 
 const meta: Meta<typeof ProjectTabSelection> = {

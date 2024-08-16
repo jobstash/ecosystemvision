@@ -3,39 +3,35 @@ import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
-import { Grantee } from '@/grants/core/schemas';
+import { GranteeItem } from '@/grants/core/schemas';
 
 import { DetailItemProps, DetailItems } from './base/detail-item';
 import { DetailValueText } from './base/detail-value-text';
 
 const createFundingItems = ({
-  lastFunding,
-  fundingDate,
-}: Grantee): DetailItemProps[] => [
+  lastFundingAmount,
+  lastFundingDate,
+}: GranteeItem): DetailItemProps[] => [
   {
     icon: <PaperbillIcon />,
     label: 'Last Funding:',
     value: (
-      <DetailValueText>{`$${formatNumber(lastFunding)}`}</DetailValueText>
+      <DetailValueText>{`$${formatNumber(lastFundingAmount)}`}</DetailValueText>
     ),
   },
   {
     icon: <BankIcon />,
     label: 'Funding Date:',
-    value: (
-      <DetailValueText>
-        {shortTimestamp(fundingDate)}
-      </DetailValueText>
-    ),
+    value: <DetailValueText>{shortTimestamp(lastFundingDate)}</DetailValueText>,
   },
 ];
 
 interface Props {
-  grantee: Grantee;
+  granteeItem: GranteeItem;
 }
 
-export const GranteeFundingItems = ({ grantee }: Props) => {
-  const fundingItems = createFundingItems(grantee);
+export const GranteeFundingItems = ({ granteeItem }: Props) => {
+  const fundingItems = createFundingItems(granteeItem);
 
   return (
     <DetailItems

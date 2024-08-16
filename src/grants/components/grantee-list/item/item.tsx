@@ -1,29 +1,28 @@
-import { Grantee } from '@/grants/core/schemas';
+import { GranteeItem } from '@/grants/core/schemas';
 import { GranteeFundingItems } from '@/grants/components/ui/grantee-funding-items';
 import { GranteeLogoTitle } from '@/grants/components/ui/grantee-logo-title';
 import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 interface Props {
-  grantee: Grantee;
+  granteeItem: GranteeItem;
 }
 
-export const GranteeListItem = ({ grantee }: Props) => {
+export const GranteeListItem = ({ granteeItem }: Props) => {
   // TODO: JOB-680
-
-  const { name, logo, category } = grantee;
 
   return (
     <>
       <div className="flex flex-col gap-4">
         <GranteeLogoTitle
-          name={name}
-          logo={logo}
-          category={category}
+          name={granteeItem.name}
+          logo={granteeItem.logoUrl}
+          // TODO: Confirm with team if grantee has category
+          category={''}
           classNames={{
             root: '[&_*]:!text-13 [&_*]:!block',
           }}
         />
-        <GranteeFundingItems grantee={grantee} />
+        <GranteeFundingItems granteeItem={granteeItem} />
       </div>
       <CaretRightIcon />
     </>
