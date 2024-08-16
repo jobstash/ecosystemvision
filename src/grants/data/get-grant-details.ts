@@ -6,7 +6,7 @@ import { dtoToGrant } from '@/grants/utils/dto-to-grant';
 
 export const getGrantDetails = async (grantId: string): Promise<Grant> => {
   const response = await mwGET({
-    url: `${grantQueryUrls.base}/${grantId}`,
+    url: grantQueryUrls.grant(grantId),
     label: 'getGrant',
     responseSchema: grantDetailsDtoSchema,
     options: { next: { revalidate: 3600 } },
