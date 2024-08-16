@@ -2,7 +2,7 @@ import { MW_URL, PAGE_SIZE } from '@/shared/core/envs';
 import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search-params';
 import { mwGET } from '@/shared/utils/mw-get';
 
-import { projectListQueryPageSchema } from '@/projects/core/schemas';
+import { projectInfiniteListPageSchema } from '@/projects/core/schemas';
 
 interface Props {
   page: number;
@@ -18,7 +18,7 @@ export const getProjectList = ({ page, searchParams }: Props) => {
   return mwGET({
     url,
     label: 'getProjectList',
-    responseSchema: projectListQueryPageSchema,
+    responseSchema: projectInfiniteListPageSchema,
     options: { next: { revalidate: 60 * 60 } },
   });
 };

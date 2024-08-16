@@ -3,16 +3,16 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { ProjectQueryKeys, projectQueryKeys } from '@/projects/core/query-keys';
-import { ProjectListQueryPage } from '@/projects/core/schemas';
+import { ProjectInfiniteListPage } from '@/projects/core/schemas';
 import { getProjectList } from '@/projects/data/get-project-list';
 export const useProjectListQuery = () => {
   // TODO: filter search params string
   const searchParams = '';
 
   return useInfiniteQuery<
-    ProjectListQueryPage,
+    ProjectInfiniteListPage,
     Error,
-    InfiniteData<ProjectListQueryPage, number>,
+    InfiniteData<ProjectInfiniteListPage, number>,
     ReturnType<ProjectQueryKeys['list']>,
     number
   >({

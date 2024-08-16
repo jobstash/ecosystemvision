@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import {
   fundingRoundSchema,
+  infiniteListPageSchema,
   investorSchema,
   jobInfoSchema,
   jobInfoTagsSchema,
@@ -108,10 +109,7 @@ export const orgDetailsSchema = z
   .merge(orgInfoSchema);
 export type OrgDetails = z.infer<typeof orgDetailsSchema>;
 
-export const orgListQueryPageSchema = z.object({
-  page: z.number(),
-  count: z.number(),
-  total: z.number(),
+export const orgInfiniteListPageSchema = infiniteListPageSchema.extend({
   data: z.array(orgListItemSchema),
 });
-export type OrgListQueryPage = z.infer<typeof orgListQueryPageSchema>;
+export type OrgInfiniteListPage = z.infer<typeof orgInfiniteListPageSchema>;

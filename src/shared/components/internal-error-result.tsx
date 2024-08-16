@@ -10,10 +10,15 @@ const MESSAGE_TEXT =
   'All shortcuts have disappeared. Screen. Mind. Both are blank';
 
 interface Props extends Partial<ErrorBoundaryProps> {
+  showReset?: boolean;
   onReset?: () => void;
 }
 
-export const InternalErrorResult = ({ onReset, reset }: Props) => {
+export const InternalErrorResult = ({
+  showReset = true,
+  onReset,
+  reset,
+}: Props) => {
   const text = {
     heading: HEADING_TEXT,
     message: MESSAGE_TEXT,
@@ -32,12 +37,14 @@ export const InternalErrorResult = ({ onReset, reset }: Props) => {
     if (onReset) onReset();
   };
 
+  const action = showReset ? <ErrorActionButton onClick={onClick} /> : null;
+
   return (
     <ErrorAction
       textContent={text}
       imageProps={img}
       classNames={classNames}
-      action={<ErrorActionButton onClick={onClick} />}
+      action={action}
     />
   );
 };
