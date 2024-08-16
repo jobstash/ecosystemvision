@@ -5,7 +5,7 @@ import { cn } from '@/shared/utils/cn';
 
 import { Grantee } from '@/grants/core/schemas';
 
-interface Props extends Pick<Grantee, 'name' | 'logo' | 'category'> {
+interface Props extends Pick<Grantee, 'name' | 'logoUrl'> {
   classNames?: {
     root?: ClassValue;
     logo?: ClassValue;
@@ -17,26 +17,37 @@ interface Props extends Pick<Grantee, 'name' | 'logo' | 'category'> {
 }
 
 export const GranteeLogoTitle = (props: Props) => {
-  const { name, logo, category, classNames } = props;
+  const { name, logoUrl, classNames } = props;
+  const category = ''; // TODO: Confirm with team if grantee has category
   return (
-    <div
-      className={cn(
-        'flex items-center md:pb-4',
-        classNames?.root,
-      )}
-    >
+    <div className={cn('flex items-center md:pb-4', classNames?.root)}>
       <div className={cn('md:pr-4', classNames?.logoWrapper)}>
         <Avatar
-          className={cn('mr-3 h-8 w-8 rounded-xl md:h-16 md:w-16 md:rounded-[24px]', classNames?.logo)}
+          className={cn(
+            'mr-3 h-8 w-8 rounded-xl md:h-16 md:w-16 md:rounded-[24px]',
+            classNames?.logo,
+          )}
           showFallback
-          src={logo ?? ''}
+          src={logoUrl ?? ''}
           name={name}
         />
       </div>
 
       <div className={cn('flex flex-col', classNames?.titleWrapper)}>
-        <span className={cn('text-2xl font-bold leading-6 md:text-base md:font-medium', classNames?.title)}>{name}</span>
-        <span className={cn('hidden text-cool-gray md:block md:text-13', classNames?.category)}>
+        <span
+          className={cn(
+            'text-2xl font-bold leading-6 md:text-base md:font-medium',
+            classNames?.title,
+          )}
+        >
+          {name}
+        </span>
+        <span
+          className={cn(
+            'hidden text-cool-gray md:block md:text-13',
+            classNames?.category,
+          )}
+        >
           {category}
         </span>
       </div>

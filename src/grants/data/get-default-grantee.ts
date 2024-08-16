@@ -1,10 +1,10 @@
 import { getGrantDetails } from '@/grants/data/get-grant-details';
 import { getGranteeDetails } from '@/grants/data/get-grantee-details';
-import { getGranteesList } from '@/grants/data/get-grantees-list';
+import { getGranteeList } from '@/grants/data/get-grantee-list';
 
 export const getDefaultGrantee = async (grantId: string) => {
   const grant = await getGrantDetails(grantId);
-  const { data: grantees } = await getGranteesList({
+  const { data: grantees } = await getGranteeList({
     page: 1,
     grantId: grant.id,
   });

@@ -97,29 +97,23 @@ export type GrantDtoInfiniteListPage = z.infer<
   typeof grantDtoInfiniteListPageSchema
 >;
 
-export const granteeSchema = z.object({
+// Grantee item matches what's returned from api. No need to differentiate as dto
+export const granteeItemSchema = z.object({
   id: z.string(),
   name: z.string(),
-  logo: z.string().nullable(),
-  category: z.string(),
-  summary: z.string(),
-  url: z.string().nullable(),
-  lastFunding: z.number(),
-  fundingDate: z.number(),
-  projects: z.array(z.string()),
+  logoUrl: z.string().nullable(),
+  lastFundingDate: z.number(),
+  lastFundingAmount: z.number(),
 });
-export type Grantee = z.infer<typeof granteeSchema>;
+export type GranteeItem = z.infer<typeof granteeItemSchema>;
 
-export const granteeDTOSchema = genericResponseSchema.extend({
-  data: granteeSchema,
-});
-export type GranteeDTO = z.infer<typeof granteeDTOSchema>;
-
-export const granteeListQueryPageSchema = z.object({
+export const granteeInfiniteListPageSchema = z.object({
   page: z.number().optional(),
-  data: z.array(granteeSchema),
+  data: z.array(granteeItemSchema),
 });
-export type GranteeListQueryPage = z.infer<typeof granteeListQueryPageSchema>;
+export type GranteeInfiniteListPage = z.infer<
+  typeof granteeInfiniteListPageSchema
+>;
 
 export const baseStatSchema = z.object({
   label: z.string(),
@@ -146,10 +140,20 @@ export const granteeProjectSchema = z.object({
   id: z.string(),
   name: z.string(),
   tabs: z.array(granteeTabItemSchema),
+  tags: z.array(z.string()),
 });
 export type GranteeProject = z.infer<typeof granteeProjectSchema>;
 
-export const granteeProjectDTOSchema = genericResponseSchema.extend({
-  data: granteeProjectSchema,
+export const granteeSchema = granteeItemSchema.extend({
+  tags: z.array(z.string()),
+  website: z.string().nullable(),
+  status: z.string(), // TODO: convert to literals
+  description: z.string(),
+  projects: z.array(granteeProjectSchema),
 });
-export type GranteeProjectDTO = z.infer<typeof granteeProjectDTOSchema>;
+export type Grantee = z.infer<typeof granteeSchema>;
+
+export const granteeDtoSchema = genericResponseSchema.extend({
+  data: granteeSchema,
+});
+export type GranteeDto = z.infer<typeof granteeDtoSchema>;

@@ -212,6 +212,7 @@ export const fakeGranteeProject = (
       ],
     },
   ],
+  tags: [],
   ...partial,
 });
 

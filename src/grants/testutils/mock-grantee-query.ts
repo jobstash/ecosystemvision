@@ -8,7 +8,7 @@ import {
   MswOptions,
 } from '@/shared/testutils/misc';
 
-import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { grantQueryUrls } from '@/grants/core/query-urls';
 import { Grantee } from '@/grants/core/schemas';
 
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
@@ -18,7 +18,7 @@ export const mockGranteeQuery = (
   options?: MswOptions & { data?: Grantee },
 ) =>
   http.get(
-    `${GRANT_QUERY_URLS.GRANTEE_DETAILS}/:granteeId`,
+    `${grantQueryUrls.GRANTEE_DETAILS}/:granteeId`,
     async ({ params }) => {
       const { networkDelay } = options || DEFAULT_MSW_OPTIONS;
       await delay(networkDelay);

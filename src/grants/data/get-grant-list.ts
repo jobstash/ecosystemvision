@@ -2,7 +2,7 @@ import { PAGE_SIZE } from '@/shared/core/envs';
 import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search-params';
 import { mwGET } from '@/shared/utils/mw-get';
 
-import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { grantQueryUrls } from '@/grants/core/query-urls';
 import {
   grantDtoInfiniteListPageSchema,
   GrantInfiniteListPage,
@@ -14,7 +14,7 @@ export const getGrantList = async (
   searchParams = '',
 ): Promise<GrantInfiniteListPage> => {
   const url = createUrlWithSearchParams(
-    `${GRANT_QUERY_URLS.BASE}?page=${page}&limit=${PAGE_SIZE}`,
+    `${grantQueryUrls.base}?page=${page}&limit=${PAGE_SIZE}`,
     searchParams,
   );
 

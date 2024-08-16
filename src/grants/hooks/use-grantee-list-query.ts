@@ -3,23 +3,23 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { GrantQueryKeys, grantQueryKeys } from '@/grants/core/query-keys';
-import { GranteeListQueryPage } from '@/grants/core/schemas';
-import { getGranteesList } from '@/grants/data/get-grantees-list';
+import { GranteeInfiniteListPage } from '@/grants/core/schemas';
+import { getGranteeList } from '@/grants/data/get-grantee-list';
 
 export const useGranteeListQuery = (grantId?: string, enabled = true) => {
   // TODO: filter search params string
   const searchParams = '';
 
   return useInfiniteQuery<
-    GranteeListQueryPage,
+    GranteeInfiniteListPage,
     Error,
-    InfiniteData<GranteeListQueryPage, number>,
+    InfiniteData<GranteeInfiniteListPage, number>,
     ReturnType<GrantQueryKeys['grantees']>,
     number
   >({
     queryKey: grantQueryKeys.grantees(grantId!, searchParams),
     queryFn: async ({ pageParam }) =>
-      getGranteesList({ page: pageParam, grantId: grantId!, searchParams }),
+      getGranteeList({ page: pageParam, grantId: grantId!, searchParams }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
       typeof page === 'number' && page > 0 && data.length > 0

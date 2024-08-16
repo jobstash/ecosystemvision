@@ -8,13 +8,20 @@ import {
 import { GranteeCard } from '@/grants/components/grantee-card/grantee-card';
 
 import { fakeGrant } from '@/grants/testutils/fake-grant';
-import { fakeGrantee, fakeGrantees } from '@/grants/testutils/fake-grantee';
+import {
+  fakeGrantee,
+  fakeGranteeItem,
+  fakeGrantees,
+} from '@/grants/testutils/fake-grantee';
 import { mockGranteeListQuery } from '@/grants/testutils/mock-grantee-list-query';
 import { mockGranteeQuery } from '@/grants/testutils/mock-grantee-query';
 
 const grant = fakeGrant();
 const grantee = fakeGrantee();
-const grantees = [grantee, ...fakeGrantees().slice(1)];
+const grantees = [
+  { ...fakeGranteeItem(), id: grantee.id },
+  ...fakeGrantees().slice(1),
+];
 
 const meta: Meta<typeof GranteeCard> = {
   title: 'grants/components/grantee-card',
@@ -29,6 +36,7 @@ const meta: Meta<typeof GranteeCard> = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
