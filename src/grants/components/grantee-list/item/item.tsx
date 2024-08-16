@@ -15,9 +15,7 @@ export const GranteeListItem = ({ granteeItem }: Props) => {
       <div className="flex flex-col gap-4">
         <GranteeLogoTitle
           name={granteeItem.name}
-          logo={granteeItem.logoUrl}
-          // TODO: Confirm with team if grantee has category
-          category={''}
+          logoUrl={granteeItem.logoUrl}
           classNames={{
             root: '[&_*]:!text-13 [&_*]:!block',
           }}

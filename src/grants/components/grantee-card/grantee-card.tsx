@@ -35,24 +35,24 @@ export const GranteeCard = () => {
     return <p>TODO: No Grantee UI</p>;
   }
 
-  const { logo, name, url, category, summary } = granteeData.data;
+  const { logoUrl, name, website, description } = granteeData.data;
 
   return (
     <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
-      <GranteeLogoTitle name={name} logo={logo} category={category} />
+      <GranteeLogoTitle name={name} logoUrl={logoUrl} />
 
-      <span className="text-13 text-white/75">{summary}</span>
+      <span className="text-13 text-white/75">{description}</span>
 
-      {url && (
+      {website && (
         <Button
           as={Link}
-          href={url}
+          href={website}
           target="_blank"
           rel="noopener noreferrer"
           className="flex h-auto w-fit items-center gap-1 rounded bg-white/10 p-1"
         >
           <span className="text-13 leading-4">
-            {getWebsiteText(url).hostname}
+            {getWebsiteText(website).hostname}
           </span>
           <ExternalIcon />
         </Button>
@@ -60,7 +60,7 @@ export const GranteeCard = () => {
 
       <div className="flex flex-col gap-2 md:border-t md:border-divider/25 md:pt-4">
         <span className="text-13 text-white">Funding Details</span>
-        <GranteeFundingItems grantee={granteeData.data} />
+        <GranteeFundingItems granteeItem={granteeData.data} />
       </div>
     </div>
   );

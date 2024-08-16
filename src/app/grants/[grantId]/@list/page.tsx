@@ -4,7 +4,6 @@ import { getQueryClient } from '@/shared/utils/get-query-client';
 
 import { grantQueryKeys } from '@/grants/core/query-keys';
 import { getGranteeDetails } from '@/grants/data/get-grantee-details';
-import { getGranteeProject } from '@/grants/data/get-grantee-project';
 import { getGranteeList } from '@/grants/data/get-grantee-list';
 import { GranteeList } from '@/grants/components/grantee-list';
 
@@ -34,16 +33,6 @@ const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
         queryFn: () => getGranteeDetails(grantee.id),
       }),
     ];
-
-    // Prefetch first project details
-    if (grantee.projects.length > 0) {
-      promises.push(
-        queryClient.prefetchQuery({
-          queryKey: grantQueryKeys.project(grantee.projects[0]),
-          queryFn: () => getGranteeProject(grantee.projects[0]),
-        }),
-      );
-    }
 
     await Promise.all(promises);
   }

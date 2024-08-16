@@ -28,7 +28,7 @@ const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
   ...fakeGrantees().slice(1),
 ];
-const granteeProject = fakeGranteeProject({ id: grantee.projects[0] });
+const granteeProject = fakeGranteeProject({ id: grantee.projects[0].id });
 
 const meta: Meta<typeof ProjectSelections> = {
   title: 'grants/components/project-selections',

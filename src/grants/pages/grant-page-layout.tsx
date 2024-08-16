@@ -49,11 +49,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const GrantPageLayout = ({
-  // list,
-  grant,
-  children,
-}: Props) => {
+export const GrantPageLayout = ({ list, grant, children }: Props) => {
   return (
     <div className="flex flex-col gap-6 p-8">
       <GrantBackButton fallbackUrl="/grants" />
@@ -65,7 +61,7 @@ export const GrantPageLayout = ({
       <Divider />
 
       <div className="flex gap-8">
-        {/* <div className="w-full shrink-0 lg:w-4/12">{list}</div> */}
+        <div className="w-full shrink-0 lg:w-4/12">{list}</div>
 
         <div className="flex w-max flex-col gap-4 lg:grow">
           {/* <GranteeCard />/ */}

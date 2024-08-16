@@ -115,19 +115,6 @@ export type GranteeInfiniteListPage = z.infer<
   typeof granteeInfiniteListPageSchema
 >;
 
-export const granteeSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  logo: z.string().nullable(),
-  category: z.string(),
-  summary: z.string(),
-  url: z.string().nullable(),
-  lastFunding: z.number(),
-  fundingDate: z.number(),
-  projects: z.array(z.string()),
-});
-export type Grantee = z.infer<typeof granteeSchema>;
-
 export const baseStatSchema = z.object({
   label: z.string(),
   value: z.string(),
@@ -153,10 +140,20 @@ export const granteeProjectSchema = z.object({
   id: z.string(),
   name: z.string(),
   tabs: z.array(granteeTabItemSchema),
+  tags: z.array(z.string()),
 });
 export type GranteeProject = z.infer<typeof granteeProjectSchema>;
 
-export const granteeProjectDTOSchema = genericResponseSchema.extend({
-  data: granteeProjectSchema,
+export const granteeSchema = granteeItemSchema.extend({
+  tags: z.array(z.string()),
+  website: z.string().nullable(),
+  status: z.string(), // TODO: convert to literals
+  description: z.string(),
+  projects: z.array(granteeProjectSchema),
 });
-export type GranteeProjectDTO = z.infer<typeof granteeProjectDTOSchema>;
+export type Grantee = z.infer<typeof granteeSchema>;
+
+export const granteeDtoSchema = genericResponseSchema.extend({
+  data: granteeSchema,
+});
+export type GranteeDto = z.infer<typeof granteeDtoSchema>;
