@@ -4,7 +4,7 @@ import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { GrantQueryKeys, grantQueryKeys } from '@/grants/core/query-keys';
 import { GranteeListQueryPage } from '@/grants/core/schemas';
-import { getGranteesList } from '@/grants/data/get-grantees-list';
+import { getGranteeList } from '@/grants/data/get-grantee-list';
 
 export const useGranteeListQuery = (grantId?: string, enabled = true) => {
   // TODO: filter search params string
@@ -19,7 +19,7 @@ export const useGranteeListQuery = (grantId?: string, enabled = true) => {
   >({
     queryKey: grantQueryKeys.grantees(grantId!, searchParams),
     queryFn: async ({ pageParam }) =>
-      getGranteesList({ page: pageParam, grantId: grantId!, searchParams }),
+      getGranteeList({ page: pageParam, grantId: grantId!, searchParams }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
       typeof page === 'number' && page > 0 && data.length > 0

@@ -2,7 +2,7 @@ import { PAGE_SIZE } from '@/shared/core/envs';
 import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search-params';
 import { mwGET } from '@/shared/utils/mw-get';
 
-import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { grantQueryUrls } from '@/grants/core/query-urls';
 import { granteeListQueryPageSchema } from '@/grants/core/schemas';
 
 interface Props {
@@ -11,13 +11,13 @@ interface Props {
   grantId: string;
 }
 
-export const getGranteesList = async ({
+export const getGranteeList = async ({
   page,
   grantId,
   searchParams = '',
 }: Props) => {
   const url = createUrlWithSearchParams(
-    `${GRANT_QUERY_URLS.GRANTEE_LIST}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
+    `${grantQueryUrls.GRANTEE_LIST}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
     searchParams,
   );
 

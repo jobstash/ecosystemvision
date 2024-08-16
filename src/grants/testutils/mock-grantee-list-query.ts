@@ -1,7 +1,7 @@
 import { MockInfiniteQueryResult, MswOptions } from '@/shared/testutils/misc';
 import { mockInfiniteListQuery } from '@/shared/testutils/mock-infinite-list-query';
 
-import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { grantQueryUrls } from '@/grants/core/query-urls';
 import { Grantee } from '@/grants/core/schemas';
 
 import { fakeGrantee } from './fake-grantee';
@@ -12,7 +12,7 @@ export const mockGranteeListQuery = (
 ) => {
   return mockInfiniteListQuery(
     {
-      url: GRANT_QUERY_URLS.GRANTEE_LIST,
+      url: grantQueryUrls.GRANTEE_LIST,
       data: Array.from({ length: 10 }).map(() => fakeGrantee()),
       overrideFirstPageData: options?.data,
     },

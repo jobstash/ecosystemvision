@@ -1,12 +1,12 @@
 import { mwGET } from '@/shared/utils/mw-get';
 
-import { GRANT_QUERY_URLS } from '@/grants/core/constants';
+import { grantQueryUrls } from '@/grants/core/query-urls';
 import { Grant, grantDetailsDtoSchema } from '@/grants/core/schemas';
 import { dtoToGrant } from '@/grants/utils/dto-to-grant';
 
 export const getGrantDetails = async (grantId: string): Promise<Grant> => {
   const response = await mwGET({
-    url: `${GRANT_QUERY_URLS.BASE}/${grantId}`,
+    url: `${grantQueryUrls.base}/${grantId}`,
     label: 'getGrant',
     responseSchema: grantDetailsDtoSchema,
     options: { next: { revalidate: 3600 } },

@@ -5,7 +5,7 @@ import { getQueryClient } from '@/shared/utils/get-query-client';
 import { grantQueryKeys } from '@/grants/core/query-keys';
 import { getGranteeDetails } from '@/grants/data/get-grantee-details';
 import { getGranteeProject } from '@/grants/data/get-grantee-project';
-import { getGranteesList } from '@/grants/data/get-grantees-list';
+import { getGranteeList } from '@/grants/data/get-grantee-list';
 import { GranteeList } from '@/grants/components/grantee-list';
 
 interface Props {
@@ -19,8 +19,7 @@ const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
     // Prefetch list
     queryClient.fetchInfiniteQuery({
       queryKey: grantQueryKeys.grantees(grantId, ''),
-      queryFn: async ({ pageParam: page }) =>
-        getGranteesList({ page, grantId }),
+      queryFn: async ({ pageParam: page }) => getGranteeList({ page, grantId }),
       initialPageParam: 1,
     }),
   ]);
