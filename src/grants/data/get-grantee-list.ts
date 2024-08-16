@@ -17,7 +17,7 @@ export const getGranteeList = async ({
   searchParams = '',
 }: Props) => {
   const url = createUrlWithSearchParams(
-    `${grantQueryUrls.GRANTEE_LIST}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
+    `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
     searchParams,
   );
 

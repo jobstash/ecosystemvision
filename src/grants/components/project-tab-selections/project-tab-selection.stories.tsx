@@ -36,6 +36,7 @@ const meta: Meta<typeof ProjectTabSelection> = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {

@@ -4,11 +4,17 @@ import { faker } from '@faker-js/faker';
 
 import { MockInfiniteQueryResult } from '@/shared/testutils/misc';
 
+import { fakeGrant } from '@/grants/testutils/fake-grant';
+import { fakeGrantee, fakeGrantees } from '@/grants/testutils/fake-grantee';
 import { mockGranteeListQuery } from '@/grants/testutils/mock-grantee-list-query';
 
 import { GranteeList } from './grantee-list';
 
 faker.seed(69);
+
+const grant = fakeGrant();
+const grantee = fakeGrantee();
+const grantees = [grantee, ...fakeGrantees().slice(1)];
 
 const meta: Meta<typeof GranteeList> = {
   title: 'grants/components/grantee-list',
@@ -16,7 +22,12 @@ const meta: Meta<typeof GranteeList> = {
   args: {},
   parameters: {
     msw: {
-      handlers: [mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS)],
+      handlers: [
+        mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
+          data: grantees,
+        }),
+      ],
     },
   },
 };
@@ -31,6 +42,8 @@ export const Loading: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
+          data: grantees,
           networkDelay: 'infinite',
         }),
       ],
@@ -41,7 +54,12 @@ export const Loading: Story = {
 export const Empty: Story = {
   parameters: {
     msw: {
-      handlers: [mockGranteeListQuery(MockInfiniteQueryResult.EMPTY)],
+      handlers: [
+        mockGranteeListQuery(MockInfiniteQueryResult.EMPTY, {
+          grantId: grant.id,
+          data: grantees,
+        }),
+      ],
     },
   },
 };
@@ -49,7 +67,12 @@ export const Empty: Story = {
 export const EndOfResults: Story = {
   parameters: {
     msw: {
-      handlers: [mockGranteeListQuery(MockInfiniteQueryResult.END_OF_RESULTS)],
+      handlers: [
+        mockGranteeListQuery(MockInfiniteQueryResult.END_OF_RESULTS, {
+          grantId: grant.id,
+          data: grantees,
+        }),
+      ],
     },
   },
 };
@@ -57,7 +80,12 @@ export const EndOfResults: Story = {
 export const NetworkError: Story = {
   parameters: {
     msw: {
-      handlers: [mockGranteeListQuery(MockInfiniteQueryResult.NETWORK_ERROR)],
+      handlers: [
+        mockGranteeListQuery(MockInfiniteQueryResult.NETWORK_ERROR, {
+          grantId: grant.id,
+          data: grantees,
+        }),
+      ],
     },
   },
 };
@@ -65,7 +93,12 @@ export const NetworkError: Story = {
 export const FetchError: Story = {
   parameters: {
     msw: {
-      handlers: [mockGranteeListQuery(MockInfiniteQueryResult.FETCH_ERROR)],
+      handlers: [
+        mockGranteeListQuery(MockInfiniteQueryResult.FETCH_ERROR, {
+          grantId: grant.id,
+          data: grantees,
+        }),
+      ],
     },
   },
 };

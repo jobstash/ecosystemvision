@@ -8,11 +8,11 @@ import { fakeGrantee } from './fake-grantee';
 
 export const mockGranteeListQuery = (
   result: MockInfiniteQueryResult,
-  options?: MswOptions & { data?: Grantee[] },
+  options: MswOptions & { grantId: string; data?: Grantee[] },
 ) => {
   return mockInfiniteListQuery(
     {
-      url: grantQueryUrls.GRANTEE_LIST,
+      url: grantQueryUrls.grantees(options.grantId),
       data: Array.from({ length: 10 }).map(() => fakeGrantee()),
       overrideFirstPageData: options?.data,
     },

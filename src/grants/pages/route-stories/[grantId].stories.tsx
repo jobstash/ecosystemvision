@@ -60,6 +60,7 @@ export const OK: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
@@ -78,6 +79,7 @@ export const LoadingGrantees: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
           networkDelay: 'infinite',
         }),
@@ -97,6 +99,7 @@ export const LoadingGrantee: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
@@ -116,6 +119,7 @@ export const LoadingProject: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
@@ -134,7 +138,9 @@ export const ErrorGrantees: Story = {
   parameters: {
     msw: {
       handlers: [
-        mockGranteeListQuery(MockInfiniteQueryResult.NETWORK_ERROR),
+        mockGranteeListQuery(MockInfiniteQueryResult.NETWORK_ERROR, {
+          grantId: grant.id,
+        }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
           data: grantee,
         }),
@@ -151,6 +157,7 @@ export const ErrorGrantee: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.FETCH_ERROR),
@@ -167,6 +174,7 @@ export const ErrorProject: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
@@ -182,7 +190,9 @@ export const EmptyGrantees: Story = {
   parameters: {
     msw: {
       handlers: [
-        mockGranteeListQuery(MockInfiniteQueryResult.EMPTY),
+        mockGranteeListQuery(MockInfiniteQueryResult.EMPTY, {
+          grantId: grant.id,
+        }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
           data: grantee,
         }),
@@ -198,7 +208,9 @@ export const EmptyProject: Story = {
   parameters: {
     msw: {
       handlers: [
-        mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS),
+        mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
+        }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
           data: { ...grantee, projects: [] },
         }),
@@ -212,6 +224,7 @@ export const NotFoundGrantee: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.NOT_FOUND, {
@@ -230,6 +243,7 @@ export const NotFoundProject: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {

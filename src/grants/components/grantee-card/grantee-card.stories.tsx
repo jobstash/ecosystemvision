@@ -29,6 +29,7 @@ const meta: Meta<typeof GranteeCard> = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
+          grantId: grant.id,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
