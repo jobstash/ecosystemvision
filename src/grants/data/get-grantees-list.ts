@@ -23,7 +23,7 @@ export const getGranteesList = async ({
 
   return mwGET({
     url,
-    label: 'getGrantList',
+    label: 'getGranteeList',
     responseSchema: granteeListQueryPageSchema,
     options: { next: { revalidate: 60 * 60 } },
   });

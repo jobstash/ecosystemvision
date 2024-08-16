@@ -17,7 +17,7 @@ export const mockGrantQuery = (
   result: MockQueryResult,
   options?: MswOptions & { data?: Grant },
 ) =>
-  http.get(`${GRANT_QUERY_URLS.GRANT_DETAILS}/:grantId`, async ({ params }) => {
+  http.get(`${GRANT_QUERY_URLS.BASE}/:grantId`, async ({ params }) => {
     const { networkDelay } = options || DEFAULT_MSW_OPTIONS;
     await delay(networkDelay);
 
