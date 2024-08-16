@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Layout = async ({ children, list, params: { grantId } }: Props) => {
-  const { data } = await getGrantDetails(grantId);
+  const data = await getGrantDetails(grantId);
 
   return (
     <GrantPageLayout grant={data} list={list}>

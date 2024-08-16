@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import { Avatar, Button } from '@nextui-org/react';
 
+import { cn } from '@/shared/utils/cn';
+import { conditionalItem } from '@/shared/utils/conditional-item';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
@@ -25,14 +27,24 @@ const createTopItems = ({
   totalFunds,
   totalDisbursedFunds,
 }: Grant): DetailItemProps[] => [
-  { icon: <PaperbillIcon />, label: 'Grantees:', value: granteesCount },
-  { label: 'Networks:', value: <DetailValueAvatars items={networks} /> },
-  { label: 'Ecosystem:', value: ecosystem },
-  { label: 'Total Funds:', value: <DetailValueAmount amount={totalFunds} /> },
-  {
+  ...conditionalItem(granteesCount > 0, {
+    icon: <PaperbillIcon />,
+    label: 'Grantees:',
+    value: granteesCount,
+  }),
+  ...conditionalItem(networks.length > 0, {
+    label: 'Networks:',
+    value: <DetailValueAvatars items={networks} />,
+  }),
+  ...conditionalItem(!!ecosystem, { label: 'Ecosystem:', value: ecosystem }),
+  ...conditionalItem(totalFunds > 0, {
+    label: 'Total Funds:',
+    value: <DetailValueAmount amount={totalFunds} />,
+  }),
+  ...conditionalItem(totalDisbursedFunds > 0, {
     label: 'Total Disbursed Funds:',
     value: <DetailValueAmount amount={totalDisbursedFunds} />,
-  },
+  }),
 ];
 
 const createMidItems = ({
@@ -40,8 +52,8 @@ const createMidItems = ({
   categories,
   type,
 }: Grant): DetailItemProps[] => [
-  { label: 'Description', value: summary },
-  {
+  ...conditionalItem(!!summary, { label: 'Summary:', value: summary }),
+  ...conditionalItem(categories.length > 0, {
     label: 'Categories',
     value: (
       <DetailValueTexts
@@ -52,8 +64,8 @@ const createMidItems = ({
         }}
       />
     ),
-  },
-  {
+  }),
+  ...conditionalItem(!!type, {
     label: 'Type',
     value: (
       <DetailValueTexts
@@ -64,14 +76,14 @@ const createMidItems = ({
         }}
       />
     ),
-  },
+  }),
 ];
 
 const createLowerItems = ({ reputations }: Grant): DetailItemProps[] => [
-  {
+  ...conditionalItem(reputations.length > 0, {
     label: 'Reputations',
     value: <DetailValueTags items={reputations} />,
-  },
+  }),
 ];
 
 interface Props {
@@ -86,8 +98,14 @@ export const GrantListItem = ({ grant }: Props) => {
   const href = `/grants/${id}`;
 
   const topItems = createTopItems(grant);
+  const hasTopItems = topItems.length > 0;
+
   const midItems = createMidItems(grant);
+
   const lowerItems = createLowerItems(grant);
+  const hasLowerItems = lowerItems.length > 0;
+
+  const hasWebLinks = !!url || !!discord || !!twitter;
 
   return (
     <Link
@@ -113,23 +131,28 @@ export const GrantListItem = ({ grant }: Props) => {
         </div>
 
         <div className="flex w-full flex-wrap gap-4 lg:gap-5">
-          <WebLinks links={{ url, discord, twitter }} />
+          {hasWebLinks && <WebLinks links={{ url, discord, twitter }} />}
 
-          <DetailItems
-            items={topItems}
-            classNames={{
-              container: 'flex-wrap gap-x-4 gap-y-1.5 lg:gap-x-5',
-              label: 'pr-2',
-            }}
-          />
+          {hasTopItems && (
+            <DetailItems
+              items={topItems}
+              classNames={{
+                container: 'flex-wrap gap-x-4 gap-y-1.5 lg:gap-x-5',
+                label: 'pr-2',
+              }}
+            />
+          )}
 
           <DetailItems
             items={midItems}
             classNames={{
               label: 'w-full pb-2 md:pb-0 md:w-auto lg:w-full lg:pb-2',
               root: 'w-full md:w-auto first:border-y first:border-divider/10 first:py-3 lg:first:border-0 lg:first:py-0 lg:items-start lg:first:max-w-xl lg:flex-col lg:items-start lg:max-w-64',
-              container:
-                'gap-y-3 md:gap-x-6 lg:border-y lg:grow lg:py-4 lg:border-divider/10 lg:w-full',
+              container: cn(
+                'gap-y-3 md:gap-x-6 lg:w-full lg:grow lg:border-divider/10',
+                { 'lg:border-t lg:pt-4': hasTopItems },
+                { 'lg:border-b lg:pb-4': hasLowerItems },
+              ),
             }}
           />
 
@@ -141,10 +164,18 @@ export const GrantListItem = ({ grant }: Props) => {
           />
         </div>
       </div>
-      <div className="flex w-full items-center gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
-        <Button className="mx-auto w-full bg-white font-semibold text-black">
-          <span>Apply</span>
-        </Button>
+      <div className="flex w-full items-center justify-end gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
+        {url && (
+          <Button
+            as={Link}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-auto w-full bg-white font-semibold text-black"
+          >
+            <span>Apply</span>
+          </Button>
+        )}
         <div className="hidden lg:flex">
           <CaretRightIcon />
         </div>
