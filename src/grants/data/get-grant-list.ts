@@ -14,7 +14,7 @@ export const getGrantList = async (
   searchParams = '',
 ): Promise<GrantInfiniteListPage> => {
   const url = createUrlWithSearchParams(
-    `${GRANT_QUERY_URLS.GRANT_LIST}?page=${page}&limit=${PAGE_SIZE}`,
+    `${GRANT_QUERY_URLS.BASE}?page=${page}&limit=${PAGE_SIZE}`,
     searchParams,
   );
 
