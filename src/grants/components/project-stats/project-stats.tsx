@@ -1,44 +1,45 @@
 'use client';
 
-// import { useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
-// import { useGranteeProjectFetch } from '@/grants/hooks/use-grantee-project-fetch';
-// import { GranteeStatItem } from '@/grants/components/grant-stat-item';
+import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
+import { GranteeStatItem } from '@/grants/components/grant-stat-item';
 
 export const GranteeProjectStats = () => {
-  return null;
-  // const { grantId, granteeId, projectId, tab } = useParams() as {
-  //   grantId: string;
-  //   granteeId?: string;
-  //   projectId?: string;
-  //   tab?: string;
-  // };
+  const { grantId, granteeId, projectId, tab } = useParams() as {
+    grantId: string;
+    granteeId?: string;
+    projectId?: string;
+    tab?: string;
+  };
 
-  // const { granteeData, projectData, isLoading, errorMessage } =
-  //   useGranteeProjectFetch({ grantId, granteeId, projectId });
+  const { granteeData, isLoading, errorMessage } = useGranteeFetch(
+    grantId,
+    granteeId,
+  );
 
-  // if (isLoading) {
-  //   return <p>{'TODO: Loading UI <ProjectStats />'}</p>;
-  // }
+  if (isLoading) return <p>{'TODO: Loading UI <ProjectStats />'}</p>;
 
-  // // This component is stacked with others. Top most component renders the error.
-  // if (errorMessage) return null;
-  // if (!granteeData?.data) return null;
-  // if (!projectData?.data) return null;
+  // This component is stacked with others. Top most component renders the error.
+  if (granteeData?.data.projects.length === 0) return null;
+  if (errorMessage || !granteeData?.data) return null;
 
-  // // If for some reason the project has no tabs, return null
-  // if (projectData.data.tabs.length === 0) return null;
+  const currentProject = projectId
+    ? granteeData.data.projects.find((project) => project.id === projectId)
+    : granteeData.data.projects[0];
 
-  // // Match the tab to the project tab or default to the first tab
-  // const projectTab =
-  //   projectData.data.tabs.find((t) => t.tab === tab) ||
-  //   projectData.data.tabs[0];
+  if (!currentProject || currentProject.tabs.length === 0) return null;
 
-  // return (
-  //   <div className="flex flex-wrap gap-6">
-  //     {projectTab.stats.map((granteeStat) => (
-  //       <GranteeStatItem key={granteeStat.label} granteeStat={granteeStat} />
-  //     ))}
-  //   </div>
-  // );
+  const activeTab = tab || currentProject.tabs[0].tab;
+  const currentTab = currentProject.tabs.find((t) => t.tab === activeTab);
+
+  if (!currentTab?.stats?.length) return null;
+
+  return (
+    <div className="flex flex-wrap gap-6">
+      {currentTab.stats.map((granteeStat) => (
+        <GranteeStatItem key={granteeStat.label} granteeStat={granteeStat} />
+      ))}
+    </div>
+  );
 };
