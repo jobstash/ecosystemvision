@@ -31,8 +31,8 @@ const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
     // Prefetch grantee details
     const promises = [
       queryClient.prefetchQuery({
-        queryKey: grantQueryKeys.grantee(grantee.id),
-        queryFn: () => getGranteeDetails(grantee.id),
+        queryKey: grantQueryKeys.grantee(grantId, grantee.id),
+        queryFn: () => getGranteeDetails(grantId, grantee.id),
       }),
     ];
 

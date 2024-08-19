@@ -15,10 +15,10 @@ import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
 export const mockGranteeQuery = (
   result: MockQueryResult,
-  options?: MswOptions & { data?: Grantee },
+  options: MswOptions & { grantId: string; data?: Grantee },
 ) =>
   http.get(
-    `${grantQueryUrls.GRANTEE_DETAILS}/:granteeId`,
+    `${grantQueryUrls.grantees(options.grantId)}/:granteeId`,
     async ({ params }) => {
       const { networkDelay } = options || DEFAULT_MSW_OPTIONS;
       await delay(networkDelay);

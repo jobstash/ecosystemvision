@@ -27,7 +27,7 @@ export const GrantListPage = async () => {
       .flatMap((page) => page.data)
       .map(({ id }) =>
         queryClient.prefetchQuery({
-          queryKey: grantQueryKeys.details(id),
+          queryKey: grantQueryKeys.grant(id),
           queryFn: () => getGrantDetails(id),
         }),
       ),

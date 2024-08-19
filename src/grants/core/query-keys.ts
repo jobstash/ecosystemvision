@@ -8,7 +8,7 @@ export const grantQueryKeys = {
 
     return [...grantQueryKeys.all, 'list', searchParams] as const;
   },
-  details: (grantId: string) => {
+  grant: (grantId: string) => {
     return [...grantQueryKeys.all, 'grant', grantId] as const;
   },
   grantees: (grantId: string, params: string | Record<string, string>) => {
@@ -17,13 +17,16 @@ export const grantQueryKeys = {
         ? params
         : new URLSearchParams(params).toString();
 
-    return [...grantQueryKeys.all, 'grantees', grantId, searchParams] as const;
+    return [
+      ...grantQueryKeys.grant(grantId),
+      'grantees',
+      grantId,
+      searchParams,
+    ] as const;
   },
-  grantee: (granteeId: string) => {
-    return [...grantQueryKeys.all, 'grantee', granteeId] as const;
+  grantee: (grantId: string, granteeId: string) => {
+    return [...grantQueryKeys.grant(grantId), 'grantee', granteeId] as const;
   },
-  project: (projectId: string) =>
-    [...grantQueryKeys.all, 'project', projectId] as const,
 } as const;
 
 export type GrantQueryKeys = typeof grantQueryKeys;

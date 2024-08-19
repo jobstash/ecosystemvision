@@ -35,7 +35,7 @@ export const useGrantList = () => {
       for (const item of items) {
         const { id } = item;
         queryClient.prefetchQuery({
-          queryKey: grantQueryKeys.details(id),
+          queryKey: grantQueryKeys.grant(id),
           queryFn: () => getGrantDetails(id),
         });
       }
