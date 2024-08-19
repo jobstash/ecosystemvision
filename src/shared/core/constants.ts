@@ -61,3 +61,5 @@ export const TEST_IDS = {
   NAV_SECTION: 'nav-section',
   DETAILS_PANEL_TABS: 'details-panel-tabs',
 } as const;
+
+export const MAX_LIST_SIZE = 5000;

@@ -14,6 +14,7 @@ interface Props {
   page: number;
   searchParams?: string;
   grantId: string;
+  limit?: number;
 }
 
 // const data = fakeGrantees();
@@ -22,6 +23,7 @@ export const getGranteeList = async ({
   page,
   grantId,
   searchParams = '',
+  limit = Number(PAGE_SIZE) || 20,
 }: Props): Promise<GranteeInfiniteListPage> => {
   // return {
   //   page: page + 1,
@@ -29,7 +31,7 @@ export const getGranteeList = async ({
   // };
 
   const url = createUrlWithSearchParams(
-    `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${PAGE_SIZE}&grantId=${grantId}`,
+    `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${limit}&grantId=${grantId}`,
     searchParams,
   );
 
