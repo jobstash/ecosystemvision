@@ -16,7 +16,7 @@ export const GrantListPage = async () => {
     // Prefetch list
     queryClient.fetchInfiniteQuery({
       queryKey: grantQueryKeys.list(''),
-      queryFn: async ({ pageParam }) => getGrantList(pageParam),
+      queryFn: async ({ pageParam: page }) => getGrantList({ page }),
       initialPageParam: 1,
     }),
   ]);

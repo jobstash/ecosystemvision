@@ -9,12 +9,19 @@ import {
 } from '@/grants/core/schemas';
 import { dtoToGrant } from '@/grants/utils/dto-to-grant';
 
-export const getGrantList = async (
-  page: number,
+interface Props {
+  page: number;
+  searchParams?: string;
+  limit?: number;
+}
+
+export const getGrantList = async ({
+  page,
   searchParams = '',
-): Promise<GrantInfiniteListPage> => {
+  limit = Number(PAGE_SIZE) || 20,
+}: Props): Promise<GrantInfiniteListPage> => {
   const url = createUrlWithSearchParams(
-    `${grantQueryUrls.base}?page=${page}&limit=${PAGE_SIZE}`,
+    `${grantQueryUrls.base}?page=${page}&limit=${limit}`,
     searchParams,
   );
 

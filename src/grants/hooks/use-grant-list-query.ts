@@ -18,7 +18,8 @@ export const useGrantListQuery = () => {
     number
   >({
     queryKey: grantQueryKeys.list(searchParams),
-    queryFn: async ({ pageParam }) => getGrantList(pageParam, searchParams),
+    queryFn: async ({ pageParam: page }) =>
+      getGrantList({ page, searchParams }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
       typeof page === 'number' && page > 0 && data.length > 0
