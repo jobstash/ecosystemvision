@@ -12,6 +12,8 @@ interface Props {
 }
 
 const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
+  await new Promise((r) => setTimeout(r, 10000));
+
   const queryClient = getQueryClient();
 
   const [granteeListResult] = await Promise.all([

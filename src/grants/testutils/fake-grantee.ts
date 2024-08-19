@@ -6,6 +6,8 @@ import { Grantee, GranteeItem } from '@/grants/core/schemas';
 
 import { fakeGranteeProject } from '@/grants/testutils/fake-grantee-project';
 
+faker.seed(69);
+
 export const fakeGrantee = (partial: Partial<Grantee> = {}): Grantee => ({
   id: faker.string.uuid(),
   status: '',
