@@ -5,7 +5,7 @@ import { granteeDtoSchema } from '@/grants/core/schemas';
 
 // import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
-export const getGranteeDetails = async (granteeId: string) => {
+export const getGranteeDetails = async (grantId: string, granteeId: string) => {
   // return {
   //   success: true,
   //   message: 'Grantee details fetched successfully',
@@ -13,7 +13,7 @@ export const getGranteeDetails = async (granteeId: string) => {
   // };
 
   return mwGET({
-    url: `${grantQueryUrls.GRANTEE_DETAILS}/${granteeId}`,
+    url: `${grantQueryUrls.grantee(grantId, granteeId)}`,
     label: 'getGranteeDetails',
     responseSchema: granteeDtoSchema,
     options: { next: { revalidate: 3600 } },

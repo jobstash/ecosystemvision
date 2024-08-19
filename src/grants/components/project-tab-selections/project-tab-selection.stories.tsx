@@ -21,6 +21,7 @@ import { ProjectTabSelection } from './project-tab-selection';
 faker.seed(420);
 
 const grant = fakeGrant();
+const grantId = grant.id;
 const grantee = fakeGrantee();
 const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
@@ -44,6 +45,7 @@ const meta: Meta<typeof ProjectTabSelection> = {
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
         }),
       ],

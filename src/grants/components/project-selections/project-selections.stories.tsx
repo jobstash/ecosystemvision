@@ -21,6 +21,7 @@ import { mockGranteeQuery } from '@/grants/testutils/mock-grantee-query';
 faker.seed(420);
 
 const grant = fakeGrant();
+const grantId = grant.id;
 const grantee = fakeGrantee();
 const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
@@ -44,6 +45,7 @@ const meta: Meta<typeof ProjectSelections> = {
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
         }),
       ],

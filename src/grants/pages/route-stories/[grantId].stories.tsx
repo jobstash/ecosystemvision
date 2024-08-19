@@ -26,6 +26,7 @@ import { GranteeDetailsSection } from '@/grants/pages/grantee-details-section';
 faker.seed(69);
 
 const grant = fakeGrant();
+const grantId = grant.id;
 const grantee = fakeGrantee();
 const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
@@ -64,10 +65,11 @@ export const OK: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
         }),
       ],
@@ -85,6 +87,7 @@ export const LoadingGrantees: Story = {
           networkDelay: 'infinite',
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
         }),
       ],
@@ -101,6 +104,7 @@ export const LoadingGrantee: Story = {
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
           networkDelay: 'infinite',
         }),
@@ -117,6 +121,7 @@ export const ErrorGrantees: Story = {
           grantId: grant.id,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
         }),
       ],
@@ -132,7 +137,9 @@ export const ErrorGrantee: Story = {
           grantId: grant.id,
           data: grantees,
         }),
-        mockGranteeQuery(MockQueryResult.FETCH_ERROR),
+        mockGranteeQuery(MockQueryResult.FETCH_ERROR, {
+          grantId,
+        }),
       ],
     },
   },
@@ -146,6 +153,7 @@ export const EmptyGrantees: Story = {
           grantId: grant.id,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: grantee,
         }),
       ],
@@ -161,6 +169,7 @@ export const EmptyProject: Story = {
           grantId: grant.id,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
+          grantId,
           data: { ...grantee, projects: [] },
         }),
       ],
@@ -177,6 +186,7 @@ export const NotFoundGrantee: Story = {
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.NOT_FOUND, {
+          grantId,
           data: grantee,
         }),
       ],
