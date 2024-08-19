@@ -15,9 +15,7 @@ import {
   fakeGranteeItem,
   fakeGrantees,
 } from '@/grants/testutils/fake-grantee';
-import { fakeGranteeProject } from '@/grants/testutils/fake-grantee-project';
 import { mockGranteeListQuery } from '@/grants/testutils/mock-grantee-list-query';
-import { mockGranteeProjectQuery } from '@/grants/testutils/mock-grantee-project-query';
 import { mockGranteeQuery } from '@/grants/testutils/mock-grantee-query';
 
 faker.seed(420);
@@ -28,7 +26,6 @@ const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
   ...fakeGrantees().slice(1),
 ];
-const granteeProject = fakeGranteeProject({ id: grantee.projects[0].id });
 
 const meta: Meta<typeof ProjectSelections> = {
   title: 'grants/components/project-selections',
@@ -48,9 +45,6 @@ const meta: Meta<typeof ProjectSelections> = {
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {
           data: grantee,
-        }),
-        mockGranteeProjectQuery(MockQueryResult.SUCCESS, {
-          data: granteeProject,
         }),
       ],
     },
