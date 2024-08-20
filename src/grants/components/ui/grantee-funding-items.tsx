@@ -1,3 +1,4 @@
+import { conditionalItem } from '@/shared/utils/conditional-item';
 import { formatNumber } from '@/shared/utils/format-number';
 import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { BankIcon } from '@/shared/components/icons/bank-icon';
@@ -19,11 +20,13 @@ const createFundingItems = ({
       <DetailValueText>{`$${formatNumber(lastFundingAmount)}`}</DetailValueText>
     ),
   },
-  {
+  ...conditionalItem(!!lastFundingDate, {
     icon: <BankIcon />,
     label: 'Funding Date:',
-    value: <DetailValueText>{shortTimestamp(lastFundingDate)}</DetailValueText>,
-  },
+    value: (
+      <DetailValueText>{shortTimestamp(lastFundingDate!)}</DetailValueText>
+    ),
+  }),
 ];
 
 interface Props {
