@@ -33,10 +33,10 @@ export const useGrantList = () => {
     if (isSuccess && data) {
       const items = data.pages.flatMap((d) => d.data);
       for (const item of items) {
-        const { id } = item;
+        const { slug } = item;
         queryClient.prefetchQuery({
-          queryKey: grantQueryKeys.grant(id),
-          queryFn: () => getGrantDetails(id),
+          queryKey: grantQueryKeys.grant(slug),
+          queryFn: () => getGrantDetails(slug),
         });
       }
     }

@@ -11,7 +11,7 @@ export { GranteeDetailsSection as default } from '@/grants/pages/grantee-details
 //   });
 
 //   const grantIds = Array.from(
-//     new Set(grantListResponse.data.map((grant) => grant.id)),
+//     new Set(grantListResponse.data.map((grant) => grant.slug)),
 //   );
 
 //   return grantIds.map((grantId) => ({ grantId }));

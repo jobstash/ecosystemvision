@@ -20,7 +20,7 @@ export const GrantListItem = ({ grant }: Props) => {
   // TODO: JOB-679
 
   const {
-    id,
+    slug,
     logo,
     name,
     url,
@@ -37,9 +37,9 @@ export const GrantListItem = ({ grant }: Props) => {
   return (
     <Link
       prefetch
-      href={`/grants/${id}`}
+      href={`/grants/${slug}`}
       className="flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap"
-      data-uuid={id}
+      data-uuid={slug}
       data-testid={GRANT_TEST_IDS.GRANT_ITEM}
     >
       <div className="lg:pr-12">

@@ -17,7 +17,7 @@ export const GrantCard = ({ grant }: Props) => {
   // TODO: JOB-678
 
   const {
-    id,
+    slug,
     logo,
     name,
     url,
@@ -34,7 +34,7 @@ export const GrantCard = ({ grant }: Props) => {
   return (
     <div
       className="to-base-dark/20 flex items-center justify-between gap-6 rounded-b-lg bg-gradient-to-t from-tertiary/20 p-6 text-13 lg:rounded-lg lg:bg-gradient-to-t lg:p-5"
-      data-uuid={id}
+      data-uuid={slug}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >
       <div className="flex grow flex-col gap-4 lg:pr-24">
