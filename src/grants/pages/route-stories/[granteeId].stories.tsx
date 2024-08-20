@@ -25,7 +25,7 @@ const grant = fakeGrant();
 const grantId = grant.slug;
 const [firstGrantee, secondGrantee, ...restGrantees] = fakeGrantees();
 const grantee = { ...fakeGrantee(), ...secondGrantee };
-const granteeId = grantee.id;
+const granteeId = grantee.slug;
 const grantees = [
   firstGrantee,
   { ...secondGrantee, id: granteeId },

@@ -103,6 +103,7 @@ export type GrantDtoInfiniteListPage = z.infer<
 export const granteeItemSchema = z.object({
   id: z.string(),
   name: z.string(),
+  slug: z.string(),
   logoUrl: z.string().nullable(),
   lastFundingDate: z.number(),
   lastFundingAmount: z.number(),

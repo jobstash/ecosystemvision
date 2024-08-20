@@ -20,7 +20,7 @@ const grant = fakeGrant();
 const grantId = grant.slug;
 const grantee = fakeGrantee();
 const grantees = [
-  { ...fakeGranteeItem(), id: grantee.id },
+  { ...fakeGranteeItem(), id: grantee.slug },
   ...fakeGrantees().slice(1),
 ];
 
