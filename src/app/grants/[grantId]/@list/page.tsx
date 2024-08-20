@@ -12,8 +12,6 @@ interface Props {
 }
 
 const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
-  await new Promise((r) => setTimeout(r, 10000));
-
   const queryClient = getQueryClient();
 
   const [granteeListResult] = await Promise.all([
@@ -31,8 +29,8 @@ const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
     // Prefetch grantee details
     const promises = [
       queryClient.prefetchQuery({
-        queryKey: grantQueryKeys.grantee(grantId, grantee.id),
-        queryFn: () => getGranteeDetails(grantId, grantee.id),
+        queryKey: grantQueryKeys.grantee(grantId, grantee.slug),
+        queryFn: () => getGranteeDetails(grantId, grantee.slug),
       }),
     ];
 

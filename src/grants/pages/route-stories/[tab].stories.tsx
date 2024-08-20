@@ -24,7 +24,7 @@ faker.seed(69);
 const grant = fakeGrant();
 const grantId = grant.slug;
 const grantee = fakeGrantee();
-const granteeId = grantee.id;
+const granteeId = grantee.slug;
 const grantees = [grantee, ...fakeGrantees().slice(1)];
 const projectId = grantee.projects[0].id;
 

@@ -10,6 +10,7 @@ faker.seed(69);
 
 export const fakeGrantee = (partial: Partial<Grantee> = {}): Grantee => ({
   id: faker.string.uuid(),
+  slug: faker.internet.domainName(),
   status: '',
   tags: [],
   name: faker.company.name(),
@@ -30,6 +31,7 @@ export const fakeGranteeItem = (
   partial: Partial<GranteeItem> = {},
 ): GranteeItem => ({
   id: faker.string.uuid(),
+  slug: faker.internet.domainName(),
   name: faker.company.name(),
   logoUrl: fakeNullable(faker.image.url()),
   lastFundingDate: faker.date
@@ -46,7 +48,7 @@ export const fakeGrantees = ({
   Array.from({ length }).map((_, index) => {
     const grantee = fakeGranteeItem();
     if (firstId && index === 0) {
-      grantee.id = firstId;
+      grantee.slug = firstId;
     }
     return grantee;
   });
