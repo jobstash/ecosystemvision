@@ -96,3 +96,7 @@ html {
 .pinned > div{
   @apply max-h-[65px];
 }
+
+.second-pinned {
+  @apply fixed w-auto top-[260px]  z-50 pl-[700px];
+}
