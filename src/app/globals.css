@@ -26,7 +26,6 @@
 }
 
 html {
-  overflow-y: scroll;
   scrollbar-gutter: stable;
 }
 
@@ -91,4 +90,9 @@ html {
 /* Enable animation */
 .enable-animation .marquee__content {
 	animation: scroll 30s linear infinite;
+}
+
+
+.pinned > div{
+  @apply max-h-[65px];
 }

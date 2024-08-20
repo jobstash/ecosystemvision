@@ -33,7 +33,7 @@ export const GrantCard = ({ grant }: Props) => {
 
   return (
     <div
-      className="to-base-dark/20 flex items-center justify-between gap-6 rounded-b-lg bg-gradient-to-t from-tertiary/20 p-6 text-13 lg:rounded-lg lg:bg-gradient-to-t lg:p-5"
+      className="to-base-dark/20 flex max-h-[500px] items-center justify-between gap-6 overflow-hidden rounded-b-lg bg-gradient-to-t  from-tertiary/20 p-6 text-13 transition-all duration-700 lg:rounded-lg lg:bg-gradient-to-t lg:p-5"
       data-uuid={id}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >

@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import React, { useEffect } from 'react';
 
 import { Divider } from '@/shared/components/divider';
 
@@ -50,24 +51,46 @@ interface Props {
 }
 
 export const GrantPageLayout = ({ list, grant, children }: Props) => {
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const fixToTop = document.getElementById('fixToTop');
+      if (window.scrollY >= 40) {
+        fixToTop?.classList.add('pinned');
+      } else {
+        fixToTop?.classList.remove('pinned');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col gap-6 p-8">
-      <GrantBackButton fallbackUrl="/grants" />
+    <div className="flex flex-col gap-6 px-8 pt-[116px]">
+      <div className='fixed top-0 z-30 flex h-[116px] w-full items-center bg-[#070708] px-8'>
+       <GrantBackButton fallbackUrl="/grants" />
+      </div>
+      <div className="fixed top-[116px] z-20 w-full overflow-hidden bg-[#070708] transition-all duration-700" id='fixToTop'>
+        <GrantCard grant={grant} />
+      </div>
 
-      <GrantCard grant={grant} />
+      <div className='relative z-10 pt-[317px]'>
+        <span>{`Grantee List of ${grant.name}`}</span>
 
-      <span>{`Grantee List of ${grant.name}`}</span>
+        <Divider />
 
-      <Divider />
+        <div className="flex gap-8">
+          <div className="w-full lg:w-4/12">{list}</div>
 
-      <div className="flex gap-8">
-        <div className="w-full shrink-0 lg:w-4/12">{list}</div>
-
-        <div className="flex w-max flex-col gap-4 lg:grow">
-          {/* <GranteeCard />/ */}
-          {/* <ProjectSelections /> */}
-          {/* <ProjectTabSelection /> */}
-          {children}
+          <div className="flex flex-col gap-4 lg:grow">
+            {/* <GranteeCard />/ */}
+            {/* <ProjectSelections /> */}
+            {/* <ProjectTabSelection /> */}
+            {children}
+          </div>
         </div>
       </div>
     </div>
