@@ -22,7 +22,7 @@ import { GranteeDetailsSection } from '@/grants/pages/grantee-details-section';
 faker.seed(69);
 
 const grant = fakeGrant();
-const grantId = grant.id;
+const grantId = grant.slug;
 const grantee = fakeGrantee();
 const granteeId = grantee.id;
 const grantees = [grantee, ...fakeGrantees().slice(1)];

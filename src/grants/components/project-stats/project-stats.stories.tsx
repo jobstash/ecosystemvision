@@ -21,7 +21,7 @@ import { mockGranteeQuery } from '@/grants/testutils/mock-grantee-query';
 faker.seed(420);
 
 const grant = fakeGrant();
-const grantId = grant.id;
+const grantId = grant.slug;
 const grantee = fakeGrantee();
 const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
@@ -34,14 +34,14 @@ const meta: Meta<typeof GranteeProjectStats> = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/grants/${grant.id}`,
-        segments: [['grantId', grant.id]],
+        pathname: `/grants/${grantId}`,
+        segments: [['grantId', grantId]],
       },
     },
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
         mockGranteeQuery(MockQueryResult.SUCCESS, {

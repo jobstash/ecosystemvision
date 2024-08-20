@@ -21,7 +21,7 @@ export const ProjectSelections = () => {
     granteeId,
   );
 
-  if (granteeData?.data.projects.length === 0) return null;
+  if (granteeData?.data?.projects.length === 0) return null;
 
   if (isLoading) {
     return (

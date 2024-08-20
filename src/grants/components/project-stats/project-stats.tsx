@@ -21,7 +21,7 @@ export const GranteeProjectStats = () => {
   if (isLoading) return <p>{'TODO: Loading UI <ProjectStats />'}</p>;
 
   // This component is stacked with others. Top most component renders the error.
-  if (granteeData?.data.projects.length === 0) return null;
+  if (granteeData?.data?.projects.length === 0) return null;
   if (errorMessage || !granteeData?.data) return null;
 
   const currentProject = projectId

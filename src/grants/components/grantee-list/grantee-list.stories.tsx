@@ -17,6 +17,7 @@ import { GranteeList } from './grantee-list';
 faker.seed(69);
 
 const grant = fakeGrant();
+const grantId = grant.slug;
 const grantee = fakeGrantee();
 const grantees = [
   { ...fakeGranteeItem(), id: grantee.id },
@@ -31,7 +32,7 @@ const meta: Meta<typeof GranteeList> = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
       ],
@@ -49,7 +50,7 @@ export const Loading: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.SUCCESS, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
           networkDelay: 'infinite',
         }),
@@ -63,7 +64,7 @@ export const Empty: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.EMPTY, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
       ],
@@ -76,7 +77,7 @@ export const EndOfResults: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.END_OF_RESULTS, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
       ],
@@ -89,7 +90,7 @@ export const NetworkError: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.NETWORK_ERROR, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
       ],
@@ -102,7 +103,7 @@ export const FetchError: Story = {
     msw: {
       handlers: [
         mockGranteeListQuery(MockInfiniteQueryResult.FETCH_ERROR, {
-          grantId: grant.id,
+          grantId,
           data: grantees,
         }),
       ],

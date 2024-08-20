@@ -1,3 +1,4 @@
+import { errMsg } from '@/shared/core/errors';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { grantQueryUrls } from '@/grants/core/query-urls';
@@ -14,6 +15,10 @@ export const getGrantDetails = async (grantId: string): Promise<Grant> => {
 
   if (!response.success) {
     throw new Error(response.message);
+  }
+
+  if (!response.data) {
+    throw new Error(errMsg.NOT_FOUND);
   }
 
   return dtoToGrant(response.data);
