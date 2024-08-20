@@ -124,7 +124,7 @@ export const HomePage = () => {
               </span>
             </Button>
           </div>
-          <div className=" aspect-h-7 aspect-w-5 bottom-0 mt-12 md:aspect-h-5 lg:aspect-h-7 md:-mt-32 lg:ml-[-294px] lg:mt-[-700px] lg:w-screen">
+          <div className=" aspect-h-5 aspect-w-5 bottom-0 mt-12 md:aspect-h-5 lg:aspect-h-7 md:-mt-32 lg:ml-[-294px] lg:mt-[-980px] lg:w-screen">
             <Image
               src={'/bg-image.jpg'}
               alt={'placeholder'}
@@ -163,7 +163,7 @@ export const HomePage = () => {
                   <FlashIcon />
                 </div>
                 <h2 className="pb-6 text-base  leading-tight text-[#EAEAEA] md:text-xl lg:text-27 lg:leading-tight">
-                  RuHow CryptoInnovate Connected with Top Talent
+                  How CryptoInnovate Connected with Top Talent
                 </h2>
                 <p className="pb-4 text-xs text-white/75 md:text-14 lg:text-lg lg:leading-tight">
                   CryptoInnovate used our platform to find and connect with
@@ -242,37 +242,11 @@ export const HomePage = () => {
             </Button>
           </div>
         </section>
-        <section>
-          <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-[57px]">
-            Explore Top Grant Programs
-          </h2>
-          <p className="pb-12 text-base leading-5">
-            Access detailed data on over 4,000 top Web3 projects, including
-            insights into total value locked (TVL), financial metrics, network
-            deployments, and ecosystem details. Utilize advanced sorting and
-            filtering to identify high-impact projects and understand their
-            significance within the Web3 landscape@/home
-          </p>
-          <Button
-            as={Link}
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
-          >
-            <span className="text-base font-medium">Discover Programs</span>
-          </Button>
-        </section>
-        <section className="relative my-32 text-center md:my-48">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Image
-              src={'/header-image.png'}
-              alt={'Ecosystem.vision'}
-              className="md:w-[450px]"
-              width={224}
-              height={209}
-              priority
-            />
+        <section className="relative my-40 text-center md:my-64 lg:my-80">
+          <div className="absolute inset-x-0 top-0 mx-auto -mt-32 flex  h-[350px] w-[320px] items-center justify-center md:-mt-48 md:h-[550px] md:w-[520px] [&_canvas]:!size-[350px] [&_canvas]:md:!size-[550px]">
+            <Suspense fallback={<div>Loading...</div>}>
+              <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
+            </Suspense>
           </div>
           <div className="relative z-10">
             <h2 className="mx-auto w-2/3 pb-3 font-grotesk text-2xl font-medium leading-8 tracking-tighter antialiased md:pb-6 md:text-48 md:leading-[57px]">

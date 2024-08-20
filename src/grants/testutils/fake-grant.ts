@@ -9,6 +9,7 @@ import { Grant } from '@/grants/core/schemas';
 export const fakeGrant = (partial: Partial<Grant> = {}): Grant => ({
   id: faker.string.uuid(),
   name: faker.company.name(),
+  slug: faker.internet.domainWord(),
   networks: Array.from({ length: faker.number.int({ min: 0, max: 4 }) }).map(
     () => ({
       name: capitalize(faker.company.buzzNoun()),

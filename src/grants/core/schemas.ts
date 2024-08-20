@@ -8,6 +8,7 @@ import {
 export const grantSchema = z.object({
   id: z.string(),
   name: z.string(),
+  slug: z.string(),
   networks: z.array(
     z.object({
       name: z.string(),
@@ -34,6 +35,7 @@ export type Grant = z.infer<typeof grantSchema>;
 export const grantDtoSchema = z.object({
   id: z.string(),
   name: z.string(),
+  slug: z.string(),
   status: z.string(),
   socialLinks: z
     .object({
@@ -81,7 +83,7 @@ export const grantDtoSchema = z.object({
 export type GrantDto = z.infer<typeof grantDtoSchema>;
 
 export const grantDetailsDtoSchema = genericResponseSchema.extend({
-  data: grantDtoSchema,
+  data: grantDtoSchema.optional(),
 });
 export type GrantDetailsDto = z.infer<typeof grantDetailsDtoSchema>;
 
@@ -101,8 +103,9 @@ export type GrantDtoInfiniteListPage = z.infer<
 export const granteeItemSchema = z.object({
   id: z.string(),
   name: z.string(),
+  slug: z.string(),
   logoUrl: z.string().nullable(),
-  lastFundingDate: z.number(),
+  lastFundingDate: z.number().nullable(),
   lastFundingAmount: z.number(),
 });
 export type GranteeItem = z.infer<typeof granteeItemSchema>;
@@ -154,6 +157,6 @@ export const granteeSchema = granteeItemSchema.extend({
 export type Grantee = z.infer<typeof granteeSchema>;
 
 export const granteeDtoSchema = genericResponseSchema.extend({
-  data: granteeSchema,
+  data: granteeSchema.optional(),
 });
 export type GranteeDto = z.infer<typeof granteeDtoSchema>;
