@@ -25,7 +25,12 @@ export const useGranteeFetch = (grantId: string, granteeId?: string) => {
   } = useGranteeDetails(grantId, granteeId ?? granteeItem?.id);
 
   const isLoading = (!granteeId && isLoadingGrantees) || isLoadingGrantee;
-  const errorMessage = granteesError?.message || granteeError?.message;
+
+  const granteesErrorMessage = shouldFetchGranteeList
+    ? granteesError?.message
+    : null;
+  const granteeErrorMessage = granteeError?.message;
+  const errorMessage = granteesErrorMessage || granteeErrorMessage;
 
   return {
     granteeData,
