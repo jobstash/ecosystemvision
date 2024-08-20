@@ -27,10 +27,10 @@ export const GrantListPage = async () => {
   await Promise.all(
     grantListResult.pages
       .flatMap((page) => page.data)
-      .map(({ id }) =>
+      .map(({ slug }) =>
         queryClient.prefetchQuery({
-          queryKey: grantQueryKeys.grant(id),
-          queryFn: () => getGrantDetails(id),
+          queryKey: grantQueryKeys.grant(slug),
+          queryFn: () => getGrantDetails(slug),
         }),
       ),
   );

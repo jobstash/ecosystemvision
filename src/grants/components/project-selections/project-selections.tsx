@@ -21,7 +21,7 @@ export const ProjectSelections = () => {
     granteeId,
   );
 
-  if (granteeData?.data.projects.length === 0) return null;
+  if (granteeData?.data?.projects.length === 0) return null;
 
   if (isLoading) {
     return (
@@ -36,7 +36,7 @@ export const ProjectSelections = () => {
   if (errorMessage) return null;
   if (!granteeData?.data) return null;
 
-  const baseHref = `/grants/${grantId}/grantees/${granteeData.data.id}/projects`;
+  const baseHref = `/grants/${grantId}/grantees/${granteeData.data.slug}/projects`;
 
   return (
     <div className={WRAPPER_CLASSNAME}>

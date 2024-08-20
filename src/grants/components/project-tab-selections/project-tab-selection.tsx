@@ -35,7 +35,7 @@ export const ProjectTabSelection = () => {
 
   if (!currentProject?.tabs?.length) return null;
 
-  const baseHref = `/grants/${grantId}/grantees/${granteeData.data.id}/projects`;
+  const baseHref = `/grants/${grantId}/grantees/${granteeData.data.slug}/projects`;
 
   const activeTab = tab || currentProject.tabs[0].tab;
 

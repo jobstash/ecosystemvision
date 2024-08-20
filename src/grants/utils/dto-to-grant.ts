@@ -4,6 +4,7 @@ export const dtoToGrant = (dto: GrantDto): Grant => {
   const {
     id,
     name,
+    slug,
     socialLinks,
     metadata: {
       networks,
@@ -22,6 +23,7 @@ export const dtoToGrant = (dto: GrantDto): Grant => {
   return {
     id,
     name,
+    slug,
     // TODO: ui expects { name: string, logo: string }[], dto is string[]
     networks: networks.length > 0 ? [{ name: networks[0], logo: null }] : [],
     // TODO: ui expects string, dto is string[]

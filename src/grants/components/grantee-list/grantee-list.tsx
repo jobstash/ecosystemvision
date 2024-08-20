@@ -42,7 +42,7 @@ export const GranteeList = () => {
         {(index) => (
           <div className={cn({ 'pt-8': index > 0 })}>
             <ClientWrapper
-              granteeId={grantees[index].id}
+              granteeId={grantees[index].slug}
               isActiveBypass={index === 0 && !paramsGranteeId}
               className="flex items-center justify-between gap-4 rounded-20 bg-gradient-to-tr from-grantee-item/25 to-black p-6"
             >
