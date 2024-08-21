@@ -7,11 +7,12 @@ import { cn } from '@/shared/utils/cn';
 import { useDebounceFn } from '@/shared/hooks/use-debounce-fn';
 
 interface Props {
+  backButton: React.ReactNode;
   collapsed: React.ReactNode;
   full: React.ReactNode;
 }
 
-export const ClientWrapper = ({ collapsed, full }: Props) => {
+export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -19,15 +20,15 @@ export const ClientWrapper = ({ collapsed, full }: Props) => {
   const handleScroll = useCallback(() => {
     const currentScrollPos = window.scrollY;
 
-    if (currentScrollPos >= 40 && !isCollapsed) {
+    if (currentScrollPos >= 40) {
       setIsCollapsed(true);
-    } else if (currentScrollPos < prevScrollPos && isCollapsed) {
+    } else if (currentScrollPos < prevScrollPos) {
       setIsCollapsed(false);
     }
     setPrevScrollPos(currentScrollPos);
-  }, [isCollapsed, prevScrollPos]);
+  }, [prevScrollPos]);
 
-  const debouncedHandleScroll = useDebounceFn(handleScroll, 100);
+  const debouncedHandleScroll = useDebounceFn(handleScroll, 200);
 
   useEffect(() => {
     window.addEventListener('scroll', debouncedHandleScroll);
@@ -39,12 +40,15 @@ export const ClientWrapper = ({ collapsed, full }: Props) => {
   const content = isCollapsed ? collapsed : full;
 
   return (
-    <div
-      className={cn('w-full overflow-hidden transition-all duration-700', {
-        pinned: isCollapsed,
-      })}
-    >
-      {content}
+    <div className="top-0 z-50">
+      {backButton}
+      <div
+        className={cn('w-full overflow-hidden transition-all duration-700', {
+          pinned: isCollapsed,
+        })}
+      >
+        {content}
+      </div>
     </div>
   );
 };
