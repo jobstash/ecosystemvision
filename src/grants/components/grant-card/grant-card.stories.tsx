@@ -14,6 +14,13 @@ const meta: Meta<typeof GrantCard> = {
   args: {
     grant: fakeGrant(),
   },
+  decorators: [
+    (Story) => (
+      <div className="h-[2100px]">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
