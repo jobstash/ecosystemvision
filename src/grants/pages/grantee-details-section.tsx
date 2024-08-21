@@ -44,13 +44,15 @@ interface Props {
 }
 
 export const GranteeDetailsSection = ({ hasGranteeId }: Props) => {
+  // TODO: Disable page scroll on mobile/tablet if hasGranteeId
+
   return (
     <div
       className={cn(
         'space-y-4',
         { 'hidden lg:block': !hasGranteeId },
         {
-          'fixed top-0 left-0 z-50 min-w-full bg-[#070708] sm:relative':
+          'fixed top-0 left-0 z-50 min-w-full bg-[#070708] min-h-screen pt-20 lg:pt-0 lg:relative':
             hasGranteeId,
         },
       )}

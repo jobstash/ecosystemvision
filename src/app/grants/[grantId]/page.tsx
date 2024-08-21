@@ -5,7 +5,7 @@
 import { GranteeDetailsSection } from '@/grants/pages/grantee-details-section';
 
 const Page = () => {
-  return <GranteeDetailsSection hasGranteeId />;
+  return <GranteeDetailsSection />;
 };
 export default Page;
 
