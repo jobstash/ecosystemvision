@@ -49,7 +49,7 @@ interface Props {
 
 export const GrantPageLayout = ({ list, grant, children }: Props) => {
   return (
-    <div className="flex flex-col gap-6 px-4 pt-20 lg:px-0 lg:pr-8">
+    <div className="flex flex-col gap-6 px-4 pt-[56px] md:pt-20 lg:px-0 lg:pr-8 lg:pt-0">
       <GrantCard
         grant={grant}
         backButton={<GrantBackButton fallbackUrl="/grants" />}

@@ -40,8 +40,10 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
   const content = isCollapsed ? collapsed : full;
 
   return (
-    <div className="top-0 z-50">
-      {backButton}
+    <div className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20">
+      <div className="px-5">
+        {backButton}
+      </div>
       <div
         className={cn('w-full overflow-hidden transition-all duration-700', {
           pinned: isCollapsed,
