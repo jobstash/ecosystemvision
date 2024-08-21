@@ -40,10 +40,9 @@ export const ClientWrapper = ({ collapsed, full }: Props) => {
 
   return (
     <div
-      className={cn(
-        'fixed top-[116px] z-20 w-full overflow-hidden bg-[#070708] transition-all duration-700',
-        { pinned: isCollapsed },
-      )}
+      className={cn('w-full overflow-hidden transition-all duration-700', {
+        pinned: isCollapsed,
+      })}
     >
       {content}
     </div>

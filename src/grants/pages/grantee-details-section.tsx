@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic';
 
+import { cn } from '@/shared/utils/cn';
+
 const GranteeCard = dynamic(
   () => import('@/grants/components/grantee-card').then((m) => m.GranteeCard),
   {
@@ -37,9 +39,22 @@ const GranteeProjectStats = dynamic(
   },
 );
 
-export const GranteeDetailsSection = () => {
+interface Props {
+  hasGranteeId?: boolean;
+}
+
+export const GranteeDetailsSection = ({ hasGranteeId }: Props) => {
   return (
-    <div className="space-y-4">
+    <div
+      className={cn(
+        'space-y-4',
+        { 'hidden lg:block': !hasGranteeId },
+        {
+          'fixed top-0 left-0 z-50 min-w-full bg-[#070708] sm:relative':
+            hasGranteeId,
+        },
+      )}
+    >
       <GranteeCard />
       <ProjectSelections />
       <ProjectTabSelection />

@@ -49,16 +49,11 @@ interface Props {
 
 export const GrantPageLayout = ({ list, grant, children }: Props) => {
   return (
-    <div className="flex flex-col gap-6 px-8 pt-[116px]">
-      <div className="fixed top-0 z-30 flex h-[116px] w-full items-center bg-[#070708] px-8">
-        <GrantBackButton fallbackUrl="/grants" />
-      </div>
-
+    <div className="flex flex-col gap-6 px-8 pt-20">
+      <GrantBackButton fallbackUrl="/grants" />
       <GrantCard grant={grant} />
 
-      <div className="relative z-10 pt-[317px]">
-        <span>{`Grantee List of ${grant.name}`}</span>
-
+      <div className="relative z-10">
         <div className="flex gap-8">
           <div className="w-full shrink-0 lg:w-4/12">{list}</div>
 
