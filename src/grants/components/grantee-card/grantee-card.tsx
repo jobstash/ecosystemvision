@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import Markdown from 'react-markdown';
 
 import { Button } from '@nextui-org/react';
 
@@ -41,7 +42,29 @@ export const GranteeCard = () => {
     <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
       <GranteeLogoTitle name={name} logoUrl={logoUrl} />
 
-      <span className="text-13 text-white/75">{description}</span>
+      <Markdown
+        components={{
+          p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+          h1: ({ children }) => (
+            <h1 className="text-bold text-2xl font-bold">{children}</h1>
+          ),
+          h2: ({ children }) => (
+            <h2 className="text-bold text-xl font-bold">{children}</h2>
+          ),
+          h3: ({ children }) => (
+            <h3 className="text-bold text-lg font-bold">{children}</h3>
+          ),
+          ol: ({ children }) => (
+            <ol className="list-outside list-decimal">{children}</ol>
+          ),
+          ul: ({ children }) => (
+            <ul className="ml-2 list-inside list-disc space-y-1">{children}</ul>
+          ),
+          li: ({ children }) => <li className="mb-2">{children}</li>,
+        }}
+      >
+        {description}
+      </Markdown>
 
       {website && (
         <Button
