@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { Suspense } from 'react';
@@ -28,7 +28,7 @@ export const HomePage = () => {
         <section className="pointer-events-none relative z-10 ">
           <div>
             <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-9/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
-              Unlock Earnings and Influence in Web3: Become a Verified
+              Unlock Earnings and your Network in Web3: Become a Verified
               Professional
             </h1>
             <div className="my-10 h-px bg-custom"></div>
@@ -229,7 +229,7 @@ export const HomePage = () => {
               insights into total value locked (TVL), financial metrics, network
               deployments, and ecosystem details. Utilize advanced sorting and
               filtering to identify high-impact projects and understand their
-              significance within the Web3 landscape@/home
+              significance within the Web3 landscape
             </p>
             <Button
               as={Link}
