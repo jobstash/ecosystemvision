@@ -59,7 +59,7 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
         <div className="flex gap-8">
           <div className="w-full shrink-0 lg:w-4/12">{list}</div>
 
-          <div className="flex flex-col gap-4 lg:grow">
+          <div className="flex w-full flex-col gap-4 lg:w-8/12">
             {/* <GranteeCard />/ */}
             {/* <ProjectSelections /> */}
             {/* <ProjectTabSelection /> */}

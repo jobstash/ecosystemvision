@@ -14,7 +14,7 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
 
   return (
     <div
-      className={cn('flex gap-6 rounded-[20px] bg-white/5 p-5', {
+      className={cn('flex flex-wrap gap-6 rounded-[20px] bg-white/5 p-5', {
         ' [&>*]:min-h-36': hasGap,
       })}
     >
