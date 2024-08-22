@@ -8,7 +8,7 @@ import {
   granteeInfiniteListPageSchema,
 } from '@/grants/core/schemas';
 
-// import { fakeGrantees } from '@/grants/testutils/fake-grantee';
+import { fakeGrantees } from '@/grants/testutils/fake-grantee';
 
 interface Props {
   page: number;
@@ -17,7 +17,7 @@ interface Props {
   limit?: number;
 }
 
-// const data = fakeGrantees();
+const data = fakeGrantees();
 
 export const getGranteeList = async ({
   page,
@@ -25,10 +25,10 @@ export const getGranteeList = async ({
   searchParams = '',
   limit = Number(PAGE_SIZE) || 20,
 }: Props): Promise<GranteeInfiniteListPage> => {
-  // return {
-  //   page: page + 1,
-  //   data,
-  // };
+  return {
+    page: page + 1,
+    data,
+  };
 
   const url = createUrlWithSearchParams(
     `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${limit}&grantId=${grantId}`,
