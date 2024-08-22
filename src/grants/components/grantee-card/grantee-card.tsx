@@ -45,6 +45,16 @@ export const GranteeCard = () => {
       <Markdown
         components={{
           p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+          a: ({ href, children }) => (
+            <Link
+              href={href ?? ''}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-2 font-bold underline last:mb-0"
+            >
+              {children}
+            </Link>
+          ),
           h1: ({ children }) => (
             <h1 className="text-bold text-2xl font-bold">{children}</h1>
           ),
@@ -63,7 +73,7 @@ export const GranteeCard = () => {
           li: ({ children }) => <li className="mb-2">{children}</li>,
         }}
       >
-        {description}
+        {description.replace(/\] \(/g, '](')}
       </Markdown>
 
       {website && (
