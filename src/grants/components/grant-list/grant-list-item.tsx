@@ -1,12 +1,14 @@
 import Link from 'next/link';
 
-import { Avatar, Button } from '@nextui-org/react';
+import { Avatar } from '@nextui-org/react';
 
 import { cn } from '@/shared/utils/cn';
+import { getLogoUrl } from '@/shared/utils/get-logo-url';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
 import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
+import { ApplyButton } from '@/grants/components/grant-list/apply-button';
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
@@ -50,7 +52,7 @@ export const GrantListItem = ({ grant }: Props) => {
                 base: 'bg-black w-8 h-8 rounded lg:w-10 lg:h-10',
               }}
               showFallback
-              src={logo ?? ''}
+              src={getLogoUrl(url ?? '', logo)}
               name={name}
             />
           </div>
@@ -94,17 +96,8 @@ export const GrantListItem = ({ grant }: Props) => {
         </div>
       </div>
       <div className="flex w-full items-center justify-end gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
-        {url && (
-          <Button
-            as={Link}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto w-full bg-white font-semibold text-black"
-          >
-            <span>Apply</span>
-          </Button>
-        )}
+        <ApplyButton url={url} />
+
         <div className="hidden lg:flex">
           <CaretRightIcon />
         </div>
