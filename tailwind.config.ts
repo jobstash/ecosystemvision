@@ -40,6 +40,7 @@ const config: Config = {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         'base-dark': 'var(--color-base-dark)',
         'dark-gray': 'var(--color-dark-gray)',
+        'app-bg': 'rgb(var( --color-bg-app))',
         'light-gray': 'rgb(var(--color-light-gray))',
         'cool-gray': 'rgb(var(--color-cool-gray))',
         'medium-gray': 'rgb(var(--color-medium-gray))',
