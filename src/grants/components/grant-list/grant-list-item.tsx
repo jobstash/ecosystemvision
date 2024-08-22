@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Avatar } from '@nextui-org/react';
 
 import { cn } from '@/shared/utils/cn';
+import { getLogoUrl } from '@/shared/utils/get-logo-url';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
@@ -51,7 +52,7 @@ export const GrantListItem = ({ grant }: Props) => {
                 base: 'bg-black w-8 h-8 rounded lg:w-10 lg:h-10',
               }}
               showFallback
-              src={logo ?? ''}
+              src={getLogoUrl(url ?? '', logo)}
               name={name}
             />
           </div>
