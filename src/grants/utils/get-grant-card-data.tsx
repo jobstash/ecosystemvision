@@ -1,5 +1,6 @@
 import { conditionalItem } from '@/shared/utils/conditional-item';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
+import { MarkdownContent } from '@/shared/components/markdown-content';
 
 import { Grant } from '@/grants/core/schemas';
 import { DetailItemProps } from '@/grants/components/ui/base/detail-item';
@@ -40,7 +41,10 @@ const createMidItems = ({
   categories,
   type,
 }: Grant): DetailItemProps[] => [
-  ...conditionalItem(!!summary, { label: 'Summary:', value: summary }),
+  ...conditionalItem(!!summary, {
+    label: 'Summary:',
+    value: <MarkdownContent content={summary} />,
+  }),
   ...conditionalItem(categories.length > 0, {
     label: 'Categories',
     value: (
