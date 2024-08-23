@@ -12,16 +12,18 @@ export const MarkdownContent = ({ content }: Props) => {
   return (
     <Markdown
       components={{
-        p: ({ children }) => <p className="space-y-2 text-13 text-white/75">{children}</p>,
+        p: ({ children }) => (
+          <p className="space-y-2 text-sm text-white/75">{children}</p>
+        ),
         a: ({ href, children }) => <LinkItem href={href}>{children}</LinkItem>,
         h1: ({ children }) => (
-          <h1 className="text-bold text-2xl font-bold">{children}</h1>
+          <h1 className="text-bold text-xl font-bold">{children}</h1>
         ),
         h2: ({ children }) => (
-          <h2 className="text-bold text-xl font-bold">{children}</h2>
+          <h2 className="text-bold text-lg font-bold">{children}</h2>
         ),
         h3: ({ children }) => (
-          <h3 className="text-bold text-lg font-bold">{children}</h3>
+          <h3 className="text-bold font-bold">{children}</h3>
         ),
         ol: ({ children }) => (
           <ol className="list-outside list-decimal">{children}</ol>
@@ -29,7 +31,9 @@ export const MarkdownContent = ({ content }: Props) => {
         ul: ({ children }) => (
           <ul className="ml-2 list-inside list-disc space-y-1">{children}</ul>
         ),
-        li: ({ children }) => <li className="mb-2">{children}</li>,
+        li: ({ children }) => (
+          <li className="mb-2 text-sm text-white/75">{children}</li>
+        ),
       }}
     >
       {content.replace(/\] \(/g, '](').replace(/--/g, '-')}
