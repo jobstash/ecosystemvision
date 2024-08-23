@@ -20,7 +20,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
   const handleScroll = useCallback(() => {
     const currentScrollPos = window.scrollY;
 
-    if (currentScrollPos >= 40) {
+    if (currentScrollPos >= 100) {
       setIsCollapsed(true);
     } else if (currentScrollPos < prevScrollPos) {
       setIsCollapsed(false);
@@ -43,7 +43,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
     <div className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20">
       <div className="px-5">{backButton}</div>
       <div
-        className={cn('w-full overflow-hidden transition-all duration-700', {
+        className={cn('w-screen overflow-hidden transition-all duration-700', {
           pinned: isCollapsed,
         })}
       >

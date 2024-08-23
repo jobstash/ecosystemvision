@@ -1,4 +1,7 @@
+'use client';
+
 import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
 import { cn } from '@/shared/utils/cn';
 
@@ -45,22 +48,40 @@ interface Props {
 
 export const GranteeDetailsSection = ({ hasGranteeId }: Props) => {
   // TODO: Disable page scroll on mobile/tablet if hasGranteeId
+  useEffect(() => {
+    const handleResize = () => {
+      if (hasGranteeId && window.innerWidth < 1024) {
+        document.body.classList.add('overflow-hidden');
+      } else {
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
 
+    handleResize(); // Call once on mount
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.body.classList.remove('overflow-hidden'); // Clean up on unmount
+    };
+  }, [hasGranteeId]);
   return (
     <div
       className={cn(
-        'space-y-4',
+        'space-y-4 overflow-auto',
         { 'hidden lg:block': !hasGranteeId },
         {
-          'fixed top-0 left-0 z-50 min-w-full bg-[#070708] min-h-screen pt-20 lg:pt-0 lg:relative':
+          'fixed top-0 left-0 bottom-0 mt-[95px] z-[999] w-screen bg-[#070708] h-[calc(100vh-95px)] lg:pt-0 lg:relative':
             hasGranteeId,
         },
       )}
     >
       <GranteeCard />
-      <ProjectSelections />
-      <ProjectTabSelection />
-      <GranteeProjectStats />
+      <div className='space-y-4 px-3.5'>
+        <ProjectSelections />
+        <ProjectTabSelection />
+        <GranteeProjectStats />
+      </div>
     </div>
   );
 };

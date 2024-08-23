@@ -8,7 +8,7 @@ import {
   GranteeStatsSkeleton,
 } from '@/grants/components/grant-stat-item';
 
-const WRAPPER_CLASSNAME = 'flex flex-wrap gap-6';
+const WRAPPER_CLASSNAME = '-mx-1.5 flex flex-wrap gap-y-5 pb-5';
 
 export const GranteeProjectStats = () => {
   const { grantId, granteeId, projectId, tab } = useParams() as {

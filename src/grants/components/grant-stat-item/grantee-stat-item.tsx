@@ -13,22 +13,20 @@ interface Props {
 
 export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
   const { label, value, stats } = granteeStat;
-  const hasChildren = stats && stats.length > 0;
+  const hasChildren = !!stats && stats.length > 0;
   const hasGap = hasChildren || level === 1;
 
   return (
-    <Container hasGap={hasGap}>
-      <Inner hasGap={hasGap}>
-        <div>
-          <span className="text-2xl font-bold text-white/60">{label}</span>
-        </div>
-        <div>
-          <span className="text-3xl font-bold">{value}</span>
-        </div>
+    <Container hasGap={hasGap} hasChildren={hasChildren}>
+      <Inner hasChildren={hasChildren}>
+        <span className="text-13 font-medium leading-tight text-white md:text-2xl">
+          {label}
+        </span>
+        <span className="text-xl font-medium">{value}</span>
       </Inner>
 
       {hasChildren && (
-        <>
+        <div className="-mx-1.5 flex flex-wrap pt-2">
           {stats.map((stat) => (
             <GranteeStatItem
               key={stat.label}
@@ -36,32 +34,46 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
               level={level + 1}
             />
           ))}
-        </>
+        </div>
       )}
     </Container>
   );
 };
 
 interface WrapperProps {
-  hasGap: boolean;
+  hasChildren: boolean;
   children: React.ReactNode;
 }
 
-export const Container = ({ hasGap, children }: WrapperProps) => (
+export const Container = ({
+  hasGap,
+  hasChildren,
+  children,
+}: { hasGap: boolean } & WrapperProps) => (
   <div
-    className={cn('flex flex-wrap gap-6 rounded-[20px] bg-white/5 p-5', {
-      ' [&>*]:min-h-36': hasGap,
+    className={cn(' w-1/2 gap-6 px-1.5 ', {
+      'w-full': hasChildren,
     })}
   >
-    {children}
+    <div
+      className={cn(
+        'flex  flex-col rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4',
+        {
+          'min-h-[130px]': hasGap,
+          'min-h-[90px]': !hasGap,
+        },
+      )}
+    >
+      {children}
+    </div>
   </div>
 );
 
-export const Inner = ({ hasGap, children }: WrapperProps) => (
+export const Inner = ({ hasChildren, children }: WrapperProps) => (
   <div
-    className={cn('flex min-h-max min-w-64 flex-col', {
-      'justify-between': hasGap,
-      'justify-center': !hasGap,
+    className={cn('flex grow  justify-between', {
+      'flex-row items-start': hasChildren,
+      'flex-col': !hasChildren,
     })}
   >
     {children}
@@ -75,10 +87,11 @@ const GranteeStatItemSkeleton = ({
   level?: number;
   children?: React.ReactNode;
 }) => {
+  const hasChildren = children !== null;
   const hasGap = level === 1;
   return (
-    <Container hasGap={hasGap}>
-      <Inner hasGap={hasGap}>
+    <Container hasChildren={hasChildren} hasGap={hasGap}>
+      <Inner hasChildren={hasChildren}>
         <Skeleton className="size-full rounded-20" />
       </Inner>
       {children}
