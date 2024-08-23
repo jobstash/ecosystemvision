@@ -2,15 +2,20 @@ import '../src/app/globals.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../src/app/swiper.css'; 
+import '../src/app/swiper.css';
 
 import type { Preview } from '@storybook/react';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
-import { useEffect, useReducer } from 'react';
+import { useEffect } from 'react';
 import { grotesk, interTight } from '@/shared/core/fonts';
+
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Initialize MSW
 initialize({

@@ -3,7 +3,12 @@
 import { useParams } from 'next/navigation';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
-import { GranteeStatItem } from '@/grants/components/grant-stat-item';
+import {
+  GranteeStatItem,
+  GranteeStatsSkeleton,
+} from '@/grants/components/grant-stat-item';
+
+const WRAPPER_CLASSNAME = 'flex flex-wrap gap-6';
 
 export const GranteeProjectStats = () => {
   const { grantId, granteeId, projectId, tab } = useParams() as {
@@ -18,7 +23,12 @@ export const GranteeProjectStats = () => {
     granteeId,
   );
 
-  if (isLoading) return <p>{'TODO: Loading UI <ProjectStats />'}</p>;
+  if (isLoading)
+    return (
+      <div className={WRAPPER_CLASSNAME}>
+        <GranteeStatsSkeleton />
+      </div>
+    );
 
   // This component is stacked with others. Top most component renders the error.
   if (granteeData?.data?.projects.length === 0) return null;
@@ -36,7 +46,7 @@ export const GranteeProjectStats = () => {
   if (!currentTab?.stats?.length) return null;
 
   return (
-    <div className="flex flex-wrap gap-6">
+    <div className={WRAPPER_CLASSNAME}>
       {currentTab.stats.map((granteeStat) => (
         <GranteeStatItem key={granteeStat.label} granteeStat={granteeStat} />
       ))}

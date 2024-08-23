@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
-import { ProjectSelectionItemSkeleton } from '@/grants/components/project-selections/project-selection-item-skeleton';
+import { TabSelectionsSkeleton } from '@/grants/components/tab-selections-skeleton';
 
 import { ProjectSelection } from './project-selection';
 
@@ -25,10 +25,7 @@ export const ProjectSelections = () => {
 
   if (isLoading) {
     return (
-      <div className={WRAPPER_CLASSNAME}>
-        <ProjectSelectionItemSkeleton />
-        <ProjectSelectionItemSkeleton />
-      </div>
+      <TabSelectionsSkeleton wrapperClassName={WRAPPER_CLASSNAME} length={2} />
     );
   }
 
