@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-import { Button } from '@nextui-org/react';
+import { Button, Skeleton } from '@nextui-org/react';
 
 import { getWebsiteText } from '@/shared/utils/get-website-text';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
@@ -11,7 +11,13 @@ import { MarkdownContent } from '@/shared/components/markdown-content';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { GranteeFundingItems } from '@/grants/components/ui/grantee-funding-items';
-import { GranteeLogoTitle } from '@/grants/components/ui/grantee-logo-title';
+import {
+  GranteeLogoTitle,
+  GranteeLogoTitleSkeleton,
+} from '@/grants/components/ui/grantee-logo-title';
+
+const WRAPPER_CLASSNAME =
+  'to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5';
 
 export const GranteeCard = () => {
   const { grantId, granteeId } = useParams() as {
@@ -25,7 +31,24 @@ export const GranteeCard = () => {
   );
 
   if (isLoading) {
-    return <p>{'Loading <GranteeCard />...'}</p>;
+    return (
+      <div className={WRAPPER_CLASSNAME}>
+        <GranteeLogoTitleSkeleton />
+        <div className="space-y-2">
+          <Skeleton className="h-5 w-full rounded-md" />
+          <Skeleton className="h-5 w-full rounded-md" />
+          <Skeleton className="h-5 w-9/12 rounded-md" />
+        </div>
+        <Skeleton className="h-5 w-32 rounded-md" />
+        <div className="flex flex-col gap-2 md:border-t md:border-divider/25 md:pt-4">
+          <div className="flex gap-x-4">
+            <Skeleton className="h-5 w-32 rounded-md" />
+            <Skeleton className="h-5 w-24 rounded-md" />
+            <Skeleton className="h-5 w-28 rounded-md" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (errorMessage) {
@@ -39,7 +62,7 @@ export const GranteeCard = () => {
   const { logoUrl, name, website, description } = granteeData.data;
 
   return (
-    <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-lg bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
+    <div className={WRAPPER_CLASSNAME}>
       <GranteeLogoTitle name={name} logoUrl={logoUrl} />
 
       <MarkdownContent content={description} />
