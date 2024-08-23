@@ -82,3 +82,4 @@ export const CollapsedGrantCard = ({ grant }: Props) => {
     </div>
   );
 };
+

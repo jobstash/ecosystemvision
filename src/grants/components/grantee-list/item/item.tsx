@@ -22,7 +22,9 @@ export const GranteeListItem = ({ granteeItem }: Props) => {
         />
         <GranteeFundingItems granteeItem={granteeItem} />
       </div>
-      <CaretRightIcon />
+      <div className='shrink-0'>
+        <CaretRightIcon />
+      </div>
     </>
   );
 };
