@@ -71,7 +71,7 @@ export const GranteeDetailsSection = ({ hasGranteeId }: Props) => {
         'space-y-4 overflow-auto',
         { 'hidden lg:block': !hasGranteeId },
         {
-          'fixed top-0 left-0 bottom-0 mt-[95px] z-[999] w-screen bg-[#070708] h-[calc(100vh-95px)] lg:pt-0 lg:relative':
+          'fixed top-0 left-0 bottom-0 mt-[95px] md:mt-[125px] z-[999] w-screen bg-[#070708] h-[calc(100vh-95px)] md:h-[calc(100vh-125px)] lg:mt-8 lg:pt-0 lg:relative lg:w-auto lg:h-auto':
             hasGranteeId,
         },
       )}

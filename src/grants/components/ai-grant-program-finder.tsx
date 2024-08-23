@@ -23,7 +23,7 @@ export const AiGrantProgramFinder = () => {
   if (!isMounted || !portal) return null;
 
   return createPortal(
-    <div className="mt-5 flex h-full flex-col gap-4 rounded-20 border border-white/10 p-4 lg:mt-0">
+    <div className="mt-5 flex h-full flex-col gap-4 rounded-20 border border-white/10 p-4 md:mt-6 lg:mt-0">
       <h2 className="text-xl font-semibold">AI Grant Program Finder</h2>
       <span className="text-sm">
         Our AI assistant will help you identify which grant program suits your

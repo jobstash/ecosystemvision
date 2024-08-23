@@ -110,10 +110,10 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
         backButton={<GrantBackButton fallbackUrl="/grants" />}
       />
 
-      <div className="mt-[430px]">
+      <div className="mt-[430px] md:mt-[320px] lg:mt-[370px]">
         <div className="flex gap-8">
           <div className="w-full shrink-0 lg:w-4/12">
-            <div className="px-2 pb-4 text-[15px]">Grantee List</div>
+            <div className="px-2 pb-4 text-base">Grantee List</div>
             {list}
           </div>
 
