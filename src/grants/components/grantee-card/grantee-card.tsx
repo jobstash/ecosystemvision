@@ -39,7 +39,7 @@ export const GranteeCard = () => {
   const { logoUrl, name, website, description } = granteeData.data;
 
   return (
-    <div className="to-base-dark/20 rounded-b- flex flex-col gap-y-4 bg-gradient-to-tr from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
+    <div className="to-base-dark/20 flex flex-col gap-y-4 rounded-b-20 bg-gradient-to-t from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5">
       <GranteeLogoTitle name={name} logoUrl={logoUrl} />
 
       <MarkdownContent content={description} />

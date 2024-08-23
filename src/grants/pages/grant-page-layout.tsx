@@ -43,53 +43,63 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
   const contentRef = useRef<HTMLDivElement>(null); // Ref for the element to add/remove classes
 
   useEffect(() => {
-    const element = pinRef.current;
-    const triggerElement = triggerRef.current;
-    const contentElement = contentRef.current;
+    const handleResize = () => {
+      const element = pinRef.current;
+      const triggerElement = triggerRef.current;
+      const contentElement = contentRef.current;
 
-    if (element && contentElement) {
-      const scrollTriggerInstance = ScrollTrigger.create({
-        trigger: triggerElement,
-        start: "top 140px",
-        endTrigger:"html",
-        end:"bottom top",
-        pin: element,
-        markers: true,
-        onEnter: () => {
-          contentElement.classList.add(
-            'hide-scrollbar',
-            'h-[calc(100svh-140px)]',
-            'overflow-auto',
-          );
-        },
-        onLeaveBack: () => {
-          contentElement.classList.remove(
-            'hide-scrollbar',
-            'h-[calc(100svh-140px)]',
-            'overflow-auto',
-          );
-        },
-      });
+      if (window.innerWidth > 1024 && element && contentElement) {
+        const scrollTriggerInstance = ScrollTrigger.create({
+          trigger: triggerElement,
+          start: "top 140px",
+          endTrigger: "html",
+          end: "bottom top",
+          pin: element,
+          markers: true,
+          onEnter: () => {
+            contentElement.classList.add(
+              'hide-scrollbar',
+              'h-[calc(100svh-140px)]',
+              'overflow-auto',
+            );
+          },
+          onLeaveBack: () => {
+            contentElement.classList.remove(
+              'hide-scrollbar',
+              'h-[calc(100svh-140px)]',
+              'overflow-auto',
+            );
+          },
+        });
 
-      // Throttled version of ScrollTrigger.refresh()
-      const throttledRefresh = throttle(() => ScrollTrigger.refresh(), 200);
+        // Throttled version of ScrollTrigger.refresh()
+        const throttledRefresh = throttle(() => ScrollTrigger.refresh(), 200);
 
-      // Set up a MutationObserver to watch for changes in the DOM
-      const observer = new MutationObserver(() => {
-        throttledRefresh(); // Throttled refresh when content changes
-      });
+        // Set up a MutationObserver to watch for changes in the DOM
+        const observer = new MutationObserver(() => {
+          throttledRefresh(); // Throttled refresh when content changes
+        });
 
-      // Observe changes in the document body or a specific container if necessary
-      observer.observe(document.documentElement, {
-        childList: true,
-        subtree: true,
-      });
+        // Observe changes in the document body or a specific container if necessary
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
 
-      return () => {
-        scrollTriggerInstance.kill();
-        observer.disconnect(); // Clean up the observer
-      };
-    }
+        return () => {
+          scrollTriggerInstance.kill();
+          observer.disconnect(); // Clean up the observer
+        };
+      }
+    };
+
+    // Run on mount and whenever window is resized
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -99,13 +109,16 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
         backButton={<GrantBackButton fallbackUrl="/grants" />}
       />
 
-      <div  className="relative z-10 mt-80">
+      <div className="mt-[430px]">
         <div className="flex gap-8">
-          <div className="w-full shrink-0 lg:w-4/12">{list}</div>
+          <div className="w-full shrink-0 lg:w-4/12">
+            <div className='px-2 pb-4 text-[15px]'>Grantee List</div>
+            {list}
+          </div>
 
           <div ref={pinRef} className="flex w-full flex-col gap-4 lg:w-8/12">
             <div ref={contentRef}>
-             {children}
+              {children}
             </div>
           </div>
         </div>

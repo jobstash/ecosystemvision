@@ -7,7 +7,7 @@ import { cn } from '@nextui-org/react';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 
-const SHARED_CLASSNAME = 'flex w-full gap-4 p-4';
+const SHARED_CLASSNAME = 'flex w-fit hide-scrollbar gap-4 p-4 rounded-20 mr-3.5';
 
 export const ProjectTabSelection = () => {
   const { grantId, granteeId, projectId, tab } = useParams() as {
@@ -40,21 +40,26 @@ export const ProjectTabSelection = () => {
   const activeTab = tab || currentProject.tabs[0].tab;
 
   return (
-    <div className={cn(SHARED_CLASSNAME, 'bg-white/5')}>
-      {currentProject.tabs.map(({ label, tab }) => (
-        <Link
-          key={label}
-          href={`${baseHref}/${currentProject.id}/${tab}`}
-          scroll={false}
-          prefetch={true}
-          className={cn('flex grow justify-center rounded-lg px-4 py-4', {
-            'bg-white/5': activeTab !== tab,
-            'is-active': activeTab === tab,
-          })}
-        >
-          {label}
-        </Link>
-      ))}
+    <div className='-mr-3.5 overflow-auto'>
+      <div className={cn(SHARED_CLASSNAME, 'bg-white/5')}>
+        {currentProject.tabs.map(({ label, tab }) => (
+          <Link
+            key={label}
+            href={`${baseHref}/${currentProject.id}/${tab}`}
+            scroll={false}
+            prefetch={true}
+            className={cn(
+              'flex grow justify-center whitespace-nowrap rounded-2xl px-4 py-3 font-medium',
+              {
+                'bg-white/5': activeTab !== tab,
+                'is-active': activeTab === tab,
+              },
+            )}
+          >
+            {label}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

@@ -14,35 +14,43 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
 
   return (
     <div
-      className={cn('flex flex-wrap gap-6 rounded-[20px] bg-white/5 p-5', {
-        ' [&>*]:min-h-36': hasGap,
+      className={cn(' w-1/2 gap-6 px-1.5 ', {
+        'w-full': hasChildren,
       })}
     >
       <div
-        className={cn('flex min-h-max min-w-64 flex-col', {
-          'justify-between': hasGap,
-          'justify-center': !hasGap,
-        })}
+        className={cn(
+          'flex  flex-col rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4',
+          {
+            'min-h-[130px]': hasGap,
+            'min-h-[90px]': !hasGap,
+          },
+        )}
       >
-        <div>
-          <span className="text-2xl font-bold text-white/60">{label}</span>
+        <div
+          className={cn('flex grow  justify-between', {
+            'flex-row items-start': hasChildren,
+            'flex-col': !hasChildren,
+          })}
+        >
+          <span className="text-13 font-medium leading-tight text-white md:text-2xl">
+            {label}
+          </span>
+          <span className="text-xl font-medium">{value}</span>
         </div>
-        <div>
-          <span className="text-3xl font-bold">{value}</span>
-        </div>
-      </div>
 
-      {hasChildren && (
-        <>
-          {stats.map((stat) => (
-            <GranteeStatItem
-              key={stat.label}
-              granteeStat={stat}
-              level={level + 1}
-            />
-          ))}
-        </>
-      )}
+        {hasChildren && (
+          <div className="-mx-1.5 flex flex-wrap pt-2">
+            {stats.map((stat) => (
+              <GranteeStatItem
+                key={stat.label}
+                granteeStat={stat}
+                level={level + 1}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

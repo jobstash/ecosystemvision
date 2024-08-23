@@ -36,7 +36,7 @@ export const GranteeProjectStats = () => {
   if (!currentTab?.stats?.length) return null;
 
   return (
-    <div className="flex flex-wrap gap-6">
+    <div className="-mx-1.5 flex flex-wrap gap-y-5 pb-5">
       {currentTab.stats.map((granteeStat) => (
         <GranteeStatItem key={granteeStat.label} granteeStat={granteeStat} />
       ))}

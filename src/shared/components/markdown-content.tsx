@@ -12,7 +12,7 @@ export const MarkdownContent = ({ content }: Props) => {
   return (
     <Markdown
       components={{
-        p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+        p: ({ children }) => <p className="space-y-2 text-13 text-white/75">{children}</p>,
         a: ({ href, children }) => <LinkItem href={href}>{children}</LinkItem>,
         h1: ({ children }) => (
           <h1 className="text-bold text-2xl font-bold">{children}</h1>

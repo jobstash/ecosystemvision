@@ -40,11 +40,11 @@ export const GranteeList = () => {
     <div className="flex flex-col gap-4">
       <VirtualWrapper count={grantees.length}>
         {(index) => (
-          <div className={cn({ 'pt-8': index > 0 })}>
+          <div className={cn({ 'pt-4 lg:pt-8': index > 0 })}>
             <ClientWrapper
               granteeId={grantees[index].slug}
               isActiveBypass={index === 0 && !paramsGranteeId}
-              className="flex items-center justify-between gap-4 rounded-20 bg-gradient-to-tr from-grantee-item/25 to-black p-6"
+              className="flex items-center justify-between gap-4 rounded-20 bg-gradient-to-tr from-grantee-item/25 to-black p-3 lg:p-6"
             >
               <GranteeListItem granteeItem={grantees[index]} />
             </ClientWrapper>

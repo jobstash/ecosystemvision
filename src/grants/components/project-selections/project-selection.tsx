@@ -29,7 +29,7 @@ export const ProjectSelection = ({
       scroll={false}
       className={cn(
         'flex grow justify-center rounded-lg px-4 py-4',
-        'rounded-2xl bg-medium-gray px-3 py-3 text-center  text-base font-semibold',
+        'rounded-2xl bg-medium-gray px-4 py-4 text-center  text-base font-semibold',
         {
           'is-active': isActive,
         },
