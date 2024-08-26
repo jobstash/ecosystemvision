@@ -112,9 +112,7 @@ export const HomePage = () => {
             </p>
             <Button
               as={Link}
-              href={''}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={'/grants'}
               className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
             >
               <span className="text-base font-medium">
@@ -136,23 +134,20 @@ export const HomePage = () => {
           <div className="flex flex-wrap">
             <div className="md:w-1/2">
               <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-40 md:leading-tight lg:text-48">
-                Real Success Stories from Web3 Professionals
+                Stay Informed and Discover Web3 Projects
               </h2>
               <p className="pb-12 text-base leading-5 lg:text-xl lg:leading-tight">
-                Read success stories of how our platform has helped users
-                connect with verified professionals, access valuable data, and
-                drive their projects forward.
+                Get a clear view of the Web3 Ecosystem with in-depth project
+                explorations. Whether you&#39;re discovering new opportunities
+                or staying up-to-date with trends, stay informed and engaged as
+                you explore the latest developments and opportunities in crypto.
               </p>
               <Button
                 as={Link}
-                href={''}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={'/projects'}
                 className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
               >
-                <span className="text-base font-medium">
-                  Discover More Success Stories
-                </span>
+                <span className="text-base font-medium">Explore Projects</span>
               </Button>
             </div>
             <div className="md:flex md:w-1/2 md:items-center md:justify-center">
@@ -161,12 +156,14 @@ export const HomePage = () => {
                   <FlashIcon />
                 </div>
                 <h2 className="pb-6 text-base  leading-tight text-[#EAEAEA] md:text-xl lg:text-27 lg:leading-tight">
-                  How CryptoInnovate Connected with Top Talent
+                  How CryptoInnovate Identified Strategic Web3 Opportunities
                 </h2>
                 <p className="pb-4 text-xs text-white/75 md:text-14 lg:text-lg lg:leading-tight">
-                  CryptoInnovate used our platform to find and connect with
-                  verified developers and industry experts, resulting in a 30%
-                  increase in project efficiency and faster time-to-market.
+                  CryptoInnovate utilized the platform to explore emerging Web3
+                  projects, enabling them to strategically partner with
+                  innovators and stay at the forefront of decentralized
+                  technology, resulting in a 30% increase in competitive
+                  advantage.
                 </p>
               </div>
             </div>
@@ -197,9 +194,7 @@ export const HomePage = () => {
             </p>
             <Button
               as={Link}
-              href={''}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={'/organizations'}
               className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
             >
               <span className="text-base font-medium">
@@ -231,9 +226,7 @@ export const HomePage = () => {
             </p>
             <Button
               as={Link}
-              href={''}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={'/grants'}
               className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
             >
               <span className="text-base font-medium">Discover Programs</span>
