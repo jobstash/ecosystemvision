@@ -59,7 +59,6 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
         endTrigger: 'html',
         end: 'bottom top',
         pin: element,
-        markers: true,
         onEnter: () => {
           contentElement.classList.add(
             'hide-scrollbar',
