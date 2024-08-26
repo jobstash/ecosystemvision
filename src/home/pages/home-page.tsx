@@ -40,10 +40,9 @@ export const HomePage = () => {
             </h2>
           </div>
           <Button
+            as={Link}
             href={'/coming-soon'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="x-auto h-auto w-full max-w-[280px] bg-red-500 py-3 font-medium text-black"
+            className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">
               Join Now and Start Earning
@@ -90,8 +89,6 @@ export const HomePage = () => {
           <Button
             as={Link}
             href={'/coming-soon'}
-            target="_blank"
-            rel="noopener noreferrer"
             className="mx-auto mt-6 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
           >
             <span className="text-base font-medium">
@@ -255,8 +252,6 @@ export const HomePage = () => {
             <Button
               as={Link}
               href={'/coming-soon'}
-              target="_blank"
-              rel="noopener noreferrer"
               className="mx-auto h-auto w-full max-w-[140px] rounded bg-white py-1 font-medium text-black md:max-w-[280px] md:rounded-lg md:py-3"
             >
               <span className="text-[8px] font-medium md:text-base">
