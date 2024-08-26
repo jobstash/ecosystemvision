@@ -5,7 +5,6 @@ import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { CodeIcon } from '@/shared/components/icons/code-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
-import { SuitcaseIcon } from '@/shared/components/icons/suitcase-icon';
 import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
 
 import { OrgListItem } from '@/orgs/core/schemas';
@@ -14,7 +13,6 @@ export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
   const {
     normalizedName: slug,
     headcountEstimate,
-    jobCount,
     projectCount,
     lastFundingAmount,
     lastFundingDate,
@@ -22,15 +20,6 @@ export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
 
   const tags: InfoTagProps[] = [];
   const baseRoute = `/organizations/${slug}`;
-
-  if (jobCount > 0) {
-    tags.push({
-      text: `${getPluralText('Job', jobCount)}: ${jobCount}`,
-      icon: <SuitcaseIcon />,
-      link: `${baseRoute}/jobs`,
-      showExternalIcon: false,
-    });
-  }
 
   if (projectCount > 0) {
     tags.push({
