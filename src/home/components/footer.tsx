@@ -8,8 +8,8 @@ import { TwitterIcon } from '@/home/components/icons/twitter';
 export const Footer = () => {
   return (
     <footer className="relative max-w-[1340px] px-5 pb-20 text-white md:px-10 lg:px-7 ">
-      <div className='md:flex md:flex-wrap'>
-        <div className='md:w-1/2'>
+      <div className="md:flex md:flex-wrap">
+        <div className="md:w-1/2">
           <Image
             src={'/ecosystem-logo.png'}
             alt={'Ecosystem.vision'}
