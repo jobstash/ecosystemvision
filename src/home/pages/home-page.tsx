@@ -40,9 +40,8 @@ export const HomePage = () => {
             </h2>
           </div>
           <Button
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
+            as={Link}
+            href={'/coming-soon'}
             className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">
@@ -89,9 +88,7 @@ export const HomePage = () => {
 
           <Button
             as={Link}
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={'/coming-soon'}
             className="mx-auto mt-6 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
           >
             <span className="text-base font-medium">
@@ -254,9 +251,7 @@ export const HomePage = () => {
             </h2>
             <Button
               as={Link}
-              href={''}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={'/coming-soon'}
               className="mx-auto h-auto w-full max-w-[140px] rounded bg-white py-1 font-medium text-black md:max-w-[280px] md:rounded-lg md:py-3"
             >
               <span className="text-[8px] font-medium md:text-base">

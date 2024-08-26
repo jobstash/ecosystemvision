@@ -1,5 +1,5 @@
 const START_COLOR = '#1f1f28';
-const END_COLOR = '#4136F1';
+const END_COLOR = '#4e4e4e';
 const BASE_BACKGROUND_COLOR = '#191919';
 const TRANSPARENT_BORDER = '2px solid transparent';
 const BASE_BACKGROUND_GRADIENT_DIRECTION = '90deg';
