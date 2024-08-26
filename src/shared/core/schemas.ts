@@ -171,7 +171,6 @@ export const competitorSchema = z
   .object({
     orgId: z.string(),
     description: z.string(),
-    jobs: z.array(z.any()),
     repos: z.array(z.any()),
   })
   .merge(projectInfoSchema);

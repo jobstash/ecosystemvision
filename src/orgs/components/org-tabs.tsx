@@ -24,7 +24,7 @@ export const OrgTabs = ({ slug }: Props) => {
 };
 
 const createTabs = (org: OrgDetails) => {
-  const { projects, jobs } = org;
+  const { projects } = org;
 
   const tabs = [
     { text: 'Organization Details', href: `/${ROUTE_TABS.SHARED.DETAILS}` },
@@ -37,16 +37,6 @@ const createTabs = (org: OrgDetails) => {
     tabs.push({
       text: `${projectText}${countText}`,
       href: `/${ROUTE_TABS.ORGS.PROJECTS}`,
-    });
-  }
-
-  const jobCount = jobs.length;
-  if (jobCount > 0) {
-    const jobText = getPluralText('Job', jobCount);
-    const countText = ` (${jobCount})`;
-    tabs.push({
-      text: `${jobText}${countText}`,
-      href: `/${ROUTE_TABS.ORGS.JOBS}`,
     });
   }
 

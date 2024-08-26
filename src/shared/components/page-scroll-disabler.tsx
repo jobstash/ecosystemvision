@@ -31,6 +31,6 @@ export const PageScrollDisabler = () => {
   return null;
 };
 
-const whitelist = ['/jobs', '/organizations', '/projects'];
+const whitelist = ['/organizations', '/projects'];
 
 const whitelistSet = new Set(whitelist);

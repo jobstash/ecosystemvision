@@ -10,14 +10,8 @@ export const ROUTE_TABS = {
     DETAILS: 'details',
     ORG: 'organization',
   },
-  JOBS: {
-    PROJECTS: 'projects',
-    COMPETITORS: 'competitors',
-    OTHER_JOBS: 'other-jobs',
-  },
   ORGS: {
     PROJECTS: 'projects',
-    JOBS: 'jobs',
     REVIEWS: 'reviews',
   },
 };

@@ -16,10 +16,6 @@ const ProjectDetailsCards = dynamic(() =>
   ),
 );
 
-const OrgJobsCards = dynamic(() =>
-  import('@/orgs/components/org-jobs-cards').then((m) => m.OrgJobsCards),
-);
-
 interface Props {
   params: {
     slug: string;
@@ -34,7 +30,6 @@ export const OrgParamsPage = ({ params: { slug, tab } }: Props) => {
   if (tab === ROUTE_TABS.SHARED.DETAILS) return <OrgDetailsCard org={data} />;
   if (tab === ROUTE_TABS.ORGS.PROJECTS)
     return <ProjectDetailsCards projects={data.projects} />;
-  if (tab === ROUTE_TABS.ORGS.JOBS) return <OrgJobsCards jobs={data.jobs} />;
 
   return null;
 };
