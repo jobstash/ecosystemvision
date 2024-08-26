@@ -6,9 +6,9 @@ import { cn } from '@/shared/utils/cn';
 import { Grantee } from '@/grants/core/schemas';
 
 const CLASSNAMES = {
-  WRAPPER: 'flex items-center md:pb-4',
+  WRAPPER: 'flex items-center',
   INNER: 'md:pr-4',
-  AVATAR: 'mr-3 h-8 w-8 rounded-xl md:h-16 md:w-16 md:rounded-[24px]',
+  AVATAR: 'mr-3 h-8 w-8 rounded-xl lg:h-16 lg:w-16 lg:rounded-[24px]',
 };
 
 interface Props extends Pick<Grantee, 'name' | 'logoUrl'> {

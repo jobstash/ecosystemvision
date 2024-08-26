@@ -36,7 +36,7 @@ export const GrantList = () => {
     <div className="flex flex-col gap-4">
       <VirtualWrapper count={grants.length}>
         {(index) => (
-          <div className="pt-8">
+          <div className="pt-6 lg:pt-8">
             <GrantListItem grant={grants[index]} />
           </div>
         )}

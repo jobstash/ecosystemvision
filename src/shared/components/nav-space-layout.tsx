@@ -8,7 +8,7 @@ export const NavLayout = ({ children }: Props) => {
   return (
     <>
       <Nav />
-      <div className="min-h-screen w-full lg:ml-[264px] lg:max-w-[calc(100%-264px)]">
+      <div className="relative min-h-screen w-full lg:ml-[264px] lg:max-w-[calc(100%-264px)]">
         {children}
       </div>
     </>

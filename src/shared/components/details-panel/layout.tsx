@@ -10,7 +10,8 @@ interface Props {
 
 export const DetailsPanelLayout = ({ backHref, children }: Props) => {
   return (
-    <div className="hide-scrollbar fixed right-0 top-0 z-20 h-screen w-[calc((100%-264px)/2)] overflow-auto bg-[#191919]  pt-[68px] md:pt-20 lg:pt-0">      <MobileHeader
+    <div className="hide-scrollbar fixed right-0 top-0 z-20 h-screen w-[calc((100%-264px)/2)] overflow-auto bg-[#191919]  pt-[68px] md:pt-20 lg:pt-0">
+      <MobileHeader
         left={<DetailsPanelBackButton href={backHref} />}
         className="z-50 bg-[#191919] md:left-auto md:right-0 md:flex md:w-[calc((100%-220px))] lg:hidden"
       />
