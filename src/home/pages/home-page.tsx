@@ -18,14 +18,14 @@ const Spline = dynamic(() => import('@splinetool/react-spline'), {
 
 export const HomePage = () => {
   return (
-    <div className="pt-[70px] font-inter-tight lg:pt-0">
-      <main className="relative max-w-[1340px] overflow-hidden px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
+    <div className="overflow-hidden pt-[70px] font-inter-tight lg:pt-0">
+      <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
         <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:translate-x-1/3 lg:translate-y-[-40%] ">
           <Suspense fallback={<div>Loading...</div>}>
             <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
           </Suspense>
         </div>
-        <section className="pointer-events-none relative z-10 ">
+        <section className="relative z-10 ">
           <div>
             <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-9/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
               Unlock Earnings and your Network in Web3: Become a Verified
