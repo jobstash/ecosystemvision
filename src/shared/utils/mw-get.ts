@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 import { z } from 'zod';
 
 import { errMsg, ResponseError } from '@/shared/core/errors';
+import { sentryMessage } from '@/shared/utils/sentry-message';
 
 interface Props<T> {
   url: string;
-  // TODO: include label in sentry
   label: string;
   responseSchema: T;
   options?: RequestInit;
@@ -17,7 +17,7 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
     throw new Error(errMsg.OFFLINE);
   }
 
-  const { url, responseSchema, options } = props;
+  const { url, responseSchema, options, label } = props;
 
   try {
     const res = await fetch(url, { method: 'GET', ...options });
@@ -39,16 +39,22 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
     return result.data as z.infer<typeof responseSchema>;
   } catch (err: unknown) {
     if (err instanceof ResponseError) {
+      const errInfo = await err.toJSON();
+      sentryMessage(label, JSON.stringify({ url, ...errInfo }));
+
       if (err.res.status === 404) {
         notFound();
       } else if (err.res.status === 400) {
         const jsonRes = await err.res.json();
         throw new Error(jsonRes.message || errMsg.ERR_BAD_REQUEST);
       }
-      // TODO: Sentry: API Error
+
       throw new Error(errMsg.INTERNAL);
     } else {
-      // TODO: Sentry: Unexpected Error
+      sentryMessage(
+        label,
+        JSON.stringify({ url, msg: (err as Error).message }),
+      );
       throw new Error(errMsg.INTERNAL);
     }
   }
