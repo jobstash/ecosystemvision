@@ -39,7 +39,11 @@ export const GranteeFundingItems = ({ granteeItem }: Props) => {
   return (
     <DetailItems
       items={fundingItems}
-      classNames={{ container: 'gap-x-4 gap-y-1.5', root: 'text-13' }}
+      classNames={{
+        container: 'gap-x-4 gap-y-1.5',
+        root: 'text-13',
+        label: 'text-current',
+      }}
     />
   );
 };
