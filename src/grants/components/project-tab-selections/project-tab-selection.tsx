@@ -9,7 +9,7 @@ import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { TabSelectionsSkeleton } from '@/grants/components/tab-selections-skeleton';
 
 const SHARED_CLASSNAME =
-  'flex bg-white/5 hide-scrollbar gap-4 p-3 rounded-20 mr-3.5';
+  'flex bg-white/5 hide-scrollbar gap-4 p-3 rounded-20 mr-3.5 lg:mr-0 lg:w-full';
 
 export const ProjectTabSelection = () => {
   const { grantId, granteeId, projectId, tab } = useParams() as {
@@ -47,7 +47,7 @@ export const ProjectTabSelection = () => {
   const activeTab = tab || currentProject.tabs[0].tab;
 
   return (
-    <div className="-mr-3.5 overflow-auto">
+    <div className="-mr-3.5 overflow-auto lg:mr-0">
       <div className={cn(SHARED_CLASSNAME, 'w-fit')}>
         {currentProject.tabs.map(({ label, tab }) => (
           <Link

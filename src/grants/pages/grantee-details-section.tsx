@@ -68,16 +68,16 @@ export const GranteeDetailsSection = ({ hasGranteeId }: Props) => {
   return (
     <div
       className={cn(
-        'space-y-4 overflow-auto',
+        'space-y-4 overflow-y-auto',
         { 'hidden lg:block': !hasGranteeId },
         {
-          'fixed top-0 left-0 bottom-0 mt-[95px] md:mt-[125px] z-[999] w-screen bg-[#070708] h-[calc(100vh-95px)] md:h-[calc(100vh-125px)] lg:mt-8 lg:pt-0 lg:relative lg:w-auto lg:h-auto':
+          'fixed top-0 left-0 bottom-0 mt-[95px] md:mt-[125px] z-[999] w-screen bg-[#070708] h-[calc(100vh-95px)] md:h-[calc(100vh-125px)] lg:mt-0 lg:pt-0 lg:relative lg:w-auto lg:h-auto':
             hasGranteeId,
         },
       )}
     >
       <GranteeCard />
-      <div className='space-y-4 px-3.5'>
+      <div className='space-y-4 px-3.5 lg:px-0 lg:pb-6'>
         <ProjectSelections />
         <ProjectTabSelection />
         <GranteeProjectStats />

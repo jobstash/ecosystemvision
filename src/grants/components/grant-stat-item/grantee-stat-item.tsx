@@ -19,7 +19,7 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
   return (
     <Container hasGap={hasGap} hasChildren={hasChildren}>
       <Inner hasChildren={hasChildren}>
-        <span className="text-13 font-medium leading-tight text-white md:text-2xl">
+        <span className="text-13 font-medium leading-tight text-white md:text-2xl md:text-white/60">
           {label}
         </span>
         <span className="text-xl font-medium">{value}</span>
@@ -57,7 +57,7 @@ export const Container = ({
   >
     <div
       className={cn(
-        'flex  flex-col rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4',
+        'flex  flex-col rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4 lg:bg-white/10 lg:bg-none',
         {
           'min-h-[130px]': hasGap,
           'min-h-[90px]': !hasGap,

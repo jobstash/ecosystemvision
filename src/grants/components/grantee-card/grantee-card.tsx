@@ -17,7 +17,7 @@ import {
 } from '@/grants/components/ui/grantee-logo-title';
 
 const WRAPPER_CLASSNAME =
-  'to-base-dark/20 flex flex-col gap-y-4 rounded-b-20 bg-gradient-to-t from-tertiary/20 p-6 transition-all duration-300 md:rounded-lg md:p-5';
+  'to-base-dark/20 flex flex-col gap-y-4 rounded-b-20 bg-gradient-to-t from-tertiary/20 p-6 transition-all duration-300 md:rounded-20 md:p-5 lg:bg-none lg:bg-white/10';
 
 export const GranteeCard = () => {
   const { grantId, granteeId } = useParams() as {
