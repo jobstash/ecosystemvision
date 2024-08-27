@@ -22,7 +22,7 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
         <span className="text-13 font-medium leading-tight text-white md:text-2xl md:text-white/60">
           {label}
         </span>
-        <span className="text-xl font-medium">{value}</span>
+        <span className="text-xl font-medium">{trimStat(value)}</span>
       </Inner>
 
       {hasChildren && (
@@ -110,3 +110,13 @@ export const GranteeStatsSkeleton = () => (
     <GranteeStatItemSkeleton />
   </>
 );
+
+export const trimStat = (input: string): string => {
+  const num = parseFloat(input);
+
+  if (!isNaN(num)) {
+    return num.toFixed(2);
+  }
+
+  return input;
+};
