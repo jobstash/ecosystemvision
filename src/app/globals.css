@@ -94,11 +94,6 @@ html {
 }
 
 
-.pinned > div{
-  @apply max-h-[65px];
-}
-
-
 .stack {
 	display: grid;
 	grid-template-columns: 1fr;
