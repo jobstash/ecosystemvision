@@ -89,3 +89,48 @@ export const DeepNested: Story = {
     },
   },
 };
+
+export const TrimmedDecimal: Story = {
+  args: {
+    granteeStat: {
+      label: 'Some Label',
+      value: 'Sample non-integer value',
+      stats: [
+        {
+          label: 'New Contributors',
+          value: '35.023523',
+          stats: [
+            {
+              label: 'Crypto Native',
+              value: '4.457',
+              stats: [],
+            },
+
+            {
+              label: 'Open Source Contributor',
+              value: '7.55',
+              stats: [],
+            },
+          ],
+        },
+        {
+          label: 'Last 6 months',
+          value: '2.342634263246326',
+          stats: [
+            {
+              label: 'First Half',
+              value: '2.123421351236236',
+              stats: [],
+            },
+
+            {
+              label: 'Last Half',
+              value: '4.324632463246',
+              stats: [],
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
