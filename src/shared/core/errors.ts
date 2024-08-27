@@ -16,7 +16,7 @@ export class ResponseError extends Error {
       message: this.message,
       info: this.info,
       status: this.res.status,
-      contentType: this.res.headers.get('content-type'),
+      contentType,
       body,
     };
   }
