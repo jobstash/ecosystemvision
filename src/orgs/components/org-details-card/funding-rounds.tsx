@@ -61,7 +61,7 @@ export const FundingRounds = ({ fundingRounds }: Props) => {
       <div className="flex flex-col justify-center gap-2">
         {fundingRounds.map((fundingRound, i) => (
           <>
-            <div key={fundingRound.id} className="flex flex-wrap lg:h-6">
+            <div key={fundingRound.id} className="flex flex-wrap">
               <InfoTags
                 tags={createFundingRoundTags(fundingRound)}
                 classNames={{ wrapper: 'gap-y-0' }}
