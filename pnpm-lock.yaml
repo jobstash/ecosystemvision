@@ -23,9 +23,6 @@ importers:
       '@splinetool/runtime':
         specifier: ^1.9.12
         version: 1.9.12
-      '@spotlightjs/spotlight':
-        specifier: ^2.3.1
-        version: 2.3.1
       '@tanstack/react-query':
         specifier: ^5.36.0
         version: 5.51.21(react@18.3.1)
@@ -2751,19 +2748,6 @@ packages:
   '@splinetool/runtime@1.9.12':
     resolution: {integrity: sha512-qJAp3ekyCwS0RDqYYlFLsuNH3g7oS1iLkJekqcS3+GSmYoCYQijXkCas0B8KKFfk0C6e2mQMQgCgjspwLCeBOw==}
 
-  '@spotlightjs/overlay@2.3.0':
-    resolution: {integrity: sha512-kIHnTjEIl8gP9UWD3tvXWZ6mEArRn+7FMBs9ekkBSwrF8YbwaNBgBGkTci79IK/Ik+4clA6HIWWSHHglmO+mug==}
-
-  '@spotlightjs/sidecar@1.7.0':
-    resolution: {integrity: sha512-XTasirfq6FCAmShtFGgw/hM/q5yWOKjpLN7WKrRdASD+aj5uPt1p1WUbpMBA0NaC7Acu1gvMKFgqhcJnDzaWIg==}
-    engines: {node: '>=18'}
-    hasBin: true
-
-  '@spotlightjs/spotlight@2.3.1':
-    resolution: {integrity: sha512-llFxhdC7b8L62mOqMxxfiGjPlF26KVcEuihxtiOLNtweuk21LFAlamiIIRYpVUfRxLmNQ2LbASVPVFstjiBRVw==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   '@storybook/addon-actions@8.2.7':
     resolution: {integrity: sha512-wDnMGGmaogAForkNncfCx8BEDiwxeK8zC0lj8HkRPUuH6vTr81U5RIb12Wa2TnnNKLKMFAtyPSnofHf3OAfzZQ==}
     peerDependencies:
@@ -4977,9 +4961,6 @@ packages:
   import-in-the-middle@1.7.1:
     resolution: {integrity: sha512-1LrZPDtW+atAxH42S6288qyDFNQ2YCty+2mxEPRtfazH6Z5QwkaBSTS2ods7hnVJioF6rkRfNoA6A/MstpFXLg==}
 
-  import-meta-resolve@4.1.0:
-    resolution: {integrity: sha512-I6fiaX09Xivtk+THaMfAwnA3MVA5Big1WHF1Dfx9hFuvNIWpXnorlkzhcQf6ehrqQiiZECRt1poOAkPmer3ruw==}
-
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
@@ -5303,10 +5284,6 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
-  kleur@4.1.5:
-    resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
-    engines: {node: '>=6'}
-
   klona@2.0.6:
     resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
     engines: {node: '>= 8'}
@@ -5317,9 +5294,6 @@ packages:
   language-tags@1.0.9:
     resolution: {integrity: sha512-MbjN408fEndfiQXbFQ1vnd+1NoLDsnQW41410oQBXiyXDMYH5z505juWa4KUE1LqxRC7DgOgZDbKLxHIwm27hA==}
     engines: {node: '>=0.10'}
-
-  launch-editor@2.8.1:
-    resolution: {integrity: sha512-elBx2l/tp9z99X5H/qev8uyDywVh0VXAwEbjk8kJhnc5grOFkGh7aW6q55me9xnYbss261XtnUrysZ+XvGbhQA==}
 
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -6640,9 +6614,6 @@ packages:
   shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
-
-  shell-quote@1.8.1:
-    resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
 
   shimmer@1.2.1:
     resolution: {integrity: sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==}
@@ -11107,20 +11078,6 @@ snapshots:
       on-change: 4.0.2
       semver-compare: 1.0.0
 
-  '@spotlightjs/overlay@2.3.0': {}
-
-  '@spotlightjs/sidecar@1.7.0':
-    dependencies:
-      kleur: 4.1.5
-      launch-editor: 2.8.1
-      source-map: 0.7.4
-
-  '@spotlightjs/spotlight@2.3.1':
-    dependencies:
-      '@spotlightjs/overlay': 2.3.0
-      '@spotlightjs/sidecar': 1.7.0
-      import-meta-resolve: 4.1.0
-
   '@storybook/addon-actions@8.2.7(storybook@8.2.7(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
       '@storybook/global': 5.0.0
@@ -13990,8 +13947,6 @@ snapshots:
       module-details-from-path: 1.0.3
     optional: true
 
-  import-meta-resolve@4.1.0: {}
-
   imurmurhash@0.1.4: {}
 
   indent-string@4.0.0: {}
@@ -14292,8 +14247,6 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  kleur@4.1.5: {}
-
   klona@2.0.6: {}
 
   language-subtag-registry@0.3.23: {}
@@ -14301,11 +14254,6 @@ snapshots:
   language-tags@1.0.9:
     dependencies:
       language-subtag-registry: 0.3.23
-
-  launch-editor@2.8.1:
-    dependencies:
-      picocolors: 1.0.1
-      shell-quote: 1.8.1
 
   leven@3.1.0: {}
 
@@ -15865,8 +15813,6 @@ snapshots:
       shebang-regex: 3.0.0
 
   shebang-regex@3.0.0: {}
-
-  shell-quote@1.8.1: {}
 
   shimmer@1.2.1: {}
 

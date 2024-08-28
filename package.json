@@ -19,7 +19,6 @@
     "e2e:h:m": "npx playwright test --headed --project=chromium.mobile",
     "e2e:h:t": "npx playwright test --headed --project=chromium.tablet",
     "storybook": "storybook dev -p 6006",
-    "spotlight": "pnpx @spotlightjs/spotlight",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -28,7 +27,6 @@
     "@sentry/nextjs": "^8",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.12",
-    "@spotlightjs/spotlight": "^2.3.1",
     "@tanstack/react-query": "^5.36.0",
     "@tanstack/react-virtual": "^3.5.0",
     "clsx": "^2.1.1",
