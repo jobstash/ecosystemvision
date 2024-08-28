@@ -26,7 +26,7 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
       </Inner>
 
       {hasChildren && (
-        <div className="-mx-1.5 flex flex-wrap pt-2">
+        <div className="-mx-1.5 flex flex-wrap gap-y-4 pt-2">
           {stats.map((stat) => (
             <GranteeStatItem
               key={stat.label}
@@ -57,7 +57,7 @@ export const Container = ({
   >
     <div
       className={cn(
-        'flex  flex-col rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4 lg:bg-white/10 lg:bg-none',
+        'flex  flex-col gap-y-4 rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4 lg:bg-white/10 lg:bg-none',
         {
           'min-h-[130px]': hasGap,
           'min-h-[90px]': !hasGap,
