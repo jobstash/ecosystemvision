@@ -38,8 +38,8 @@ const config: Config = {
       },
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',
-        'base-dark': 'rgb(var(--color-base-dark / <alpha-value>))',
-        'dark-gray': 'rgb(var(--color-dark-gray  / <alpha-value>))',
+        'base-dark': 'rgb(var(--color-base-dark) / <alpha-value>)',
+        'dark-gray': 'rgb(var(--color-dark-gray)  / <alpha-value>)',
         'app-bg': 'rgb(var( --color-bg-app))',
         'light-gray': 'rgb(var(--color-light-gray))',
         'cool-gray': 'rgb(var(--color-cool-gray))',
