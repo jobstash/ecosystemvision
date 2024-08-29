@@ -6,6 +6,7 @@ import { Button, Textarea } from '@nextui-org/react';
 
 import { useIsMounted } from '@/shared/hooks/use-is-mounted';
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
+import { AiIcon } from '@/shared/components/icons/ai-icon';
 
 import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
 
@@ -33,12 +34,13 @@ export const AiGrantProgramFinder = () => {
         classNames={{
           base: 'grow',
           inputWrapper: 'h-full bg-white/5 grow rounded-lg',
-          input: 'placeholder:text-white placeholder:text-sm text-base',
+          input: 'placeholder:text-cool-gray placeholder:text-sm text-base',
         }}
         placeholder="Describe your project here"
       />
       <Button className="is-active mx-auto w-full rounded-lg text-sm font-semibold text-black">
-        <span>Find</span>
+        <AiIcon />
+        <span className='-ml-1'>Find</span>
       </Button>
     </div>,
     portal,
