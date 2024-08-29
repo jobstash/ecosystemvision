@@ -26,7 +26,7 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
       </Inner>
 
       {hasChildren && (
-        <div className="-mx-1.5 flex flex-wrap pt-2">
+        <div className="-mx-1.5 flex flex-wrap gap-y-4 pt-2">
           {stats.map((stat) => (
             <GranteeStatItem
               key={stat.label}

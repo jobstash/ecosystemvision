@@ -6,7 +6,6 @@ import { DetailsPanelBackButton } from './back-button';
 interface Props {
   backHref: string;
   children: React.ReactNode;
-  backButton: React.ReactNode;
 }
 
 export const DetailsPanelLayout = ({ backHref, children }: Props) => {
