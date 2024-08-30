@@ -58,7 +58,7 @@ export const AiGrantProgramFinder = () => {
       </span>
       <Textarea
         isDisabled={isPending}
-        value={aiQuery || aiQueryInput}
+        value={aiQueryInput || aiQuery}
         onChange={onChangeAiQuery}
         classNames={{
           base: 'grow',
