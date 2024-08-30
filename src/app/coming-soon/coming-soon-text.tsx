@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TEXT = 'Coming Soon';
+const TEXT = 'Coming Soon!';
 
 export const ComingSoonText = () => {
   return (
-    <div className="stack max-w-lg font-grotesk text-4xl font-bold text-white">
+    <div className="stack max-w-2xl font-grotesk font-bold text-white">
       {Array.from({ length: 3 }).map((_, index) => (
         <span
           key={index}
