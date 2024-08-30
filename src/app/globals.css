@@ -111,6 +111,12 @@ html {
 	animation: stack 340ms cubic-bezier(.46, .29, 0, 1.24) 1 backwards calc(var(--index) * 120ms), glitch 1s ease infinite 1s alternate-reverse;
 }
 
+@media (max-width: 640px) {
+	.stack span {
+		font-size: 3.0rem; 
+	}
+}
+
 .stack span:nth-child(odd) { --glitch-translate: 8px; }
 .stack span:nth-child(even) { --glitch-translate: -8px; }
 
