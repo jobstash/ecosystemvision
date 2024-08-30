@@ -1,31 +1,25 @@
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { QUERY_STALETIME } from '@/shared/core/constants';
-import { PAGE_SIZE } from '@/shared/core/envs';
 
 import { GrantQueryKeys, grantQueryKeys } from '@/grants/core/query-keys';
 import { GrantInfiniteListPage } from '@/grants/core/schemas';
-import { getGrantList } from '@/grants/data/get-grant-list';
+import { findGrantProgram } from '@/grants/data/find-grant-program';
 
-export const useGrantListQuery = () => {
-  // TODO: filter search params string
-  const searchParams = '';
-
+export const useAiGrantFinderQuery = (query: string) => {
   return useInfiniteQuery<
     GrantInfiniteListPage,
     Error,
     InfiniteData<GrantInfiniteListPage, number>,
-    ReturnType<GrantQueryKeys['list']>,
+    ReturnType<GrantQueryKeys['aiGrantFinder']>,
     number
   >({
-    queryKey: grantQueryKeys.list(searchParams),
-    queryFn: async ({ pageParam: page }) =>
-      getGrantList({ page, searchParams }),
+    enabled: !!query,
+    queryKey: grantQueryKeys.aiGrantFinder(query),
+    queryFn: async ({ pageParam: page }) => findGrantProgram({ page, query }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
-      typeof page === 'number' &&
-      page > 0 &&
-      data.length > (Number(PAGE_SIZE) || 20)
+      typeof page === 'number' && page > 0 && data.length > 10
         ? page + 1
         : undefined,
     staleTime: QUERY_STALETIME.DEFAULT,
