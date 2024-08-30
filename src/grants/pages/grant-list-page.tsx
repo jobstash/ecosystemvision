@@ -59,7 +59,6 @@ export const GrantListPage = async () => {
         <GrantList />
       </div>
       <AiGrantProgramFinder />
-      {/* <AiGrantProgramFinderSkeleton /> */}
     </HydrationBoundary>
   );
 };
