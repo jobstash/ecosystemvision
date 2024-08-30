@@ -1,5 +1,7 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 import { Skeleton } from '@nextui-org/react';
 
 import { cn } from '@/shared/utils/cn';
@@ -12,7 +14,9 @@ interface Props {
 export const AiGrantProgramFinderSkeleton = ({ isDesktop }: Props) => {
   const isMounted = useIsMounted();
 
-  return isMounted ? null : (
+  const pathname = usePathname();
+
+  return isMounted || pathname !== '/grants' ? null : (
     <div
       className={cn('h-full', {
         'lg:hidden': !isDesktop,
