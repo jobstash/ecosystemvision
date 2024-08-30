@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@nextui-org/react';
 
 import { openNewTab } from '@/shared/utils/open-new-tab';
