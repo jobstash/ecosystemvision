@@ -8,8 +8,6 @@ import { GrantListItem } from '@/grants/components/grant-list/grant-list-item';
 import { useAiGrantList } from '@/grants/components/grant-list/use-ai-grant-list';
 
 export const AiGrantList = () => {
-  // TODO: JOB-682
-
   const { grants, error, inViewRef, hasNextPage, isPending } = useAiGrantList();
 
   const lastItem = useMemo(() => {

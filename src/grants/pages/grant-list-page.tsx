@@ -19,8 +19,6 @@ const AiGrantProgramFinderSkeleton = dynamic(
   { ssr: true },
 );
 
-// TODO: Check if need to use search params(filter related), if so need to force dynamic
-
 export const GrantListPage = async () => {
   const queryClient = getQueryClient();
 
