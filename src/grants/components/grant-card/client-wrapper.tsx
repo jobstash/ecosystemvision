@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/shared/utils/cn';
-import { useDebounceFn } from '@/shared/hooks/use-debounce-fn';
 
 interface Props {
   backButton: React.ReactNode;
@@ -13,41 +12,49 @@ interface Props {
 }
 
 export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-
   const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    const currentScrollPos = window.scrollY;
-
-    if (currentScrollPos >= 50) {
-      setIsCollapsed(true);
-    } else if (currentScrollPos < prevScrollPos) {
-      setIsCollapsed(false);
-    }
-    setPrevScrollPos(currentScrollPos);
-  }, [prevScrollPos]);
-
-  const debouncedHandleScroll = useDebounceFn(handleScroll, 50);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.addEventListener('scroll', debouncedHandleScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsCollapsed(!entry.isIntersecting);
+      },
+      {
+        rootMargin: '50px 0px 0px 0px', // Adjust as needed
+        threshold: 0,
+      },
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
     return () => {
-      window.removeEventListener('scroll', debouncedHandleScroll);
+      if (sentinelRef.current) {
+        observer.unobserve(sentinelRef.current);
+      }
     };
-  }, [debouncedHandleScroll]);
+  }, []);
 
   const content = isCollapsed ? collapsed : full;
 
   return (
-    <div className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20">
-      <div className="flex items-center px-5 lg:h-[115px] lg:px-0">{backButton}</div>
-      <div
-        className={cn('w-screen transition-all duration-700 lg:w-full', {
-          pinned: isCollapsed,
-        })}
-      >
-        {content}
+    <div>
+      <div ref={sentinelRef} className="absolute left-0 top-0 h-1 w-full"></div>
+      <div className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20">
+        {/* Sentinel element for IntersectionObserver */}
+
+        <div className="flex items-center px-5 lg:h-[115px] lg:px-0">
+          {backButton}
+        </div>
+        <div
+          className={cn('w-screen transition-all duration-700 lg:w-full', {
+            pinned: isCollapsed,
+          })}
+        >
+          {content}
+        </div>
       </div>
     </div>
   );
