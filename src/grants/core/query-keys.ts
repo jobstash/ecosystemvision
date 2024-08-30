@@ -1,5 +1,7 @@
 export const grantQueryKeys = {
   all: ['grants'] as const,
+  aiGrantFinder: (query: string) =>
+    [...grantQueryKeys.all, 'ai-find', query] as const,
   list: (params: string | Record<string, string>) => {
     const searchParams =
       typeof params === 'string'

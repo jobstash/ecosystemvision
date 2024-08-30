@@ -1,14 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { Button, Textarea } from '@nextui-org/react';
+import { useAtom, useAtomValue } from 'jotai';
 
 import { useIsMounted } from '@/shared/hooks/use-is-mounted';
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
 import { AiIcon } from '@/shared/components/icons/ai-icon';
 
 import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
+import {
+  aiGrantFinderPending,
+  aiGrantFinderQueryAtom,
+} from '@/grants/core/atoms';
 
 export const AiGrantProgramFinder = () => {
   const isMounted = useIsMounted();
@@ -21,6 +27,26 @@ export const AiGrantProgramFinder = () => {
   const portal =
     typeof window === 'undefined' ? null : document.getElementById(portalId);
 
+  const isPending = useAtomValue(aiGrantFinderPending);
+  const [aiQuery, setAiQuery] = useAtom(aiGrantFinderQueryAtom);
+
+  const [aiQueryInput, setAiQueryInput] = useState('');
+  const onChangeAiQuery: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setAiQueryInput(e.target.value);
+  };
+
+  const onFind = () => {
+    setAiQuery(aiQueryInput);
+  };
+
+  const onClear = () => {
+    setAiQuery('');
+    setAiQueryInput('');
+  };
+
+  const buttonText = !!aiQuery && !isPending ? 'Reset' : 'Find';
+  const onClick = aiQuery ? onClear : onFind;
+
   if (!isMounted || !portal) return null;
 
   return createPortal(
@@ -31,6 +57,9 @@ export const AiGrantProgramFinder = () => {
         application best
       </span>
       <Textarea
+        isDisabled={isPending}
+        value={aiQuery || aiQueryInput}
+        onChange={onChangeAiQuery}
         classNames={{
           base: 'grow',
           inputWrapper: 'h-full bg-white/5 grow rounded-lg',
@@ -38,9 +67,14 @@ export const AiGrantProgramFinder = () => {
         }}
         placeholder="Describe your project here"
       />
-      <Button className="is-active mx-auto w-full rounded-lg text-sm font-semibold text-black">
+      <Button
+        isLoading={isPending}
+        isDisabled={!aiQueryInput && !aiQuery}
+        className="is-active mx-auto w-full rounded-lg text-sm font-semibold text-black"
+        onClick={onClick}
+      >
         <AiIcon />
-        <span className='-ml-1'>Find</span>
+        <span className="-ml-1">{buttonText}</span>
       </Button>
     </div>,
     portal,

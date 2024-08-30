@@ -1,3 +1,5 @@
+import dynamic from 'next/dynamic';
+
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { getQueryClient } from '@/shared/utils/get-query-client';
@@ -9,7 +11,13 @@ import { getGrantList } from '@/grants/data/get-grant-list';
 import { AiGrantProgramFinder } from '@/grants/components/ai-grant-program-finder';
 import { GrantList } from '@/grants/components/grant-list/grant-list';
 
-// TODO: Check if need to use search params(filter related), if so need to force dynamic
+const AiGrantProgramFinderSkeleton = dynamic(
+  () =>
+    import(
+      '@/grants/components/ai-grant-program-finder/ai-grant-program-finder-skeleton'
+    ).then((m) => m.AiGrantProgramFinderSkeleton),
+  { ssr: true },
+);
 
 export const GrantListPage = async () => {
   const queryClient = getQueryClient();
@@ -41,7 +49,11 @@ export const GrantListPage = async () => {
         <h1 className="pt-6 text-2xl font-semibold tracking-[-0.06em] md:pt-2 md:text-4xl lg:pt-0 lg:text-7xl">
           Grant Programs
         </h1>
-        <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE} />
+        <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE}>
+          <div className="lg:hidden">
+            <AiGrantProgramFinderSkeleton />
+          </div>
+        </div>
         <GrantList />
       </div>
       <AiGrantProgramFinder />
