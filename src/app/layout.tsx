@@ -2,7 +2,7 @@ import './globals.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './swiper.css'; 
+import './swiper.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -13,6 +13,8 @@ import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
 import { NextUIProvider } from '@/shared/providers/next-ui-provider';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
+
+import { Toaster } from '@/grants/components/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -40,6 +42,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
 
       <PageScrollDisabler />
       <InitPathSyncer />
+      <Toaster />
     </body>
   </html>
 );
