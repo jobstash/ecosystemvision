@@ -52,7 +52,7 @@ export const GranteeList = () => {
         )}
       </VirtualWrapper>
 
-      {lastItem}
+      <div className='pb-4'>{lastItem}</div>
     </div>
   );
 };

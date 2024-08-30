@@ -28,7 +28,7 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
       />
 
       <div className="mt-[450px] md:mt-[350px] lg:mt-[390px] lg:pr-8">
-        <div className="px-2 pb-4 text-base">Grantee List</div>
+        <div className="px-2 pb-5 text-base lg:hidden">Grantee List</div>
         <div className="flex gap-8">
           <div className="w-full shrink-0 lg:w-4/12">{list}</div>
 
