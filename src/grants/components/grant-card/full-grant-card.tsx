@@ -1,3 +1,4 @@
+
 import { Avatar } from '@nextui-org/react';
 
 import { cn } from '@/shared/utils/cn';
@@ -6,6 +7,7 @@ import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
 import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
+import { ApplyButton } from '@/grants/components/grant-list/apply-button';
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links';
@@ -34,7 +36,7 @@ export const FullGrantCard = ({ grant }: Props) => {
 
   return (
     <div
-      className="lg:rounded-t-0 flex max-h-[500px] items-center justify-between gap-6 overflow-hidden rounded-b-lg bg-gradient-to-b from-gradient-1/0  to-white/15 p-6 text-13 transition-all duration-700 lg:rounded-b-20  lg:p-5"
+      className="lg:rounded-t-0 flex max-h-[500px] flex-wrap items-center justify-between gap-6 overflow-hidden rounded-b-lg bg-gradient-to-b from-gradient-1/0 to-white/15  p-6 text-13 transition-all duration-700 lg:flex-nowrap lg:rounded-b-20  lg:p-5"
       data-uuid={slug}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >
@@ -75,8 +77,8 @@ export const FullGrantCard = ({ grant }: Props) => {
         )}
       </div>
 
-      <div className="hidden flex-col gap-4 lg:flex">
-        <div className="flex size-[144px] items-center justify-center overflow-hidden rounded-xl">
+      <div className="flex w-full flex-col gap-4 lg:w-fit">
+        <div className="hidden size-[144px] items-center justify-center overflow-hidden rounded-xl lg:flex">
           <Avatar
             classNames={{
               base: 'bg-black w-8 h-8 rounded h-[144px] w-[144px]',
@@ -86,6 +88,7 @@ export const FullGrantCard = ({ grant }: Props) => {
             name={name}
           />
         </div>
+        <ApplyButton url={url} />
       </div>
     </div>
   );
