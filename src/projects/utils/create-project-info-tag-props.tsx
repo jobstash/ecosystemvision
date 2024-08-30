@@ -4,7 +4,6 @@ import { formatNumber } from '@/shared/utils/format-number';
 import { getEnabledTagsConfig } from '@/shared/utils/get-enabled-tags-config';
 import { ActiveUsersIcon } from '@/shared/components/icons/active-users-icon';
 import { CategoryIcon } from '@/shared/components/icons/category-icon';
-import { MainnetIcon } from '@/shared/components/icons/mainnet-icon';
 import { MonthlyVolumeIcon } from '@/shared/components/icons/monthly-volume-icon';
 import { RevenueIcon } from '@/shared/components/icons/revenue-icon';
 import { TvlIcon } from '@/shared/components/icons/tvl-icon';
@@ -15,7 +14,6 @@ export const createProjectInfoTagProps = (
 ) => {
   const {
     category,
-    isMainnet,
     tvl,
     monthlyVolume,
     monthlyActiveUsers,
@@ -31,13 +29,6 @@ export const createProjectInfoTagProps = (
     tags.push({
       text: `Category: ${category}`,
       icon: <CategoryIcon />,
-    });
-  }
-
-  if (isMainnet && enabledTagsConfig.isMainnet) {
-    tags.push({
-      text: 'Mainnet',
-      icon: <MainnetIcon />,
     });
   }
 
