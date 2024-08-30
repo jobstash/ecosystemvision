@@ -16,6 +16,9 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentRef = sentinelRef.current;
+    if (!currentRef) return; // Se currentRef è null, esci dalla funzione
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsCollapsed(!entry.isIntersecting);
@@ -26,14 +29,10 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
       },
     );
 
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
-    }
+    observer.observe(currentRef);
 
     return () => {
-      if (sentinelRef.current) {
-        observer.unobserve(sentinelRef.current);
-      }
+      observer.unobserve(currentRef);
     };
   }, []);
 
