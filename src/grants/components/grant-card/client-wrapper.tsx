@@ -28,7 +28,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
     setPrevScrollPos(currentScrollPos);
   }, [prevScrollPos]);
 
-  const debouncedHandleScroll = useDebounceFn(handleScroll, 200);
+  const debouncedHandleScroll = useDebounceFn(handleScroll, 50);
 
   useEffect(() => {
     window.addEventListener('scroll', debouncedHandleScroll);
