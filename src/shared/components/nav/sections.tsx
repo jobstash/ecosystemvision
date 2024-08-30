@@ -1,3 +1,5 @@
+import dynamic from 'next/dynamic';
+
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
 
@@ -5,6 +7,14 @@ import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
 
 import { Bartab } from './bartab';
 import { CloseButton } from './close-button';
+
+const AiGrantProgramFinderSkeleton = dynamic(
+  () =>
+    import(
+      '@/grants/components/ai-grant-program-finder/ai-grant-program-finder-skeleton'
+    ).then((m) => m.AiGrantProgramFinderSkeleton),
+  { ssr: true },
+);
 
 const SECTIONS = [
   {
@@ -67,7 +77,11 @@ export const NavSections = ({ isMobile }: Props) => {
           borderImageSource:
             'linear-gradient(162.12deg, #EAEAEA -14.01%, rgba(187, 190, 223, 0) 27.11%, rgba(132, 132, 132, 0) 62.3%, rgba(133, 133, 134, 0) 68.01%, #999999 92.7%)',
         }}
-      />
+      >
+        <div className="hidden lg:block">
+          <AiGrantProgramFinderSkeleton />
+        </div>
+      </div>
     </nav>
   );
 };

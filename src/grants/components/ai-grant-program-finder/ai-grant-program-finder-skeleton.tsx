@@ -1,0 +1,20 @@
+'use client';
+
+import { Skeleton } from '@nextui-org/react';
+
+import { useIsMounted } from '@/shared/hooks/use-is-mounted';
+
+export const AiGrantProgramFinderSkeleton = () => {
+  const isMounted = useIsMounted();
+  return isMounted ? null : (
+    <div className="mt-5 flex h-full flex-col gap-4 rounded-20 border border-white/10 p-4 md:mt-6 lg:mt-0">
+      <h2 className="text-xl font-semibold">AI Grant Program Finder</h2>
+      <span className="text-sm">
+        Our AI assistant will help you identify which grant program suits your
+        application best
+      </span>
+      <Skeleton className="min-h-[88px] grow rounded-lg" />
+      <Skeleton className="h-10 w-full rounded-lg" />
+    </div>
+  );
+};
