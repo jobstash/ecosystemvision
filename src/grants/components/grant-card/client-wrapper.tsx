@@ -14,17 +14,19 @@ interface Props {
 export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const fixedDivRef = useRef<HTMLDivElement>(null);
+  const [paddingBottom, setPaddingBottom] = useState<number>(440);
 
   useEffect(() => {
     const currentRef = sentinelRef.current;
-    if (!currentRef) return; // Se currentRef è null, esci dalla funzione
+    if (!currentRef) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsCollapsed(!entry.isIntersecting);
       },
       {
-        rootMargin: '50px 0px 0px 0px', // Adjust as needed
+        rootMargin: '50px 0px 0px 0px',
         threshold: 0,
       },
     );
@@ -36,14 +38,45 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    // Debounce function to delay the resize handling
+    let resizeTimeout: NodeJS.Timeout;
+
+    const updatePaddingBottom = () => {
+      if (fixedDivRef.current) {
+        const height = fixedDivRef.current?.offsetHeight || 0;
+        setPaddingBottom(height);
+      }
+    };
+
+    const handleResize = () => {
+      clearTimeout(resizeTimeout); // Clear the previous timeout
+      resizeTimeout = setTimeout(() => {
+        updatePaddingBottom();
+      }, 100); // Adjust the debounce delay as needed (200ms in this case)
+    };
+
+    // Initial calculation
+    setTimeout(updatePaddingBottom, 200); 
+
+    // Attach the debounced resize event listener
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimeout); // Clean up the timeout on unmount
+    };
+  }, []);
+
   const content = isCollapsed ? collapsed : full;
 
   return (
-    <div>
+    <div style={{ paddingBottom: `${paddingBottom}px` }}>
       <div ref={sentinelRef} className="absolute left-0 top-0 h-1 w-full"></div>
-      <div className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20">
-        {/* Sentinel element for IntersectionObserver */}
-
+      <div
+        ref={fixedDivRef}
+        className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20"
+      >
         <div className="flex items-center px-5 lg:h-[115px] lg:px-0">
           {backButton}
         </div>
