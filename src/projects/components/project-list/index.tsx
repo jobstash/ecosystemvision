@@ -48,7 +48,7 @@ export const ProjectList = () => {
               <Loader />
             </div>
           ) : (
-            <p>TODO: No more projects UI</p>
+            <p>No more projects to display.</p>
           )}
         </>
       ) : (
