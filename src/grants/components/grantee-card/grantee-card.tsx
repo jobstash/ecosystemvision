@@ -56,7 +56,7 @@ export const GranteeCard = () => {
   }
 
   if (!granteeData?.data) {
-    return <p>TODO: No Grantee UI</p>;
+    return <p>Grantee not found.</p>;
   }
 
   const { logoUrl, name, website, description } = granteeData.data;
