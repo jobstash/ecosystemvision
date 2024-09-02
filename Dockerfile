@@ -15,7 +15,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN yarn global add pnpm
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_MW_URL=https://middleware.ecosytem.vision
+ENV NEXT_PUBLIC_MW_URL=https://middleware.ecosystem.vision
 ENV NEXT_PUBLIC_FRONTEND_URL=https://ecosystem.vision
 
 ENV NEXT_PUBLIC_PAGE_SIZE=20
