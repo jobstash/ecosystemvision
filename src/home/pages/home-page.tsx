@@ -33,9 +33,9 @@ export const HomePage = () => {
             </h1>
             <div className="my-10 h-px bg-custom"></div>
             <h2 className="w-full pb-12 text-base font-normal leading-5 md:w-10/12 	lg:w-2/3 lg:text-xl">
-              Dive into data on over 6,500 companies, thousands of projects, and
-              hundreds of grant programs shaping the decentralized future.
-              Discover insights and uncover opportunities in the Web3 ecosystem.
+              Discover insights. Uncover opportunities. Dive into data on
+              thousands of organizations and projects, and find grants using our
+              AI grant finder.
             </h2>
           </div>
           <Button
