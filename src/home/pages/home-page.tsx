@@ -40,11 +40,11 @@ export const HomePage = () => {
           </div>
           <Button
             as={Link}
-            href={'/explore'}
+            href={'/grants'}
             className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">
-              Start Exploring the Ecosystem Now
+              Explore Ecosystem Grants
             </span>
           </Button>
         </section>
