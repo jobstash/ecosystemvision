@@ -173,7 +173,7 @@ export const HomePage = () => {
           </div>
           <div className="lg:w-2/3 lg:px-14">
             <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight lg:text-48">
-              Coming Soon: Verified Business Representatives
+              Soon(tm): Verified Business Representatives
             </h2>
             <p className="pb-12 text-base leading-5 lg:text-xl lg:leading-tight">
               We are preparing to launch a platform where verified business
@@ -202,7 +202,7 @@ export const HomePage = () => {
           </div>
           <div className="lg:lefft-0 lg:absolute lg:top-0 lg:w-1/3 lg:translate-y-1/2">
             <h2 className="pb-6  font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:text-48 md:leading-tight lg:text-48">
-              Unveiling Soon: VC Fund Insights
+              Soon(tm): VC Fund Insights
             </h2>
             <p className="pb-12 text-base leading-5 lg:text-xl lg:leading-tight">
               Ecosystem Vision will soon offer in-depth insights about venture
