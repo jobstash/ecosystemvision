@@ -9,7 +9,7 @@ export const Toaster = () => {
         className: 'lg:ml-[248px]',
         style: {
           color: 'white',
-          backgroundColor: 'rgba(255,255,255,0.10)',
+          backgroundColor: '#2b2b2b',
         },
         success: {
           icon: '🎉',
