@@ -1,4 +1,5 @@
 export const ROUTE_SECTIONS = {
+  SEARCH: 'search' as const,
   ORGS: 'organizations' as const,
   PROJECTS: 'projects' as const,
   ACTIVE_GRANTS: 'active-grants' as const,
@@ -18,6 +19,7 @@ export const ROUTE_TABS = {
 };
 
 export const HREFS = {
+  SEARCH_PAGE: `/${ROUTE_SECTIONS.SEARCH}`,
   HOME_PAGE: '/',
   ORGS_PAGE: `/${ROUTE_SECTIONS.ORGS}`,
   PROJECTS_PAGE: `/${ROUTE_SECTIONS.PROJECTS}`,
@@ -29,6 +31,7 @@ export const A11Y = {
   LINK: {
     BACK: 'Back',
     NAV: {
+      SEARCH: 'Search',
       HOME: 'Home',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',

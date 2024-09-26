@@ -14,10 +14,17 @@ interface BartabProps {
   text: string;
   href: string;
   isMobile?: boolean;
+  endContent?: React.ReactNode;
 }
 
 export const Bartab = (props: BartabProps) => {
-  const { icon = null, text, href, isMobile = false } = props;
+  const {
+    icon = null,
+    text,
+    href,
+    isMobile = false,
+    endContent = null,
+  } = props;
 
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
@@ -47,12 +54,13 @@ export const Bartab = (props: BartabProps) => {
       data-active={isActive}
     >
       <span
-        className={cn('text-2xl text-white md:text-sm', {
-          'text-black': isActive && !isMobile,
+        className={cn('grow text-2xl text-white md:text-sm', {
+          'text-black fill-black': isActive && !isMobile,
         })}
       >
         {text}
       </span>
+      {endContent}
     </Button>
   );
 };

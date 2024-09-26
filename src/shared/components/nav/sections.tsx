@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
+import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
 import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
 
@@ -54,6 +55,13 @@ export const NavSections = ({ isMobile }: Props) => {
         <Brand />
         {isMobile && <CloseButton />}
       </div>
+
+      <Bartab
+        text={A11Y.LINK.NAV.SEARCH}
+        href={HREFS.SEARCH_PAGE}
+        isMobile={isMobile}
+        endContent={<SearchIcon />}
+      />
 
       <Bartab
         text={A11Y.LINK.NAV.HOME}
