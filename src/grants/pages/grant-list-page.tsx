@@ -45,7 +45,7 @@ export const GrantListPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="px-5 pt-[56px] md:pt-[80px] lg:px-8">
+      <div className="px-5 pt-[56px] md:pt-[80px] lg:pl-4 lg:pr-8">
         <h1 className="pt-6 text-2xl font-semibold tracking-[-0.06em] md:pt-2 md:text-4xl lg:pt-0 lg:text-7xl">
           Grant Programs
         </h1>
