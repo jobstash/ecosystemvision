@@ -22,7 +22,7 @@ const highlightText = (text: string, query: string): React.ReactNode => {
     <div className="">
       {parts.map((part, index) =>
         regex.test(part) ? (
-          <span key={index} className="font-bold text-[#98eebe]">
+          <span key={index} className="text-[#98eebe]">
             {part}
           </span>
         ) : (
@@ -48,7 +48,7 @@ export const SearchCategory = ({ label, url, query }: Props) => {
       className=""
       endContent={<ExternalIcon />}
     >
-      {highlightText(label, query)}
+      <span className='text-13'>{highlightText(label, query)}</span>
     </Button>
   );
 };
