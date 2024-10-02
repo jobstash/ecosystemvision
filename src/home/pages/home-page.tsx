@@ -1,9 +1,9 @@
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-// import React, { Suspense } from 'react';
-import React from 'react';
+import React, { Suspense } from 'react';
 
+// import React from 'react';
 import { Button } from '@nextui-org/react';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
@@ -12,20 +12,20 @@ import { FlashIcon } from '@/home/components/icons/flash';
 import { Marquee } from '@/home/components/marquee';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 
-// const Spline = dynamic(() => import('@splinetool/react-spline'), {
-//   ssr: true,
-//   loading: () => <p>Loading ...</p>,
-// });
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: true,
+  loading: () => <p>Loading ...</p>,
+});
 
 export const HomePage = () => {
   return (
     <div className="overflow-hidden pt-[70px] font-inter-tight lg:pt-0">
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
-        {/* <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:translate-x-1/3 lg:translate-y-[-40%] ">
-          <Suspense fallback={<div>Loading...</div>}>
+        <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:translate-x-1/3 lg:translate-y-[-40%] ">
+          
             <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
-          </Suspense>
-        </div> */}
+          
+        </div>
         <section className="relative z-10 ">
           <div>
             <h1 className="w-full font-grotesk text-32 font-medium leading-9 tracking-tighter antialiased md:w-9/12 md:text-48 md:leading-[57px] lg:w-1/2 lg:text-64 lg:leading-[76px]">
@@ -220,9 +220,9 @@ export const HomePage = () => {
         </section>
         <section className="relative my-40 text-center md:my-64 lg:my-80">
           <div className="absolute inset-x-0 top-0 mx-auto -mt-32 flex  h-[350px] w-[320px] items-center justify-center md:-mt-48 md:h-[550px] md:w-[520px] [&_canvas]:!size-[350px] [&_canvas]:md:!size-[550px]">
-            {/* <Suspense fallback={<div>Loading...</div>}>
+            
               <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
-            </Suspense> */}
+            
           </div>
           <div className="relative z-10">
             <h2 className="mx-auto w-2/3 pb-3 font-grotesk text-2xl font-medium leading-8 tracking-tighter antialiased md:pb-6 md:text-48 md:leading-[57px]">
