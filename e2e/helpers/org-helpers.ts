@@ -22,7 +22,7 @@ export const navigateBackToOrgListPage = async (page: Page) => {
   await expect(page).toHaveURL(/\/organizations\/[^/]+\/details/);
 
   // Click back button
-  await page.getByTestId(TEST_IDS.DETAILS_BACK).click();
+  await page.getByTestId(TEST_IDS.DETAILS_BACK).last().click();
 
   // Assert currently on org-list page
   await expect(page).toHaveURL(HREFS.ORGS_PAGE);
