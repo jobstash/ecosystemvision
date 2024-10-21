@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test.describe('@mobile', () => {
+test.describe('@mobile/@mobile', () => {
   for (const { name, href } of pageLinks) {
     test(`should navigate to ${href} using ${name} sidebar`, async ({
       page,
@@ -32,7 +32,7 @@ test.describe('@mobile', () => {
   }
 });
 
-test.describe('@tablet/@desktop', () => {
+test.describe('@desktop', () => {
   for (const { name, href } of pageLinks) {
     test(`should navigate to ${href} using ${name} sidebar`, async ({
       page,

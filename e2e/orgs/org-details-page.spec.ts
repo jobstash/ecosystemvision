@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/organizations');
 });
 
-test.describe('@mobile', () => {
+test.describe('@mobile/@tablet', () => {
   test('should render init-card correctly using nav', async ({ page }) => {
     const [id1, id2] = await getFirstTwoOrgIds(page);
 
@@ -63,7 +63,7 @@ test.describe('@mobile/@tablet', () => {
   });
 });
 
-test.describe('@tablet/@desktop', () => {
+test.describe('@desktop', () => {
   test('should render init-card correctly using nav', async ({ page }) => {
     const [id1, id2] = await getFirstTwoOrgIds(page);
 

@@ -33,7 +33,7 @@ export const ProjectParamsPage = ({ params: { slug, tab } }: Props) => {
     return <ProjectDetailsCard project={data} />;
   }
 
-  if (tab === ROUTE_TABS.SHARED.ORG) {
+  if (data.organization && tab === ROUTE_TABS.SHARED.ORG) {
     return (
       <OrgDetailsCard
         org={data.organization}

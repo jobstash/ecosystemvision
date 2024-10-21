@@ -42,4 +42,4 @@ export const openMobileNav = async (page: Page) =>
   page.getByTestId(TEST_IDS.MOBILE_MENU).click();
 
 export const openMobileNavFromDetails = async (page: Page) =>
-  page.getByTestId(TEST_IDS.MOBILE_MENU).nth(1).click();
+  page.getByRole('navigation').getByTestId(TEST_IDS.MOBILE_MENU).click();

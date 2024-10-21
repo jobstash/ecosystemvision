@@ -32,7 +32,7 @@ export type ProjectOrg = z.infer<typeof projectOrgSchema>;
 
 export const projectDetailsSchema = z
   .object({
-    organization: projectOrgSchema,
+    organization: projectOrgSchema.nullable(),
   })
   .merge(projectAllInfoSchema);
 
