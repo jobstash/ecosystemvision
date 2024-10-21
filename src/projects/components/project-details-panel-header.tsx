@@ -12,7 +12,9 @@ interface Props {
 
 export const ProjectDetailsPanelHeader = ({ slug }: Props) => {
   const { data } = useProjectDetails(slug);
+
   if (!data) return <Spinner size="sm" color="white" />;
+  if (!data.organization) return null;
 
   return <DetailsPanelHeader org={data.organization} />;
 };

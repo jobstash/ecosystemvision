@@ -135,7 +135,7 @@ export type Audit = z.infer<typeof auditSchema>;
 
 export const projectInfoTagsSchema = z.object({
   category: z.string().nullable(),
-  isMainnet: z.boolean(),
+  isMainnet: z.boolean().nullable(),
   tvl: z.number().nullable(),
   monthlyRevenue: z.number().nullable(),
   monthlyVolume: z.number().nullable(),
@@ -161,7 +161,7 @@ export type ProjectInfo = z.infer<typeof projectInfoSchema>;
 export const projectAllInfoSchema = projectInfoSchema
   .merge(
     z.object({
-      description: z.string(),
+      description: z.string().nullable(),
     }),
   )
   .merge(socialsInfoSchema.omit({ website: true }));
@@ -169,7 +169,7 @@ export type ProjectAllInfo = z.infer<typeof projectAllInfoSchema>;
 
 export const competitorSchema = z
   .object({
-    orgId: z.string(),
+    orgId: z.string().nullable(),
     description: z.string(),
     repos: z.array(z.any()),
   })

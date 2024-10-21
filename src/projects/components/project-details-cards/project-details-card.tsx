@@ -53,9 +53,13 @@ export const ProjectDetailsCard = ({ project, actionHref }: Props) => {
         className="text-base font-semibold"
         htmlTag="h3"
       />
-      <Text text={description} />
 
-      <Divider />
+      {description && (
+        <>
+          <Text text={description} />
+          <Divider />
+        </>
+      )}
 
       <InfoTags tags={tags} />
 
