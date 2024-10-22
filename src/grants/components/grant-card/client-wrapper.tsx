@@ -15,7 +15,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const fixedDivRef = useRef<HTMLDivElement>(null);
-  const [paddingBottom, setPaddingBottom] = useState<number>(440);
+  const [paddingBottom, setPaddingBottom] = useState<number>(0);
 
   useEffect(() => {
     const currentRef = sentinelRef.current;
@@ -26,7 +26,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
         setIsCollapsed(!entry.isIntersecting);
       },
       {
-        rootMargin: '50px 0px 0px 0px',
+        rootMargin: '30px 0px 0px 0px',
         threshold: 0,
       },
     );
@@ -46,6 +46,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
       if (fixedDivRef.current) {
         const height = fixedDivRef.current?.offsetHeight || 0;
         setPaddingBottom(height);
+        fixedDivRef.current.classList.add('fixed', 'inset-x-0', 'top-0', 'z-50', 'lg:ml-[264px]');
       }
     };
 
@@ -53,11 +54,11 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
       clearTimeout(resizeTimeout); // Clear the previous timeout
       resizeTimeout = setTimeout(() => {
         updatePaddingBottom();
-      }, 100); // Adjust the debounce delay as needed (200ms in this case)
+      }, 20); // Adjust the debounce delay as needed (200ms in this case)
     };
 
     // Initial calculation
-    setTimeout(updatePaddingBottom, 200); 
+    setTimeout(updatePaddingBottom, 20); 
 
     // Attach the debounced resize event listener
     window.addEventListener('resize', handleResize);
@@ -75,7 +76,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
       <div ref={sentinelRef} className="absolute left-0 top-0 h-1 w-full"></div>
       <div
         ref={fixedDivRef}
-        className="fixed inset-x-0 top-0 z-50 mt-[56px] bg-app-bg md:mt-20 lg:ml-[264px] lg:mr-8 lg:mt-0 lg:rounded-b-20"
+        className="mt-[56px] bg-app-bg md:mt-20  lg:mr-8 lg:mt-0 lg:rounded-b-20"
       >
         <div className="flex items-center px-5 lg:h-[115px] lg:px-0">
           {backButton}

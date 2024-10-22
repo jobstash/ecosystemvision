@@ -31,7 +31,7 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
-    className={`bg-[#070708] ${interTight.variable} ${grotesk.variable}`}
+    className={`overflow-x-hidden bg-[#070708] ${interTight.variable} ${grotesk.variable}`}
   >
     <body className={inter.className}>
       <NextUIProvider>

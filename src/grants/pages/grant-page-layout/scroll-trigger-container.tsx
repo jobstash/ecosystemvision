@@ -68,9 +68,7 @@ export const ScrollTriggerContainer = ({ children }: Props) => {
 
   return (
     <div ref={pinRef} className="flex w-full flex-col gap-4">
-      <div className="absolute left-auto right-0 mx-6 -mr-8 -mt-20  hidden h-20 w-[calc(100vw-264px)] flex-col bg-app-bg text-base lg:block">
-        <span className='absolute bottom-0 left-0 pb-2 pl-8'>Grantee List</span>
-      </div>
+      
       <div ref={isDesktop ? contentRef : undefined}>{children}</div>
     </div>
   );
