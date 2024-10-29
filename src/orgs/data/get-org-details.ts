@@ -12,6 +12,5 @@ export const getOrgDetails = async (slug: string) => {
     url,
     label,
     responseSchema: orgDetailsSchema,
-    options: { next: { revalidate: 60 * 60 } },
   });
 };

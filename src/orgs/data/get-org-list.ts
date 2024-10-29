@@ -17,6 +17,5 @@ export const getOrgList = async (
     url,
     label: 'getOrgList',
     responseSchema: orgInfiniteListPageSchema,
-    options: { next: { revalidate: 60 * 60 } },
   });
 };

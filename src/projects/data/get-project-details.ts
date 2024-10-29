@@ -10,7 +10,6 @@ export const getProjectDetails = (slug: string) => {
     url,
     label,
     responseSchema: projectDetailsSchema,
-    options: { next: { revalidate: 60 * 60 } },
   });
 };
 
