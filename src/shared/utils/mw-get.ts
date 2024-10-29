@@ -20,7 +20,11 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
   const { url, responseSchema, options, label } = props;
 
   try {
-    const res = await fetch(url, { method: 'GET', ...options });
+    const res = await fetch(url, {
+      method: 'GET',
+      ...options,
+      cache: 'no-store',
+    });
 
     if (!res.ok) {
       throw new ResponseError(errMsg.ERR_RESPONSE, res);

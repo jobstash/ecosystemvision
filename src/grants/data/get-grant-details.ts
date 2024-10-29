@@ -10,7 +10,6 @@ export const getGrantDetails = async (grantId: string): Promise<Grant> => {
     url: grantQueryUrls.grant(grantId),
     label: 'getGrant',
     responseSchema: grantDetailsDtoSchema,
-    options: { next: { revalidate: 3600 } },
   });
 
   if (!response.success) {

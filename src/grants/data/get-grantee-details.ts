@@ -16,6 +16,5 @@ export const getGranteeDetails = async (grantId: string, granteeId: string) => {
     url: `${grantQueryUrls.grantee(grantId, granteeId)}`,
     label: 'getGranteeDetails',
     responseSchema: granteeDtoSchema,
-    options: { next: { revalidate: 3600 } },
   });
 };

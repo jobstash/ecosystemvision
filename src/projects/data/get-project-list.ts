@@ -19,6 +19,5 @@ export const getProjectList = ({ page, searchParams }: Props) => {
     url,
     label: 'getProjectList',
     responseSchema: projectInfiniteListPageSchema,
-    options: { next: { revalidate: 60 * 60 } },
   });
 };

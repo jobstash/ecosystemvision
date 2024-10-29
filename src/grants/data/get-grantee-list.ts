@@ -31,7 +31,7 @@ export const getGranteeList = async ({
   // };
 
   const url = createUrlWithSearchParams(
-    `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${limit}&grantId=${grantId}`,
+    `${grantQueryUrls.grantees(grantId)}?page=${page}&limit=${limit}`,
     searchParams,
   );
 
@@ -39,6 +39,5 @@ export const getGranteeList = async ({
     url,
     label: 'getGranteeList',
     responseSchema: granteeInfiniteListPageSchema,
-    options: { next: { revalidate: 60 * 60 } },
   });
 };
