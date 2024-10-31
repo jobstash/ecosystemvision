@@ -1,1 +1,1 @@
-export * from './ai-grant-program-finder';
+export * from './ai-grant-program-finder-portal';

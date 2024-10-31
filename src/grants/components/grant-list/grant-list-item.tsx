@@ -16,9 +16,10 @@ import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 interface Props {
   grant: Grant;
+  isLink?: boolean;
 }
 
-export const GrantListItem = ({ grant }: Props) => {
+export const GrantListItem = ({ grant, isLink = true }: Props) => {
   // TODO: JOB-679
 
   const {
@@ -36,14 +37,11 @@ export const GrantListItem = ({ grant }: Props) => {
     hasWebLinks,
   } = getGrantCardData(grant);
 
-  return (
-    <Link
-      prefetch
-      href={`/grants/${slug}`}
-      className="flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap"
-      data-uuid={slug}
-      data-testid={GRANT_TEST_IDS.GRANT_ITEM}
-    >
+  const wrapperClassName =
+    'flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap';
+
+  const content = (
+    <>
       <div className="lg:pr-12">
         <div className="flex w-full items-center gap-x-4 pb-6">
           <div className="size-8 shrink-0 lg:size-10">
@@ -102,6 +100,30 @@ export const GrantListItem = ({ grant }: Props) => {
           <CaretRightIcon />
         </div>
       </div>
-    </Link>
+    </>
+  );
+
+  if (isLink) {
+    return (
+      <Link
+        prefetch
+        href={`/grants/${slug}`}
+        className={wrapperClassName}
+        data-uuid={slug}
+        data-testid={GRANT_TEST_IDS.GRANT_ITEM}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={wrapperClassName}
+      data-uuid={slug}
+      data-testid={GRANT_TEST_IDS.GRANT_ITEM}
+    >
+      {content}
+    </div>
   );
 };

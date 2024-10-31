@@ -7,7 +7,7 @@ import { grantQueryKeys } from '@/grants/core/query-keys';
 import { getGrantDetails } from '@/grants/data/get-grant-details';
 import { useGrantListQuery } from '@/grants/hooks/use-grant-list-query';
 
-export const useGrantList = () => {
+export const useGrantList = (status = null as 'active' | 'inactive' | null) => {
   const queryClient = getQueryClient();
 
   const {
@@ -18,7 +18,7 @@ export const useGrantList = () => {
     isPending,
     isFetching,
     isSuccess,
-  } = useGrantListQuery();
+  } = useGrantListQuery(status);
 
   // Next page fetch on scroll
   const { ref: inViewRef } = useInView({

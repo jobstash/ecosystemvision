@@ -16,7 +16,7 @@ export const AiGrantProgramFinderSkeleton = ({ isDesktop }: Props) => {
 
   const pathname = usePathname();
 
-  return isMounted || pathname !== '/grants' ? null : (
+  return isMounted || pathname !== '/active-grants' ? null : (
     <div
       className={cn('h-full', {
         'lg:hidden': !isDesktop,

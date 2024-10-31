@@ -21,6 +21,7 @@ export const HREFS = {
   ORGS_PAGE: `/${ROUTE_SECTIONS.ORGS}`,
   PROJECTS_PAGE: `/${ROUTE_SECTIONS.PROJECTS}`,
   GRANTS_PAGE: `/${ROUTE_SECTIONS.GRANTS}`,
+  ACTIVE_GRANTS_PAGE: `/active-${ROUTE_SECTIONS.GRANTS}`,
 } as const;
 
 export const A11Y = {
@@ -30,7 +31,8 @@ export const A11Y = {
       HOME: 'Home',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
-      GRANTS: 'Grant Programs',
+      GRANTS: 'Grant Impact',
+      ACTIVE_GRANTS: 'Active Grants',
     },
   },
 } as const;

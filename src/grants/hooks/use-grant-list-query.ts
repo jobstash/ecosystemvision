@@ -7,9 +7,8 @@ import { GrantQueryKeys, grantQueryKeys } from '@/grants/core/query-keys';
 import { GrantInfiniteListPage } from '@/grants/core/schemas';
 import { getGrantList } from '@/grants/data/get-grant-list';
 
-export const useGrantListQuery = () => {
-  // TODO: filter search params string
-  const searchParams = '';
+export const useGrantListQuery = (status: 'active' | 'inactive' | null) => {
+  const searchParams = status ? { status } : '';
 
   return useInfiniteQuery<
     GrantInfiniteListPage,
@@ -23,9 +22,7 @@ export const useGrantListQuery = () => {
       getGrantList({ page, searchParams }),
     initialPageParam: 1,
     getNextPageParam: ({ page, data }) =>
-      typeof page === 'number' &&
-      page > 0 &&
-      data.length > (Number(PAGE_SIZE) || 20)
+      typeof page === 'number' && page > 0 && data.length >= Number(PAGE_SIZE)
         ? page + 1
         : undefined,
     staleTime: QUERY_STALETIME.DEFAULT,
