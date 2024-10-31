@@ -11,7 +11,7 @@ import { dtoToGrant } from '@/grants/utils/dto-to-grant';
 
 interface Props {
   page: number;
-  searchParams?: string;
+  searchParams?: string | Record<string, string>;
   limit?: number;
 }
 

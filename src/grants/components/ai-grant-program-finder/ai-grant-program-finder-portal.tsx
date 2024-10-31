@@ -16,7 +16,7 @@ import {
   aiGrantFinderQueryAtom,
 } from '@/grants/core/atoms';
 
-export const AiGrantProgramFinder = () => {
+export const AiGrantProgramFinderPortal = () => {
   const isMounted = useIsMounted();
   const isDesktop = useIsDesktop();
 

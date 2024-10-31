@@ -29,6 +29,10 @@ const SECTIONS = [
         href: HREFS.PROJECTS_PAGE,
       },
       {
+        text: A11Y.LINK.NAV.ACTIVE_GRANTS,
+        href: HREFS.ACTIVE_GRANTS_PAGE,
+      },
+      {
         text: A11Y.LINK.NAV.GRANTS,
         href: HREFS.GRANTS_PAGE,
       },

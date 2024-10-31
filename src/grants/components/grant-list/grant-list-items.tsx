@@ -13,10 +13,11 @@ interface Props {
   inViewRef: (node?: Element | null) => void;
   hasNextPage: boolean;
   isPending: boolean;
+  isLink?: boolean;
 }
 
 export const GrantListItems = (props: Props) => {
-  const { grants, error, inViewRef, hasNextPage, isPending } = props;
+  const { grants, error, inViewRef, hasNextPage, isPending, isLink } = props;
 
   const lastItem = useMemo(() => {
     if (error) return <p>Error: {error.message}</p>;
@@ -41,7 +42,7 @@ export const GrantListItems = (props: Props) => {
       <VirtualWrapper count={grants.length}>
         {(index) => (
           <div className="pt-6 lg:pt-8">
-            <GrantListItem grant={grants[index]} />
+            <GrantListItem grant={grants[index]} isLink={isLink} />
           </div>
         )}
       </VirtualWrapper>
