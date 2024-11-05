@@ -11,13 +11,14 @@ import { DetailValueText } from './base/detail-value-text';
 
 const createFundingItems = ({
   lastFundingAmount,
+  lastFundingUnit,
   lastFundingDate,
 }: GranteeItem): DetailItemProps[] => [
   {
     icon: <PaperbillIcon />,
     label: 'Last Funding:',
     value: (
-      <DetailValueText>{`$${formatNumber(lastFundingAmount)}`}</DetailValueText>
+      <DetailValueText>{`$${formatNumber(lastFundingAmount)} ${lastFundingUnit}`}</DetailValueText>
     ),
   },
   ...conditionalItem(!!lastFundingDate, {

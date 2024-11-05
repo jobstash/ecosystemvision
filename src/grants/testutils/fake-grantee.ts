@@ -18,6 +18,7 @@ export const fakeGrantee = (partial: Partial<Grantee> = {}): Grantee => ({
   description: faker.lorem.paragraph({ min: 3, max: 8 }),
   website: faker.internet.url(),
   lastFundingAmount: faker.number.int({ min: 500_000, max: 200_000_000 }),
+  lastFundingUnit: 'USD',
   lastFundingDate: faker.date
     .past({ years: faker.number.int({ min: 2, max: 4 }) })
     .getTime(),
@@ -38,6 +39,7 @@ export const fakeGranteeItem = (
     .past({ years: faker.number.int({ min: 2, max: 4 }) })
     .getTime(),
   lastFundingAmount: faker.number.int({ min: 500_000, max: 200_000_000 }),
+  lastFundingUnit: 'USD',
   ...partial,
 });
 
