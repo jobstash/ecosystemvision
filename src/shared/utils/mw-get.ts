@@ -23,7 +23,9 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
     const res = await fetch(url, {
       method: 'GET',
       ...options,
-      cache: 'no-store',
+      next: {
+        revalidate: 43200, // 12 hours
+      },
     });
 
     if (!res.ok) {
