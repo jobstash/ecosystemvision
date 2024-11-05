@@ -10,14 +10,11 @@ export class ResponseError extends Error {
 
   async toJSON() {
     const contentType = this.res.headers.get('content-type');
-    const isJson = !!contentType?.includes('application/json');
-    const body = isJson ? await this.res.json() : await this.res.text();
     return {
       message: this.message,
       info: this.info,
       status: this.res.status,
       contentType,
-      body,
     };
   }
 }
