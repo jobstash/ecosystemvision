@@ -14,27 +14,20 @@ interface Props {
 const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
   const queryClient = getQueryClient();
 
-  const [granteeListResult] = await Promise.all([
-    // Prefetch list
-    queryClient.fetchInfiniteQuery({
-      queryKey: grantQueryKeys.grantees(grantId, ''),
-      queryFn: async ({ pageParam: page }) => getGranteeList({ page, grantId }),
-      initialPageParam: 1,
-    }),
-  ]);
+  const granteeListResult = await queryClient.fetchInfiniteQuery({
+    queryKey: grantQueryKeys.grantees(grantId, ''),
+    queryFn: async ({ pageParam: page }) => getGranteeList({ page, grantId }),
+    initialPageParam: 1,
+  });
 
   // Prefetch data for first item only (default for the page enough for seo)
   const grantee = granteeListResult.pages.flatMap((page) => page.data).at(0);
-  if (grantee) {
-    // Prefetch grantee details
-    const promises = [
-      queryClient.prefetchQuery({
-        queryKey: grantQueryKeys.grantee(grantId, grantee.slug),
-        queryFn: () => getGranteeDetails(grantId, grantee.slug),
-      }),
-    ];
 
-    await Promise.all(promises);
+  if (grantee) {
+    await queryClient.prefetchQuery({
+      queryKey: grantQueryKeys.grantee(grantId, grantee.slug),
+      queryFn: () => getGranteeDetails(grantId, grantee.slug),
+    });
   }
 
   return (
