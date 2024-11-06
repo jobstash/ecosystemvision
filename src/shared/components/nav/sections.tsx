@@ -34,7 +34,7 @@ const SECTIONS = [
       },
       {
         text: A11Y.LINK.NAV.GRANTS,
-        href: HREFS.GRANTS_PAGE,
+        href: HREFS.GRANT_IMPACT_PAGE,
       },
     ],
   },

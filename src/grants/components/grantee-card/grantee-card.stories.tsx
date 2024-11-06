@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
+
 import {
   MockInfiniteQueryResult,
   MockQueryResult,
@@ -30,7 +32,7 @@ const meta: Meta<typeof GranteeCard> = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/grants/${grantId}`,
+        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}`,
         segments: [['grantId', grantId]],
       },
     },

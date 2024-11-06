@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
@@ -22,7 +23,7 @@ export const ClientWrapper = ({
 }: Props) => {
   const params = useParams();
 
-  const href = `/grants/${params.grantId}/grantees/${granteeId}`;
+  const href = `/${ROUTE_SECTIONS.GRANT_IMPACT}/${params.grantId}/grantees/${granteeId}`;
   const isActive = isActiveBypass || params.granteeId === granteeId;
 
   return (

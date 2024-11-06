@@ -5,6 +5,8 @@ import React from 'react';
 
 import { Button } from '@nextui-org/react';
 
+import { HREFS } from '@/shared/core/constants';
+
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
 import { FlashIcon } from '@/home/components/icons/flash';
@@ -21,9 +23,7 @@ export const HomePage = () => {
     <div className="overflow-hidden pt-[70px] font-inter-tight lg:pt-0">
       <main className="relative max-w-[1340px] px-5 pt-12 text-white md:px-10 lg:px-7 lg:pt-20">
         <div className="absolute right-0 top-0 z-0 size-[900px] -translate-y-1/2 translate-x-1/2  lg:translate-x-1/3 lg:translate-y-[-40%] ">
-          
-            <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
-          
+          <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
         </div>
         <section className="relative z-10 ">
           <div>
@@ -39,7 +39,7 @@ export const HomePage = () => {
           </div>
           <Button
             as={Link}
-            href={'/grants'}
+            href={HREFS.ACTIVE_GRANTS_PAGE}
             className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">
@@ -85,7 +85,7 @@ export const HomePage = () => {
 
           <Button
             as={Link}
-            href={'/grants'}
+            href={HREFS.GRANT_IMPACT_PAGE}
             className="mx-auto mt-6 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
           >
             <span className="text-base font-medium">Explore Grant Impact</span>
@@ -219,9 +219,7 @@ export const HomePage = () => {
         </section>
         <section className="relative my-40 text-center md:my-64 lg:my-80">
           <div className="absolute inset-x-0 top-0 mx-auto -mt-32 flex  h-[350px] w-[320px] items-center justify-center md:-mt-48 md:h-[550px] md:w-[520px] [&_canvas]:!size-[350px] [&_canvas]:md:!size-[550px]">
-            
-              <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
-            
+            <Spline scene="https://prod.spline.design/kO6h5vInhIdK643Y/scene.splinecode" />
           </div>
           <div className="relative z-10">
             <h2 className="mx-auto w-2/3 pb-3 font-grotesk text-2xl font-medium leading-8 tracking-tighter antialiased md:pb-6 md:text-48 md:leading-[57px]">
