@@ -2,6 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { faker } from '@faker-js/faker';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
+
 import {
   MockInfiniteQueryResult,
   MockQueryResult,
@@ -34,7 +36,7 @@ const meta: Meta<typeof ProjectSelections> = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/grants/${grantId}`,
+        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}`,
         segments: [['grantId', grantId]],
       },
     },

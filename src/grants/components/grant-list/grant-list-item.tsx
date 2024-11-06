@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { Avatar } from '@nextui-org/react';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 
@@ -17,9 +18,10 @@ import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 interface Props {
   grant: Grant;
   isLink?: boolean;
+  ctaText?: string;
 }
 
-export const GrantListItem = ({ grant, isLink = true }: Props) => {
+export const GrantListItem = ({ grant, isLink = true, ctaText }: Props) => {
   // TODO: JOB-679
 
   const {
@@ -94,7 +96,7 @@ export const GrantListItem = ({ grant, isLink = true }: Props) => {
         </div>
       </div>
       <div className="flex w-full items-center justify-end gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
-        <ApplyButton url={url} />
+        <ApplyButton url={url} text={ctaText} />
 
         <div className="hidden lg:flex">
           <CaretRightIcon />
@@ -107,7 +109,7 @@ export const GrantListItem = ({ grant, isLink = true }: Props) => {
     return (
       <Link
         prefetch
-        href={`/grants/${slug}`}
+        href={`/${ROUTE_SECTIONS.GRANT_IMPACT}/${slug}`}
         className={wrapperClassName}
         data-uuid={slug}
         data-testid={GRANT_TEST_IDS.GRANT_ITEM}

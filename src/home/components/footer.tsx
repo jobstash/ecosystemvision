@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { HREFS } from '@/shared/core/constants';
+
 import { FarcasterIcon } from '@/home/components/icons/farcaster';
 import { TelegramIcon } from '@/home/components/icons/telegram';
 import { TwitterIcon } from '@/home/components/icons/twitter';
@@ -37,16 +39,16 @@ export const Footer = () => {
         </div>
         <ul className="flex flex-col gap-y-1 pb-12">
           <li>
-            <Link href={'/projects'}>Projects</Link>
+            <Link href={HREFS.PROJECTS_PAGE}>Projects</Link>
           </li>
           <li>
-            <Link href={'/organizations'}>Organizations</Link>
+            <Link href={HREFS.ORGS_PAGE}>Organizations</Link>
           </li>
           <li>
-            <Link href={'/vc'}>VC</Link>
+            <Link href={HREFS.ACTIVE_GRANTS_PAGE}>Active Grants</Link>
           </li>
           <li>
-            <Link href={'/grants'}>Grants</Link>
+            <Link href={HREFS.GRANT_IMPACT_PAGE}>Grant Impact</Link>
           </li>
         </ul>
       </div>

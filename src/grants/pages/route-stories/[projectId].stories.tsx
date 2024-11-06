@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { faker } from '@faker-js/faker';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { NavLayout } from '@/shared/components/nav-space-layout';
 
 import {
@@ -48,7 +49,7 @@ const meta: Meta<typeof Component> = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/grants/${grantId}/grantees/${granteeId}/projects/${projectId}`,
+        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeId}/projects/${projectId}`,
         segments: [
           ['grantId', grantId],
           ['granteeId', granteeId],

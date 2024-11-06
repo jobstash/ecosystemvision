@@ -107,7 +107,7 @@ export const granteeItemSchema = z.object({
   logoUrl: z.string().nullable(),
   lastFundingDate: z.number().nullable(),
   lastFundingAmount: z.number(),
-  lastFundingUnit: z.string(),
+  lastFundingUnit: z.string().optional(),
 });
 export type GranteeItem = z.infer<typeof granteeItemSchema>;
 

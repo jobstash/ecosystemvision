@@ -18,7 +18,7 @@ const createFundingItems = ({
     icon: <PaperbillIcon />,
     label: 'Last Funding:',
     value: (
-      <DetailValueText>{`$${formatNumber(lastFundingAmount)} ${lastFundingUnit}`}</DetailValueText>
+      <DetailValueText>{`${formatNumber(lastFundingAmount)} ${lastFundingUnit}`}</DetailValueText>
     ),
   },
   ...conditionalItem(!!lastFundingDate, {

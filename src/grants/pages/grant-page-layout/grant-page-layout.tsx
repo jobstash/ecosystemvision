@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic';
 
+import { HREFS } from '@/shared/core/constants';
+
 import { Grant } from '@/grants/core/schemas';
 import { GrantBackButton } from '@/grants/components/grant-back-button';
 
@@ -24,7 +26,7 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
     <div className="flex flex-col gap-6 px-4 pt-[56px] md:pt-20 lg:px-0 lg:pt-0">
       <GrantCard
         grant={grant}
-        backButton={<GrantBackButton fallbackUrl="/grants" />}
+        backButton={<GrantBackButton fallbackUrl={HREFS.GRANT_IMPACT_PAGE} />}
       />
 
       <div className="lg:pr-8">

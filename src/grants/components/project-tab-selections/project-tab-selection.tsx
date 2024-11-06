@@ -5,6 +5,8 @@ import { useParams } from 'next/navigation';
 
 import { cn } from '@nextui-org/react';
 
+import { ROUTE_SECTIONS } from '@/shared/core/constants';
+
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { TabSelectionsSkeleton } from '@/grants/components/tab-selections-skeleton';
 
@@ -42,7 +44,7 @@ export const ProjectTabSelection = () => {
 
   if (!currentProject?.tabs?.length) return null;
 
-  const baseHref = `/grants/${grantId}/grantees/${granteeData.data.slug}/projects`;
+  const baseHref = `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeData.data.slug}/projects`;
 
   const activeTab = tab || currentProject.tabs[0].tab;
 
