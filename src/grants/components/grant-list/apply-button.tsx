@@ -13,7 +13,7 @@ interface Props {
  * Need to implement this as button (instead of link) to avoid nested links
  * Parent card is already a link, so it'll throw react minification error
  */
-export const ApplyButton = ({ url, text = 'Apply' }: Props) => {
+export const ApplyButton = ({ url, text = 'View Program' }: Props) => {
   if (!url) return null;
 
   const onClick: React.MouseEventHandler = (e) => {

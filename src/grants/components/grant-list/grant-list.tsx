@@ -6,7 +6,7 @@ import { useGrantList } from './use-grant-list';
 
 export const FetchedGrantList = () => {
   const props = useGrantList('inactive');
-  return <GrantListItems {...props} ctaText="View Program" />;
+  return <GrantListItems {...props} />;
 };
 
 export const GrantList = () => {
