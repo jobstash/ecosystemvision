@@ -1,4 +1,3 @@
-
 import { Avatar } from '@nextui-org/react';
 
 import { cn } from '@/shared/utils/cn';

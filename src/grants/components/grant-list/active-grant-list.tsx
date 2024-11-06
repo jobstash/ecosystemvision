@@ -15,7 +15,7 @@ import { useGrantList } from './use-grant-list';
 
 const FetchedGrantList = () => {
   const props = useGrantList('active');
-  return <GrantListItems isLink={false} {...props} />;
+  return <GrantListItems isLink={false} {...props} ctaText="Apply" />;
 };
 
 const AiGrantList = () => {
