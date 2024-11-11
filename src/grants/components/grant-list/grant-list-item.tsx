@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Avatar } from '@nextui-org/react';
+import { Avatar, Button } from '@nextui-org/react';
 
 import { ROUTE_SECTIONS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
@@ -95,8 +95,19 @@ export const GrantListItem = ({ grant, isLink = true, ctaText }: Props) => {
           )}
         </div>
       </div>
-      <div className="flex w-full items-center justify-end gap-4 pt-6 lg:max-w-[180px] lg:pt-0">
+      <div className="flex w-full flex-col items-center justify-end gap-4 pt-6 md:flex-row lg:max-w-[180px] lg:pt-0">
         <ApplyButton url={url} text={ctaText} />
+
+        {!ctaText && (
+          <div className="flex w-full lg:hidden">
+            <Button
+              className="mx-auto w-full rounded-xl border border-white/20 font-semibold"
+              variant="bordered"
+            >
+              <span>View Impact</span>
+            </Button>
+          </div>
+        )}
 
         <div className="hidden lg:flex">
           <CaretRightIcon />
