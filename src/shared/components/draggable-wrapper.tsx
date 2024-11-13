@@ -13,7 +13,7 @@ interface Props {
   className?: ClassValue;
 }
 
-const WRAPPER_CLASSNAME = 'hide-scrollbar p-1';
+const WRAPPER_CLASSNAME = 'hide-scrollbar p-1 overflow-auto';
 
 export const DraggableWrapper = (props: Props) => {
   const { children, className } = props;
