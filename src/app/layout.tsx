@@ -7,6 +7,9 @@ import './swiper.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+
+import { GOOGLE_ANALYTICS_ID } from '@/shared/core/envs';
 import { grotesk, interTight } from '@/shared/core/fonts';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
 import { NavLayout } from '@/shared/components/nav-space-layout';
@@ -43,6 +46,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
       <PageScrollDisabler />
       <InitPathSyncer />
       <Toaster />
+
+      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID ?? ''} />
     </body>
   </html>
 );
