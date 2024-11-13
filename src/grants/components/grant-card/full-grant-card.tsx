@@ -1,5 +1,6 @@
 import { Avatar } from '@nextui-org/react';
 
+import { GA_EVENT } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 
@@ -87,7 +88,11 @@ export const FullGrantCard = ({ grant }: Props) => {
             name={name}
           />
         </div>
-        <ApplyButton url={url} />
+        <ApplyButton
+          url={url}
+          gaEvent={GA_EVENT.GRANTS.VIEW_PROGRAM}
+          value={slug}
+        />
       </div>
     </div>
   );

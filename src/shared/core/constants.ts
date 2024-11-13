@@ -60,3 +60,17 @@ export const TEST_IDS = {
 } as const;
 
 export const MAX_LIST_SIZE = 5000;
+
+export const GA_EVENT = {
+  GRANTS: {
+    APPLY_ACTIVE_GRANT: 'apply-active-grant', // value: grant slug
+    APPLY_AI_ACTIVE_GRANT: 'apply-ai-active-grant', // value: grant slug
+    VIEW_PROGRAM: 'grant-view-program', // value: program slug
+    VIEW_IMPACT: 'grant-view-impact', // value: grant slug
+    AI_GRANT_PROGRAM_FINDER_SUBMIT: 'ai-grant-program-finder-submit', // value: program name
+    GRANT_ITEM_CLICK: 'grant-item-click', // value: grant slug
+    GRANTEE_ITEM_CLICK: 'grantee-item-click', // value: grantee id
+    GRANTEE_PROJECT_SELECTION: 'grantee-project-selection', // value: project id
+    GRANTEE_PROJECT_TAB_SELECTION: 'grantee-project-tab-selection', // value: `${project name}-${tab name}`
+  },
+};

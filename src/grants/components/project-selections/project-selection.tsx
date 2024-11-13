@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
+import { sendGAEvent } from '@next/third-parties/google';
+
+import { GA_EVENT } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 
 interface Props {
@@ -22,6 +25,12 @@ export const ProjectSelection = ({
 
   const isActive = isActiveBypass || paramsProjectId === projectId;
 
+  const sendAnalytics = () => {
+    sendGAEvent('event', GA_EVENT.GRANTS.GRANTEE_PROJECT_SELECTION, {
+      value: name,
+    });
+  };
+
   return (
     <Link
       prefetch
@@ -34,6 +43,7 @@ export const ProjectSelection = ({
           'is-active': isActive,
         },
       )}
+      onClick={sendAnalytics}
     >
       {name}
     </Link>

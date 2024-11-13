@@ -33,7 +33,7 @@ export const AiGrantList = () => {
       <VirtualWrapper count={grants.length}>
         {(index) => (
           <div className="pt-6 lg:pt-8">
-            <GrantListItem grant={grants[index]} />
+            <GrantListItem isAiResult grant={grants[index]} />
           </div>
         )}
       </VirtualWrapper>
