@@ -19,6 +19,7 @@ ENV NEXT_PUBLIC_MW_URL=https://middleware.ecosystem.vision
 ENV NEXT_PUBLIC_FRONTEND_URL=https://ecosystem.vision
 
 ENV NEXT_PUBLIC_PAGE_SIZE=20
+ENV NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=G-9ZY0R2T7KR
 RUN pnpm build
 
 # Production image, copy all the files and run next
