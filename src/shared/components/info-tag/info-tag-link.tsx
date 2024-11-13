@@ -18,8 +18,8 @@ export const InfoTagLink = ({ className, href, content }: Props) => {
   };
 
   return (
-    <Button className={className} onClick={onClick}>
-      <div className="flex items-center gap-x-2">{content}</div>
+    <Button className={`${className} max-w-full`} onClick={onClick}>
+      <div className="flex max-w-full items-center gap-x-2">{content}</div>
     </Button>
   );
 };
