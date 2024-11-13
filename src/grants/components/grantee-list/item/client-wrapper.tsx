@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-import { ROUTE_SECTIONS } from '@/shared/core/constants';
+import { sendGAEvent } from '@next/third-parties/google';
+
+import { GA_EVENT, ROUTE_SECTIONS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
@@ -26,6 +28,12 @@ export const ClientWrapper = ({
   const href = `/${ROUTE_SECTIONS.GRANT_IMPACT}/${params.grantId}/grantees/${granteeId}`;
   const isActive = isActiveBypass || params.granteeId === granteeId;
 
+  const sendAnalytics = () => {
+    sendGAEvent('event', GA_EVENT.GRANTS.GRANTEE_ITEM_CLICK, {
+      value: granteeId,
+    });
+  };
+
   return (
     <Link
       href={href}
@@ -40,6 +48,7 @@ export const ClientWrapper = ({
         },
         className,
       )}
+      onClick={sendAnalytics}
       {...props}
     >
       {children}

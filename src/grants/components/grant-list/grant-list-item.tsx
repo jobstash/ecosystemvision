@@ -1,8 +1,6 @@
-import Link from 'next/link';
+import { Avatar } from '@nextui-org/react';
 
-import { Avatar, Button } from '@nextui-org/react';
-
-import { ROUTE_SECTIONS } from '@/shared/core/constants';
+import { GA_EVENT } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 
@@ -10,6 +8,8 @@ import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
 import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
 import { ApplyButton } from '@/grants/components/grant-list/apply-button';
+import { GrantListItemLinkWrapper } from '@/grants/components/grant-list/grant-list-item-link-wrapper';
+import { ViewImpactButton } from '@/grants/components/grant-list/view-impact-button';
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
@@ -19,11 +19,15 @@ interface Props {
   grant: Grant;
   isLink?: boolean;
   ctaText?: string;
+  isAiResult?: boolean;
 }
 
-export const GrantListItem = ({ grant, isLink = true, ctaText }: Props) => {
-  // TODO: JOB-679
-
+export const GrantListItem = ({
+  grant,
+  isLink = true,
+  ctaText,
+  isAiResult,
+}: Props) => {
   const {
     slug,
     logo,
@@ -38,6 +42,12 @@ export const GrantListItem = ({ grant, isLink = true, ctaText }: Props) => {
     hasLowerItems,
     hasWebLinks,
   } = getGrantCardData(grant);
+
+  const gaEvent = ctaText
+    ? isAiResult
+      ? GA_EVENT.GRANTS.APPLY_AI_ACTIVE_GRANT
+      : GA_EVENT.GRANTS.APPLY_ACTIVE_GRANT
+    : GA_EVENT.GRANTS.VIEW_PROGRAM;
 
   const wrapperClassName =
     'flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap';
@@ -96,18 +106,9 @@ export const GrantListItem = ({ grant, isLink = true, ctaText }: Props) => {
         </div>
       </div>
       <div className="flex w-full flex-col items-center justify-end gap-4 pt-6 md:flex-row lg:max-w-[180px] lg:pt-0">
-        <ApplyButton url={url} text={ctaText} />
+        <ApplyButton url={url} text={ctaText} gaEvent={gaEvent} value={slug} />
 
-        {!ctaText && (
-          <div className="flex w-full lg:hidden">
-            <Button
-              className="mx-auto w-full rounded-xl border border-white/20 font-semibold"
-              variant="bordered"
-            >
-              <span>View Impact</span>
-            </Button>
-          </div>
-        )}
+        {!ctaText && <ViewImpactButton slug={slug} />}
 
         <div className="hidden lg:flex">
           <CaretRightIcon />
@@ -118,15 +119,7 @@ export const GrantListItem = ({ grant, isLink = true, ctaText }: Props) => {
 
   if (isLink) {
     return (
-      <Link
-        prefetch
-        href={`/${ROUTE_SECTIONS.GRANT_IMPACT}/${slug}`}
-        className={wrapperClassName}
-        data-uuid={slug}
-        data-testid={GRANT_TEST_IDS.GRANT_ITEM}
-      >
-        {content}
-      </Link>
+      <GrantListItemLinkWrapper slug={slug}>{content}</GrantListItemLinkWrapper>
     );
   }
 

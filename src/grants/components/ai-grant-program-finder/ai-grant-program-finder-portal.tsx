@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { sendGAEvent } from '@next/third-parties/google';
 import { Button, Textarea } from '@nextui-org/react';
 import { useAtom, useAtomValue } from 'jotai';
 
+import { GA_EVENT } from '@/shared/core/constants';
 import { useIsMounted } from '@/shared/hooks/use-is-mounted';
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
 import { AiIcon } from '@/shared/components/icons/ai-icon';
@@ -36,6 +38,9 @@ export const AiGrantProgramFinderPortal = () => {
   };
 
   const onFind = () => {
+    sendGAEvent('event', GA_EVENT.GRANTS.AI_GRANT_PROGRAM_FINDER_SUBMIT, {
+      value: aiQueryInput,
+    });
     setAiQuery(aiQueryInput);
   };
 

@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
+import { sendGAEvent } from '@next/third-parties/google';
 import { cn } from '@nextui-org/react';
 
-import { ROUTE_SECTIONS } from '@/shared/core/constants';
+import { GA_EVENT, ROUTE_SECTIONS } from '@/shared/core/constants';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { TabSelectionsSkeleton } from '@/grants/components/tab-selections-skeleton';
@@ -48,6 +49,12 @@ export const ProjectTabSelection = () => {
 
   const activeTab = tab || currentProject.tabs[0].tab;
 
+  const sendAnalytics = () => {
+    sendGAEvent('event', GA_EVENT.GRANTS.GRANTEE_PROJECT_TAB_SELECTION, {
+      value: `${currentProject.name}-${activeTab}`,
+    });
+  };
+
   return (
     <div className="-mr-3.5 overflow-auto lg:mr-0">
       <div className={cn(SHARED_CLASSNAME, 'w-fit')}>
@@ -64,6 +71,7 @@ export const ProjectTabSelection = () => {
                 'is-active': activeTab === tab,
               },
             )}
+            onClick={sendAnalytics}
           >
             {label}
           </Link>
