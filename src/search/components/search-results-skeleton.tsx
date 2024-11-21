@@ -14,7 +14,7 @@ export const SearchResultsSkeleton = () => {
           <Divider />
           <SearchResultLayout
             label={<Skeleton className="h-5 w-20 rounded-md" />}
-            categories={
+            items={
               <>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Skeleton key={i} className="h-9 w-40 rounded-lg" />

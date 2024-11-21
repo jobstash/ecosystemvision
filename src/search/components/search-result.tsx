@@ -1,33 +1,40 @@
-import { SearchResultDto } from '@/search/core/schemas';
-import { SearchCategory } from '@/search/components/search-category';
+import { TSearchResult } from '@/search/core/schemas';
+import { SearchResultItem } from '@/search/components/search-result-item';
 
 export const SearchResultLayout = ({
   label,
-  categories,
+  items,
 }: {
   label: React.ReactNode;
-  categories: React.ReactNode;
+  items: React.ReactNode;
 }) => {
   return (
     <div className="flex flex-col gap-3">
-     {label}
-      <div className="flex flex-wrap gap-4">{categories}</div>
+      {label}
+      <div className="flex flex-wrap gap-4">{items}</div>
     </div>
   );
 };
 
-interface Props extends SearchResultDto {
+interface Props extends TSearchResult {
   query: string;
 }
 
-export const SearchResult = ({ query, title, categories }: Props) => {
+export const SearchResult = ({ query, title, items }: Props) => {
   return (
     <SearchResultLayout
-      label={<span className='text-13 font-light uppercase opacity-60'>{title}</span>}
-      categories={
+      label={
+        <span className="text-13 font-light uppercase opacity-60">{title}</span>
+      }
+      items={
         <>
-          {categories.map(({ label, url }) => (
-            <SearchCategory key={label} query={query} label={label} url={url} />
+          {items.map(({ label, href }) => (
+            <SearchResultItem
+              key={label}
+              query={query}
+              label={label}
+              href={href}
+            />
           ))}
         </>
       }

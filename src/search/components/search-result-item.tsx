@@ -6,7 +6,7 @@ import { Button } from '@nextui-org/react';
 
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
-import { SearchResultDto } from '@/search/core/schemas';
+import { TSearchResultItem } from '@/search/core/schemas';
 
 const escapeRegExp = (str: string): string =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -33,22 +33,20 @@ const highlightText = (text: string, query: string): React.ReactNode => {
   );
 };
 
-type Category = SearchResultDto['categories'][number];
-
-interface Props extends Category {
+interface Props extends TSearchResultItem {
   query: string;
 }
 
-export const SearchCategory = ({ label, url, query }: Props) => {
+export const SearchResultItem = ({ label, href, query }: Props) => {
   return (
     <Button
       as={Link}
-      href={url}
+      href={href}
       size="sm"
       className=""
       endContent={<ExternalIcon />}
     >
-      <span className='text-13'>{highlightText(label, query)}</span>
+      <span className="text-13">{highlightText(label, query)}</span>
     </Button>
   );
 };

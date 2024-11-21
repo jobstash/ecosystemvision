@@ -15,10 +15,10 @@ export const SearchResults = () => {
 
   return (
     <div className="flex flex-col gap-6 py-8 md:gap-8">
-      {data.map(({ title: label, categories }) => (
-        <Fragment key={label}>
+      {data.map(({ title, items }) => (
+        <Fragment key={title}>
           <Divider />
-          <SearchResult query={query} title={label} categories={categories} />
+          <SearchResult query={query} title={title} items={items} />
         </Fragment>
       ))}
     </div>

@@ -1,6 +1,17 @@
-import { fakeSearchResults } from '@/search/testutils/fake-search-results';
+import { MW_URL } from '@/shared/core/envs';
+import { mwGET } from '@/shared/utils/mw-get';
 
-export const search = async (_query: string) => {
-  await new Promise((r) => setTimeout(r, 200));
-  return fakeSearchResults();
+import {
+  dtoToSearchResults,
+  searchResultsDtoSchema,
+} from '@/search/core/schemas';
+
+export const search = async (query: string) => {
+  const response = await mwGET({
+    url: `${MW_URL}/search?query=${query}`,
+    label: 'search',
+    responseSchema: searchResultsDtoSchema,
+  });
+
+  return dtoToSearchResults(response);
 };
