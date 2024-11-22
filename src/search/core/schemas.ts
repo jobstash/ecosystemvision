@@ -30,7 +30,7 @@ export type TSearchResults = z.infer<typeof searchResultsSchema>;
 export const dtoToSearchResults = (dto: SearchResultsDto): TSearchResults => {
   return Object.entries(dto)
     .map(([title, itemsDto]) => ({
-      title: title.toUpperCase(),
+      title: title.replace(/([a-z])([A-Z])/g, '$1 $2').toUpperCase(),
       items: itemsDto.map(({ value, link }) => ({ label: value, href: link })),
     }))
     .filter(({ items }) => items.length > 0);
