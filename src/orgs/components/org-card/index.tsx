@@ -14,42 +14,42 @@ import { activeOrgSlugAtom } from '@/orgs/core/atoms';
 import { createOrgCardTags } from './create-org-card-tags';
 
 interface Props {
-  orgItem: OrgListItem;
-  isInit?: boolean;
-  filterParamsString?: string;
+	orgItem: OrgListItem;
+	isInit?: boolean;
+	filterParamsString?: string;
 }
 
 export const OrgCard = (props: Props) => {
-  const { orgItem, isInit = false, filterParamsString = '' } = props;
-  const { normalizedName: slug, url, logoUrl, name, location } = orgItem;
+	const { orgItem, isInit = false, filterParamsString = '' } = props;
+	const { normalizedName: slug, url, logoUrl, name, location } = orgItem;
 
-  const src = getLogoUrl(url, logoUrl);
-  const tags = createOrgCardTags(orgItem);
-  const hasTags = tags.length > 0;
-  const linkHref = `${HREFS.ORGS_PAGE}/${slug}/details${filterParamsString}`;
+	const src = getLogoUrl(url, logoUrl);
+	const tags = createOrgCardTags(orgItem);
+	const hasTags = tags.length > 0;
+	const linkHref = `${HREFS.ORGS_PAGE}/names/${slug}/details${filterParamsString}`;
 
-  return (
-    <CardWrapper id={slug} idAtom={activeOrgSlugAtom}>
-      <Link
-        href={linkHref}
-        scroll={false}
-        data-testid={ORG_TEST_IDS.ORG_CARD}
-        data-uuid={slug}
-        data-is-init={isInit ?? undefined}
-        prefetch={true}
-        className="flex flex-col gap-3 p-6"
-      >
-        <LogoTitle src={src}>
-          <div className="flex flex-col">
-            <h3 className="text-lg font-bold">{name}</h3>
-            <h4 className="text-sm text-white/60">{location}</h4>
-          </div>
-        </LogoTitle>
+	return (
+		<CardWrapper id={slug} idAtom={activeOrgSlugAtom}>
+			<Link
+				href={linkHref}
+				scroll={false}
+				data-testid={ORG_TEST_IDS.ORG_CARD}
+				data-uuid={slug}
+				data-is-init={isInit ?? undefined}
+				prefetch={true}
+				className="flex flex-col gap-3 p-6"
+			>
+				<LogoTitle src={src}>
+					<div className="flex flex-col">
+						<h3 className="text-lg font-bold">{name}</h3>
+						<h4 className="text-sm text-white/60">{location}</h4>
+					</div>
+				</LogoTitle>
 
-        {hasTags && <Divider />}
+				{hasTags && <Divider />}
 
-        <InfoTags tags={tags} />
-      </Link>
-    </CardWrapper>
-  );
+				<InfoTags tags={tags} />
+			</Link>
+		</CardWrapper>
+	);
 };

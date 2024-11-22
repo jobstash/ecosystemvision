@@ -14,12 +14,12 @@ export const navigateToOrgDetails = async (page: Page, n: number) => {
   // Click on the upper right corner (ensure buttons w/in the card is not clicked)
   await card.click({ position: { x: 10, y: 10 } });
 
-  await expect(page).toHaveURL(`/organizations/${uuid}/details`);
+  await expect(page).toHaveURL(`/organizations/names/${uuid}/details`);
 };
 
 export const navigateBackToOrgListPage = async (page: Page) => {
   // Assert mobile/tablet devices are currently on details-page
-  await expect(page).toHaveURL(/\/organizations\/[^/]+\/details/);
+  await expect(page).toHaveURL(/\/organizations\/names\/[^/]+\/details/);
 
   // Click back button
   await page.getByTestId(TEST_IDS.DETAILS_BACK).last().click();
@@ -51,7 +51,7 @@ export const getFirstTwoOrgIds = async (page: Page) => {
 };
 
 export const reloadToOrgDetails = (page: Page, id: string) =>
-  page.goto(`/organizations/${id}/details`);
+  page.goto(`/organizations/names/${id}/details`);
 
 export const assertOrgCardsSwapped = async (
   page: Page,

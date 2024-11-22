@@ -3,7 +3,7 @@ import { mwGET } from '@/shared/utils/mw-get';
 
 import { projectDetailsSchema } from '@/projects/core/schemas';
 
-export const getProjectDetails = (slug: string) => {
+export const getProjectDetails = async (slug: string) => {
   const url = `${MW_URL}/projects/details/slug/${slug}`;
 
   return mwGET({

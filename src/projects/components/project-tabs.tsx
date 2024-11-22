@@ -20,7 +20,7 @@ export const ProjectTabs = ({ slug }: Props) => {
 	if (!data) return null;
 	if (data.organizations.length === 0) return null;
 
-	const prefix = `${HREFS.PROJECTS_PAGE}/${slug}`;
+	const prefix = `${HREFS.PROJECTS_PAGE}/names/${slug}`;
 	const tabs = projectTabs.map((tab) => ({
 		...tab,
 		href: `${prefix}${tab.href}`,
