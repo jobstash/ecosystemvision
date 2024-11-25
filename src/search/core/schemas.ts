@@ -35,3 +35,46 @@ export const dtoToSearchResults = (dto: SearchResultsDto): TSearchResults => {
     }))
     .filter(({ items }) => items.length > 0);
 };
+
+export const pillarDtoSchema = z.object({
+  slug: z.string(),
+  items: z.array(z.string()),
+});
+export type PillarDto = z.infer<typeof pillarDtoSchema>;
+
+export const pillarInfoDtoSchema = z.object({
+  title: z.string(),
+  count: z.number(),
+  description: z.string(),
+  activePillar: pillarDtoSchema,
+  altPillar: pillarDtoSchema,
+  // TODO: Pillar filters
+});
+export type PillarInfoDto = z.infer<typeof pillarInfoDtoSchema>;
+
+export const pillarInfoResponseSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: pillarInfoDtoSchema,
+});
+export type PillarInfoResponse = z.infer<typeof pillarInfoResponseSchema>;
+
+export const pillarInfoSchema = z.object({
+  title: z.string(),
+  count: z.number(),
+  description: z.string(),
+  activePillar: pillarDtoSchema,
+  altPillar: pillarDtoSchema,
+  // TODO: Pillar filters
+});
+export type TPillarInfo = z.infer<typeof pillarInfoSchema>;
+
+export const dtoToPillarSearchResults = (dto: PillarInfoDto): TPillarInfo => {
+  return {
+    title: dto.title,
+    count: dto.count,
+    description: dto.description,
+    activePillar: dto.activePillar,
+    altPillar: dto.altPillar,
+  };
+};
