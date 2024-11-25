@@ -1,14 +1,21 @@
 import { z } from 'zod';
 
+import { pascalToTitle } from '@/shared/utils/pascal-to-title';
+
 export const searchResultItemDtoSchema = z.object({
   value: z.string(),
   link: z.string(),
 });
 export type SearchResultItemDto = z.infer<typeof searchResultItemDtoSchema>;
 
-export const searchResultsDtoSchema = z.record(
+export const searchResultPillarDtoSchema = z.record(
   z.string(),
   z.array(searchResultItemDtoSchema),
+);
+
+export const searchResultsDtoSchema = z.record(
+  z.string(),
+  searchResultPillarDtoSchema,
 );
 export type SearchResultsDto = z.infer<typeof searchResultsDtoSchema>;
 
@@ -28,12 +35,14 @@ export const searchResultsSchema = z.array(searchResultSchema);
 export type TSearchResults = z.infer<typeof searchResultsSchema>;
 
 export const dtoToSearchResults = (dto: SearchResultsDto): TSearchResults => {
-  return Object.entries(dto)
-    .map(([title, itemsDto]) => ({
-      title: title.replace(/([a-z])([A-Z])/g, '$1 $2').toUpperCase(),
-      items: itemsDto.map(({ value, link }) => ({ label: value, href: link })),
-    }))
-    .filter(({ items }) => items.length > 0);
+  return Object.entries(dto).flatMap(([mainTitle, searchResultPillar]) => {
+    return Object.entries(searchResultPillar)
+      .flatMap(([subTitle, items]) => ({
+        title: `${pascalToTitle(mainTitle.replace(/s$/, ''))} ${pascalToTitle(subTitle)}`,
+        items: items.map(({ value, link }) => ({ label: value, href: link })),
+      }))
+      .filter(({ items }) => items.length > 0);
+  });
 };
 
 export const pillarDtoSchema = z.object({
