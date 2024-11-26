@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
+import { Button } from '@nextui-org/react';
+
 import { A11Y, TEST_IDS } from '@/shared/core/constants';
 
 interface Props {
@@ -20,8 +22,13 @@ export const DetailsPanelBackButton = ({
   };
 
   return (
-    <span onClick={onClick} data-testid={TEST_IDS.DETAILS_BACK}>
+    <Button
+      variant="bordered"
+      className="rounded-lg border-white/10"
+      onClick={onClick}
+      data-testid={TEST_IDS.DETAILS_BACK}
+    >
       {text}
-    </span>
+    </Button>
   );
 };
