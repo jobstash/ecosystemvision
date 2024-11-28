@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
 
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
@@ -22,7 +22,7 @@ const highlightText = (text: string, query: string): React.ReactNode => {
     <div className="">
       {parts.map((part, index) =>
         regex.test(part) ? (
-          <span key={index} className="text-[#98eebe]">
+          <span key={index} className="font-semibold text-accent2">
             {part}
           </span>
         ) : (

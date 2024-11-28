@@ -23,6 +23,10 @@
     --color-gradient-1: 117 117 117; /* #757575 */
     --color-gradient-2: 117 112 141; /* #75708D */
     --color-innovate: 31 31 38; /* #1F1F26 */
+
+		--color-accent: 252 186 159; /* #FCBAAF */
+		--color-accent2: 152 238 190; /* #98EEBE */
+		--color-accent2-dark: 20 153 107; /* #14996B */
   }
 }
 

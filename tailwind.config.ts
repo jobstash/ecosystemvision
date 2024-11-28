@@ -23,8 +23,10 @@ const config: Config = {
         '20': '20px',
       },
       backgroundImage: {
-        'custom': 'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(197, 197, 197, 0.434343) 28%, rgba(153, 153, 153, 0) 49.5%)',
-        'custom-mobile': 'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(197, 197, 197, 0.434343) 49.56%)',
+        custom:
+          'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(197, 197, 197, 0.434343) 28%, rgba(153, 153, 153, 0) 49.5%)',
+        'custom-mobile':
+          'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(197, 197, 197, 0.434343) 49.56%)',
       },
       fontSize: {
         '10': '10px',
@@ -34,7 +36,7 @@ const config: Config = {
         '32': '32px',
         '40': '40px',
         '48': '48px',
-        '64': '64px'
+        '64': '64px',
       },
       colors: {
         white: 'rgb(var(--color-white) / <alpha-value>)',
@@ -52,7 +54,9 @@ const config: Config = {
         'grantee-item': 'rgb(var(--color-grantee-item) / <alpha-value>)',
         'gradient-1': 'rgb(var(--color-gradient-1) / <alpha-value>)',
         'gradient-2': 'rgb(var(--color-gradient-2) / <alpha-value>)',
-        'innovate' : 'rgb(var(--color-innovate) / <alpha-value>)',
+        innovate: 'rgb(var(--color-innovate) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        accent2: 'rgb(var(--color-accent2) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',
         skill3: '#E2BF2B',
@@ -112,6 +116,7 @@ const config: Config = {
               900: '#F5F5F5',
               DEFAULT: '#1E1E1E',
             },
+            focus: '#14996b',
           },
         },
       },

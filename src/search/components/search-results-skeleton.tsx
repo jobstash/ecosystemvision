@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { Skeleton } from '@nextui-org/react';
+import { Skeleton } from '@nextui-org/skeleton';
 
 import { Divider } from '@/shared/components/divider';
 
