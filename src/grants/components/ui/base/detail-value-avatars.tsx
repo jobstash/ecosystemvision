@@ -3,7 +3,7 @@ import {
   AvatarGroup,
   AvatarGroupProps,
   AvatarProps,
-} from '@nextui-org/react';
+} from '@nextui-org/avatar';
 
 interface Props extends AvatarProps {
   items: { name: string; logo: string | null }[];
@@ -15,7 +15,7 @@ interface Props extends AvatarProps {
 
 export const DetailValueAvatars = ({ items, avatarProps }: Props) => {
   return (
-    <AvatarGroup  {...avatarProps?.group}>
+    <AvatarGroup {...avatarProps?.group}>
       {items.map(({ name, logo }) => (
         <Avatar
           key={name}

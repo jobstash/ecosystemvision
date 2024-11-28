@@ -8,7 +8,7 @@ import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
 import { grantQueryKeys } from '@/grants/core/query-keys';
 import { getGrantDetails } from '@/grants/data/get-grant-details';
 import { getGrantList } from '@/grants/data/get-grant-list';
-import { AiGrantProgramFinder } from '@/grants/components/ai-grant-program-finder';
+import { AiGrantProgramFinderPortal } from '@/grants/components/ai-grant-program-finder';
 import { GrantList } from '@/grants/components/grant-list/grant-list';
 
 const AiGrantProgramFinderSkeleton = dynamic(
@@ -56,7 +56,7 @@ export const GrantListPage = async () => {
         </div>
         <GrantList />
       </div>
-      <AiGrantProgramFinder />
+      <AiGrantProgramFinderPortal />
     </HydrationBoundary>
   );
 };

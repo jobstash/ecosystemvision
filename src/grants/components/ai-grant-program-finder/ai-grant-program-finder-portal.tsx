@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { sendGAEvent } from '@next/third-parties/google';
-import { Button, Textarea } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
+import { Textarea } from '@nextui-org/input';
 import { useAtom, useAtomValue } from 'jotai';
 
 import { GA_EVENT } from '@/shared/core/constants';

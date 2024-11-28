@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
 
 import { A11Y, TEST_IDS } from '@/shared/core/constants';
 

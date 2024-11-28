@@ -3,8 +3,7 @@
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 
-import { cn } from '@nextui-org/react';
-
+import { cn } from '@/shared/utils/cn';
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { ClientWrapper } from '@/grants/components/grantee-list/item/client-wrapper';
@@ -52,7 +51,7 @@ export const GranteeList = () => {
         )}
       </VirtualWrapper>
 
-      <div className='pb-6'>{lastItem}</div>
+      <div className="pb-6">{lastItem}</div>
     </div>
   );
 };

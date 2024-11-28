@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from '@nextui-org/avatar';
 
 import { MySwiper, SwiperSlide } from '@/home/components/swiper';
 
@@ -15,7 +15,12 @@ export const TestimonialSwiper = () => {
   };
   return (
     <div className="testimonial-swiper md:overflow-hidden">
-      <MySwiper spaceBetween={32} hasNavigation={true} hasPagination={true} breakpoints={breakpoints}>
+      <MySwiper
+        spaceBetween={32}
+        hasNavigation={true}
+        hasPagination={true}
+        breakpoints={breakpoints}
+      >
         <SwiperSlide>
           <div className="flex h-full grow flex-col">
             <p className="grow pb-8 text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">

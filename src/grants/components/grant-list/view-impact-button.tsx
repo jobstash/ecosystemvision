@@ -1,7 +1,7 @@
 'use client';
 
 import { sendGAEvent } from '@next/third-parties/google';
-import { Button } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
 
 import { GA_EVENT } from '@/shared/core/constants';
 

@@ -1,4 +1,5 @@
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
+import { Skeleton } from '@nextui-org/skeleton';
 
 import { cn } from '@/shared/utils/cn';
 import { copyToClipboard } from '@/shared/utils/copy-to-clipboard';

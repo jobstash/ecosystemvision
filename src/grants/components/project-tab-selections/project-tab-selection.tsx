@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { sendGAEvent } from '@next/third-parties/google';
-import { cn } from '@nextui-org/react';
 
 import { GA_EVENT, ROUTE_SECTIONS } from '@/shared/core/constants';
+import { cn } from '@/shared/utils/cn';
 
 import { useGranteeFetch } from '@/grants/hooks/use-grantee-fetch';
 import { TabSelectionsSkeleton } from '@/grants/components/tab-selections-skeleton';

@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 
-import { Button, Input } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
+import { Input } from '@nextui-org/input';
 
 import { useAddToWaitlist } from '@/shared/hooks/use-add-to-waitlist';
 

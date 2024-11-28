@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
+import { Skeleton } from '@nextui-org/skeleton';
 
 import { getWebsiteText } from '@/shared/utils/get-website-text';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';

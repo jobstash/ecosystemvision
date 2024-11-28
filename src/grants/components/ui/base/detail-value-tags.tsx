@@ -1,4 +1,4 @@
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from '@nextui-org/avatar';
 
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 
