@@ -48,10 +48,10 @@ interface Props {
 export const NavSections = ({ isMobile }: Props) => {
   return (
     <nav
-      className="flex h-full flex-col gap-6 "
+      className="flex h-full flex-col gap-6"
       data-testid={TEST_IDS.NAV_SECTION}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex h-16 items-center justify-between">
         <Brand />
         {isMobile && <CloseButton />}
       </div>

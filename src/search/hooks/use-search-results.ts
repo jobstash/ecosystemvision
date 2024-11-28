@@ -15,6 +15,7 @@ export const useSearchResults = () => {
     queryKey: searchQueryKeys.search(query.toLowerCase()),
     queryFn: () => search(query),
     staleTime: QUERY_STALETIME.DEFAULT,
+    enabled: !!query,
   });
 
   return {

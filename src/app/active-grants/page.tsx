@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { getQueryClient } from '@/shared/utils/get-query-client';
+import { AppHeader } from '@/shared/components/app-header';
 
 import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
 import { grantQueryKeys } from '@/grants/core/query-keys';
@@ -27,20 +28,23 @@ const ActiveGrantsPage = async () => {
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="px-5 pt-[56px] md:pt-[80px] lg:px-8">
-        <h1 className="py-6 text-2xl font-semibold tracking-[-0.06em] md:pt-2 md:text-4xl lg:pt-0 lg:text-6xl">
-          Active Grant Programs
-        </h1>
-        <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE}>
-          <div className="lg:hidden">
-            <AiGrantProgramFinderSkeleton />
+    <>
+      <AppHeader />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <div className="px-5 pt-[56px] md:pt-[80px] lg:px-8">
+          <h1 className="py-6 text-2xl font-semibold tracking-[-0.06em] md:pt-2 md:text-4xl lg:pt-0 lg:text-6xl">
+            Active Grant Programs
+          </h1>
+          <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE}>
+            <div className="lg:hidden">
+              <AiGrantProgramFinderSkeleton />
+            </div>
           </div>
+          <ActiveGrantList />
         </div>
-        <ActiveGrantList />
-      </div>
-      <AiGrantProgramFinderPortal />
-    </HydrationBoundary>
+        <AiGrantProgramFinderPortal />
+      </HydrationBoundary>
+    </>
   );
 };
 

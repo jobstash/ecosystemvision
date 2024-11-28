@@ -106,8 +106,8 @@ export const fakeSearchResultsDto = (): SearchResultsDto => {
       ],
       categories: [
         {
-          value: 'Dexes Projects',
-          link: '/projects/categories/dexes-projects',
+          value: 'Dexes',
+          link: '/projects/categories/dexes',
         },
         {
           value: 'Bizdev Projects',

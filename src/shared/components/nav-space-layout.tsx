@@ -6,11 +6,12 @@ interface Props {
 
 export const NavLayout = ({ children }: Props) => {
   return (
-    <>
-      <Nav />
-      <div className="relative min-h-screen w-full lg:ml-[264px] lg:max-w-[calc(100%-264px)]">
-        {children}
+    <div className="flex min-h-screen">
+      <div className="sticky top-0 hidden h-screen w-[236px] flex-col bg-[#070708] p-4 lg:flex">
+        <Nav />
       </div>
-    </>
+
+      <div className="w-full lg:max-w-[calc(100%-236px)]">{children}</div>
+    </div>
   );
 };

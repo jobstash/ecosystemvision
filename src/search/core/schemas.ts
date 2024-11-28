@@ -56,7 +56,7 @@ export const pillarInfoDtoSchema = z.object({
   count: z.number(),
   description: z.string(),
   activePillar: pillarDtoSchema,
-  altPillar: pillarDtoSchema,
+  altPillar: pillarDtoSchema.nullable(),
   // TODO: Pillar filters
 });
 export type PillarInfoDto = z.infer<typeof pillarInfoDtoSchema>;
@@ -73,7 +73,7 @@ export const pillarInfoSchema = z.object({
   count: z.number(),
   description: z.string(),
   activePillar: pillarDtoSchema,
-  altPillar: pillarDtoSchema,
+  altPillar: pillarDtoSchema.nullable(),
   // TODO: Pillar filters
 });
 export type TPillarInfo = z.infer<typeof pillarInfoSchema>;

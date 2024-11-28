@@ -1,12 +1,13 @@
+import { faker } from '@faker-js/faker';
+
 export const fakePillarInfo = () => ({
-  title: 'Dexes Projects',
+  title: faker.lorem.words({ min: 2, max: 4 }),
   count: 331,
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut odio eu ante laoreet tincidunt id eget dui. Suspendisse interdum, tortor at tempus pulvinar, elit libero consequat nulla, id mollis elit mauris ac est.',
+  description: faker.lorem.paragraph(),
   activePillar: {
     slug: 'categories',
     items: [
-      'Dexes Projects in Crypto',
+      'Dexes',
       'Bizdev Projects',
       'Customer Support Projects',
       'Cybersecurity Projects',
@@ -24,7 +25,7 @@ export const fakePillarInfo = () => ({
     ],
   },
   altPillar: {
-    slug: 'skills',
+    slug: 'tags',
     items: [
       'Python',
       'JavaScript',
@@ -46,6 +47,7 @@ export const fakePillarInfo = () => ({
       'Swift',
       'Kotlin',
       'Rust',
+      'Kubernetes',
       'Scala',
       'TypeScript',
       'HTML',
