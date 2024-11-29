@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+import { AppHeader } from '@/shared/components/app-header';
 
 import { createPillarItems } from '@/search/utils/create-pillar-items';
 import { getInputItems } from '@/search/utils/get-input-items';
@@ -6,13 +6,6 @@ import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { ActivePillarContent } from '@/search/components/active-pillar-content';
 import { PillarItems } from '@/search/components/pillar-items';
 import { PillarSearchInput } from '@/search/components/pillar-search-input';
-
-const AppHeader = dynamic(
-  () => import('@/shared/components/app-header').then((m) => m.AppHeader),
-  {
-    ssr: true,
-  },
-);
 
 interface Props {
   params: {
