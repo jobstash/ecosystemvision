@@ -23,7 +23,7 @@ export const PillarPage = async ({ params }: Props) => {
 
   const { mainPillar, altPillar, title, description } = pillarInfo;
   const { mainItems, altItems } = createPillarItems(nav, pillarInfo, params);
-  const inputItems = getInputItems(nav, pillarInfo, params.item);
+  const inputItems = getInputItems(nav, pillarInfo, params.item, params.item2);
 
   return (
     <div className="flex flex-col gap-4">
