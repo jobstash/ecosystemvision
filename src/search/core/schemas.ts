@@ -72,18 +72,18 @@ export const pillarInfoSchema = z.object({
   title: z.string(),
   // count: z.number(),
   description: z.string(),
-  activePillar: pillarDtoSchema,
+  mainPillar: pillarDtoSchema,
   altPillar: pillarDtoSchema.nullable(),
   // TODO: Pillar filters
 });
 export type TPillarInfo = z.infer<typeof pillarInfoSchema>;
 
-export const dtoToPillarSearchResults = (dto: PillarInfoDto): TPillarInfo => {
+export const dtoToPillarInfo = (dto: PillarInfoDto): TPillarInfo => {
   return {
     title: dto.title,
     // count: dto.count,
     description: dto.description,
-    activePillar: dto.activePillar,
+    mainPillar: dto.activePillar,
     altPillar: dto.altPillar,
   };
 };

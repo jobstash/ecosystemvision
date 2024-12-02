@@ -5,12 +5,13 @@ import { Spinner } from '@nextui-org/spinner';
 import { cn } from '@/shared/utils/cn';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
+import { TPillarItem } from '@/search/core/types';
 import { PillarSearchInputItem } from '@/search/components/pillar-search-input-item';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
-  inputItems: { label: string; href: string }[];
+  inputItems: TPillarItem[];
 }
 
 export const PillarSearchInput = ({ inputItems }: Props) => {

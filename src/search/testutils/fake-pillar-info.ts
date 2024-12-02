@@ -4,7 +4,7 @@ export const fakePillarInfo = () => ({
   title: faker.lorem.words({ min: 2, max: 4 }),
   count: 331,
   description: faker.lorem.paragraph(),
-  activePillar: {
+  mainPillar: {
     slug: 'categories',
     items: [
       'Dexes',

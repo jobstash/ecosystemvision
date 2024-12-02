@@ -2,7 +2,7 @@ import { MW_URL } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import {
-  dtoToPillarSearchResults,
+  dtoToPillarInfo,
   pillarInfoResponseSchema,
   TPillarInfo,
 } from '@/search/core/schemas';
@@ -33,5 +33,17 @@ export const getPillarInfo = async (
     throw new Error(response.message);
   }
 
-  return dtoToPillarSearchResults(response.data);
+  return dtoToPillarInfo(response.data);
 };
+
+// import { TPillarInfo } from '@/search/core/schemas';
+// import { GetPillarInfoProps } from '@/search/core/types';
+
+// import { fakePillarInfo } from '@/search/testutils/fake-pillar-info';
+
+// export const getPillarInfo = async (
+//   _props: GetPillarInfoProps,
+// ): Promise<TPillarInfo> => {
+//   await new Promise((r) => setTimeout(r, 2000));
+//   return fakePillarInfo();
+// };

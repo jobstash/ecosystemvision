@@ -10,15 +10,15 @@ export const createPillarItems = (
   pillarInfo: TPillarInfo,
   params: PillarParams,
 ) => {
-  const { activePillar, altPillar } = pillarInfo;
+  const { mainPillar, altPillar } = pillarInfo;
 
-  const activeHrefPrefix = `/${nav}/${activePillar.slug}`;
-  const activeItems = [
+  const activeHrefPrefix = `/${nav}/${mainPillar.slug}`;
+  const mainItems = [
     {
-      label: createAllItemsLabel(activePillar.slug),
+      label: createAllItemsLabel(mainPillar.slug),
       href: `${activeHrefPrefix}/all`,
     },
-    ...activePillar.items.map((pillarItem) => ({
+    ...mainPillar.items.map((pillarItem) => ({
       label: pillarItem,
       href: `${activeHrefPrefix}/${normalizeString(pillarItem)}`,
     })),
@@ -27,7 +27,7 @@ export const createPillarItems = (
   const altItems = [];
 
   if (altPillar) {
-    const altHrefPrefix = `/${nav}/${activePillar.slug}/${params.item}/${altPillar.slug}`;
+    const altHrefPrefix = `/${nav}/${mainPillar.slug}/${params.item}/${altPillar.slug}`;
     altItems.push(
       {
         label: createAllItemsLabel(altPillar.slug),
@@ -40,5 +40,5 @@ export const createPillarItems = (
     );
   }
 
-  return { activeItems, altItems };
+  return { mainItems, altItems };
 };

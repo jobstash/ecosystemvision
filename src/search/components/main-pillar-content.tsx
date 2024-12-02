@@ -4,7 +4,7 @@ interface Props {
   items: React.ReactNode;
 }
 
-export const ActivePillarContent = (props: Props) => {
+export const MainPillarContent = (props: Props) => {
   const { title, description, items } = props;
 
   return (

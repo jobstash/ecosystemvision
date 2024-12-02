@@ -1,6 +1,7 @@
 import { capitalize } from '@/shared/utils/capitalize';
 
 import { TPillarInfo } from '@/search/core/schemas';
+import { TPillarItem } from '@/search/core/types';
 import { findPillarItem } from '@/search/utils/find-pillar-item';
 
 export const getInputItems = (
@@ -8,8 +9,8 @@ export const getInputItems = (
   pillarInfo: TPillarInfo,
   itemParam: string,
   item2Param?: string,
-): { label: string; href: string }[] => {
-  const { activePillar, altPillar } = pillarInfo;
+): TPillarItem[] => {
+  const { mainPillar: activePillar, altPillar } = pillarInfo;
 
   if (itemParam === 'all') {
     return [

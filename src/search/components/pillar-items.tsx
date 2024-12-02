@@ -1,51 +1,60 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
-import { Button } from '@nextui-org/button';
-
-import { cn } from '@/shared/utils/cn';
 import { normalizeString } from '@/shared/utils/normalize-string';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { TPillarItem } from '@/search/core/types';
+import {
+  hiddenAltPillarItemsAtom,
+  hiddenMainPillarItemsAtom,
+} from '@/search/core/atoms';
+import { PillarItem } from '@/search/components/pillar-item';
+import { PillarItemsDropdown } from '@/search/components/pillar-items-dropdown';
 
 interface Props {
+  pillarSlug: string;
   itemParam: string;
-  items: { label: string; href: string }[];
+  items: TPillarItem[];
+  isMain?: boolean;
 }
 
-export const PillarItems = ({ itemParam, items }: Props) => {
-  const router = useRouter();
-
-  const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
-
+export const PillarItems = ({
+  pillarSlug,
+  itemParam,
+  items,
+  isMain,
+}: Props) => {
   if (items.length === 0) return null;
 
-  const onNavigate = (href: string) => {
-    startTransition(() => {
-      router.push(href);
-    });
-  };
+  const hiddenItemsAtom = isMain
+    ? hiddenMainPillarItemsAtom
+    : hiddenAltPillarItemsAtom;
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {items.map(({ label, href }) => {
-        const isActive =
-          normalizeString(label) === itemParam ||
-          (label.toLowerCase().includes('all') && itemParam === 'all');
-
-        return (
-          <Button
-            key={label}
-            className={cn({ 'border border-white/60': isActive })}
-            variant={isActive ? 'bordered' : 'faded'}
-            isDisabled={isPendingPillarRoute}
-            onClick={() => onNavigate(href)}
-          >
-            {label}
-          </Button>
-        );
-      })}
+    <div
+      key={itemParam}
+      className="relative flex h-14 gap-4 overflow-hidden p-1"
+    >
+      <div className="flex max-w-fit flex-wrap gap-4">
+        {items.map((item) => (
+          <PillarItem
+            key={item.label}
+            item={item}
+            isActive={checkIsActive(itemParam, item.label)}
+            hiddenItemsAtom={hiddenItemsAtom}
+          />
+        ))}
+      </div>
+      <div className="shrink-0 grow">
+        <PillarItemsDropdown
+          pillarSlug={pillarSlug}
+          itemParam={itemParam}
+          hiddenItemsAtom={hiddenItemsAtom}
+        />
+      </div>
     </div>
   );
 };
+
+const checkIsActive = (activeItemParam: string, itemLabel: string) =>
+  normalizeString(itemLabel) === activeItemParam ||
+  (itemLabel.toLowerCase().includes('all') && activeItemParam === 'all');
