@@ -9,11 +9,11 @@ import { PillarItems } from '@/search/components/pillar-items';
 import { PillarSearchInput } from '@/search/components/pillar-search-input';
 
 interface Props {
+  nav: string;
   params: PillarParams;
 }
 
-export const PillarPage = async ({ params }: Props) => {
-  const nav = 'projects';
+export const PillarPage = async ({ nav, params }: Props) => {
   const pillarInfo = await getPillarInfo({
     nav,
     pillar: params.pillar,
