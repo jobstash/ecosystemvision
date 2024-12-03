@@ -51,7 +51,7 @@ export const PillarItemsDropdown = ({
             radius="md"
             variant="bordered"
             className={cn('border border-white/20', {
-              'text-accent2': !!hiddenItem,
+              'text-accent2 border-accent2/60': !!hiddenItem,
             })}
             endContent={
               <CaretDown
