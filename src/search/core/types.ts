@@ -7,6 +7,7 @@ export interface PillarParams {
 
 export interface GetPillarInfoProps extends PillarParams {
   nav: string;
+  limit?: number;
 }
 
 export interface TPillarItem {

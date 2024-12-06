@@ -1,7 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useAsyncList } from 'react-stately';
 
 import { Input } from '@nextui-org/input';
 import { Listbox, ListboxItem } from '@nextui-org/listbox';
@@ -16,6 +18,7 @@ import { convertSlugToTitle } from '@/search/utils/convert-slug-to-title';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
+const ITEMS_PER_PAGE = 10;
 interface Props {
   pillarSlug: string;
   itemParam: string;
@@ -32,13 +35,36 @@ export const PillarItemsDropdownContent = ({
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Filtered items based on the search term
-  const filteredItems = useMemo(() => {
-    const lowercasedSearchTerm = searchTerm.toLowerCase();
-    return items.filter(({ label }) =>
-      label.toLowerCase().includes(lowercasedSearchTerm),
-    );
-  }, [items, searchTerm]);
+  const list = useAsyncList<TPillarItem, number>({
+    async load({ cursor, filterText }) {
+      const filtered = items.filter(({ label }) =>
+        label.toLowerCase().includes(filterText?.toLowerCase() ?? ''),
+      );
+
+      const start = cursor || 0;
+      const paginatedItems = filtered.slice(start, start + ITEMS_PER_PAGE);
+      const nextCursor = start + ITEMS_PER_PAGE;
+
+      return {
+        items: paginatedItems,
+        cursor: nextCursor,
+      };
+    },
+  });
+
+  useEffect(() => {
+    list.setFilterText(searchTerm);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm]);
+
+  const { ref: inViewRef } = useInView({
+    threshold: 0.4,
+    onChange(inView) {
+      if (inView) {
+        list.loadMore();
+      }
+    },
+  });
 
   const onAction = (key: React.Key) => {
     const item = items.find(({ label }) => normalizeString(label) === key);
@@ -75,8 +101,8 @@ export const PillarItemsDropdownContent = ({
           disabledKeys={['no-results']}
           onAction={onAction}
         >
-          {filteredItems.length > 0 ? (
-            filteredItems.map(({ label }) => {
+          {list.items.length > 0 ? (
+            list.items.map(({ label }, i) => {
               const key = normalizeString(label);
               const isActive = key === itemParam;
               return (
@@ -90,7 +116,12 @@ export const PillarItemsDropdownContent = ({
                   }}
                   endContent={isActive ? <CheckmarkIcon /> : null}
                 >
-                  {label}
+                  <div
+                    key={label}
+                    ref={i === list.items.length - 1 ? inViewRef : undefined}
+                  >
+                    {label}
+                  </div>
                 </ListboxItem>
               );
             })

@@ -54,9 +54,9 @@ export const PillarPage = async ({ nav, params }: Props) => {
         </div>
       )}
 
-      <p>TODO: if pillar is not visible, unshift</p>
+      {/* <p>TODO: if pillar is not visible, unshift</p> */}
 
-      <p>TODO: Active Pillar Page Content</p>
+      {/* <p>TODO: Active Pillar Page Content</p> */}
     </div>
   );
 };

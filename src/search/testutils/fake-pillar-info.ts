@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-export const fakePillarInfo = () => ({
+export const fakePillarInfo = (limit?: number) => ({
   title: faker.lorem.words({ min: 2, max: 4 }),
   count: 331,
   description: faker.lorem.paragraph(),
@@ -22,7 +22,7 @@ export const fakePillarInfo = () => ({
       'Legal Jobs',
       'Management Jobs',
       'Marketing Jobs',
-    ],
+    ].slice(0, limit),
   },
   altPillar: {
     slug: 'tags',
@@ -54,6 +54,6 @@ export const fakePillarInfo = () => ({
       'CSS',
       'SASS',
       'LESS',
-    ],
+    ].slice(0, limit),
   },
 });

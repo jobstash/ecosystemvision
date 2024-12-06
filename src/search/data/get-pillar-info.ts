@@ -11,7 +11,7 @@ import { GetPillarInfoProps } from '@/search/core/types';
 export const getPillarInfo = async (
   props: GetPillarInfoProps,
 ): Promise<TPillarInfo> => {
-  const { nav, pillar, item, pillar2, item2 } = props;
+  const { nav, pillar, item, pillar2, item2, limit } = props;
 
   const url = new URL(`${MW_URL}/search/pillar`);
   url.searchParams.set('nav', nav);
@@ -22,6 +22,8 @@ export const getPillarInfo = async (
     url.searchParams.set('pillar2', pillar2);
     url.searchParams.set('item2', item2);
   }
+
+  if (limit) url.searchParams.set('limit', limit.toString());
 
   const response = await mwGET({
     url: url.toString(),
@@ -42,8 +44,8 @@ export const getPillarInfo = async (
 // import { fakePillarInfo } from '@/search/testutils/fake-pillar-info';
 
 // export const getPillarInfo = async (
-//   _props: GetPillarInfoProps,
+//   props: GetPillarInfoProps,
 // ): Promise<TPillarInfo> => {
 //   await new Promise((r) => setTimeout(r, 2000));
-//   return fakePillarInfo();
+//   return fakePillarInfo(props.limit);
 // };
