@@ -1,13 +1,20 @@
-import { PillarParams } from '@/search/core/types';
+import { PillarParams, PillarSearchParams } from '@/search/core/types';
 
 import { PillarPage } from '@/search/pages/pillar-page';
 
 interface Props {
   params: PillarParams;
+  searchParams: PillarSearchParams;
 }
 
-const Page = ({ params }: Props) => {
-  return <PillarPage nav="organizations" params={params} />;
+const Page = ({ params, searchParams }: Props) => {
+  return (
+    <PillarPage
+      nav="organizations"
+      params={params}
+      searchParams={searchParams}
+    />
+  );
 };
 
 export default Page;

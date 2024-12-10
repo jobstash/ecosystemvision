@@ -1,29 +1,50 @@
+import { notFound } from 'next/navigation';
+
+import { errMsg } from '@/shared/core/errors';
+import { normalizeString } from '@/shared/utils/normalize-string';
 import { AppHeader } from '@/shared/components/app-header';
 
-import { PillarParams } from '@/search/core/types';
+import { PillarParams, PillarSearchParams } from '@/search/core/types';
+import { createInputItems } from '@/search/utils/create-input-items';
 import { createPillarItems } from '@/search/utils/create-pillar-items';
-import { getInputItems } from '@/search/utils/get-input-items';
 import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
 import { PillarItems } from '@/search/components/pillar-items';
+import { PillarItemsDropdownContent } from '@/search/components/pillar-items-dropdown-content';
 import { PillarSearchInput } from '@/search/components/pillar-search-input';
 
 interface Props {
   nav: string;
   params: PillarParams;
+  searchParams: PillarSearchParams;
 }
 
-export const PillarPage = async ({ nav, params }: Props) => {
+export const PillarPage = async ({ nav, params, searchParams }: Props) => {
   const pillarInfo = await getPillarInfo({
     nav,
     pillar: params.pillar,
     item: params.item,
-    item2: params.item2,
+    // TODO: searchParams implementation for mw endpoint
   });
 
-  const { mainPillar, altPillar, title, description } = pillarInfo;
-  const { mainItems, altItems } = createPillarItems(nav, pillarInfo, params);
-  const inputItems = getInputItems(nav, pillarInfo, params.item, params.item2);
+  const { title, description } = pillarInfo;
+
+  try {
+    moveItemToFront(pillarInfo.mainPillar.items, params.item);
+  } catch (error) {
+    if ((error as Error).message === errMsg.NOT_FOUND) {
+      notFound();
+    }
+  }
+
+  const { mainItems, altItems, activeItems } = createPillarItems({
+    nav,
+    pillarInfo,
+    params,
+    searchParams,
+  });
+
+  const inputItems = createInputItems(activeItems, params.item);
 
   return (
     <div className="flex flex-col gap-4">
@@ -35,28 +56,55 @@ export const PillarPage = async ({ nav, params }: Props) => {
             description={description}
             items={
               <PillarItems
-                isMain
-                pillarSlug={mainPillar.slug}
-                items={mainItems}
                 itemParam={params.item}
+                items={mainItems}
+                dropdownContent={
+                  <PillarItemsDropdownContent
+                    nav={nav}
+                    pillarInfo={pillarInfo}
+                    params={params}
+                    searchParams={searchParams}
+                    pillarSlug={params.pillar}
+                    activeItems={activeItems.include}
+                  />
+                }
               />
             }
           />
         }
       />
-      {altPillar && (
-        <div className="px-4">
-          <PillarItems
-            pillarSlug={altPillar.slug}
-            items={altItems}
-            itemParam={params.item2 ?? ''}
-          />
-        </div>
-      )}
 
-      {/* <p>TODO: if pillar is not visible, unshift</p> */}
+      {pillarInfo.altPillars.map(({ slug }) => {
+        const items = altItems[slug] || undefined;
+        if (!items || items?.length === 0) return null;
 
-      {/* <p>TODO: Active Pillar Page Content</p> */}
+        return (
+          <div key={slug} className="px-4">
+            <PillarItems
+              itemParam={params.item}
+              items={items}
+              dropdownContent={
+                <PillarItemsDropdownContent
+                  nav={nav}
+                  pillarInfo={pillarInfo}
+                  params={params}
+                  searchParams={searchParams}
+                  pillarSlug={slug}
+                  activeItems={activeItems[slug] || []}
+                />
+              }
+            />
+          </div>
+        );
+      })}
     </div>
   );
+};
+
+const moveItemToFront = (items: string[], itemParam: string) => {
+  const index = items.findIndex((item) => normalizeString(item) === itemParam);
+  if (index === -1) throw new Error(errMsg.NOT_FOUND);
+
+  items.unshift(items.splice(index, 1)[0]);
+  return false;
 };

@@ -53,11 +53,9 @@ export type PillarDto = z.infer<typeof pillarDtoSchema>;
 
 export const pillarInfoDtoSchema = z.object({
   title: z.string(),
-  // count: z.number(),
   description: z.string(),
   activePillar: pillarDtoSchema,
-  altPillar: pillarDtoSchema.nullable(),
-  // TODO: Pillar filters
+  altPillars: z.array(pillarDtoSchema),
 });
 export type PillarInfoDto = z.infer<typeof pillarInfoDtoSchema>;
 
@@ -73,17 +71,24 @@ export const pillarInfoSchema = z.object({
   // count: z.number(),
   description: z.string(),
   mainPillar: pillarDtoSchema,
-  altPillar: pillarDtoSchema.nullable(),
-  // TODO: Pillar filters
+  altPillars: z.array(pillarDtoSchema),
 });
 export type TPillarInfo = z.infer<typeof pillarInfoSchema>;
 
 export const dtoToPillarInfo = (dto: PillarInfoDto): TPillarInfo => {
   return {
     title: dto.title,
-    // count: dto.count,
     description: dto.description,
     mainPillar: dto.activePillar,
-    altPillar: dto.altPillar,
+    altPillars: dto.altPillars,
   };
 };
+
+export const pillarItemsResponseDtoSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.array(z.string()),
+});
+export type PillarItemsResponseDto = z.infer<
+  typeof pillarItemsResponseDtoSchema
+>;

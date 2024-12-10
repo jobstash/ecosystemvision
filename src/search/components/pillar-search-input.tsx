@@ -1,8 +1,10 @@
 'use client';
 
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Spinner } from '@nextui-org/spinner';
 
 import { cn } from '@/shared/utils/cn';
+import { DraggableWrapper } from '@/shared/components/draggable-wrapper';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
 import { TPillarItem } from '@/search/core/types';
@@ -17,6 +19,8 @@ interface Props {
 export const PillarSearchInput = ({ inputItems }: Props) => {
   const { isPendingPillarRoute } = usePillarRoutesContext();
 
+  const [animateRef] = useAutoAnimate();
+
   const icon = isPendingPillarRoute ? (
     <Spinner size="sm" color="white" />
   ) : (
@@ -26,7 +30,7 @@ export const PillarSearchInput = ({ inputItems }: Props) => {
   return (
     <div
       className={cn(
-        'flex h-12 max-w-lg items-center gap-4 rounded-xl bg-white/10 px-3',
+        'flex h-12 w-fit min-w-96 max-w-6xl items-center gap-4 rounded-xl bg-white/10 px-3',
         { 'opacity-60 pointer-events-none': isPendingPillarRoute },
       )}
     >
@@ -35,24 +39,14 @@ export const PillarSearchInput = ({ inputItems }: Props) => {
       </div>
 
       {inputItems.length > 0 && (
-        <div className="flex items-center gap-x-4">
-          {inputItems.map(({ label, href }) => (
-            <PillarSearchInputItem key={label} label={label} href={href} />
-          ))}
-        </div>
+        <DraggableWrapper>
+          <div ref={animateRef} className="flex items-center gap-x-4">
+            {inputItems.map(({ label, href }) => (
+              <PillarSearchInputItem key={label} label={label} href={href} />
+            ))}
+          </div>
+        </DraggableWrapper>
       )}
-
-      {/* {inputItems.length < 2 && (
-        <Input
-          placeholder="Search ..."
-          classNames={{
-            base: 'p-0',
-            input: 'bg-transparent',
-            inputWrapper:
-              'p-0 bg-transparent data-[hover=true]:bg-transparent data-[focus=true]:bg-transparent group-data-[focus=true]:bg-transparent',
-          }}
-        />
-      )} */}
     </div>
   );
 };

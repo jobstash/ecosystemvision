@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { Chip } from '@nextui-org/chip';
@@ -24,11 +25,14 @@ export const PillarSearchInputItem = ({ label, href }: Props) => {
 
   return (
     <Chip
+      as={Link}
+      href={href}
       key={label}
       classNames={{
         base: 'rounded-lg bg-white/10',
       }}
       isDisabled={isPendingPillarRoute}
+      onClick={onClose}
       onClose={onClose}
     >
       {label}

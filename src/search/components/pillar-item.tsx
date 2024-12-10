@@ -2,69 +2,48 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import { Button } from '@nextui-org/button';
-import { PrimitiveAtom, useSetAtom } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';
-import { normalizeString } from '@/shared/utils/normalize-string';
 
-import { TPillarItem, TPillarItemMap } from '@/search/core/types';
+import { TPillarItem } from '@/search/core/types';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
+  isMainPillarItem: boolean;
   item: TPillarItem;
-  isActive: boolean;
-  hiddenItemsAtom: PrimitiveAtom<TPillarItemMap>;
 }
 
-export const PillarItem = ({ item, isActive, hiddenItemsAtom }: Props) => {
-  const { label, href } = item;
+export const PillarItem = ({ item, isMainPillarItem }: Props) => {
+  const { isActive, label, href } = item;
 
   const router = useRouter();
-
   const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
 
-  const onNavigate = (href: string) => {
+  const onClick = () => {
     startTransition(() => {
       router.push(href);
     });
   };
 
-  const { ref: inViewRef, inView } = useInView({
-    threshold: 1,
-    // triggerOnce: true,
+  const className = cn('border', {
+    'border-white/60': isActive,
+    'pointer-events-none text-accent2 border-accent2': isMainPillarItem,
   });
 
-  const setHiddenItems = useSetAtom(hiddenItemsAtom);
-  useEffect(() => {
-    setHiddenItems((prev) => {
-      const updatedHiddenItems = new Map(prev);
-      const itemSlug = normalizeString(label);
-
-      inView
-        ? updatedHiddenItems.delete(itemSlug)
-        : updatedHiddenItems.set(itemSlug, item);
-
-      return updatedHiddenItems;
-    });
-  }, [inView, isActive, item, label, setHiddenItems]);
+  const variant = isActive || isMainPillarItem ? 'bordered' : 'faded';
 
   return (
     <Button
       as={Link}
       href={href}
-      key={label}
-      ref={inViewRef}
       radius="md"
-      className={cn({ 'border border-white/60': isActive })}
-      variant={isActive ? 'bordered' : 'faded'}
+      className={className}
+      variant={variant}
       isDisabled={isPendingPillarRoute}
-      tabIndex={inView ? undefined : -1}
-      onClick={() => onNavigate(href)}
+      onClick={onClick}
     >
       {label}
     </Button>

@@ -1,48 +1,13 @@
-'use client';
-
-import { useMemo } from 'react';
-
 import { Button } from '@nextui-org/button';
-import { Popover, PopoverTrigger } from '@nextui-org/popover';
-import { PrimitiveAtom, useAtomValue } from 'jotai';
+import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/popover';
 
 import { cn } from '@/shared/utils/cn';
-import { normalizeString } from '@/shared/utils/normalize-string';
-
-import { TPillarItemMap } from '@/search/core/types';
-import { PillarItemsDropdownContent } from '@/search/components/pillar-items-dropdown-content';
 
 interface Props {
-  pillarSlug: string;
-  itemParam: string;
-  hiddenItemsAtom: PrimitiveAtom<TPillarItemMap>;
+  children: React.ReactNode;
 }
 
-export const PillarItemsDropdown = ({
-  pillarSlug,
-  itemParam,
-  hiddenItemsAtom,
-}: Props) => {
-  const hiddenItemsAtomValue = useAtomValue(hiddenItemsAtom);
-
-  const { hiddenItems, hiddenItem } = useMemo(() => {
-    const hiddenItems = Array.from(hiddenItemsAtomValue.values());
-    const hiddenItem = hiddenItems.find(
-      ({ label }) => normalizeString(label) === itemParam,
-    );
-
-    // If hiddenItem is found, unshift it to first position
-    if (hiddenItem) {
-      const hiddenItemIndex = hiddenItems.findIndex(
-        ({ label }) => normalizeString(label) === itemParam,
-      );
-      hiddenItems.splice(hiddenItemIndex, 1);
-      hiddenItems.unshift(hiddenItem);
-    }
-
-    return { hiddenItems, hiddenItem };
-  }, [hiddenItemsAtomValue, itemParam]);
-
+export const PillarItemsDropdown = ({ children }: Props) => {
   return (
     <div className="flex justify-end p-1 pt-0">
       <Popover placement="bottom-end">
@@ -51,22 +16,24 @@ export const PillarItemsDropdown = ({
             radius="md"
             variant="bordered"
             className={cn('border border-white/20', {
-              'text-accent2 border-accent2/60': !!hiddenItem,
+              // 'text-accent2 border-accent2/60': !!hiddenItem,
             })}
             endContent={
               <CaretDown
-                className={cn({ 'stroke-2 text-accent2': !!hiddenItem })}
+              // className={cn({ 'stroke-2 text-accent2': !!hiddenItem })}
               />
             }
           >
-            <span className={cn({ 'font-bold': !!hiddenItem })}>More</span>
+            <span
+            // className={cn({ 'font-bold': !!hiddenItem })}
+            >
+              More
+            </span>
           </Button>
         </PopoverTrigger>
-        <PillarItemsDropdownContent
-          pillarSlug={pillarSlug}
-          itemParam={itemParam}
-          items={hiddenItems}
-        />
+        <PopoverContent className="flex flex-col gap-4 p-4">
+          {children}
+        </PopoverContent>
       </Popover>
     </div>
   );

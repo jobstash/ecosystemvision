@@ -1,44 +1,118 @@
-import { normalizeString } from '@/shared/utils/normalize-string';
+import {
+  denormalizeString,
+  normalizeString,
+} from '@/shared/utils/normalize-string';
 
 import { TPillarInfo } from '@/search/core/schemas';
-import { createAllItemsLabel } from '@/search/utils/create-all-items-label';
+import {
+  PillarParams,
+  PillarSearchParams,
+  PillarSelections,
+  TPillarItem,
+} from '@/search/core/types';
+import { createPillarItemHref } from '@/search/utils/create-pillar-item-href';
+import { createToggledPillarItemSearchParam } from '@/search/utils/create-toggled-pillar-item-search-param';
 
-type PillarParams = { item: string; item2?: string };
+interface Props {
+  nav: string;
+  pillarInfo: TPillarInfo;
+  params: PillarParams;
+  searchParams: PillarSearchParams;
+}
 
-export const createPillarItems = (
-  nav: string,
-  pillarInfo: TPillarInfo,
-  params: PillarParams,
-) => {
-  const { mainPillar, altPillar } = pillarInfo;
+export const createPillarItems = (props: Props) => {
+  const {
+    params,
+    searchParams,
+    pillarInfo: { mainPillar, altPillars },
+  } = props;
+  const selections = getPillarItemSelections(props);
 
-  const activeHrefPrefix = `/${nav}/${mainPillar.slug}`;
-  const mainItems = [
-    {
-      label: createAllItemsLabel(mainPillar.slug),
-      href: `${activeHrefPrefix}/all`,
-    },
-    ...mainPillar.items.map((pillarItem) => ({
-      label: pillarItem,
-      href: `${activeHrefPrefix}/${normalizeString(pillarItem)}`,
-    })),
+  const mainItems: TPillarItem[] = [];
+
+  mainPillar.items.forEach((itemLabel) => {
+    const itemSlug = normalizeString(itemLabel);
+    const isActive =
+      selections.include.includes(itemSlug) || itemSlug === params.item;
+    const newSearchparams = createToggledPillarItemSearchParam({
+      itemSlug,
+      pillarParamKey: 'include',
+      isActive,
+      searchParams,
+    });
+
+    mainItems.push({
+      label: itemLabel,
+      href: createPillarItemHref(props, newSearchparams),
+      isActive,
+    });
+  });
+
+  const altPillarEntries = altPillars.map((pillar) => [pillar.slug, []]);
+  const altItems: Record<string, TPillarItem[]> =
+    Object.fromEntries(altPillarEntries);
+
+  altPillars.forEach((altPillar) => {
+    altPillar.items.forEach((itemLabel) => {
+      const itemSlug = normalizeString(itemLabel);
+      const isActive = selections[altPillar.slug].includes(itemSlug);
+      const newSearchParams = createToggledPillarItemSearchParam({
+        itemSlug,
+        pillarParamKey: altPillar.slug,
+        isActive,
+        searchParams,
+      });
+
+      altItems[altPillar.slug].push({
+        label: itemLabel,
+        href: createPillarItemHref(props, newSearchParams),
+        isActive,
+      });
+    });
+  });
+
+  const activeItems: Record<string, TPillarItem[]> & {
+    include: TPillarItem[];
+  } = {
+    include: [],
+    ...Object.fromEntries(altPillars.map((pillar) => [pillar.slug, []])),
+  };
+  Object.entries(selections).forEach(([pillarKey, items]) => {
+    items.forEach((normalizedLabel) => {
+      const label = denormalizeString(normalizedLabel);
+      const newSearchParams = createToggledPillarItemSearchParam({
+        itemSlug: normalizedLabel,
+        pillarParamKey: pillarKey,
+        isActive: true,
+        searchParams,
+      });
+
+      activeItems[pillarKey].push({
+        label,
+        href: createPillarItemHref(props, newSearchParams),
+        isActive: true,
+      });
+    });
+  });
+
+  return { mainItems, altItems, activeItems };
+};
+
+const getPillarItemSelections = (props: Props): PillarSelections => {
+  const { pillarInfo, params, searchParams } = props;
+
+  const selections: PillarSelections = {};
+
+  // Selected main-pillar items
+  selections['include'] = [
+    params.item,
+    ...(searchParams.include?.split(',') || []),
   ];
 
-  const altItems = [];
+  // Selected alt-pillar items
+  pillarInfo.altPillars.forEach((pillar) => {
+    selections[pillar.slug] = searchParams[pillar.slug]?.split(',') || [];
+  });
 
-  if (altPillar) {
-    const altHrefPrefix = `/${nav}/${mainPillar.slug}/${params.item}/${altPillar.slug}`;
-    altItems.push(
-      {
-        label: createAllItemsLabel(altPillar.slug),
-        href: `${altHrefPrefix}/all`,
-      },
-      ...altPillar.items.map((pillarItem) => ({
-        label: pillarItem,
-        href: `${altHrefPrefix}/${normalizeString(pillarItem)}`,
-      })),
-    );
-  }
-
-  return { mainItems, altItems };
+  return selections;
 };
