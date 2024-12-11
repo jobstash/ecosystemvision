@@ -27,5 +27,3 @@ export interface TPillarItem {
   href: string;
   isActive: boolean;
 }
-
-export type TPillarItemMap = Map<string, TPillarItem>;

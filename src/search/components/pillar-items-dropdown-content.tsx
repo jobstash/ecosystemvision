@@ -10,6 +10,7 @@ import { Listbox, ListboxItem } from '@nextui-org/listbox';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { Spinner } from '@nextui-org/spinner';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAtomValue } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';
 import { normalizeString } from '@/shared/utils/normalize-string';
@@ -25,6 +26,7 @@ import {
 import { convertSlugToTitle } from '@/search/utils/convert-slug-to-title';
 import { createPillarItemHref } from '@/search/utils/create-pillar-item-href';
 import { createToggledPillarItemSearchParam } from '@/search/utils/create-toggled-pillar-item-search-param';
+import { hiddenPillarItemsAtom } from '@/search/core/atoms';
 import { getPillarItems } from '@/search/data/get-pillar-items';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
@@ -56,6 +58,9 @@ export const PillarItemsDropdownContent = (props: Props) => {
     setQuery(event.target.value);
   };
 
+  const hiddenItemsMap = useAtomValue(hiddenPillarItemsAtom);
+  const hiddenItems = hiddenItemsMap[pillarSlug] || [];
+
   const list = useAsyncList<string, number>({
     async load({ cursor, filterText }) {
       const queryProps: GetPillarItemsProps = {
@@ -66,7 +71,7 @@ export const PillarItemsDropdownContent = (props: Props) => {
         limit: ITEMS_PER_PAGE,
       };
 
-      const items = await queryClient.fetchQuery({
+      const responseItems = await queryClient.fetchQuery({
         queryKey: searchQueryKeys.getPillarItems(queryProps),
         queryFn: async () => getPillarItems(queryProps),
       });
@@ -75,21 +80,26 @@ export const PillarItemsDropdownContent = (props: Props) => {
       const nextCursor = start + ITEMS_PER_PAGE;
 
       return {
-        items,
+        items: cursor ? responseItems : [...hiddenItems, ...responseItems],
         cursor: nextCursor,
       };
     },
   });
 
-  const itemLabelsSet = useMemo(
-    () => new Set(activeItems.map(({ label }) => label)),
+  useEffect(() => {
+    list.reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hiddenItems]);
+
+  const itemSlugsSet = useMemo(
+    () => new Set(activeItems.map(({ label }) => normalizeString(label))),
     [activeItems],
   );
 
   const onAction = (key: React.Key) => {
     if (key) {
       const itemSlug = normalizeString(key as string);
-      const isActive = itemLabelsSet.has(key as string);
+      const isActive = itemSlugsSet.has(itemSlug);
       const newSearchParams = createToggledPillarItemSearchParam({
         itemSlug,
         pillarParamKey,
@@ -149,7 +159,7 @@ export const PillarItemsDropdownContent = (props: Props) => {
         >
           {list.items.length > 0 ? (
             list.items.map((label, i) => {
-              const isActive = itemLabelsSet.has(label);
+              const isActive = itemSlugsSet.has(normalizeString(label));
 
               return (
                 <ListboxItem

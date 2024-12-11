@@ -56,8 +56,9 @@ export const PillarPage = async ({ nav, params, searchParams }: Props) => {
             description={description}
             items={
               <PillarItems
-                itemParam={params.item}
+                params={params}
                 items={mainItems}
+                pillarSlug={params.pillar}
                 dropdownContent={
                   <PillarItemsDropdownContent
                     nav={nav}
@@ -81,8 +82,9 @@ export const PillarPage = async ({ nav, params, searchParams }: Props) => {
         return (
           <div key={slug} className="px-4">
             <PillarItems
-              itemParam={params.item}
+              params={params}
               items={items}
+              pillarSlug={slug}
               dropdownContent={
                 <PillarItemsDropdownContent
                   nav={nav}
