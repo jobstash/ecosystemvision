@@ -11,7 +11,6 @@ import { SearchResultsSkeleton } from '@/search/components/search-results-skelet
 export const SearchResults = () => {
   const { query, data } = useSearchResults();
 
-  if (!query) return null;
   if (!data) return <SearchResultsSkeleton />;
 
   return (

@@ -7,8 +7,11 @@ import {
 } from '@/search/core/schemas';
 
 export const search = async (query: string) => {
+  const url = new URL(`${MW_URL}/search`);
+  if (query) url.searchParams.append('query', query);
+
   const response = await mwGET({
-    url: `${MW_URL}/search?query=${query}`,
+    url: url.toString(),
     label: 'search',
     responseSchema: searchResultsDtoSchema,
   });
