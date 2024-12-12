@@ -14,6 +14,7 @@ import { useAtomValue } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';
 import { normalizeString } from '@/shared/utils/normalize-string';
+import { useDebouncedValue } from '@/shared/hooks/use-debounced-value';
 
 import { searchQueryKeys } from '@/search/core/query-keys';
 import { TPillarInfo } from '@/search/core/schemas';
@@ -23,7 +24,6 @@ import {
   PillarSearchParams,
   TPillarItem,
 } from '@/search/core/types';
-import { convertSlugToTitle } from '@/search/utils/convert-slug-to-title';
 import { createPillarItemHref } from '@/search/utils/create-pillar-item-href';
 import { createToggledPillarItemSearchParam } from '@/search/utils/create-toggled-pillar-item-search-param';
 import { hiddenPillarItemsAtom } from '@/search/core/atoms';
@@ -31,7 +31,8 @@ import { getPillarItems } from '@/search/data/get-pillar-items';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 20;
+const DEBOUNCE_DELAY = 300;
 
 interface Props {
   nav: string;
@@ -39,12 +40,20 @@ interface Props {
   params: PillarParams;
   searchParams: PillarSearchParams;
   pillarSlug: string;
+  pillarItems: TPillarItem[];
   activeItems: TPillarItem[];
 }
 
 export const PillarItemsDropdownContent = (props: Props) => {
-  const { pillarSlug, activeItems, nav, pillarInfo, params, searchParams } =
-    props;
+  const {
+    pillarSlug,
+    activeItems,
+    nav,
+    pillarInfo,
+    pillarItems,
+    params,
+    searchParams,
+  } = props;
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -54,6 +63,7 @@ export const PillarItemsDropdownContent = (props: Props) => {
   const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
 
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebouncedValue(query, DEBOUNCE_DELAY);
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
@@ -62,12 +72,17 @@ export const PillarItemsDropdownContent = (props: Props) => {
   const hiddenItems = hiddenItemsMap[pillarSlug] || [];
 
   const list = useAsyncList<string, number>({
-    async load({ cursor, filterText }) {
+    async load({ cursor = ITEMS_PER_PAGE, filterText }) {
+      const pageOffset = !debouncedQuery ? 1 : 0;
+      const page = Math.floor(cursor / ITEMS_PER_PAGE) + pageOffset;
+
+      console.log({ cursor, pageOffset, page });
+
       const queryProps: GetPillarItemsProps = {
-        nav: '',
+        nav,
         pillar: pillarSlug,
-        query: filterText || '',
-        page: cursor,
+        query: filterText || undefined,
+        page,
         limit: ITEMS_PER_PAGE,
       };
 
@@ -76,20 +91,48 @@ export const PillarItemsDropdownContent = (props: Props) => {
         queryFn: async () => getPillarItems(queryProps),
       });
 
-      const start = cursor || 0;
+      const start = cursor || ITEMS_PER_PAGE;
       const nextCursor = start + ITEMS_PER_PAGE;
 
       return {
-        items: cursor ? responseItems : [...hiddenItems, ...responseItems],
+        items: responseItems,
         cursor: nextCursor,
       };
     },
   });
 
+  const pillarItemsSet = useMemo(
+    () => new Set(pillarItems.map(({ label }) => normalizeString(label))),
+    [pillarItems],
+  );
+
+  const dropdownItems = useMemo(
+    () => {
+      const hiddenItemsCopy = [...hiddenItems];
+      hiddenItemsCopy.reverse();
+
+      const dedupedItems = list.items.filter(
+        (label) =>
+          !pillarItemsSet.has(normalizeString(label)) &&
+          !hiddenItemsCopy.includes(label),
+      );
+
+      if (!debouncedQuery) return [...hiddenItemsCopy, ...dedupedItems];
+
+      const filteredHiddenItems = hiddenItemsCopy.filter((item) =>
+        item.toLowerCase().includes(debouncedQuery.toLowerCase()),
+      );
+
+      return [...filteredHiddenItems, ...dedupedItems];
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [list.items.length, debouncedQuery, hiddenItems.length],
+  );
+
   useEffect(() => {
     list.reload();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hiddenItems]);
+  }, [hiddenItems.length]);
 
   const itemSlugsSet = useMemo(
     () => new Set(activeItems.map(({ label }) => normalizeString(label))),
@@ -121,30 +164,33 @@ export const PillarItemsDropdownContent = (props: Props) => {
   };
 
   useEffect(() => {
-    list.setFilterText(query);
+    if (debouncedQuery) {
+      list.reload();
+      list.setFilterText(debouncedQuery);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [debouncedQuery]);
 
   const { ref: inViewRef } = useInView({
     threshold: 0.4,
     onChange(inView) {
-      if (inView) {
+      if (inView && !list.error) {
         list.loadMore();
       }
     },
   });
 
-  const pillarName = convertSlugToTitle(pillarSlug);
-
   return (
     <>
       <Input
         radius="sm"
-        placeholder={`Search ${pillarName} ...`}
+        placeholder={
+          list.isLoading ? 'Loading more items ...' : `Search ${pillarSlug} ...`
+        }
         value={query}
         onChange={handleQueryChange}
-        aria-label={`Search ${pillarName}`}
-        isDisabled={isPendingPillarRoute}
+        aria-label={`Search ${pillarSlug}`}
+        isDisabled={isPendingPillarRoute || list.isLoading}
         endContent={list.isLoading ? <Spinner size="sm" color="white" /> : null}
       />
       <ScrollShadow
@@ -153,12 +199,12 @@ export const PillarItemsDropdownContent = (props: Props) => {
         })}
       >
         <Listbox
-          aria-label={`${pillarName} items`}
+          aria-label={`${pillarSlug} items`}
           disabledKeys={['no-results']}
           onAction={onAction}
         >
-          {list.items.length > 0 ? (
-            list.items.map((label, i) => {
+          {dropdownItems.length > 0 ? (
+            dropdownItems.map((label, i) => {
               const isActive = itemSlugsSet.has(normalizeString(label));
 
               return (
@@ -171,10 +217,11 @@ export const PillarItemsDropdownContent = (props: Props) => {
                     base: 'py-3',
                   }}
                   endContent={isActive ? <CheckmarkIcon /> : null}
+                  textValue={label}
                 >
                   <div
                     key={label}
-                    ref={i === list.items.length - 1 ? inViewRef : undefined}
+                    ref={i === dropdownItems.length - 1 ? inViewRef : undefined}
                   >
                     {label}
                   </div>

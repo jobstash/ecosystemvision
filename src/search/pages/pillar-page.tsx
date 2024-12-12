@@ -66,6 +66,7 @@ export const PillarPage = async ({ nav, params, searchParams }: Props) => {
                     params={params}
                     searchParams={searchParams}
                     pillarSlug={params.pillar}
+                    pillarItems={mainItems}
                     activeItems={activeItems.include}
                   />
                 }
@@ -92,6 +93,7 @@ export const PillarPage = async ({ nav, params, searchParams }: Props) => {
                   params={params}
                   searchParams={searchParams}
                   pillarSlug={slug}
+                  pillarItems={items}
                   activeItems={activeItems[slug] || []}
                 />
               }

@@ -17,7 +17,7 @@ export interface GetPillarInfoProps extends PillarParams {
 export interface GetPillarItemsProps {
   nav: string;
   pillar: string;
-  query: string;
+  query?: string;
   page?: number;
   limit?: number;
 }

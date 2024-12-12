@@ -85,8 +85,9 @@ export const dtoToPillarInfo = (dto: PillarInfoDto): TPillarInfo => {
 };
 
 export const pillarItemsResponseDtoSchema = z.object({
-  success: z.boolean(),
-  message: z.string(),
+  page: z.number(),
+  count: z.number(),
+  total: z.number(),
   data: z.array(z.string()),
 });
 export type PillarItemsResponseDto = z.infer<
