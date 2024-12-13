@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@nextui-org/button';
 
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 
 import { TSearchResultItem } from '@/search/core/schemas';
+
+import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 const escapeRegExp = (str: string): string =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -38,13 +41,22 @@ interface Props extends TSearchResultItem {
 }
 
 export const SearchResultItem = ({ label, href, query }: Props) => {
+  const router = useRouter();
+  const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
+  const onClick = () => {
+    startTransition(() => {
+      router.push(href);
+    });
+  };
   return (
     <Button
       as={Link}
       href={href}
       size="sm"
       className=""
+      isDisabled={isPendingPillarRoute}
       endContent={<ExternalIcon />}
+      onClick={onClick}
     >
       <span className="text-13">{highlightText(label, query)}</span>
     </Button>

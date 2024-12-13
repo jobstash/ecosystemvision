@@ -4,14 +4,18 @@ import { useEffect, useRef } from 'react';
 
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
+import { Spinner } from '@nextui-org/spinner';
 
 import { CloseIcon } from '@/shared/components/icons/close-icon';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
 import { useSearchInput } from '@/search/hooks/use-search-input';
 
+import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+
 export const PlainSearchInput = () => {
   const { value, onChange, onClear } = useSearchInput();
+  const { isPendingPillarRoute } = usePillarRoutesContext();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,23 +34,27 @@ export const PlainSearchInput = () => {
           <SearchIcon />
         </div>
       }
-      endContent={
-        value ? (
-          <Button
-            isIconOnly
-            size="sm"
-            onClick={onClear}
-            variant="light"
-            className="bg-white/5"
-          >
-            <CloseIcon />
-          </Button>
-        ) : null
-      }
       radius="sm"
       classNames={{
         input: 'focus:ring-red-500 focus:border-red-500',
       }}
+      endContent={
+        <>
+          {isPendingPillarRoute && <Spinner size="sm" color="white" />}
+          {value && (
+            <Button
+              isIconOnly
+              size="sm"
+              onClick={onClear}
+              variant="light"
+              className="bg-white/5"
+            >
+              <CloseIcon />
+            </Button>
+          )}
+        </>
+      }
+      isDisabled={isPendingPillarRoute}
       value={value}
       onChange={onChange}
     />

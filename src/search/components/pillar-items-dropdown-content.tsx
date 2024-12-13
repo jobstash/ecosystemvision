@@ -32,7 +32,7 @@ import { getPillarItems } from '@/search/data/get-pillar-items';
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 const ITEMS_PER_PAGE = 20;
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 500;
 
 interface Props {
   nav: string;
