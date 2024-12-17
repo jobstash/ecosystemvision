@@ -231,14 +231,20 @@ export const PillarItemsDropdownContent = (props: Props) => {
           onAction={onAction}
         >
           <ListboxSection>
-            {activeDropdownItems.map((label, i) => (
+            {activeDropdownItems.map((label) => (
               <ListboxItem
                 key={label}
                 classNames={{
                   base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
                 }}
                 textValue={label}
-                endContent={i === 0 ? <LockIcon /> : <CheckmarkIcon />}
+                endContent={
+                  params.item === normalizeString(label) ? (
+                    <LockIcon />
+                  ) : (
+                    <CheckmarkIcon />
+                  )
+                }
               >
                 {label}
               </ListboxItem>
