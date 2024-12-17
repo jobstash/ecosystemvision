@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import { useAsyncList } from 'react-stately';
 
 import { Input } from '@nextui-org/input';
-import { Listbox, ListboxItem } from '@nextui-org/listbox';
+import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/listbox';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { Spinner } from '@nextui-org/spinner';
 import { useQueryClient } from '@tanstack/react-query';
@@ -76,8 +76,6 @@ export const PillarItemsDropdownContent = (props: Props) => {
       const pageOffset = !debouncedQuery ? 1 : 0;
       const page = Math.floor(cursor / ITEMS_PER_PAGE) + pageOffset;
 
-      console.log({ cursor, pageOffset, page });
-
       const queryProps: GetPillarItemsProps = {
         nav,
         pillar: pillarSlug,
@@ -101,19 +99,53 @@ export const PillarItemsDropdownContent = (props: Props) => {
     },
   });
 
-  const pillarItemsSet = useMemo(
-    () => new Set(pillarItems.map(({ label }) => normalizeString(label))),
-    [pillarItems],
+  const activeItemsSet = useMemo(
+    () => new Set(activeItems.map(({ label }) => normalizeString(label))),
+    [activeItems],
+  );
+
+  const activePillarItems = useMemo(
+    () =>
+      pillarItems
+        .filter((pillarItem) =>
+          activeItemsSet.has(normalizeString(pillarItem.label)),
+        )
+        .map((pillarItem) => pillarItem.label),
+    [activeItemsSet, pillarItems],
+  );
+
+  const activeDropdownItems = useMemo(
+    () => {
+      const activeDedupedItems = list.items.filter(
+        (label) =>
+          activeItemsSet.has(normalizeString(label)) &&
+          !activePillarItems.includes(label),
+      );
+
+      if (!debouncedQuery) return [...activePillarItems, ...activeDedupedItems];
+
+      const filteredItems = [
+        ...activePillarItems,
+        ...activeDedupedItems,
+      ].filter((item) =>
+        item.toLowerCase().includes(debouncedQuery.toLowerCase()),
+      );
+
+      return filteredItems;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [list.items.length, debouncedQuery, hiddenItems.length],
   );
 
   const dropdownItems = useMemo(
     () => {
-      const hiddenItemsCopy = [...hiddenItems];
-      hiddenItemsCopy.reverse();
+      const hiddenItemsCopy = [...hiddenItems]
+        .reverse()
+        .filter((label) => !activeDropdownItems.includes(label));
 
       const dedupedItems = list.items.filter(
         (label) =>
-          !pillarItemsSet.has(normalizeString(label)) &&
+          !activeDropdownItems.includes(label) &&
           !hiddenItemsCopy.includes(label),
       );
 
@@ -132,17 +164,12 @@ export const PillarItemsDropdownContent = (props: Props) => {
   useEffect(() => {
     list.reload();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hiddenItems.length]);
-
-  const itemSlugsSet = useMemo(
-    () => new Set(activeItems.map(({ label }) => normalizeString(label))),
-    [activeItems],
-  );
+  }, [activeItems.length, hiddenItems.length]);
 
   const onAction = (key: React.Key) => {
     if (key) {
       const itemSlug = normalizeString(key as string);
-      const isActive = itemSlugsSet.has(itemSlug);
+      const isActive = activeItemsSet.has(itemSlug);
       const newSearchParams = createToggledPillarItemSearchParam({
         itemSlug,
         pillarParamKey,
@@ -200,39 +227,42 @@ export const PillarItemsDropdownContent = (props: Props) => {
       >
         <Listbox
           aria-label={`${pillarSlug} items`}
-          disabledKeys={['no-results']}
+          disabledKeys={['no-results', pillarItems.at(0)?.label ?? '']}
           onAction={onAction}
         >
-          {dropdownItems.length > 0 ? (
-            dropdownItems.map((label, i) => {
-              const isActive = itemSlugsSet.has(normalizeString(label));
+          <ListboxSection>
+            {activeDropdownItems.map((label, i) => (
+              <ListboxItem
+                key={label}
+                classNames={{
+                  base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
+                }}
+                textValue={label}
+                endContent={i === 0 ? <LockIcon /> : <CheckmarkIcon />}
+              >
+                {label}
+              </ListboxItem>
+            ))}
+          </ListboxSection>
 
-              return (
-                <ListboxItem
+          <ListboxSection>
+            {dropdownItems.map((label, i) => (
+              <ListboxItem
+                key={label}
+                classNames={{
+                  base: 'py-3',
+                }}
+                textValue={label}
+              >
+                <div
                   key={label}
-                  className={cn({
-                    'text-accent2 font-bold bg-accent2/5': isActive,
-                  })}
-                  classNames={{
-                    base: 'py-3',
-                  }}
-                  endContent={isActive ? <CheckmarkIcon /> : null}
-                  textValue={label}
+                  ref={i === dropdownItems.length - 1 ? inViewRef : undefined}
                 >
-                  <div
-                    key={label}
-                    ref={i === dropdownItems.length - 1 ? inViewRef : undefined}
-                  >
-                    {label}
-                  </div>
-                </ListboxItem>
-              );
-            })
-          ) : (
-            <ListboxItem key={'no-results'} value="no-results">
-              {list.isLoading ? 'Loading items ...' : 'No results found'}
-            </ListboxItem>
-          )}
+                  {label}
+                </div>
+              </ListboxItem>
+            ))}
+          </ListboxSection>
         </Listbox>
       </ScrollShadow>
     </>
@@ -253,6 +283,24 @@ const CheckmarkIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
       d="m4.5 12.75 6 6 9-13.5"
+    />
+  </svg>
+);
+
+const LockIcon = () => (
+  <svg
+    fill="none"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className="size-4 stroke-2"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
     />
   </svg>
 );
