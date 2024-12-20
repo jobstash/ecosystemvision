@@ -8,5 +8,5 @@ const ProjectList = dynamic(() =>
 
 // TODO: Add rawSearchParams prop for filters
 export const ProjectListClientPage = () => {
-  return <ProjectList />;
+  return <ProjectList searchParams={{}} />;
 };
