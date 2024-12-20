@@ -9,6 +9,8 @@ interface Props {
 }
 
 const Page = ({ params, searchParams }: Props) => {
+  const { include, ...restSearchParams } = searchParams;
+  const pillarValue = include ? `${params.item},${include}` : params.item;
   return (
     <PillarPage
       nav="projects"
@@ -17,10 +19,8 @@ const Page = ({ params, searchParams }: Props) => {
       content={
         <ProjectListClient
           searchParams={{
-            nav: 'organizations',
-            pillar: params.pillar,
-            item: params.item,
-            ...searchParams,
+            [params.pillar]: pillarValue,
+            ...restSearchParams,
           }}
         />
       }
