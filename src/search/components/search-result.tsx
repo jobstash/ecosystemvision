@@ -24,7 +24,9 @@ export const SearchResult = ({ query, title, items }: Props) => {
   return (
     <SearchResultLayout
       label={
-        <span className="text-13 font-light uppercase opacity-60">{title}</span>
+        <span className="text-13 uppercase text-accent2">
+          suggested {title}
+        </span>
       }
       items={
         <>
