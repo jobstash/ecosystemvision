@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { HREFS } from '@/shared/core/constants';
 import { ProjectInfo } from '@/shared/core/schemas';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
+import { normalizeString } from '@/shared/utils/normalize-string';
 import { CardWrapper } from '@/shared/components/card-wrapper';
 import { ChainsInfoTag } from '@/shared/components/chains-info-tag';
 import { Divider } from '@/shared/components/divider';
@@ -26,7 +27,8 @@ export const ProjectCard = (props: Props) => {
 
 	const src = getLogoUrl(website || '', logo);
 	const { upperTags, midTags } = createProjectTags(project);
-	const href = `${HREFS.PROJECTS_PAGE}/names/${slug}/details${filterParamsString}`;
+	// const href = `${HREFS.PROJECTS_PAGE}/names/${normalizeString(slug)}/details${filterParamsString}`;
+	const href = `${HREFS.PROJECTS_PAGE}/info/${normalizeString(slug)}${filterParamsString}`;
 
 	return (
 		<CardWrapper id={slug} idAtom={activeProjectSlugAtom}>

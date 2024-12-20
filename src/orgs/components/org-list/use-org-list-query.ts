@@ -6,10 +6,11 @@ import { OrgQueryKeys, orgQueryKeys } from '@/orgs/core/query-keys';
 import { OrgInfiniteListPage } from '@/orgs/core/schemas';
 import { getOrgList } from '@/orgs/data/get-org-list';
 
-export const useOrgListQuery = () => {
-  // TODO: filter search params string
-  const searchParams = '';
+interface Props {
+  searchParams: string | Record<string, string>;
+}
 
+export const useOrgListQuery = ({ searchParams }: Props) => {
   return useInfiniteQuery<
     OrgInfiniteListPage,
     Error,

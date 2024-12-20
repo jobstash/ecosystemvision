@@ -9,6 +9,7 @@ export const orgQueryKeys = {
 
     return [...orgQueryKeys.all, 'list', searchParams] as const;
   },
+  search: (searchParams: Record<string, string>) => [...orgQueryKeys.all, 'search', searchParams]
 };
 
 export type OrgQueryKeys = typeof orgQueryKeys;

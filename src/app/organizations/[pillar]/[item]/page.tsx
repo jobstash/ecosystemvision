@@ -1,4 +1,5 @@
 import { PillarParams, PillarSearchParams } from '@/search/core/types';
+import { OrgListClient } from '@/orgs/components/org-list/org-list-client';
 
 import { PillarPage } from '@/search/pages/pillar-page';
 
@@ -13,6 +14,16 @@ const Page = ({ params, searchParams }: Props) => {
       nav="organizations"
       params={params}
       searchParams={searchParams}
+      content={
+        <OrgListClient
+          searchParams={{
+            nav: 'organizations',
+            pillar: params.pillar,
+            item: params.item,
+            ...searchParams,
+          }}
+        />
+      }
     />
   );
 };

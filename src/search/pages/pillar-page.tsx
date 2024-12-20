@@ -17,9 +17,10 @@ interface Props {
   nav: string;
   params: PillarParams;
   searchParams: PillarSearchParams;
+  content?: React.ReactNode
 }
 
-export const PillarPage = async ({ nav, params, searchParams }: Props) => {
+export const PillarPage = async ({ nav, params, searchParams, content = null }: Props) => {
   const pillarInfo = await getPillarInfo({
     nav,
     pillar: params.pillar,
@@ -102,6 +103,8 @@ export const PillarPage = async ({ nav, params, searchParams }: Props) => {
           </div>
         );
       })}
+
+      {content}
     </div>
   );
 };

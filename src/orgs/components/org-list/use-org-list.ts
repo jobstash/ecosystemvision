@@ -13,7 +13,11 @@ import { getOrgDetails } from '@/orgs/data/get-org-details';
 
 import { useOrgListQuery } from './use-org-list-query';
 
-export const useOrgList = () => {
+interface Props {
+  searchParams: string | Record<string, string>;
+}
+
+export const useOrgList = ({ searchParams }: Props) => {
   const queryClient = getQueryClient();
 
   const {
@@ -24,7 +28,7 @@ export const useOrgList = () => {
     isSuccess,
     isPending,
     isFetching,
-  } = useOrgListQuery();
+  } = useOrgListQuery({ searchParams });
 
   // Sync total count
   const [totalCount, setTotalCount] = useAtom(orgTotalCountAtom);

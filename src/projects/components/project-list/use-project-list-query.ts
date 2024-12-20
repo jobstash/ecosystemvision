@@ -5,10 +5,12 @@ import { QUERY_STALETIME } from '@/shared/core/constants';
 import { ProjectQueryKeys, projectQueryKeys } from '@/projects/core/query-keys';
 import { ProjectInfiniteListPage } from '@/projects/core/schemas';
 import { getProjectList } from '@/projects/data/get-project-list';
-export const useProjectListQuery = () => {
-  // TODO: filter search params string
-  const searchParams = '';
 
+interface Props {
+  searchParams: string | Record<string, string>;
+}
+
+export const useProjectListQuery = ({ searchParams }: Props) => {
   return useInfiniteQuery<
     ProjectInfiniteListPage,
     Error,

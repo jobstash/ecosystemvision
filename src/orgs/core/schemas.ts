@@ -113,3 +113,8 @@ export const orgInfiniteListPageSchema = infiniteListPageSchema.extend({
   data: z.array(orgListItemSchema),
 });
 export type OrgInfiniteListPage = z.infer<typeof orgInfiniteListPageSchema>;
+
+export const orgSearchInfiniteListPageSchema = infiniteListPageSchema.extend({
+  data: z.array(orgListItemSchema),
+})
+export type OrgSearchInfiniteListPage = z.infer<typeof orgSearchInfiniteListPageSchema>;

@@ -13,7 +13,11 @@ import { getProjectDetails } from '@/projects/data/get-project-details';
 
 import { useProjectListQuery } from './use-project-list-query';
 
-export const useProjectList = () => {
+interface Props {
+  searchParams: string | Record<string, string>;
+}
+
+export const useProjectList = ({searchParams}:Props) => {
   const queryClient = getQueryClient();
 
   const {
@@ -24,7 +28,7 @@ export const useProjectList = () => {
     isSuccess,
     isPending,
     isFetching,
-  } = useProjectListQuery();
+  } = useProjectListQuery({searchParams});
 
   // Sync total count
   const [totalCount, setTotalCount] = useAtom(projectTotalCountAtom);

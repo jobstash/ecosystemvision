@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { HREFS } from '@/shared/core/constants';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
+import { normalizeString } from '@/shared/utils/normalize-string';
 import { CardWrapper } from '@/shared/components/card-wrapper';
 import { Divider } from '@/shared/components/divider';
 import { InfoTags } from '@/shared/components/info-tags';
@@ -26,12 +27,13 @@ export const OrgCard = (props: Props) => {
 	const src = getLogoUrl(url, logoUrl);
 	const tags = createOrgCardTags(orgItem);
 	const hasTags = tags.length > 0;
-	const linkHref = `${HREFS.ORGS_PAGE}/names/${slug}/details${filterParamsString}`;
+	// const href = `${HREFS.ORGS_PAGE}/names/${normalizeString(slug)}/details${filterParamsString}`;
+	const href = `${HREFS.ORGS_PAGE}/info/${normalizeString(slug)}${filterParamsString}`;
 
 	return (
 		<CardWrapper id={slug} idAtom={activeOrgSlugAtom}>
 			<Link
-				href={linkHref}
+				href={href}
 				scroll={false}
 				data-testid={ORG_TEST_IDS.ORG_CARD}
 				data-uuid={slug}

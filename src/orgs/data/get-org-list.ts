@@ -9,7 +9,7 @@ export const getOrgList = async (
   searchParams: string | Record<string, string>,
 ) => {
   const url = createUrlWithSearchParams(
-    `${MW_URL}/organizations/list?page=${page}&limit=${PAGE_SIZE}`,
+    `${MW_URL}/organizations/search?page=${page}&limit=${PAGE_SIZE}`,
     searchParams,
   );
 
