@@ -57,6 +57,7 @@ export const PillarPage = async ({ nav, params, searchParams }: Props) => {
             items={
               <PillarItems
                 params={params}
+                hasLabel={false}
                 items={mainItems}
                 pillarSlug={params.pillar}
                 dropdownContent={
