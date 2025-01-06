@@ -16,5 +16,18 @@ if (process.env.NODE_ENV === 'production') {
     debug: false,
 
     // spotlight: process.env.NODE_ENV === 'development',
+
+    denyUrls: [/extensions\//i, /^chrome:\/\//i, /^chrome-extension:\/\//i],
+    beforeSend(event) {
+      const hasStackTrace = event?.exception?.values?.some(
+        (exceptionValue) => exceptionValue.stacktrace,
+      );
+
+      if (!hasStackTrace) {
+        return null;
+      }
+
+      return event;
+    },
   });
 }
