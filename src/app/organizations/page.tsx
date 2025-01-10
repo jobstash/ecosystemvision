@@ -48,15 +48,11 @@ const OrgListPage = async ({ searchParams: rawSearchParams }: Props) => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PillarPage
+        isIndex
         nav="organizations"
-        params={{ pillar: 'tags', item: 'react' }}
+        params={{ pillar: null, item: null }}
         searchParams={{}}
-        content={
-          <OrgListClient
-            // searchParams={rawSearchParams}
-            searchParams={{  tags: 'react'}}
-          />
-        }
+        content={<OrgListClient searchParams="" />}
       />
     </HydrationBoundary>
   );

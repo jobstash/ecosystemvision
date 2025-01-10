@@ -42,6 +42,7 @@ interface Props {
   pillarSlug: string;
   pillarItems: TPillarItem[];
   activeItems: TPillarItem[];
+  isIndex?: boolean;
 }
 
 export const PillarItemsDropdownContent = (props: Props) => {
@@ -53,6 +54,7 @@ export const PillarItemsDropdownContent = (props: Props) => {
     pillarItems,
     params,
     searchParams,
+    isIndex,
   } = props;
 
   const router = useRouter();
@@ -176,6 +178,16 @@ export const PillarItemsDropdownContent = (props: Props) => {
         isActive,
         searchParams,
       });
+
+      const overrideUrl = isIndex
+        ? {
+            pillar: pillarSlug,
+            item: itemSlug,
+          }
+        : undefined;
+
+      console.log({ overrideUrl, props });
+
       const href = createPillarItemHref(
         {
           nav,
@@ -184,6 +196,7 @@ export const PillarItemsDropdownContent = (props: Props) => {
           searchParams,
         },
         newSearchParams,
+        overrideUrl,
       );
 
       startTransition(() => router.push(href));

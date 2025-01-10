@@ -17,10 +17,17 @@ interface Props {
   nav: string;
   params: PillarParams;
   searchParams: PillarSearchParams;
-  content?: React.ReactNode
+  content?: React.ReactNode;
+  isIndex?: boolean;
 }
 
-export const PillarPage = async ({ nav, params, searchParams, content = null }: Props) => {
+export const PillarPage = async ({
+  nav,
+  params,
+  searchParams,
+  content = null,
+  isIndex,
+}: Props) => {
   const pillarInfo = await getPillarInfo({
     nav,
     pillar: params.pillar,
@@ -43,6 +50,7 @@ export const PillarPage = async ({ nav, params, searchParams, content = null }: 
     pillarInfo,
     params,
     searchParams,
+    isIndex,
   });
 
   const inputItems = createInputItems(activeItems, params.item);
@@ -60,16 +68,17 @@ export const PillarPage = async ({ nav, params, searchParams, content = null }: 
                 params={params}
                 hasLabel={false}
                 items={mainItems}
-                pillarSlug={params.pillar}
+                pillarSlug={pillarInfo.mainPillar.slug}
                 dropdownContent={
                   <PillarItemsDropdownContent
                     nav={nav}
                     pillarInfo={pillarInfo}
                     params={params}
                     searchParams={searchParams}
-                    pillarSlug={params.pillar}
+                    pillarSlug={pillarInfo.mainPillar.slug}
                     pillarItems={mainItems}
                     activeItems={activeItems.include}
+                    isIndex={isIndex}
                   />
                 }
               />
@@ -97,6 +106,7 @@ export const PillarPage = async ({ nav, params, searchParams, content = null }: 
                   pillarSlug={slug}
                   pillarItems={items}
                   activeItems={activeItems[slug] || []}
+                  isIndex={isIndex}
                 />
               }
             />
@@ -109,10 +119,11 @@ export const PillarPage = async ({ nav, params, searchParams, content = null }: 
   );
 };
 
-const moveItemToFront = (items: string[], itemParam: string) => {
+const moveItemToFront = (items: string[], itemParam: string | null) => {
+  if (!itemParam) return;
+
   const index = items.findIndex((item) => normalizeString(item) === itemParam);
   if (index === -1) throw new Error(errMsg.NOT_FOUND);
 
   items.unshift(items.splice(index, 1)[0]);
-  return false;
 };

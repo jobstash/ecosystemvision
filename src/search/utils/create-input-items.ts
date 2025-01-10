@@ -8,8 +8,10 @@ import { TPillarItem } from '@/search/core/types';
 
 export const createInputItems = (
   activeItems: Record<string, TPillarItem[]>,
-  itemParam: string,
+  itemParam: string | null,
 ): TPillarItem[] => {
+  if (!itemParam) return [];
+
   // Get the current main item if it exists
   const mainItem = (activeItems.include ?? []).find(
     (item) => normalizeString(item.label) === itemParam,

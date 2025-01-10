@@ -47,17 +47,11 @@ const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PillarPage
+        isIndex
         nav="projects"
-        params={{ pillar: 'categories', item: 'dexes' }}
+        params={{ pillar: null, item: null }}
         searchParams={{}}
-        content={
-          <ProjectListClient
-            // searchParams={rawSearchParams}
-            searchParams={{
-              categories: 'dexes',
-            }}
-          />
-        }
+        content={<ProjectListClient searchParams="" />}
       />
     </HydrationBoundary>
   );

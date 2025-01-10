@@ -18,6 +18,7 @@ interface Props {
   pillarInfo: TPillarInfo;
   params: PillarParams;
   searchParams: PillarSearchParams;
+  isIndex?: boolean;
 }
 
 export const createPillarItems = (props: Props) => {
@@ -25,12 +26,13 @@ export const createPillarItems = (props: Props) => {
     params,
     searchParams,
     pillarInfo: { mainPillar, altPillars },
+    isIndex,
   } = props;
   const selections = getPillarItemSelections(props);
 
   const mainItems: TPillarItem[] = [];
 
-  mainPillar.items.forEach((itemLabel) => {
+  mainPillar.items.forEach((itemLabel, index) => {
     const itemSlug = normalizeString(itemLabel);
     const isActive =
       selections.include.includes(itemSlug) || itemSlug === params.item;
@@ -41,9 +43,16 @@ export const createPillarItems = (props: Props) => {
       searchParams,
     });
 
+    const overrideUrl = isIndex
+      ? {
+          pillar: mainPillar.slug,
+          item: mainPillar.items[index],
+        }
+      : undefined;
+
     mainItems.push({
       label: itemLabel,
-      href: createPillarItemHref(props, newSearchparams),
+      href: createPillarItemHref(props, newSearchparams, overrideUrl),
       isActive,
     });
   });
@@ -53,7 +62,7 @@ export const createPillarItems = (props: Props) => {
     Object.fromEntries(altPillarEntries);
 
   altPillars.forEach((altPillar) => {
-    altPillar.items.forEach((itemLabel) => {
+    altPillar.items.forEach((itemLabel, index) => {
       const itemSlug = normalizeString(itemLabel);
       const isActive = selections[altPillar.slug].includes(itemSlug);
       const newSearchParams = createToggledPillarItemSearchParam({
@@ -63,9 +72,16 @@ export const createPillarItems = (props: Props) => {
         searchParams,
       });
 
+      const overrideUrl = isIndex
+        ? {
+            pillar: altPillar.slug,
+            item: altPillar.items[index],
+          }
+        : undefined;
+
       altItems[altPillar.slug].push({
         label: itemLabel,
-        href: createPillarItemHref(props, newSearchParams),
+        href: createPillarItemHref(props, newSearchParams, overrideUrl),
         isActive,
       });
     });
@@ -105,7 +121,7 @@ const getPillarItemSelections = (props: Props): PillarSelections => {
 
   // Selected main-pillar items
   selections['include'] = [
-    params.item,
+    ...(params.item ? [params.item] : []),
     ...(searchParams.include?.split(',') || []),
   ];
 

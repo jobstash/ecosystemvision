@@ -13,8 +13,14 @@ interface Props {
 export const createPillarItemHref = (
   props: Props,
   newSearchParams?: PillarSearchParams,
+  overrideUrl?: { pillar: string; item: string },
 ) => {
   const { nav, params, searchParams } = props;
+
+  if (overrideUrl) {
+    return `${FRONTEND_URL}/${nav}/${overrideUrl.pillar.toLowerCase()}/${overrideUrl.item.toLowerCase()}`;
+  }
+
   const baseUrl = `${FRONTEND_URL}/${nav}/${params.pillar}/${params.item}`;
 
   if (!newSearchParams && !searchParams) {

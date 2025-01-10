@@ -15,8 +15,10 @@ export const getPillarInfo = async (
 
   const url = new URL(`${MW_URL}/search/pillar`);
   url.searchParams.set('nav', nav);
-  url.searchParams.set('pillar', pillar);
-  url.searchParams.set('item', item);
+  if (pillar && item) {
+    url.searchParams.set('pillar', pillar);
+    url.searchParams.set('item', item);
+  }
 
   if (limit) url.searchParams.set('limit', limit.toString());
 

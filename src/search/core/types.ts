@@ -1,6 +1,6 @@
 export interface PillarParams {
-  pillar: string;
-  item: string;
+  pillar: string | null;
+  item: string | null;
 }
 
 export type PillarSearchParams = Record<string, string> & {
