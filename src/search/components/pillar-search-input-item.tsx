@@ -1,18 +1,20 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { Chip } from '@nextui-org/chip';
 
+import { cn } from '@/shared/utils/cn';
+
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
-  label: string;
+  slug: string;
+  label: string | null;
   href: string;
 }
 
-export const PillarSearchInputItem = ({ label, href }: Props) => {
+export const PillarSearchInputItem = ({ slug, label, href }: Props) => {
   const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
 
   const router = useRouter();
@@ -25,17 +27,16 @@ export const PillarSearchInputItem = ({ label, href }: Props) => {
 
   return (
     <Chip
-      as={Link}
-      href={href}
       key={label}
       classNames={{
-        base: 'rounded-lg bg-white/10',
+        base: cn('rounded-lg bg-white/10', {
+          'border border-red-800 text-red-500 bg-transparent': !label,
+        }),
       }}
       isDisabled={isPendingPillarRoute}
-      onClick={onClose}
       onClose={onClose}
     >
-      {label}
+      {label || slug}
     </Chip>
   );
 };

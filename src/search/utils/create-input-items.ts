@@ -1,8 +1,4 @@
-import { capitalize } from '@/shared/utils/capitalize';
-import {
-  denormalizeString,
-  normalizeString,
-} from '@/shared/utils/normalize-string';
+import { normalizeString } from '@/shared/utils/normalize-string';
 
 import { TPillarItem } from '@/search/core/types';
 
@@ -36,6 +32,5 @@ export const createInputItems = (
 
   return items.map((item) => ({
     ...item,
-    label: capitalize(denormalizeString(item.label)),
   }));
 };

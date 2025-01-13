@@ -93,3 +93,16 @@ export const pillarItemsResponseDtoSchema = z.object({
 export type PillarItemsResponseDto = z.infer<
   typeof pillarItemsResponseDtoSchema
 >;
+
+export const pillarInputLabelsResponseDtoSchema = z.object({
+  data: z.array(
+    z.object({
+      label: z.string(),
+      slug: z.string(),
+    }),
+  ),
+});
+
+export type PillarInputLabelsResponseDto = z.infer<
+  typeof pillarInputLabelsResponseDtoSchema
+>;

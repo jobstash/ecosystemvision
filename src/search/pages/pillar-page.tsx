@@ -58,7 +58,7 @@ export const PillarPage = async ({
   return (
     <div className="flex flex-col gap-4">
       <AppHeader
-        input={<PillarSearchInput inputItems={inputItems} />}
+        input={<PillarSearchInput inputPillarItems={inputItems} />}
         mainPillar={
           <MainPillarContent
             title={title}

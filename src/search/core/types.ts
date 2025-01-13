@@ -23,6 +23,7 @@ export interface GetPillarItemsProps {
 }
 
 export interface TPillarItem {
+  slug: string;
   label: string;
   href: string;
   isActive: boolean;

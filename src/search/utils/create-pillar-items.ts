@@ -51,6 +51,7 @@ export const createPillarItems = (props: Props) => {
       : undefined;
 
     mainItems.push({
+      slug: itemSlug,
       label: itemLabel,
       href: createPillarItemHref(props, newSearchparams, overrideUrl),
       isActive,
@@ -80,6 +81,7 @@ export const createPillarItems = (props: Props) => {
         : undefined;
 
       altItems[altPillar.slug].push({
+        slug: itemSlug,
         label: itemLabel,
         href: createPillarItemHref(props, newSearchParams, overrideUrl),
         isActive,
@@ -104,6 +106,7 @@ export const createPillarItems = (props: Props) => {
       });
 
       activeItems[pillarKey].push({
+        slug: normalizedLabel,
         label,
         href: createPillarItemHref(props, newSearchParams),
         isActive: true,
