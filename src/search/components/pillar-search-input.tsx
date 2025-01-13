@@ -38,7 +38,8 @@ export const PillarSearchInput = ({ inputPillarItems }: Props) => {
 
   const [animateRef] = useAutoAnimate();
 
-  const isLoading = isPendingPillarRoute || !data;
+  const hasInputPillarItems = inputPillarItems.length > 0;
+  const isLoading = (isPendingPillarRoute || !data) && hasInputPillarItems;
   const icon = isLoading ? <Spinner size="sm" color="white" /> : <SearchIcon />;
 
   return (

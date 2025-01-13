@@ -12,5 +12,6 @@ export const usePillarInputLabels = (
     queryKey: searchQueryKeys.getPillarInputLabels(inputs),
     queryFn: async () => getPillarInputLabels(inputs),
     staleTime: QUERY_STALETIME.DEFAULT,
+    enabled: inputs.length > 0,
   });
 };
