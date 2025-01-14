@@ -53,12 +53,18 @@ export const PillarPage = async ({
     isIndex,
   });
 
-  const inputItems = createInputItems(activeItems, params.item);
+  const { pillars, inputs } = createInputItems(
+    activeItems,
+    params.item,
+    pillarInfo.mainPillar.slug,
+  );
 
   return (
     <div className="flex flex-col gap-4">
       <AppHeader
-        input={<PillarSearchInput inputPillarItems={inputItems} />}
+        input={
+          <PillarSearchInput nav={nav} pillars={pillars} inputs={inputs} />
+        }
         mainPillar={
           <MainPillarContent
             title={title}

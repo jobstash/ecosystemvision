@@ -9,19 +9,19 @@ import { cn } from '@/shared/utils/cn';
 import { DraggableWrapper } from '@/shared/components/draggable-wrapper';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
-import { TPillarItem } from '@/search/core/types';
+import { GetPillarInputLabelsProps } from '@/search/core/types';
 import { usePillarInputLabels } from '@/search/hooks/use-pillar-input-labels';
 import { PillarSearchInputItem } from '@/search/components/pillar-search-input-item';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
-interface Props {
-  inputPillarItems: TPillarItem[];
-}
-
-export const PillarSearchInput = ({ inputPillarItems }: Props) => {
+export const PillarSearchInput = ({
+  nav,
+  pillars,
+  inputs,
+}: GetPillarInputLabelsProps) => {
   const { isPendingPillarRoute } = usePillarRoutesContext();
-  const { data } = usePillarInputLabels(inputPillarItems);
+  const { data } = usePillarInputLabels({ nav, pillars, inputs });
   const [items, setItems] = useState<
     {
       label: string | null;
@@ -38,7 +38,7 @@ export const PillarSearchInput = ({ inputPillarItems }: Props) => {
 
   const [animateRef] = useAutoAnimate();
 
-  const hasInputPillarItems = inputPillarItems.length > 0;
+  const hasInputPillarItems = inputs.length > 0;
   const isLoading = (isPendingPillarRoute || !data) && hasInputPillarItems;
   const icon = isLoading ? <Spinner size="sm" color="white" /> : <SearchIcon />;
 

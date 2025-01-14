@@ -2,12 +2,17 @@ import { MW_URL } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { pillarInputLabelsResponseDtoSchema } from '@/search/core/schemas';
+import { GetPillarInputLabelsProps } from '@/search/core/types';
 
-export const getPillarInputLabels = async (
-  inputs: { slug: string; href: string }[],
-) => {
-  const url = new URL(`${MW_URL}/search/pillar/input-labels`);
-  url.searchParams.set('inputs', inputs.join(','));
+export const getPillarInputLabels = async ({
+  nav,
+  pillars,
+  inputs,
+}: GetPillarInputLabelsProps) => {
+  const url = new URL(`${MW_URL}/search/pillar/labels`);
+  url.searchParams.set('nav', nav);
+  url.searchParams.set('pillars', pillars.join(','));
+  url.searchParams.set('slugs', inputs.map((input) => input.slug).join(','));
 
   const response = await mwGET({
     url: url.toString(),

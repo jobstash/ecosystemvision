@@ -5,8 +5,9 @@ import { TPillarItem } from '@/search/core/types';
 export const createInputItems = (
   activeItems: Record<string, TPillarItem[]>,
   itemParam: string | null,
-): TPillarItem[] => {
-  if (!itemParam) return [];
+  mainPillar: string,
+) => {
+  if (!itemParam) return { inputs: [], pillars: [] };
 
   // Get the current main item if it exists
   const mainItem = (activeItems.include ?? []).find(
@@ -24,13 +25,15 @@ export const createInputItems = (
     .flatMap(([_, items]) => items);
 
   // Combine all items in the desired order
-  const items = [
+  const inputs = [
     ...(mainItem ? [{ ...mainItem, href: '/search' }] : []),
     ...remainingMainItems,
     ...altItemsArray,
   ];
 
-  return items.map((item) => ({
-    ...item,
-  }));
+  const pillars: string[] = Object.keys(activeItems).map((key) =>
+    key === 'include' ? mainPillar : key,
+  );
+
+  return { inputs, pillars };
 };

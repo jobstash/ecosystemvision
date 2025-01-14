@@ -1,4 +1,8 @@
-import { GetPillarInfoProps, GetPillarItemsProps } from '@/search/core/types';
+import {
+  GetPillarInfoProps,
+  GetPillarInputLabelsProps,
+  GetPillarItemsProps,
+} from '@/search/core/types';
 
 export const searchQueryKeys = {
   all: ['search'] as const,
@@ -7,8 +11,14 @@ export const searchQueryKeys = {
     [...searchQueryKeys.all, 'pillar-items', props] as const,
   getPillarInfo: (props: GetPillarInfoProps) =>
     [...searchQueryKeys.all, 'pillar-info', props] as const,
-  getPillarInputLabels: (inputs: { slug: string; href: string }[]) =>
-    [...searchQueryKeys.all, 'pillar-input-labels', inputs] as const,
+  getPillarInputLabels: ({ nav, pillars, inputs }: GetPillarInputLabelsProps) =>
+    [
+      ...searchQueryKeys.all,
+      'pillar-input-labels',
+      nav,
+      pillars,
+      inputs,
+    ] as const,
 };
 
 export type SearchQueryKeys = typeof searchQueryKeys;

@@ -28,3 +28,9 @@ export interface TPillarItem {
   href: string;
   isActive: boolean;
 }
+
+export interface GetPillarInputLabelsProps {
+  nav: string;
+  pillars: string[];
+  inputs: { slug: string; href: string }[];
+}
