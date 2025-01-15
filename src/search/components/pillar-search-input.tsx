@@ -27,6 +27,7 @@ export const PillarSearchInput = ({
       label: string | null;
       slug: string;
       href: string;
+      pillarSlug: string;
     }[]
   >([]);
 
@@ -56,12 +57,13 @@ export const PillarSearchInput = ({
       {items && items.length > 0 && (
         <DraggableWrapper>
           <div ref={animateRef} className="flex items-center gap-x-4">
-            {items.map(({ slug, label, href }) => (
+            {items.map(({ slug, label, href, pillarSlug }) => (
               <PillarSearchInputItem
                 key={slug}
                 slug={slug}
                 label={label}
                 href={href}
+                pillarSlug={pillarSlug}
               />
             ))}
           </div>

@@ -32,5 +32,9 @@ export interface TPillarItem {
 export interface GetPillarInputLabelsProps {
   nav: string;
   pillars: string[];
-  inputs: { slug: string; href: string }[];
+  inputs: { slug: string; pillarSlug: string; href: string }[];
+}
+
+export interface InputPillarItem extends TPillarItem {
+  pillarSlug: string;
 }

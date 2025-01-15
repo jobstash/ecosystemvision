@@ -5,6 +5,7 @@ import {
 
 import { TPillarInfo } from '@/search/core/schemas';
 import {
+  InputPillarItem,
   PillarParams,
   PillarSearchParams,
   PillarSelections,
@@ -89,8 +90,8 @@ export const createPillarItems = (props: Props) => {
     });
   });
 
-  const activeItems: Record<string, TPillarItem[]> & {
-    include: TPillarItem[];
+  const activeItems: Record<string, InputPillarItem[]> & {
+    include: InputPillarItem[];
   } = {
     include: [],
     ...Object.fromEntries(altPillars.map((pillar) => [pillar.slug, []])),
@@ -110,6 +111,7 @@ export const createPillarItems = (props: Props) => {
         label,
         href: createPillarItemHref(props, newSearchParams),
         isActive: true,
+        pillarSlug: pillarKey,
       });
     });
   });

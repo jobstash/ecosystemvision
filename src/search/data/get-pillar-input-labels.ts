@@ -31,10 +31,20 @@ export const getPillarInputLabels = async ({
   //   ],
   // };
 
-  const results: { slug: string; href: string; label: string | null }[] = [];
-  for (const { slug, href } of inputs) {
+  const results: {
+    slug: string;
+    href: string;
+    label: string | null;
+    pillarSlug: string;
+  }[] = [];
+  for (const { slug, href, pillarSlug } of inputs) {
     const matched = response.data.find((item) => item.slug === slug);
-    results.push({ slug, href, label: matched ? matched.label : null });
+    results.push({
+      slug,
+      href,
+      label: matched ? matched.label : null,
+      pillarSlug,
+    });
   }
 
   return results;

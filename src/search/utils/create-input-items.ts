@@ -1,9 +1,9 @@
 import { normalizeString } from '@/shared/utils/normalize-string';
 
-import { TPillarItem } from '@/search/core/types';
+import { InputPillarItem } from '@/search/core/types';
 
 export const createInputItems = (
-  activeItems: Record<string, TPillarItem[]>,
+  activeItems: Record<string, InputPillarItem[]>,
   itemParam: string | null,
   mainPillar: string,
 ) => {
