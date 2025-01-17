@@ -5,10 +5,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useAsyncList } from 'react-stately';
 
-import { Input } from '@nextui-org/input';
-import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/listbox';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
-import { Spinner } from '@nextui-org/spinner';
+import { Input } from "@heroui/input";
+import { Listbox, ListboxItem, ListboxSection } from "@heroui/listbox";
+import { ScrollShadow } from "@heroui/scroll-shadow";
+import { Spinner } from "@heroui/spinner";
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 

@@ -1,11 +1,11 @@
-import { nextui } from '@nextui-org/theme';
+import { heroui } from "@heroui/theme";
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   safelist: [
     {
@@ -97,7 +97,7 @@ const config: Config = {
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
-    nextui({
+    heroui({
       defaultTheme: 'dark',
       defaultExtendTheme: 'dark',
       themes: {

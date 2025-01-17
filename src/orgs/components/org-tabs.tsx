@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { HREFS, ROUTE_TABS } from '@/shared/core/constants';
 import { getPluralText } from '@/shared/utils/get-plural-text';

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 
 interface Props {
   className: string;

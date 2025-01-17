@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 import { useSetAtom } from 'jotai';
 
 import { showFullscreenNavAtom } from '@/shared/core/atoms';

@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Chip } from '@nextui-org/chip';
-import { Tooltip } from '@nextui-org/tooltip';
+import { Chip } from "@heroui/chip";
+import { Tooltip } from "@heroui/tooltip";
 
 import { cn } from '@/shared/utils/cn';
 

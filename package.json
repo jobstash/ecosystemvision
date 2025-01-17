@@ -25,7 +25,7 @@
     "@formkit/auto-animate": "^0.8.2",
     "@next/bundle-analyzer": "^14.2.5",
     "@next/third-parties": "^15.0.3",
-    "@nextui-org/react": "^2.3.6",
+    "@heroui/react": "2.6.13",
     "@sentry/nextjs": "^8.50.0",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.28",

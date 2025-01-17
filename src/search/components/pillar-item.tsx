@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 import { useSetAtom } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';

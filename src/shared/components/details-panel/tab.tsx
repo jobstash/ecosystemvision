@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 
 import { cn } from '@/shared/utils/cn';
 import { getGradientBorderStyle } from '@/shared/utils/get-gradient-border-style';

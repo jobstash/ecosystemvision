@@ -2,8 +2,8 @@
 
 import { useMemo } from 'react';
 
-import { Avatar, AvatarGroup } from '@nextui-org/avatar';
-import { Tooltip } from '@nextui-org/tooltip';
+import { Avatar, AvatarGroup } from "@heroui/avatar";
+import { Tooltip } from "@heroui/tooltip";
 
 import { Chain } from '@/shared/core/schemas';
 import { getPluralText } from '@/shared/utils/get-plural-text';

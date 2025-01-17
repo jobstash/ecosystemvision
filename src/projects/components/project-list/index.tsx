@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { cn } from '@/shared/utils/cn';
 import { reloadPage } from '@/shared/utils/reload-page';
@@ -28,40 +28,37 @@ export const ProjectList = ({ searchParams }: Props) => {
   } = useProjectList({ searchParams });
   const hasProjects = projects.length > 0;
 
-  return (
-    <>
-      {error && <InternalErrorResult onReset={reloadPage} />}
-
-      {isPendingList ? (
-        // <CardSkeleton />
-        <div className="flex w-full justify-center pt-8">
-          <Spinner size="md" color="white" />
-        </div>
-      ) : isSuccess && hasProjects ? (
-        <>
-          {/* <InitProjectCard /> */}
-          <VirtualWrapper count={projects.length}>
-            {(index) => (
-              <div className={cn({ 'pt-8': index > 0 })}>
-                <ProjectCard
-                  project={projects[index]}
-                  // TODO: filterParamsString
-                />
-              </div>
-            )}
-          </VirtualWrapper>
-
-          {hasNextPage ? (
-            <div ref={inViewRef}>
-              <Loader />
+  return (<>
+    {error && <InternalErrorResult onReset={reloadPage} />}
+    {isPendingList ? (
+      // <CardSkeleton />
+      (<div className="flex w-full justify-center pt-8">
+        <Spinner size="md" color="white" />
+      </div>)
+    ) : isSuccess && hasProjects ? (
+      <>
+        {/* <InitProjectCard /> */}
+        <VirtualWrapper count={projects.length}>
+          {(index) => (
+            <div className={cn({ 'pt-8': index > 0 })}>
+              <ProjectCard
+                project={projects[index]}
+                // TODO: filterParamsString
+              />
             </div>
-          ) : (
-            <p>No more projects to display.</p>
           )}
-        </>
-      ) : (
-        <p>Empty UI</p>
-      )}
-    </>
-  );
+        </VirtualWrapper>
+
+        {hasNextPage ? (
+          <div ref={inViewRef}>
+            <Loader />
+          </div>
+        ) : (
+          <p>No more projects to display.</p>
+        )}
+      </>
+    ) : (
+      <p>Empty UI</p>
+    )}
+  </>);
 };

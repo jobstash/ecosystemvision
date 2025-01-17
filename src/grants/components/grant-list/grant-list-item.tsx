@@ -1,4 +1,4 @@
-import { Avatar } from '@nextui-org/avatar';
+import { Avatar } from "@heroui/avatar";
 
 import { GA_EVENT } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar } from '@nextui-org/avatar';
+import { Avatar } from "@heroui/avatar";
 
 import { MySwiper, SwiperSlide } from '@/home/components/swiper';
 

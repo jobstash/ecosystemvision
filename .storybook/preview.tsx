@@ -5,7 +5,7 @@ import 'swiper/css/pagination';
 import '../src/app/swiper.css';
 
 import type { Preview } from '@storybook/react';
-import { NextUIProvider } from '@/shared/providers/next-ui-provider';
+import { HeroUIProvider } from '@/shared/providers/hero-ui-provider';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
@@ -57,11 +57,11 @@ const queryClient = new QueryClient({
 });
 
 const Providers = ({ children }: { children: React.ReactNode }) => (
-  <NextUIProvider>
+  <HeroUIProvider>
     <ReactQueryProvider queryClient={queryClient}>
       {children}
     </ReactQueryProvider>
-  </NextUIProvider>
+  </HeroUIProvider>
 );
 
 const ClearReactQuery = () => {

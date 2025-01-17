@@ -1,5 +1,5 @@
-import { Button } from '@nextui-org/button';
-import { Skeleton } from '@nextui-org/skeleton';
+import { Button } from "@heroui/button";
+import { Skeleton } from "@heroui/skeleton";
 
 import { cn } from '@/shared/utils/cn';
 import { copyToClipboard } from '@/shared/utils/copy-to-clipboard';

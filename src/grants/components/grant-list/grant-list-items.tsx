@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 

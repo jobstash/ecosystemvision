@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 
-import { Button } from '@nextui-org/button';
-import { Input } from '@nextui-org/input';
-import { Spinner } from '@nextui-org/spinner';
+import { Button } from "@heroui/button";
+import { Input } from "@heroui/input";
+import { Spinner } from "@heroui/spinner";
 
 import { CloseIcon } from '@/shared/components/icons/close-icon';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';

@@ -1,4 +1,4 @@
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';

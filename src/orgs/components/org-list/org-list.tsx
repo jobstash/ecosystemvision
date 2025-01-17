@@ -1,4 +1,4 @@
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { cn } from '@/shared/utils/cn';
 import { reloadPage } from '@/shared/utils/reload-page';
@@ -27,42 +27,39 @@ export const OrgList = ({ searchParams }: Props) => {
 
   const hasOrgs = orgs.length > 0;
 
-  return (
-    <>
-      {isPendingOrgs ? (
-        // <CardSkeleton />
-        <div className="flex w-full justify-center pt-8">
-          <Spinner size="md" color="white" />
-        </div>
-      ) : (
-        isSuccess &&
-        (hasOrgs ? (
-          <>
-            {/* <InitOrgCard /> */}
-            <VirtualWrapper count={orgs.length}>
-              {(index) => (
-                <div className={cn({ 'pt-8': index > 0 })}>
-                  <OrgCard
-                    orgItem={orgs[index]}
-                    // TODO: filterParamsString
-                  />
-                </div>
-              )}
-            </VirtualWrapper>
-            {hasNextPage ? (
-              <div ref={inViewRef}>
-                <Loader />
+  return (<>
+    {isPendingOrgs ? (
+      // <CardSkeleton />
+      (<div className="flex w-full justify-center pt-8">
+        <Spinner size="md" color="white" />
+      </div>)
+    ) : (
+      isSuccess &&
+      (hasOrgs ? (
+        <>
+          {/* <InitOrgCard /> */}
+          <VirtualWrapper count={orgs.length}>
+            {(index) => (
+              <div className={cn({ 'pt-8': index > 0 })}>
+                <OrgCard
+                  orgItem={orgs[index]}
+                  // TODO: filterParamsString
+                />
               </div>
-            ) : (
-              <p>No more organizations available.</p>
             )}
-          </>
-        ) : (
-          <p>No organizations found.</p>
-        ))
-      )}
-
-      {error && <InternalErrorResult onReset={reloadPage} />}
-    </>
-  );
+          </VirtualWrapper>
+          {hasNextPage ? (
+            <div ref={inViewRef}>
+              <Loader />
+            </div>
+          ) : (
+            <p>No more organizations available.</p>
+          )}
+        </>
+      ) : (
+        <p>No organizations found.</p>
+      ))
+    )}
+    {error && <InternalErrorResult onReset={reloadPage} />}
+  </>);
 };

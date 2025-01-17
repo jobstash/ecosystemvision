@@ -2,9 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 
-import { NextUIProvider as BaseProvider } from '@nextui-org/system';
+import { HeroUIProvider as BaseProvider } from '@heroui/react';
 
-export const NextUIProvider = ({ children }: { children: React.ReactNode }) => {
+export const HeroUIProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   return (

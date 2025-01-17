@@ -1,7 +1,7 @@
 'use client';
 
+import { Button } from '@heroui/button';
 import { sendGAEvent } from '@next/third-parties/google';
-import { Button } from '@nextui-org/button';
 
 import { openNewTab } from '@/shared/utils/open-new-tab';
 

@@ -14,7 +14,7 @@ import { grotesk, interTight } from '@/shared/core/fonts';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
 import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
-import { NextUIProvider } from '@/shared/providers/next-ui-provider';
+import { HeroUIProvider } from '@/shared/providers/hero-ui-provider';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 
 import { Toaster } from '@/grants/components/toaster';
@@ -37,11 +37,11 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
     className={`overflow-x-hidden bg-[#070708] ${interTight.variable} ${grotesk.variable}`}
   >
     <body className={inter.className}>
-      <NextUIProvider>
+      <HeroUIProvider>
         <ReactQueryProvider>
           <NavLayout>{children}</NavLayout>
         </ReactQueryProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
 
       <PageScrollDisabler />
       <InitPathSyncer />

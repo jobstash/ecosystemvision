@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 
 import { reloadPage } from '@/shared/utils/reload-page';
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { cn } from '@/shared/utils/cn';
 import { DraggableWrapper } from '@/shared/components/draggable-wrapper';

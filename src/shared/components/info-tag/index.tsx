@@ -1,4 +1,4 @@
-import { Skeleton } from '@nextui-org/skeleton';
+import { Skeleton } from "@heroui/skeleton";
 
 import { InfoTagProps } from '@/shared/core/types';
 import { cn } from '@/shared/utils/cn';

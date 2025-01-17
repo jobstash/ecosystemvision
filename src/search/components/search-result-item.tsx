@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 
 import { ExternalIcon } from '@/shared/components/icons/external-icon';
 

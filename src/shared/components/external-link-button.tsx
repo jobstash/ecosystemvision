@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, ButtonProps } from '@nextui-org/button';
+import { Button, ButtonProps } from "@heroui/button";
 
 import { openNewTab } from '@/shared/utils/open-new-tab';
 
