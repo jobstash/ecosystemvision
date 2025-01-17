@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { use } from 'react';
 
 import { ROUTE_TABS } from '@/shared/core/constants';
 
@@ -23,8 +24,8 @@ interface Props {
   }>;
 }
 
-export const OrgParamsPage = async ({ params }: Props) => {
-  const { slug, tab } = await params;
+export const OrgParamsPage = ({ params }: Props) => {
+  const { slug, tab } = use(params);
   const { data } = useOrgDetails(slug);
 
   if (!data) return null;

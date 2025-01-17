@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { use } from 'react';
 
 import { ROUTE_TABS } from '@/shared/core/constants';
 import { FRONTEND_URL } from '@/shared/core/envs';
@@ -24,8 +25,8 @@ interface Props {
   }>;
 }
 
-export const ProjectParamsPage = async ({ params }: Props) => {
-  const { slug, tab } = await params;
+export const ProjectParamsPage = ({ params }: Props) => {
+  const { slug, tab } = use(params);
   const { data } = useProjectDetails(slug);
 
   if (!data) return null;

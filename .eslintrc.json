@@ -6,12 +6,11 @@
     "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
     "plugin:tailwindcss/recommended",
     "plugin:playwright/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
-  "plugins": ["react", "react-hooks", "prefer-arrow", "simple-import-sort"],
+  "plugins": ["react", "prefer-arrow", "simple-import-sort"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
