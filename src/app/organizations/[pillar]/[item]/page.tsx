@@ -5,11 +5,14 @@ import { OrgListClient } from '@/orgs/components/org-list/org-list-client';
 import { PillarPage } from '@/search/pages/pillar-page';
 
 interface Props {
-  params: PillarParams;
-  searchParams: PillarSearchParams;
+  params: Promise<PillarParams>;
+  searchParams: Promise<PillarSearchParams>;
 }
 
-const Page = ({ params, searchParams }: Props) => {
+const Page = async (props: Props) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+
   const finalSearchParams = createPillarItemSearchParams(params, searchParams);
 
   return (

@@ -1,12 +1,13 @@
 import { getProjectDetails } from '@/projects/data/get-project-details';
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-const Page = async ({ params: { slug } }: Props) => {
+const Page = async ({ params }: Props) => {
+  const { slug } = await params;
   const data = await getProjectDetails(slug);
 
   return (

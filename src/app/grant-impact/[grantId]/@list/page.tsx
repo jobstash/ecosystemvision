@@ -8,10 +8,11 @@ import { getGranteeList } from '@/grants/data/get-grantee-list';
 import { GranteeList } from '@/grants/components/grantee-list';
 
 interface Props {
-  params: { grantId: string };
+  params: Promise<{ grantId: string }>;
 }
 
-const ParallelGranteeList = async ({ params: { grantId } }: Props) => {
+const ParallelGranteeList = async ({ params }: Props) => {
+  const { grantId } = await params;
   const queryClient = getQueryClient();
 
   const granteeListResult = await queryClient.fetchInfiniteQuery({

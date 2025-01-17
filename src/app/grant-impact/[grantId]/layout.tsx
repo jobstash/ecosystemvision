@@ -5,10 +5,11 @@ import { GrantPageLayout } from '@/grants/pages/grant-page-layout';
 interface Props {
   children: React.ReactNode;
   list: React.ReactNode;
-  params: { grantId: string };
+  params: Promise<{ grantId: string }>;
 }
 
-const Layout = async ({ children, list, params: { grantId } }: Props) => {
+const Layout = async ({ children, list, params }: Props) => {
+  const { grantId } = await params;
   const data = await getGrantDetails(grantId);
 
   return (

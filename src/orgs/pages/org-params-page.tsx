@@ -17,13 +17,14 @@ const ProjectDetailsCards = dynamic(() =>
 );
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
     tab: string;
-  };
+  }>;
 }
 
-export const OrgParamsPage = ({ params: { slug, tab } }: Props) => {
+export const OrgParamsPage = async ({ params }: Props) => {
+  const { slug, tab } = await params;
   const { data } = useOrgDetails(slug);
 
   if (!data) return null;

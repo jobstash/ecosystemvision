@@ -9,10 +9,11 @@ import { ProjectListClient } from '@/projects/components/project-list/project-li
 import { PillarPage } from '@/search/pages/pillar-page';
 
 interface Props {
-  searchParams: Record<string, string>;
+  searchParams: Promise<Record<string, string>>;
 }
 
-const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
+const ProjectListPage = async ({ searchParams }: Props) => {
+  const rawSearchParams = await searchParams;
   const queryClient = getQueryClient();
 
   // const [projectListResult] = await Promise.all([

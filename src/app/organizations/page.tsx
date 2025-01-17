@@ -12,10 +12,11 @@ import { PillarPage } from '@/search/pages/pillar-page';
 export const dynamic = 'force-dynamic';
 
 interface Props {
-  searchParams: Record<string, string>;
+  searchParams: Promise<Record<string, string>>;
 }
 
-const OrgListPage = async ({ searchParams: rawSearchParams }: Props) => {
+const OrgListPage = async ({ searchParams }: Props) => {
+  const rawSearchParams = await searchParams;
   const queryClient = getQueryClient();
 
   // const [orgListResult] = await Promise.all([

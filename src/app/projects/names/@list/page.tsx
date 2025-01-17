@@ -9,10 +9,11 @@ import { getProjectList } from '@/projects/data/get-project-list';
 import { ProjectListClientPage } from './client-page';
 
 interface Props {
-  searchParams: Record<string, string>;
+  searchParams: Promise<Record<string, string>>;
 }
 
-const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
+const ProjectListPage = async ({ searchParams }: Props) => {
+  const rawSearchParams = await searchParams;
   const queryClient = getQueryClient();
 
   const [projectListResult] = await Promise.all([

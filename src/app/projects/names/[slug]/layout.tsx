@@ -1,11 +1,12 @@
 import { ProjectDetailsLayout } from '@/projects/components/project-details-layout';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
   children: React.ReactNode;
 }
 
-const Layout = ({ children, params: { slug } }: Props) => {
+const Layout = async ({ children, params }: Props) => {
+  const { slug } = await params;
   return <ProjectDetailsLayout slug={slug}>{children}</ProjectDetailsLayout>;
 };
 
