@@ -38,3 +38,5 @@ export interface GetPillarInputLabelsProps {
 export interface InputPillarItem extends TPillarItem {
   pillarSlug: string;
 }
+
+export type PillarSearchNavFilter = 'project' | 'organization' | 'grant' | 'vc';

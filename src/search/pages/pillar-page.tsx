@@ -4,18 +4,24 @@ import { errMsg } from '@/shared/core/errors';
 import { normalizeString } from '@/shared/utils/normalize-string';
 import { AppHeader } from '@/shared/components/app-header';
 
-import { PillarParams, PillarSearchParams } from '@/search/core/types';
+import {
+  PillarParams,
+  PillarSearchNavFilter,
+  PillarSearchParams,
+} from '@/search/core/types';
 import { createInputItems } from '@/search/utils/create-input-items';
 import { createPillarItems } from '@/search/utils/create-pillar-items';
 import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
 import { PillarItems } from '@/search/components/pillar-items';
 import { PillarItemsDropdownContent } from '@/search/components/pillar-items-dropdown-content';
-import { PillarSearchInput } from '@/search/components/pillar-search-input';
+import { PillarPageSearchResults } from '@/search/components/pillar-page-search-results';
+import { PillarSearchSection } from '@/search/components/pillar-search-section';
 
 interface Props {
   nav: string;
   params: PillarParams;
+  pillarSearchNavFilter: PillarSearchNavFilter;
   searchParams: PillarSearchParams;
   content?: React.ReactNode;
   isIndex?: boolean;
@@ -25,6 +31,7 @@ export const PillarPage = async ({
   nav,
   params,
   searchParams,
+  pillarSearchNavFilter,
   content = null,
   isIndex,
 }: Props) => {
@@ -63,8 +70,9 @@ export const PillarPage = async ({
     <div className="flex flex-col gap-4">
       <AppHeader
         input={
-          <PillarSearchInput nav={nav} pillars={pillars} inputs={inputs} />
+          <PillarSearchSection nav={nav} pillars={pillars} inputs={inputs} />
         }
+        searchResults={<PillarPageSearchResults nav={pillarSearchNavFilter} />}
         mainPillar={
           <MainPillarContent
             title={title}

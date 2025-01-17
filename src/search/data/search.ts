@@ -5,8 +5,9 @@ import {
   dtoToSearchResults,
   searchResultsDtoSchema,
 } from '@/search/core/schemas';
+import { PillarSearchNavFilter } from '@/search/core/types';
 
-export const search = async (query: string) => {
+export const search = async (query: string, nav?: PillarSearchNavFilter) => {
   const url = new URL(`${MW_URL}/search`);
   if (query) url.searchParams.append('query', query);
 
@@ -16,5 +17,5 @@ export const search = async (query: string) => {
     responseSchema: searchResultsDtoSchema,
   });
 
-  return dtoToSearchResults(response);
+  return dtoToSearchResults(response, nav);
 };
