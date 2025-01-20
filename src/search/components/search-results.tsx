@@ -12,9 +12,14 @@ import { SearchResultsSkeleton } from '@/search/components/search-results-skelet
 interface Props {
   nav?: PillarNav;
   excluded?: string;
+  isPillarSearchResult?: boolean;
 }
 
-export const SearchResults = ({ nav, excluded }: Props) => {
+export const SearchResults = ({
+  nav,
+  excluded,
+  isPillarSearchResult,
+}: Props) => {
   const { query, data } = useSearchResults(nav, excluded);
 
   if (!data) return <SearchResultsSkeleton />;
@@ -24,7 +29,12 @@ export const SearchResults = ({ nav, excluded }: Props) => {
       {data.map(({ title, items }) => (
         <Fragment key={title}>
           <Divider />
-          <SearchResult query={query} title={title} items={items} />
+          <SearchResult
+            isPillarSearchResult={isPillarSearchResult}
+            query={query}
+            title={title}
+            items={items}
+          />
         </Fragment>
       ))}
       <Divider />

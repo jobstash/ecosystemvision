@@ -16,5 +16,5 @@ export const PillarPageSearchResults = ({ nav, excluded }: Props) => {
 
   if (!isVisible) return null;
 
-  return <SearchResults nav={nav} excluded={excluded} />;
+  return <SearchResults isPillarSearchResult nav={nav} excluded={excluded} />;
 };

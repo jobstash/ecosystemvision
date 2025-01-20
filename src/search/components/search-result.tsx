@@ -18,9 +18,15 @@ export const SearchResultLayout = ({
 
 interface Props extends TSearchResult {
   query: string;
+  isPillarSearchResult?: boolean;
 }
 
-export const SearchResult = ({ query, title, items }: Props) => {
+export const SearchResult = ({
+  query,
+  title,
+  items,
+  isPillarSearchResult,
+}: Props) => {
   return (
     <SearchResultLayout
       label={
@@ -36,6 +42,7 @@ export const SearchResult = ({ query, title, items }: Props) => {
               query={query}
               label={label}
               href={href}
+              isPillarSearchResult={isPillarSearchResult}
             />
           ))}
         </>
