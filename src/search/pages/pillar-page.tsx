@@ -70,7 +70,7 @@ export const PillarPage = async ({
   ].join(',');
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="relative min-h-screen space-y-4 overflow-hidden">
       <AppHeader
         input={
           <PillarSearchSection nav={nav} pillars={pillars} inputs={inputs} />
