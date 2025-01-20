@@ -4,17 +4,18 @@ import { Fragment } from 'react';
 
 import { Divider } from '@/shared/components/divider';
 
-import { PillarSearchNavFilter } from '@/search/core/types';
+import { PillarNav } from '@/search/core/types';
 import { useSearchResults } from '@/search/hooks/use-search-results';
 import { SearchResult } from '@/search/components/search-result';
 import { SearchResultsSkeleton } from '@/search/components/search-results-skeleton';
 
 interface Props {
-  nav?: PillarSearchNavFilter;
+  nav?: PillarNav;
+  excluded?: string;
 }
 
-export const SearchResults = ({ nav }: Props) => {
-  const { query, data } = useSearchResults(nav);
+export const SearchResults = ({ nav, excluded }: Props) => {
+  const { query, data } = useSearchResults(nav, excluded);
 
   if (!data) return <SearchResultsSkeleton />;
 

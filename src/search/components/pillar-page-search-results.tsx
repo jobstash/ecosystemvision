@@ -2,18 +2,19 @@
 
 import { useAtomValue } from 'jotai';
 
-import { PillarSearchNavFilter } from '@/search/core/types';
+import { PillarNav } from '@/search/core/types';
 import { isFocusedPillarSearchInputAtom } from '@/search/core/atoms';
 import { SearchResults } from '@/search/components/search-results';
 
 interface Props {
-  nav: PillarSearchNavFilter;
+  nav: PillarNav;
+  excluded: string;
 }
 
-export const PillarPageSearchResults = ({ nav }: Props) => {
+export const PillarPageSearchResults = ({ nav, excluded }: Props) => {
   const isVisible = useAtomValue(isFocusedPillarSearchInputAtom);
 
   if (!isVisible) return null;
 
-  return <SearchResults nav={nav} />;
+  return <SearchResults nav={nav} excluded={excluded} />;
 };

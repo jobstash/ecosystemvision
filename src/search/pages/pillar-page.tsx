@@ -5,8 +5,8 @@ import { normalizeString } from '@/shared/utils/normalize-string';
 import { AppHeader } from '@/shared/components/app-header';
 
 import {
+  PillarNav,
   PillarParams,
-  PillarSearchNavFilter,
   PillarSearchParams,
 } from '@/search/core/types';
 import { createInputItems } from '@/search/utils/create-input-items';
@@ -19,9 +19,8 @@ import { PillarPageSearchResults } from '@/search/components/pillar-page-search-
 import { PillarSearchSection } from '@/search/components/pillar-search-section';
 
 interface Props {
-  nav: string;
+  nav: PillarNav;
   params: PillarParams;
-  pillarSearchNavFilter: PillarSearchNavFilter;
   searchParams: PillarSearchParams;
   content?: React.ReactNode;
   isIndex?: boolean;
@@ -31,7 +30,6 @@ export const PillarPage = async ({
   nav,
   params,
   searchParams,
-  pillarSearchNavFilter,
   content = null,
   isIndex,
 }: Props) => {
@@ -66,13 +64,20 @@ export const PillarPage = async ({
     pillarInfo.mainPillar.slug,
   );
 
+  const excluded = [
+    ...(params.item ? [params.item] : []),
+    ...Object.values(searchParams),
+  ].join(',');
+
   return (
     <div className="flex flex-col gap-4">
       <AppHeader
         input={
           <PillarSearchSection nav={nav} pillars={pillars} inputs={inputs} />
         }
-        searchResults={<PillarPageSearchResults nav={pillarSearchNavFilter} />}
+        searchResults={
+          <PillarPageSearchResults nav={nav} excluded={excluded} />
+        }
         mainPillar={
           <MainPillarContent
             title={title}

@@ -19,7 +19,6 @@ const Page = async (props: Props) => {
       nav="projects"
       params={params}
       searchParams={searchParams}
-      pillarSearchNavFilter="project"
       content={<ProjectListClient searchParams={finalSearchParams} />}
     />
   );

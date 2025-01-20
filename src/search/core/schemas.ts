@@ -2,8 +2,6 @@ import { z } from 'zod';
 
 import { pascalToTitle } from '@/shared/utils/pascal-to-title';
 
-import { PillarSearchNavFilter } from '@/search/core/types';
-
 export const searchResultItemDtoSchema = z.object({
   value: z.string(),
   link: z.string(),
@@ -36,25 +34,14 @@ export type TSearchResult = z.infer<typeof searchResultSchema>;
 export const searchResultsSchema = z.array(searchResultSchema);
 export type TSearchResults = z.infer<typeof searchResultsSchema>;
 
-export const dtoToSearchResults = (
-  dto: SearchResultsDto,
-  nav?: PillarSearchNavFilter,
-): TSearchResults => {
+export const dtoToSearchResults = (dto: SearchResultsDto): TSearchResults => {
   return Object.entries(dto).flatMap(([mainTitle, searchResultPillar]) => {
-    const result = Object.entries(searchResultPillar)
+    return Object.entries(searchResultPillar)
       .flatMap(([subTitle, items]) => ({
         title: `${pascalToTitle(mainTitle.replace(/s$/, ''))} ${pascalToTitle(subTitle)}`,
         items: items.map(({ value, link }) => ({ label: value, href: link })),
       }))
       .filter(({ items }) => items.length > 0);
-
-    if (!nav) {
-      return result;
-    }
-
-    return result.filter(({ title }) =>
-      title.toLowerCase().includes(nav.toLowerCase()),
-    );
   });
 };
 

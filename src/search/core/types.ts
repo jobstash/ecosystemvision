@@ -39,4 +39,9 @@ export interface InputPillarItem extends TPillarItem {
   pillarSlug: string;
 }
 
-export type PillarSearchNavFilter = 'project' | 'organization' | 'grant' | 'vc';
+export type PillarNav =
+  | 'projects'
+  | 'organizations'
+  | 'grants'
+  | 'grantsImpact'
+  | 'vcs';
