@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import { useDebouncedValue } from '@/shared/hooks/use-debounced-value';
 
@@ -9,26 +9,25 @@ import { searchQueryAtom } from '@/search/core/atoms';
 const DEBOUNCE_DELAY = 500;
 
 export const useSearchInput = () => {
-  const [inputValue, setInputValue] = useState('');
-  const debouncedValue = useDebouncedValue(inputValue, DEBOUNCE_DELAY);
-  const setSearchQuery = useSetAtom(searchQueryAtom);
+  const [{ actual }, setSearchQuery] = useAtom(searchQueryAtom);
+  const debouncedValue = useDebouncedValue(actual, DEBOUNCE_DELAY);
+  const setInputValue = (value: string) =>
+    setSearchQuery((prev) => ({ ...prev, actual: value }));
 
   useEffect(() => {
-    setSearchQuery(debouncedValue);
+    setSearchQuery((prev) => ({ ...prev, debounced: debouncedValue }));
   }, [debouncedValue, setSearchQuery]);
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.target.value);
   };
 
-
   const onClear = () => {
-    setSearchQuery('')
-    setInputValue('');
+    setSearchQuery((prev) => ({ ...prev, actual: '' }));
   };
 
   return {
-    value: inputValue,
+    value: actual,
     onChange,
     onClear,
   };

@@ -53,11 +53,10 @@ export const SearchResultItem = ({
   const router = useRouter();
   const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
 
-  const setQuery = useSetAtom(searchQueryAtom);
-  const clearQuery = () => setQuery('');
+  const setSearchQuery = useSetAtom(searchQueryAtom);
 
   const onClick = () => {
-    clearQuery();
+    setSearchQuery({ actual: '', debounced: '' });
     startTransition(() => {
       router.push(href);
     });

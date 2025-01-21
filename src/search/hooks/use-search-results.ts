@@ -9,7 +9,7 @@ import { searchQueryAtom } from '@/search/core/atoms';
 import { search } from '@/search/data/search';
 
 export const useSearchResults = (nav?: PillarNav, excluded?: string) => {
-  const query = useAtomValue(searchQueryAtom);
+  const { debounced: query } = useAtomValue(searchQueryAtom);
 
   const fetchResult = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
