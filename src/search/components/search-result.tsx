@@ -1,3 +1,5 @@
+import { DraggableWrapper } from '@/shared/components/draggable-wrapper';
+
 import { TSearchResult } from '@/search/core/schemas';
 import { SearchResultItem } from '@/search/components/search-result-item';
 
@@ -11,7 +13,9 @@ export const SearchResultLayout = ({
   return (
     <div className="flex flex-col gap-3">
       {label}
-      <div className="flex flex-wrap gap-4">{items}</div>
+      <DraggableWrapper className="flex items-center gap-4">
+        {items}
+      </DraggableWrapper>
     </div>
   );
 };
