@@ -16,7 +16,7 @@ interface Options {
  * Can safely assume main-pillar-item is included in fetchedLabels - page already has logic if main-pillar-item is 404.
  */
 export const createLabeledItems = ({
-  nav,
+  nav: _nav,
   params,
   searchParams,
   fetchedLabels,
@@ -42,7 +42,7 @@ export const createLabeledItems = ({
         continue;
       }
 
-      const prefixUrl = `/${nav}/${params.pillar}/${params.item}`;
+      const prefixUrl = `/projectsx/${params.pillar}/${params.item}`;
       const newSearchParams = new URLSearchParams(searchParams);
       const currentItems = newSearchParams.get(pillar)?.split(',') ?? [];
       const newItems = currentItems.filter((item) => item !== slug);

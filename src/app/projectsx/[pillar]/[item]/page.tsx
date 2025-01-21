@@ -1,8 +1,10 @@
 import { AppHeader } from '@/shared/components/app-header';
 
+import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { getPillarLabels } from '@/search/data/get-pillar-labels';
 
 import { createLabeledItems } from './create-labeled-items';
+import { PillarRows } from './pillar-rows';
 import { PillarSearch } from './pillar-search';
 
 interface Props {
@@ -18,11 +20,18 @@ const Page = async (props: Props) => {
   const activePillars = [params.pillar, ...Object.keys(searchParams)].join(',');
   const activeSlugs = [params.item, ...Object.values(searchParams)].join(',');
 
-  const fetchedLabels = await getPillarLabels({
-    nav,
-    pillars: activePillars,
-    slugs: activeSlugs,
-  });
+  const [fetchedLabels, pillarInfo] = await Promise.all([
+    getPillarLabels({
+      nav,
+      pillars: activePillars,
+      slugs: activeSlugs,
+    }),
+    getPillarInfo({
+      nav,
+      pillar: params.pillar,
+      item: params.item,
+    }),
+  ]);
 
   const labeledItems = createLabeledItems({
     nav,
@@ -31,6 +40,8 @@ const Page = async (props: Props) => {
     fetchedLabels,
   });
 
+  const pathPrefix = `/projectsx/${params.pillar}/${params.item}`;
+
   return (
     <div className="relative min-h-screen space-y-4 overflow-hidden">
       <AppHeader
@@ -38,10 +49,16 @@ const Page = async (props: Props) => {
         searchResults={<p>{'<PillarPageSearchResults />'}</p>}
         mainPillar={<p>{'<MainPillarContent />'}</p>}
       />
-      <p>{'<PillarRows />'}</p>
-      <p>{'<Content />'}</p>
 
-      <pre>{JSON.stringify({ fetchedLabels }, undefined, '\t')}</pre>
+      <PillarRows
+        pathPrefix={pathPrefix}
+        searchParams={searchParams}
+        itemParam={params.item}
+        labeledItems={labeledItems}
+        pillars={pillarInfo.altPillars}
+      />
+
+      <p>{'<Content />'}</p>
     </div>
   );
 };
