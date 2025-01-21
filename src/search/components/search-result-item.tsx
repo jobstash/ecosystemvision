@@ -7,8 +7,6 @@ import { useMemo } from 'react';
 import { Button } from '@heroui/button';
 import { useSetAtom } from 'jotai';
 
-import { ExternalIcon } from '@/shared/components/icons/external-icon';
-
 import { TSearchResultItem } from '@/search/core/schemas';
 import { searchQueryAtom } from '@/search/core/atoms';
 
@@ -75,7 +73,6 @@ export const SearchResultItem = ({
       size="sm"
       className="shrink-0"
       isDisabled={isPendingPillarRoute}
-      endContent={<ExternalIcon />}
       onClick={onClick}
     >
       <span className="text-13">{highlightText(label, query)}</span>
