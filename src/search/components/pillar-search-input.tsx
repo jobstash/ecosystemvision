@@ -2,7 +2,7 @@
 
 import { useSetAtom } from 'jotai';
 
-import { isFocusedPillarSearchInputAtom } from '@/search/core/atoms';
+import { isActiveSearchAtom } from '@/search/core/atoms';
 import { useSearchInput } from '@/search/hooks/use-search-input';
 
 const MIN_WIDTH = 72;
@@ -13,7 +13,7 @@ const PLACEHOLDER = 'Search ...';
 
 export const PillarSearchInput = () => {
   const { value, onChange } = useSearchInput();
-  const setIsFocused = useSetAtom(isFocusedPillarSearchInputAtom);
+  const setIsFocused = useSetAtom(isActiveSearchAtom);
 
   const onFocus = () => setIsFocused(true);
   const onBlur = () => setIsFocused(false);

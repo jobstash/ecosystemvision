@@ -3,7 +3,7 @@
 import { useAtomValue } from 'jotai';
 
 import { PillarNav } from '@/search/core/types';
-import { isFocusedPillarSearchInputAtom } from '@/search/core/atoms';
+import { isActiveSearchAtom } from '@/search/core/atoms';
 import { SearchResults } from '@/search/components/search-results';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const PillarPageSearchResults = ({ nav, excluded }: Props) => {
-  const isVisible = useAtomValue(isFocusedPillarSearchInputAtom);
+  const isVisible = useAtomValue(isActiveSearchAtom);
 
   if (!isVisible) return null;
 

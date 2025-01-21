@@ -12,6 +12,7 @@ import {
 import { createInputItems } from '@/search/utils/create-input-items';
 import { createPillarItems } from '@/search/utils/create-pillar-items';
 import { getPillarInfo } from '@/search/data/get-pillar-info';
+import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
 import { PillarItems } from '@/search/components/pillar-items';
 import { PillarItemsDropdownContent } from '@/search/components/pillar-items-dropdown-content';
@@ -79,61 +80,65 @@ export const PillarPage = async ({
           <PillarPageSearchResults nav={nav} excluded={excluded} />
         }
         mainPillar={
-          <MainPillarContent
-            title={title}
-            description={description}
-            items={
+          <ActiveSearchHiddenWrapper>
+            <MainPillarContent
+              title={title}
+              description={description}
+              items={
+                <PillarItems
+                  params={params}
+                  hasLabel={false}
+                  items={mainItems}
+                  pillarSlug={pillarInfo.mainPillar.slug}
+                  dropdownContent={
+                    <PillarItemsDropdownContent
+                      nav={nav}
+                      pillarInfo={pillarInfo}
+                      params={params}
+                      searchParams={searchParams}
+                      pillarSlug={pillarInfo.mainPillar.slug}
+                      pillarItems={mainItems}
+                      activeItems={activeItems.include}
+                      isIndex={isIndex}
+                    />
+                  }
+                />
+              }
+            />
+          </ActiveSearchHiddenWrapper>
+        }
+      />
+
+      <ActiveSearchHiddenWrapper>
+        {pillarInfo.altPillars.map(({ slug }) => {
+          const items = altItems[slug] || undefined;
+          if (!items || items?.length === 0) return null;
+
+          return (
+            <div key={slug} className="px-4">
               <PillarItems
                 params={params}
-                hasLabel={false}
-                items={mainItems}
-                pillarSlug={pillarInfo.mainPillar.slug}
+                items={items}
+                pillarSlug={slug}
                 dropdownContent={
                   <PillarItemsDropdownContent
                     nav={nav}
                     pillarInfo={pillarInfo}
                     params={params}
                     searchParams={searchParams}
-                    pillarSlug={pillarInfo.mainPillar.slug}
-                    pillarItems={mainItems}
-                    activeItems={activeItems.include}
+                    pillarSlug={slug}
+                    pillarItems={items}
+                    activeItems={activeItems[slug] || []}
                     isIndex={isIndex}
                   />
                 }
               />
-            }
-          />
-        }
-      />
+            </div>
+          );
+        })}
+      </ActiveSearchHiddenWrapper>
 
-      {pillarInfo.altPillars.map(({ slug }) => {
-        const items = altItems[slug] || undefined;
-        if (!items || items?.length === 0) return null;
-
-        return (
-          <div key={slug} className="px-4">
-            <PillarItems
-              params={params}
-              items={items}
-              pillarSlug={slug}
-              dropdownContent={
-                <PillarItemsDropdownContent
-                  nav={nav}
-                  pillarInfo={pillarInfo}
-                  params={params}
-                  searchParams={searchParams}
-                  pillarSlug={slug}
-                  pillarItems={items}
-                  activeItems={activeItems[slug] || []}
-                  isIndex={isIndex}
-                />
-              }
-            />
-          </div>
-        );
-      })}
-
-      {content}
+      <ActiveSearchHiddenWrapper>{content}</ActiveSearchHiddenWrapper>
     </div>
   );
 };
