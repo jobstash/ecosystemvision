@@ -2,12 +2,12 @@ import {
   GetPillarInfoProps,
   GetPillarInputLabelsProps,
   GetPillarItemsProps,
-  PillarSearchNavFilter,
+  PillarNav,
 } from '@/search/core/types';
 
 export const searchQueryKeys = {
   all: ['search'] as const,
-  search: (query: string, nav?: PillarSearchNavFilter) =>
+  search: (query: string, nav?: PillarNav) =>
     [...searchQueryKeys.all, 'search', query, nav] as const,
   getPillarItems: (props: GetPillarItemsProps) =>
     [...searchQueryKeys.all, 'pillar-items', props] as const,
