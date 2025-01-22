@@ -1,20 +1,41 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
 import { Chip } from '@heroui/chip';
+import { Skeleton } from '@heroui/skeleton';
 import { Tooltip } from '@heroui/tooltip';
 
 import { cn } from '@/shared/utils/cn';
 
 import { LabeledItem } from './types';
 
+import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+
 interface Props {
   item: LabeledItem;
-  isLoading: boolean;
-  onClose: (item: LabeledItem) => void;
 }
 
-export const PillarSearchInputItem = ({ item, isLoading, onClose }: Props) => {
+export const PillarSearchInputItem = ({ item }: Props) => {
   const { pillar, slug, label } = item;
+
+  const router = useRouter();
+
+  const { isPendingPillarRoute: isLoading, startTransition } =
+    usePillarRoutesContext();
+
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const onClose = (item: LabeledItem) => {
+    setShowSpinner(true);
+    startTransition(() => {
+      router.push(item.href || '/search');
+      setShowSpinner(false);
+    });
+  };
+
+  if (showSpinner) return <Skeleton className="flex h-7 w-20 rounded-lg" />;
 
   return (
     <Tooltip
