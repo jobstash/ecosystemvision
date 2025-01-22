@@ -4,3 +4,9 @@ export interface LabeledItem {
   label: string | undefined;
   href: string;
 }
+
+export interface PillarRowItem {
+  label: string;
+  href: string;
+  isActive: boolean;
+}

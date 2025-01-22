@@ -36,7 +36,7 @@ export const PillarSearch = ({ labeledItems }: Props) => {
   const onClose = (item: LabeledItem) => {
     setItems((prev) => prev.filter((prevItem) => prevItem.slug !== item.slug));
     startTransition(() => {
-      router.push(item.href);
+      router.push(item.href || '/search');
     });
   };
 

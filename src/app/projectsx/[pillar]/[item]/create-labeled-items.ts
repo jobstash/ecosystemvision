@@ -24,8 +24,10 @@ export const createLabeledItems = ({
   const result: LabeledItem[] = [];
 
   const items = {
-    [params.pillar]: params.item,
     ...searchParams,
+    [params.pillar]: searchParams[params.pillar]
+      ? `${params.item},${searchParams[params.pillar]}`
+      : params.item,
   };
 
   for (const [pillar, csv] of Object.entries(items)) {
@@ -37,11 +39,12 @@ export const createLabeledItems = ({
           pillar,
           slug,
           label,
-          href: '/search',
+          href: '',
         });
         continue;
       }
 
+      // TODO: change projectsx to ${nav}
       const prefixUrl = `/projectsx/${params.pillar}/${params.item}`;
       const newSearchParams = new URLSearchParams(searchParams);
       const currentItems = newSearchParams.get(pillar)?.split(',') ?? [];
