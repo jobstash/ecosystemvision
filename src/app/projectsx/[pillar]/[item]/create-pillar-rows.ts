@@ -5,7 +5,8 @@ import { PillarDto } from '@/search/core/schemas';
 import { LabeledItem } from './types';
 
 interface Options {
-  pathPrefix: string;
+  nav: string;
+  params: { pillar: string; item: string };
   searchParams: Record<string, string>;
   labeledItems: LabeledItem[];
   pillars: PillarDto[];
@@ -15,36 +16,39 @@ interface Options {
  * Create pillar rows with props needed for the ui.
  */
 export const createPillarRows = (options: Options) => {
-  const { pathPrefix, searchParams, labeledItems, pillars } = options;
+  const { nav, params, searchParams, labeledItems, pillars } = options;
+  const pathPrefix = `/${nav}/${params.pillar}/${params.item}`;
+
+  const selectedPillarLabels = new Set<string>(
+    labeledItems
+      .filter(({ label }) => !!label)
+      .map(({ pillar, label }) => `${pillar}-${label}`),
+  );
 
   const pillarRows = pillars.flatMap(({ slug: pillar, items }) => {
-    const selectedLabels = new Set<string>();
-    const selectedItems = labeledItems
-      .filter(
-        (labeledItem) => labeledItem.pillar === pillar && labeledItem.label,
-      )
-      .map(({ label, href }) => {
-        selectedLabels.add(label as string);
-        return { label: label!, href, isActive: true };
-      });
-
-    const mappedItems = items
-      .map((label) => {
-        const newSearchParams = new URLSearchParams(searchParams);
-        const paramValues = newSearchParams.get(pillar)?.split(',') ?? [];
-        paramValues.push(normalizeString(label));
-        newSearchParams.set(pillar, paramValues.join(','));
+    const mappedItems = items.map((label) => {
+      if (normalizeString(label) === params.item) {
         return {
           label,
-          href: `${pathPrefix}?${newSearchParams.toString()}`,
-          isActive: false,
+          href: '',
+          isActive: true,
         };
-      })
-      .filter(({ label }) => !selectedLabels.has(label));
+      }
+
+      const newSearchParams = new URLSearchParams(searchParams);
+      const paramValues = newSearchParams.get(pillar)?.split(',') ?? [];
+      paramValues.push(normalizeString(label));
+      newSearchParams.set(pillar, paramValues.join(','));
+      return {
+        label,
+        href: `${pathPrefix}?${newSearchParams.toString()}`,
+        isActive: selectedPillarLabels.has(`${pillar}-${label}`),
+      };
+    });
 
     return {
       pillar,
-      items: [...selectedItems, ...mappedItems],
+      items: mappedItems,
     };
   });
 
