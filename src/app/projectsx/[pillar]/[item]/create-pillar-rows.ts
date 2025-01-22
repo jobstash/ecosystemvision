@@ -2,6 +2,7 @@ import { normalizeString } from '@/shared/utils/normalize-string';
 
 import { PillarDto } from '@/search/core/schemas';
 
+import { createPillarItemHref } from './create-pillar-item-href';
 import { LabeledItem } from './types';
 
 interface Options {
@@ -35,14 +36,20 @@ export const createPillarRows = (options: Options) => {
         };
       }
 
-      const newSearchParams = new URLSearchParams(searchParams);
-      const paramValues = newSearchParams.get(pillar)?.split(',') ?? [];
-      paramValues.push(normalizeString(label));
-      newSearchParams.set(pillar, paramValues.join(','));
+      const isActive = selectedPillarLabels.has(`${pillar}-${label}`);
+      const slug = normalizeString(label);
+      const href = createPillarItemHref({
+        isActive,
+        pathPrefix,
+        searchParams,
+        pillar,
+        slug,
+      });
+
       return {
         label,
-        href: `${pathPrefix}?${newSearchParams.toString()}`,
-        isActive: selectedPillarLabels.has(`${pillar}-${label}`),
+        href,
+        isActive,
       };
     });
 

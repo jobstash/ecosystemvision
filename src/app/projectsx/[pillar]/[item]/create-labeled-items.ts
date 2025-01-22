@@ -1,5 +1,6 @@
 import { normalizeString } from '@/shared/utils/normalize-string';
 
+import { createPillarItemHref } from './create-pillar-item-href';
 import { LabeledItem } from './types';
 
 interface Options {
@@ -12,11 +13,10 @@ interface Options {
 /**
  * Returns pillar-search-items that maps fetched slug-label with correct href.
  * Href should correspond to the item being removed in search params.
- * Active main-pillar-item should link back to /search page.
  * Can safely assume main-pillar-item is included in fetchedLabels - page already has logic if main-pillar-item is 404.
  */
 export const createLabeledItems = ({
-  nav: _nav,
+  nav,
   params,
   searchParams,
   fetchedLabels,
@@ -44,19 +44,15 @@ export const createLabeledItems = ({
         continue;
       }
 
-      // TODO: change projectsx to ${nav}
-      const prefixUrl = `/projectsx/${params.pillar}/${params.item}`;
-      const newSearchParams = new URLSearchParams(searchParams);
-      const currentItems = newSearchParams.get(pillar)?.split(',') ?? [];
-      const newItems = currentItems.filter((item) => item !== slug);
+      const pathPrefix = `/${nav}/${params.pillar}/${params.item}`;
+      const href = createPillarItemHref({
+        isActive: true,
+        pathPrefix,
+        searchParams,
+        pillar,
+        slug,
+      });
 
-      if (newItems.length > 0) {
-        newSearchParams.set(pillar, newItems.join(','));
-      } else {
-        newSearchParams.delete(pillar);
-      }
-
-      const href = `${prefixUrl}?${newSearchParams.toString()}`;
       result.push({ pillar, slug, label, href });
     }
   }
