@@ -37,7 +37,9 @@ export const createPillarRows = (options: Options) => {
       const slug = normalizeString(label);
 
       const href = isIndex
-        ? `/${nav}/${pillar}/${slug}`
+        ? pillar === 'names'
+          ? `/${nav}/info/${slug}`
+          : `/${nav}/${pillar}/${slug}`
         : createPillarItemHref({
             isActive,
             pathPrefix,
