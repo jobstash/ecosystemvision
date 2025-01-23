@@ -20,5 +20,8 @@ export const createPillarItemHref = (options: Options) => {
     ? newSearchParams.delete(pillar)
     : newSearchParams.set(pillar, updatedItems.join(','));
 
-  return `${pathPrefix}?${newSearchParams.toString()}`;
+  const searchParamsString = newSearchParams.toString();
+
+  if (searchParamsString === '') return pathPrefix;
+  return `${pathPrefix}?${searchParamsString}`;
 };
