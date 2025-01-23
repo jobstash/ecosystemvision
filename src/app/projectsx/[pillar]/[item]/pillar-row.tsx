@@ -9,18 +9,19 @@ import { PillarLoadingWrapper } from './pillar-loading-wrapper';
 import { PillarRowItem } from './types';
 
 interface Props {
-  pillar: string | null;
+  pillar: string;
   pillarItems: PillarRowItem[];
   dropdownContent: React.ReactNode;
+  hidePillar?: boolean;
 }
 
 export const PillarRow = (props: Props) => {
-  const { pillar, pillarItems, dropdownContent } = props;
+  const { pillar, pillarItems, dropdownContent, hidePillar } = props;
 
   return (
     <PillarLoadingWrapper>
       <div className="flex flex-col gap-1">
-        {pillar && (
+        {!hidePillar && (
           <div className="pl-2 text-13 uppercase text-accent2/90">
             <span>{pillar}</span>
           </div>
@@ -31,6 +32,7 @@ export const PillarRow = (props: Props) => {
               <PillarItem
                 key={label}
                 isActive={isActive}
+                pillar={pillar}
                 label={label}
                 href={href}
               />

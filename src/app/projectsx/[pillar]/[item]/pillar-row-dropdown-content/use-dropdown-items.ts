@@ -1,28 +1,30 @@
 import { useMemo } from 'react';
 
-import { normalizeString } from '@/shared/utils/normalize-string';
+import { useAtomValue } from 'jotai';
+
+import { hiddenPillarItemsAtom } from '../atoms';
 
 interface Options {
   value: string;
   activeLabelsSet: Set<string>;
-  params: { item: string };
   items: string[];
+  mainLabel: string;
+  pillar: string;
 }
 
 export const useDropdownItems = (options: Options) => {
-  const { value, activeLabelsSet, params, items } = options;
+  const { value, activeLabelsSet, items, mainLabel, pillar } = options;
+
+  const hiddenItemsMap = useAtomValue(hiddenPillarItemsAtom);
+  const hiddenItems = useMemo(() => {
+    const itemsSet = new Set(items);
+    const hiddenPillarItems = hiddenItemsMap[pillar] || [];
+    return hiddenPillarItems.filter((item) => !itemsSet.has(item));
+  }, [hiddenItemsMap, items, pillar]);
 
   const activeLabels = useMemo(() => {
     return Array.from(activeLabelsSet);
   }, [activeLabelsSet]);
-
-  const mainLabel = useMemo(
-    () =>
-      Array.from(activeLabelsSet).find(
-        (label) => normalizeString(label) === params.item,
-      ),
-    [activeLabelsSet, params.item],
-  );
 
   const activeItems = useMemo(() => {
     return [
@@ -32,11 +34,12 @@ export const useDropdownItems = (options: Options) => {
   }, [activeLabels, value, mainLabel]);
 
   const optionItems = useMemo(() => {
-    return items.filter((item) => !activeLabelsSet.has(item));
-  }, [activeLabelsSet, items]);
+    return [...hiddenItems, ...items].filter(
+      (item) => !activeLabelsSet.has(item),
+    );
+  }, [activeLabelsSet, hiddenItems, items]);
 
   return {
-    mainLabel,
     activeItems,
     optionItems,
   };

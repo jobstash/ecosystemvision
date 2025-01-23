@@ -15,3 +15,5 @@ export const searchQueryAtom = atom<SearchQueryText>({
 });
 
 export const isActiveSearchAtom = atom<boolean>(false);
+
+export const hiddenPillarItemsAtom = atom<Record<string, string[]>>({});

@@ -2,23 +2,46 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useInView } from 'react-intersection-observer';
 
 import { Button } from '@heroui/button';
+import { useSetAtom } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';
+
+import { hiddenPillarItemsAtom } from './atoms';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
   isActive: boolean;
+  pillar: string;
   label: string;
   href: string;
 }
 
-export const PillarItem = ({ isActive, label, href }: Props) => {
+export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
   const router = useRouter();
   const { isPendingPillarRoute: isLoading, startTransition } =
     usePillarRoutesContext();
+
+  const setHiddenItems = useSetAtom(hiddenPillarItemsAtom);
+  const { ref: inViewRef } = useInView({
+    onChange: (inView) => {
+      setHiddenItems((prev) => {
+        const newState = { ...prev };
+
+        const hiddenItems = newState[pillar] || [];
+
+        inView
+          ? hiddenItems.splice(hiddenItems.indexOf(label), 1)
+          : hiddenItems.unshift(label);
+
+        newState[pillar] = hiddenItems;
+        return newState;
+      });
+    },
+  });
 
   const onClick = () => {
     startTransition(() => {
@@ -38,6 +61,7 @@ export const PillarItem = ({ isActive, label, href }: Props) => {
       as={Link}
       href={href}
       radius="md"
+      ref={inViewRef}
       className={className}
       variant={variant}
       isDisabled={isLoading}

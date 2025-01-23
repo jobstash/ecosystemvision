@@ -47,6 +47,10 @@ export const PillarRowDropdownContent = ({
     return new Set(activeLabels);
   }, [activeLabels]);
 
+  const mainLabel = useMemo(() => {
+    activeLabels.find((label) => normalizeString(label) === params.item);
+  }, [activeLabels, params.item]);
+
   const { onAction } = useDropdownOnAction({
     nav,
     pillar,
@@ -57,11 +61,12 @@ export const PillarRowDropdownContent = ({
     overrideItemUrl,
   });
 
-  const { mainLabel, activeItems, optionItems } = useDropdownItems({
+  const { activeItems, optionItems } = useDropdownItems({
     value,
     activeLabelsSet,
-    params,
     items: list.items,
+    mainLabel: mainLabel!,
+    pillar,
   });
 
   return (
