@@ -7,8 +7,10 @@ import { MainPillarContent } from '@/search/components/main-pillar-content';
 import { ActiveSearchHiddenWrapper } from './active-search-hidden-wrapper';
 import { createLabeledItems } from './create-labeled-items';
 import { createPillarRows } from './create-pillar-rows';
+import { getActiveLabels } from './get-active-labels';
 import { PillarPageSearchResults } from './pillar-page-search-results';
 import { PillarRow } from './pillar-row';
+import { PillarRowDropdownContent } from './pillar-row-dropdown-content';
 import { PillarSearch } from './pillar-search';
 
 interface Props {
@@ -89,6 +91,18 @@ const Page = async (props: Props) => {
                 <PillarRow
                   pillar={params.pillar}
                   pillarItems={mainPillarRow.items}
+                  dropdownContent={
+                    <PillarRowDropdownContent
+                      nav={'projectsx'}
+                      pillar={mainPillarRow.pillar}
+                      params={params}
+                      searchParams={searchParams}
+                      activeLabels={getActiveLabels(
+                        labeledItems,
+                        mainPillarRow.pillar,
+                      )}
+                    />
+                  }
                 />
               }
             />
@@ -101,6 +115,18 @@ const Page = async (props: Props) => {
           <PillarRow
             pillar={altPillarRow.pillar}
             pillarItems={altPillarRow.items}
+            dropdownContent={
+              <PillarRowDropdownContent
+                nav={'projectsx'}
+                pillar={altPillarRow.pillar}
+                params={params}
+                searchParams={searchParams}
+                activeLabels={getActiveLabels(
+                  labeledItems,
+                  altPillarRow.pillar,
+                )}
+              />
+            }
           />
         </div>
 

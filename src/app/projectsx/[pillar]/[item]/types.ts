@@ -10,3 +10,11 @@ export interface PillarRowItem {
   href: string;
   isActive: boolean;
 }
+
+export interface GetPillarItemsProps {
+  nav: string;
+  pillar: string;
+  query?: string;
+  page?: number;
+  limit?: number;
+}

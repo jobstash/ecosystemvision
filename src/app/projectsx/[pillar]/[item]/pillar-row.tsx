@@ -1,15 +1,21 @@
-import { PillarItem } from './pillar-item';
-import { PillarRowItem } from './types';
+import { Button } from '@heroui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
 
-import { PillarLoadingWrapper } from '@/app/projectsx/[pillar]/[item]/pillar-loading-wrapper';
+import { cn } from '@/shared/utils/cn';
+
+import { CaretDownIcon } from './caret-down-icon';
+import { PillarItem } from './pillar-item';
+import { PillarLoadingWrapper } from './pillar-loading-wrapper';
+import { PillarRowItem } from './types';
 
 interface Props {
   pillar: string | null;
   pillarItems: PillarRowItem[];
+  dropdownContent: React.ReactNode;
 }
 
 export const PillarRow = (props: Props) => {
-  const { pillar, pillarItems } = props;
+  const { pillar, pillarItems, dropdownContent } = props;
 
   return (
     <PillarLoadingWrapper>
@@ -31,8 +37,22 @@ export const PillarRow = (props: Props) => {
             ))}
           </div>
 
-          <div className="shrink-0 grow">
-            <p>{'<More />'}</p>
+          <div className="shrink-0 grow justify-end">
+            <Popover placement="bottom-end">
+              <PopoverTrigger>
+                <Button
+                  radius="md"
+                  variant="bordered"
+                  className={cn('border border-white/20', {})}
+                  endContent={<CaretDownIcon />}
+                >
+                  <span>More</span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="flex flex-col gap-4 p-4">
+                {dropdownContent}
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
