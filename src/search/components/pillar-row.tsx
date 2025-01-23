@@ -2,11 +2,12 @@ import { Button } from '@heroui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
 
 import { cn } from '@/shared/utils/cn';
+import { CaretDownIcon } from '@/shared/components/icons/caret-down-icon';
 
-import { CaretDownIcon } from './caret-down-icon';
+import { PillarRowItem } from '@/search/core/types';
+
 import { PillarItem } from './pillar-item';
 import { PillarLoadingWrapper } from './pillar-loading-wrapper';
-import { PillarRowItem } from './types';
 
 interface Props {
   pillar: string;

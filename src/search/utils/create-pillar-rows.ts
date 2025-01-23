@@ -1,9 +1,9 @@
 import { normalizeString } from '@/shared/utils/normalize-string';
 
 import { PillarDto } from '@/search/core/schemas';
+import { LabeledItem } from '@/search/core/types';
 
 import { createPillarItemHref } from './create-pillar-item-href';
-import { LabeledItem } from './types';
 
 interface Options {
   nav: string;
@@ -11,6 +11,7 @@ interface Options {
   searchParams: Record<string, string>;
   labeledItems: LabeledItem[];
   pillars: PillarDto[];
+  isIndex?: boolean;
 }
 
 /**
@@ -18,7 +19,7 @@ interface Options {
  * Streamlined items are items buried in the more dropdown but included in the search params.
  */
 export const createPillarRows = (options: Options) => {
-  const { nav, params, searchParams, labeledItems, pillars } = options;
+  const { nav, params, searchParams, labeledItems, pillars, isIndex } = options;
   const pathPrefix = `/${nav}/${params.pillar}/${params.item}`;
 
   const selectedPillarLabels = new Set<string>(
@@ -33,14 +34,17 @@ export const createPillarRows = (options: Options) => {
       if (isMainItem) return { label, href: '', isActive: true };
 
       const isActive = selectedPillarLabels.has(`${pillar}-${label}`);
+      const slug = normalizeString(label);
 
-      const href = createPillarItemHref({
-        isActive,
-        pathPrefix,
-        searchParams,
-        pillar,
-        slug: normalizeString(label),
-      });
+      const href = isIndex
+        ? `/${nav}/${pillar}/${slug}`
+        : createPillarItemHref({
+            isActive,
+            pathPrefix,
+            searchParams,
+            pillar,
+            slug,
+          });
 
       return {
         label,

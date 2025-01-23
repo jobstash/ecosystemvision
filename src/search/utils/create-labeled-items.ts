@@ -1,7 +1,8 @@
 import { normalizeString } from '@/shared/utils/normalize-string';
 
+import { LabeledItem } from '@/search/core/types';
+
 import { createPillarItemHref } from './create-pillar-item-href';
-import { LabeledItem } from './types';
 
 interface Options {
   nav: string;
@@ -21,6 +22,8 @@ export const createLabeledItems = ({
   searchParams,
   fetchedLabels,
 }: Options) => {
+  if (fetchedLabels.length === 0) return [];
+
   const result: LabeledItem[] = [];
 
   const items = {

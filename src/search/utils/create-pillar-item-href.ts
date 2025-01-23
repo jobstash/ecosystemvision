@@ -1,39 +1,28 @@
-import { FRONTEND_URL } from '@/shared/core/envs';
-
-import { TPillarInfo } from '@/search/core/schemas';
-import { PillarParams, PillarSearchParams } from '@/search/core/types';
-
-interface Props {
-  nav: string;
-  pillarInfo: TPillarInfo;
-  params: PillarParams;
-  searchParams: PillarSearchParams;
+interface Options {
+  isActive: boolean;
+  pathPrefix: string;
+  searchParams: Record<string, string>;
+  pillar: string;
+  slug: string;
 }
 
-export const createPillarItemHref = (
-  props: Props,
-  newSearchParams?: PillarSearchParams,
-  overrideUrl?: { pillar: string; item: string },
-) => {
-  const { nav, params, searchParams } = props;
+export const createPillarItemHref = (options: Options) => {
+  const { isActive, pathPrefix, searchParams, pillar, slug } = options;
 
-  if (overrideUrl) {
-    return `${FRONTEND_URL}/${nav}/${overrideUrl.pillar.toLowerCase()}/${overrideUrl.item.toLowerCase()}`;
-  }
+  const newSearchParams = new URLSearchParams(searchParams);
+  const currentItems = newSearchParams.get(pillar)?.split(',') ?? [];
 
-  const baseUrl = `${FRONTEND_URL}/${nav}/${params.pillar}/${params.item}`;
+  const updatedItems = isActive
+    ? currentItems.filter((item) => item !== slug)
+    : [...currentItems, slug];
 
-  if (!newSearchParams && !searchParams) {
-    return baseUrl;
-  }
+  const shouldRemoveParam = updatedItems.length === 0;
+  shouldRemoveParam
+    ? newSearchParams.delete(pillar)
+    : newSearchParams.set(pillar, updatedItems.join(','));
 
-  const urlSearchParams = new URLSearchParams(newSearchParams || searchParams);
+  const searchParamsString = newSearchParams.toString();
 
-  const searchPairs = Array.from(urlSearchParams.entries()).map(
-    ([key, value]) => `${key}=${value}`,
-  );
-
-  const searchString = searchPairs.join('&');
-
-  return searchString ? `${baseUrl}?${searchString}` : baseUrl;
+  if (searchParamsString === '') return pathPrefix;
+  return `${pathPrefix}?${searchParamsString}`;
 };

@@ -50,7 +50,7 @@ const ProjectListPage = async ({ searchParams }: Props) => {
       <PillarPage
         isIndex
         nav="projects"
-        params={{ pillar: null, item: null }}
+        params={{ pillar: '', item: '' }}
         searchParams={{}}
         content={<ProjectListClient searchParams="" />}
       />

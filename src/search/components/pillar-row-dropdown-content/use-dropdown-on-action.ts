@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 
 import { normalizeString } from '@/shared/utils/normalize-string';
 
-import { createPillarItemHref } from '../create-pillar-item-href';
+import { createPillarItemHref } from '@/search/utils/create-pillar-item-href';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
@@ -13,7 +13,7 @@ interface Options {
   searchParams: Record<string, string>;
   activeLabelsSet: Set<string>;
   onClear: () => void;
-  overrideItemUrl?: { pillar: string; item: string };
+  isIndex?: boolean;
 }
 
 export const useDropdownOnAction = (options: Options) => {
@@ -24,7 +24,7 @@ export const useDropdownOnAction = (options: Options) => {
     searchParams,
     activeLabelsSet,
     onClear,
-    overrideItemUrl,
+    isIndex,
   } = options;
 
   const router = useRouter();
@@ -36,14 +36,15 @@ export const useDropdownOnAction = (options: Options) => {
 
       const pathPrefix = `/${nav}/${params.pillar}/${params.item}`;
 
-      const href = overrideItemUrl
-        ? `/${nav}/${overrideItemUrl.pillar}/${overrideItemUrl.item}`
+      const slug = normalizeString(key as string);
+      const href = isIndex
+        ? `/${nav}/${pillar}/${slug}`
         : createPillarItemHref({
             isActive,
             pathPrefix,
             searchParams,
             pillar,
-            slug: normalizeString(key as string),
+            slug,
           });
 
       startTransition(() => {

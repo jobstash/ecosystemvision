@@ -1,69 +1,76 @@
-import { notFound } from 'next/navigation';
-
-import { errMsg } from '@/shared/core/errors';
-import { normalizeString } from '@/shared/utils/normalize-string';
 import { AppHeader } from '@/shared/components/app-header';
 
-import {
-  PillarNav,
-  PillarParams,
-  PillarSearchParams,
-} from '@/search/core/types';
-import { createInputItems } from '@/search/utils/create-input-items';
-import { createPillarItems } from '@/search/utils/create-pillar-items';
+import { createLabeledItems } from '@/search/utils/create-labeled-items';
+import { createPillarRows } from '@/search/utils/create-pillar-rows';
+import { getActiveLabels } from '@/search/utils/get-active-labels';
 import { getPillarInfo } from '@/search/data/get-pillar-info';
+import { getPillarLabels } from '@/search/data/get-pillar-labels';
 import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
-import { PillarItems } from '@/search/components/pillar-items';
-import { PillarItemsDropdownContent } from '@/search/components/pillar-items-dropdown-content';
 import { PillarPageSearchResults } from '@/search/components/pillar-page-search-results';
-import { PillarSearchSection } from '@/search/components/pillar-search-section';
+import { PillarRow } from '@/search/components/pillar-row';
+import { PillarRowDropdownContent } from '@/search/components/pillar-row-dropdown-content';
+import { PillarSearch } from '@/search/components/pillar-search';
 
 interface Props {
-  nav: PillarNav;
-  params: PillarParams;
-  searchParams: PillarSearchParams;
-  content?: React.ReactNode;
+  nav: string;
+  params: { pillar: string; item: string };
+  searchParams: Record<string, string>;
+  content: React.ReactNode;
   isIndex?: boolean;
 }
 
-export const PillarPage = async ({
-  nav,
-  params,
-  searchParams,
-  content = null,
-  isIndex,
-}: Props) => {
-  const pillarInfo = await getPillarInfo({
+export const PillarPage = async (props: Props) => {
+  const { nav, params, searchParams, content, isIndex = false } = props;
+
+  const activePillars = [params.pillar, ...Object.keys(searchParams)].join(',');
+  const activeSlugs = [params.item, ...Object.values(searchParams)].join(',');
+
+  const [fetchedLabels, pillarInfo] = await Promise.all([
+    getPillarLabels({
+      nav,
+      pillars: activePillars,
+      slugs: activeSlugs,
+    }),
+    getPillarInfo({
+      nav,
+      pillar: params.pillar,
+      item: params.item,
+    }),
+  ]);
+
+  const labeledItems = createLabeledItems({
     nav,
-    pillar: params.pillar,
-    item: params.item,
-    // TODO: searchParams implementation for mw endpoint
-  });
-
-  const { title, description } = pillarInfo;
-
-  try {
-    moveItemToFront(pillarInfo.mainPillar.items, params.item);
-  } catch (error) {
-    if ((error as Error).message === errMsg.NOT_FOUND) {
-      notFound();
-    }
-  }
-
-  const { mainItems, altItems, activeItems } = createPillarItems({
-    nav,
-    pillarInfo,
     params,
     searchParams,
-    isIndex,
+    fetchedLabels,
   });
 
-  const { pillars, inputs } = createInputItems(
-    activeItems,
-    params.item,
-    pillarInfo.mainPillar.slug,
-  );
+  const mainPillarRow = createPillarRows({
+    nav,
+    params,
+    searchParams,
+    labeledItems,
+    pillars: [pillarInfo.mainPillar],
+    isIndex,
+  })[0];
+
+  const altPillarRow = createPillarRows({
+    nav,
+    params,
+    searchParams,
+    labeledItems,
+    pillars: pillarInfo.altPillars,
+    isIndex,
+  })[0];
+
+  // const pillarFilters = createPillarRows({
+  //   nav,
+  //   params,
+  //   searchParams,
+  //   labeledItems,
+  //   pillars: pillarInfo.altPillars.slice(1),
+  // });
 
   const excluded = [
     ...(params.item ? [params.item] : []),
@@ -74,7 +81,10 @@ export const PillarPage = async ({
     <div className="relative min-h-screen space-y-4 overflow-hidden">
       <AppHeader
         input={
-          <PillarSearchSection nav={nav} pillars={pillars} inputs={inputs} />
+          <PillarSearch
+            mainLabel={mainPillarRow.items[0].label}
+            labeledItems={labeledItems}
+          />
         }
         searchResults={
           <PillarPageSearchResults nav={nav} excluded={excluded} />
@@ -82,23 +92,23 @@ export const PillarPage = async ({
         mainPillar={
           <ActiveSearchHiddenWrapper>
             <MainPillarContent
-              title={title}
-              description={description}
+              title={pillarInfo.title}
+              description={pillarInfo.description}
               items={
-                <PillarItems
-                  params={params}
-                  hasLabel={false}
-                  items={mainItems}
-                  pillarSlug={pillarInfo.mainPillar.slug}
+                <PillarRow
+                  hidePillar
+                  pillar={params.pillar}
+                  pillarItems={mainPillarRow.items}
                   dropdownContent={
-                    <PillarItemsDropdownContent
+                    <PillarRowDropdownContent
                       nav={nav}
-                      pillarInfo={pillarInfo}
+                      pillar={mainPillarRow.pillar}
                       params={params}
                       searchParams={searchParams}
-                      pillarSlug={pillarInfo.mainPillar.slug}
-                      pillarItems={mainItems}
-                      activeItems={activeItems.include}
+                      activeLabels={getActiveLabels(
+                        labeledItems,
+                        mainPillarRow.pillar,
+                      )}
                       isIndex={isIndex}
                     />
                   }
@@ -110,44 +120,28 @@ export const PillarPage = async ({
       />
 
       <ActiveSearchHiddenWrapper>
-        {pillarInfo.altPillars.map(({ slug }) => {
-          const items = altItems[slug] || undefined;
-          if (!items || items?.length === 0) return null;
-
-          return (
-            <div key={slug} className="px-4">
-              <PillarItems
+        <div className="px-4">
+          <PillarRow
+            pillar={altPillarRow.pillar}
+            pillarItems={altPillarRow.items}
+            dropdownContent={
+              <PillarRowDropdownContent
+                nav={nav}
+                pillar={altPillarRow.pillar}
                 params={params}
-                items={items}
-                pillarSlug={slug}
-                dropdownContent={
-                  <PillarItemsDropdownContent
-                    nav={nav}
-                    pillarInfo={pillarInfo}
-                    params={params}
-                    searchParams={searchParams}
-                    pillarSlug={slug}
-                    pillarItems={items}
-                    activeItems={activeItems[slug] || []}
-                    isIndex={isIndex}
-                  />
-                }
+                searchParams={searchParams}
+                activeLabels={getActiveLabels(
+                  labeledItems,
+                  altPillarRow.pillar,
+                )}
+                isIndex={isIndex}
               />
-            </div>
-          );
-        })}
-      </ActiveSearchHiddenWrapper>
+            }
+          />
+        </div>
 
-      <ActiveSearchHiddenWrapper>{content}</ActiveSearchHiddenWrapper>
+        {content}
+      </ActiveSearchHiddenWrapper>
     </div>
   );
-};
-
-const moveItemToFront = (items: string[], itemParam: string | null) => {
-  if (!itemParam) return;
-
-  const index = items.findIndex((item) => normalizeString(item) === itemParam);
-  if (index === -1) throw new Error(errMsg.NOT_FOUND);
-
-  items.unshift(items.splice(index, 1)[0]);
 };

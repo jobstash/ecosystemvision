@@ -22,7 +22,7 @@ interface Props {
   params: { pillar: string; item: string };
   searchParams: Record<string, string>;
   activeLabels: string[];
-  overrideItemUrl?: { pillar: string; item: string };
+  isIndex: boolean;
 }
 
 export const PillarRowDropdownContent = ({
@@ -31,7 +31,7 @@ export const PillarRowDropdownContent = ({
   params,
   searchParams,
   activeLabels,
-  overrideItemUrl,
+  isIndex,
 }: Props) => {
   const {
     placeholder,
@@ -48,7 +48,7 @@ export const PillarRowDropdownContent = ({
   }, [activeLabels]);
 
   const mainLabel = useMemo(() => {
-    activeLabels.find((label) => normalizeString(label) === params.item);
+    return activeLabels.find((label) => normalizeString(label) === params.item);
   }, [activeLabels, params.item]);
 
   const { onAction } = useDropdownOnAction({
@@ -58,7 +58,7 @@ export const PillarRowDropdownContent = ({
     searchParams,
     activeLabelsSet,
     onClear,
-    overrideItemUrl,
+    isIndex,
   });
 
   const { activeItems, optionItems } = useDropdownItems({

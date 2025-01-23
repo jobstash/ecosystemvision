@@ -4,13 +4,13 @@ import { Fragment } from 'react';
 
 import { Divider } from '@/shared/components/divider';
 
-import { PillarNav } from '@/search/core/types';
 import { useSearchResults } from '@/search/hooks/use-search-results';
 import { SearchResult } from '@/search/components/search-result';
-import { SearchResultsSkeleton } from '@/search/components/search-results-skeleton';
+
+import { SearchResultsSkeleton } from './search-results-skeleton';
 
 interface Props {
-  nav?: PillarNav;
+  nav?: string;
   excluded?: string;
   isPillarSearchResult?: boolean;
 }

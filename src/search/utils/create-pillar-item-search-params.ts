@@ -1,8 +1,6 @@
-import { PillarParams, PillarSearchParams } from '@/search/core/types';
-
 export const createPillarItemSearchParams = (
-  params: PillarParams,
-  searchParams: PillarSearchParams,
+  params: { pillar: string; item: string },
+  searchParams: Record<string, string>,
 ) => {
   const { include, ...restSearchParams } = searchParams;
   if (!params.pillar) return '';

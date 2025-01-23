@@ -1,12 +1,11 @@
-import { PillarParams, PillarSearchParams } from '@/search/core/types';
 import { createPillarItemSearchParams } from '@/search/utils/create-pillar-item-search-params';
 import { OrgListClient } from '@/orgs/components/org-list/org-list-client';
 
 import { PillarPage } from '@/search/pages/pillar-page';
 
 interface Props {
-  params: Promise<PillarParams>;
-  searchParams: Promise<PillarSearchParams>;
+  params: Promise<{ pillar: string; item: string }>;
+  searchParams: Promise<Record<string, string>>;
 }
 
 const Page = async (props: Props) => {

@@ -7,9 +7,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useDebouncedValue } from '@/shared/hooks/use-debounced-value';
 
 import { searchQueryKeys } from '@/search/core/query-keys';
+import { GetPillarItemsProps } from '@/search/core/types';
 import { getPillarItems } from '@/search/data/get-pillar-items';
-
-import { GetPillarItemsProps } from '../types';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 

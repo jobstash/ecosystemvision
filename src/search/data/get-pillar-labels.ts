@@ -9,9 +9,13 @@ interface Options {
   slugs: string;
 }
 
-export const getPillarLabels = async ({ nav, pillars, slugs }: Options) => {
+export const getPillarLabels = async ({
+  nav,
+  pillars,
+  slugs,
+}: Options): Promise<{ label: string; slug: string }[]> => {
   if (!pillars.length || !slugs.length) {
-    throw new Error('Pillars and slugs are required');
+    return [];
   }
 
   const url = new URL(`${MW_URL}/search/pillar/labels`);

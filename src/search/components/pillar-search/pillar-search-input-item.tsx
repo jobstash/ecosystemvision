@@ -9,7 +9,7 @@ import { Tooltip } from '@heroui/tooltip';
 
 import { cn } from '@/shared/utils/cn';
 
-import { LabeledItem } from './types';
+import { LabeledItem } from '@/search/core/types';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 

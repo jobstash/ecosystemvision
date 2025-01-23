@@ -4,27 +4,26 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 
-import { Button } from "@heroui/button";
+import { Button } from '@heroui/button';
 import { useSetAtom } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';
 
-import { TPillarItem } from '@/search/core/types';
 import { hiddenPillarItemsAtom } from '@/search/core/atoms';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
-  isMainPillarItem: boolean;
-  item: TPillarItem;
-  pillarSlug: string;
+  isActive: boolean;
+  pillar: string;
+  label: string;
+  href: string;
 }
 
-export const PillarItem = ({ item, isMainPillarItem, pillarSlug }: Props) => {
-  const { isActive, label, href } = item;
-
+export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
   const router = useRouter();
-  const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
+  const { isPendingPillarRoute: isLoading, startTransition } =
+    usePillarRoutesContext();
 
   const setHiddenItems = useSetAtom(hiddenPillarItemsAtom);
   const { ref: inViewRef } = useInView({
@@ -32,29 +31,13 @@ export const PillarItem = ({ item, isMainPillarItem, pillarSlug }: Props) => {
       setHiddenItems((prev) => {
         const newState = { ...prev };
 
-        // Initialize Set if pillar doesn't exist
-        if (!newState[pillarSlug]) {
-          newState[pillarSlug] = [];
-        }
+        const hiddenItems = newState[pillar] || [];
 
-        // Update hidden items set
-        let pillarHiddenItems = [...newState[pillarSlug]];
+        inView
+          ? hiddenItems.splice(hiddenItems.indexOf(label), 1)
+          : hiddenItems.unshift(label);
 
-        if (!inView) {
-          pillarHiddenItems.unshift(label);
-        } else {
-          pillarHiddenItems = pillarHiddenItems.filter(
-            (itemLabel) => itemLabel !== label,
-          );
-        }
-
-        // Remove pillar key if empty
-        if (pillarHiddenItems.length > 0) {
-          newState[pillarSlug] = pillarHiddenItems;
-        } else {
-          delete newState[pillarSlug];
-        }
-
+        newState[pillar] = hiddenItems;
         return newState;
       });
     },
@@ -68,20 +51,20 @@ export const PillarItem = ({ item, isMainPillarItem, pillarSlug }: Props) => {
 
   const className = cn('border', {
     'border-white/60': isActive,
-    'pointer-events-none text-accent2 border-accent2': isMainPillarItem,
+    'pointer-events-none text-accent2 border-accent2': !href,
   });
 
-  const variant = isActive || isMainPillarItem ? 'bordered' : 'faded';
+  const variant = isActive || !href ? 'bordered' : 'faded';
 
   return (
     <Button
       as={Link}
       href={href}
-      ref={inViewRef}
       radius="md"
+      ref={inViewRef}
       className={className}
       variant={variant}
-      isDisabled={isPendingPillarRoute}
+      isDisabled={isLoading}
       onClick={onClick}
     >
       {label}

@@ -4,7 +4,7 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { useDebouncedValue } from '@/shared/hooks/use-debounced-value';
 
-import { isActiveSearchAtom, searchQueryAtom } from './atoms';
+import { isActiveSearchAtom, searchQueryAtom } from '@/search/core/atoms';
 
 const MIN_WIDTH = 72;
 const MAX_WIDTH = 160;

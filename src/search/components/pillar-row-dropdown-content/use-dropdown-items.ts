@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useAtomValue } from 'jotai';
 
-import { hiddenPillarItemsAtom } from '../atoms';
+import { hiddenPillarItemsAtom } from '@/search/core/atoms';
 
 interface Options {
   value: string;

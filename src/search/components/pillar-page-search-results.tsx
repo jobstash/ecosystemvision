@@ -2,12 +2,12 @@
 
 import { useAtomValue } from 'jotai';
 
-import { PillarNav } from '@/search/core/types';
 import { isActiveSearchAtom } from '@/search/core/atoms';
-import { SearchResults } from '@/search/components/search-results';
+
+import { SearchResults } from './search-results';
 
 interface Props {
-  nav: PillarNav;
+  nav: string;
   excluded: string;
 }
 

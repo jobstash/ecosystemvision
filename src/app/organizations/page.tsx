@@ -51,7 +51,7 @@ const OrgListPage = async ({ searchParams }: Props) => {
       <PillarPage
         isIndex
         nav="organizations"
-        params={{ pillar: null, item: null }}
+        params={{ pillar: '', item: '' }}
         searchParams={{}}
         content={<OrgListClient searchParams="" />}
       />
