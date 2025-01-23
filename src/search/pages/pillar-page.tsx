@@ -97,6 +97,7 @@ export const PillarPage = async (props: Props) => {
               items={
                 <PillarRow
                   hidePillar
+                  nav={nav}
                   pillar={params.pillar}
                   pillarItems={mainPillarRow.items}
                   dropdownContent={
@@ -122,6 +123,7 @@ export const PillarPage = async (props: Props) => {
       <ActiveSearchHiddenWrapper>
         <div className="px-4">
           <PillarRow
+            nav={nav}
             pillar={altPillarRow.pillar}
             pillarItems={altPillarRow.items}
             dropdownContent={
