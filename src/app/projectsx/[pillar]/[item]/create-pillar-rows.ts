@@ -15,6 +15,7 @@ interface Options {
 
 /**
  * Create pillar rows with props needed for the ui.
+ * Streamlined items are items buried in the more dropdown but included in the search params.
  */
 export const createPillarRows = (options: Options) => {
   const { nav, params, searchParams, labeledItems, pillars } = options;
@@ -26,24 +27,19 @@ export const createPillarRows = (options: Options) => {
       .map(({ pillar, label }) => `${pillar}-${label}`),
   );
 
-  const pillarRows = pillars.flatMap(({ slug: pillar, items }) => {
+  return pillars.flatMap(({ slug: pillar, items }) => {
     const mappedItems = items.map((label) => {
-      if (normalizeString(label) === params.item) {
-        return {
-          label,
-          href: '',
-          isActive: true,
-        };
-      }
+      const isMainItem = normalizeString(label) === params.item;
+      if (isMainItem) return { label, href: '', isActive: true };
 
       const isActive = selectedPillarLabels.has(`${pillar}-${label}`);
-      const slug = normalizeString(label);
+
       const href = createPillarItemHref({
         isActive,
         pathPrefix,
         searchParams,
         pillar,
-        slug,
+        slug: normalizeString(label),
       });
 
       return {
@@ -53,11 +49,29 @@ export const createPillarRows = (options: Options) => {
       };
     });
 
+    const pillarPrefix = `${pillar}-`;
+    const streamlinedLabels = new Set(
+      [...selectedPillarLabels]
+        .filter((fullLabel) => fullLabel.startsWith(pillarPrefix))
+        .map((fullLabel) => fullLabel.replace(pillarPrefix, ''))
+        .filter(
+          (cleanLabel) =>
+            !mappedItems.some(({ label }) => label === cleanLabel),
+        ),
+    );
+
+    const streamlinedItems = labeledItems
+      .filter(({ label }) => streamlinedLabels.has(label!))
+      .map(({ label, href }) => ({ label: label!, href, isActive: true }));
+
+    const isMainPillar = pillar === params.pillar;
+    const arrangedItems = isMainPillar
+      ? [mappedItems[0], ...streamlinedItems, ...mappedItems.slice(1)]
+      : [...streamlinedItems, ...mappedItems];
+
     return {
       pillar,
-      items: mappedItems,
+      items: arrangedItems,
     };
   });
-
-  return pillarRows;
 };
