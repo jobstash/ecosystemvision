@@ -99,17 +99,13 @@ const getFinalHref = (href: string, isPillarSearchResult?: boolean) => {
   }
 
   const currentUrl = new URL(window.location.href);
-  const currentPillar = currentUrl.pathname.split('/')[2];
   const currentValues = currentUrl.searchParams.get(pillar);
-  const pillarMatched = currentPillar === pillar;
-
-  const pillarKey = pillarMatched ? 'include' : pillar;
 
   if (currentValues) {
     const updatedValues = new Set(currentValues.split(',').concat(item));
-    currentUrl.searchParams.set(pillarKey, Array.from(updatedValues).join(','));
+    currentUrl.searchParams.set(pillar, Array.from(updatedValues).join(','));
   } else {
-    currentUrl.searchParams.set(pillarKey, item);
+    currentUrl.searchParams.set(pillar, item);
   }
 
   return currentUrl.toString();
