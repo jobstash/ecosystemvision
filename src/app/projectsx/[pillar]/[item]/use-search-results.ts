@@ -4,8 +4,9 @@ import { useAtomValue } from 'jotai';
 import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { searchQueryKeys } from '@/search/core/query-keys';
-import { searchQueryAtom } from '@/search/core/atoms';
 import { search } from '@/search/data/search';
+
+import { searchQueryAtom } from './atoms';
 
 export const useSearchResults = (nav?: string, excluded?: string) => {
   const { debounced: query } = useAtomValue(searchQueryAtom);

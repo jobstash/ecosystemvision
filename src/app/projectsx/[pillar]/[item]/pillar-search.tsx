@@ -4,6 +4,7 @@ import { DraggableWrapper } from '@/shared/components/draggable-wrapper';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
 import { PillarLoadingWrapper } from './pillar-loading-wrapper';
+import { PillarSearchInput } from './pillar-search-input';
 import { PillarSearchInputItem } from './pillar-search-input-item';
 import { LabeledItem } from './types';
 
@@ -23,7 +24,8 @@ export const PillarSearch = ({ labeledItems: items }: Props) => {
           >
             <SearchIcon />
           </PillarLoadingWrapper>
-          <p>{'<PillarSearchInput />'}</p>
+
+          <PillarSearchInput />
         </div>
 
         {items.length > 0 && (

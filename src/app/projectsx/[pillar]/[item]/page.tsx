@@ -4,8 +4,10 @@ import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { getPillarLabels } from '@/search/data/get-pillar-labels';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
 
+import { ActiveSearchHiddenWrapper } from './active-search-hidden-wrapper';
 import { createLabeledItems } from './create-labeled-items';
 import { createPillarRows } from './create-pillar-rows';
+import { PillarPageSearchResults } from './pillar-page-search-results';
 import { PillarRow } from './pillar-row';
 import { PillarSearch } from './pillar-search';
 
@@ -58,45 +60,52 @@ const Page = async (props: Props) => {
     pillars: pillarInfo.altPillars,
   })[0];
 
-  const pillarFilters = createPillarRows({
-    nav: 'projectsx',
-    params,
-    searchParams,
-    labeledItems,
-    pillars: pillarInfo.altPillars.slice(1),
-  });
+  // const pillarFilters = createPillarRows({
+  //   nav: 'projectsx',
+  //   params,
+  //   searchParams,
+  //   labeledItems,
+  //   pillars: pillarInfo.altPillars.slice(1),
+  // });
+
+  const excluded = [
+    ...(params.item ? [params.item] : []),
+    ...Object.values(searchParams),
+  ].join(',');
 
   return (
     <div className="relative min-h-screen space-y-4 overflow-hidden">
       <AppHeader
         input={<PillarSearch labeledItems={labeledItems} />}
-        searchResults={<p>{'<PillarPageSearchResults />'}</p>}
+        searchResults={
+          <PillarPageSearchResults nav={nav} excluded={excluded} />
+        }
         mainPillar={
-          <MainPillarContent
-            title={pillarInfo.title}
-            description={pillarInfo.description}
-            items={
-              <PillarRow
-                pillar={params.pillar}
-                pillarItems={mainPillarRow.items}
-              />
-            }
-          />
+          <ActiveSearchHiddenWrapper>
+            <MainPillarContent
+              title={pillarInfo.title}
+              description={pillarInfo.description}
+              items={
+                <PillarRow
+                  pillar={params.pillar}
+                  pillarItems={mainPillarRow.items}
+                />
+              }
+            />
+          </ActiveSearchHiddenWrapper>
         }
       />
 
-      <div className="px-4">
-        <PillarRow
-          pillar={altPillarRow.pillar}
-          pillarItems={altPillarRow.items}
-        />
-      </div>
+      <ActiveSearchHiddenWrapper>
+        <div className="px-4">
+          <PillarRow
+            pillar={altPillarRow.pillar}
+            pillarItems={altPillarRow.items}
+          />
+        </div>
 
-      <pre>
-        {JSON.stringify({ mainPillarRow, pillarFilters }, undefined, '\t')}
-      </pre>
-
-      <p>{'<Content />'}</p>
+        <p>{'<Content />'}</p>
+      </ActiveSearchHiddenWrapper>
     </div>
   );
 };
