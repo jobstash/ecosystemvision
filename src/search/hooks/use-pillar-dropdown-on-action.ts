@@ -16,7 +16,7 @@ interface Options {
   isIndex?: boolean;
 }
 
-export const useDropdownOnAction = (options: Options) => {
+export const usePillarDropdownOnAction = (options: Options) => {
   const {
     nav,
     pillar,

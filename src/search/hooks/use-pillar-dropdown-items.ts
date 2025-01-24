@@ -8,11 +8,11 @@ interface Options {
   value: string;
   activeLabelsSet: Set<string>;
   items: string[];
-  mainLabel: string;
   pillar: string;
+  mainLabel?: string;
 }
 
-export const useDropdownItems = (options: Options) => {
+export const usePillarDropdownItems = (options: Options) => {
   const { value, activeLabelsSet, items, mainLabel, pillar } = options;
 
   const hiddenItemsMap = useAtomValue(hiddenPillarItemsAtom);

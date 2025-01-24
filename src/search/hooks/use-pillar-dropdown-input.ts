@@ -20,7 +20,7 @@ interface Options {
   pillar: string;
 }
 
-export const useDropdownInput = ({ nav, pillar }: Options) => {
+export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
   const queryClient = useQueryClient();
   const { isPendingPillarRoute } = usePillarRoutesContext();
 

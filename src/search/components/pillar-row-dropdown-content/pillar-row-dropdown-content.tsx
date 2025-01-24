@@ -10,11 +10,12 @@ import { Spinner } from '@heroui/spinner';
 import { cn } from '@/shared/utils/cn';
 import { normalizeString } from '@/shared/utils/normalize-string';
 
+import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input';
+import { usePillarDropdownItems } from '@/search/hooks/use-pillar-dropdown-items';
+import { usePillarDropdownOnAction } from '@/search/hooks/use-pillar-dropdown-on-action';
+
 import { CheckmarkIcon } from './checkmark-icon';
 import { LockIcon } from './lock-icon';
-import { useDropdownInput } from './use-dropdown-input';
-import { useDropdownItems } from './use-dropdown-items';
-import { useDropdownOnAction } from './use-dropdown-on-action';
 
 interface Props {
   nav: string;
@@ -42,7 +43,7 @@ export const PillarRowDropdownContent = ({
     onClear,
     inViewRef,
     isPendingDebounce,
-  } = useDropdownInput({ nav, pillar });
+  } = usePillarDropdownInput({ nav, pillar });
 
   const activeLabelsSet = useMemo(() => {
     return new Set(activeLabels);
@@ -52,7 +53,7 @@ export const PillarRowDropdownContent = ({
     return activeLabels.find((label) => normalizeString(label) === params.item);
   }, [activeLabels, params.item]);
 
-  const { onAction } = useDropdownOnAction({
+  const { onAction } = usePillarDropdownOnAction({
     nav,
     pillar,
     params,
@@ -62,7 +63,7 @@ export const PillarRowDropdownContent = ({
     isIndex,
   });
 
-  const { activeItems, optionItems } = useDropdownItems({
+  const { activeItems, optionItems } = usePillarDropdownItems({
     value,
     activeLabelsSet,
     items: list.items,
