@@ -34,7 +34,6 @@ export const PillarRowDropdownContent = ({
   isIndex,
 }: Props) => {
   const {
-    placeholder,
     isLoadingRoute,
     value,
     onChange,
@@ -70,14 +69,14 @@ export const PillarRowDropdownContent = ({
     pillar,
   });
 
-  const isLoading = list.isLoading || isPendingDebounce;
+  const ariaLabel = `Search ${pillar}`;
 
   return (
     <>
       <Input
         radius="sm"
-        aria-label={`Search ${pillar}`}
-        placeholder={placeholder}
+        aria-label={ariaLabel}
+        placeholder={ariaLabel}
         isDisabled={isLoadingRoute}
         value={value}
         onChange={onChange}
@@ -92,60 +91,52 @@ export const PillarRowDropdownContent = ({
         <Listbox
           hideEmptyContent
           aria-label={`${pillar} items`}
-          disabledKeys={['no-results', 'empty', 'loading', mainLabel!]}
+          disabledKeys={['no-results', 'empty', mainLabel!]}
           onAction={onAction}
         >
-          {isLoading ? (
-            <ListboxItem key="loading">Loading ...</ListboxItem>
-          ) : (
-            <>
-              {optionItems.length === 0 ? (
-                <ListboxItem key="empty">No results found.</ListboxItem>
-              ) : null}
+          <>
+            {optionItems.length === 0 && !isPendingDebounce ? (
+              <ListboxItem key="empty">No results found.</ListboxItem>
+            ) : null}
 
-              {activeItems.map((label) => {
-                const classNames = {
-                  base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
-                };
+            {activeItems.map((label) => {
+              const classNames = {
+                base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
+              };
 
-                const isMainItem = params.item === normalizeString(label);
-                const endContent = isMainItem ? (
-                  <LockIcon />
-                ) : (
-                  <CheckmarkIcon />
-                );
+              const isMainItem = params.item === normalizeString(label);
+              const endContent = isMainItem ? <LockIcon /> : <CheckmarkIcon />;
 
-                return (
-                  <ListboxItem
-                    key={label}
-                    classNames={classNames}
-                    textValue={label}
-                    endContent={endContent}
-                    isReadOnly={isMainItem}
-                  >
-                    {label}
-                  </ListboxItem>
-                );
-              })}
-
-              {optionItems.map((label, i) => (
+              return (
                 <ListboxItem
                   key={label}
-                  classNames={{
-                    base: 'py-3',
-                  }}
+                  classNames={classNames}
                   textValue={label}
+                  endContent={endContent}
+                  isReadOnly={isMainItem}
                 >
-                  <div
-                    key={label}
-                    ref={i === optionItems.length - 1 ? inViewRef : undefined}
-                  >
-                    {label}
-                  </div>
+                  {label}
                 </ListboxItem>
-              ))}
-            </>
-          )}
+              );
+            })}
+
+            {optionItems.map((label, i) => (
+              <ListboxItem
+                key={label}
+                classNames={{
+                  base: 'py-3',
+                }}
+                textValue={label}
+              >
+                <div
+                  key={label}
+                  ref={i === optionItems.length - 1 ? inViewRef : undefined}
+                >
+                  {label}
+                </div>
+              </ListboxItem>
+            ))}
+          </>
         </Listbox>
       </ScrollShadow>
     </>

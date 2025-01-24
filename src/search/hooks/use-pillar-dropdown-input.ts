@@ -74,10 +74,6 @@ export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
     list.setFilterText('');
   };
 
-  const placeholder = list.isLoading
-    ? 'Loading more items ...'
-    : `Search ${pillar} ...`;
-
   const { ref: inViewRef } = useInView({
     threshold: 0.4,
     onChange(inView) {
@@ -88,7 +84,6 @@ export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
   });
 
   return {
-    placeholder,
     isLoadingRoute: isPendingPillarRoute,
     value,
     onChange,
