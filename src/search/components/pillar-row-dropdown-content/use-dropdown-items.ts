@@ -34,10 +34,10 @@ export const useDropdownItems = (options: Options) => {
   }, [activeLabels, value, mainLabel]);
 
   const optionItems = useMemo(() => {
-    return [...hiddenItems, ...items].filter(
-      (item) => !activeLabelsSet.has(item),
-    );
-  }, [activeLabelsSet, hiddenItems, items]);
+    return [...hiddenItems, ...items]
+      .filter((item) => !activeLabelsSet.has(item))
+      .filter((item) => item.toLowerCase().includes(value.toLowerCase()));
+  }, [activeLabelsSet, hiddenItems, items, value]);
 
   return {
     activeItems,
