@@ -49,12 +49,12 @@ export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
     });
   };
 
-  const className = cn('border', {
-    'border-white/60': isActive,
+  const className = cn({
+    'border border-white/60': isActive,
     'pointer-events-none text-accent2 border-accent2': !href,
   });
 
-  const variant = isActive || !href ? 'bordered' : 'faded';
+  const variant = isActive || !href ? 'bordered' : undefined;
 
   return (
     <Button
