@@ -41,6 +41,7 @@ export const PillarRowDropdownContent = ({
     list,
     onClear,
     inViewRef,
+    isPendingDebounce,
   } = useDropdownInput({ nav, pillar });
 
   const activeLabelsSet = useMemo(() => {
@@ -69,6 +70,8 @@ export const PillarRowDropdownContent = ({
     pillar,
   });
 
+  const isLoading = (list.isLoading || isPendingDebounce) && value.length > 0;
+
   return (
     <>
       <Input
@@ -86,51 +89,62 @@ export const PillarRowDropdownContent = ({
         })}
       >
         <Listbox
+          hideEmptyContent
           aria-label={`${pillar} items`}
-          disabledKeys={['no-results', mainLabel!]}
+          disabledKeys={['no-results', 'empty', 'loading', mainLabel!]}
           onAction={onAction}
         >
-          <>
-            {activeItems.map((label) => {
-              const classNames = {
-                base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
-              };
+          {isLoading ? (
+            <ListboxItem key="loading">Loading ...</ListboxItem>
+          ) : (
+            <>
+              {optionItems.length === 0 ? (
+                <ListboxItem key="empty">No results found.</ListboxItem>
+              ) : null}
 
-              const isMainItem = params.item === normalizeString(label);
-              const endContent = isMainItem ? <LockIcon /> : <CheckmarkIcon />;
+              {activeItems.map((label) => {
+                const classNames = {
+                  base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
+                };
 
-              return (
+                const isMainItem = params.item === normalizeString(label);
+                const endContent = isMainItem ? (
+                  <LockIcon />
+                ) : (
+                  <CheckmarkIcon />
+                );
+
+                return (
+                  <ListboxItem
+                    key={label}
+                    classNames={classNames}
+                    textValue={label}
+                    endContent={endContent}
+                    isReadOnly={isMainItem}
+                  >
+                    {label}
+                  </ListboxItem>
+                );
+              })}
+
+              {optionItems.map((label, i) => (
                 <ListboxItem
                   key={label}
-                  classNames={classNames}
+                  classNames={{
+                    base: 'py-3',
+                  }}
                   textValue={label}
-                  endContent={endContent}
-                  isReadOnly={isMainItem}
                 >
-                  {label}
+                  <div
+                    key={label}
+                    ref={i === optionItems.length - 1 ? inViewRef : undefined}
+                  >
+                    {label}
+                  </div>
                 </ListboxItem>
-              );
-            })}
-          </>
-
-          <>
-            {optionItems.map((label, i) => (
-              <ListboxItem
-                key={label}
-                classNames={{
-                  base: 'py-3',
-                }}
-                textValue={label}
-              >
-                <div
-                  key={label}
-                  ref={i === optionItems.length - 1 ? inViewRef : undefined}
-                >
-                  {label}
-                </div>
-              </ListboxItem>
-            ))}
-          </>
+              ))}
+            </>
+          )}
         </Listbox>
       </ScrollShadow>
     </>

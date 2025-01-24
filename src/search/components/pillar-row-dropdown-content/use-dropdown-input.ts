@@ -4,7 +4,7 @@ import { useAsyncList } from 'react-stately';
 
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useDebouncedValue } from '@/shared/hooks/use-debounced-value';
+import { useAdvancedDebouncedValue } from '@/shared/hooks/use-advanced-debounced-value';
 
 import { searchQueryKeys } from '@/search/core/query-keys';
 import { GetPillarItemsProps } from '@/search/core/types';
@@ -25,7 +25,8 @@ export const useDropdownInput = ({ nav, pillar }: Options) => {
   const { isPendingPillarRoute } = usePillarRoutesContext();
 
   const [value, setValue] = useState('');
-  const debouncedValue = useDebouncedValue(value, DEBOUNCE_DELAY);
+  const { debouncedValue, isPending: isPendingDebounce } =
+    useAdvancedDebouncedValue(value, DEBOUNCE_DELAY);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -94,5 +95,6 @@ export const useDropdownInput = ({ nav, pillar }: Options) => {
     list,
     onClear,
     inViewRef,
+    isPendingDebounce,
   };
 };
