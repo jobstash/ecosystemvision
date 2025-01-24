@@ -81,7 +81,7 @@ export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
   const { ref: inViewRef } = useInView({
     threshold: 0.4,
     onChange(inView) {
-      if (inView && !list.error) {
+      if (inView && !list.error && list.items.length % ITEMS_PER_PAGE === 0) {
         list.loadMore();
       }
     },

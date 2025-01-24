@@ -11,7 +11,7 @@ export const getPillarItems = async (
 
   const url = new URL(`${MW_URL}/search/pillar/items`);
   const searchParams = new URLSearchParams({
-    nav: nav.replaceAll('x', ''),
+    nav,
     pillar,
     page: `${page}`,
     limit: `${limit}`,

@@ -7,6 +7,9 @@ import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { getPillarLabels } from '@/search/data/get-pillar-labels';
 import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
+import { PillarFilterDropdown } from '@/search/components/pillar-filter-dropdown';
+import { PillarFilterDropdownContent } from '@/search/components/pillar-filter-dropdown-content';
+import { PillarFilters } from '@/search/components/pillar-filters';
 import { PillarPageSearchResults } from '@/search/components/pillar-page-search-results';
 import { PillarRow } from '@/search/components/pillar-row';
 import { PillarRowDropdownContent } from '@/search/components/pillar-row-dropdown-content';
@@ -60,17 +63,17 @@ export const PillarPage = async (props: Props) => {
     params,
     searchParams,
     labeledItems,
-    pillars: pillarInfo.altPillars,
+    pillars: [pillarInfo.altPillars[0]],
     isIndex,
   })[0];
 
-  // const pillarFilters = createPillarRows({
-  //   nav,
-  //   params,
-  //   searchParams,
-  //   labeledItems,
-  //   pillars: pillarInfo.altPillars.slice(1),
-  // });
+  const altPillarFilters = createPillarRows({
+    nav,
+    params,
+    searchParams,
+    labeledItems,
+    pillars: pillarInfo.altPillars.slice(1),
+  });
 
   const excluded = [
     ...(params.item ? [params.item] : []),
@@ -120,8 +123,8 @@ export const PillarPage = async (props: Props) => {
         }
       />
 
-      <ActiveSearchHiddenWrapper>
-        <div className="px-4">
+      <div className="space-y-4 px-4">
+        <ActiveSearchHiddenWrapper>
           <PillarRow
             nav={nav}
             pillar={altPillarRow.pillar}
@@ -140,10 +143,27 @@ export const PillarPage = async (props: Props) => {
               />
             }
           />
-        </div>
 
-        {content}
-      </ActiveSearchHiddenWrapper>
+          <PillarFilters>
+            {altPillarFilters.map(({ pillar, items }) => (
+              <PillarFilterDropdown key={pillar} pillar={pillar}>
+                <PillarFilterDropdownContent
+                  key={pillar}
+                  nav={nav}
+                  pillar={pillar}
+                  params={params}
+                  searchParams={searchParams}
+                  activeLabels={getActiveLabels(labeledItems, pillar)}
+                  isIndex={isIndex}
+                  overrideHiddenItems={items.map((item) => item.label)}
+                />
+              </PillarFilterDropdown>
+            ))}
+          </PillarFilters>
+
+          <div className="py-4">{content}</div>
+        </ActiveSearchHiddenWrapper>
+      </div>
     </div>
   );
 };

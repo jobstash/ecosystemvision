@@ -10,34 +10,45 @@ interface Options {
   items: string[];
   pillar: string;
   mainLabel?: string;
+  overrideHiddenItems?: string[];
 }
 
 export const usePillarDropdownItems = (options: Options) => {
-  const { value, activeLabelsSet, items, mainLabel, pillar } = options;
+  const {
+    value,
+    activeLabelsSet,
+    items,
+    mainLabel,
+    pillar,
+    overrideHiddenItems,
+  } = options;
 
   const hiddenItemsMap = useAtomValue(hiddenPillarItemsAtom);
-  const hiddenItems = useMemo(() => {
+  const hiddenItemsSet = useMemo(() => {
+    if (overrideHiddenItems) return new Set(overrideHiddenItems);
     const itemsSet = new Set(items);
     const hiddenPillarItems = hiddenItemsMap[pillar] || [];
-    return hiddenPillarItems.filter((item) => !itemsSet.has(item));
-  }, [hiddenItemsMap, items, pillar]);
-
-  const activeLabels = useMemo(() => {
-    return Array.from(activeLabelsSet);
-  }, [activeLabelsSet]);
+    const result = hiddenPillarItems.filter((item) => !itemsSet.has(item));
+    return new Set(result);
+  }, [hiddenItemsMap, items, pillar, overrideHiddenItems]);
 
   const activeItems = useMemo(() => {
     return [
       ...(mainLabel ? [mainLabel] : []),
-      ...activeLabels.filter((label) => label !== mainLabel),
+      ...Array.from(activeLabelsSet).filter((label) => label !== mainLabel),
     ].filter((item) => item.toLowerCase().includes(value.toLowerCase()));
-  }, [activeLabels, value, mainLabel]);
+  }, [mainLabel, activeLabelsSet, value]);
 
   const optionItems = useMemo(() => {
-    return [...hiddenItems, ...items]
-      .filter((item) => !activeLabelsSet.has(item))
-      .filter((item) => item.toLowerCase().includes(value.toLowerCase()));
-  }, [activeLabelsSet, hiddenItems, items, value]);
+    return [
+      ...Array.from(hiddenItemsSet),
+      ...items.filter((item) => !hiddenItemsSet.has(item)),
+    ].filter(
+      (item) =>
+        !activeLabelsSet.has(item) &&
+        item.toLowerCase().includes(value.toLowerCase()),
+    );
+  }, [activeLabelsSet, hiddenItemsSet, items, value]);
 
   return {
     activeItems,

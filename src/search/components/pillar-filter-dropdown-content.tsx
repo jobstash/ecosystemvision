@@ -8,9 +8,7 @@ import { ScrollShadow } from '@heroui/scroll-shadow';
 import { Spinner } from '@heroui/spinner';
 
 import { cn } from '@/shared/utils/cn';
-import { normalizeString } from '@/shared/utils/normalize-string';
 import { CheckmarkIcon } from '@/shared/components/icons/checkmark-icon';
-import { LockIcon } from '@/shared/components/icons/lock-icon';
 
 import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input';
 import { usePillarDropdownItems } from '@/search/hooks/use-pillar-dropdown-items';
@@ -23,16 +21,24 @@ interface Props {
   searchParams: Record<string, string>;
   activeLabels: string[];
   isIndex: boolean;
+  overrideHiddenItems: string[];
 }
 
-export const PillarRowDropdownContent = ({
-  nav,
-  pillar,
-  params,
-  searchParams,
-  activeLabels,
-  isIndex,
-}: Props) => {
+export const PillarFilterDropdownContent = (props: Props) => {
+  const {
+    nav,
+    pillar,
+    params,
+    searchParams,
+    activeLabels,
+    isIndex,
+    overrideHiddenItems,
+  } = props;
+
+  const activeLabelsSet = useMemo(() => {
+    return new Set(activeLabels);
+  }, [activeLabels]);
+
   const {
     placeholder,
     isLoadingRoute,
@@ -43,14 +49,6 @@ export const PillarRowDropdownContent = ({
     inViewRef,
     isPendingDebounce,
   } = usePillarDropdownInput({ nav, pillar });
-
-  const activeLabelsSet = useMemo(() => {
-    return new Set(activeLabels);
-  }, [activeLabels]);
-
-  const mainLabel = useMemo(() => {
-    return activeLabels.find((label) => normalizeString(label) === params.item);
-  }, [activeLabels, params.item]);
 
   const { onAction } = usePillarDropdownOnAction({
     nav,
@@ -66,8 +64,8 @@ export const PillarRowDropdownContent = ({
     value,
     activeLabelsSet,
     items: list.items,
-    mainLabel: mainLabel!,
     pillar,
+    overrideHiddenItems,
   });
 
   const isLoading = list.isLoading || isPendingDebounce;
@@ -81,7 +79,7 @@ export const PillarRowDropdownContent = ({
         isDisabled={isLoadingRoute}
         value={value}
         onChange={onChange}
-        endContent={list.isLoading ? <Spinner size="sm" color="white" /> : null}
+        endContent={isLoading ? <Spinner size="sm" color="white" /> : null}
       />
 
       <ScrollShadow
@@ -92,7 +90,7 @@ export const PillarRowDropdownContent = ({
         <Listbox
           hideEmptyContent
           aria-label={`${pillar} items`}
-          disabledKeys={['no-results', 'empty', 'loading', mainLabel!]}
+          disabledKeys={['no-results', 'empty', 'loading']}
           onAction={onAction}
         >
           {isLoading ? (
@@ -108,20 +106,12 @@ export const PillarRowDropdownContent = ({
                   base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
                 };
 
-                const isMainItem = params.item === normalizeString(label);
-                const endContent = isMainItem ? (
-                  <LockIcon />
-                ) : (
-                  <CheckmarkIcon />
-                );
-
                 return (
                   <ListboxItem
                     key={label}
                     classNames={classNames}
                     textValue={label}
-                    endContent={endContent}
-                    isReadOnly={isMainItem}
+                    endContent={<CheckmarkIcon />}
                   >
                     {label}
                   </ListboxItem>
