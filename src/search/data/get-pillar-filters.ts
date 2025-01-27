@@ -15,6 +15,7 @@ export const getPillarFilters = async (
 ): Promise<PillarFiltersItemDto[]> => {
   const { nav } = options;
 
+  await new Promise((r) => setTimeout(r, 1000));
   return dummyFilters;
 
   const url = new URL(`${MW_URL}/search/pillar/filters`);

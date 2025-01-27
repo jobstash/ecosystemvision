@@ -143,7 +143,7 @@ const pillarSelectFilterDto = pillarFiltersSharedPropsDto.extend({
   options: z.array(
     z.object({
       label: z.string(),
-      value: z.union([z.string(), z.boolean()]),
+      value: z.string(),
     }),
   ),
 });
