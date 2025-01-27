@@ -106,3 +106,58 @@ export const pillarInputLabelsResponseDtoSchema = z.object({
 export type PillarInputLabelsResponseDto = z.infer<
   typeof pillarInputLabelsResponseDtoSchema
 >;
+
+const pillarFiltersSharedPropsDto = z.object({
+  position: z.number().positive(),
+  label: z.string(),
+  googleAnalyticsEventName: z.string(),
+});
+export type PillarFiltersSharedPropsDto = z.infer<
+  typeof pillarFiltersSharedPropsDto
+>;
+
+const pillarRangeFilterValueDto = z.object({
+  value: z.number().nonnegative(),
+  paramKey: z.string(),
+});
+export type PillarRangeFilterValueDto = z.infer<
+  typeof pillarRangeFilterValueDto
+>;
+
+const pillarRangeFilterDto = pillarFiltersSharedPropsDto.extend({
+  kind: z.literal('RANGE'),
+  min: pillarRangeFilterValueDto,
+  max: pillarRangeFilterValueDto,
+  prefix: z.string().min(1).nullable(),
+});
+export type PillarRangeFilterDto = z.infer<typeof pillarRangeFilterDto>;
+
+const pillarSelectFilterDto = pillarFiltersSharedPropsDto.extend({
+  kind: z.union([
+    z.literal('SINGLE_SELECT'),
+    z.literal('MULTI_SELECT'),
+    z.literal('ORDER'),
+    z.literal('ORDER_BY'),
+  ]),
+  paramKey: z.string(),
+  options: z.array(
+    z.object({
+      label: z.string(),
+      value: z.union([z.string(), z.boolean()]),
+    }),
+  ),
+});
+export type PillarSelectFilterDto = z.infer<typeof pillarSelectFilterDto>;
+
+export const pillarFiltersItemDto = z.union([
+  pillarRangeFilterDto,
+  pillarSelectFilterDto,
+]);
+export type PillarFiltersItemDto = z.infer<typeof pillarFiltersItemDto>;
+
+export const pillarFiltersResponseDto = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.array(z.union([pillarRangeFilterDto, pillarSelectFilterDto])),
+});
+export type PillarFiltersResponseDto = z.infer<typeof pillarFiltersResponseDto>;

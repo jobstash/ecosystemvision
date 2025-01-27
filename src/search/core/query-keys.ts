@@ -20,6 +20,8 @@ export const searchQueryKeys = {
       pillars,
       inputs,
     ] as const,
+  getPillarFilters: (nav: string) =>
+    [...searchQueryKeys.all, 'pillar-filters', nav] as const,
 };
 
 export type SearchQueryKeys = typeof searchQueryKeys;
