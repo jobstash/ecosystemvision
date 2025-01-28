@@ -21,7 +21,7 @@ export const PillarFilters = (props: Props) => {
         <div className="flex items-center gap-4">
           <PillarOrderButton nav={nav} />
           <PillarSortByButton nav={nav} />
-          <PillarAllFiltersTrigger />
+          <PillarAllFiltersTrigger nav={nav} />
         </div>
       </div>
     </PillarLoadingWrapper>
