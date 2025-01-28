@@ -1,18 +1,13 @@
 import { MW_URL } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
-import {
-  PillarFiltersItemDto,
-  pillarFiltersResponseDto,
-} from '@/search/core/schemas';
+import { PillarFiltersItemDto, pillarFiltersResponseDto } from '@/search/core/schemas';
 
 interface Options {
   nav: string;
 }
 
-export const getPillarFilters = async (
-  options: Options,
-): Promise<PillarFiltersItemDto[]> => {
+export const getPillarFilters = async (options: Options): Promise<PillarFiltersItemDto[]> => {
   const { nav } = options;
 
   await new Promise((r) => setTimeout(r, 1000));
@@ -49,9 +44,9 @@ const dummyFilters = [
   {
     position: 0,
     label: 'Order By',
-    googleAnalyticsEventName: 'order-by',
+    googleAnalyticsEventName: 'orderBy',
     kind: 'ORDER_BY' as const,
-    paramKey: 'order-by',
+    paramKey: 'orderBy',
     options: [
       { label: 'Monthly Fees', value: 'monthly-fees' },
       { label: 'Monthly Revenue', value: 'monthly-revenue' },

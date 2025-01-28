@@ -1,10 +1,7 @@
-import { Button } from '@heroui/button';
-
-import { CaretDownIcon } from '@/shared/components/icons/caret-down-icon';
-
 import { PillarAllFiltersTrigger } from '@/search/components/pillar-all-filters/trigger';
 import { PillarLoadingWrapper } from '@/search/components/pillar-loading-wrapper';
 import { PillarOrderButton } from '@/search/components/pillar-order-button';
+import { PillarSortByButton } from '@/search/components/pillar-sort-by-button';
 
 interface Props {
   children: React.ReactNode;
@@ -23,7 +20,7 @@ export const PillarFilters = (props: Props) => {
         </div>
         <div className="flex items-center gap-4">
           <PillarOrderButton nav={nav} />
-          <Button endContent={<CaretDownIcon />}>Sort By</Button>
+          <PillarSortByButton nav={nav} />
           <PillarAllFiltersTrigger />
         </div>
       </div>
