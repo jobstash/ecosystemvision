@@ -11,6 +11,7 @@ import { PillarAllFiltersWrapper } from '@/search/components/pillar-all-filters/
 import { PillarFilterDropdown } from '@/search/components/pillar-filter-dropdown';
 import { PillarFilterDropdownContent } from '@/search/components/pillar-filter-dropdown-content';
 import { PillarFilters } from '@/search/components/pillar-filters';
+import { PillarLoadingWrapper } from '@/search/components/pillar-loading-wrapper';
 import { PillarPageSearchResults } from '@/search/components/pillar-page-search-results';
 import { PillarRow } from '@/search/components/pillar-row';
 import { PillarRowDropdownContent } from '@/search/components/pillar-row-dropdown-content';
@@ -76,10 +77,9 @@ export const PillarPage = async (props: Props) => {
     pillars: pillarInfo.altPillars.slice(1),
   });
 
-  const excluded = [
-    ...(params.item ? [params.item] : []),
-    ...Object.values(searchParams),
-  ].join(',');
+  const excluded = [...(params.item ? [params.item] : []), ...Object.values(searchParams)].join(
+    ',',
+  );
 
   return (
     <PillarAllFiltersWrapper>
@@ -91,9 +91,7 @@ export const PillarPage = async (props: Props) => {
               labeledItems={labeledItems}
             />
           }
-          searchResults={
-            <PillarPageSearchResults nav={nav} excluded={excluded} />
-          }
+          searchResults={<PillarPageSearchResults nav={nav} excluded={excluded} />}
           mainPillar={
             <ActiveSearchHiddenWrapper>
               <MainPillarContent
@@ -111,10 +109,7 @@ export const PillarPage = async (props: Props) => {
                         pillar={mainPillarRow.pillar}
                         params={params}
                         searchParams={searchParams}
-                        activeLabels={getActiveLabels(
-                          labeledItems,
-                          mainPillarRow.pillar,
-                        )}
+                        activeLabels={getActiveLabels(labeledItems, mainPillarRow.pillar)}
                         isIndex={isIndex}
                       />
                     }
@@ -137,10 +132,7 @@ export const PillarPage = async (props: Props) => {
                   pillar={altPillarRow.pillar}
                   params={params}
                   searchParams={searchParams}
-                  activeLabels={getActiveLabels(
-                    labeledItems,
-                    altPillarRow.pillar,
-                  )}
+                  activeLabels={getActiveLabels(labeledItems, altPillarRow.pillar)}
                   isIndex={isIndex}
                 />
               }
@@ -163,7 +155,9 @@ export const PillarPage = async (props: Props) => {
               ))}
             </PillarFilters>
 
-            <div className="py-4">{content}</div>
+            <PillarLoadingWrapper>
+              <div className="py-4">{content}</div>
+            </PillarLoadingWrapper>
           </ActiveSearchHiddenWrapper>
         </div>
       </div>
