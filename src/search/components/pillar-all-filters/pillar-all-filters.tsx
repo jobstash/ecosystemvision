@@ -1,6 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
+import { useAtom } from 'jotai';
+
+import { currentFilterParamsAtom } from '@/search/core/atoms';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
+import { usePillarSearchParams } from '@/search/hooks/use-pillar-search-params';
 import { FilterMapper } from '@/search/components/pillar-all-filters/filter-mapper';
 
 import { PillarAllFiltersHeader } from './header';
@@ -15,9 +21,19 @@ interface Props {
 }
 
 export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
-  const { data } = usePillarFilters(nav);
+  const { data: filterConfigs = [] } = usePillarFilters(nav);
 
-  const filterConfigs = data?.filter((d) => !EXCLUDED_KINDS.has(d.kind)) ?? [];
+  const activeSearchParams = usePillarSearchParams();
+  const [_currentFilterParams, setCurrentFilterParams] = useAtom(
+    currentFilterParamsAtom,
+  );
+  const [initialized, setInitialized] = useState(false);
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true);
+      setCurrentFilterParams(activeSearchParams);
+    }
+  }, [activeSearchParams, initialized, setCurrentFilterParams]);
 
   return (
     <div className="relative flex min-h-screen justify-center bg-neutral-900 pb-24">
@@ -40,5 +56,3 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
     </div>
   );
 };
-
-const EXCLUDED_KINDS = new Set(['ORDER', 'ORDER_BY']);
