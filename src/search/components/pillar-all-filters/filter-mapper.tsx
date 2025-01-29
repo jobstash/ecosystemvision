@@ -20,7 +20,13 @@ export const FilterMapper = ({ item }: Props) => {
         item.options.every((option) => typeof option.value === 'boolean');
 
       if (isBoolean) {
-        return <BooleanFilter label={item.label} items={item.options} />;
+        return (
+          <BooleanFilter
+            label={item.label}
+            items={item.options}
+            paramKey={item.paramKey}
+          />
+        );
       }
 
       if (hasFewOptions) {

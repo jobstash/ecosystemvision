@@ -1,34 +1,46 @@
 'use client';
 
-import { useState } from 'react';
-
 import { Checkbox, CheckboxGroup } from '@heroui/checkbox';
+import { useAtom } from 'jotai';
 
 import { Divider } from '@/shared/components/divider';
 
+import { currentFilterParamsAtom } from '@/search/core/atoms';
+
 interface Props {
+  paramKey: string;
   label: string;
   items: { label: string; value: string | boolean }[];
 }
 
-export const BooleanFilter = ({ label, items }: Props) => {
-  const [selected, setSelected] = useState<string[]>([]);
+export const BooleanFilter = ({ paramKey, label, items }: Props) => {
+  const [currentFilterParams, setCurrentFilterParams] = useAtom(
+    currentFilterParamsAtom,
+  );
+  const currentFilterValue = currentFilterParams[paramKey];
+  const value = currentFilterValue ? [currentFilterValue] : [];
+
   const onValueChange = (values: string[]) => {
-    if (values.length < 2) return setSelected(values);
-    setSelected([values.at(-1)!]);
+    if (values.length === 0) {
+      return setCurrentFilterParams((prev) => {
+        const { [paramKey]: _, ...rest } = prev;
+        return rest;
+      });
+    }
+
+    setCurrentFilterParams((prev) => ({
+      ...prev,
+      [paramKey]: values.at(-1)!.toString(),
+    }));
   };
   return (
     <>
-      <CheckboxGroup
-        label={label}
-        value={selected}
-        onValueChange={onValueChange}
-      >
+      <CheckboxGroup label={label} value={value} onValueChange={onValueChange}>
         {items.map((item) => (
           <Checkbox
-            key={item.value as string}
+            key={item.label}
             color="default"
-            value={item.value as string}
+            value={item.value.toString()}
           >
             {item.label}
           </Checkbox>
