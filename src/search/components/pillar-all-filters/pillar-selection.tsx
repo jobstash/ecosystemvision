@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 
 import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
@@ -10,7 +9,7 @@ import { capitalize } from '@/shared/utils/capitalize';
 
 interface Props {
   pillar: string;
-  items: { label: string; href: string; isActive: boolean }[];
+  items: { label: string; slug: string; isActive: boolean }[];
 }
 
 export const PillarSelection = ({ pillar, items }: Props) => {
@@ -18,11 +17,9 @@ export const PillarSelection = ({ pillar, items }: Props) => {
     items.filter(({ isActive }) => isActive),
   );
 
-  const onClose = (item: {
-    label: string;
-    href: string;
-    isActive: boolean;
-  }) => {
+  if (items.length === 0) return null;
+
+  const onClose = (item: { label: string; slug: string; isActive: boolean }) => {
     setActiveItems((prev) => prev.filter((prevItem) => prevItem !== item));
   };
 
@@ -47,9 +44,9 @@ export const PillarSelection = ({ pillar, items }: Props) => {
         placeholder={`Search ${pillar}...`}
         variant="bordered"
       >
-        {({ label, href }) => (
+        {({ label }) => (
           <AutocompleteItem key={label} textValue={label}>
-            <Link href={href}>{label}</Link>
+            {label}
           </AutocompleteItem>
         )}
       </Autocomplete>

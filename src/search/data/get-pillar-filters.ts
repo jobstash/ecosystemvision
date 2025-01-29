@@ -86,7 +86,7 @@ const dummyFilters = [
     paramKey: 'hacks',
     options: [
       { label: 'Has been hacked', value: 'hacked' },
-      { label: 'has not been hacked', value: 'not-hacked' },
+      { label: 'Has not been hacked', value: 'not-hacked' },
     ],
   },
   {

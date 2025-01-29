@@ -3,16 +3,16 @@
 import { useAtomValue } from 'jotai';
 
 import { isActiveAllFiltersAtom } from '@/search/core/atoms';
-import { PillarAllFilters } from '@/search/components/pillar-all-filters/pillar-all-filters';
 
 interface Props {
+  allFilters: React.ReactNode;
   children: React.ReactNode;
 }
 
-export const PillarAllFiltersWrapper = ({ children }: Props) => {
+export const PillarAllFiltersWrapper = ({ allFilters, children }: Props) => {
   const isActive = useAtomValue(isActiveAllFiltersAtom);
 
-  if (isActive) return <PillarAllFilters />;
+  if (isActive) return allFilters;
 
   return <>{children}</>;
 };

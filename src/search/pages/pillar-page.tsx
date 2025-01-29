@@ -7,6 +7,7 @@ import { getPillarInfo } from '@/search/data/get-pillar-info';
 import { getPillarLabels } from '@/search/data/get-pillar-labels';
 import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
 import { MainPillarContent } from '@/search/components/main-pillar-content';
+import { PillarAllFilters } from '@/search/components/pillar-all-filters';
 import { PillarAllFiltersWrapper } from '@/search/components/pillar-all-filters/wrapper';
 import { PillarFilterDropdown } from '@/search/components/pillar-filter-dropdown';
 import { PillarFilterDropdownContent } from '@/search/components/pillar-filter-dropdown-content';
@@ -77,12 +78,15 @@ export const PillarPage = async (props: Props) => {
     pillars: pillarInfo.altPillars.slice(1),
   });
 
-  const excluded = [...(params.item ? [params.item] : []), ...Object.values(searchParams)].join(
-    ',',
-  );
+  const excluded = [
+    ...(params.item ? [params.item] : []),
+    ...Object.values(searchParams),
+  ].join(',');
 
   return (
-    <PillarAllFiltersWrapper>
+    <PillarAllFiltersWrapper
+      allFilters={<PillarAllFilters nav={nav} pillarSelections={altPillarFilters} />}
+    >
       <div className="relative min-h-screen space-y-4 overflow-hidden">
         <AppHeader
           input={

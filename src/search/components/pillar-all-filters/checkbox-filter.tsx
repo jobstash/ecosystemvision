@@ -4,16 +4,16 @@ import { Divider } from '@/shared/components/divider';
 
 interface Props {
   label: string;
-  items: string[];
+  items: { label: string; value: string }[];
 }
 
-export const CheckboxFilters = ({ label, items }: Props) => {
+export const CheckboxFilter = ({ label, items }: Props) => {
   return (
     <>
       <CheckboxGroup label={label}>
         {items.map((item) => (
-          <Checkbox key={item} color="default" value={item}>
-            {item}
+          <Checkbox key={item.value} color="default" value={item.value}>
+            {item.label}
           </Checkbox>
         ))}
       </CheckboxGroup>
