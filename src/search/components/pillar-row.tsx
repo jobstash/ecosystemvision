@@ -1,9 +1,3 @@
-import { Button } from '@heroui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
-
-import { cn } from '@/shared/utils/cn';
-import { CaretDownIcon } from '@/shared/components/icons/caret-down-icon';
-
 import { PillarRowItem } from '@/search/core/types';
 import { formatPillarName } from '@/search/utils/format-pillar-name';
 
@@ -42,23 +36,7 @@ export const PillarRow = (props: Props) => {
             ))}
           </div>
 
-          <div className="shrink-0 grow justify-end">
-            <Popover placement="bottom-end">
-              <PopoverTrigger>
-                <Button
-                  radius="md"
-                  variant="bordered"
-                  className={cn('border border-white/20', {})}
-                  endContent={<CaretDownIcon />}
-                >
-                  <span>More</span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="flex flex-col gap-4 p-4">
-                {dropdownContent}
-              </PopoverContent>
-            </Popover>
-          </div>
+          <div className="shrink-0 grow justify-end">{dropdownContent}</div>
         </div>
       </div>
     </PillarLoadingWrapper>
