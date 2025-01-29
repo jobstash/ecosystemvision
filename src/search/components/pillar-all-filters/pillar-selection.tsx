@@ -5,14 +5,15 @@ import { useState } from 'react';
 import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
 import { Chip } from '@heroui/chip';
 
-import { capitalize } from '@/shared/utils/capitalize';
+import { formatPillarName } from '@/search/utils/format-pillar-name';
 
 interface Props {
+  nav: string;
   pillar: string;
   items: { label: string; slug: string; isActive: boolean }[];
 }
 
-export const PillarSelection = ({ pillar, items }: Props) => {
+export const PillarSelection = ({ nav, pillar, items }: Props) => {
   const [activeItems, setActiveItems] = useState(
     items.filter(({ isActive }) => isActive),
   );
@@ -40,7 +41,9 @@ export const PillarSelection = ({ pillar, items }: Props) => {
   return (
     <div className="space-y-8">
       <Autocomplete
-        label={<span className="text-white/60">{capitalize(pillar)}</span>}
+        label={
+          <span className="text-white/60">{formatPillarName(pillar, nav)}</span>
+        }
         labelPlacement="outside"
         className="max-w-sm"
         inputProps={{ radius: 'md' }}

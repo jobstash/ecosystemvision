@@ -83,10 +83,12 @@ export const PillarPage = async (props: Props) => {
     ...Object.values(searchParams),
   ].join(',');
 
+  const pillarSelections = [mainPillarRow, altPillarRow, ...altPillarFilters];
+
   return (
     <PillarAllFiltersWrapper
       allFilters={
-        <PillarAllFilters nav={nav} pillarSelections={altPillarFilters} />
+        <PillarAllFilters nav={nav} pillarSelections={pillarSelections} />
       }
     >
       <div className="relative min-h-screen space-y-4 overflow-hidden">

@@ -29,7 +29,12 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
         ))}
 
         {pillarSelections.map(({ pillar, items }) => (
-          <PillarSelection key={pillar} pillar={pillar} items={items} />
+          <PillarSelection
+            key={pillar}
+            nav={nav}
+            pillar={pillar}
+            items={items}
+          />
         ))}
       </div>
     </div>
