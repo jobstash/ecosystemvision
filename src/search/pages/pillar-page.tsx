@@ -50,6 +50,10 @@ export const PillarPage = async (props: Props) => {
     params,
     searchParams,
     fetchedLabels,
+    pillarSlugs: [
+      pillarInfo.mainPillar.slug,
+      ...pillarInfo.altPillars.map((pillar) => pillar.slug),
+    ],
   });
 
   const mainPillarRow = createPillarRows({

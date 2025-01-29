@@ -9,6 +9,7 @@ interface Options {
   params: { pillar: string; item: string };
   searchParams: Record<string, string>;
   fetchedLabels: { slug: string; label: string }[];
+  pillarSlugs: string[];
 }
 
 /**
@@ -21,6 +22,7 @@ export const createLabeledItems = ({
   params,
   searchParams,
   fetchedLabels,
+  pillarSlugs,
 }: Options) => {
   if (fetchedLabels.length === 0) return [];
 
@@ -60,10 +62,6 @@ export const createLabeledItems = ({
     }
   }
 
-  return removeExcludedParams(result);
+  const excludedParams = new Set(pillarSlugs);
+  return result.filter((item) => excludedParams.has(item.pillar));
 };
-
-const excludedParams = new Set(['order', 'orderBy']);
-
-const removeExcludedParams = (items: LabeledItem[]) =>
-  items.filter((item) => !excludedParams.has(item.pillar));
