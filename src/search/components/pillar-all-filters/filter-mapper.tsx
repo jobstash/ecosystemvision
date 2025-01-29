@@ -27,7 +27,14 @@ export const FilterMapper = ({ item }: Props) => {
     }
 
     case 'RANGE': {
-      return <RangeFilter />;
+      return (
+        <RangeFilter
+          label={item.label}
+          minValue={item.min.value}
+          maxValue={item.max.value}
+          prefix={item.prefix}
+        />
+      );
     }
 
     default: {
