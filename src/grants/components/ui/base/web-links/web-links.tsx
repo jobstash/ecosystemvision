@@ -29,7 +29,10 @@ export const WebLinks = ({ links, classNames }: Props) => {
           <ExternalLinkButton
             key={key}
             isIconOnly
-            className={cn('h-auto w-auto min-w-0 overflow-hidden rounded-md border border-transparent bg-transparent hover:border-white',classNames?.button)}
+            className={cn(
+              'h-auto w-auto min-w-0 overflow-hidden rounded-md border border-transparent bg-transparent hover:border-white',
+              classNames?.button,
+            )}
             href={value}
           >
             {icon}

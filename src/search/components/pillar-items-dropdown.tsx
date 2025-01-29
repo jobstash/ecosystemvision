@@ -1,5 +1,5 @@
-import { Button } from "@heroui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { Button } from '@heroui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
 
 import { cn } from '@/shared/utils/cn';
 

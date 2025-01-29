@@ -11,6 +11,6 @@ interface Props {
 }
 
 // TODO: Add rawSearchParams prop for filters
-export const ProjectListClient = ({searchParams}:Props) => {
-  return <ProjectList searchParams={searchParams}/>;
+export const ProjectListClient = ({ searchParams }: Props) => {
+  return <ProjectList searchParams={searchParams} />;
 };

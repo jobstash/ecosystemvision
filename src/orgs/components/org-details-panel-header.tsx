@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from "@heroui/spinner";
+import { Spinner } from '@heroui/spinner';
 
 import { DetailsPanelHeader } from '@/shared/components/details-panel/header';
 

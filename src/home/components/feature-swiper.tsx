@@ -35,7 +35,9 @@ export const FeatureSwiper = () => {
         <SwiperSlide>
           <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
             <GainIcon />
-            <h3 className="text-base font-semibold leading-5 antialiased lg:text-xl lg:leading-[26px]">Gain Investor Insights</h3>
+            <h3 className="text-base font-semibold leading-5 antialiased lg:text-xl lg:leading-[26px]">
+              Gain Investor Insights
+            </h3>
             <p className="text-base font-normal leading-5 lg:text-xl lg:leading-[26px]">
               Discover where top investors are putting their money, explore
               similar ecosystems and verticals, and understand the funding

@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-import { Button } from "@heroui/button";
-import { Skeleton } from "@heroui/skeleton";
+import { Button } from '@heroui/button';
+import { Skeleton } from '@heroui/skeleton';
 
 import { getWebsiteText } from '@/shared/utils/get-website-text';
 import { ExternalIcon } from '@/shared/components/icons/external-icon';

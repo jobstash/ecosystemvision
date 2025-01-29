@@ -1,5 +1,5 @@
-import { Avatar } from "@heroui/avatar";
-import { Skeleton } from "@heroui/skeleton";
+import { Avatar } from '@heroui/avatar';
+import { Skeleton } from '@heroui/skeleton';
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';

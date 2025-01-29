@@ -17,7 +17,7 @@ interface Props {
   searchParams: string | Record<string, string>;
 }
 
-export const useProjectList = ({searchParams}:Props) => {
+export const useProjectList = ({ searchParams }: Props) => {
   const queryClient = getQueryClient();
 
   const {
@@ -28,7 +28,7 @@ export const useProjectList = ({searchParams}:Props) => {
     isSuccess,
     isPending,
     isFetching,
-  } = useProjectListQuery({searchParams});
+  } = useProjectListQuery({ searchParams });
 
   // Sync total count
   const [totalCount, setTotalCount] = useAtom(projectTotalCountAtom);

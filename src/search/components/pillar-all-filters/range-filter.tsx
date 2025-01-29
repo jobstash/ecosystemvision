@@ -14,7 +14,10 @@ interface Props {
 export const RangeFilter = (props: Props) => {
   const { label, minValue, maxValue, prefix } = props;
   const step = (maxValue - minValue) / 100;
-  const defaultValue = [minValue + step * 30, maxValue - step * 30] as [number, number];
+  const defaultValue = [minValue + step * 30, maxValue - step * 30] as [
+    number,
+    number,
+  ];
   const marks = SLIDER_MARKS.map((mark) => {
     const value = maxValue * (mark / 100);
     return {

@@ -4,7 +4,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@heroui/button';
 import { Skeleton } from '@heroui/skeleton';
-import { ArrowDownWideNarrowIcon, ArrowUpWideNarrowIcon, ListFilterIcon } from 'lucide-react';
+import {
+  ArrowDownWideNarrowIcon,
+  ArrowUpWideNarrowIcon,
+  ListFilterIcon,
+} from 'lucide-react';
 
 import { PillarSelectFilterDto } from '@/search/core/schemas';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
@@ -30,7 +34,8 @@ export const PillarOrderButton = ({ nav }: Props) => {
 
   const currentOrder = searchParams.get(orderFilter.paramKey);
   const currentIndex = currentOrder
-    ? orderFilter.options.findIndex((option) => option.value === currentOrder) + 1
+    ? orderFilter.options.findIndex((option) => option.value === currentOrder) +
+      1
     : 0;
 
   const getDisplayValues = () => {

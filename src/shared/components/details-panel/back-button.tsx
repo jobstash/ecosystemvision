@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from "@heroui/button";
+import { Button } from '@heroui/button';
 
 import { A11Y, TEST_IDS } from '@/shared/core/constants';
 

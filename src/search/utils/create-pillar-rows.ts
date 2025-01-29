@@ -31,7 +31,8 @@ export const createPillarRows = (options: Options) => {
   return pillars.flatMap(({ slug: pillar, items }) => {
     const mappedItems = items.map((label) => {
       const isMainItem = normalizeString(label) === params.item;
-      if (isMainItem) return { label, href: '', slug: params.item, isActive: true };
+      if (isMainItem)
+        return { label, href: '', slug: params.item, isActive: true };
 
       const isActive = selectedPillarLabels.has(`${pillar}-${label}`);
       const slug = normalizeString(label);
@@ -61,12 +62,20 @@ export const createPillarRows = (options: Options) => {
       [...selectedPillarLabels]
         .filter((fullLabel) => fullLabel.startsWith(pillarPrefix))
         .map((fullLabel) => fullLabel.replace(pillarPrefix, ''))
-        .filter((cleanLabel) => !mappedItems.some(({ label }) => label === cleanLabel)),
+        .filter(
+          (cleanLabel) =>
+            !mappedItems.some(({ label }) => label === cleanLabel),
+        ),
     );
 
     const streamlinedItems = labeledItems
       .filter(({ label }) => streamlinedLabels.has(label!))
-      .map(({ label, href, slug }) => ({ label: label!, href, slug, isActive: true }));
+      .map(({ label, href, slug }) => ({
+        label: label!,
+        href,
+        slug,
+        isActive: true,
+      }));
 
     const isMainPillar = pillar === params.pillar;
     const arrangedItems = isMainPillar

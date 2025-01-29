@@ -9,7 +9,8 @@ interface Props {
 }
 
 export const FilterMapper = ({ item }: Props) => {
-  const hasFewOptions = item.kind === 'RANGE' ? false : item.options.length <= 5;
+  const hasFewOptions =
+    item.kind === 'RANGE' ? false : item.options.length <= 5;
 
   switch (item.kind) {
     case 'SINGLE_SELECT': {

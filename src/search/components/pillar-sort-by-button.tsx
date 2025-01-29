@@ -3,7 +3,12 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@heroui/button';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown';
 import { Skeleton } from '@heroui/skeleton';
 
 import { cn } from '@/shared/utils/cn';

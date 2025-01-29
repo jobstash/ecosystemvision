@@ -10,6 +10,8 @@ export const DetailValueAmount = ({ amount }: Props) => {
   const text = `$${formatNumber(amount)}`;
 
   return (
-    <DetailValueText className="rounded-md bg-white/10 px-[2px]">{text}</DetailValueText>
+    <DetailValueText className="rounded-md bg-white/10 px-[2px]">
+      {text}
+    </DetailValueText>
   );
 };

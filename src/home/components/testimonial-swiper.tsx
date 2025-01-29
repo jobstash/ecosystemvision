@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar } from "@heroui/avatar";
+import { Avatar } from '@heroui/avatar';
 
 import { MySwiper, SwiperSlide } from '@/home/components/swiper';
 

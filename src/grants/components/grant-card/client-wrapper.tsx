@@ -46,7 +46,13 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
       if (fixedDivRef.current) {
         const height = fixedDivRef.current?.offsetHeight || 0;
         setPaddingBottom(height);
-        fixedDivRef.current.classList.add('fixed', 'inset-x-0', 'top-0', 'z-50', 'lg:ml-[264px]');
+        fixedDivRef.current.classList.add(
+          'fixed',
+          'inset-x-0',
+          'top-0',
+          'z-50',
+          'lg:ml-[264px]',
+        );
       }
     };
 
@@ -58,7 +64,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
     };
 
     // Initial calculation
-    setTimeout(updatePaddingBottom, 20); 
+    setTimeout(updatePaddingBottom, 20);
 
     // Attach the debounced resize event listener
     window.addEventListener('resize', handleResize);

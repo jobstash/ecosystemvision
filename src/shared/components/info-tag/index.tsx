@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from '@heroui/skeleton';
 
 import { InfoTagProps } from '@/shared/core/types';
 import { cn } from '@/shared/utils/cn';
@@ -29,11 +29,11 @@ export const InfoTag = (props: Props) => {
 
   const content = (
     <>
-      <div className='shrink-0'>{icon}</div>
+      <div className="shrink-0">{icon}</div>
       <span className="max-w-[32ch] truncate text-sm md:max-w-[44ch] lg:text-xs">
         {text}
       </span>
-      <div className='shrink-0'>{showExternalIcon && <ExternalIcon />}</div>
+      <div className="shrink-0">{showExternalIcon && <ExternalIcon />}</div>
     </>
   );
 

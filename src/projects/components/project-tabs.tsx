@@ -6,25 +6,25 @@ import { DetailsPanelTabs } from '@/shared/components/details-panel/tabs';
 import { useProjectDetails } from '@/projects/hooks/use-project-details';
 
 const projectTabs = [
-	{ text: `Project Details`, href: `/${ROUTE_TABS.SHARED.DETAILS}` },
-	{ text: `Organization`, href: `/${ROUTE_TABS.SHARED.ORG}` },
+  { text: `Project Details`, href: `/${ROUTE_TABS.SHARED.DETAILS}` },
+  { text: `Organization`, href: `/${ROUTE_TABS.SHARED.ORG}` },
 ];
 
 interface Props {
-	slug: string;
+  slug: string;
 }
 
 export const ProjectTabs = ({ slug }: Props) => {
-	const { data } = useProjectDetails(slug);
+  const { data } = useProjectDetails(slug);
 
-	if (!data) return null;
-	if (data.organizations.length === 0) return null;
+  if (!data) return null;
+  if (data.organizations.length === 0) return null;
 
-	const prefix = `${HREFS.PROJECTS_PAGE}/names/${slug}`;
-	const tabs = projectTabs.map((tab) => ({
-		...tab,
-		href: `${prefix}${tab.href}`,
-	}));
+  const prefix = `${HREFS.PROJECTS_PAGE}/names/${slug}`;
+  const tabs = projectTabs.map((tab) => ({
+    ...tab,
+    href: `${prefix}${tab.href}`,
+  }));
 
-	return <DetailsPanelTabs tabs={tabs} />;
+  return <DetailsPanelTabs tabs={tabs} />;
 };

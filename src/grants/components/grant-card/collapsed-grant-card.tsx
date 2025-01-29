@@ -10,11 +10,7 @@ interface Props {
 }
 
 export const CollapsedGrantCard = ({ grant }: Props) => {
-  const {
-    topItems,
-    hasTopItems,
-    midItems,
-  } = getGrantCardData(grant);
+  const { topItems, hasTopItems, midItems } = getGrantCardData(grant);
 
   return (
     // <div>
@@ -25,14 +21,17 @@ export const CollapsedGrantCard = ({ grant }: Props) => {
       data-uuid={grant.slug}
     >
       <div className="flex flex-wrap gap-2">
-        <Title className="text-12 whitespace-nowrap font-semibold">{grant.name}</Title>
+        <Title className="text-12 whitespace-nowrap font-semibold">
+          {grant.name}
+        </Title>
         <div className="flex  gap-6">
-        
-
           {hasTopItems && (
             <DetailItems
               items={topItems}
-              classNames={{ container: 'gap-x-4 gap-y-1.5', root: 'text-13 flex-nowrap flex' }}
+              classNames={{
+                container: 'gap-x-4 gap-y-1.5',
+                root: 'text-13 flex-nowrap flex',
+              }}
             />
           )}
         </div>
@@ -42,14 +41,10 @@ export const CollapsedGrantCard = ({ grant }: Props) => {
           classNames={{
             label: 'pr-2',
             root: 'flex-nowrap flex first:hidden',
-            container: cn(
-              'flex grow flex-nowrap gap-6',
-              { '': hasTopItems },
-            ),
+            container: cn('flex grow flex-nowrap gap-6', { '': hasTopItems }),
           }}
         />
       </div>
     </div>
   );
 };
-

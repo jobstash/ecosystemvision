@@ -68,7 +68,6 @@ export const ScrollTriggerContainer = ({ children }: Props) => {
 
   return (
     <div ref={pinRef} className="flex w-full flex-col gap-4">
-      
       <div ref={isDesktop ? contentRef : undefined}>{children}</div>
     </div>
   );

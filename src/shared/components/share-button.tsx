@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "@heroui/button";
+import { Button } from '@heroui/button';
 
 import { FRONTEND_URL } from '@/shared/core/envs';
 

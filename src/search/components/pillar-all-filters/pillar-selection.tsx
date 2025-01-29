@@ -19,7 +19,11 @@ export const PillarSelection = ({ pillar, items }: Props) => {
 
   if (items.length === 0) return null;
 
-  const onClose = (item: { label: string; slug: string; isActive: boolean }) => {
+  const onClose = (item: {
+    label: string;
+    slug: string;
+    isActive: boolean;
+  }) => {
     setActiveItems((prev) => prev.filter((prevItem) => prevItem !== item));
   };
 

@@ -85,7 +85,9 @@ export const PillarPage = async (props: Props) => {
 
   return (
     <PillarAllFiltersWrapper
-      allFilters={<PillarAllFilters nav={nav} pillarSelections={altPillarFilters} />}
+      allFilters={
+        <PillarAllFilters nav={nav} pillarSelections={altPillarFilters} />
+      }
     >
       <div className="relative min-h-screen space-y-4 overflow-hidden">
         <AppHeader
@@ -95,7 +97,9 @@ export const PillarPage = async (props: Props) => {
               labeledItems={labeledItems}
             />
           }
-          searchResults={<PillarPageSearchResults nav={nav} excluded={excluded} />}
+          searchResults={
+            <PillarPageSearchResults nav={nav} excluded={excluded} />
+          }
           mainPillar={
             <ActiveSearchHiddenWrapper>
               <MainPillarContent
@@ -113,7 +117,10 @@ export const PillarPage = async (props: Props) => {
                         pillar={mainPillarRow.pillar}
                         params={params}
                         searchParams={searchParams}
-                        activeLabels={getActiveLabels(labeledItems, mainPillarRow.pillar)}
+                        activeLabels={getActiveLabels(
+                          labeledItems,
+                          mainPillarRow.pillar,
+                        )}
                         isIndex={isIndex}
                       />
                     }
@@ -136,7 +143,10 @@ export const PillarPage = async (props: Props) => {
                   pillar={altPillarRow.pillar}
                   params={params}
                   searchParams={searchParams}
-                  activeLabels={getActiveLabels(labeledItems, altPillarRow.pillar)}
+                  activeLabels={getActiveLabels(
+                    labeledItems,
+                    altPillarRow.pillar,
+                  )}
                   isIndex={isIndex}
                 />
               }

@@ -20,7 +20,6 @@
   @apply bg-white/20 rounded-full w-12 h-12 flex items-center justify-center z-20;
 }
 
-
 .testimonial-swiper .swiper-button-next:after,
 .testimonial-swiper .swiper-button-prev:after {
   @apply content-none;
@@ -40,7 +39,6 @@
 .testimonial-swiper .swiper-button-prev {
   @apply right-20 left-auto bottom-8 top-auto bg-no-repeat bg-center;
   background-image: url('data:image/svg+xml;utf8,<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 7.01172H3.83L9.42 1.42172L8 0.0117188L0 8.01172L8 16.0117L9.41 14.6017L3.83 9.01172H16V7.01172Z" fill="white"/></svg>');
-
 }
 @screen md {
   .testimonial-swiper .swiper-button-prev {

@@ -1,4 +1,4 @@
-import { Avatar } from "@heroui/avatar";
+import { Avatar } from '@heroui/avatar';
 
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 

@@ -77,7 +77,7 @@ export const GranteeDetailsSection = ({ hasGranteeId }: Props) => {
       )}
     >
       <GranteeCard />
-      <div className='space-y-4 px-3.5 lg:px-0 lg:pb-6'>
+      <div className="space-y-4 px-3.5 lg:px-0 lg:pb-6">
         <ProjectSelections />
         <ProjectTabSelection />
         <GranteeProjectStats />

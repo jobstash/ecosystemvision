@@ -8,5 +8,5 @@ const OrgList = dynamic(() =>
 
 // TODO: Add rawSearchParams prop for filters
 export const OrgListClientPage = () => {
-  return <OrgList searchParams={''}/>;
+  return <OrgList searchParams={''} />;
 };

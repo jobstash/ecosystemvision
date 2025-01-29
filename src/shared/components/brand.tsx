@@ -4,9 +4,7 @@ import Link from 'next/link';
 export const Brand = () => {
   return (
     <Link href="/">
-      <div
-        className="flex items-center justify-center"
-      >
+      <div className="flex items-center justify-center">
         <Image
           src={'/ecosystem-logo.png'}
           alt={'Ecosystem.vision'}

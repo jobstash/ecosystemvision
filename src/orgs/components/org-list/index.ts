@@ -1,1 +1,1 @@
-export * from './org-list'
+export * from './org-list';

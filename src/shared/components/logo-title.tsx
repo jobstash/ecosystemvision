@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from '@heroui/skeleton';
 
 interface Props {
   src: string;

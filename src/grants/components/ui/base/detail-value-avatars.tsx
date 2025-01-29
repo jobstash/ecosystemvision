@@ -3,7 +3,7 @@ import {
   AvatarGroup,
   AvatarGroupProps,
   AvatarProps,
-} from "@heroui/avatar";
+} from '@heroui/avatar';
 
 interface Props extends AvatarProps {
   items: { name: string; logo: string | null }[];

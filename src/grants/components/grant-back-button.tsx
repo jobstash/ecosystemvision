@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from "@heroui/button";
+import { Button } from '@heroui/button';
 
 interface Props {
   fallbackUrl?: string;

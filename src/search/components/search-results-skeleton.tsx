@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from '@heroui/skeleton';
 
 import { Divider } from '@/shared/components/divider';
 

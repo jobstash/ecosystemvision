@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from '@heroui/skeleton';
 
 import { cn } from '@/shared/utils/cn';
 import { useIsMounted } from '@/shared/hooks/use-is-mounted';

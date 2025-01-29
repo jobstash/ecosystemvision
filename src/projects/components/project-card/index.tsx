@@ -16,42 +16,42 @@ import { activeProjectSlugAtom } from '@/projects/core/atoms';
 import { createProjectTags } from './create-project-tags';
 
 interface Props {
-	project: ProjectInfo;
-	isInit?: boolean;
-	filterParamsString?: string;
+  project: ProjectInfo;
+  isInit?: boolean;
+  filterParamsString?: string;
 }
 
 export const ProjectCard = (props: Props) => {
-	const { project, isInit, filterParamsString = '' } = props;
-	const { normalizedName: slug, website, logo, name, chains } = project;
+  const { project, isInit, filterParamsString = '' } = props;
+  const { normalizedName: slug, website, logo, name, chains } = project;
 
-	const src = getLogoUrl(website || '', logo);
-	const { upperTags, midTags } = createProjectTags(project);
-	// const href = `${HREFS.PROJECTS_PAGE}/names/${normalizeString(slug)}/details${filterParamsString}`;
-	const href = `${HREFS.PROJECTS_PAGE}/info/${normalizeString(slug)}${filterParamsString}`;
+  const src = getLogoUrl(website || '', logo);
+  const { upperTags, midTags } = createProjectTags(project);
+  // const href = `${HREFS.PROJECTS_PAGE}/names/${normalizeString(slug)}/details${filterParamsString}`;
+  const href = `${HREFS.PROJECTS_PAGE}/info/${normalizeString(slug)}${filterParamsString}`;
 
-	return (
-		<CardWrapper id={slug} idAtom={activeProjectSlugAtom}>
-			<Link
-				href={href}
-				scroll={false}
-				data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
-				data-uuid={slug}
-				data-is-init={isInit ?? undefined}
-				prefetch={true}
-				className="flex flex-col gap-3 p-6"
-			>
-				<LogoTitle src={src} name={name} />
+  return (
+    <CardWrapper id={slug} idAtom={activeProjectSlugAtom}>
+      <Link
+        href={href}
+        scroll={false}
+        data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
+        data-uuid={slug}
+        data-is-init={isInit ?? undefined}
+        prefetch={true}
+        className="flex flex-col gap-3 p-6"
+      >
+        <LogoTitle src={src} name={name} />
 
-				{upperTags.length > 0 && <Divider />}
-				<InfoTags isCompact tags={upperTags} />
+        {upperTags.length > 0 && <Divider />}
+        <InfoTags isCompact tags={upperTags} />
 
-				{midTags.length > 0 && <Divider />}
-				<InfoTags isCompact tags={midTags} />
+        {midTags.length > 0 && <Divider />}
+        <InfoTags isCompact tags={midTags} />
 
-				{chains.length > 0 && <Divider />}
-				<ChainsInfoTag chains={chains} />
-			</Link>
-		</CardWrapper>
-	);
+        {chains.length > 0 && <Divider />}
+        <ChainsInfoTag chains={chains} />
+      </Link>
+    </CardWrapper>
+  );
 };

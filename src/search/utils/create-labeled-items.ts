@@ -16,7 +16,12 @@ interface Options {
  * Href should correspond to the item being removed in search params.
  * Can safely assume main-pillar-item is included in fetchedLabels - page already has logic if main-pillar-item is 404.
  */
-export const createLabeledItems = ({ nav, params, searchParams, fetchedLabels }: Options) => {
+export const createLabeledItems = ({
+  nav,
+  params,
+  searchParams,
+  fetchedLabels,
+}: Options) => {
   if (fetchedLabels.length === 0) return [];
 
   const result: LabeledItem[] = [];

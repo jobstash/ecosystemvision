@@ -1,4 +1,4 @@
-import { Spinner } from "@heroui/spinner";
+import { Spinner } from '@heroui/spinner';
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
