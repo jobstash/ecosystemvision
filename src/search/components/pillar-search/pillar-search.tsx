@@ -33,12 +33,10 @@ export const PillarSearch = ({ mainLabel, labeledItems }: Props) => {
         </div>
 
         {items.length > 0 && (
-          <DraggableWrapper>
-            <div className="flex items-center gap-x-4">
-              {items.map((item) => (
-                <PillarSearchInputItem key={item.label} item={item} />
-              ))}
-            </div>
+          <DraggableWrapper className="flex items-center gap-x-4">
+            {items.map((item) => (
+              <PillarSearchInputItem key={item.label} item={item} />
+            ))}
           </DraggableWrapper>
         )}
       </div>
