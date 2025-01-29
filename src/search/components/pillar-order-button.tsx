@@ -59,7 +59,7 @@ export const PillarOrderButton = ({ nav }: Props) => {
       newParams.delete(orderFilter.paramKey);
     } else {
       const option = orderFilter.options[nextIndex - 1];
-      newParams.set(orderFilter.paramKey, option.value);
+      newParams.set(orderFilter.paramKey, option.value as string);
     }
 
     startTransition(() => {

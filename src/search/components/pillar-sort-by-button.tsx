@@ -80,7 +80,7 @@ export const PillarSortByButton = ({ nav }: Props) => {
 
           return (
             <DropdownItem
-              key={option.value}
+              key={option.label}
               classNames={{ base: itemClasses }}
               endContent={isActive && <CheckmarkIcon />}
             >

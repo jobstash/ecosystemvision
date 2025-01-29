@@ -1,4 +1,5 @@
 import { PillarFiltersItemDto } from '@/search/core/schemas';
+import { BooleanFilter } from '@/search/components/pillar-all-filters/boolean-filter';
 import { CheckboxFilter } from '@/search/components/pillar-all-filters/checkbox-filter';
 import { MultiSelectFilter } from '@/search/components/pillar-all-filters/multi-select-filter';
 import { RangeFilter } from '@/search/components/pillar-all-filters/range-filter';
@@ -14,6 +15,14 @@ export const FilterMapper = ({ item }: Props) => {
 
   switch (item.kind) {
     case 'SINGLE_SELECT': {
+      const isBoolean =
+        item.options.length === 2 &&
+        item.options.every((option) => typeof option.value === 'boolean');
+
+      if (isBoolean) {
+        return <BooleanFilter label={item.label} items={item.options} />;
+      }
+
       if (hasFewOptions) {
         return <CheckboxFilter label={item.label} items={item.options} />;
       }
