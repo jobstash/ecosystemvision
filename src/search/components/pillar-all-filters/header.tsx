@@ -51,7 +51,6 @@ export const PillarAllFiltersHeader = ({
   const params = useParams();
   const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
   const onApply = () => {
-    // Remove params.pillar and params.item from the currentFilterParams
     const searchParams = new URLSearchParams();
 
     for (const [key, value] of Object.entries(currentParams)) {
