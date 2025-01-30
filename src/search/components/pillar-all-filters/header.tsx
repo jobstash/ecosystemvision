@@ -19,9 +19,16 @@ export const PillarAllFiltersHeader = ({ activeSearchParams }: Props) => {
   const currentFilterParams = useAtomValue(currentFilterParamsAtom);
 
   const isDisabled = useMemo(() => {
-    const activeValues = Object.values(activeSearchParams).sort();
-    const currentValues = Object.values(currentFilterParams).sort();
-    return JSON.stringify(activeValues) === JSON.stringify(currentValues);
+    const activeParams = parseCsvParams(activeSearchParams);
+    const currentParams = parseCsvParams(currentFilterParams);
+
+    const activeValues = Object.values(activeParams).flat();
+    const currentValues = Object.values(currentParams).flat();
+
+    return (
+      currentValues.length === activeValues.length &&
+      currentValues.every((value) => activeValues.includes(value))
+    );
   }, [activeSearchParams, currentFilterParams]);
 
   return (
@@ -42,5 +49,14 @@ export const PillarAllFiltersHeader = ({ activeSearchParams }: Props) => {
       </div>
       <Divider />
     </div>
+  );
+};
+
+const parseCsvParams = (params: Record<string, string>) => {
+  return Object.fromEntries(
+    Object.entries(params).map(([key, value]) => [
+      key,
+      value.split(',').filter(Boolean),
+    ]),
   );
 };
