@@ -18,9 +18,14 @@ const DEBOUNCE_DELAY = 500;
 interface Options {
   nav: string;
   pillar: string;
+  hasOffset?: boolean;
 }
 
-export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
+export const usePillarDropdownInput = ({
+  nav,
+  pillar,
+  hasOffset = true,
+}: Options) => {
   const queryClient = useQueryClient();
   const { isPendingPillarRoute } = usePillarRoutesContext();
 
@@ -31,11 +36,15 @@ export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
+  const onChangeValue = (value: string) => {
+    setValue(value);
+  };
 
   const list = useAsyncList<string, number>({
     async load({ cursor = ITEMS_PER_PAGE, filterText }) {
       const pageOffset = !debouncedValue ? 1 : 0;
-      const page = Math.floor(cursor / ITEMS_PER_PAGE) + pageOffset;
+      const currentPage = Math.floor(cursor / ITEMS_PER_PAGE);
+      const page = hasOffset ? currentPage + pageOffset : currentPage;
 
       const queryProps: GetPillarItemsProps = {
         nav,
@@ -61,10 +70,9 @@ export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
   });
 
   useEffect(() => {
-    if (debouncedValue) {
-      list.reload();
-      list.setFilterText(debouncedValue);
-    }
+    list.reload();
+    list.setFilterText(debouncedValue);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
@@ -87,6 +95,7 @@ export const usePillarDropdownInput = ({ nav, pillar }: Options) => {
     isLoadingRoute: isPendingPillarRoute,
     value,
     onChange,
+    onChangeValue,
     list,
     onClear,
     inViewRef,

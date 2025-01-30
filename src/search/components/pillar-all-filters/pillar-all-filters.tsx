@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
 import { currentFilterParamsAtom } from '@/search/core/atoms';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
@@ -24,9 +24,7 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
   const { data: filterConfigs = [] } = usePillarFilters(nav);
 
   const activeSearchParams = usePillarSearchParams();
-  const [_currentFilterParams, setCurrentFilterParams] = useAtom(
-    currentFilterParamsAtom,
-  );
+  const setCurrentFilterParams = useSetAtom(currentFilterParamsAtom);
   const [initialized, setInitialized] = useState(false);
   useEffect(() => {
     if (!initialized) {
@@ -49,7 +47,9 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
             key={pillar}
             nav={nav}
             pillar={pillar}
-            items={items}
+            activeLabels={items
+              .filter((item) => item.isActive)
+              .map(({ label }) => label)}
           />
         ))}
       </div>
