@@ -28,6 +28,7 @@ export const RangeFilter = (props: Props) => {
   return (
     <Slider
       size="sm"
+      className="px-4"
       label={label}
       minValue={minValue}
       maxValue={maxValue}

@@ -38,7 +38,7 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
   return (
     <div className="relative flex min-h-screen justify-center bg-neutral-900 pb-24">
       <div className="flex w-full max-w-3xl flex-col gap-8">
-        <PillarAllFiltersHeader />
+        <PillarAllFiltersHeader activeSearchParams={activeSearchParams} />
 
         {filterConfigs.map((item) => (
           <FilterMapper key={item.label} item={item} />
