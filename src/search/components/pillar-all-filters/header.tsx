@@ -4,13 +4,15 @@ import { useParams, useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 import { Button } from '@heroui/button';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
+import { normalizeString } from '@/shared/utils/normalize-string';
 import { Divider } from '@/shared/components/divider';
 
 import {
   currentFilterParamsAtom,
   isActiveAllFiltersAtom,
+  PillarFilterState,
 } from '@/search/core/atoms';
 
 import { CloseButton } from './close-button';
@@ -20,24 +22,30 @@ import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-co
 interface Props {
   nav: string;
   activeSearchParams: Record<string, string>;
+  onClear: () => void;
 }
 
-export const PillarAllFiltersHeader = ({ nav, activeSearchParams }: Props) => {
-  const currentFilterParams = useAtomValue(currentFilterParamsAtom);
-  const setIsActiveAllFilters = useSetAtom(isActiveAllFiltersAtom);
+export const PillarAllFiltersHeader = ({
+  nav,
+  activeSearchParams,
+  onClear,
+}: Props) => {
+  const [currentFilterParams] = useAtom(currentFilterParamsAtom);
+  const [, setIsActiveAllFilters] = useAtom(isActiveAllFiltersAtom);
+
+  const { activeParams, currentParams } = useMemo(() => {
+    const activeParams = parseCsvParams(activeSearchParams);
+    const currentParams = parseCsvParams(stateToParams(currentFilterParams));
+
+    return { activeParams, currentParams };
+  }, [activeSearchParams, currentFilterParams]);
 
   const hasChanges = useMemo(() => {
-    const activeParams = parseCsvParams(activeSearchParams);
-    const currentParams = parseCsvParams(currentFilterParams);
+    const activeValues = Object.values(activeParams).flat().sort();
+    const currentValues = Object.values(currentParams).flat().sort();
 
-    const activeValues = Object.values(activeParams).flat();
-    const currentValues = Object.values(currentParams).flat();
-
-    return (
-      currentValues.length !== activeValues.length ||
-      currentValues.some((value) => !activeValues.includes(value))
-    );
-  }, [activeSearchParams, currentFilterParams]);
+    return JSON.stringify(activeValues) !== JSON.stringify(currentValues);
+  }, [activeParams, currentParams]);
 
   const router = useRouter();
   const params = useParams();
@@ -46,17 +54,15 @@ export const PillarAllFiltersHeader = ({ nav, activeSearchParams }: Props) => {
     // Remove params.pillar and params.item from the currentFilterParams
     const searchParams = new URLSearchParams();
 
-    for (const [key, value] of Object.entries(currentFilterParams)) {
+    for (const [key, value] of Object.entries(currentParams)) {
       const isMainPillar = key === params.pillar;
-      const newValue = isMainPillar
-        ? value
-            .split(',')
-            .filter((item) => item !== params.item)
-            .join(',')
-        : value;
+      const newValue =
+        isMainPillar && Array.isArray(value)
+          ? value.filter((item) => item !== params.item)
+          : value;
 
-      if (newValue) {
-        searchParams.set(key, newValue);
+      if (newValue.length > 0) {
+        searchParams.set(key, newValue.join(','));
       }
     }
 
@@ -76,7 +82,7 @@ export const PillarAllFiltersHeader = ({ nav, activeSearchParams }: Props) => {
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-bold">All Filters</h2>
-          <Button size="sm" isDisabled={isDisabled}>
+          <Button size="sm" isDisabled={isDisabled} onClick={onClear}>
             Clear
           </Button>
         </div>
@@ -92,11 +98,22 @@ export const PillarAllFiltersHeader = ({ nav, activeSearchParams }: Props) => {
   );
 };
 
-const parseCsvParams = (params: Record<string, string>) => {
+const parseCsvParams = (
+  params: Record<string, string>,
+): Record<string, string[]> => {
   return Object.fromEntries(
     Object.entries(params).map(([key, value]) => [
       key,
       value.split(',').filter(Boolean),
+    ]),
+  );
+};
+
+const stateToParams = (state: PillarFilterState) => {
+  return Object.fromEntries(
+    Object.entries(state).map(([key, value]) => [
+      key,
+      value.current?.map((v) => normalizeString(v)).join(',') || value.init,
     ]),
   );
 };

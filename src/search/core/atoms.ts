@@ -20,4 +20,8 @@ export const hiddenPillarItemsAtom = atom<Record<string, string[]>>({});
 
 export const isActiveAllFiltersAtom = atom<boolean>(false);
 
-export const currentFilterParamsAtom = atom<Record<string, string>>({});
+export type PillarFilterState = Record<
+  string,
+  { init: string; current?: string[] }
+>;
+export const currentFilterParamsAtom = atom<PillarFilterState>({});

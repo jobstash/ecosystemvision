@@ -1,13 +1,12 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
 import { Chip } from '@heroui/chip';
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import { capitalize } from '@/shared/utils/capitalize';
-import { normalizeString } from '@/shared/utils/normalize-string';
 
 import { currentFilterParamsAtom } from '@/search/core/atoms';
 import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input';
@@ -15,10 +14,9 @@ import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input
 interface Props {
   nav: string;
   pillar: string;
-  activeLabels: string[];
 }
 
-export const PillarSelection = ({ nav, pillar, activeLabels }: Props) => {
+export const PillarSelection = ({ nav, pillar }: Props) => {
   const {
     isLoadingRoute,
     value,
@@ -35,10 +33,13 @@ export const PillarSelection = ({ nav, pillar, activeLabels }: Props) => {
 
   const isLoading = list.isLoading || isPendingDebounce;
 
-  const setCurrentFilterParams = useSetAtom(currentFilterParamsAtom);
+  const [currentFilterParams, setCurrentFilterParams] = useAtom(
+    currentFilterParamsAtom,
+  );
 
-  const [currentSelections, setCurrentSelections] =
-    useState<string[]>(activeLabels);
+  const currentSelections = useMemo(() => {
+    return currentFilterParams[pillar]?.current || [];
+  }, [currentFilterParams, pillar]);
 
   const optionItems = useMemo(() => {
     const activeSlugs = new Set(currentSelections);
@@ -51,24 +52,26 @@ export const PillarSelection = ({ nav, pillar, activeLabels }: Props) => {
   const addSelection = (key: React.Key | null) => {
     if (key) {
       onClear();
-      const next = [...currentSelections, key as string];
-      setCurrentSelections(next);
       setCurrentFilterParams((prev) => {
         return {
           ...prev,
-          [pillar]: next.map((label) => normalizeString(label)).join(','),
+          [pillar]: {
+            ...prev[pillar],
+            current: [...currentSelections, key as string],
+          },
         };
       });
     }
   };
 
   const removeSelection = (key: string) => {
-    const next = currentSelections.filter((item) => item !== key);
-    setCurrentSelections(next);
     setCurrentFilterParams((prev) => {
       return {
         ...prev,
-        [pillar]: next.map((label) => normalizeString(label)).join(','),
+        [pillar]: {
+          ...prev[pillar],
+          current: currentSelections.filter((item) => item !== key),
+        },
       };
     });
   };
@@ -86,6 +89,7 @@ export const PillarSelection = ({ nav, pillar, activeLabels }: Props) => {
           emptyContent: isLoading ? 'Loading ...' : 'No results found.',
         }}
         defaultItems={optionItems}
+        value={value}
         inputValue={value}
         onInputChange={onChangeValue}
         onSelectionChange={addSelection}

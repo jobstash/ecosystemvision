@@ -18,7 +18,7 @@ export const BooleanFilter = ({ paramKey, label, items }: Props) => {
     currentFilterParamsAtom,
   );
   const currentFilterValue = currentFilterParams[paramKey];
-  const value = currentFilterValue ? [currentFilterValue] : [];
+  const value = currentFilterValue ? [currentFilterValue.init] : [];
 
   const onValueChange = (values: string[]) => {
     if (values.length === 0) {
@@ -30,7 +30,9 @@ export const BooleanFilter = ({ paramKey, label, items }: Props) => {
 
     setCurrentFilterParams((prev) => ({
       ...prev,
-      [paramKey]: values.at(-1)!.toString(),
+      [paramKey]: {
+        init: values.at(-1)!.toString(),
+      },
     }));
   };
   return (

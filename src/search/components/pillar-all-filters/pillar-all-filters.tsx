@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
-import { currentFilterParamsAtom } from '@/search/core/atoms';
+import {
+  currentFilterParamsAtom,
+  PillarFilterState,
+} from '@/search/core/atoms';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
 import { usePillarSearchParams } from '@/search/hooks/use-pillar-search-params';
 import { FilterMapper } from '@/search/components/pillar-all-filters/filter-mapper';
@@ -24,14 +27,33 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
   const { data: filterConfigs = [] } = usePillarFilters(nav);
 
   const activeSearchParams = usePillarSearchParams();
-  const setCurrentFilterParams = useSetAtom(currentFilterParamsAtom);
+  const [, setCurrentFilterParams] = useAtom(currentFilterParamsAtom);
   const [initialized, setInitialized] = useState(false);
+
+  const resetState = useCallback(() => {
+    const pillarKeys = new Set(pillarSelections.map(({ pillar }) => pillar));
+    const initFilterParams: PillarFilterState = {};
+    Object.entries(activeSearchParams).forEach(([pillar, initValue]) => {
+      initFilterParams[pillar] = {
+        init: initValue,
+        ...(pillarKeys.has(pillar) && {
+          current: pillarSelections
+            .find((p) => p.pillar === pillar)!
+            .items.filter((item) => item.isActive)
+            .map((item) => item.label),
+        }),
+      };
+    });
+
+    setCurrentFilterParams(initFilterParams);
+  }, [activeSearchParams, pillarSelections, setCurrentFilterParams]);
+
   useEffect(() => {
     if (!initialized) {
       setInitialized(true);
-      setCurrentFilterParams(activeSearchParams);
+      resetState();
     }
-  }, [activeSearchParams, initialized, setCurrentFilterParams]);
+  }, [initialized, resetState]);
 
   return (
     <div className="relative flex min-h-screen justify-center bg-neutral-900 pb-24">
@@ -39,21 +61,15 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
         <PillarAllFiltersHeader
           nav={nav}
           activeSearchParams={activeSearchParams}
+          onClear={resetState}
         />
 
         {filterConfigs.map((item) => (
           <FilterMapper key={item.label} item={item} />
         ))}
 
-        {pillarSelections.map(({ pillar, items }) => (
-          <PillarSelection
-            key={pillar}
-            nav={nav}
-            pillar={pillar}
-            activeLabels={items
-              .filter((item) => item.isActive)
-              .map(({ label }) => label)}
-          />
+        {pillarSelections.map(({ pillar }) => (
+          <PillarSelection key={pillar} nav={nav} pillar={pillar} />
         ))}
       </div>
     </div>
