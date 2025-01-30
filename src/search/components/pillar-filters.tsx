@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { PillarAllFiltersTrigger } from '@/search/components/pillar-all-filters/trigger';
 import { PillarLoadingWrapper } from '@/search/components/pillar-loading-wrapper';
 import { PillarOrderButton } from '@/search/components/pillar-order-button';
@@ -18,11 +20,13 @@ export const PillarFilters = (props: Props) => {
           <span className="text-sm">Other Filters</span>
           <div className="flex gap-4">{children}</div>
         </div>
-        <div className="flex items-center gap-4">
-          <PillarOrderButton nav={nav} />
-          <PillarSortByButton nav={nav} />
-          <PillarAllFiltersTrigger nav={nav} />
-        </div>
+        <Suspense>
+          <div className="flex items-center gap-4">
+            <PillarOrderButton nav={nav} />
+            <PillarSortByButton nav={nav} />
+            <PillarAllFiltersTrigger nav={nav} />
+          </div>
+        </Suspense>
       </div>
     </PillarLoadingWrapper>
   );
