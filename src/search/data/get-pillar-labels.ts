@@ -1,4 +1,5 @@
 import { MW_URL } from '@/shared/core/envs';
+import { getMappedNavParam } from '@/shared/utils/get-mapped-nav-param';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { pillarInputLabelsResponseDtoSchema } from '@/search/core/schemas';
@@ -19,7 +20,7 @@ export const getPillarLabels = async ({
   }
 
   const url = new URL(`${MW_URL}/search/pillar/labels`);
-  url.searchParams.set('nav', nav);
+  url.searchParams.set('nav', getMappedNavParam(nav));
   url.searchParams.set('pillars', pillars);
   url.searchParams.set('slugs', slugs);
 

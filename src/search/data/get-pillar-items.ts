@@ -1,4 +1,5 @@
 import { MW_URL } from '@/shared/core/envs';
+import { getMappedNavParam } from '@/shared/utils/get-mapped-nav-param';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { pillarItemsResponseDtoSchema } from '@/search/core/schemas';
@@ -11,7 +12,7 @@ export const getPillarItems = async (
 
   const url = new URL(`${MW_URL}/search/pillar/items`);
   const searchParams = new URLSearchParams({
-    nav,
+    nav: getMappedNavParam(nav),
     pillar,
     page: `${page}`,
     limit: `${limit}`,
