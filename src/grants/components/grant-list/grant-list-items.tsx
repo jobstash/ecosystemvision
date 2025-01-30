@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import { Spinner } from '@heroui/spinner';
 
+import { cn } from '@/shared/utils/cn';
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { Grant } from '@/grants/core/schemas';
@@ -43,7 +44,7 @@ export const GrantListItems = (props: Props) => {
     <div className="flex flex-col gap-4">
       <VirtualWrapper count={grants.length}>
         {(index) => (
-          <div className="pt-6 lg:pt-8">
+          <div className={cn({ 'pt-6 lg:pt-8': index > 0 })}>
             <GrantListItem
               grant={grants[index]}
               isLink={isLink}
