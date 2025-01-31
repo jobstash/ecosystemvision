@@ -15,7 +15,7 @@ import { useGrantList } from './use-grant-list';
 
 const FetchedGrantList = () => {
   const props = useGrantList('active');
-  return <GrantListItems isLink={false} {...props} ctaText="Apply" />;
+  return <GrantListItems isInfo {...props} ctaText="Apply" />;
 };
 
 const AiGrantList = () => {
@@ -29,7 +29,7 @@ const AiGrantList = () => {
     }
   }, [isPending, props.isPending, setIsPending]);
 
-  return <GrantListItems isLink={false} {...props} />;
+  return <GrantListItems isInfo {...props} />;
 };
 
 export const ActiveGrantList = () => {

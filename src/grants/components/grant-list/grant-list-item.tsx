@@ -18,6 +18,7 @@ import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 interface Props {
   grant: Grant;
   isLink?: boolean;
+  isInfo?: boolean;
   ctaText?: string;
   isAiResult?: boolean;
 }
@@ -25,6 +26,7 @@ interface Props {
 export const GrantListItem = ({
   grant,
   isLink = true,
+  isInfo,
   ctaText,
   isAiResult,
 }: Props) => {
@@ -117,9 +119,11 @@ export const GrantListItem = ({
     </>
   );
 
-  if (isLink) {
+  if (isLink || isInfo) {
     return (
-      <GrantListItemLinkWrapper slug={slug}>{content}</GrantListItemLinkWrapper>
+      <GrantListItemLinkWrapper slug={slug} isInfo={isInfo}>
+        {content}
+      </GrantListItemLinkWrapper>
     );
   }
 
