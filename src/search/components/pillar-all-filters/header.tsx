@@ -15,8 +15,6 @@ import {
   PillarFilterState,
 } from '@/search/core/atoms';
 
-import { CloseButton } from './close-button';
-
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
@@ -80,22 +78,24 @@ export const PillarAllFiltersHeader = ({
     });
   };
 
+  const onClose = () => {
+    onClear();
+    setIsActiveAllFilters(false);
+  };
+
   const isDisabled = isPendingPillarRoute || !hasChanges;
 
   return (
     <div className="sticky top-0 z-50 space-y-4 bg-neutral-900 pt-8">
       <div className="flex w-full items-center justify-between">
-        <div className="flex items-center gap-4">
-          <h2 className="text-lg font-bold">All Filters</h2>
-          <Button size="sm" isDisabled={isDisabled} onClick={onClear}>
-            Clear
-          </Button>
-        </div>
+        <h2 className="text-lg font-bold">All Filters</h2>
         <div className="flex items-center gap-4">
           <Button size="sm" isDisabled={isDisabled} onClick={onApply}>
             Apply Filters
           </Button>
-          <CloseButton />
+          <Button isIconOnly size="sm" onClick={onClose}>
+            X
+          </Button>
         </div>
       </div>
       <Divider />
