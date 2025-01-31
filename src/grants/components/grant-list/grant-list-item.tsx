@@ -1,14 +1,13 @@
 import { Avatar } from '@heroui/avatar';
 
-import { GA_EVENT } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
 import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
-import { ApplyButton } from '@/grants/components/grant-list/apply-button';
 import { GrantListItemLinkWrapper } from '@/grants/components/grant-list/grant-list-item-link-wrapper';
+import { MainCTAButton } from '@/grants/components/grant-list/main-cta-button';
 import { ViewImpactButton } from '@/grants/components/grant-list/view-impact-button';
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
@@ -17,9 +16,9 @@ import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 interface Props {
   grant: Grant;
+  gaEvent: string;
   isLink?: boolean;
   isInfo?: boolean;
-  ctaText?: string;
   isAiResult?: boolean;
 }
 
@@ -27,8 +26,7 @@ export const GrantListItem = ({
   grant,
   isLink = true,
   isInfo,
-  ctaText,
-  isAiResult,
+  gaEvent,
 }: Props) => {
   const {
     slug,
@@ -44,12 +42,6 @@ export const GrantListItem = ({
     hasLowerItems,
     hasWebLinks,
   } = getGrantCardData(grant);
-
-  const gaEvent = ctaText
-    ? isAiResult
-      ? GA_EVENT.GRANTS.APPLY_AI_ACTIVE_GRANT
-      : GA_EVENT.GRANTS.APPLY_ACTIVE_GRANT
-    : GA_EVENT.GRANTS.VIEW_PROGRAM;
 
   const wrapperClassName =
     'flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap';
@@ -108,9 +100,8 @@ export const GrantListItem = ({
         </div>
       </div>
       <div className="flex w-full flex-col items-center justify-end gap-4 pt-6 md:flex-row lg:max-w-[180px] lg:pt-0">
-        <ApplyButton url={url} text={ctaText} gaEvent={gaEvent} value={slug} />
-
-        {!ctaText && <ViewImpactButton slug={slug} />}
+        <MainCTAButton gaEvent={gaEvent} slug={slug} />
+        {!isInfo && <ViewImpactButton slug={slug} />}
 
         <div className="hidden lg:flex">
           <CaretRightIcon />

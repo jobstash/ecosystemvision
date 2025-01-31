@@ -1,17 +1,25 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { MouseEventHandler } from 'react';
+
 import { Button } from '@heroui/button';
 import { sendGAEvent } from '@next/third-parties/google';
 
-import { GA_EVENT } from '@/shared/core/constants';
+import { GA_EVENT, ROUTE_SECTIONS } from '@/shared/core/constants';
 
 interface Props {
   slug: string;
 }
 
 export const ViewImpactButton = ({ slug }: Props) => {
-  const sendAnalytics = () => {
+  const router = useRouter();
+  const onClick: MouseEventHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     sendGAEvent('event', GA_EVENT.GRANTS.VIEW_IMPACT, { value: slug });
+    router.push(`/${ROUTE_SECTIONS.IMPACT}/${slug}`);
   };
 
   return (
@@ -19,7 +27,7 @@ export const ViewImpactButton = ({ slug }: Props) => {
       <Button
         className="mx-auto w-full rounded-xl border border-white/20 font-semibold"
         variant="bordered"
-        onClick={sendAnalytics}
+        onClick={onClick}
       >
         <span>View Impact</span>
       </Button>

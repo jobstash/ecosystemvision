@@ -14,9 +14,9 @@ interface Props {
   inViewRef: (node?: Element | null) => void;
   hasNextPage: boolean;
   isPending: boolean;
+  gaEvent: string;
   isLink?: boolean;
   isInfo?: boolean;
-  ctaText?: string;
 }
 
 export const GrantListItems = (props: Props) => {
@@ -26,9 +26,9 @@ export const GrantListItems = (props: Props) => {
     inViewRef,
     hasNextPage,
     isPending,
+    gaEvent,
     isLink,
     isInfo,
-    ctaText,
   } = props;
 
   const lastItem = useMemo(() => {
@@ -56,9 +56,9 @@ export const GrantListItems = (props: Props) => {
           <div className={cn({ 'pt-6 lg:pt-8': index > 0 })}>
             <GrantListItem
               grant={grants[index]}
+              gaEvent={gaEvent}
               isLink={isLink}
               isInfo={isInfo}
-              ctaText={ctaText}
             />
           </div>
         )}

@@ -7,7 +7,7 @@ import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
 import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
-import { ApplyButton } from '@/grants/components/grant-list/apply-button';
+import { MainCTAButton } from '@/grants/components/grant-list/main-cta-button';
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links';
@@ -88,11 +88,7 @@ export const FullGrantCard = ({ grant }: Props) => {
             name={name}
           />
         </div>
-        <ApplyButton
-          url={url}
-          gaEvent={GA_EVENT.GRANTS.VIEW_PROGRAM}
-          value={slug}
-        />
+        <MainCTAButton gaEvent={GA_EVENT.GRANTS.VIEW_PROGRAM} slug={slug} />
       </div>
     </div>
   );
