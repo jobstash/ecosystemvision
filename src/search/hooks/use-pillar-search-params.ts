@@ -5,8 +5,7 @@ export const usePillarSearchParams = () => {
   const searchParams = useSearchParams();
 
   if (typeof params.pillar !== 'string' || typeof params.item !== 'string') {
-    const str = JSON.stringify(params);
-    throw new Error(`Missing required params.pillar and params.item: ${str}`);
+    return {};
   }
 
   const pillarKey = params.pillar as string;

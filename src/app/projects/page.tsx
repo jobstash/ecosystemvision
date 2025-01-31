@@ -51,8 +51,8 @@ const ProjectListPage = async ({ searchParams }: Props) => {
         isIndex
         nav="projects"
         params={{ pillar: '', item: '' }}
-        searchParams={{}}
-        content={<ProjectListClient searchParams="" />}
+        searchParams={rawSearchParams}
+        content={<ProjectListClient searchParams={rawSearchParams} />}
       />
     </HydrationBoundary>
   );

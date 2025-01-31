@@ -66,7 +66,13 @@ export const PillarAllFiltersHeader = ({
     }
 
     const query = searchParams.size > 0 ? `?${searchParams.toString()}` : '';
-    const path = `/${nav}/${params.pillar}/${params.item}${query}`;
+
+    const isPillarPage = params.pillar && params.item;
+    const pathPrefix = isPillarPage
+      ? `/${nav}/${params.pillar}/${params.item}`
+      : `/${nav}`;
+
+    const path = `${pathPrefix}${query}`;
 
     setIsActiveAllFilters(false);
     startTransition(() => {

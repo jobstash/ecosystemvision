@@ -52,8 +52,8 @@ const OrgListPage = async ({ searchParams }: Props) => {
         isIndex
         nav="organizations"
         params={{ pillar: '', item: '' }}
-        searchParams={{}}
-        content={<OrgListClient searchParams="" />}
+        searchParams={rawSearchParams}
+        content={<OrgListClient searchParams={rawSearchParams} />}
       />
     </HydrationBoundary>
   );

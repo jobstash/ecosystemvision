@@ -19,7 +19,12 @@ export const metadata: Metadata = {
     'Explore active grant programs driving the Web3 space forward. Discover funding opportunities and stay updated on real-time impacts with insights from our partnership with Ecosystem Vision, ThankArb, and the Cartographer Syndicate.',
 };
 
-const ActiveGrantsPage = async () => {
+interface Props {
+  searchParams: Promise<Record<string, string>>;
+}
+
+const ActiveGrantsPage = async (props: Props) => {
+  const searchParams = await props.searchParams;
   const queryClient = getQueryClient();
 
   queryClient.fetchInfiniteQuery({
@@ -35,7 +40,7 @@ const ActiveGrantsPage = async () => {
           isIndex
           nav="grants"
           params={{ pillar: '', item: '' }}
-          searchParams={{}}
+          searchParams={searchParams}
           content={
             <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE}>
               <div className="lg:hidden">
