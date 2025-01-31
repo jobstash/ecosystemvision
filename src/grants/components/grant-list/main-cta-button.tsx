@@ -1,29 +1,29 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import { Button } from '@heroui/button';
 import { sendGAEvent } from '@next/third-parties/google';
 
-import { ROUTE_SECTIONS } from '@/shared/core/constants';
+import { openNewTab } from '@/shared/utils/open-new-tab';
 
 interface Props {
   gaEvent: string;
   slug: string;
+  url: string | null;
 }
 
 /**
  * Need to implement this as button (instead of link) to avoid nested links
  * Parent card is already a link, so it'll throw react minification error
  */
-export const MainCTAButton = ({ gaEvent, slug }: Props) => {
-  const router = useRouter();
+export const ViewProgramButton = ({ gaEvent, slug, url }: Props) => {
+  if (!url) return null;
+
   const onClick: React.MouseEventHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     sendGAEvent('event', gaEvent, { value: slug });
-    router.push(`/${ROUTE_SECTIONS.GRANTS}/info/${slug}`);
+    openNewTab(url);
   };
 
   return (

@@ -7,7 +7,7 @@ import { getQueryClient } from '@/shared/utils/get-query-client';
 import { grantQueryKeys } from '@/grants/core/query-keys';
 import { getGrantDetails } from '@/grants/data/get-grant-details';
 import { getGrantList } from '@/grants/data/get-grant-list';
-import { GrantList } from '@/grants/components/grant-list';
+import { GrantList } from '@/grants/components/grant-list/apply-button';
 
 export const metadata: Metadata = {
   title: 'Grant Programs - Ecosystem Vision',

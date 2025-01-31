@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 
 import { Spinner } from '@heroui/spinner';
 
-import { GA_EVENT } from '@/shared/core/constants';
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { GrantListItem } from '@/grants/components/grant-list/grant-list-item';
@@ -34,11 +33,7 @@ export const AiGrantList = () => {
       <VirtualWrapper count={grants.length}>
         {(index) => (
           <div className="pt-6 lg:pt-8">
-            <GrantListItem
-              isAiResult
-              gaEvent={GA_EVENT.GRANTS.APPLY_AI_ACTIVE_GRANT}
-              grant={grants[index]}
-            />
+            <GrantListItem isAiResult grant={grants[index]} />
           </div>
         )}
       </VirtualWrapper>

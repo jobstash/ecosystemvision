@@ -7,8 +7,6 @@ import { GRANT_TEST_IDS } from '@/grants/core/constants';
 import { Grant } from '@/grants/core/schemas';
 import { getGrantCardData } from '@/grants/utils/get-grant-card-data';
 import { GrantListItemLinkWrapper } from '@/grants/components/grant-list/grant-list-item-link-wrapper';
-import { MainCTAButton } from '@/grants/components/grant-list/main-cta-button';
-import { ViewImpactButton } from '@/grants/components/grant-list/view-impact-button';
 import { DetailItems } from '@/grants/components/ui/base/detail-item';
 import { Title } from '@/grants/components/ui/base/title';
 import { WebLinks } from '@/grants/components/ui/base/web-links/web-links';
@@ -16,18 +14,12 @@ import { CaretRightIcon } from '@/grants/components/ui/icons/caret-right-icon';
 
 interface Props {
   grant: Grant;
-  gaEvent: string;
   isLink?: boolean;
   isInfo?: boolean;
   isAiResult?: boolean;
 }
 
-export const GrantListItem = ({
-  grant,
-  isLink = true,
-  isInfo,
-  gaEvent,
-}: Props) => {
+export const GrantListItem = ({ grant, isLink = true, isInfo }: Props) => {
   const {
     slug,
     logo,
@@ -100,9 +92,6 @@ export const GrantListItem = ({
         </div>
       </div>
       <div className="flex w-full flex-col items-center justify-end gap-4 pt-6 md:flex-row lg:max-w-[180px] lg:pt-0">
-        <MainCTAButton gaEvent={gaEvent} slug={slug} />
-        {!isInfo && <ViewImpactButton slug={slug} />}
-
         <div className="hidden lg:flex">
           <CaretRightIcon />
         </div>

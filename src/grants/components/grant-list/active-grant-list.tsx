@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 
 import { useAtom, useAtomValue } from 'jotai';
 
-import { GA_EVENT } from '@/shared/core/constants';
-
 import {
   aiGrantFinderPending,
   aiGrantFinderQueryAtom,
@@ -18,8 +16,7 @@ import { useGrantList } from './use-grant-list';
 const FetchedGrantList = () => {
   const props = useGrantList('active');
 
-  const gaEvent = GA_EVENT.GRANTS.APPLY_ACTIVE_GRANT;
-  return <GrantListItems isInfo gaEvent={gaEvent} {...props} />;
+  return <GrantListItems isInfo {...props} />;
 };
 
 const AiGrantList = () => {
@@ -33,8 +30,7 @@ const AiGrantList = () => {
     }
   }, [isPending, props.isPending, setIsPending]);
 
-  const gaEvent = GA_EVENT.GRANTS.APPLY_AI_ACTIVE_GRANT;
-  return <GrantListItems isInfo gaEvent={gaEvent} {...props} />;
+  return <GrantListItems isInfo {...props} />;
 };
 
 export const ActiveGrantList = () => {

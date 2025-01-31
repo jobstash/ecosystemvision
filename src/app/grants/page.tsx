@@ -9,7 +9,7 @@ import { grantQueryKeys } from '@/grants/core/query-keys';
 import { getGrantList } from '@/grants/data/get-grant-list';
 import { AiGrantProgramFinderPortal } from '@/grants/components/ai-grant-program-finder';
 import { AiGrantProgramFinderSkeleton } from '@/grants/components/ai-grant-program-finder/ai-grant-program-finder-skeleton';
-import { ActiveGrantList } from '@/grants/components/grant-list';
+import { ActiveGrantList } from '@/grants/components/grant-list/apply-button';
 
 import { PillarPage } from '@/search/pages/pillar-page';
 
