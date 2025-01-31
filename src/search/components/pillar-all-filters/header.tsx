@@ -107,10 +107,9 @@ const parseCsvParams = (
   params: Record<string, string>,
 ): Record<string, string[]> => {
   return Object.fromEntries(
-    Object.entries(params).map(([key, value]) => [
-      key,
-      value.split(',').filter(Boolean),
-    ]),
+    Object.entries(params)
+      .filter(([, value]) => !!value)
+      .map(([key, value]) => [key, value.split(',').filter(Boolean)]),
   );
 };
 
