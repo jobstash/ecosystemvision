@@ -93,7 +93,6 @@ export const PillarSelection = ({
   };
 
   const removeSelection = (key: string) => {
-    console.log({ key, currentSelections });
     setCurrentFilterParams((prev) => {
       return {
         ...prev,
