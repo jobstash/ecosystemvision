@@ -21,9 +21,14 @@ interface Props {
     pillar: string;
     items: { label: string; slug: string; isActive: boolean }[];
   }[];
+  isPillarPageSelection: boolean;
 }
 
-export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
+export const PillarAllFilters = ({
+  nav,
+  pillarSelections,
+  isPillarPageSelection,
+}: Props) => {
   const { data: filterConfigs = [] } = usePillarFilters(nav);
 
   const activeSearchParams = usePillarSearchParams();
@@ -69,7 +74,12 @@ export const PillarAllFilters = ({ nav, pillarSelections }: Props) => {
         ))}
 
         {pillarSelections.map(({ pillar }) => (
-          <PillarSelection key={pillar} nav={nav} pillar={pillar} />
+          <PillarSelection
+            key={pillar}
+            nav={nav}
+            pillar={pillar}
+            isPillarPageSelection={isPillarPageSelection}
+          />
         ))}
       </div>
     </div>

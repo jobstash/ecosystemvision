@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
@@ -7,16 +8,27 @@ import { Chip } from '@heroui/chip';
 import { useAtom } from 'jotai';
 
 import { capitalize } from '@/shared/utils/capitalize';
+import { normalizeString } from '@/shared/utils/normalize-string';
 
-import { currentFilterParamsAtom } from '@/search/core/atoms';
+import {
+  currentFilterParamsAtom,
+  isActiveAllFiltersAtom,
+} from '@/search/core/atoms';
 import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input';
+
+import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
 interface Props {
   nav: string;
   pillar: string;
+  isPillarPageSelection: boolean;
 }
 
-export const PillarSelection = ({ nav, pillar }: Props) => {
+export const PillarSelection = ({
+  nav,
+  pillar,
+  isPillarPageSelection,
+}: Props) => {
   const {
     isLoadingRoute,
     value,
@@ -49,22 +61,39 @@ export const PillarSelection = ({ nav, pillar }: Props) => {
       .map((label) => ({ label }));
   }, [currentSelections, list.items]);
 
+  const router = useRouter();
+  const { startTransition } = usePillarRoutesContext();
+
+  const [, setIsActveAllFilters] = useAtom(isActiveAllFiltersAtom);
+  const redirectToPillarPage = (item: string) => {
+    setIsActveAllFilters(false);
+    startTransition(() => {
+      router.push(`/${nav}/${pillar}/${normalizeString(item)}`);
+    });
+  };
+
   const addSelection = (key: React.Key | null) => {
-    if (key) {
-      onClear();
-      setCurrentFilterParams((prev) => {
-        return {
-          ...prev,
-          [pillar]: {
-            ...prev[pillar],
-            current: [...currentSelections, key as string],
-          },
-        };
-      });
+    if (!key) return;
+
+    if (isPillarPageSelection) {
+      redirectToPillarPage(key as string);
+      return;
     }
+
+    onClear();
+    setCurrentFilterParams((prev) => {
+      return {
+        ...prev,
+        [pillar]: {
+          ...prev[pillar],
+          current: [...currentSelections, key as string],
+        },
+      };
+    });
   };
 
   const removeSelection = (key: string) => {
+    console.log({ key, currentSelections });
     setCurrentFilterParams((prev) => {
       return {
         ...prev,

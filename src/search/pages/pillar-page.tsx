@@ -92,7 +92,11 @@ export const PillarPage = async (props: Props) => {
   return (
     <PillarAllFiltersWrapper
       allFilters={
-        <PillarAllFilters nav={nav} pillarSelections={pillarSelections} />
+        <PillarAllFilters
+          nav={nav}
+          pillarSelections={pillarSelections}
+          isPillarPageSelection={isIndex}
+        />
       }
     >
       <div className="relative min-h-screen space-y-4 overflow-hidden">
