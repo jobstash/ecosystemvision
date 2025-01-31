@@ -36,7 +36,7 @@ const meta: Meta<typeof GranteeProjectStats> = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}`,
+        pathname: `/${ROUTE_SECTIONS.IMPACT}/${grantId}`,
         segments: [['grantId', grantId]],
       },
     },

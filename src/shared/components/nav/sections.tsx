@@ -30,12 +30,12 @@ const SECTIONS = [
         href: HREFS.PROJECTS_PAGE,
       },
       {
-        text: A11Y.LINK.NAV.ACTIVE_GRANTS,
-        href: HREFS.ACTIVE_GRANTS_PAGE,
+        text: A11Y.LINK.NAV.GRANTS,
+        href: HREFS.GRANTS_PAGE,
       },
       {
-        text: A11Y.LINK.NAV.GRANTS,
-        href: HREFS.GRANT_IMPACT_PAGE,
+        text: A11Y.LINK.NAV.IMPACT,
+        href: HREFS.IMPACT_PAGE,
       },
     ],
   },

@@ -33,7 +33,7 @@ const ActiveGrantsPage = async () => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <PillarPage
           isIndex
-          nav="active-grants"
+          nav="grants"
           params={{ pillar: '', item: '' }}
           searchParams={{}}
           content={

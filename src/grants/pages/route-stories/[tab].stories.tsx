@@ -52,7 +52,7 @@ export const Default: Story = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeId}/projects/summary`,
+        pathname: `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeId}/projects/summary`,
         segments: [
           ['grantId', grantId],
           ['granteeId', granteeId],
@@ -80,7 +80,7 @@ export const ImpactMetrics: Story = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeId}/projects/impact-metrics`,
+        pathname: `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeId}/projects/impact-metrics`,
         segments: [
           ['grantId', grantId],
           ['granteeId', granteeId],
@@ -108,7 +108,7 @@ export const GithubMetrics: Story = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeId}/projects/github-metrics`,
+        pathname: `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeId}/projects/github-metrics`,
         segments: [
           ['grantId', grantId],
           ['granteeId', granteeId],
@@ -136,7 +136,7 @@ export const CodeMetrics: Story = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeId}/projects/code-metrics`,
+        pathname: `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeId}/projects/code-metrics`,
         segments: [
           ['grantId', grantId],
           ['granteeId', granteeId],
@@ -164,7 +164,7 @@ export const ContractAddress: Story = {
   parameters: {
     nextjs: {
       navigation: {
-        pathname: `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeId}/projects/contract-address`,
+        pathname: `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeId}/projects/contract-address`,
         segments: [
           ['grantId', grantId],
           ['granteeId', granteeId],

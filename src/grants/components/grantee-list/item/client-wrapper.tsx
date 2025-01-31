@@ -25,7 +25,7 @@ export const ClientWrapper = ({
 }: Props) => {
   const params = useParams();
 
-  const href = `/${ROUTE_SECTIONS.GRANT_IMPACT}/${params.grantId}/grantees/${granteeId}`;
+  const href = `/${ROUTE_SECTIONS.IMPACT}/${params.grantId}/grantees/${granteeId}`;
   const isActive = isActiveBypass || params.granteeId === granteeId;
 
   const sendAnalytics = () => {

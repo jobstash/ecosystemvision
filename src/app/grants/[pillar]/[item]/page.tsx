@@ -19,7 +19,7 @@ const Page = async (props: Props) => {
 
   return (
     <PillarPage
-      nav="active-grants"
+      nav="grants"
       params={params}
       searchParams={searchParams}
       content={

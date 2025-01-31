@@ -39,7 +39,7 @@ export const HomePage = () => {
           </div>
           <Button
             as={Link}
-            href={HREFS.ACTIVE_GRANTS_PAGE}
+            href={HREFS.GRANTS_PAGE}
             className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
           >
             <span className="text-base font-medium">
@@ -85,7 +85,7 @@ export const HomePage = () => {
 
           <Button
             as={Link}
-            href={HREFS.GRANT_IMPACT_PAGE}
+            href={HREFS.IMPACT_PAGE}
             className="mx-auto mt-6 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
           >
             <span className="text-base font-medium">Explore Grant Impact</span>

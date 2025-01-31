@@ -45,10 +45,10 @@ export const Footer = () => {
             <Link href={HREFS.ORGS_PAGE}>Organizations</Link>
           </li>
           <li>
-            <Link href={HREFS.ACTIVE_GRANTS_PAGE}>Active Grants</Link>
+            <Link href={HREFS.GRANTS_PAGE}>Active Grants</Link>
           </li>
           <li>
-            <Link href={HREFS.GRANT_IMPACT_PAGE}>Grant Impact</Link>
+            <Link href={HREFS.IMPACT_PAGE}>Grant Impact</Link>
           </li>
         </ul>
       </div>

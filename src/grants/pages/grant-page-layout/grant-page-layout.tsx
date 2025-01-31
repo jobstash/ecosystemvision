@@ -26,7 +26,7 @@ export const GrantPageLayout = ({ list, grant, children }: Props) => {
     <div className="flex flex-col gap-6 px-4 pt-[56px] md:pt-20 lg:px-0 lg:pt-0">
       <GrantCard
         grant={grant}
-        backButton={<GrantBackButton fallbackUrl={HREFS.GRANT_IMPACT_PAGE} />}
+        backButton={<GrantBackButton fallbackUrl={HREFS.IMPACT_PAGE} />}
       />
 
       <div className="lg:pr-8">

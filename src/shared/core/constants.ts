@@ -2,8 +2,8 @@ export const ROUTE_SECTIONS = {
   SEARCH: 'search' as const,
   ORGS: 'organizations' as const,
   PROJECTS: 'projects' as const,
-  ACTIVE_GRANTS: 'active-grants' as const,
-  GRANT_IMPACT: 'grant-impact' as const,
+  GRANTS: 'grants' as const,
+  IMPACT: 'impact' as const,
 } as const;
 export type RouteSection = (typeof ROUTE_SECTIONS)[keyof typeof ROUTE_SECTIONS];
 
@@ -23,8 +23,8 @@ export const HREFS = {
   HOME_PAGE: '/',
   ORGS_PAGE: `/${ROUTE_SECTIONS.ORGS}`,
   PROJECTS_PAGE: `/${ROUTE_SECTIONS.PROJECTS}`,
-  GRANT_IMPACT_PAGE: `/${ROUTE_SECTIONS.GRANT_IMPACT}`,
-  ACTIVE_GRANTS_PAGE: `/${ROUTE_SECTIONS.ACTIVE_GRANTS}`,
+  IMPACT_PAGE: `/${ROUTE_SECTIONS.IMPACT}`,
+  GRANTS_PAGE: `/${ROUTE_SECTIONS.GRANTS}`,
 } as const;
 
 export const A11Y = {
@@ -35,8 +35,8 @@ export const A11Y = {
       HOME: 'Home',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
-      GRANTS: 'Grant Impact',
-      ACTIVE_GRANTS: 'Active Grants',
+      IMPACT: 'Impact',
+      GRANTS: 'Grants',
     },
   },
 } as const;

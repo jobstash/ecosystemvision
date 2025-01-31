@@ -35,7 +35,7 @@ export const ProjectSelections = () => {
   if (errorMessage) return null;
   if (!granteeData?.data) return null;
 
-  const baseHref = `/${ROUTE_SECTIONS.GRANT_IMPACT}/${grantId}/grantees/${granteeData.data.slug}/projects`;
+  const baseHref = `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeData.data.slug}/projects`;
 
   return (
     <div className={WRAPPER_CLASSNAME}>
