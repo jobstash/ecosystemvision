@@ -15,8 +15,15 @@ export const OrgDetailsHeader = ({ org }: Props) => {
   const { name, logoUrl, website, summary } = org;
   const src = getLogoUrl(website!, logoUrl);
   const infoTags = createOrgInfoTagProps(org);
-  const socials = createSocialsInfoTagProps(org, { website: false });
-  const tags = [...infoTags, ...socials];
+  const socialTags = createSocialsInfoTagProps(org, { website: false });
 
-  return <DetailsHeader src={src} name={name} summary={summary} tags={tags} />;
+  return (
+    <DetailsHeader
+      src={src}
+      name={name}
+      summary={summary}
+      infoTags={infoTags}
+      socialTags={socialTags}
+    />
+  );
 };

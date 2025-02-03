@@ -34,7 +34,6 @@ export const ProjectCard = (props: Props) => {
     <CardWrapper id={slug} idAtom={activeProjectSlugAtom}>
       <Link
         href={href}
-        scroll={false}
         data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
         data-uuid={slug}
         data-is-init={isInit ?? undefined}

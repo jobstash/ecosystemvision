@@ -2,6 +2,7 @@ import { ProjectInfo, ProjectInfoTags } from '@/shared/core/schemas';
 import { EnabledTagsConfig, InfoTagProps } from '@/shared/core/types';
 import { formatNumber } from '@/shared/utils/format-number';
 import { getEnabledTagsConfig } from '@/shared/utils/get-enabled-tags-config';
+import { getWebsiteText } from '@/shared/utils/get-website-text';
 import { ActiveUsersIcon } from '@/shared/components/icons/active-users-icon';
 import { CategoryIcon } from '@/shared/components/icons/category-icon';
 import { MonthlyVolumeIcon } from '@/shared/components/icons/monthly-volume-icon';
@@ -11,6 +12,7 @@ import { TvlIcon } from '@/shared/components/icons/tvl-icon';
 export const createProjectInfoTagProps = (
   projectInfoTags: ProjectInfoTags,
   config?: EnabledTagsConfig<ProjectInfo>,
+  website?: string | null,
 ) => {
   const {
     category,
@@ -24,6 +26,16 @@ export const createProjectInfoTagProps = (
   const enabledTagsConfig = getEnabledTagsConfig(projectInfoTags, config);
 
   const tags: InfoTagProps[] = [];
+
+  if (website) {
+    const { hostname, link } = getWebsiteText(website);
+    tags.push({
+      text: hostname,
+      icon: null,
+      link,
+      showExternalIcon: true,
+    });
+  }
 
   if (category && enabledTagsConfig.category) {
     tags.push({

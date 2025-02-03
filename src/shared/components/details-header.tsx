@@ -9,11 +9,12 @@ interface Props {
   src: string;
   name: string;
   summary: string;
-  tags: InfoTagProps[];
+  infoTags: InfoTagProps[];
+  socialTags: InfoTagProps[];
 }
 
 export const DetailsHeader = (props: Props) => {
-  const { src, name, summary, tags } = props;
+  const { src, name, summary, infoTags, socialTags } = props;
 
   return (
     <div className="flex flex-col gap-4">
@@ -28,7 +29,10 @@ export const DetailsHeader = (props: Props) => {
           </div>
         </div>
       </div>
-      <InfoTags tags={tags} />
+      <div className="flex max-w-4xl flex-col gap-4">
+        <InfoTags tags={infoTags} />
+        <InfoTags tags={socialTags} />
+      </div>
     </div>
   );
 };
