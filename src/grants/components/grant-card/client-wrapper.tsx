@@ -82,7 +82,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
       <div ref={sentinelRef} className="absolute left-0 top-0 h-1 w-full"></div>
       <div
         ref={fixedDivRef}
-        className="mt-[56px] bg-app-bg md:mt-20  lg:mr-8 lg:mt-0 lg:rounded-b-20"
+        className="bg-app-bg mt-[56px] md:mt-20  lg:mr-8 lg:mt-0 lg:rounded-b-20"
       >
         <div className="flex items-center px-5 lg:h-[115px] lg:px-0">
           {backButton}

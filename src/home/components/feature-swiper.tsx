@@ -19,7 +19,7 @@ export const FeatureSwiper = () => {
     <section className="md:pt-6 lg:pt-20">
       <MySwiper spaceBetween={40} breakpoints={breakpoints}>
         <SwiperSlide>
-          <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
+          <div className="from-gradient-1/0 to-gradient-2/25 flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl p-5">
             <EarnIcon />
             <h3 className="text-base font-semibold leading-5 antialiased lg:text-xl lg:leading-[26px]">
               Earn and Connect as a Verified Professional
@@ -33,7 +33,7 @@ export const FeatureSwiper = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
+          <div className="from-gradient-1/0 to-gradient-2/25 flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl p-5">
             <GainIcon />
             <h3 className="text-base font-semibold leading-5 antialiased lg:text-xl lg:leading-[26px]">
               Gain Investor Insights
@@ -46,7 +46,7 @@ export const FeatureSwiper = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
+          <div className="from-gradient-1/0 to-gradient-2/25 flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl p-5">
             <TrackIcon />
             <h3 className="text-base font-semibold leading-5 antialiased lg:text-xl lg:leading-[26px]">
               Track Grant Program Impact
@@ -59,7 +59,7 @@ export const FeatureSwiper = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl from-gradient-1/0 to-gradient-2/25 p-5">
+          <div className="from-gradient-1/0 to-gradient-2/25 flex h-full grow flex-col gap-y-4 rounded-20 bg-gradient-to-tl p-5">
             <AccessIcon />
             <h3 className="text-base font-semibold leading-5 antialiased lg:text-xl lg:leading-[26px]">
               Access Comprehensive Ecosystem Data

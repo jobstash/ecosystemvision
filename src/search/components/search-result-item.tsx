@@ -26,7 +26,7 @@ const highlightText = (text: string, query: string): React.ReactNode => {
     <div className="">
       {parts.map((part, index) =>
         regex.test(part) ? (
-          <span key={index} className="font-semibold text-accent2">
+          <span key={index} className="text-accent2 font-semibold">
             {part}
           </span>
         ) : (

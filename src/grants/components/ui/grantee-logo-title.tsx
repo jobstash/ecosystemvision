@@ -48,7 +48,7 @@ export const GranteeLogoTitle = (props: Props) => {
         </span>
         <span
           className={cn(
-            'hidden text-cool-gray md:block md:text-13',
+            'text-cool-gray hidden md:block md:text-13',
             classNames?.category,
           )}
         >

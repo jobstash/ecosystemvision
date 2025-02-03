@@ -24,7 +24,7 @@ export const DetailItem = ({
       {label && (
         <span
           className={cn(
-            'pr-2 text-labels/75',
+            'text-labels/75 pr-2',
             classNames?.label,
             label === 'Description' ? 'hidden lg:block' : '',
           )}

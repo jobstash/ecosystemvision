@@ -72,7 +72,7 @@ export const Container = ({
   >
     <div
       className={cn(
-        'flex  flex-col rounded-20 bg-gradient-to-r from-gradient-1/25 to-gradient-2/0 p-4 lg:bg-white/10 lg:bg-none',
+        'from-gradient-1/25  to-gradient-2/0 flex flex-col rounded-20 bg-gradient-to-r p-4 lg:bg-white/10 lg:bg-none',
         {
           'min-h-[130px]': hasGap,
           'min-h-[90px]': !hasGap,
