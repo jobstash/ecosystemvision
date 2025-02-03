@@ -44,7 +44,7 @@ html {
 }
 
 .is-active {
-  @apply bg-gradient-to-r from-white/100 text-black to-light-gray;
+  @apply bg-gradient-to-r from-white/100 text-black to-gray;
 }
 
 /* remove padding in storybook to easily work on the homepage */

@@ -8,6 +8,7 @@ import {
   jobInfoTagsSchema,
   orgInfoSchema,
   projectAllInfoSchema,
+  tagSchema,
 } from '@/shared/core/schemas';
 
 import { ORG_REVIEW_LOCATIONS, ORG_REVIEW_TIMEZONES } from './constants';
@@ -105,6 +106,7 @@ export const orgDetailsSchema = z
     aggregateRatings: orgRatingSchema,
     reviewCount: z.number(),
     reviews: z.array(orgReviewSchema.omit({ compensation: true })),
+    tags: z.array(tagSchema),
   })
   .merge(orgInfoSchema);
 export type OrgDetails = z.infer<typeof orgDetailsSchema>;
