@@ -1,13 +1,11 @@
-import { OrgInfo, OrgInfoTagProps } from '@/shared/core/schemas';
-import { InfoTagProps } from '@/shared/core/types';
+import { OrgInfo } from '@/shared/core/schemas';
 import { createSocialsInfoTagProps } from '@/shared/utils/create-socials-info-tag-props';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
-import { getWebsiteText } from '@/shared/utils/get-website-text';
-import { LocationIcon } from '@/shared/components/icons/location-icon';
-import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
 import { InfoTags } from '@/shared/components/info-tags';
 import { LogoTitle } from '@/shared/components/logo-title';
 import { Text } from '@/shared/components/text';
+
+import { createOrgInfoTagProps } from '@/orgs/components/utils/create-org-info-tag-props';
 
 interface Props {
   org: OrgInfo;
@@ -16,7 +14,7 @@ interface Props {
 export const DetailsPanelHeader = ({ org }: Props) => {
   const { name, logoUrl, website, summary } = org;
   const src = getLogoUrl(website!, logoUrl);
-  const tags = createInfoTagProps(org);
+  const tags = createOrgInfoTagProps(org);
   const socials = createSocialsInfoTagProps(org, { website: false });
 
   return (
@@ -27,36 +25,4 @@ export const DetailsPanelHeader = ({ org }: Props) => {
       <InfoTags isDraggable isCompact tags={socials} />
     </div>
   );
-};
-
-export const createInfoTagProps = (props: OrgInfoTagProps) => {
-  const { website, location, headcountEstimate } = props;
-
-  const tags: InfoTagProps[] = [];
-
-  if (website) {
-    const { hostname, link } = getWebsiteText(website);
-    tags.push({
-      text: hostname,
-      icon: null,
-      link,
-      showExternalIcon: true,
-    });
-  }
-
-  if (location) {
-    tags.push({
-      text: location,
-      icon: <LocationIcon />,
-    });
-  }
-
-  if (headcountEstimate) {
-    tags.push({
-      text: `Employees: ${headcountEstimate}`,
-      icon: <UsersThreeIcon />,
-    });
-  }
-
-  return tags;
 };

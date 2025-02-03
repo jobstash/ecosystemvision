@@ -34,7 +34,6 @@ export const OrgCard = (props: Props) => {
     <CardWrapper id={slug} idAtom={activeOrgSlugAtom}>
       <Link
         href={href}
-        scroll={false}
         data-testid={ORG_TEST_IDS.ORG_CARD}
         data-uuid={slug}
         data-is-init={isInit ?? undefined}
