@@ -4,7 +4,7 @@ interface Props {
   org: OrgDetails;
 }
 
-export const OrgDetailsFunding = ({ org }: Props) => {
+export const OrgDetailsInvestments = ({ org }: Props) => {
   const { fundingRounds, investors } = org;
   return (
     <pre>{JSON.stringify({ fundingRounds, investors }, undefined, '\t')}</pre>

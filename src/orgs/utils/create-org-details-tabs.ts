@@ -7,17 +7,16 @@ export const createOrgDetailsTabs = (org: OrgDetails) => {
 
   const tabs = [{ key: 'overview', text: 'Overview', href: `${hrefPrefix}` }];
 
-  const fundingRoundsCount = org.fundingRounds.length;
-  const investorsCount = org.investors.length;
-  if (fundingRoundsCount > 0 || investorsCount > 0) {
-    const fundingTitle =
-      fundingRoundsCount === 1
-        ? 'Funding Round'
-        : `Funding Rounds (${fundingRoundsCount})`;
+  const investmentsCount = org.fundingRounds.length + org.investors.length;
+  if (investmentsCount > 0) {
+    const text =
+      investmentsCount === 1
+        ? 'Investment'
+        : `Investments (${investmentsCount})`;
     tabs.push({
-      key: 'funding',
-      text: fundingTitle,
-      href: `${hrefPrefix}/funding`,
+      key: 'investments',
+      text,
+      href: `${hrefPrefix}/investments`,
     });
   }
 
