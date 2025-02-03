@@ -5,10 +5,21 @@ import { OrgDetails } from '@/orgs/core/schemas';
 export const createOrgDetailsTabs = (org: OrgDetails) => {
   const hrefPrefix = `/${ROUTE_SECTIONS.ORGS}/info/${org.normalizedName}`;
 
-  const tabs = [
-    { key: 'overview', text: 'Overview', href: `${hrefPrefix}` },
-    { key: 'funding', text: 'Funding', href: `${hrefPrefix}/funding` },
-  ];
+  const tabs = [{ key: 'overview', text: 'Overview', href: `${hrefPrefix}` }];
+
+  const fundingRoundsCount = org.fundingRounds.length;
+  const investorsCount = org.investors.length;
+  if (fundingRoundsCount > 0 || investorsCount > 0) {
+    const fundingTitle =
+      fundingRoundsCount === 1
+        ? 'Funding Round'
+        : `Funding Rounds (${fundingRoundsCount})`;
+    tabs.push({
+      key: 'funding',
+      text: fundingTitle,
+      href: `${hrefPrefix}/funding`,
+    });
+  }
 
   const projectsCount = org.projects.length;
   if (projectsCount > 0) {
