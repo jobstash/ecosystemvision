@@ -142,7 +142,7 @@ export const HomePage = () => {
               </Button>
             </div>
             <div className="md:flex md:w-1/2 md:items-center md:justify-center">
-              <div className="bg-innovate ml-5 mt-16 w-[240px] rotate-12 rounded-xl border-t border-white p-5 md:mt-0 lg:ml-0 lg:w-[400px] lg:p-8">
+              <div className="ml-5 mt-16 w-[240px] rotate-12 rounded-xl border-t border-white bg-innovate p-5 md:mt-0 lg:ml-0 lg:w-[400px] lg:p-8">
                 <div className="mb-3 flex size-8 items-center justify-center rounded-md border-t bg-[#17171A] shadow-lg lg:mb-6 lg:size-14 [&>svg]:lg:size-10">
                   <FlashIcon />
                 </div>

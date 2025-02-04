@@ -19,7 +19,7 @@ export const PillarRow = (props: Props) => {
     <PillarLoadingWrapper>
       <div className="flex flex-col gap-1">
         {!hidePillar && (
-          <div className="text-accent2/90 pl-2 text-13 uppercase">
+          <div className="pl-2 text-13 uppercase text-accent2/90">
             <span>{formatPillarName(pillar, nav)}</span>
           </div>
         )}

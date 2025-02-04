@@ -34,7 +34,7 @@ export const SearchResult = ({
   return (
     <SearchResultLayout
       label={
-        <span className="text-accent2 text-13 uppercase">
+        <span className="text-13 uppercase text-accent2">
           suggested {title}
         </span>
       }
