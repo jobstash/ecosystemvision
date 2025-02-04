@@ -23,7 +23,14 @@ interface Props {
 
 export const ProjectCard = (props: Props) => {
   const { project, isInit, filterParamsString = '' } = props;
-  const { normalizedName: slug, website, logo, name, chains } = project;
+  const {
+    normalizedName: slug,
+    website,
+    logo,
+    name,
+    chains,
+    summary,
+  } = project;
 
   const src = getLogoUrl(website || '', logo);
   const { upperTags, midTags } = createProjectTags(project);
@@ -41,6 +48,12 @@ export const ProjectCard = (props: Props) => {
         className="flex flex-col gap-3 p-6"
       >
         <LogoTitle src={src} name={name} />
+
+        {summary && (
+          <>
+            <p className="text-sm text-white/80">{summary}</p>
+          </>
+        )}
 
         {upperTags.length > 0 && <Divider />}
         <InfoTags isCompact tags={upperTags} />

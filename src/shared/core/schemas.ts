@@ -154,6 +154,7 @@ export const projectInfoSchema = z
     chains: z.array(chainSchema),
     hacks: z.array(hackSchema),
     audits: z.array(auditSchema),
+    summary: z.string().nullable(),
   })
   .merge(projectInfoTagsSchema);
 export type ProjectInfo = z.infer<typeof projectInfoSchema>;
