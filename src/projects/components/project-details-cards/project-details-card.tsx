@@ -75,7 +75,11 @@ export const ProjectDetailsCard = ({ project, actionHref }: Props) => {
         <>
           <Divider />
           <DetailsPanelActionsWrapper>
-            <DetailsPanelCTA text={CTA_TEXT} href={actionHref} />
+            <DetailsPanelCTA
+              text={CTA_TEXT}
+              href={actionHref}
+              isActive={false}
+            />
           </DetailsPanelActionsWrapper>
         </>
       )}

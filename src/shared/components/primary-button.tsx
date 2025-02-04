@@ -9,17 +9,24 @@ interface Props extends ButtonProps {
     button?: ClassValue;
     text?: ClassValue;
   };
+  isActive: boolean;
 }
 
-const TEXT_CLASS_NAME = 'shrink-0 text-xs font-semibold sm:text-sm';
-const BUTTON_CLASS_NAME = 'flex items-center rounded-lg is-active p-2 px-4';
+const TEXT_CLASS_NAME = 'shrink-0 text-xs sm:text-sm';
+const BUTTON_CLASS_NAME = 'flex items-center rounded-lg p-2 px-4';
 
-export const PrimaryButton = ({ text, classNames, ...props }: Props) => {
-  const buttonClassName = cn(BUTTON_CLASS_NAME, classNames?.button);
+export const PrimaryButton = (props: Props) => {
+  const { text, classNames, isActive, ...rest } = props;
+
+  const buttonClassName = cn(BUTTON_CLASS_NAME, classNames?.button, {
+    'is-active': isActive,
+    'bg-white/10': !isActive,
+  });
+
   const textClassName = cn(TEXT_CLASS_NAME, classNames?.text);
 
   return (
-    <Button className={buttonClassName} {...props}>
+    <Button className={buttonClassName} {...rest}>
       <span className={textClassName}>{text}</span>
     </Button>
   );
