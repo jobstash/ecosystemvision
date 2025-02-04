@@ -1,3 +1,4 @@
+import { Heading } from '@/shared/components/heading';
 import { TagsSection } from '@/shared/components/tags-section';
 
 import { OrgDetails } from '@/orgs/core/schemas';
@@ -7,11 +8,14 @@ interface Props {
 }
 
 export const OrgDetailsOverview = ({ org }: Props) => {
-  const { tags } = org;
+  const { tags, description } = org;
 
   return (
     <div className="flex flex-col gap-4">
-      <span className="text-white/80">{org.description}</span>
+      <div className="flex flex-col gap-2">
+        <Heading className="text-lg text-white/90" text="Description" />
+        <span className="text-white/80">{description}</span>
+      </div>
       <TagsSection tags={tags} />
     </div>
   );
