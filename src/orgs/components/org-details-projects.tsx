@@ -1,4 +1,5 @@
 import { OrgDetails } from '@/orgs/core/schemas';
+import { ProjectDetailsCards } from '@/projects/components/project-details-cards';
 
 interface Props {
   org: OrgDetails;
@@ -6,11 +7,5 @@ interface Props {
 
 export const OrgDetailsProjects = ({ org }: Props) => {
   const { projects } = org;
-  return (
-    <div>
-      {projects.map((project) => (
-        <pre key={project.id}>{JSON.stringify(project, undefined, '\t')}</pre>
-      ))}
-    </div>
-  );
+  return <ProjectDetailsCards projects={projects} />;
 };

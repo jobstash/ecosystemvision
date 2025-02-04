@@ -16,7 +16,7 @@ export const ProjectDetailsCards = ({ projects }: Props) => {
         <ProjectDetailsCard
           key={project.id}
           project={project}
-          actionHref={`${FRONTEND_URL}/projects/names/${project.normalizedName}/details`}
+          actionHref={`${FRONTEND_URL}/projects/info/${project.normalizedName}`}
         />
       ))}
     </div>
