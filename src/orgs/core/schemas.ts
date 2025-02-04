@@ -23,6 +23,7 @@ export const orgListItemSchema = orgInfoSchema
     logoUrl: true,
     aggregateRating: true,
     reviewCount: true,
+    summary: true,
   })
   .merge(
     z.object({

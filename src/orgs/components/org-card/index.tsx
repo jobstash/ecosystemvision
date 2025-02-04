@@ -22,7 +22,14 @@ interface Props {
 
 export const OrgCard = (props: Props) => {
   const { orgItem, isInit = false, filterParamsString = '' } = props;
-  const { normalizedName: slug, url, logoUrl, name, location } = orgItem;
+  const {
+    normalizedName: slug,
+    url,
+    logoUrl,
+    name,
+    location,
+    summary,
+  } = orgItem;
 
   const src = getLogoUrl(url, logoUrl);
   const tags = createOrgCardTags(orgItem);
@@ -47,9 +54,18 @@ export const OrgCard = (props: Props) => {
           </div>
         </LogoTitle>
 
-        {hasTags && <Divider />}
+        {summary && (
+          <>
+            <p className="text-sm text-white/80">{summary}</p>
+          </>
+        )}
 
-        <InfoTags tags={tags} />
+        {hasTags && (
+          <>
+            <Divider />
+            <InfoTags tags={tags} />
+          </>
+        )}
       </Link>
     </CardWrapper>
   );
