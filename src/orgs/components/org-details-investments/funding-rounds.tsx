@@ -1,8 +1,7 @@
+import { FundingRoundsList } from '@/shared/components/funding-rounds-list';
 import { Heading } from '@/shared/components/heading';
 
 import { OrgDetails } from '@/orgs/core/schemas';
-
-import { FundingRoundsList } from './funding-rounds-list';
 
 const HEADING_TEXT = 'Funding Rounds';
 

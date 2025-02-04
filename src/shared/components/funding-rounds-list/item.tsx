@@ -8,29 +8,28 @@ import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 import { InfoTag } from '@/shared/components/info-tag';
 
-import { OrgDetails } from '@/orgs/core/schemas';
-
-type FundingRound = OrgDetails['fundingRounds'][number];
-
-interface Props extends FundingRound {
+interface Props {
   showDivider: boolean;
-  isGrid: boolean;
+  round: string | null;
+  date: number;
+  amount: number | null;
+  isGrid?: boolean;
 }
 
 export const FundingRoundItem = (props: Props) => {
-  const { date, raisedAmount, roundName, showDivider, isGrid } = props;
+  const { showDivider, round, date, amount, isGrid } = props;
 
   const infoTags = [
-    roundName && {
-      text: `Funding Round: ${roundName}`,
+    round && {
+      text: `Funding Round: ${round}`,
       icon: <BankIcon />,
     },
     {
       text: `Funding Date: ${shortTimestamp(date)}`,
       icon: <HandCoinsIcon size={16} />,
     },
-    raisedAmount && {
-      text: `Raised Amount: $${formatNumber(raisedAmount * 1_000_000)}`,
+    amount && {
+      text: `Raised Amount: $${formatNumber(amount * 1_000_000)}`,
       icon: <PaperbillIcon />,
     },
   ].filter(Boolean) as InfoTagProps[];

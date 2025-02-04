@@ -1,9 +1,9 @@
-import { OrgDetails } from '@/orgs/core/schemas';
+import { FundingRound } from '@/shared/core/schemas';
 
-import { FundingRoundItem } from './funding-round-item';
+import { FundingRoundItem } from './item';
 
 interface Props {
-  fundingRounds: OrgDetails['fundingRounds'];
+  fundingRounds: FundingRound[];
 }
 
 export const FundingRoundsList = ({ fundingRounds }: Props) => {
@@ -12,10 +12,12 @@ export const FundingRoundsList = ({ fundingRounds }: Props) => {
 
   return (
     <div className="flex flex-col gap-x-4 gap-y-2">
-      {fundingRounds.map((round, index) => (
+      {fundingRounds.map(({ id, roundName, date, raisedAmount }, index) => (
         <FundingRoundItem
-          key={round.id}
-          {...round}
+          key={id}
+          round={roundName}
+          date={date}
+          amount={raisedAmount}
           showDivider={index !== count - 1}
           isGrid={isGrid}
         />
