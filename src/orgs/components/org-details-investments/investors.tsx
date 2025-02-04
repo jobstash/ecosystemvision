@@ -1,8 +1,7 @@
 import { Heading } from '@/shared/components/heading';
+import { InvestorsList } from '@/shared/components/investors-list';
 
 import { OrgDetails } from '@/orgs/core/schemas';
-
-import { InvestorsList } from './investors-list';
 
 const HEADING_TEXT = 'Investors';
 

@@ -1,9 +1,8 @@
-import { OrgDetails } from '@/orgs/core/schemas';
+import { Investor } from '@/shared/core/schemas';
 
-import { InvestorItem } from './investor-item';
-
+import { InvestorItem } from './item';
 interface Props {
-  investors: OrgDetails['investors'];
+  investors: Investor[];
 }
 
 export const InvestorsList = ({ investors }: Props) => (
