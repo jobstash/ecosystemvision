@@ -6,11 +6,11 @@ interface Props {
 }
 
 export const ProjectDetailsOrg = ({ project }: Props) => {
-  const { organizations: orgs } = project;
+  const { organizations } = project;
 
   return (
     <div className="flex flex-col gap-4">
-      {orgs.map((org) => (
+      {organizations.map((org) => (
         <OrgDetailsCard key={org.id} org={org} />
       ))}
     </div>
