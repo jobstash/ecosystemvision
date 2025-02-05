@@ -19,12 +19,14 @@ interface Props {
     fundingRounds: FundingRound[];
     investors: Investor[];
   };
+  actionHref?: string;
 }
 
 export const OrgDetailsCard = ({
   org: { name, description, fundingRounds, investors, normalizedName },
+  actionHref,
 }: Props) => {
-  const exploreHref = `/organizations/info/${normalizedName}`;
+  const exploreHref = actionHref || `/organizations/info/${normalizedName}`;
 
   return (
     <DetailsPanelCardWrapper>
