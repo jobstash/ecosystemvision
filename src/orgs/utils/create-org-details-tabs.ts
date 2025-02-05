@@ -7,12 +7,10 @@ export const createOrgDetailsTabs = (org: OrgDetails) => {
 
   const tabs = [{ key: 'overview', text: 'Overview', href: `${hrefPrefix}` }];
 
-  const investmentsCount = org.fundingRounds.length + org.investors.length;
-  if (investmentsCount > 0) {
-    const text =
-      investmentsCount === 1
-        ? 'Investment'
-        : `Investments (${investmentsCount})`;
+  const fundingRoundsCount = org.fundingRounds.length;
+  const investorsCount = org.investors.length;
+  if (fundingRoundsCount || investorsCount) {
+    const text = `Investments${fundingRoundsCount ? ` (${fundingRoundsCount})` : ''}`;
     tabs.push({
       key: 'investments',
       text,
