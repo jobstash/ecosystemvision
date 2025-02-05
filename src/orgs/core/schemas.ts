@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import {
   fundingRoundSchema,
+  grantFundingSchema,
   infiniteListPageSchema,
   investorSchema,
   jobInfoSchema,
@@ -102,6 +103,7 @@ export const orgDetailsSchema = z
     projects: z.array(projectAllInfoSchema),
     fundingRounds: z.array(fundingRoundSchema),
     investors: z.array(investorSchema),
+    grants: z.array(grantFundingSchema),
     jobs: z.array(orgJobSchema),
     aggregateRating: starRatingSchema,
     aggregateRatings: orgRatingSchema,
