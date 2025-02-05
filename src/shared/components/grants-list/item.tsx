@@ -3,6 +3,7 @@ import { CoinsIcon, HandCoinsIcon } from 'lucide-react';
 import { InfoTagProps } from '@/shared/core/types';
 import { cn } from '@/shared/utils/cn';
 import { formatNumber } from '@/shared/utils/format-number';
+import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { Divider } from '@/shared/components/divider';
 import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
@@ -31,25 +32,25 @@ export const GrantsListItem = (props: Props) => {
 
   const infoTags = [
     programName && {
-      text: `Grant: ${programName}`,
+      text: `${programName}`,
       icon: <BankIcon />,
     },
-    fundingDate && {
-      text: `Funding Date: ${fundingDate}`,
-      icon: <HandCoinsIcon size={16} />,
-    },
     amount && {
-      text: `Raised Amount: $${formatNumber(amount * 1_000_000)}`,
+      text: `Raised Amount: $${formatNumber(amount)}`,
       icon: <PaperbillIcon />,
     },
     ...(hasTokenAmount
       ? [
           {
-            text: `Token Amount: ${tokenAmount} ${tokenUnit}`,
+            text: `Token Amount: ${formatNumber(tokenAmount)} ${tokenUnit}`,
             icon: <CoinsIcon size={16} />,
           },
         ]
       : []),
+    fundingDate && {
+      text: `Date: ${shortTimestamp(fundingDate / 1000)}`,
+      icon: <HandCoinsIcon size={16} />,
+    },
   ].filter(Boolean) as InfoTagProps[];
 
   return (
@@ -57,7 +58,7 @@ export const GrantsListItem = (props: Props) => {
       <div
         className={cn({
           'flex flex-wrap items-center gap-x-4': !isGrid,
-          'grid max-w-3xl grid-cols-3': isGrid,
+          'grid max-w-3xl grid-cols-4': isGrid,
         })}
       >
         {infoTags.map((tag) => (
