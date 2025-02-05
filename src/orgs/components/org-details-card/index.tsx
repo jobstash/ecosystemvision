@@ -14,32 +14,31 @@ const CTA_TEXT = 'Explore Organization';
 interface Props {
   org: {
     name: string;
+    normalizedName: string;
     description: string;
     fundingRounds: FundingRound[];
     investors: Investor[];
   };
-  actionHref?: string;
 }
 
 export const OrgDetailsCard = ({
-  org: { name, description, fundingRounds, investors },
-  actionHref,
+  org: { name, description, fundingRounds, investors, normalizedName },
 }: Props) => {
+  const exploreHref = `/organizations/info/${normalizedName}`;
+
   return (
     <DetailsPanelCardWrapper>
       <Heading text={name} />
+
       <Divider />
       <Text text={description} />
+
+      <DetailsPanelActionsWrapper>
+        <DetailsPanelCTA text={CTA_TEXT} href={exploreHref} isActive={false} />
+      </DetailsPanelActionsWrapper>
+
       <FundingRounds fundingRounds={fundingRounds} />
       <Investors investors={investors} />
-      {actionHref && (
-        <>
-          <Divider />
-          <DetailsPanelActionsWrapper>
-            <DetailsPanelCTA text={CTA_TEXT} href={actionHref} />
-          </DetailsPanelActionsWrapper>
-        </>
-      )}
     </DetailsPanelCardWrapper>
   );
 };
