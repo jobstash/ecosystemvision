@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import {
   fundingRoundSchema,
+  grantFundingSchema,
   infiniteListPageSchema,
   investorSchema,
   orgInfoSchema,
@@ -33,6 +34,7 @@ export type ProjectOrg = z.infer<typeof projectOrgSchema>;
 export const projectDetailsSchema = z
   .object({
     organizations: z.array(projectOrgSchema),
+    grants: z.array(grantFundingSchema),
   })
   .merge(projectAllInfoSchema);
 

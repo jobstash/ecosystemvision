@@ -29,6 +29,16 @@ export const fundingRoundSchema = z.object({
 });
 export type FundingRound = z.infer<typeof fundingRoundSchema>;
 
+export const grantFundingSchema = z.object({
+  id: z.string(),
+  amount: z.number().nullable(),
+  tokenUnit: z.string().nullable(),
+  fundingDate: z.number().nullable(),
+  tokenAmount: z.number().nullable(),
+  programName: z.string().nullable(),
+});
+export type GrantFunding = z.infer<typeof grantFundingSchema>;
+
 export const categorySchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
