@@ -1,7 +1,8 @@
 /* eslint-disable tailwindcss/classnames-order */
-import { memo } from 'react';
 
 import { cn } from '@/shared/utils/cn';
+
+import { LinkWrapper } from './link-wrapper';
 
 const colorPool = [
   'skill1',
@@ -35,20 +36,23 @@ const fontColorPool = [
 
 interface Props {
   id: string;
+  nav: string;
+  slug: string;
   children: string;
   isFilled?: boolean;
   isChecked?: boolean;
   canTeach?: boolean;
 }
 
-const TechWrapper = ({ id, children, isFilled }: Props) => {
+export const TechWrapper = ({ id, nav, slug, children, isFilled }: Props) => {
   const colorIndex = getColorIndex(id, colorPool.length);
   const skillColor = colorPool[colorIndex];
   const filledFontColor = fontColorPool[colorIndex];
 
   return (
-    <div className="relative flex items-center justify-center">
-      {/* {isChecked && (
+    <LinkWrapper nav={nav} slug={slug}>
+      <div className="relative flex items-center justify-center">
+        {/* {isChecked && (
         <>
           <div
             className={`bg- absolute right-0 top-0 -mr-2.5 -mt-2.5 size-5${skillColor} hover:bg-${skillColor}-hover rounded-full`}
@@ -80,23 +84,24 @@ const TechWrapper = ({ id, children, isFilled }: Props) => {
           </div>
         </>
       )} */}
-      <div
-        className={cn(
-          'flex items-center justify-center rounded-sm p-1 px-1.5',
-          `border border-${skillColor} hover:border-${skillColor}-hover`,
-          `text-${skillColor} hover:text-${skillColor}-hover`,
-          { [`bg-${skillColor} text-${filledFontColor}`]: isFilled },
-          {
-            [`hover:bg-${skillColor}-hover hover:text-${filledFontColor}-hover`]:
-              isFilled,
-          },
-        )}
-      >
-        <span className={`font-lato text-sm font-bold antialiased`}>
-          {children.toUpperCase()}
-        </span>
+        <div
+          className={cn(
+            'flex items-center justify-center rounded-sm p-1 px-1.5',
+            `border border-${skillColor} hover:border-${skillColor}-hover`,
+            `text-${skillColor} hover:text-${skillColor}-hover`,
+            { [`bg-${skillColor} text-${filledFontColor}`]: isFilled },
+            {
+              [`hover:bg-${skillColor}-hover hover:text-${filledFontColor}-hover`]:
+                isFilled,
+            },
+          )}
+        >
+          <span className={`font-lato text-sm font-bold antialiased`}>
+            {children.toUpperCase()}
+          </span>
+        </div>
       </div>
-    </div>
+    </LinkWrapper>
   );
 };
 
@@ -115,5 +120,3 @@ function getColorIndex(uuid: string, N: number) {
 
   return accumulator; // Return the result
 }
-
-export default memo(TechWrapper);

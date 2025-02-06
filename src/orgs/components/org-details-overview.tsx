@@ -18,7 +18,7 @@ export const OrgDetailsOverview = ({ org }: Props) => {
         <span className="text-white/80">{description}</span>
       </div>
       <FundingSplit grants={grants} fundingRounds={fundingRounds} />
-      <TagsSection tags={tags} />
+      <TagsSection nav="organizations" tags={tags} />
     </div>
   );
 };

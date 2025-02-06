@@ -17,7 +17,7 @@ export const ProjectDetailsOverview = ({ project }: Props) => {
         <Heading className="text-lg text-white/90" text="Description" />
         <span className="text-white/80">{description}</span>
       </div>
-      <TagsSection tags={tags} />
+      <TagsSection nav="projects" tags={tags} />
     </div>
   );
 };
