@@ -145,7 +145,6 @@ export type Audit = z.infer<typeof auditSchema>;
 
 export const projectInfoTagsSchema = z.object({
   category: z.string().nullable(),
-  isMainnet: z.boolean().nullable(),
   tvl: z.number().nullable(),
   monthlyRevenue: z.number().nullable(),
   monthlyVolume: z.number().nullable(),

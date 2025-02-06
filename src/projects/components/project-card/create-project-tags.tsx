@@ -6,7 +6,6 @@ import { ActiveUsersIcon } from '@/shared/components/icons/active-users-icon';
 import { AuditsIcon } from '@/shared/components/icons/audits-icon';
 import { CategoryIcon } from '@/shared/components/icons/category-icon';
 import { HacksIcon } from '@/shared/components/icons/hacks-icon';
-import { MainnetIcon } from '@/shared/components/icons/mainnet-icon';
 import { MonthlyVolumeIcon } from '@/shared/components/icons/monthly-volume-icon';
 import { RevenueIcon } from '@/shared/components/icons/revenue-icon';
 import { TvlIcon } from '@/shared/components/icons/tvl-icon';
@@ -22,7 +21,6 @@ export const createProjectTags = (project: ProjectInfo) => {
     monthlyFees,
     monthlyRevenue,
     category,
-    isMainnet,
     audits,
     hacks,
   } = project;
@@ -66,13 +64,6 @@ export const createProjectTags = (project: ProjectInfo) => {
     upperTags.push({
       text: `Monthly Revenue: $${formatNumber(monthlyRevenue)}`,
       icon: <RevenueIcon />,
-    });
-  }
-
-  if (isMainnet) {
-    upperTags.push({
-      text: 'Mainnet',
-      icon: <MainnetIcon />,
     });
   }
 
