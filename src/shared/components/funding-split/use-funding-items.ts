@@ -8,7 +8,7 @@ import {
 } from '@/shared/utils/short-timestamp';
 import { LineItem } from '@/shared/components/funding-split/types';
 
-const FUNDING_MULTIPLIER = 5_000;
+const FUNDING_MULTIPLIER = 1_000_000;
 
 const createLineItem = (
   round: FundingRound,
