@@ -1,3 +1,4 @@
+import { FundingSplit } from '@/shared/components/funding-split';
 import { Heading } from '@/shared/components/heading';
 import { TagsSection } from '@/shared/components/tags-section';
 
@@ -8,7 +9,7 @@ interface Props {
 }
 
 export const OrgDetailsOverview = ({ org }: Props) => {
-  const { tags, description } = org;
+  const { tags, description, grants, fundingRounds } = org;
 
   return (
     <div className="flex flex-col gap-4">
@@ -16,6 +17,7 @@ export const OrgDetailsOverview = ({ org }: Props) => {
         <Heading className="text-lg text-white/90" text="Description" />
         <span className="text-white/80">{description}</span>
       </div>
+      <FundingSplit grants={grants} fundingRounds={fundingRounds} />
       <TagsSection tags={tags} />
     </div>
   );
