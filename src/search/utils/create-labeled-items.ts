@@ -12,11 +12,44 @@ interface Options {
   pillarSlugs: string[];
 }
 
-/**
- * Returns pillar-search-items that maps fetched slug-label with correct href.
- * Href should correspond to the item being removed in search params.
- * Can safely assume main-pillar-item is included in fetchedLabels - page already has logic if main-pillar-item is 404.
- */
+const createMainItemHref = (
+  nav: string,
+  nextPillar: string,
+  nextItem: string | undefined,
+  searchParams: Record<string, string>,
+) => {
+  if (!nextItem) return `/${nav}`;
+
+  const searchParamsObj = new URLSearchParams();
+  for (const [p, v] of Object.entries(searchParams)) {
+    if (p === nextPillar) {
+      const values = v.split(',').filter((val) => val !== nextItem);
+      if (values.length) {
+        searchParamsObj.set(p, values.join(','));
+      }
+    } else {
+      searchParamsObj.set(p, v);
+    }
+  }
+
+  const searchString = searchParamsObj.toString();
+  return `/${nav}/${nextPillar}/${nextItem}${
+    searchString ? `?${searchString}` : ''
+  }`;
+};
+
+const createLabeledItem = (
+  pillar: string,
+  slug: string,
+  label: string | undefined,
+  href: string,
+): LabeledItem => ({
+  pillar,
+  slug,
+  label,
+  href,
+});
+
 export const createLabeledItems = ({
   nav,
   params,
@@ -26,8 +59,6 @@ export const createLabeledItems = ({
 }: Options) => {
   if (fetchedLabels.length === 0) return [];
 
-  const result: LabeledItem[] = [];
-
   const items = {
     ...searchParams,
     [params.pillar]: searchParams[params.pillar]
@@ -35,18 +66,23 @@ export const createLabeledItems = ({
       : params.item,
   };
 
-  for (const [pillar, csv] of Object.entries(items)) {
-    const slugs = csv.split(',');
-    for (const slug of slugs) {
+  const labeledItems = Object.entries(items).flatMap(([pillar, csv]) => {
+    return csv.split(',').map((slug) => {
       const label = fetchedLabels.find((item) => item.slug === slug)?.label;
+
       if (slug === normalizeString(params.item)) {
-        result.push({
-          pillar,
-          slug,
-          label,
-          href: '',
-        });
-        continue;
+        const [nextPillar, nextPillarValue] = Object.entries(items)[0];
+        const nextItem = nextPillarValue
+          .split(',')
+          .find((v) => v !== params.item);
+
+        const href = createMainItemHref(
+          nav,
+          nextPillar,
+          nextItem,
+          searchParams,
+        );
+        return createLabeledItem(pillar, slug, label, href);
       }
 
       const pathPrefix = `/${nav}/${params.pillar}/${params.item}`;
@@ -58,10 +94,10 @@ export const createLabeledItems = ({
         slug,
       });
 
-      result.push({ pillar, slug, label, href });
-    }
-  }
+      return createLabeledItem(pillar, slug, label, href);
+    });
+  });
 
   const excludedParams = new Set(pillarSlugs);
-  return result.filter((item) => excludedParams.has(item.pillar));
+  return labeledItems.filter((item) => excludedParams.has(item.pillar));
 };
