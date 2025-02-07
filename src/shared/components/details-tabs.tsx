@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { Tab, Tabs } from '@heroui/tabs';
@@ -23,7 +22,13 @@ export const DetailsTabs = ({ tabs }: Props) => {
       }}
     >
       {tabs.map((tab) => (
-        <Tab key={tab.key} title={tab.text} as={Link} href={tab.href} />
+        <Tab
+          key={tab.key}
+          title={tab.text}
+          href={tab.href}
+          // @ts-expect-error - routerOptions
+          routerOptions={{ replace: true }}
+        />
       ))}
     </Tabs>
   );

@@ -13,3 +13,11 @@ export const HeroUIProvider = ({ children }: { children: React.ReactNode }) => {
     </BaseProvider>
   );
 };
+
+declare module '@react-types/shared' {
+  interface RouterConfig {
+    routerOptions: NonNullable<
+      Parameters<ReturnType<typeof useRouter>['push']>[1]
+    >;
+  }
+}
