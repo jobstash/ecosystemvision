@@ -1,16 +1,9 @@
-import { AppHeader } from '@/shared/components/app-header';
-import { BackButton } from '@/shared/components/app-header/back-button';
-import { DetailsTabs } from '@/shared/components/details-tabs';
-import { Divider } from '@/shared/components/divider';
-import { ScrollToTop } from '@/shared/components/scroll-to-top';
+import { DetailsLayout } from '@/shared/components/details-layout';
 
 import { createOrgDetailsTabs } from '@/orgs/utils/create-org-details-tabs';
 import { createOrgJsonLd } from '@/orgs/utils/create-org-json-ld';
 import { getOrgDetails } from '@/orgs/data/get-org-details';
 import { OrgDetailsHeader } from '@/orgs/components/org-details-header';
-import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
-import { DetailsSearchResults } from '@/search/components/details-search-results';
-import { PillarLoadingWrapper } from '@/search/components/pillar-loading-wrapper';
 
 interface Props {
   params: Promise<{
@@ -26,31 +19,19 @@ const Layout = async ({ params, children }: Props) => {
   const tabs = createOrgDetailsTabs(data);
 
   return (
-    <div className="min-h-screen">
-      <ScrollToTop />
-      <AppHeader
-        showSearchButton
-        input={<BackButton nav="organizations" />}
-        searchResults={<DetailsSearchResults nav="organizations" />}
-      />
-
-      <ActiveSearchHiddenWrapper>
-        <PillarLoadingWrapper>
-          <div className="flex max-w-4xl flex-col gap-4 p-8">
-            <OrgDetailsHeader org={data} />
-
-            <Divider />
-
-            <DetailsTabs tabs={tabs} />
-            <div className="px-1">{children}</div>
-          </div>
-        </PillarLoadingWrapper>
-      </ActiveSearchHiddenWrapper>
+    <>
+      <DetailsLayout
+        nav="organizations"
+        header={<OrgDetailsHeader org={data} />}
+        tabs={tabs}
+      >
+        {children}
+      </DetailsLayout>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </div>
+    </>
   );
 };
 
