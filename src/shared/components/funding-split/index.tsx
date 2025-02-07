@@ -18,10 +18,18 @@ interface Props {
 export const FundingSplit = (props: Props) => {
   const { grants, fundingRounds } = props;
 
-  if (!grants.length && !fundingRounds.length) return null;
+  const grantsWithFunding = grants.filter((grant) => grant.amount);
+  const fundingRoundsWithAmount = fundingRounds.filter(
+    (round) => round.raisedAmount,
+  );
+
+  if (!grantsWithFunding.length && !fundingRoundsWithAmount.length) return null;
 
   return (
-    <FundingSplitProvider grants={grants} fundingRounds={fundingRounds}>
+    <FundingSplitProvider
+      grants={grantsWithFunding}
+      fundingRounds={fundingRoundsWithAmount}
+    >
       <div className="flex flex-col gap-2 py-4">
         <div className="flex justify-between">
           <Heading className="text-lg" text="Grants" />
