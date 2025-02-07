@@ -1,5 +1,4 @@
-import { DetailsTabs } from '@/shared/components/details-tabs';
-import { Divider } from '@/shared/components/divider';
+import { DetailsLayout } from '@/shared/components/details-layout';
 
 import { createProjectDetailsTabs } from '@/projects/utils/create-project-details-tabs';
 import { getProjectDetails } from '@/projects/data/get-project-details';
@@ -18,14 +17,14 @@ const Layout = async ({ params, children }: Props) => {
   const tabs = createProjectDetailsTabs(data);
 
   return (
-    <>
-      <div className="flex max-w-4xl flex-col gap-4 p-8">
-        <ProjectDetailsHeader project={data} />
-        <Divider />
-        <DetailsTabs tabs={tabs} />
-        <div className="px-1">{children}</div>
-      </div>
-    </>
+    <DetailsLayout
+      nav="projects"
+      header={<ProjectDetailsHeader project={data} />}
+      tabs={tabs}
+    >
+      {children}
+    </DetailsLayout>
   );
 };
+
 export default Layout;
