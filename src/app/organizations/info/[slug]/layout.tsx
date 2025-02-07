@@ -2,6 +2,7 @@ import { AppHeader } from '@/shared/components/app-header';
 import { BackButton } from '@/shared/components/app-header/back-button';
 import { DetailsTabs } from '@/shared/components/details-tabs';
 import { Divider } from '@/shared/components/divider';
+import { ScrollToTop } from '@/shared/components/scroll-to-top';
 
 import { createOrgDetailsTabs } from '@/orgs/utils/create-org-details-tabs';
 import { createOrgJsonLd } from '@/orgs/utils/create-org-json-ld';
@@ -26,6 +27,7 @@ const Layout = async ({ params, children }: Props) => {
 
   return (
     <div className="min-h-screen">
+      <ScrollToTop />
       <AppHeader
         showSearchButton
         input={<BackButton nav="organizations" />}
