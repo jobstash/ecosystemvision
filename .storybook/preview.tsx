@@ -10,7 +10,7 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 import { useEffect } from 'react';
-import { grotesk, interTight } from '@/shared/core/fonts';
+import { grotesk, inter } from '@/shared/core/fonts';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -78,7 +78,7 @@ const ClearReactQuery = () => {
 
 const decorators: Preview['decorators'] = [
   (Story) => (
-    <div className={`${interTight.variable} ${grotesk.variable}`}>
+    <div className={`${inter.variable} ${grotesk.variable}`}>
       <Providers>
         <Story />
         <ClearReactQuery />

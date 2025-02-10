@@ -1,9 +1,9 @@
-import { Inter_Tight, Space_Grotesk } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 
-export const interTight = Inter_Tight({
+export const inter = Inter({
   weight: ['400', '600', '700'],
   subsets: ['latin'],
-  variable: '--font-inter-tight',
+  variable: '--font-inter',
 });
 
 export const grotesk = Space_Grotesk({

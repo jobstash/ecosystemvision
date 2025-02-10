@@ -115,7 +115,7 @@ const config: Config = {
         'skill12fg-hover': '#C0F2C5',
       },
       fontFamily: {
-        ['inter-tight']: ['var(--font-inter-tight)'],
+        inter: ['var(--font-inter)'],
         grotesk: ['var(--font-space-grotesk)'],
       },
       keyframes: {
