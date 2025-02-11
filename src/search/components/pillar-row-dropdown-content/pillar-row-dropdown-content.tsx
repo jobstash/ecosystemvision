@@ -44,7 +44,7 @@ export const PillarRowDropdownContent = ({
     onClear,
     inViewRef,
     isPendingDebounce,
-  } = usePillarDropdownInput({ nav, pillar });
+  } = usePillarDropdownInput({ nav, pillar, searchParams });
 
   const activeLabelsSet = useMemo(() => {
     return new Set(activeLabels);

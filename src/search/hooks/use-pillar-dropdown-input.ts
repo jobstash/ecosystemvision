@@ -18,12 +18,14 @@ const DEBOUNCE_DELAY = 500;
 interface Options {
   nav: string;
   pillar: string;
+  searchParams: Record<string, string>;
   hasOffset?: boolean;
 }
 
 export const usePillarDropdownInput = ({
   nav,
   pillar,
+  searchParams,
   hasOffset = true,
 }: Options) => {
   const queryClient = useQueryClient();
@@ -49,6 +51,7 @@ export const usePillarDropdownInput = ({
       const queryProps: GetPillarItemsProps = {
         nav,
         pillar,
+        searchParams,
         query: filterText || undefined,
         page,
         limit: ITEMS_PER_PAGE,

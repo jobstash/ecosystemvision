@@ -95,6 +95,7 @@ export const PillarPage = async (props: Props) => {
       allFilters={
         <PillarAllFilters
           nav={nav}
+          searchParams={searchParams}
           pillarSelections={pillarSelections}
           isPillarPageSelection={isIndex}
         />

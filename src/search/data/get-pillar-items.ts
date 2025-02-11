@@ -17,6 +17,11 @@ export const getPillarItems = async (
     limit: `${limit}`,
   });
   if (query) searchParams.set('query', query);
+  if (props.searchParams) {
+    Object.entries(props.searchParams).forEach(([key, value]) => {
+      searchParams.set(key, value);
+    });
+  }
   url.search = searchParams.toString();
 
   const response = await mwGET({

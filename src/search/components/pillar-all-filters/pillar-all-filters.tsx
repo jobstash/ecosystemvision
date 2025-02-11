@@ -17,6 +17,7 @@ import { PillarSelection } from './pillar-selection';
 
 interface Props {
   nav: string;
+  searchParams: Record<string, string>;
   pillarSelections: {
     pillar: string;
     items: { label: string; slug: string; isActive: boolean }[];
@@ -26,6 +27,7 @@ interface Props {
 
 export const PillarAllFilters = ({
   nav,
+  searchParams,
   pillarSelections,
   isPillarPageSelection,
 }: Props) => {
@@ -78,6 +80,7 @@ export const PillarAllFilters = ({
             key={pillar}
             nav={nav}
             pillar={pillar}
+            searchParams={searchParams}
             isPillarPageSelection={isPillarPageSelection}
           />
         ))}
