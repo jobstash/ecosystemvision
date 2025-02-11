@@ -28,7 +28,7 @@ export const DetailsLayout = (props: Props) => {
       />
       <ActiveSearchHiddenWrapper>
         <PillarLoadingWrapper>
-          <div className="flex max-w-4xl flex-col gap-4 p-8">
+          <div className="flex max-w-4xl flex-col gap-4 bg-yellow-400 p-8">
             {header}
             <Divider />
             <DetailsTabs tabs={tabs} />

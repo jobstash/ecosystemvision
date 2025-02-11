@@ -23,6 +23,19 @@ const config: Config = {
       lg: '1280px',
     },
     extend: {
+      animation: {
+        'gradient-loop': 'gradient-animation 5s infinite linear',
+      },
+      keyframes: {
+        'gradient-animation': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
+      backgroundSize: {
+        'gradient': '200% 200%',
+      },
       borderRadius: {
         '20': '20px',
       },

@@ -101,7 +101,7 @@ export const PillarPage = async (props: Props) => {
         />
       }
     >
-      <div className="relative min-h-screen space-y-4 overflow-hidden">
+      <div className="">
         <AppHeader
           input={
             <PillarSearch
@@ -139,13 +139,7 @@ export const PillarPage = async (props: Props) => {
                   />
                 }
               />
-            </ActiveSearchHiddenWrapper>
-          }
-        />
-
-        <div className="space-y-4 px-4">
-          <ActiveSearchHiddenWrapper>
-            <PillarRow
+              <PillarRow
               nav={nav}
               pillar={altPillarRow.pillar}
               pillarItems={altPillarRow.items}
@@ -180,6 +174,13 @@ export const PillarPage = async (props: Props) => {
                 </PillarFilterDropdown>
               ))}
             </PillarFilters>
+            </ActiveSearchHiddenWrapper>
+          }
+        />
+
+        <div className=" bg-green-500 ">
+          <ActiveSearchHiddenWrapper>
+            
 
             <PillarLoadingWrapper>
               <div className="py-4">{content}</div>

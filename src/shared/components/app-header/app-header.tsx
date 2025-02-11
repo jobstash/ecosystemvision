@@ -19,9 +19,8 @@ export const AppHeader = (props: Props) => {
   const { input, mainPillar, searchResults, showSearchButton } = props;
   return (
     <AppHeaderProvider>
-      <div className="sticky top-0 z-50">
         <FullPageWrapper>
-          <div className="flex min-h-16 flex-wrap items-center gap-8">
+          <div className="sticky top-0 z-50 flex min-h-16 flex-wrap items-center gap-8 bg-emerald-300">
             <div className="order-1 shrink-0 lg:hidden">
               <Brand />
             </div>
@@ -41,7 +40,6 @@ export const AppHeader = (props: Props) => {
 
           {mainPillar}
         </FullPageWrapper>
-      </div>
     </AppHeaderProvider>
   );
 };
