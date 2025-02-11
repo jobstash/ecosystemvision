@@ -105,8 +105,8 @@ export const granteeItemSchema = z.object({
   name: z.string(),
   slug: z.string(),
   logoUrl: z.string().nullable(),
-  lastFundingDate: z.number().nullable(),
-  lastFundingAmount: z.number(),
+  lastFundingDate: z.number().nullable().optional(),
+  lastFundingAmount: z.number().optional(),
   lastFundingUnit: z.string().optional(),
 });
 export type GranteeItem = z.infer<typeof granteeItemSchema>;
@@ -144,12 +144,12 @@ export const granteeProjectSchema = z.object({
   id: z.string(),
   name: z.string(),
   tabs: z.array(granteeTabItemSchema),
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).optional(),
 });
 export type GranteeProject = z.infer<typeof granteeProjectSchema>;
 
 export const granteeSchema = granteeItemSchema.extend({
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).optional(),
   website: z.string().nullable(),
   status: z.string(), // TODO: convert to literals
   description: z.string(),
