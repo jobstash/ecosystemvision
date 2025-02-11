@@ -51,7 +51,7 @@ export const ClientWrapper = ({ backButton, collapsed, full }: Props) => {
           'inset-x-0',
           'top-0',
           'z-50',
-          'lg:ml-[264px]',
+          'lg:ml-[236px]',
         );
       }
     };

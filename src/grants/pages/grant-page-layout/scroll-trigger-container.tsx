@@ -2,12 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 
-import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   children: React.ReactNode;
