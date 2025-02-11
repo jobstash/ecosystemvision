@@ -84,7 +84,7 @@ export const createPillarRows = (options: Options) => {
 
     return {
       pillar,
-      items: arrangedItems,
+      items: arrangedItems.filter(Boolean),
     };
   });
 };
