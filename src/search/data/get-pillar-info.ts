@@ -36,11 +36,6 @@ export const getPillarInfo = async (
     throw new Error(response.message);
   }
 
-  console.log({
-    url: url.toString(),
-    item: dtoToPillarInfo(response.data).altPillars[0],
-  });
-
   return dtoToPillarInfo(response.data);
 };
 
