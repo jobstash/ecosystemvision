@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
@@ -53,23 +52,22 @@ export const SearchResultItem = ({
 
   const setSearchQuery = useSetAtom(searchQueryAtom);
 
-  const onClick = () => {
-    setSearchQuery({ actual: '', debounced: '' });
-    startTransition(() => {
-      router.push(href);
-    });
-  };
-
   // Pillar pages append the item to the search params
   const finalHref = useMemo(
     () => getFinalHref(href, isPillarSearchResult),
     [href, isPillarSearchResult],
   );
 
+  const onClick = () => {
+    setSearchQuery({ actual: '', debounced: '' });
+    startTransition(() => {
+      router.push(finalHref);
+      router.refresh();
+    });
+  };
+
   return (
     <Button
-      as={Link}
-      href={finalHref}
       size="sm"
       className="shrink-0"
       isDisabled={isPendingPillarRoute}
