@@ -183,7 +183,7 @@ export const PillarPage = async (props: Props) => {
             
 
             <PillarLoadingWrapper>
-              <div className="py-4">{content}</div>
+              <div className="">{content}</div>
             </PillarLoadingWrapper>
           </ActiveSearchHiddenWrapper>
         </div>

@@ -17,12 +17,15 @@ export const FullPageWrapper = ({ children }: Props) => {
   return (
     <div
       className={cn(
-        'flex flex-col gap-4 px-4 py-2 lg:py-4',
+        '',
         isActiveSearch
-          ? 'bg-size-gradient animate-gradient-loop bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 bg-gradient'
-          : 'bg-red-500',
+          ? 'bg-size-gradient animate-gradient-loop bg-gradient-to-l from-yellow-500 via-blue-500 to-green-500'
+          : ' z-50 bg-gradient-to-r from-blue-500 to-purple-600',
       )}
     >
+      {/* <p className="py-2 text-center text-white">
+        isActiveSearch: {isActiveSearch ? 'True' : 'False'}
+      </p> */}
       {children}
     </div>
   );
