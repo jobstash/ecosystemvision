@@ -23,6 +23,7 @@ export interface GetPillarInfoProps {
   nav: string;
   pillar: string | null;
   item: string | null;
+  searchParams: Record<string, string>;
   limit?: number;
 }
 

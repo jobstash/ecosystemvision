@@ -42,6 +42,7 @@ export const PillarPage = async (props: Props) => {
       nav,
       pillar: params.pillar,
       item: params.item,
+      searchParams,
     }),
   ]);
 

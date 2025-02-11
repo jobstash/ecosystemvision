@@ -11,7 +11,7 @@ import { GetPillarInfoProps } from '@/search/core/types';
 export const getPillarInfo = async (
   props: GetPillarInfoProps,
 ): Promise<TPillarInfo> => {
-  const { nav, pillar, item, limit } = props;
+  const { nav, pillar, item, limit, searchParams } = props;
 
   const url = new URL(`${MW_URL}/search/pillar`);
   url.searchParams.set('nav', nav);
@@ -19,6 +19,10 @@ export const getPillarInfo = async (
     url.searchParams.set('pillar', pillar);
     url.searchParams.set('item', item);
   }
+
+  Object.entries(searchParams).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
 
   if (limit) url.searchParams.set('limit', limit.toString());
 
@@ -31,6 +35,11 @@ export const getPillarInfo = async (
   if (!response.success) {
     throw new Error(response.message);
   }
+
+  console.log({
+    url: url.toString(),
+    item: dtoToPillarInfo(response.data).altPillars[0],
+  });
 
   return dtoToPillarInfo(response.data);
 };
