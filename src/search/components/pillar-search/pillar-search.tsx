@@ -20,7 +20,7 @@ export const PillarSearch = ({ mainLabel, labeledItems }: Props) => {
   const items = moveMainItemToFront(labeledItems, mainLabel);
   return (
     <PillarLoadingWrapper>
-      <div className="flex min-w-96 items-center gap-2 rounded-xl bg-white/10 px-3 py-1">
+      <div className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-1">
         <PillarLoadingWrapper
           className="size-6"
           shouldReduceOpacity={false}
