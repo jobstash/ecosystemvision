@@ -34,3 +34,9 @@ export interface GetPillarInputLabelsProps {
   pillars: string[];
   inputs: { slug: string; pillarSlug: string; href: string }[];
 }
+
+export interface GetPillarFiltersProps {
+  nav: string;
+  params: { pillar: string; item: string };
+  searchParams: Record<string, string>;
+}

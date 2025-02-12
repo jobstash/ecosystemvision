@@ -33,7 +33,11 @@ export const PillarAllFilters = ({
   pillarSelections,
   isPillarPageSelection,
 }: Props) => {
-  const { data: filterConfigs = [] } = usePillarFilters(nav);
+  const { data: filterConfigs = [] } = usePillarFilters({
+    nav,
+    params,
+    searchParams,
+  });
 
   const activeSearchParams = usePillarSearchParams();
   const [, setCurrentFilterParams] = useAtom(currentFilterParamsAtom);

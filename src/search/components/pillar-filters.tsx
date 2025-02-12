@@ -8,10 +8,12 @@ import { PillarSortByButton } from '@/search/components/pillar-sort-by-button';
 interface Props {
   children: React.ReactNode;
   nav: string;
+  params: { pillar: string; item: string };
+  searchParams: Record<string, string>;
 }
 
 export const PillarFilters = (props: Props) => {
-  const { children, nav } = props;
+  const { children, nav, params, searchParams } = props;
 
   return (
     <PillarLoadingWrapper>
@@ -22,9 +24,21 @@ export const PillarFilters = (props: Props) => {
         </div>
         <Suspense>
           <div className="flex items-center gap-4">
-            <PillarOrderButton nav={nav} />
-            <PillarSortByButton nav={nav} />
-            <PillarAllFiltersTrigger nav={nav} />
+            <PillarOrderButton
+              nav={nav}
+              params={params}
+              searchParams={searchParams}
+            />
+            <PillarSortByButton
+              nav={nav}
+              params={params}
+              searchParams={searchParams}
+            />
+            <PillarAllFiltersTrigger
+              nav={nav}
+              params={params}
+              searchParams={searchParams}
+            />
           </div>
         </Suspense>
       </div>

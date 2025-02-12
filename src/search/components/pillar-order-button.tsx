@@ -11,20 +11,17 @@ import {
 } from 'lucide-react';
 
 import { PillarSelectFilterDto } from '@/search/core/schemas';
+import { GetPillarFiltersProps } from '@/search/core/types';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
-interface Props {
-  nav: string;
-}
-
-export const PillarOrderButton = ({ nav }: Props) => {
+export const PillarOrderButton = (props: GetPillarFiltersProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { startTransition } = usePillarRoutesContext();
-  const { data } = usePillarFilters(nav);
+  const { data } = usePillarFilters(props);
 
   const orderFilter = data?.find(
     (item): item is PillarSelectFilterDto => item.kind === 'ORDER',
