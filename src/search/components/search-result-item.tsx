@@ -101,6 +101,9 @@ const getFinalHref = (href: string, isPillarSearchResult?: boolean) => {
   const currentUrl = new URL(window.location.href);
   const currentValues = currentUrl.searchParams.get(pillar);
 
+  const isIndex = currentUrl.pathname.split('/').length < 3;
+  if (isIndex) return href;
+
   if (currentValues) {
     const updatedValues = new Set(currentValues.split(',').concat(item));
     currentUrl.searchParams.set(pillar, Array.from(updatedValues).join(','));
