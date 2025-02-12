@@ -7,7 +7,7 @@ import { Button } from '@heroui/button';
 import { useSetAtom } from 'jotai';
 
 import { TSearchResultItem } from '@/search/core/schemas';
-import { searchQueryAtom } from '@/search/core/atoms';
+import { isActiveSearchAtom, searchQueryAtom } from '@/search/core/atoms';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
@@ -58,8 +58,10 @@ export const SearchResultItem = ({
     [href, isPillarSearchResult],
   );
 
+  const setIsActive = useSetAtom(isActiveSearchAtom);
   const onClick = () => {
     setSearchQuery({ actual: '', debounced: '' });
+    setIsActive(false);
     startTransition(() => {
       router.push(finalHref);
       router.refresh();

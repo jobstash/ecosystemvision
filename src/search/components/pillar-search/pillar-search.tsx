@@ -7,6 +7,7 @@ import { LabeledItem } from '@/search/core/types';
 
 import { PillarLoadingWrapper } from '../pillar-loading-wrapper';
 
+import { PillarSearchCloseButton } from './pillar-search-close-button';
 import { PillarSearchInput } from './pillar-search-input';
 import { PillarSearchInputItem } from './pillar-search-input-item';
 
@@ -37,6 +38,8 @@ export const PillarSearch = ({ mainLabel, labeledItems }: Props) => {
             ))}
           </DraggableWrapper>
         )}
+
+        <PillarSearchCloseButton />
       </div>
     </PillarLoadingWrapper>
   );
