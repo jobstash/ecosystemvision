@@ -14,6 +14,7 @@ export interface PillarRowItem {
 export interface GetPillarItemsProps {
   nav: string;
   pillar: string;
+  params: { pillar: string; item: string };
   searchParams: Record<string, string>;
   query?: string;
   page?: number;

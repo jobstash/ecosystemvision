@@ -3,26 +3,48 @@ import { mwGET } from '@/shared/utils/mw-get';
 
 import { pillarItemsResponseDtoSchema } from '@/search/core/schemas';
 import { GetPillarItemsProps } from '@/search/core/types';
+import { addMainItemToSearchParams } from '@/search/utils/add-main-item-to-search-params';
 
-export const getPillarItems = async (
-  props: GetPillarItemsProps,
-): Promise<string[]> => {
-  const { nav, pillar, query, page = 1, limit = 20 } = props;
+const createPillarItemsSearchParams = (props: GetPillarItemsProps) => {
+  const {
+    nav,
+    pillar,
+    page = 1,
+    limit = 20,
+    query,
+    params,
+    searchParams: initialSearchParams,
+  } = props;
 
-  const url = new URL(`${MW_URL}/search/pillar/items`);
   const searchParams = new URLSearchParams({
     nav,
     pillar,
     page: `${page}`,
     limit: `${limit}`,
   });
+
   if (query) searchParams.set('query', query);
-  if (props.searchParams) {
-    Object.entries(props.searchParams).forEach(([key, value]) => {
+
+  if (initialSearchParams) {
+    const updatedSearchParams = addMainItemToSearchParams({
+      pillar: params.pillar,
+      item: params.item,
+      searchParams: initialSearchParams,
+    });
+
+    Object.entries(updatedSearchParams).forEach(([key, value]) => {
       searchParams.set(key, value);
     });
   }
-  url.search = searchParams.toString();
+
+  return searchParams.toString();
+};
+
+export const getPillarItems = async (
+  props: GetPillarItemsProps,
+): Promise<string[]> => {
+  const url = new URL(`${MW_URL}/search/pillar/items`);
+  url.search = createPillarItemsSearchParams(props);
 
   const response = await mwGET({
     url: url.toString(),
