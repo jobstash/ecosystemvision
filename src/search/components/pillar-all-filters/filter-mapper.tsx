@@ -14,6 +14,8 @@ export const FilterMapper = ({ item }: Props) => {
 
   switch (item.kind) {
     case 'SINGLE_SELECT': {
+      if (item.options.length === 0) return null;
+
       const isBoolean =
         item.options.length === 2 &&
         item.options.every((option) => typeof option.value === 'boolean');
@@ -35,6 +37,8 @@ export const FilterMapper = ({ item }: Props) => {
     }
 
     case 'MULTI_SELECT': {
+      if (item.options.length === 0) return null;
+
       if (hasFewOptions) {
         return <CheckboxFilter label={item.label} items={item.options} />;
       }

@@ -16,16 +16,13 @@ import { CaretDownIcon } from '@/shared/components/icons/caret-down-icon';
 import { CheckmarkIcon } from '@/shared/components/icons/checkmark-icon';
 
 import { PillarSelectFilterDto } from '@/search/core/schemas';
+import { GetPillarFiltersProps } from '@/search/core/types';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
-interface Props {
-  nav: string;
-}
-
-export const PillarSortByButton = ({ nav }: Props) => {
-  const { data } = usePillarFilters(nav);
+export const PillarSortByButton = (props: GetPillarFiltersProps) => {
+  const { data } = usePillarFilters(props);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

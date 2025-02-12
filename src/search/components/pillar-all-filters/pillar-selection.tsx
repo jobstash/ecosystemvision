@@ -21,6 +21,7 @@ import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-co
 interface Props {
   nav: string;
   pillar: string;
+  params: { pillar: string; item: string };
   searchParams: Record<string, string>;
   isPillarPageSelection: boolean;
 }
@@ -28,6 +29,7 @@ interface Props {
 export const PillarSelection = ({
   nav,
   pillar,
+  params,
   searchParams,
   isPillarPageSelection,
 }: Props) => {
@@ -42,6 +44,7 @@ export const PillarSelection = ({
   } = usePillarDropdownInput({
     nav,
     pillar,
+    params,
     searchParams,
     hasOffset: false,
   });

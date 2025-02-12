@@ -47,7 +47,7 @@ export const PillarFilterDropdownContent = (props: Props) => {
     onClear,
     inViewRef,
     isPendingDebounce,
-  } = usePillarDropdownInput({ nav, pillar, searchParams });
+  } = usePillarDropdownInput({ nav, pillar, params, searchParams });
 
   const { onAction } = usePillarDropdownOnAction({
     nav,

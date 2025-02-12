@@ -1,4 +1,5 @@
 import {
+  GetPillarFiltersProps,
   GetPillarInfoProps,
   GetPillarInputLabelsProps,
   GetPillarItemsProps,
@@ -20,8 +21,8 @@ export const searchQueryKeys = {
       pillars,
       inputs,
     ] as const,
-  getPillarFilters: (nav: string) =>
-    [...searchQueryKeys.all, 'pillar-filters', nav] as const,
+  getPillarFilters: (props: GetPillarFiltersProps) =>
+    [...searchQueryKeys.all, 'pillar-filters', props] as const,
 };
 
 export type SearchQueryKeys = typeof searchQueryKeys;

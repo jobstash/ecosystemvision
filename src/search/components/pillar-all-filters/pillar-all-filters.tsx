@@ -17,6 +17,7 @@ import { PillarSelection } from './pillar-selection';
 
 interface Props {
   nav: string;
+  params: { pillar: string; item: string };
   searchParams: Record<string, string>;
   pillarSelections: {
     pillar: string;
@@ -27,11 +28,16 @@ interface Props {
 
 export const PillarAllFilters = ({
   nav,
+  params,
   searchParams,
   pillarSelections,
   isPillarPageSelection,
 }: Props) => {
-  const { data: filterConfigs = [] } = usePillarFilters(nav);
+  const { data: filterConfigs = [] } = usePillarFilters({
+    nav,
+    params,
+    searchParams,
+  });
 
   const activeSearchParams = usePillarSearchParams();
   const [, setCurrentFilterParams] = useAtom(currentFilterParamsAtom);
@@ -80,6 +86,7 @@ export const PillarAllFilters = ({
             key={pillar}
             nav={nav}
             pillar={pillar}
+            params={params}
             searchParams={searchParams}
             isPillarPageSelection={isPillarPageSelection}
           />

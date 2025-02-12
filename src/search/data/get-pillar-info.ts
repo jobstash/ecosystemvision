@@ -7,27 +7,43 @@ import {
   TPillarInfo,
 } from '@/search/core/schemas';
 import { GetPillarInfoProps } from '@/search/core/types';
+import { addMainItemToSearchParams } from '@/search/utils/add-main-item-to-search-params';
 
-export const getPillarInfo = async (
-  props: GetPillarInfoProps,
-): Promise<TPillarInfo> => {
+const buildPillarInfoURL = (props: GetPillarInfoProps) => {
   const { nav, pillar, item, limit, searchParams } = props;
 
   const url = new URL(`${MW_URL}/search/pillar`);
   url.searchParams.set('nav', nav);
+
+  let updatedSearchParams = { ...searchParams };
+
   if (pillar && item) {
     url.searchParams.set('pillar', pillar);
     url.searchParams.set('item', item);
-  }
 
-  Object.entries(searchParams).forEach(([key, value]) => {
-    url.searchParams.set(key, value);
-  });
+    updatedSearchParams = addMainItemToSearchParams({
+      pillar,
+      item,
+      searchParams,
+    });
+  }
 
   if (limit) url.searchParams.set('limit', limit.toString());
 
+  Object.entries(updatedSearchParams).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+
+  return url.toString();
+};
+
+export const getPillarInfo = async (
+  props: GetPillarInfoProps,
+): Promise<TPillarInfo> => {
+  const url = buildPillarInfoURL(props);
+
   const response = await mwGET({
-    url: url.toString(),
+    url,
     label: 'getPillarInfo',
     responseSchema: pillarInfoResponseSchema,
   });
