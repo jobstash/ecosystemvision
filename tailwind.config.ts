@@ -24,17 +24,13 @@ const config: Config = {
     },
     extend: {
       animation: {
-        'gradient-loop': 'gradient-animation 5s infinite linear',
+        slideDown: 'slideDown 0.5s ease-out forwards',
       },
       keyframes: {
-        'gradient-animation': {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
+        slideDown: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(0)' },
         },
-      },
-      backgroundSize: {
-        'gradient': '200% 200%',
       },
       borderRadius: {
         '20': '20px',

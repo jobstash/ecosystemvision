@@ -70,7 +70,7 @@ export const AppHeader = (props: Props) => {
         {searchResults}
 
         {/* Target div for scroll detection */}
-        <div ref={gradientRef} className="min-h-[300px] bg-gradient-to-r from-slate-700 to-slate-900">
+        <div ref={gradientRef} className="bg-gradient-to-r from-slate-700 to-slate-900">
           {mainPillar}
         </div>
       </FullPageWrapper>
