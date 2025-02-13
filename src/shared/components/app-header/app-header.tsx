@@ -49,7 +49,7 @@ export const AppHeader = (props: Props) => {
           </div>
         </div>
       </AppHeaderProvider>
-      <div className="py-8">{searchResults}</div>
+      <div className="py-16">{searchResults}</div>
     </>
   );
 };

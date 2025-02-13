@@ -24,8 +24,15 @@ export const SearchResults = ({
 
   if (!data) return <SearchResultsSkeleton />;
 
+  if (data.length === 0)
+    return (
+      <div className="py-8">
+        <p>No results found.</p>
+      </div>
+    );
+
   return (
-    <div className="flex flex-col gap-6 py-8 md:gap-8">
+    <div className="flex flex-col gap-6 md:gap-8">
       {data.map(({ title, items }) => (
         <Fragment key={title}>
           <Divider />
