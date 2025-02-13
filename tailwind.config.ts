@@ -25,11 +25,22 @@ const config: Config = {
     extend: {
       animation: {
         slideDown: 'slideDown 0.5s ease-out forwards',
+        spin: 'spin 2.4s linear infinite',
+        spin2: 'spin 0.4s linear infinite',
+        'spin-slow': 'spin 220s linear infinite',
       },
       keyframes: {
         slideDown: {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(0)' },
+        },
+        spin: {
+          from: {
+            transform: 'rotate(0deg)',
+          },
+          to: {
+            transform: 'rotate(360deg)',
+          },
         },
       },
       borderRadius: {
@@ -126,21 +137,6 @@ const config: Config = {
       fontFamily: {
         inter: ['var(--font-inter)'],
         grotesk: ['var(--font-space-grotesk)'],
-      },
-      keyframes: {
-        spin: {
-          from: {
-            transform: 'rotate(0deg)',
-          },
-          to: {
-            transform: 'rotate(360deg)',
-          },
-        },
-      },
-      animation: {
-        spin: 'spin 2.4s linear infinite',
-        spin2: 'spin 0.4s linear infinite',
-        'spin-slow': 'spin 220s linear infinite',
       },
     },
   },
