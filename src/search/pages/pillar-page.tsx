@@ -9,6 +9,7 @@ import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hid
 import { MainPillarContent } from '@/search/components/main-pillar-content';
 import { PillarAllFilters } from '@/search/components/pillar-all-filters';
 import { PillarAllFiltersWrapper } from '@/search/components/pillar-all-filters/wrapper';
+import { PillarAppHeader } from '@/search/components/pillar-app-header/pillar-app-header';
 import { PillarFilterDropdown } from '@/search/components/pillar-filter-dropdown';
 import { PillarFilterDropdownContent } from '@/search/components/pillar-filter-dropdown-content';
 import { PillarFilters } from '@/search/components/pillar-filters';
@@ -102,45 +103,48 @@ export const PillarPage = async (props: Props) => {
         />
       }
     >
-      <div className="">
-        <AppHeader
-          input={
-            <PillarSearch
-              mainLabel={mainPillarRow.items[0].label}
-              labeledItems={labeledItems}
-            />
-          }
-          searchResults={
-            <PillarPageSearchResults nav={nav} excluded={excluded} />
-          }
-          mainPillar={
-            <ActiveSearchHiddenWrapper>
-              <MainPillarContent
-                title={pillarInfo.title}
-                description={pillarInfo.description}
-                items={
-                  <PillarRow
-                    hidePillar
-                    nav={nav}
-                    pillar={params.pillar}
-                    pillarItems={mainPillarRow.items}
-                    dropdownContent={
-                      <PillarRowDropdownContent
-                        nav={nav}
-                        pillar={mainPillarRow.pillar}
-                        params={params}
-                        searchParams={searchParams}
-                        activeLabels={getActiveLabels(
-                          labeledItems,
-                          mainPillarRow.pillar,
-                        )}
-                        isIndex={isIndex}
-                      />
-                    }
-                  />
-                }
+      <PillarAppHeader
+        appHeader={
+          <AppHeader
+            input={
+              <PillarSearch
+                mainLabel={mainPillarRow.items[0].label}
+                labeledItems={labeledItems}
               />
-              <PillarRow
+            }
+            searchResults={
+              <PillarPageSearchResults nav={nav} excluded={excluded} />
+            }
+          />
+        }
+        content={
+          <ActiveSearchHiddenWrapper>
+            <MainPillarContent
+              title={pillarInfo.title}
+              description={pillarInfo.description}
+              items={
+                <PillarRow
+                  hidePillar
+                  nav={nav}
+                  pillar={params.pillar}
+                  pillarItems={mainPillarRow.items}
+                  dropdownContent={
+                    <PillarRowDropdownContent
+                      nav={nav}
+                      pillar={mainPillarRow.pillar}
+                      params={params}
+                      searchParams={searchParams}
+                      activeLabels={getActiveLabels(
+                        labeledItems,
+                        mainPillarRow.pillar,
+                      )}
+                      isIndex={isIndex}
+                    />
+                  }
+                />
+              }
+            />
+            <PillarRow
               nav={nav}
               pillar={altPillarRow.pillar}
               pillarItems={altPillarRow.items}
@@ -179,17 +183,16 @@ export const PillarPage = async (props: Props) => {
                 </PillarFilterDropdown>
               ))}
             </PillarFilters>
-            </ActiveSearchHiddenWrapper>
-          }
-        />
-
-        <div className=" bg-green-500 ">
-          <ActiveSearchHiddenWrapper>
-            <PillarLoadingWrapper>
-              <div className="">{content}</div>
-            </PillarLoadingWrapper>
           </ActiveSearchHiddenWrapper>
-        </div>
+        }
+      />
+
+      <div className=" bg-green-500 ">
+        <ActiveSearchHiddenWrapper>
+          <PillarLoadingWrapper>
+            <div className="">{content}</div>
+          </PillarLoadingWrapper>
+        </ActiveSearchHiddenWrapper>
       </div>
     </PillarAllFiltersWrapper>
   );

@@ -11,6 +11,7 @@ interface Props {
   shouldReduceOpacity?: boolean;
   loadingIcon?: React.ReactNode;
   className?: ClassValue;
+  isFullWidth?: boolean;
 }
 
 export const PillarLoadingWrapper = (props: Props) => {
@@ -19,12 +20,14 @@ export const PillarLoadingWrapper = (props: Props) => {
     shouldReduceOpacity = true,
     loadingIcon = null,
     className,
+    isFullWidth = false,
   } = props;
   const { isPendingPillarRoute: isLoading } = usePillarRoutesContext();
 
   return (
     <div
       className={cn(
+        { 'w-full': isFullWidth },
         { 'pointer-events-none': isLoading },
         { 'opacity-60': shouldReduceOpacity && isLoading },
         className,
