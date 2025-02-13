@@ -187,11 +187,9 @@ export const PillarPage = async (props: Props) => {
         }
       />
 
-      <div className=" bg-green-500 ">
+      <div className="bg-green-500 p-4">
         <ActiveSearchHiddenWrapper>
-          <PillarLoadingWrapper>
-            <div className="">{content}</div>
-          </PillarLoadingWrapper>
+          <PillarLoadingWrapper>{content}</PillarLoadingWrapper>
         </ActiveSearchHiddenWrapper>
       </div>
     </PillarAllFiltersWrapper>

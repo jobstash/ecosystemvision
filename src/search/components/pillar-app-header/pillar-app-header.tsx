@@ -47,7 +47,7 @@ export const PillarAppHeader = (props: Props) => {
       {/* Target div for scroll detection */}
       <div
         ref={secondPanelRef}
-        className="fixed top-16 z-40 w-full bg-gradient-to-r from-slate-700  to-slate-900 transition-transform lg:max-w-[calc(100%-236px)]"
+        className="fixed top-16 z-40 w-full bg-gradient-to-r from-slate-700 to-slate-900 p-4 transition-transform lg:max-w-[calc(100%-236px)]"
         style={{
           transform:
             scrollDirection === 'down'

@@ -31,7 +31,7 @@ export const OrgList = ({ searchParams }: Props) => {
     <>
       {isPendingOrgs ? (
         // <CardSkeleton />
-        <div className="flex w-full justify-center pt-8">
+        <div className="flex w-full justify-center">
           <Spinner size="md" color="white" />
         </div>
       ) : (
