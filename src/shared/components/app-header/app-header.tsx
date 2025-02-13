@@ -1,134 +1,55 @@
-'use client';
+import { Button } from '@heroui/button';
 
-import React, { useEffect, useRef, useState } from 'react';
-
-import { SearchDetailsButton } from '@/shared/components/app-header/search-details-button';
 import { Brand } from '@/shared/components/brand';
 import { MenuButton } from '@/shared/components/menu-button';
 
+import { BackButtonClientWrapper } from './back-button-client-wrapper';
 import { AppHeaderProvider } from './context';
-import { HeaderLinks } from './header-links';
-import { MainInput } from './main-input';
+import { InputClientWrapper } from './input-client-wrapper';
+import { SearchTriggerButton } from './search-trigger-button';
 
 interface Props {
   input?: React.ReactNode;
-  mainPillar?: React.ReactNode;
+  backButton?: React.ReactNode;
+  initShowInput?: boolean;
   searchResults?: React.ReactNode;
-  showSearchButton?: boolean;
 }
 
 export const AppHeader = (props: Props) => {
-  const { input, mainPillar, searchResults, showSearchButton } = props;
-
-  const [scrollPos, setScrollPos] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(
-    null,
-  );
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [parentHeight, setParentHeight] = useState(0);
-  const firstPanelRef = useRef<HTMLDivElement>(null);
-  const secondPanelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Calculate the combined height of first and second panels
-    const calculateHeight = () => {
-      const firstPanelHeight = firstPanelRef.current?.offsetHeight || 0;
-      const secondPanelHeight = secondPanelRef.current?.offsetHeight || 0;
-      setParentHeight(firstPanelHeight + secondPanelHeight); // Set the total height of the parent div
-    };
-
-    // Initial calculation of height
-    calculateHeight();
-
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-
-      // Only start checking scroll direction after 60px
-      if (currentScroll <= 230) {
-        setScrollDirection(null); // No transition if below 60px
-        setIsCollapsed(false);
-        return;
-      }
-
-      // Determine Scroll Direction
-      if (currentScroll > scrollPos) {
-        setScrollDirection('down');
-        setIsCollapsed(true); // Collapsed when scrolling down after 120px
-      } else if (currentScroll < scrollPos) {
-        setScrollDirection('up');
-        setIsCollapsed(false); // Expanded when scrolling up
-      }
-
-      setScrollPos(currentScroll);
-    };
-
-    // Recalculate height on window resize
-    window.addEventListener('resize', calculateHeight);
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('resize', calculateHeight);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrollPos]);
+  const { input, backButton, initShowInput, searchResults } = props;
+  const hasBackButton = !!backButton;
 
   return (
-    <AppHeaderProvider>
-      <div
-        className="relative"
-        style={{ height: `${parentHeight}px` }} // Set the height dynamically
+    <>
+      <AppHeaderProvider
+        initShowInput={initShowInput}
+        hasBackButton={hasBackButton}
       >
-        {/* Fixed div that changes position when gradientRef is out of view */}
-        <div
-          className={`fixed z-[999] h-[105px] w-full bg-yellow-800 transition-all duration-300 ${
-            isCollapsed ? 'top-0' : '-top-full'
-          }`}
-        >
-          header-collapsed
-        </div>
+        <div className="fixed z-50 flex min-h-16 w-full items-center gap-x-4 bg-cyan-600 px-4 lg:w-[calc(100%-236px)]">
+          <div className="flex grow items-center gap-x-4">
+            <div className="block lg:hidden">
+              <Brand />
+            </div>
 
-        {/* Sticky header */}
-        <div
-          className="first-panel fixed z-50 flex min-h-16 w-full flex-wrap items-center gap-8 bg-cyan-600 transition-transform"
-          ref={firstPanelRef}
-          style={{
-            transform:
-              scrollDirection === 'down'
-                ? 'translateY(-100%)'
-                : 'translateY(0)',
-          }}
-        >
-          <div className="order-1 shrink-0 lg:hidden">
-            <Brand />
+            <BackButtonClientWrapper>{backButton}</BackButtonClientWrapper>
+
+            <InputClientWrapper>{input}</InputClientWrapper>
+
+            <SearchTriggerButton />
           </div>
-
-          <div className="order-3 w-full grow lg:order-2 lg:w-auto">
-            <MainInput mainInput={input} />
-          </div>
-
-          <div className="order-2 flex grow justify-end gap-4 lg:grow-0">
-            {showSearchButton && <SearchDetailsButton />}
-            <HeaderLinks />
+          <div className="flex items-center gap-x-4">
+            <div className="hidden gap-2 lg:flex">
+              <Button variant="light">Get Listed</Button>
+              <Button variant="light">Subscribe on TG</Button>
+              <Button radius="sm" className="bg-white text-black">
+                Connect Wallet
+              </Button>
+            </div>
             <MenuButton />
           </div>
         </div>
-
-        {searchResults}
-
-        {/* Target div for scroll detection */}
-        <div
-          ref={secondPanelRef}
-          className="second-panel fixed top-16  z-40 w-full bg-gradient-to-r from-slate-700  to-slate-900 transition-transform lg:max-w-[calc(100%-236px)]"
-          style={{
-            transform:
-              scrollDirection === 'down'
-                ? 'translateY(calc(-100% - 4rem))'
-                : 'translateY(0)',
-          }}
-        >
-          {mainPillar}
-        </div>
-      </div>
-    </AppHeaderProvider>
+      </AppHeaderProvider>
+      <div className="py-8">{searchResults}</div>
+    </>
   );
 };

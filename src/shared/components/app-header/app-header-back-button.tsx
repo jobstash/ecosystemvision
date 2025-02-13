@@ -13,7 +13,7 @@ interface Props {
   nav: string;
 }
 
-export const BackButton = ({ nav }: Props) => {
+export const AppHeaderBackButton = ({ nav }: Props) => {
   const { startTransition } = usePillarRoutesContext();
   const router = useRouter();
 

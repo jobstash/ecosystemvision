@@ -1,5 +1,6 @@
 import { AppHeader } from '@/shared/components/app-header';
-import { BackButton } from '@/shared/components/app-header/back-button';
+import { AppHeaderBackButton } from '@/shared/components/app-header/app-header-back-button';
+import { AppHeaderDetailsSearchInput } from '@/shared/components/app-header/app-header-details-search-input';
 import { DetailsTabs } from '@/shared/components/details-tabs';
 import { Divider } from '@/shared/components/divider';
 import { ScrollToTop } from '@/shared/components/scroll-to-top';
@@ -22,8 +23,8 @@ export const DetailsLayout = (props: Props) => {
     <div className="min-h-screen">
       <ScrollToTop />
       <AppHeader
-        showSearchButton
-        input={<BackButton nav={nav} />}
+        input={<AppHeaderDetailsSearchInput />}
+        backButton={<AppHeaderBackButton nav={nav} />}
         searchResults={<DetailsSearchResults nav={nav} />}
       />
       <ActiveSearchHiddenWrapper>

@@ -3,13 +3,13 @@
 import { createContext, useContext, useReducer } from 'react';
 
 interface AppHeaderCtx {
-  isDetailsSearch: boolean;
-  toggleDetailsSearch: () => void;
+  showInput: boolean;
+  toggleInput: () => void;
 }
 
 const AppHeaderContext = createContext<AppHeaderCtx>({
-  isDetailsSearch: false,
-  toggleDetailsSearch: () => {},
+  showInput: false,
+  toggleInput: () => {},
 });
 
 export const useAppHeaderContext = () => {
@@ -24,17 +24,23 @@ export const useAppHeaderContext = () => {
 
 interface Props {
   children: React.ReactNode;
+  hasBackButton: boolean;
+  initShowInput?: boolean;
 }
 
-export const AppHeaderProvider = ({ children }: Props) => {
-  const [isDetailsSearch, toggleDetailsSearch] = useReducer(
+export const AppHeaderProvider = ({
+  children,
+  hasBackButton,
+  initShowInput,
+}: Props) => {
+  const [showInput, toggleInput] = useReducer(
     (prev: boolean) => !prev,
-    false,
+    !!initShowInput,
   );
 
   const value = {
-    isDetailsSearch,
-    toggleDetailsSearch,
+    showInput: !hasBackButton || showInput,
+    toggleInput,
   };
 
   return (

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
@@ -16,9 +17,9 @@ import { useSearchInput } from '@/search/hooks/use-search-input';
 
 import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
 
-export const SearchDetailsInput = () => {
+export const AppHeaderDetailsSearchInput = () => {
   const { isPendingPillarRoute } = usePillarRoutesContext();
-  const { toggleDetailsSearch } = useAppHeaderContext();
+  const { toggleInput } = useAppHeaderContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useAtom(isActiveSearchAtom);
@@ -35,7 +36,7 @@ export const SearchDetailsInput = () => {
 
   const onClose = () => {
     onClear();
-    toggleDetailsSearch();
+    toggleInput();
   };
 
   return (
