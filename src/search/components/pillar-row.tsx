@@ -23,7 +23,7 @@ export const PillarRow = (props: Props) => {
             <span>{formatPillarName(pillar, nav)}</span>
           </div>
         )}
-        <div className="relative flex h-14 gap-4 overflow-hidden p-1">
+        <div className="relative flex h-14 justify-between gap-4 overflow-hidden">
           <div className="flex max-w-fit flex-wrap gap-4">
             {pillarItems.map(({ label, href, isActive }) => (
               <PillarItem
@@ -36,7 +36,7 @@ export const PillarRow = (props: Props) => {
             ))}
           </div>
 
-          <div className="shrink-0 grow justify-end">{dropdownContent}</div>
+          <div className="shrink-0">{dropdownContent}</div>
         </div>
       </div>
     </PillarLoadingWrapper>
