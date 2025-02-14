@@ -119,7 +119,7 @@ export const PillarPage = async (props: Props) => {
         }
         content={
           <ActiveSearchHiddenWrapper>
-            <div className="glow-gradient px-4 lg:pb-8 lg:px-8">
+            <div className="glow-gradient px-4 lg:px-8 lg:pb-8">
               <MainPillarContent
                 title={pillarInfo.title}
                 description={pillarInfo.description}
@@ -146,7 +146,7 @@ export const PillarPage = async (props: Props) => {
                 }
               />
             </div>
-            <div className="bg-[#070708] px-4 mt-4 lg:mt-8 lg:px-8">
+            <div className="mt-4 bg-[#070708] px-4 lg:mt-8 lg:px-8">
               <PillarRow
                 nav={nav}
                 pillar={altPillarRow.pillar}
@@ -166,7 +166,7 @@ export const PillarPage = async (props: Props) => {
                 }
               />
             </div>
-            <div className="bg-[#070708] px-4 lg:px-8 overflow-hidden">
+            <div className="overflow-hidden bg-[#070708] px-4 lg:px-8">
               <PillarFilters
                 nav={nav}
                 params={params}

@@ -34,7 +34,6 @@ html {
   scrollbar-gutter: stable;
 }
 
-
 .glow-background {
   position: fixed;
   right: 0;
@@ -55,7 +54,6 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 
 .hide-scrollbar {
   -ms-overflow-style: none;

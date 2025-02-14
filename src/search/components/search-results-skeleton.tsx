@@ -9,8 +9,8 @@ import { SearchResultLayout } from '@/search/components/search-result';
 export const SearchResultsSkeleton = () => {
   return (
     <div className="flex flex-col gap-8 px-2 pb-8  md:px-8 lg:pl-12">
-      <div className='glow-background top-0 lg:w-[calc(100vw-236px)]'></div>
-      <div className='bg-gradient-to-r top-0 from-[#070708] to-[#101012] h-screen fixed left-[236px] z-[999] w-6'></div>
+      <div className="glow-background top-0 lg:w-[calc(100vw-236px)]"></div>
+      <div className="fixed left-[236px] top-0 z-[999] h-screen w-6 bg-gradient-to-r from-[#070708] to-[#101012]"></div>
       {Array.from({ length: 5 }).map((_, i) => (
         <Fragment key={i}>
           <Divider />

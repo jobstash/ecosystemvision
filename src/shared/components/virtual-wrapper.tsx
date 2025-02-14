@@ -40,7 +40,7 @@ export const VirtualWrapper = ({ count, children }: Props) => {
 
   return (
     <div ref={parentRef}>
-      <div className="relative my-4 lg:my-8 mx-4 lg:mx-8" style={{ height: getTotalSize }}>
+      <div className="relative m-4 lg:m-8" style={{ height: getTotalSize }}>
         <div
           className="absolute left-0 top-0 w-full"
           style={{ transform: `translateY(${translateY}px)` }}

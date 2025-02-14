@@ -33,9 +33,9 @@ export const PillarAppHeader = (props: Props) => {
       </div>
 
       {/* Sticky header */}
-      <div className="">
+      <div>
         <div
-          className="fixed transition-transform duration-700 z-50 flex h-[122px] w-full flex-wrap items-center gap-8"
+          className="fixed z-50 flex h-[122px] w-full flex-wrap items-center gap-8 transition-transform duration-700"
           ref={firstPanelRef}
           style={{
             transform:
@@ -50,7 +50,7 @@ export const PillarAppHeader = (props: Props) => {
         {/* Target div for scroll detection */}
         <div
           ref={secondPanelRef}
-          className=" top-[122px] fixed z-40 w-full duration-700 lg:w-[calc(100vw-236px)]  transition-transform  bg-[#070708]"
+          className=" fixed top-[122px] z-40 w-full bg-[#070708] transition-transform  duration-700  lg:w-[calc(100vw-236px)]"
           style={{
             transform:
               scrollDirection === 'down'
