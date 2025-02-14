@@ -44,6 +44,7 @@ export const usePillarDropdownInput = ({
     setValue(value);
   };
 
+  const [total, setTotal] = useState(0);
   const list = useAsyncList<string, number>({
     async load({ cursor = ITEMS_PER_PAGE, filterText }) {
       const pageOffset = !debouncedValue ? 1 : 0;
@@ -60,16 +61,18 @@ export const usePillarDropdownInput = ({
         limit: ITEMS_PER_PAGE,
       };
 
-      const responseItems = await queryClient.fetchQuery({
+      const { items, total } = await queryClient.fetchQuery({
         queryKey: searchQueryKeys.getPillarItems(queryProps),
         queryFn: async () => getPillarItems(queryProps),
       });
+
+      setTotal(total);
 
       const start = cursor || ITEMS_PER_PAGE;
       const nextCursor = start + ITEMS_PER_PAGE;
 
       return {
-        items: responseItems,
+        items,
         cursor: nextCursor,
       };
     },
@@ -106,5 +109,6 @@ export const usePillarDropdownInput = ({
     onClear,
     inViewRef,
     isPendingDebounce,
+    total,
   };
 };
