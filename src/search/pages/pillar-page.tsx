@@ -168,8 +168,12 @@ export const PillarPage = async (props: Props) => {
               params={params}
               searchParams={searchParams}
             >
-              {altPillarFilters.map(({ pillar, items }) => (
-                <PillarFilterDropdown key={pillar} pillar={pillar}>
+              {altPillarFilters.map(({ pillar, label, items }) => (
+                <PillarFilterDropdown
+                  key={pillar}
+                  pillar={pillar}
+                  label={label}
+                >
                   <PillarFilterDropdownContent
                     key={pillar}
                     nav={nav}

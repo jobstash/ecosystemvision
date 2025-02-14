@@ -29,7 +29,7 @@ export const createPillarRows = (options: Options) => {
       .map(({ pillar, label }) => `${pillar}-${label}`),
   );
 
-  return pillars.flatMap(({ slug: pillar, items }) => {
+  return pillars.flatMap(({ slug: pillar, label, items }) => {
     const mappedItems = items.map((label) => {
       const isMainItem = normalizeString(label) === params.item;
       if (isMainItem) {
@@ -87,6 +87,7 @@ export const createPillarRows = (options: Options) => {
 
     return {
       pillar,
+      label,
       items: arrangedItems.filter(Boolean),
     };
   });
