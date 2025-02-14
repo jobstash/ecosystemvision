@@ -25,7 +25,7 @@ export const usePillarAppHeader = () => {
       const currentScroll = window.scrollY;
 
       // Only start checking scroll direction after 60px
-      if (currentScroll <= 230) {
+      if (currentScroll <= 250) {
         setScrollDirection(null); // No transition if below 60px
         setIsCollapsed(false);
         return;

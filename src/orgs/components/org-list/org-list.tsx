@@ -54,7 +54,7 @@ export const OrgList = ({ searchParams }: Props) => {
                 <Loader />
               </div>
             ) : (
-              <p>No more organizations available.</p>
+              <p className="px-4 lg:px-8">No more organizations available.</p>
             )}
           </>
         ) : (

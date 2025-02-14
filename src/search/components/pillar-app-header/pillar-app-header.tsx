@@ -20,7 +20,7 @@ export const PillarAppHeader = (props: Props) => {
 
   return (
     <div
-      className="relative"
+      className="relative  z-[999]"
       style={{ height: `${parentHeight}px` }} // Set the height dynamically
     >
       {/* Fixed div that changes position when gradientRef is out of view */}
@@ -29,33 +29,37 @@ export const PillarAppHeader = (props: Props) => {
           isCollapsed ? 'top-0' : '-top-full'
         }`}
       >
-        header-collapsed
+        TODO: HERE WE CAN INCLUDE AN COLLAPSIBLE HEADER COMPONENT
       </div>
 
       {/* Sticky header */}
-      <div
-        className="fixed z-50 flex h-16 w-full flex-wrap items-center gap-8 bg-cyan-600 transition-transform"
-        ref={firstPanelRef}
-        style={{
-          transform:
-            scrollDirection === 'down' ? 'translateY(-100%)' : 'translateY(0)',
-        }}
-      >
-        {appHeader}
-      </div>
+      <div>
+        <div
+          className="fixed z-50 flex h-[122px] w-full flex-wrap items-center gap-8 transition-transform duration-700"
+          ref={firstPanelRef}
+          style={{
+            transform:
+              scrollDirection === 'down'
+                ? 'translateY(calc(-100% - 4rem))'
+                : 'translateY(0)',
+          }}
+        >
+          {appHeader}
+        </div>
 
-      {/* Target div for scroll detection */}
-      <div
-        ref={secondPanelRef}
-        className="fixed top-16 z-40 w-full bg-gradient-to-r from-slate-700 to-slate-900 p-4 transition-transform lg:max-w-[calc(100%-236px)]"
-        style={{
-          transform:
-            scrollDirection === 'down'
-              ? 'translateY(calc(-100% - 4rem))'
-              : 'translateY(0)',
-        }}
-      >
-        {content}
+        {/* Target div for scroll detection */}
+        <div
+          ref={secondPanelRef}
+          className=" fixed top-[122px] z-40 w-full bg-[#070708] transition-transform  duration-700  lg:w-[calc(100vw-236px)]"
+          style={{
+            transform:
+              scrollDirection === 'down'
+                ? 'translateY(calc(-100% - 4rem))'
+                : 'translateY(0)',
+          }}
+        >
+          {content}
+        </div>
       </div>
     </div>
   );

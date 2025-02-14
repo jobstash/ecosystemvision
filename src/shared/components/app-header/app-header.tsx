@@ -25,7 +25,7 @@ export const AppHeader = (props: Props) => {
         initShowInput={initShowInput}
         hasBackButton={hasBackButton}
       >
-        <div className="fixed z-50 flex min-h-16 w-full items-center gap-x-4 bg-cyan-600 px-4 lg:w-[calc(100%-236px)]">
+        <div className="fixed top-0 z-50 flex h-[122px] w-full items-center justify-between gap-x-4  bg-[#101012] px-4 lg:max-w-[calc(100vw-236px)] lg:px-8 lg:pl-7">
           <div className="flex grow items-center gap-x-4">
             <div className="block lg:hidden">
               <Brand />
@@ -49,7 +49,9 @@ export const AppHeader = (props: Props) => {
           </div>
         </div>
       </AppHeaderProvider>
-      <div className="px-4 py-16">{searchResults}</div>
+      {searchResults && (
+        <div className="mt-[122px] overflow-hidden">{searchResults}</div>
+      )}
     </>
   );
 };
