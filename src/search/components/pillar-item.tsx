@@ -27,6 +27,7 @@ export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
 
   const setHiddenItems = useSetAtom(hiddenPillarItemsAtom);
   const { ref: inViewRef } = useInView({
+    threshold: 1,
     onChange: (inView) => {
       setHiddenItems((prev) => {
         const newState = { ...prev };
@@ -38,6 +39,7 @@ export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
           : hiddenItems.unshift(label);
 
         newState[pillar] = hiddenItems;
+
         return newState;
       });
     },
