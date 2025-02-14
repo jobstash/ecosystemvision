@@ -17,7 +17,7 @@ export const PillarFilters = (props: Props) => {
 
   return (
     <PillarLoadingWrapper>
-      <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/15 px-3 py-4">
+      <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/15 overflow-hidden px-3 py-4">
         <div className="flex items-center gap-8">
           <span className="text-sm">Other Filters</span>
           <div className="flex gap-4">{children}</div>

@@ -119,76 +119,79 @@ export const PillarPage = async (props: Props) => {
         }
         content={
           <ActiveSearchHiddenWrapper>
-
-            <MainPillarContent
-              title={pillarInfo.title}
-              description={pillarInfo.description}
-              items={
-                <PillarRow
-                  hidePillar
-                  nav={nav}
-                  pillar={params.pillar}
-                  pillarItems={mainPillarRow.items}
-                  dropdownContent={
-                    <PillarRowDropdownContent
-                      nav={nav}
-                      pillar={mainPillarRow.pillar}
-                      params={params}
-                      searchParams={searchParams}
-                      activeLabels={getActiveLabels(
-                        labeledItems,
-                        mainPillarRow.pillar,
-                      )}
-                      isIndex={isIndex}
-                    />
-                  }
-                />
-              }
-            />
-            
-            <PillarRow
-              nav={nav}
-              pillar={altPillarRow.pillar}
-              pillarItems={altPillarRow.items}
-              dropdownContent={
-                <PillarRowDropdownContent
-                  nav={nav}
-                  pillar={altPillarRow.pillar}
-                  params={params}
-                  searchParams={searchParams}
-                  activeLabels={getActiveLabels(
-                    labeledItems,
-                    altPillarRow.pillar,
-                  )}
-                  isIndex={isIndex}
-                />
-              }
-            />
-
-            <PillarFilters
-              nav={nav}
-              params={params}
-              searchParams={searchParams}
-            >
-              {altPillarFilters.map(({ pillar, label, items }) => (
-                <PillarFilterDropdown
-                  key={pillar}
-                  pillar={pillar}
-                  label={label}
-                >
-                  <PillarFilterDropdownContent
-                    key={pillar}
+            <div className="glow-gradient px-4 lg:pb-8 lg:px-8">
+              <MainPillarContent
+                title={pillarInfo.title}
+                description={pillarInfo.description}
+                items={
+                  <PillarRow
+                    hidePillar
                     nav={nav}
-                    pillar={pillar}
+                    pillar={params.pillar}
+                    pillarItems={mainPillarRow.items}
+                    dropdownContent={
+                      <PillarRowDropdownContent
+                        nav={nav}
+                        pillar={mainPillarRow.pillar}
+                        params={params}
+                        searchParams={searchParams}
+                        activeLabels={getActiveLabels(
+                          labeledItems,
+                          mainPillarRow.pillar,
+                        )}
+                        isIndex={isIndex}
+                      />
+                    }
+                  />
+                }
+              />
+            </div>
+            <div className="bg-[#070708] px-4 mt-4 lg:mt-8 lg:px-8">
+              <PillarRow
+                nav={nav}
+                pillar={altPillarRow.pillar}
+                pillarItems={altPillarRow.items}
+                dropdownContent={
+                  <PillarRowDropdownContent
+                    nav={nav}
+                    pillar={altPillarRow.pillar}
                     params={params}
                     searchParams={searchParams}
-                    activeLabels={getActiveLabels(labeledItems, pillar)}
+                    activeLabels={getActiveLabels(
+                      labeledItems,
+                      altPillarRow.pillar,
+                    )}
                     isIndex={isIndex}
-                    overrideHiddenItems={items.map((item) => item.label)}
                   />
-                </PillarFilterDropdown>
-              ))}
-            </PillarFilters>
+                }
+              />
+            </div>
+            <div className="bg-[#070708] px-4 lg:px-8 overflow-hidden">
+              <PillarFilters
+                nav={nav}
+                params={params}
+                searchParams={searchParams}
+              >
+                {altPillarFilters.map(({ pillar, label, items }) => (
+                  <PillarFilterDropdown
+                    key={pillar}
+                    pillar={pillar}
+                    label={label}
+                  >
+                    <PillarFilterDropdownContent
+                      key={pillar}
+                      nav={nav}
+                      pillar={pillar}
+                      params={params}
+                      searchParams={searchParams}
+                      activeLabels={getActiveLabels(labeledItems, pillar)}
+                      isIndex={isIndex}
+                      overrideHiddenItems={items.map((item) => item.label)}
+                    />
+                  </PillarFilterDropdown>
+                ))}
+              </PillarFilters>
+            </div>
           </ActiveSearchHiddenWrapper>
         }
       />

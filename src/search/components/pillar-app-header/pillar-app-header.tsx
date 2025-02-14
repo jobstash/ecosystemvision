@@ -29,33 +29,40 @@ export const PillarAppHeader = (props: Props) => {
           isCollapsed ? 'top-0' : '-top-full'
         }`}
       >
-        header-collapsed
+        TODO: HERE WE CAN INCLUDE AN COLLAPSIBLE HEADER COMPONENT
       </div>
 
       {/* Sticky header */}
       <div
-        className="transition-transform"
-        style={{
-          transform:
-            scrollDirection === 'down'
-              ? 'translateY(calc(-100% - 4rem))'
-              : 'translateY(0)',
-        }}
+        className=""
+        
       >
         <div
-          className=" z-50 flex h-[122px] w-full flex-wrap items-center gap-8"
+          className="fixed transition-transform duration-700 z-50 flex h-[122px] w-full flex-wrap items-center gap-8"
           ref={firstPanelRef}
+          style={{
+            transform:
+              scrollDirection === 'down'
+                ? 'translateY(calc(-100% - 4rem))'
+                : 'translateY(0)',
+          }}
         >
           {appHeader}
         </div>
 
         {/* Target div for scroll detection */}
-        {/* <div
+        <div
           ref={secondPanelRef}
-          className=" top-[122px] z-40 w-full  transition-transform "
-        > */}
+          className=" top-[122px] fixed z-40 w-full duration-700 lg:w-[calc(100vw-236px)]  transition-transform  bg-[#070708]"
+          style={{
+            transform:
+              scrollDirection === 'down'
+                ? 'translateY(calc(-100% - 4rem))'
+                : 'translateY(0)',
+          }}
+        >
           {content}
-        {/* </div> */}
+        </div>
       </div>
     </div>
   );
