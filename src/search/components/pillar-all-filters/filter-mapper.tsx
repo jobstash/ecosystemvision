@@ -49,6 +49,9 @@ export const FilterMapper = ({ item }: Props) => {
     }
 
     case 'RANGE': {
+      const isInvalid = item.min.value >= item.max.value;
+      if (isInvalid) return null;
+
       return (
         <RangeFilter
           label={item.label}
