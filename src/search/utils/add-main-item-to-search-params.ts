@@ -9,6 +9,6 @@ export const addMainItemToSearchParams = ({
 }) => {
   return {
     ...searchParams,
-    [pillar]: [searchParams[pillar], item].filter(Boolean).join(','),
+    [pillar]: [item, searchParams[pillar]].filter(Boolean).join(','),
   };
 };
