@@ -6,7 +6,7 @@ import { Divider } from '@/shared/components/divider';
 import { ScrollToTop } from '@/shared/components/scroll-to-top';
 
 import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
-import { DetailsSearchResults } from '@/search/components/details-search-results';
+import { ActiveSearchResults } from '@/search/components/active-search-results';
 import { PillarLoadingWrapper } from '@/search/components/pillar-loading-wrapper';
 
 interface Props {
@@ -25,7 +25,7 @@ export const DetailsLayout = (props: Props) => {
       <AppHeader
         input={<AppHeaderDetailsSearchInput />}
         backButton={<AppHeaderBackButton nav={nav} />}
-        searchResults={<DetailsSearchResults nav={nav} />}
+        searchResults={<ActiveSearchResults nav={nav} />}
       />
       <ActiveSearchHiddenWrapper>
         <PillarLoadingWrapper>
