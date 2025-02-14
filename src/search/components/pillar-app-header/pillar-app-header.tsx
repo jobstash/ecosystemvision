@@ -20,7 +20,7 @@ export const PillarAppHeader = (props: Props) => {
 
   return (
     <div
-      className="relative"
+      className="relative  z-[999]"
       style={{ height: `${parentHeight}px` }} // Set the height dynamically
     >
       {/* Fixed div that changes position when gradientRef is out of view */}
@@ -34,20 +34,7 @@ export const PillarAppHeader = (props: Props) => {
 
       {/* Sticky header */}
       <div
-        className="fixed z-50 flex h-16 w-full flex-wrap items-center gap-8 bg-cyan-600 transition-transform"
-        ref={firstPanelRef}
-        style={{
-          transform:
-            scrollDirection === 'down' ? 'translateY(-100%)' : 'translateY(0)',
-        }}
-      >
-        {appHeader}
-      </div>
-
-      {/* Target div for scroll detection */}
-      <div
-        ref={secondPanelRef}
-        className="fixed top-16 z-40 w-full bg-gradient-to-r from-slate-700 to-slate-900 p-4 transition-transform lg:max-w-[calc(100%-236px)]"
+        className="transition-transform"
         style={{
           transform:
             scrollDirection === 'down'
@@ -55,7 +42,20 @@ export const PillarAppHeader = (props: Props) => {
               : 'translateY(0)',
         }}
       >
-        {content}
+        <div
+          className=" z-50 flex h-[122px] w-full flex-wrap items-center gap-8"
+          ref={firstPanelRef}
+        >
+          {appHeader}
+        </div>
+
+        {/* Target div for scroll detection */}
+        {/* <div
+          ref={secondPanelRef}
+          className=" top-[122px] z-40 w-full  transition-transform "
+        > */}
+          {content}
+        {/* </div> */}
       </div>
     </div>
   );
