@@ -33,10 +33,7 @@ export const PillarAppHeader = (props: Props) => {
       </div>
 
       {/* Sticky header */}
-      <div
-        className=""
-        
-      >
+      <div className="">
         <div
           className="fixed transition-transform duration-700 z-50 flex h-[122px] w-full flex-wrap items-center gap-8"
           ref={firstPanelRef}
