@@ -42,17 +42,17 @@ const createPillarItemsSearchParams = (props: GetPillarItemsProps) => {
 
 export const getPillarItems = async (
   props: GetPillarItemsProps,
-): Promise<string[]> => {
+): Promise<{ items: string[]; total: number }> => {
   const url = new URL(`${MW_URL}/search/pillar/items`);
   url.search = createPillarItemsSearchParams(props);
 
-  const response = await mwGET({
+  const { total, data: items } = await mwGET({
     url: url.toString(),
     label: 'getPillarItems',
     responseSchema: pillarItemsResponseDtoSchema,
   });
 
-  return response.data;
+  return { items, total };
 };
 
 // import { GetPillarItemsProps } from '@/search/core/types';

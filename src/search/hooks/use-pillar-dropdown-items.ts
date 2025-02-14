@@ -42,7 +42,8 @@ export const usePillarDropdownItems = (options: Options) => {
   const optionItems = useMemo(() => {
     return [
       ...Array.from(hiddenItemsSet),
-      ...items.filter((item) => !hiddenItemsSet.has(item)),
+      ...items,
+      // .filter((item) => !hiddenItemsSet.has(item)),
     ].filter(
       (item) =>
         !activeLabelsSet.has(item) &&

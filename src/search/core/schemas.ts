@@ -47,6 +47,7 @@ export const dtoToSearchResults = (dto: SearchResultsDto): TSearchResults => {
 
 export const pillarDtoSchema = z.object({
   slug: z.string(),
+  label: z.string().optional(),
   items: z.array(z.string()),
 });
 export type PillarDto = z.infer<typeof pillarDtoSchema>;

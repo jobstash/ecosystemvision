@@ -108,7 +108,7 @@ export const PillarPage = async (props: Props) => {
           <AppHeader
             input={
               <PillarSearch
-                mainLabel={mainPillarRow.items[0].label}
+                mainLabel={mainPillarRow.items[0]?.label}
                 labeledItems={labeledItems}
               />
             }
@@ -170,8 +170,12 @@ export const PillarPage = async (props: Props) => {
               params={params}
               searchParams={searchParams}
             >
-              {altPillarFilters.map(({ pillar, items }) => (
-                <PillarFilterDropdown key={pillar} pillar={pillar}>
+              {altPillarFilters.map(({ pillar, label, items }) => (
+                <PillarFilterDropdown
+                  key={pillar}
+                  pillar={pillar}
+                  label={label}
+                >
                   <PillarFilterDropdownContent
                     key={pillar}
                     nav={nav}

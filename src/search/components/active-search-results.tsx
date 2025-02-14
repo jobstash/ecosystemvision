@@ -7,10 +7,10 @@ import { isActiveSearchAtom } from '@/search/core/atoms';
 import { SearchResults } from './search-results';
 
 interface Props {
-  nav: string;
+  nav?: string;
 }
 
-export const DetailsSearchResults = ({ nav }: Props) => {
+export const ActiveSearchResults = ({ nav }: Props) => {
   const isVisible = useAtomValue(isActiveSearchAtom);
 
   if (!isVisible) return null;

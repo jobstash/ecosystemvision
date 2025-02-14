@@ -35,6 +35,7 @@ export const BooleanFilter = ({ paramKey, label, items }: Props) => {
       },
     }));
   };
+
   return (
     <>
       <CheckboxGroup label={label} value={value} onValueChange={onValueChange}>

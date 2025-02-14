@@ -9,11 +9,14 @@ import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
 import { ScrollShadow } from '@heroui/scroll-shadow';
 import { Spinner } from '@heroui/spinner';
 
+import { capitalize } from '@/shared/utils/capitalize';
 import { cn } from '@/shared/utils/cn';
+import { formatNumber } from '@/shared/utils/format-number';
 import { normalizeString } from '@/shared/utils/normalize-string';
 import { CaretDownIcon } from '@/shared/components/icons/caret-down-icon';
 import { CheckmarkIcon } from '@/shared/components/icons/checkmark-icon';
 import { LockIcon } from '@/shared/components/icons/lock-icon';
+import { Text } from '@/shared/components/text';
 
 import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input';
 import { usePillarDropdownItems } from '@/search/hooks/use-pillar-dropdown-items';
@@ -44,6 +47,7 @@ export const PillarRowDropdownContent = ({
     onClear,
     inViewRef,
     isPendingDebounce,
+    total,
   } = usePillarDropdownInput({ nav, pillar, params, searchParams });
 
   const activeLabelsSet = useMemo(() => {
@@ -72,7 +76,10 @@ export const PillarRowDropdownContent = ({
     pillar,
   });
 
-  const ariaLabel = `Search ${pillar}`;
+  const ariaLabel = `Search ...`;
+  const hasActiveItems = activeItems.length > 0;
+  const hasOptionItems = optionItems.length > 0;
+  const showCounts = hasActiveItems || hasOptionItems;
 
   return (
     <Popover placement="bottom-end">
@@ -97,6 +104,24 @@ export const PillarRowDropdownContent = ({
           endContent={
             list.isLoading ? <Spinner size="sm" color="white" /> : null
           }
+          description={
+            showCounts ? (
+              <div className="flex w-full justify-between pt-2">
+                {hasActiveItems ? (
+                  <Text
+                    className="text-xs text-white/50"
+                    text={`Selected  ${capitalize(pillar)}: ${activeItems.length}`}
+                  />
+                ) : null}
+                {hasOptionItems ? (
+                  <Text
+                    className="text-xs text-white/50"
+                    text={`Total Count: ${formatNumber(total)}`}
+                  />
+                ) : null}
+              </div>
+            ) : null
+          }
         />
 
         <ScrollShadow
@@ -115,47 +140,49 @@ export const PillarRowDropdownContent = ({
                 <ListboxItem key="empty">No results found.</ListboxItem>
               ) : null}
 
-              {activeItems.map((label) => {
-                const classNames = {
-                  base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
-                };
+              {hasActiveItems &&
+                activeItems.map((label) => {
+                  const classNames = {
+                    base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
+                  };
 
-                const isMainItem = params.item === normalizeString(label);
-                const endContent = isMainItem ? (
-                  <LockIcon />
-                ) : (
-                  <CheckmarkIcon />
-                );
+                  const isMainItem = params.item === normalizeString(label);
+                  const endContent = isMainItem ? (
+                    <LockIcon />
+                  ) : (
+                    <CheckmarkIcon />
+                  );
 
-                return (
+                  return (
+                    <ListboxItem
+                      key={label}
+                      classNames={classNames}
+                      textValue={label}
+                      endContent={endContent}
+                      isReadOnly={isMainItem}
+                    >
+                      {label}
+                    </ListboxItem>
+                  );
+                })}
+
+              {hasOptionItems &&
+                optionItems.map((label, i) => (
                   <ListboxItem
                     key={label}
-                    classNames={classNames}
+                    classNames={{
+                      base: 'py-3',
+                    }}
                     textValue={label}
-                    endContent={endContent}
-                    isReadOnly={isMainItem}
                   >
-                    {label}
+                    <div
+                      key={label}
+                      ref={i === optionItems.length - 1 ? inViewRef : undefined}
+                    >
+                      {label}
+                    </div>
                   </ListboxItem>
-                );
-              })}
-
-              {optionItems.map((label, i) => (
-                <ListboxItem
-                  key={label}
-                  classNames={{
-                    base: 'py-3',
-                  }}
-                  textValue={label}
-                >
-                  <div
-                    key={label}
-                    ref={i === optionItems.length - 1 ? inViewRef : undefined}
-                  >
-                    {label}
-                  </div>
-                </ListboxItem>
-              ))}
+                ))}
             </>
           </Listbox>
         </ScrollShadow>

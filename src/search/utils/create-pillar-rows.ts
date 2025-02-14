@@ -3,6 +3,7 @@ import { normalizeString } from '@/shared/utils/normalize-string';
 import { PillarDto } from '@/search/core/schemas';
 import { LabeledItem } from '@/search/core/types';
 
+import { createMainItemHref } from './create-main-item-href';
 import { createPillarItemHref } from './create-pillar-item-href';
 
 interface Options {
@@ -28,11 +29,13 @@ export const createPillarRows = (options: Options) => {
       .map(({ pillar, label }) => `${pillar}-${label}`),
   );
 
-  return pillars.flatMap(({ slug: pillar, items }) => {
+  return pillars.flatMap(({ slug: pillar, label, items }) => {
     const mappedItems = items.map((label) => {
       const isMainItem = normalizeString(label) === params.item;
-      if (isMainItem)
-        return { label, href: '', slug: params.item, isActive: true };
+      if (isMainItem) {
+        const href = createMainItemHref(nav, params, searchParams);
+        return { label, href, slug: params.item, isActive: true };
+      }
 
       const isActive = selectedPillarLabels.has(`${pillar}-${label}`);
       const slug = normalizeString(label);
@@ -84,6 +87,7 @@ export const createPillarRows = (options: Options) => {
 
     return {
       pillar,
+      label,
       items: arrangedItems.filter(Boolean),
     };
   });

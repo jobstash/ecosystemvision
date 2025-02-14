@@ -15,16 +15,17 @@ const formatPillarName = (text: string) => {
 
 interface Props {
   pillar: string;
+  label?: string;
   children: React.ReactNode;
 }
 
-export const PillarFilterDropdown = ({ pillar, children }: Props) => {
+export const PillarFilterDropdown = ({ pillar, label, children }: Props) => {
   return (
     <div className="shrink-0 grow justify-end">
       <Popover placement="bottom-start">
         <PopoverTrigger>
           <Button endContent={<CaretDownIcon />}>
-            <span>{formatPillarName(pillar)}</span>
+            <span>{label ?? formatPillarName(pillar)}</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="flex flex-col gap-4 p-4">
