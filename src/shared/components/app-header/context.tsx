@@ -24,7 +24,7 @@ export const useAppHeaderContext = () => {
 
 interface Props {
   children: React.ReactNode;
-  hasBackButton: boolean;
+  hasBackButton?: boolean;
   initShowInput?: boolean;
 }
 
