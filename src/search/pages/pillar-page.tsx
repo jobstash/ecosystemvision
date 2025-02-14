@@ -108,7 +108,7 @@ export const PillarPage = async (props: Props) => {
           <AppHeader
             input={
               <PillarSearch
-                mainLabel={mainPillarRow.items[0].label}
+                mainLabel={mainPillarRow.items[0]?.label}
                 labeledItems={labeledItems}
               />
             }

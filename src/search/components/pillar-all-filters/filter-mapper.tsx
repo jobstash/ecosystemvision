@@ -31,7 +31,13 @@ export const FilterMapper = ({ item }: Props) => {
       }
 
       if (hasFewOptions) {
-        return <CheckboxFilter label={item.label} items={item.options} />;
+        return (
+          <CheckboxFilter
+            label={item.label}
+            items={item.options}
+            paramKey={item.paramKey}
+          />
+        );
       }
       return <SingleSelectFilter />;
     }
@@ -40,7 +46,13 @@ export const FilterMapper = ({ item }: Props) => {
       if (item.options.length === 0) return null;
 
       if (hasFewOptions) {
-        return <CheckboxFilter label={item.label} items={item.options} />;
+        return (
+          <CheckboxFilter
+            label={item.label}
+            items={item.options}
+            paramKey={item.paramKey}
+          />
+        );
       }
 
       throw new Error(
@@ -55,8 +67,8 @@ export const FilterMapper = ({ item }: Props) => {
       return (
         <RangeFilter
           label={item.label}
-          minValue={item.min.value}
-          maxValue={item.max.value}
+          min={item.min}
+          max={item.max}
           prefix={item.prefix}
         />
       );

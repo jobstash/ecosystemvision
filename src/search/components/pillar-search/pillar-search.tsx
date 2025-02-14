@@ -12,7 +12,7 @@ import { PillarSearchInput } from './pillar-search-input';
 import { PillarSearchInputItem } from './pillar-search-input-item';
 
 interface Props {
-  mainLabel: string;
+  mainLabel?: string;
   labeledItems: LabeledItem[];
 }
 
@@ -45,11 +45,11 @@ export const PillarSearch = ({ mainLabel, labeledItems }: Props) => {
   );
 };
 
-const moveMainItemToFront = (items: LabeledItem[], mainLabel: string) => {
+const moveMainItemToFront = (items: LabeledItem[], mainLabel?: string) => {
+  if (!mainLabel) return items;
+
   const mainItem = items.find((item) => item.label === mainLabel);
-  if (!mainItem) {
-    return items;
-  }
+  if (!mainItem) return items;
 
   return [mainItem, ...items.filter((item) => item.label !== mainLabel)];
 };
