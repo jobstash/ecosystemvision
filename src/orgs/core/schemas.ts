@@ -29,7 +29,6 @@ export const orgListItemSchema = orgInfoSchema
   .merge(
     z.object({
       url: z.string(),
-      jobCount: z.number(),
       projectCount: z.number(),
       lastFundingDate: z.number(),
       lastFundingAmount: z.number(),

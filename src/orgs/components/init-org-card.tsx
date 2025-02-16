@@ -35,7 +35,6 @@ export const InitOrgCard = () => {
     const orgItem: OrgListItem = {
       ...initOrg,
       url: initOrg.website!,
-      jobCount: initOrg.jobs.length,
       projectCount: initOrg.projects.length,
       lastFundingAmount,
       lastFundingDate,
