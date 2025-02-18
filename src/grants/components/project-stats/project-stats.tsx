@@ -48,7 +48,7 @@ export const GranteeProjectStats = () => {
   return (
     <div className={WRAPPER_CLASSNAME}>
       {currentTab.stats.map((granteeStat) => (
-        <GranteeStatItem key={granteeStat.label} granteeStat={granteeStat} />
+        <GranteeStatItem key={granteeStat.value} granteeStat={granteeStat} />
       ))}
     </div>
   );
