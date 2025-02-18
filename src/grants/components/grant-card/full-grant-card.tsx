@@ -14,9 +14,10 @@ import { WebLinks } from '@/grants/components/ui/base/web-links';
 
 interface Props {
   grant: Grant;
+  isRounded?: boolean;
 }
 
-export const FullGrantCard = ({ grant }: Props) => {
+export const FullGrantCard = ({ grant, isRounded = true }: Props) => {
   // TODO: JOB-678
 
   const {
@@ -36,7 +37,10 @@ export const FullGrantCard = ({ grant }: Props) => {
 
   return (
     <div
-      className="lg:rounded-t-0 flex max-h-[500px] flex-wrap items-center justify-between gap-6 overflow-hidden rounded-b-lg bg-gradient-to-b from-gradient-1/0 to-white/15  p-6 text-13 transition-all duration-700 lg:flex-nowrap lg:rounded-b-20  lg:p-5"
+      className={cn(
+        'flex max-h-[500px] flex-wrap items-center justify-between gap-6 overflow-hidden bg-gradient-to-b from-gradient-1/0 to-white/15  p-6 text-13 transition-all duration-700 lg:flex-nowrap lg:p-5',
+        { 'rounded-b-lg lg:rounded-b-20 lg:rounded-t-0': isRounded },
+      )}
       data-uuid={slug}
       data-testid={GRANT_TEST_IDS.GRANT_CARD}
     >
