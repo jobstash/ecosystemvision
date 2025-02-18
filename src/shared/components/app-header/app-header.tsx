@@ -25,9 +25,9 @@ export const AppHeader = (props: Props) => {
         initShowInput={initShowInput}
         hasBackButton={hasBackButton}
       >
-        <div className="fixed top-0 z-50 flex h-[122px] w-full items-center justify-between gap-x-4  bg-[#101012] px-4 lg:max-w-[calc(100vw-236px)] lg:px-8 lg:pl-7">
+        <div className="fixed top-0 z-50 flex h-[122px] w-full items-center justify-between gap-x-4  bg-[#101012] px-4 lg:max-w-[calc(100vw-236px)] lg:px-8 ">
           <div className="flex grow items-center gap-x-4">
-            <div className="block lg:hidden">
+            <div className="block w-[130px] shrink-0 lg:hidden">
               <Brand />
             </div>
 

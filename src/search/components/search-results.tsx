@@ -34,7 +34,7 @@ export const SearchResults = ({
   return (
     <div className="-mr-4 flex flex-col gap-6  px-4 pb-8 md:gap-8 lg:mx-0 lg:pb-12 lg:pl-12 lg:pr-8">
       <div className="glow-background top-0 lg:w-[calc(100vw-236px)]"></div>
-      <div className="fixed left-[236px] top-0 z-[999] h-screen w-6 bg-gradient-to-r from-[#070708] to-[#101012]"></div>
+      <div className="fixed left-[236px] top-0 z-[999] hidden h-screen w-6 bg-gradient-to-r from-[#070708] to-[#101012] lg:block"></div>
       {data.map(({ title, items }) => (
         <Fragment key={title}>
           <Divider />

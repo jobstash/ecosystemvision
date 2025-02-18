@@ -34,9 +34,9 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
-    className={`overflow-x-hidden bg-[#070708] ${inter.variable} ${grotesk.variable}`}
+    className={`bg-[#070708] ${inter.variable} ${grotesk.variable}`}
   >
-    <body className={inter.className}>
+    <body className={`overflow-x-hidden ${inter.className}`}>
       <GsapInit />
       <HeroUIProvider>
         <ReactQueryProvider>
