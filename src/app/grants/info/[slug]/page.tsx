@@ -1,5 +1,6 @@
 import { getGrantDetails } from '@/grants/data/get-grant-details';
-import { FullGrantCard } from '@/grants/components/grant-card/full-grant-card';
+
+import { GrantDetailsPage } from '@/grants/pages/grant-details-page';
 
 interface Props {
   params: Promise<{
@@ -9,16 +10,8 @@ interface Props {
 
 const Page = async (props: Props) => {
   const params = await props.params;
-
   const data = await getGrantDetails(params.slug);
-
-  return (
-    <div className="min-h-screen">
-      <div className="pt-16">
-        <FullGrantCard grant={data} isRounded={false} />
-      </div>
-    </div>
-  );
+  return <GrantDetailsPage grant={data} />;
 };
 
 export default Page;
