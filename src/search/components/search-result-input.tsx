@@ -16,7 +16,7 @@ import { useSearchInput } from '@/search/hooks/use-search-input';
 
 import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
-export const HomeSearchInput = () => {
+export const SearchResultInput = () => {
   const { isPendingRoute: isPendingPillarRoute } = usePendingRoute();
   const { toggleInput } = useAppHeaderContext();
 

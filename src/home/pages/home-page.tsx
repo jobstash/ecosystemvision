@@ -11,12 +11,12 @@ import { AppHeaderProvider } from '@/shared/components/app-header/context';
 
 import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
-import { HomeSearchInput } from '@/home/components/home-search-input';
 import { FlashIcon } from '@/home/components/icons/flash';
 import { Marquee } from '@/home/components/marquee';
 import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
 import { ActiveSearchResults } from '@/search/components/active-search-results';
+import { SearchResultInput } from '@/search/components/search-result-input';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: true,
@@ -28,7 +28,7 @@ export const HomePage = () => {
     <div className="overflow-hidden pt-[70px] font-inter lg:pt-0">
       <AppHeaderProvider>
         <AppHeader
-          input={<HomeSearchInput />}
+          input={<SearchResultInput />}
           searchResults={<ActiveSearchResults />}
         />
       </AppHeaderProvider>
