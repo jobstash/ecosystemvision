@@ -11,20 +11,13 @@ import { AiGrantProgramFinderPortal } from '@/grants/components/ai-grant-program
 import { AiGrantProgramFinderSkeleton } from '@/grants/components/ai-grant-program-finder/ai-grant-program-finder-skeleton';
 import { ActiveGrantList } from '@/grants/components/grant-list/apply-button';
 
-import { PillarPage } from '@/search/pages/pillar-page';
-
 export const metadata: Metadata = {
   title: 'Active Grant Programs - Ecosystem Vision',
   description:
     'Explore active grant programs driving the Web3 space forward. Discover funding opportunities and stay updated on real-time impacts with insights from our partnership with Ecosystem Vision, ThankArb, and the Cartographer Syndicate.',
 };
 
-interface Props {
-  searchParams: Promise<Record<string, string>>;
-}
-
-const ActiveGrantsPage = async (props: Props) => {
-  const searchParams = await props.searchParams;
+const ActiveGrantsPage = async () => {
   const queryClient = getQueryClient();
 
   queryClient.fetchInfiniteQuery({
@@ -36,21 +29,18 @@ const ActiveGrantsPage = async (props: Props) => {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <PillarPage
-          isIndex
-          nav="grants"
-          params={{ pillar: '', item: '' }}
-          searchParams={searchParams}
-          content={
-            <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE}>
-              <div className="lg:hidden">
-                <AiGrantProgramFinderSkeleton />
-              </div>
-              <ActiveGrantList />
-              <AiGrantProgramFinderPortal />
+        <div className="px-5 pt-[56px] md:pt-[80px] lg:px-8">
+          <h1 className="py-6 text-2xl font-semibold tracking-[-0.06em] md:pt-2 md:text-4xl lg:pt-0 lg:text-6xl">
+            Active Grant Programs
+          </h1>
+          <div id={GRANTS_PORTAL_IDS.AI_FINDER_MOBILE}>
+            <div className="lg:hidden">
+              <AiGrantProgramFinderSkeleton />
             </div>
-          }
-        />
+          </div>
+          <ActiveGrantList />
+        </div>
+        <AiGrantProgramFinderPortal />
       </HydrationBoundary>
     </>
   );
