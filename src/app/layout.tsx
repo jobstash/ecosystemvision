@@ -19,6 +19,8 @@ import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 
 import { Toaster } from '@/grants/components/toaster';
 
+import { PendingRouteProvider } from '@/shared/contexts/pending-route-context';
+
 export const metadata: Metadata = {
   title: 'Ecosystem Vision',
   description:
@@ -38,7 +40,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
       <GsapInit />
       <HeroUIProvider>
         <ReactQueryProvider>
-          <NavLayout>{children}</NavLayout>
+          <NavLayout>
+            <PendingRouteProvider>{children}</PendingRouteProvider>
+          </NavLayout>
         </ReactQueryProvider>
       </HeroUIProvider>
 

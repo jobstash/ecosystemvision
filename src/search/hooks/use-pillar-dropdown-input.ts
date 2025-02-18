@@ -10,7 +10,7 @@ import { searchQueryKeys } from '@/search/core/query-keys';
 import { GetPillarItemsProps } from '@/search/core/types';
 import { getPillarItems } from '@/search/data/get-pillar-items';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 const ITEMS_PER_PAGE = 20;
 const DEBOUNCE_DELAY = 500;
@@ -31,7 +31,7 @@ export const usePillarDropdownInput = ({
   hasOffset = true,
 }: Options) => {
   const queryClient = useQueryClient();
-  const { isPendingPillarRoute } = usePillarRoutesContext();
+  const { isPendingRoute: isPendingPillarRoute } = usePendingRoute();
 
   const [value, setValue] = useState('');
   const { debouncedValue, isPending: isPendingDebounce } =

@@ -16,7 +16,7 @@ import {
 } from '@/search/core/atoms';
 import { usePillarDropdownInput } from '@/search/hooks/use-pillar-dropdown-input';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Props {
   nav: string;
@@ -68,7 +68,7 @@ export const PillarSelection = ({
   }, [currentSelections, list.items]);
 
   const router = useRouter();
-  const { startTransition } = usePillarRoutesContext();
+  const { startTransition } = usePendingRoute();
 
   const [, setIsActveAllFilters] = useAtom(isActiveAllFiltersAtom);
   const redirectToPillarPage = (item: string) => {

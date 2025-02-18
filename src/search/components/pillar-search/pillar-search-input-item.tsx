@@ -11,7 +11,7 @@ import { cn } from '@/shared/utils/cn';
 
 import { LabeledItem } from '@/search/core/types';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Props {
   item: LabeledItem;
@@ -22,8 +22,7 @@ export const PillarSearchInputItem = ({ item }: Props) => {
 
   const router = useRouter();
 
-  const { isPendingPillarRoute: isLoading, startTransition } =
-    usePillarRoutesContext();
+  const { isPendingRoute: isLoading, startTransition } = usePendingRoute();
 
   const [showSpinner, setShowSpinner] = useState(false);
 

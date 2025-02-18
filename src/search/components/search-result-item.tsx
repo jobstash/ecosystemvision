@@ -9,7 +9,7 @@ import { useSetAtom } from 'jotai';
 import { TSearchResultItem } from '@/search/core/schemas';
 import { isActiveSearchAtom, searchQueryAtom } from '@/search/core/atoms';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 const escapeRegExp = (str: string): string =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -48,7 +48,8 @@ export const SearchResultItem = ({
   isPillarSearchResult,
 }: Props) => {
   const router = useRouter();
-  const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
+  const { isPendingRoute: isPendingPillarRoute, startTransition } =
+    usePendingRoute();
 
   const setSearchQuery = useSetAtom(searchQueryAtom);
 

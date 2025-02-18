@@ -4,7 +4,7 @@ import { normalizeString } from '@/shared/utils/normalize-string';
 
 import { createPillarItemHref } from '@/search/utils/create-pillar-item-href';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Options {
   nav: string;
@@ -28,7 +28,7 @@ export const usePillarDropdownOnAction = (options: Options) => {
   } = options;
 
   const router = useRouter();
-  const { startTransition } = usePillarRoutesContext();
+  const { startTransition } = usePendingRoute();
 
   const onAction = (key: React.Key) => {
     if (key) {

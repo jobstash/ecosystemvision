@@ -11,7 +11,7 @@ import { cn } from '@/shared/utils/cn';
 
 import { hiddenPillarItemsAtom } from '@/search/core/atoms';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Props {
   isActive: boolean;
@@ -22,8 +22,7 @@ interface Props {
 
 export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
   const router = useRouter();
-  const { isPendingPillarRoute: isLoading, startTransition } =
-    usePillarRoutesContext();
+  const { isPendingRoute: isLoading, startTransition } = usePendingRoute();
 
   const setHiddenItems = useSetAtom(hiddenPillarItemsAtom);
   const { ref: inViewRef } = useInView({

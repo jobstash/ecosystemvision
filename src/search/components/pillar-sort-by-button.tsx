@@ -19,14 +19,14 @@ import { PillarSelectFilterDto } from '@/search/core/schemas';
 import { GetPillarFiltersProps } from '@/search/core/types';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 export const PillarSortByButton = (props: GetPillarFiltersProps) => {
   const { data } = usePillarFilters(props);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startTransition } = usePillarRoutesContext();
+  const { startTransition } = usePendingRoute();
 
   const orderByFilter = data?.find(
     (item): item is PillarSelectFilterDto => item.kind === 'ORDER_BY',

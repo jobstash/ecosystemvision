@@ -14,10 +14,10 @@ import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 import { isActiveSearchAtom } from '@/search/core/atoms';
 import { useSearchInput } from '@/search/hooks/use-search-input';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 export const HomeSearchInput = () => {
-  const { isPendingPillarRoute } = usePillarRoutesContext();
+  const { isPendingRoute: isPendingPillarRoute } = usePendingRoute();
   const { toggleInput } = useAppHeaderContext();
 
   const [isFocused, setIsFocused] = useAtom(isActiveSearchAtom);

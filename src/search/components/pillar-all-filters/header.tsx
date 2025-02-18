@@ -15,7 +15,7 @@ import {
   PillarFilterState,
 } from '@/search/core/atoms';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Props {
   nav: string;
@@ -47,7 +47,8 @@ export const PillarAllFiltersHeader = ({
 
   const router = useRouter();
   const params = useParams();
-  const { isPendingPillarRoute, startTransition } = usePillarRoutesContext();
+  const { isPendingRoute: isPendingPillarRoute, startTransition } =
+    usePendingRoute();
   const onApply = () => {
     const searchParams = new URLSearchParams();
 

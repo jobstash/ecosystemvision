@@ -4,7 +4,7 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export const PillarLoadingWrapper = (props: Props) => {
     className,
     isFullWidth = false,
   } = props;
-  const { isPendingPillarRoute: isLoading } = usePillarRoutesContext();
+  const { isPendingRoute: isLoading } = usePendingRoute();
 
   return (
     <div

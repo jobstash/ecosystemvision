@@ -7,14 +7,14 @@ import { ChevronLeftIcon } from 'lucide-react';
 
 import { capitalize } from '@/shared/utils/capitalize';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface Props {
   nav: string;
 }
 
 export const AppHeaderBackButton = ({ nav }: Props) => {
-  const { startTransition } = usePillarRoutesContext();
+  const { startTransition } = usePendingRoute();
   const router = useRouter();
 
   const navigate = () => {

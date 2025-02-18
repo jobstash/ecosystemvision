@@ -11,11 +11,11 @@ import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
 import { useSearchInput } from '@/search/hooks/use-search-input';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 export const PlainSearchInput = () => {
   const { value, onChange, onClear } = useSearchInput();
-  const { isPendingPillarRoute } = usePillarRoutesContext();
+  const { isPendingRoute: isPendingPillarRoute } = usePendingRoute();
 
   const inputRef = useRef<HTMLInputElement>(null);
 

@@ -14,13 +14,13 @@ import { PillarSelectFilterDto } from '@/search/core/schemas';
 import { GetPillarFiltersProps } from '@/search/core/types';
 import { usePillarFilters } from '@/search/hooks/use-pillar-filters';
 
-import { usePillarRoutesContext } from '@/search/state/contexts/pillar-routes-context';
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 export const PillarOrderButton = (props: GetPillarFiltersProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { startTransition } = usePillarRoutesContext();
+  const { startTransition } = usePendingRoute();
   const { data } = usePillarFilters(props);
 
   const orderFilter = data?.find(
