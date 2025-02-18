@@ -15,6 +15,8 @@ interface Props {
 export const PillarRow = (props: Props) => {
   const { nav, pillar, pillarItems, dropdownContent, hidePillar } = props;
 
+  if (pillarItems.length === 0) return null;
+
   return (
     <PillarLoadingWrapper>
       <div className="flex flex-col gap-1">
