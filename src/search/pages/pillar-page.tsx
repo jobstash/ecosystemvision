@@ -196,11 +196,9 @@ export const PillarPage = async (props: Props) => {
         }
       />
 
-      <div className="">
-        <ActiveSearchHiddenWrapper>
-          <PillarLoadingWrapper>{content}</PillarLoadingWrapper>
-        </ActiveSearchHiddenWrapper>
-      </div>
+      <ActiveSearchHiddenWrapper>
+        <PillarLoadingWrapper>{content}</PillarLoadingWrapper>
+      </ActiveSearchHiddenWrapper>
     </PillarAllFiltersWrapper>
   );
 };

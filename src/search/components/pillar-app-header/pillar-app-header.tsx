@@ -20,7 +20,7 @@ export const PillarAppHeader = (props: Props) => {
 
   return (
     <div
-      className="relative  z-[999]"
+      className="relative z-[999]"
       style={{ height: `${parentHeight}px` }} // Set the height dynamically
     >
       {/* Fixed div that changes position when gradientRef is out of view */}

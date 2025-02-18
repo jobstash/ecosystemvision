@@ -31,7 +31,7 @@ export const OrgList = ({ searchParams }: Props) => {
     <>
       {isPendingOrgs ? (
         // <CardSkeleton />
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center pt-8">
           <Spinner size="md" color="white" />
         </div>
       ) : (
@@ -54,11 +54,11 @@ export const OrgList = ({ searchParams }: Props) => {
                 <Loader />
               </div>
             ) : (
-              <p className="px-4 lg:px-8">No more organizations available.</p>
+              <p className="p-4 lg:p-8">No more organizations available.</p>
             )}
           </>
         ) : (
-          <p>No organizations found.</p>
+          <p className="p-4 lg:p-8">No organizations found.</p>
         ))
       )}
       {error && <InternalErrorResult onReset={reloadPage} />}

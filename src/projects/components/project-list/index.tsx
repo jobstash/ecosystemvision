@@ -55,11 +55,11 @@ export const ProjectList = ({ searchParams }: Props) => {
               <Loader />
             </div>
           ) : (
-            <p>No more projects to display.</p>
+            <p className="p-4 lg:p-8">No more projects to display.</p>
           )}
         </>
       ) : (
-        <p>Empty UI</p>
+        <p className="p-4 lg:p-8">No projects found.</p>
       )}
     </>
   );
