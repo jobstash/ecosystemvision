@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
@@ -20,18 +20,25 @@ export const SearchResultInput = () => {
   const { isPendingRoute: isPendingPillarRoute } = usePendingRoute();
   const { toggleInput } = useAppHeaderContext();
 
-  const [isFocused, setIsFocused] = useAtom(isActiveSearchAtom);
-  const onFocus = () => setIsFocused(true);
-  const onBlur = () => setIsFocused(false);
+  const [isActiveSearch, setIsActiveSearch] = useAtom(isActiveSearchAtom);
+  const onFocus = () => setIsActiveSearch(true);
+  const onBlur = () => setIsActiveSearch(false);
 
   const { value, onChange, onClear } = useSearchInput();
 
   const onClose = () => {
     onClear();
     toggleInput();
+    setIsActiveSearch(false);
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape' && inputRef.current) {
@@ -58,7 +65,7 @@ export const SearchResultInput = () => {
         input: 'focus:ring-red-500 focus:border-red-500',
       }}
       endContent={
-        isPendingPillarRoute || !isFocused ? null : (
+        isPendingPillarRoute || !isActiveSearch ? null : (
           <Button
             isIconOnly
             size="sm"
