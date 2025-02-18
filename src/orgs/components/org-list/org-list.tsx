@@ -39,7 +39,7 @@ export const OrgList = ({ searchParams }: Props) => {
         (hasOrgs ? (
           <>
             {/* <InitOrgCard /> */}
-            <VirtualWrapper count={orgs.length}>
+            <VirtualWrapper count={orgs.length} className="m-4 lg:m-8">
               {(index) => (
                 <div className={cn({ 'pt-8': index > 0 })}>
                   <OrgCard
@@ -50,7 +50,7 @@ export const OrgList = ({ searchParams }: Props) => {
               )}
             </VirtualWrapper>
             {hasNextPage ? (
-              <div ref={inViewRef}>
+              <div ref={inViewRef} className="m-4 py-4 lg:m-8">
                 <Loader />
               </div>
             ) : (

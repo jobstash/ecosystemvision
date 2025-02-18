@@ -3,6 +3,9 @@
 import { useRef } from 'react';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { ClassValue } from 'clsx';
+
+import { cn } from '@/shared/utils/cn';
 
 const OVERSCAN = 5;
 const ESTIMATE_SIZE = 500;
@@ -27,10 +30,11 @@ export const useVirtualWrapper = (count: number) => {
 
 interface Props {
   count: number;
+  className?: ClassValue;
   children: (index: number) => JSX.Element;
 }
 
-export const VirtualWrapper = ({ count, children }: Props) => {
+export const VirtualWrapper = ({ count, className, children }: Props) => {
   const { parentRef, virtualizer, items } = useVirtualWrapper(count);
 
   const getTotalSize = virtualizer.getTotalSize();
@@ -40,7 +44,10 @@ export const VirtualWrapper = ({ count, children }: Props) => {
 
   return (
     <div ref={parentRef}>
-      <div className="relative m-4 lg:m-8" style={{ height: getTotalSize }}>
+      <div
+        className={cn('relative', className)}
+        style={{ height: getTotalSize }}
+      >
         <div
           className="absolute left-0 top-0 w-full"
           style={{ transform: `translateY(${translateY}px)` }}

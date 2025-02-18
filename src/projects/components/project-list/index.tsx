@@ -39,7 +39,7 @@ export const ProjectList = ({ searchParams }: Props) => {
       ) : isSuccess && hasProjects ? (
         <>
           {/* <InitProjectCard /> */}
-          <VirtualWrapper count={projects.length}>
+          <VirtualWrapper count={projects.length} className="m-4 lg:m-8">
             {(index) => (
               <div className={cn({ 'pt-8': index > 0 })}>
                 <ProjectCard
@@ -51,7 +51,7 @@ export const ProjectList = ({ searchParams }: Props) => {
           </VirtualWrapper>
 
           {hasNextPage ? (
-            <div ref={inViewRef}>
+            <div ref={inViewRef} className="m-4 py-4 lg:m-8">
               <Loader />
             </div>
           ) : (
