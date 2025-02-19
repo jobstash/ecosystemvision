@@ -26,7 +26,7 @@ export const GranteeStatItem = ({ granteeStat, level = 1 }: Props) => {
     <Container hasGap={hasGap} hasChildren={hasChildren}>
       <Inner hasChildren={hasChildren}>
         <span className="text-13 font-medium leading-tight text-white md:text-2xl md:text-white/60">
-          {label}
+          {label || 'Untitled'}
         </span>
         <div className="flex items-center gap-1">
           <span className="text-xl font-medium" onClick={onCopy}>
