@@ -1,6 +1,6 @@
 import { getGrantDetails } from '@/grants/data/get-grant-details';
 
-// import { GrantPageLayout } from '@/grants/pages/grant-page-layout';
+import { GrantPageLayout } from '@/grants/pages/grant-page-layout';
 
 interface Props {
   children: React.ReactNode;
@@ -9,19 +9,20 @@ interface Props {
 }
 
 const Layout = async ({
-  //  children, list,
+  children,
+  //  list,
   params,
 }: Props) => {
   const { grantId } = await params;
   const data = await getGrantDetails(grantId);
 
-  return <pre>{JSON.stringify({ grantId, data }, null, '\t')}</pre>;
+  // return <pre>{JSON.stringify({ grantId, data }, null, '\t')}</pre>;
 
-  // return (
-  //   <GrantPageLayout grant={data} list={list}>
-  //     {children}
-  //   </GrantPageLayout>
-  // );
+  return (
+    <GrantPageLayout grant={data} list={null}>
+      {children}
+    </GrantPageLayout>
+  );
 };
 
 export default Layout;
