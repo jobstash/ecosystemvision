@@ -28,7 +28,7 @@ export const HomePage = () => {
     <div className="overflow-hidden pt-[70px] font-inter lg:pt-0">
       <AppHeaderProvider>
         <AppHeader
-          input={<SearchResultInput />}
+          input={<SearchResultInput isAutoFocus={false} />}
           searchResults={<ActiveSearchResults />}
         />
       </AppHeaderProvider>

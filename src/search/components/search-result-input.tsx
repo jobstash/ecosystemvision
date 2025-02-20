@@ -16,7 +16,11 @@ import { useSearchInput } from '@/search/hooks/use-search-input';
 
 import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
-export const SearchResultInput = () => {
+interface Props {
+  isAutoFocus?: boolean;
+}
+
+export const SearchResultInput = ({ isAutoFocus = true }: Props) => {
   const { isPendingRoute: isPendingPillarRoute } = usePendingRoute();
   const { toggleInput } = useAppHeaderContext();
 
@@ -35,10 +39,10 @@ export const SearchResultInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && isAutoFocus) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [isAutoFocus]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape' && inputRef.current) {
