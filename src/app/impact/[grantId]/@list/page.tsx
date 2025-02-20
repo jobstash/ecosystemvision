@@ -5,7 +5,16 @@
 // import { grantQueryKeys } from '@/grants/core/query-keys';
 // import { getGranteeDetails } from '@/grants/data/get-grantee-details';
 // import { getGranteeList } from '@/grants/data/get-grantee-list';
-import { GranteeList } from '@/grants/components/grantee-list';
+
+import dynamic from 'next/dynamic';
+
+const GranteeList = dynamic(
+  () =>
+    import('@/grants/components/grantee-list/grantee-list').then(
+      (m) => m.GranteeList,
+    ),
+  { ssr: true },
+);
 
 // interface Props {
 //   params: Promise<{ grantId: string }>;

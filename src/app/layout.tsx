@@ -10,7 +10,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { GOOGLE_ANALYTICS_ID } from '@/shared/core/envs';
 import { grotesk, inter } from '@/shared/core/fonts';
-// import { GsapInit } from '@/shared/components/gsap-init';
+import { GsapInit } from '@/shared/components/gsap-init';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
 import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
@@ -37,7 +37,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
     className={`bg-[#070708] ${inter.variable} ${grotesk.variable}`}
   >
     <body className={`overflow-x-hidden ${inter.className}`}>
-      {/* <GsapInit /> */}
+      <GsapInit />
       <HeroUIProvider>
         <ReactQueryProvider>
           <NavLayout>
