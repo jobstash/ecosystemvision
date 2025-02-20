@@ -2,11 +2,10 @@
 
 // import { getGrantList } from '@/grants/data/get-grant-list';
 
-// import { GranteeDetailsSection } from '@/grants/pages/grantee-details-section';
+import { GranteeDetailsSection } from '@/grants/pages/grantee-details-section';
 
 const Page = () => {
-  return <p>{'<GranteeDetailsSection />'}</p>;
-  // return <GranteeDetailsSection />;
+  return <GranteeDetailsSection />;
 };
 export default Page;
 
