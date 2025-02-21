@@ -15,8 +15,10 @@ export const getPillarFilters = async (
 
   const url = new URL(`${MW_URL}/search/pillar/filters`);
   url.searchParams.set('nav', nav);
-  url.searchParams.set('pillar', params.pillar);
-  url.searchParams.set('item', params.item);
+  if (params.pillar && params.item) {
+    url.searchParams.set('pillar', params.pillar);
+    url.searchParams.set('item', params.item);
+  }
 
   const updatedSearchParams = addMainItemToSearchParams({
     pillar: params.pillar,
