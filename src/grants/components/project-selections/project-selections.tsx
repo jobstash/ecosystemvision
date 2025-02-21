@@ -23,7 +23,7 @@ export const ProjectSelections = () => {
     granteeId,
   );
 
-  if (granteeData?.data?.projects.length === 0) return null;
+  if (granteeData?.projects.length === 0) return null;
 
   if (isLoading) {
     return (
@@ -32,14 +32,13 @@ export const ProjectSelections = () => {
   }
 
   // This component is stacked with others. Top most component renders the error.
-  if (errorMessage) return null;
-  if (!granteeData?.data) return null;
+  if (errorMessage || !granteeData) return null;
 
-  const baseHref = `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeData.data.slug}/projects`;
+  const baseHref = `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeData.slug}/projects`;
 
   return (
     <div className={WRAPPER_CLASSNAME}>
-      {granteeData.data.projects.map(({ id, name }, index) => (
+      {granteeData.projects.map(({ id, name }, index) => (
         <ProjectSelection
           key={id}
           projectId={id}

@@ -99,15 +99,45 @@ export type GrantDtoInfiniteListPage = z.infer<
   typeof grantDtoInfiniteListPageSchema
 >;
 
-// Grantee item matches what's returned from api. No need to differentiate as dto
+export const fundingEventDtoSchema = z.object({
+  id: z.string(),
+  timestamp: z.number(),
+  amountInUsd: z.number().nullable(),
+  tokenAmount: z.number().nullable(),
+  tokenUnit: z.string().nullable(),
+  roundName: z.string().nullable(),
+  sourceLink: z.string().nullable(),
+  eventType: z.union([z.literal('funding'), z.literal('grant')]),
+});
+export type FundingEventDto = z.infer<typeof fundingEventDtoSchema>;
+
+export const granteeItemDtoSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  website: z.string().nullable(),
+  slug: z.string(),
+  logoUrl: z.string().nullable(),
+  fundingEvents: z.array(fundingEventDtoSchema),
+});
+export type GranteeItemDto = z.infer<typeof granteeItemDtoSchema>;
+
+export const granteeInfiniteListPageDto = z.object({
+  page: z.number().optional(),
+  data: z.array(granteeItemDtoSchema),
+});
+export type GranteeInfiniteListPageDto = z.infer<
+  typeof granteeInfiniteListPageDto
+>;
+
 export const granteeItemSchema = z.object({
   id: z.string(),
   name: z.string(),
   slug: z.string(),
   logoUrl: z.string().nullable(),
-  lastFundingDate: z.number().nullable().optional(),
-  lastFundingAmount: z.number().optional(),
-  lastFundingUnit: z.string().optional(),
+  lastFundingDate: z.number().nullable(),
+  lastFundingAmount: z.number().nullable(),
+  lastFundingTokenAmount: z.number().nullable(),
+  lastFundingTokenUnit: z.string().nullable(),
 });
 export type GranteeItem = z.infer<typeof granteeItemSchema>;
 
@@ -148,16 +178,39 @@ export const granteeProjectSchema = z.object({
 });
 export type GranteeProject = z.infer<typeof granteeProjectSchema>;
 
-export const granteeSchema = granteeItemSchema.extend({
+export const granteeDtoProject = z.object({
+  id: z.string(),
+  name: z.string(),
+  tags: z.array(z.string()),
+  tabs: z.array(granteeTabItemSchema),
+});
+export type GranteeDtoProject = z.infer<typeof granteeDtoProject>;
+
+export const granteeDto = granteeItemDtoSchema.extend({
+  status: z.union([
+    z.literal('PENDING'),
+    z.literal('APPROVED'),
+    z.literal('REJECTED'),
+    z.literal('CANCELLED'),
+    z.literal('IN_REVIEW'),
+  ]),
+  description: z.string(),
+  projects: z.array(granteeDtoProject),
+});
+export type GranteeDto = z.infer<typeof granteeDto>;
+
+export const granteeDetailsSchema = granteeItemSchema.extend({
   tags: z.array(z.string()).optional(),
   website: z.string().nullable(),
   status: z.string(), // TODO: convert to literals
   description: z.string(),
   projects: z.array(granteeProjectSchema),
 });
-export type Grantee = z.infer<typeof granteeSchema>;
+export type GranteeDetails = z.infer<typeof granteeDetailsSchema>;
 
-export const granteeDtoSchema = genericResponseSchema.extend({
-  data: granteeSchema.optional(),
+export const granteeDetailsResponseSchema = genericResponseSchema.extend({
+  data: granteeDto.optional(),
 });
-export type GranteeDto = z.infer<typeof granteeDtoSchema>;
+export type GranteeDetailsResponse = z.infer<
+  typeof granteeDetailsResponseSchema
+>;

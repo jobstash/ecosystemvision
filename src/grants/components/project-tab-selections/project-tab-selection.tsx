@@ -37,15 +37,15 @@ export const ProjectTabSelection = () => {
   }
 
   // This component is stacked with others. Top most component renders the error.
-  if (errorMessage || !granteeData?.data) return null;
+  if (errorMessage || !granteeData) return null;
 
   const currentProject = projectId
-    ? granteeData.data.projects.find((p) => p.id === projectId)
-    : granteeData.data.projects[0];
+    ? granteeData.projects.find((p) => p.id === projectId)
+    : granteeData.projects[0];
 
   if (!currentProject?.tabs?.length) return null;
 
-  const baseHref = `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeData.data.slug}/projects`;
+  const baseHref = `/${ROUTE_SECTIONS.IMPACT}/${grantId}/grantees/${granteeData.slug}/projects`;
 
   const activeTab = tab || currentProject.tabs[0].tab;
 

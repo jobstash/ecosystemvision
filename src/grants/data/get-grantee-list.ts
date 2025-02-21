@@ -5,8 +5,9 @@ import { mwGET } from '@/shared/utils/mw-get';
 import { grantQueryUrls } from '@/grants/core/query-urls';
 import {
   GranteeInfiniteListPage,
-  granteeInfiniteListPageSchema,
+  granteeInfiniteListPageDto,
 } from '@/grants/core/schemas';
+import { dtoToGranteeItem } from '@/grants/utils/dto-to-grantee-item';
 
 // import { fakeGrantees } from '@/grants/testutils/fake-grantee';
 
@@ -35,9 +36,14 @@ export const getGranteeList = async ({
     searchParams,
   );
 
-  return mwGET({
+  const response = await mwGET({
     url,
     label: 'getGranteeList',
-    responseSchema: granteeInfiniteListPageSchema,
+    responseSchema: granteeInfiniteListPageDto,
   });
+
+  return {
+    ...response,
+    data: response.data.map(dtoToGranteeItem),
+  };
 };

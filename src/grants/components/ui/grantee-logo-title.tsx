@@ -4,7 +4,7 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
 
-import { Grantee } from '@/grants/core/schemas';
+import { GranteeDetails } from '@/grants/core/schemas';
 
 const CLASSNAMES = {
   WRAPPER: 'flex items-center',
@@ -12,7 +12,7 @@ const CLASSNAMES = {
   AVATAR: 'mr-3 h-8 w-8 rounded-xl lg:h-16 lg:w-16 lg:rounded-[24px]',
 };
 
-interface Props extends Pick<Grantee, 'name' | 'logoUrl'> {
+interface Props extends Pick<GranteeDetails, 'name' | 'logoUrl'> {
   classNames?: {
     root?: ClassValue;
     logo?: ClassValue;

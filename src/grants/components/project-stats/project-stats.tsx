@@ -31,12 +31,12 @@ export const GranteeProjectStats = () => {
     );
 
   // This component is stacked with others. Top most component renders the error.
-  if (granteeData?.data?.projects.length === 0) return null;
-  if (errorMessage || !granteeData?.data) return null;
+  if (granteeData?.projects.length === 0) return null;
+  if (errorMessage || !granteeData) return null;
 
   const currentProject = projectId
-    ? granteeData.data.projects.find((project) => project.id === projectId)
-    : granteeData.data.projects[0];
+    ? granteeData.projects.find((project) => project.id === projectId)
+    : granteeData.projects[0];
 
   if (!currentProject || currentProject.tabs.length === 0) return null;
 

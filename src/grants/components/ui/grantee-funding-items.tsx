@@ -1,3 +1,5 @@
+import { CoinsIcon } from 'lucide-react';
+
 import { conditionalItem } from '@/shared/utils/conditional-item';
 import { formatNumber } from '@/shared/utils/format-number';
 import { shortTimestamp } from '@/shared/utils/short-timestamp';
@@ -11,21 +13,31 @@ import { DetailValueText } from './base/detail-value-text';
 
 const createFundingItems = ({
   lastFundingAmount,
-  lastFundingUnit,
+  lastFundingTokenAmount,
+  lastFundingTokenUnit,
   lastFundingDate,
 }: GranteeItem): DetailItemProps[] => [
   ...conditionalItem(!!lastFundingAmount, {
     icon: <PaperbillIcon />,
     label: 'Last Funding:',
     value: (
-      <DetailValueText>{`${formatNumber(lastFundingAmount!)} ${lastFundingUnit}`}</DetailValueText>
+      <DetailValueText>{`$${formatNumber(lastFundingAmount!)}`}</DetailValueText>
+    ),
+  }),
+  ...conditionalItem(!!lastFundingTokenAmount && !!lastFundingTokenUnit, {
+    icon: <CoinsIcon size={18} />,
+    label: 'Token Amount:',
+    value: (
+      <DetailValueText>{`${formatNumber(lastFundingTokenAmount!)} ${lastFundingTokenUnit}`}</DetailValueText>
     ),
   }),
   ...conditionalItem(!!lastFundingDate, {
     icon: <BankIcon />,
     label: 'Funding Date:',
     value: (
-      <DetailValueText>{shortTimestamp(lastFundingDate!)}</DetailValueText>
+      <DetailValueText>
+        {shortTimestamp(lastFundingDate! / 1000)}
+      </DetailValueText>
     ),
   }),
 ];

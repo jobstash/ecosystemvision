@@ -9,13 +9,13 @@ import {
 } from '@/shared/testutils/misc';
 
 import { grantQueryUrls } from '@/grants/core/query-urls';
-import { Grantee } from '@/grants/core/schemas';
+import { GranteeDetails } from '@/grants/core/schemas';
 
 import { fakeGrantee } from '@/grants/testutils/fake-grantee';
 
 export const mockGranteeQuery = (
   result: MockQueryResult,
-  options: MswOptions & { grantId: string; data?: Grantee },
+  options: MswOptions & { grantId: string; data?: GranteeDetails },
 ) =>
   http.get(
     `${grantQueryUrls.grantees(options.grantId)}/:granteeId`,

@@ -56,11 +56,11 @@ export const GranteeCard = () => {
     return <p>{`TODO: <GranteeCardErrorUI /> "${errorMessage}"`}</p>;
   }
 
-  if (!granteeData?.data) {
+  if (!granteeData) {
     return <p>Grantee not found.</p>;
   }
 
-  const { logoUrl, name, website, description } = granteeData.data;
+  const { logoUrl, name, website, description } = granteeData;
 
   return (
     <div className={WRAPPER_CLASSNAME}>
@@ -85,7 +85,7 @@ export const GranteeCard = () => {
 
       <div className="flex flex-col gap-2 md:border-t md:border-divider/25 md:pt-4">
         <span className="text-13 text-white">Funding Details</span>
-        <GranteeFundingItems granteeItem={granteeData.data} />
+        <GranteeFundingItems granteeItem={granteeData} />
       </div>
     </div>
   );
