@@ -1,5 +1,11 @@
 'use client';
 
+import { useAtomValue } from 'jotai';
+
+import { cn } from '@/shared/utils/cn';
+
+import { isActiveSearchAtom } from '@/search/core/atoms';
+
 import { usePillarAppHeader } from './use-pillar-app-header';
 
 interface Props {
@@ -18,6 +24,8 @@ export const PillarAppHeader = (props: Props) => {
     secondPanelRef,
   } = usePillarAppHeader();
 
+  const isActiveSearch = useAtomValue(isActiveSearchAtom);
+
   return (
     <div
       className="relative z-[999]"
@@ -25,11 +33,13 @@ export const PillarAppHeader = (props: Props) => {
     >
       {/* Fixed div that changes position when gradientRef is out of view */}
       <div
-        className={`fixed z-[999] h-[105px] w-full bg-yellow-800 transition-all duration-300 ${
-          isCollapsed ? 'top-0' : '-top-full'
-        }`}
+        className={cn(
+          'fixed z-[999]  w-full bg-yellow-800 transition-all duration-300',
+          { 'top-0': isCollapsed },
+          { '-top-full': !isCollapsed && !isActiveSearch },
+        )}
       >
-        TODO: HERE WE CAN INCLUDE AN COLLAPSIBLE HEADER COMPONENT
+        {appHeader}
       </div>
 
       {/* Sticky header */}
@@ -50,7 +60,7 @@ export const PillarAppHeader = (props: Props) => {
         {/* Target div for scroll detection */}
         <div
           ref={secondPanelRef}
-          className=" fixed top-[122px] z-40 w-full bg-[#070708] transition-transform  duration-700  lg:w-[calc(100vw-236px)]"
+          className="fixed top-[122px] z-40 w-full bg-[#070708] transition-transform  duration-700  lg:w-[calc(100vw-236px)]"
           style={{
             transform:
               scrollDirection === 'down'
