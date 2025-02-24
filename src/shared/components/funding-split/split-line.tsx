@@ -8,7 +8,7 @@ export const SplitLine = () => {
   return (
     <div className="flex h-2 w-full">
       <div
-        className="flex h-full bg-accent2"
+        className="flex h-full bg-[#7EDCD5]"
         style={{ width: `${grants.percentage}%` }}
       >
         {grants.items.map((item, index) => (
@@ -16,7 +16,7 @@ export const SplitLine = () => {
         ))}
       </div>
       <div
-        className="flex h-full bg-accent"
+        className="flex h-full bg-[#FE5468]"
         style={{ width: `${funding.percentage}%` }}
       >
         {funding.items.map((item, index) => (

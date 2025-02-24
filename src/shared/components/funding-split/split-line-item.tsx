@@ -38,7 +38,7 @@ export const SplitLineItem = ({ item, index }: Props) => {
       }
     >
       <div
-        className={cn('h-full hover:bg-red-500/80', {
+        className={cn('h-full hover:bg-white/80', {
           'bg-blue-500/80': item.isActive,
         })}
         style={{

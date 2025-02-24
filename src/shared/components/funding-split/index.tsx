@@ -32,8 +32,8 @@ export const FundingSplit = (props: Props) => {
     >
       <div className="flex flex-col gap-2 py-4">
         <div className="flex justify-between">
-          <Heading className="text-lg" text="Grants" />
-          <Heading className="text-lg" text="Funding" />
+          <Heading className="text-lg" text="Grant Funding" />
+          <Heading className="text-lg" text="VC Funding" />
         </div>
         <div className="flex justify-between">
           <GroupSelections type="grant" />
