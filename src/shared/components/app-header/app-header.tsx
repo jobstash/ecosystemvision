@@ -41,9 +41,9 @@ export const AppHeader = (props: Props) => {
             <div className="hidden gap-2 lg:flex">
               <Button variant="light">Get Listed</Button>
               <Button variant="light">Subscribe on TG</Button>
-              <Button radius="sm" className="bg-white text-black">
+              {/* <Button radius="sm" className="bg-white text-black">
                 Connect Wallet
-              </Button>
+              </Button> */}
             </div>
             <MenuButton />
           </div>
