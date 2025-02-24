@@ -112,9 +112,6 @@ export const PillarPage = async (props: Props) => {
                 labeledItems={labeledItems}
               />
             }
-            searchResults={
-              <PillarPageSearchResults nav={nav} excluded={excluded} />
-            }
           />
         }
         content={
@@ -195,6 +192,8 @@ export const PillarPage = async (props: Props) => {
           </ActiveSearchHiddenWrapper>
         }
       />
+
+      <PillarPageSearchResults nav={nav} excluded={excluded} />
 
       <ActiveSearchHiddenWrapper>
         <PillarLoadingWrapper>{content}</PillarLoadingWrapper>
