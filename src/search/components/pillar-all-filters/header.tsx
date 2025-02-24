@@ -118,7 +118,7 @@ const stateToParams = (state: PillarFilterState) => {
   return Object.fromEntries(
     Object.entries(state).map(([key, value]) => [
       key,
-      value.current?.map((v) => normalizeString(v)).join(',') || value.init,
+      value.current?.map((v) => normalizeString(v)).join(',') || '',
     ]),
   );
 };
