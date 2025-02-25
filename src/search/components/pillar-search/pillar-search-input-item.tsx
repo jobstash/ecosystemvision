@@ -38,6 +38,7 @@ export const PillarSearchInputItem = ({ item }: Props) => {
 
   return (
     <Tooltip
+      isDisabled={!!item.href}
       content={
         !label ? <TooltipContent pillarSlug={pillar} slug={slug} /> : null
       }
