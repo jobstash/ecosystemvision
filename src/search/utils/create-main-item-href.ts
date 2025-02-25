@@ -18,8 +18,11 @@ export const createMainItemHref = (
   const searchParamsObj = new URLSearchParams();
   for (const [p, v] of Object.entries(searchParamsWithMainItem)) {
     if (p === nextPillar) {
-      const values = v.split(',').filter((val) => val !== nextItem);
-      if (values.length) {
+      const values = v
+        .split(',')
+        .filter((val) => val !== nextItem && val !== params.item);
+
+      if (values.length > 0) {
         searchParamsObj.set(p, values.join(','));
       }
     } else {
