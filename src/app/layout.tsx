@@ -4,7 +4,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './swiper.css';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 
@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   title: 'Ecosystem Vision',
   description:
     'Explore and visualize grants and ecosystem trends with actionable insights.',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 interface RootLayoutProps {
