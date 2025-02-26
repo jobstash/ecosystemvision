@@ -163,7 +163,7 @@ export const PillarPage = async (props: Props) => {
                 }
               />
             </div>
-            <div className="overflow-hidden bg-[#070708] px-4 lg:px-8">
+            <div className="overflow-hidden bg-[#070708] p-4 lg:px-8">
               <PillarFilters
                 nav={nav}
                 params={params}

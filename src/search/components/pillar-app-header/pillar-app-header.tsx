@@ -29,12 +29,12 @@ export const PillarAppHeader = (props: Props) => {
   return (
     <div
       className="relative z-[999]"
-      style={{ height: `${parentHeight}px` }} // Set the height dynamically
+      style={{ height: isActiveSearch ? undefined : `${parentHeight}px` }} // Set the height dynamically
     >
       {/* Fixed div that changes position when gradientRef is out of view */}
       <div
         className={cn(
-          'fixed z-[999]  w-full bg-yellow-800 transition-all duration-300',
+          'fixed z-[999]  w-full transition-all duration-300',
           { 'top-0': isCollapsed },
           { '-top-full': !isCollapsed && !isActiveSearch },
         )}
