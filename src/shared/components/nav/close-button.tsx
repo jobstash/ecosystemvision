@@ -1,7 +1,5 @@
 'use client';
 
-import { MouseEventHandler } from 'react';
-
 import { Button } from '@heroui/button';
 
 import { cn } from '@/shared/utils/cn';
@@ -11,8 +9,7 @@ import { useCloseNav } from './use-close-nav';
 export const CloseButton = () => {
   const { showNav, closeNav } = useCloseNav();
 
-  const handleClick: MouseEventHandler = (event) => {
-    event.stopPropagation();
+  const handleClick = () => {
     closeNav();
   };
 
@@ -20,7 +17,7 @@ export const CloseButton = () => {
     <Button
       isIconOnly
       aria-label="Close Nav"
-      className={cn('-mr-2 lg:hidden', { hidden: !showNav })}
+      className={cn('lg:hidden', { hidden: !showNav })}
       onClick={handleClick}
       variant="light"
     >

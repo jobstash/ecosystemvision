@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { Button } from '@heroui/button';
 
 import { cn } from '@/shared/utils/cn';
 
 import { useCloseNav } from './use-close-nav';
+
+import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 
 interface BartabProps {
   icon?: React.ReactNode;
@@ -31,9 +33,14 @@ export const Bartab = (props: BartabProps) => {
 
   const { closeNav } = useCloseNav();
 
-  const handleClick: React.MouseEventHandler = (event) => {
-    event.stopPropagation();
+  const { startTransition } = usePendingRoute();
+  const router = useRouter();
+
+  const handleClick = () => {
     closeNav();
+    startTransition(() => {
+      router.push(href);
+    });
   };
 
   const buttonClassName = cn('justify-start hover:bg-white/15', {

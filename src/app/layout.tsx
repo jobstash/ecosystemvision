@@ -47,9 +47,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
       <GsapInit />
       <HeroUIProvider>
         <ReactQueryProvider>
-          <NavLayout>
-            <PendingRouteProvider>{children}</PendingRouteProvider>
-          </NavLayout>
+          <PendingRouteProvider>
+            <NavLayout>{children}</NavLayout>
+          </PendingRouteProvider>
         </ReactQueryProvider>
       </HeroUIProvider>
 
