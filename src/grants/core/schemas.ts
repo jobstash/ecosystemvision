@@ -106,8 +106,12 @@ export const fundingEventDtoSchema = z.object({
   tokenAmount: z.number().nullable(),
   tokenUnit: z.string().nullable(),
   roundName: z.string().nullable(),
-  sourceLink: z.string().nullable(),
-  eventType: z.union([z.literal('funding'), z.literal('grant')]),
+  sourceLink: z.string().nullable().optional(),
+  eventType: z.union([
+    z.literal('funding'),
+    z.literal('grant'),
+    z.literal('round'),
+  ]),
 });
 export type FundingEventDto = z.infer<typeof fundingEventDtoSchema>;
 
