@@ -1,8 +1,11 @@
 'use client';
 
-import { Briefcase, ExternalLink, Globe } from 'lucide-react';
+import { Briefcase, ExternalLink } from 'lucide-react';
+
+import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
 
 import { OrgDetails } from '@/orgs/core/schemas';
+import { createOrgInfoTagProps } from '@/orgs/utils/create-job-info-tag-props';
 // const slugify = (text: string) =>
 //   text
 //     .toLowerCase()
@@ -32,7 +35,7 @@ export const OrgDetailsJobs = ({ org }: Props) => {
   }
 
   return (
-    <div className="mx-auto max-w-4xl p-4">
+    <DetailsPanelCardWrapper>
       <h2 className="mb-4 text-2xl font-semibold text-white">Job Listings</h2>
       <div className="space-y-4">
         {jobs.map((job) => {
@@ -47,6 +50,8 @@ export const OrgDetailsJobs = ({ org }: Props) => {
           // const jobTitleSlug = slugify(job.title);
 
           // ✅ Correct URL structure
+          const jobTags = createOrgInfoTagProps(job);
+          console.log('job tag', jobTags);
           const jobUrl = `${process.env.NEXT_PUBLIC_JOBSTASH_URL}/jobs/${job.shortUUID}/details?organizations=${org.normalizedName}`;
           return (
             <a
@@ -62,18 +67,16 @@ export const OrgDetailsJobs = ({ org }: Props) => {
               </div>
               <p className="text-gray-400 mt-2">{job.summary}</p>
               <div className="text-gray-300 mt-3 flex flex-wrap gap-2 text-sm">
-                <span className="bg-gray-800 flex items-center gap-1 rounded px-2 py-1">
-                  <Globe size={14} /> {job.location}
-                </span>
-                <span className="bg-gray-800 rounded px-2 py-1">
-                  {job.commitment}
-                </span>
-                {job.salary && (
-                  <span className="rounded bg-green-700 px-2 py-1 text-white">
-                    ${job.minimumSalary?.toLocaleString()} - $
-                    {job.maximumSalary?.toLocaleString()} {job.salaryCurrency}
-                  </span>
-                )}
+                {jobTags
+                  .filter((tag) => tag.text?.trim())
+                  .map((tag) => (
+                    <span
+                      key={tag.text}
+                      className="bg-gray-800 flex items-center gap-1 rounded px-2 py-1"
+                    >
+                      {tag.icon} {tag.text}
+                    </span>
+                  ))}
               </div>
               <div className="mt-3 flex items-center gap-2 text-blue-400">
                 Explore Job <ExternalLink size={16} />
@@ -82,6 +85,6 @@ export const OrgDetailsJobs = ({ org }: Props) => {
           );
         })}
       </div>
-    </div>
+    </DetailsPanelCardWrapper>
   );
 };
