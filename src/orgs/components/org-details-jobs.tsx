@@ -1,17 +1,20 @@
 'use client';
 
-import { Briefcase, ExternalLink } from 'lucide-react';
+import React from 'react';
 
+import { Briefcase } from 'lucide-react';
+
+import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
 import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
+import { DetailsPanelCTA } from '@/shared/components/details-panel/cta';
+import { Divider } from '@/shared/components/divider';
+import { Heading } from '@/shared/components/heading';
+import { InfoTags } from '@/shared/components/info-tags';
+import { ShareButton } from '@/shared/components/share-button';
+import { Text } from '@/shared/components/text';
 
 import { OrgDetails } from '@/orgs/core/schemas';
 import { createOrgInfoTagProps } from '@/orgs/utils/create-job-info-tag-props';
-// const slugify = (text: string) =>
-//   text
-//     .toLowerCase()
-//     .trim() // Remove leading/trailing spaces
-//     .replace(/\s+/g, '-') // Convert spaces to hyphens
-//     .replace(/[^\w-]/g, '');
 
 interface Props {
   org: OrgDetails;
@@ -19,14 +22,6 @@ interface Props {
 
 export const OrgDetailsJobs = ({ org }: Props) => {
   const { jobs, normalizedName } = org;
-  console.log('hello', normalizedName);
-
-  // ✅ Extract & slugify company name
-  // const segments = pathname.split('/');
-  // const rawCompany = decodeURIComponent(
-  //   segments[segments.indexOf('info') + 1] || 'unknown',
-  // );
-  // const companySlug = slugify(rawCompany);
 
   if (!jobs || jobs.length === 0) {
     return (
@@ -35,56 +30,67 @@ export const OrgDetailsJobs = ({ org }: Props) => {
   }
 
   return (
-    <DetailsPanelCardWrapper>
-      <h2 className="mb-4 text-2xl font-semibold text-white">Job Listings</h2>
+    <>
+      <Heading
+        text="Job Listings"
+        className="mb-4 text-2xl font-semibold text-white"
+      />
       <div className="space-y-4">
-        {jobs.map((job) => {
-          if (!job.title) {
-            console.error('Job title is missing for job ID:', job.id);
-          }
-
-          // ✅ Debugging slugify function
-          // console.log('Original Job Title:', job.title);
-          // console.log('Slugified Job Title:', slugify(job.title));
-          // ✅ Slugify job title separately
-          // const jobTitleSlug = slugify(job.title);
-
-          // ✅ Correct URL structure
+        {jobs.map((job, index) => {
           const jobTags = createOrgInfoTagProps(job);
-          console.log('job tag', jobTags);
-          const jobUrl = `${process.env.NEXT_PUBLIC_JOBSTASH_URL}/jobs/${job.shortUUID}/details?organizations=${org.normalizedName}`;
+          const jobUrl = `${process.env.NEXT_PUBLIC_JOBSTASH_URL}/jobs/${job.shortUUID}/details?organizations=${normalizedName}`;
+
           return (
-            <a
-              key={job.id}
-              href={jobUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-lg border bg-[#161616] p-4 shadow-md transition-transform duration-200 hover:scale-105"
-            >
-              <div className="flex items-center gap-3">
-                <Briefcase className="text-blue-400" size={24} />
-                <h3 className="text-lg font-bold text-white">{job.title}</h3>
+            <DetailsPanelCardWrapper key={job.id || `job-${index}`}>
+              <div className="flex flex-wrap items-center justify-between">
+                <Heading
+                  text={job.title}
+                  className="text-lg font-bold text-white"
+                />
+                <DetailsPanelActionsWrapper className="shrink-0">
+                  <ShareButton id={job.id} routeSection="organizations" />
+                </DetailsPanelActionsWrapper>
               </div>
-              <p className="text-gray-400 mt-2">{job.summary}</p>
-              <div className="text-gray-300 mt-3 flex flex-wrap gap-2 text-sm">
-                {jobTags
-                  .filter((tag) => tag.text?.trim())
-                  .map((tag) => (
-                    <span
-                      key={tag.text}
-                      className="bg-gray-800 flex items-center gap-1 rounded px-2 py-1"
-                    >
-                      {tag.icon} {tag.text}
-                    </span>
-                  ))}
-              </div>
-              <div className="mt-3 flex items-center gap-2 text-blue-400">
-                Explore Job <ExternalLink size={16} />
-              </div>
-            </a>
+
+              <Divider />
+              <InfoTags tags={jobTags} />
+              <Divider />
+
+              {job.summary && (
+                <>
+                  <Heading
+                    text="Description"
+                    className="text-base font-semibold"
+                    htmlTag="h3"
+                  />
+                  <Text text={job.summary} />
+                  <Divider />
+                </>
+              )}
+
+              {job.classification && (
+                <>
+                  <div className="flex items-center gap-2">
+                    <Briefcase size={20} className="text-white" />
+                    <p className="text-gray-300">
+                      Category: {job.classification}
+                    </p>
+                  </div>
+                  <Divider />
+                </>
+              )}
+
+              <DetailsPanelActionsWrapper>
+                <DetailsPanelCTA
+                  text="Explore Job"
+                  href={jobUrl}
+                  isActive={false}
+                />
+              </DetailsPanelActionsWrapper>
+            </DetailsPanelCardWrapper>
           );
         })}
       </div>
-    </DetailsPanelCardWrapper>
+    </>
   );
 };
