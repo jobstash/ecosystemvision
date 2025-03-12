@@ -1,9 +1,5 @@
 'use client';
 
-import React from 'react';
-
-import { Briefcase } from 'lucide-react';
-
 import { DetailsPanelActionsWrapper } from '@/shared/components/details-panel/actions-wrapper';
 import { DetailsPanelCardWrapper } from '@/shared/components/details-panel/card-wrapper';
 import { DetailsPanelCTA } from '@/shared/components/details-panel/cta';
@@ -64,18 +60,6 @@ export const OrgDetailsJobs = ({ org }: Props) => {
                     htmlTag="h3"
                   />
                   <Text text={job.summary} />
-                  <Divider />
-                </>
-              )}
-
-              {job.classification && (
-                <>
-                  <div className="flex items-center gap-2">
-                    <Briefcase size={20} className="text-white" />
-                    <p className="text-gray-300">
-                      Category: {job.classification}
-                    </p>
-                  </div>
                   <Divider />
                 </>
               )}

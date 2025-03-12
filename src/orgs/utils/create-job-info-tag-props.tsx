@@ -1,14 +1,16 @@
-import { Briefcase } from 'lucide-react';
-
 import { JobInfoTags, jobInfoTagsSchema } from '@/shared/core/schemas';
 import { EnabledTagsConfig, InfoTagProps } from '@/shared/core/types';
 import { createLocationText } from '@/shared/utils/create-location-text';
 import { createSalaryText } from '@/shared/utils/create-salary-text-';
 import { createSeniorityText } from '@/shared/utils/create-seniority-text';
 import { getEnabledTagsConfig } from '@/shared/utils/get-enabled-tags-config';
+import { getTitleCase } from '@/shared/utils/get-title-case';
+import { CategoryIcon } from '@/shared/components/icons/category-icon';
 import { LocationIcon } from '@/shared/components/icons/location-icon';
+import MoneyIcon from '@/shared/components/icons/money-icon';
 import { SalaryIcon } from '@/shared/components/icons/salary-icon';
 import { SeniorityIcon } from '@/shared/components/icons/seniority-icon';
+import { SuitcaseIcon } from '@/shared/components/icons/suitcase-icon';
 
 export const createOrgInfoTagProps = (
   jobInfoTags: JobInfoTags,
@@ -40,11 +42,11 @@ export const createOrgInfoTagProps = (
       icon: <LocationIcon />,
     });
   }
-
+  const commitmentText = getTitleCase(commitment);
   if (commitment && enabledTagsConfig.commitment) {
     tags.push({
-      text: commitment,
-      icon: <Briefcase />,
+      text: commitmentText,
+      icon: <SuitcaseIcon />,
     });
   }
 
@@ -54,10 +56,11 @@ export const createOrgInfoTagProps = (
     maximumSalary,
     salaryCurrency,
   });
+
   if (salaryText && enabledTagsConfig.salary) {
     tags.push({
       text: salaryText,
-      icon: <SalaryIcon />,
+      icon: <MoneyIcon />,
     });
   }
 
@@ -82,11 +85,11 @@ export const createOrgInfoTagProps = (
       icon: <SalaryIcon />,
     });
   }
-
+  const classificationText = getTitleCase(classification);
   if (classification && enabledTagsConfig.classification) {
     tags.push({
-      text: `Classification: ${classification}`,
-      icon: <Briefcase />,
+      text: `Category: ${classificationText}`,
+      icon: <CategoryIcon />,
     });
   }
 
