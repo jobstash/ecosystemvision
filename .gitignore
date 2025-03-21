@@ -60,3 +60,5 @@ apps/
 instructions/
 
 *.dummy*
+
+sitemap.xml
