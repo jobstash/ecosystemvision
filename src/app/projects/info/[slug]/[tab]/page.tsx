@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getProjectDetails } from '@/projects/data/get-project-details';
 import { ProjectDetailsGrants } from '@/projects/components/project-details-grants';
 import { ProjectDetailsOrg } from '@/projects/components/project-details-org';
+import { RoundDetails } from '@/projects/components/round-details';
 
 interface Props {
   params: Promise<{ slug: string; tab: string }>;
@@ -22,6 +23,11 @@ const Page = async ({ params }: Props) => {
   const hasGrants = project.grants.length > 0;
   if (tab.toLowerCase() === 'grants' && hasGrants) {
     return <ProjectDetailsGrants grants={grants} />;
+  }
+
+
+  if (tab.toLowerCase() === 'rounds') {
+    return <RoundDetails />;
   }
 
   notFound();
