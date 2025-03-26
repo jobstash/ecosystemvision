@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { getProjectDetails } from '@/projects/data/get-project-details';
+import { GitcoinRounds } from '@/projects/components/gitcoin-rounds';
 import { ProjectDetailsGrants } from '@/projects/components/project-details-grants';
 import { ProjectDetailsOrg } from '@/projects/components/project-details-org';
 
@@ -22,6 +23,10 @@ const Page = async ({ params }: Props) => {
   const hasGrants = project.grants.length > 0;
   if (tab.toLowerCase() === 'grants' && hasGrants) {
     return <ProjectDetailsGrants grants={grants} />;
+  }
+
+  if (tab.toLowerCase() === 'rounds') {
+    return <GitcoinRounds/>;
   }
 
   notFound();
