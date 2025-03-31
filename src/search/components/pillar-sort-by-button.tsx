@@ -42,10 +42,15 @@ export const PillarSortByButton = (props: GetPillarFiltersProps) => {
   const getQueryString = (value: string) => {
     const newParams = new URLSearchParams(searchParams);
     const isActive = value === currentSortValue;
+    const filterValue = orderByFilter.options
+      .find(({ label }) => label === value)
+      ?.value.toString();
 
-    isActive
-      ? newParams.delete(orderByFilter.paramKey)
-      : newParams.set(orderByFilter.paramKey, value);
+    if (isActive) {
+      newParams.delete(orderByFilter.paramKey);
+    } else if (filterValue) {
+      newParams.set(orderByFilter.paramKey, filterValue);
+    }
 
     const newParamsString = newParams.toString();
     if (!newParamsString) return '';
