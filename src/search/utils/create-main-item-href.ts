@@ -8,9 +8,13 @@ export const createMainItemHref = (
   const hasNoSearchParams = Object.keys(searchParamsWithMainItem).length === 0;
   if (hasNoSearchParams) return defaultHref;
 
-  const [nextPillar, nextPillarValue] = Object.entries(
-    searchParamsWithMainItem,
-  )[0];
+  const nextPillarEntry = Object.entries(searchParamsWithMainItem).find(
+    ([pillar]) => !pillar.includes('order'),
+  );
+
+  if (!nextPillarEntry) return defaultHref;
+
+  const [nextPillar, nextPillarValue] = nextPillarEntry;
 
   const nextItem = nextPillarValue.split(',').find((v) => v !== params.item);
   if (!nextItem) return defaultHref;
