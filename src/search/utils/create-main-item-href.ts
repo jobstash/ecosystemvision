@@ -29,7 +29,7 @@ export const createMainItemHref = (
       if (values.length > 0) {
         searchParamsObj.set(p, values.join(','));
       }
-    } else {
+    } else if (p !== params.pillar) {
       searchParamsObj.set(p, v);
     }
   }
