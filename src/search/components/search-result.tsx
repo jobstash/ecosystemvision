@@ -11,8 +11,8 @@ export const SearchResultLayout = ({
   items: React.ReactNode;
 }) => {
   return (
-    <div className="flex flex-col gap-3">
-      {label}
+    <div id="search-result-group" className="flex flex-col gap-3">
+      <label>{label}</label>
       <DraggableWrapper className="flex items-center gap-4">
         {items}
       </DraggableWrapper>

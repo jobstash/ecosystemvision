@@ -1,0 +1,144 @@
+# Ecosystem Vision by veri.xyz
+
+> [Ecosystem Vision](https://ecosystem.vision) offers insights and data on Web3 organizations and projects, facilitating the discovery of grant opportunities and professional connections within the crypto ecosystem.
+
+## / (Homepage)
+
+[Visit Homepage](/) : LLM should understand this is the main landing page. Users typically find an overview, highlights, or entry points to other sections here.
+
+## /organizations
+
+[Visit Organizations](/organizations): LLM should navigate here or direct users here when looking for information about organizations within the ecosystem, such as profiles, lists, or details.
+
+## /projects
+
+[Visit Projects](/projects): LLM should navigate here or direct users here for information about projects, including lists of projects, detailed project views, or potentially ways to submit/manage projects.
+
+## /grants
+
+[Visit Grants](/grants): LLM should navigate here or direct users here for information related to grants, such as available grants, application details, awarded grants, or grant program information.
+
+## /search
+
+[Visit Search](/search): LLM should use this page or direct users here to search across the website's content, potentially filtering by organizations, projects, grants, etc.
+
+## /impact
+
+[Visit Impact](/impact): LLM should navigate here or direct users here to find information about the overall impact, metrics, reports, or visualizations related to the ecosystem's activities (projects, grants, etc.). 
+
+## Search Interaction
+
+To search for organizations, projects, grants, or any other topic within Ecosystem Vision, the LLM should interact with the search input element identified by the ID `#search-input`. The search results will be displayed dynamically below the input, organized into labeled groups (each group identified by `#search-result-group`) such as "Organizations", "Projects", and "Grants".
+
+## Popular Grants
+
+LLM should use these links when the user is looking for specific grant programs or hackathons.
+
+- [ETH Global Grants](https://ecosystem.vision/grants/info/eth-global): Promote grants and hackathons for Ethereum developers.
+- [0x Protocol Grant Program](https://ecosystem.vision/grants/info/0x-protocol-grant-program): Promote the 0x Protocol Grant Program and its funding opportunities.
+- [Buidlbox Program Overview](https://ecosystem.vision/grants/info/buidlbox): Foster collaboration between creators and organizations through hackathons on a unified platform.
+- [Badger x Gitcoin Grants](https://ecosystem.vision/grants/info/badger-x-gitcoin-grants): Inform about BadgerDAO's $250,000 grants program to enhance Bitcoin's DeFi ecosystem.
+- [Coinbase Proof of Reserve Grant](https://ecosystem.vision/grants/info/coinbase-proof-of-reserve-grant): Information about a developer grant program focusing on on-chain accounting and privacy-preserving techniques.
+- [Encode Club Overview](https://ecosystem.vision/grants/info/encode-club): Connects developers and students in Emerging Tech through a global community program.
+- [Avalanche Grant Program](https://ecosystem.vision/grants/info/codebase-avax): Promote a grant program for projects on the Avalanche platform.
+- [Backdrop Build Program](https://ecosystem.vision/grants/info/backdrop-build): This webpage promotes the Backdrop Build program for builders in frontier tech to collaborate and launch ideas.
+- [Fjord Foundry Bug Bounty](https://ecosystem.vision/grants/info/fjord-foundry-liquidity-bootstrapping-pool-audit): Inform about a bug bounty program for Fjord Foundry's liquidity bootstrapping pool with a total reward.
+- [Aztec Developer Incentive](https://ecosystem.vision/grants/info/aztec-developer-incentive-program): Promote a developer incentive program with a prize pool for building on the Aztec Network.
+- [01 Exchange Grants Program](https://ecosystem.vision/grants/info/01-exchange-grants-program): To inform about the 01 Exchange Grants Program supporting contributions to the Solana ecosystem.
+- [ThankArb Grant Programs](https://ecosystem.vision/grants/info/thankarb-arbitrium): Promote grant opportunities for crypto builders in the Arbitrum ecosystem.
+- [Superteam FastTrack Program](https://ecosystem.vision/grants/info/superteam-fasttrack): Support and accelerate Solana builders through a coalition of accelerators.
+- [Naabathon - Star Atlas](https://ecosystem.vision/grants/info/naabathon-star-atlas): To promote the Naabathon hackathon for developing new applications in the Star Atlas ecosystem.
+- [ETH Online Hackathon](https://ecosystem.vision/grants/info/eth-online): Inform about the ETH Online hackathon and its prize pool.
+- [Cartesi Grants Program](https://ecosystem.vision/grants/info/cartesi-grants-program): Encourage developers to build applications on the Cartesi blockchain through funding and community support.
+- [Dora Hacks Program](https://ecosystem.vision/grants/info/dora-hacks): Encourages participation in hackathons through information about DoraHacks.
+- [Monad Madness Competition](https://ecosystem.vision/grants/info/monad-madness): Promote a pitch competition for startups in the Monad ecosystem with substantial funding and investment opportunities.
+
+## Organization Spotlights
+
+LLM should use these links when the user wants information about specific organizations featured on the platform.
+
+- [0xNodes Investment Platform](https://ecosystem.vision/organizations/info/0xnodes): Promotes an investment platform for generating high APY returns with minimal fees across multiple blockchain networks.
+- [2MR Labs Overview](https://ecosystem.vision/organizations/info/2mr-labs): Showcase 2MR Labs as a leading AI-Enabled Blockchain Ecosystem Builder.
+- [1Hive DAO Overview](https://ecosystem.vision/organizations/info/1hive): Inform about 1Hive, a DAO focused on the Honey digital currency and its community governance.
+- [GR1D Network Overview](https://ecosystem.vision/organizations/info/gr1d-network): Promoting GR1D Network as a platform for connecting gamers to community-driven games.
+- [1SEC Inc. Overview](https://ecosystem.vision/organizations/info/1sec-inc): Showcase a digital creative agency specializing in AI, XR, and blockchain technologies.
+- [0xGen DeFi Platform Overview](https://ecosystem.vision/organizations/info/0xgen): Promote and explain the 0xGen AI-driven DeFi platform and its open-source features.
+- [1Hive DAO Projects](https://ecosystem.vision/organizations/info/1hive/projects): Showcase projects and information related to the 1Hive DAO.
+- [1delta Labs Overview](https://ecosystem.vision/organizations/info/1delta-labs): To provide information about 1delta Labs, a decentralized margin trading protocol in the DeFi space.
+- [Macro Audit & Investment](https://ecosystem.vision/organizations/info/0xmacro): Showcases the services of Macro, an audit and investment firm for early stage token projects.
+- [1Konto Trading Solutions](https://ecosystem.vision/organizations/info/1konto): Showcases 1Konto's trading solutions for digital and fiat currencies.
+- [GR1D Network Projects](https://ecosystem.vision/organizations/info/gr1d-network/projects): Showcases GR1D Network's projects that enhance digital gaming and social finance experiences.
+- [1delta Labs Job Listings](https://ecosystem.vision/organizations/info/1delta-labs/jobs): List of job opportunities at 1delta Labs in the DeFi sector.
+- [Cybersecurity Solutions Overview](https://ecosystem.vision/organizations/info/1strike-sp-z-oo): Promotes a cybersecurity platform for continuous breach simulations and vulnerability assessments.
+- [.mura Marketplace Overview](https://ecosystem.vision/organizations/info/mura): Showcases .mura as a marketplace for unique NFT artworks combining music and visual art.
+- [01node Blockchain Services](https://ecosystem.vision/organizations/info/01node): Showcases 01node's blockchain products and services, including staking and bridge solutions.
+- [MetaHash Overview](https://ecosystem.vision/organizations/info/metahash): Inform about the MetaHash decentralized network and its capabilities in digital asset exchange and app development.
+- [2gether.Global Information](https://ecosystem.vision/organizations/info/2getherglobal): Provide information about the 2gether.Global organization within the Ecosystem Vision platform.
+- [DeFi Privacy Solutions](https://ecosystem.vision/organizations/info/0xbow): 0xbow aims to enhance privacy and compliance in the DeFi sector through innovative solutions.
+- [Digital Identity Verification](https://ecosystem.vision/organizations/info/0xkyc): Offers tools for secure digital identity verification and compliance using blockchain technology.
+- [0xNodes Project Overview](https://ecosystem.vision/organizations/info/0xnodes/projects): To describe the 0xNodes project and its features for generating high APY returns with minimal fees.
+- [1Sol Protocol Overview](https://ecosystem.vision/organizations/info/1sol): Provides information about the 1Sol Protocol, a cross-chain DEX aggregator for decentralized finance on Solana.
+- [1WorldOnline Cookie Policy](https://ecosystem.vision/organizations/info/1worldonline): Inform users about 1WorldOnline's cookie usage for personalization and analytics.
+- [NFT Marketplace and Profiles](https://ecosystem.vision/organizations/info/find): Facilitates NFT transactions and profile creation on the Flow blockchain.
+- [AI Cryptocurrency Trading](https://ecosystem.vision/organizations/info/andvolume): Promote an AI-driven cryptocurrency trading system for novice traders.
+
+## Organizations by Tag
+
+LLM should use these links when the user is interested in organizations grouped by specific technologies, strategies, or focus areas.
+
+- [Persona Development Insights](https://ecosystem.vision/organizations/tags/persona-development): Showcase organizations that use persona development to enhance user engagement and marketing strategies.
+- [Event Technology Organizations](https://ecosystem.vision/organizations/tags/event): Showcase organizations using event technology for enhanced engagement and management.
+- [Blockchain Organizations Overview](https://ecosystem.vision/organizations/tags/blockchain): Highlighting organizations using blockchain technology to innovate across various industries.
+- [Organizations Using Twitter](https://ecosystem.vision/organizations/tags/twitter): Showcases organizations using Twitter for communication and engagement strategies.
+- [Trend Analysis Organizations](https://ecosystem.vision/organizations/tags/trend): Showcase organizations using trend analysis for strategic growth and innovation.
+- [Cross-Chain Development Overview](https://ecosystem.vision/organizations/tags/cross-chain-development): Showcase organizations enhancing blockchain interoperability through cross-chain development.
+- [Responsive Design Organizations](https://ecosystem.vision/organizations/tags/responsive-design): Highlight organizations that utilize responsive design for improved web user experiences across different devices.
+- [Cryptocurrency Organizations Overview](https://ecosystem.vision/organizations/tags/cryptocurrency): Showcase organizations using cryptocurrency to innovate financial solutions and improve transaction efficiency and security.
+- [Discord Community Engagement](https://ecosystem.vision/organizations/tags/discord): Highlight organizations using Discord for community engagement and communication.
+- [User Interviews in Product Development](https://ecosystem.vision/organizations/tags/user-interview): Highlight organizations that effectively use user interviews for product development insights.
+- [On-Chain Data Organizations](https://ecosystem.vision/organizations/tags/on-chain-data): Showcase organizations using on-chain data for transparency and accountability in blockchain systems.
+- [User Flow Strategies](https://ecosystem.vision/organizations/tags/user-flow): Highlight organizations improving user experience through effective user flow strategies in digital platforms.
+- [Organizations and Feedback Systems](https://ecosystem.vision/organizations/tags/feedback): Highlight organizations that use feedback mechanisms to enhance user experience and engagement.
+- [Prototyping in Product Development](https://ecosystem.vision/organizations/tags/prototyping): Highlight organizations that use prototyping for product development and innovation.
+- [Decentralized Technology Showcase](https://ecosystem.vision/organizations/tags/decentralized-technology): Showcase organizations using decentralized technology for innovative solutions across various sectors.
+
+## Project Spotlights
+
+LLM should use these links when the user wants information about specific projects featured on the platform.
+
+- [DollarEarth Solarpunk DAO](https://ecosystem.vision/projects/info/dollarearth-solarpunk-dao): Promoting the $EARTH token for climate finance and ecosystem services.
+- [0xDAO Coalition Overview](https://ecosystem.vision/projects/info/0xdao): Promoting the 0xDAO coalition's goals and resources within the Fantom ecosystem.
+- [1INTRO Decentralized Exchange](https://ecosystem.vision/projects/info/1intro): To showcase the 1INTRO decentralized exchange platform and its features.
+- [1Hive Gardens Overview](https://ecosystem.vision/projects/info/1hive-gardens): Promoting a web3 coordination platform for community-driven decision-making and resource management.
+- [1Hive DAO Overview](https://ecosystem.vision/projects/info/1hive): Inform about 1Hive DAO and its economic model for funding public goods.
+- [Privacy Solution Overview](https://ecosystem.vision/projects/info/0x0ai): Showcases the features and tools of the privacy-focused platform 0x0.ai.
+- [01 Exchange Shutdown Notice](https://ecosystem.vision/projects/info/01): To inform users about the 01 Exchange platform's shutdown and asset withdrawal.
+- [0VIX Protocol Overview](https://ecosystem.vision/projects/info/0vix): Detailing the integration of 0VIX Protocol into Keom Protocol.
+- [Decentralized App Security](https://ecosystem.vision/projects/info/0xscans): Promotes AI-driven security solutions for smart contracts and decentralized applications.
+- [0x Nodes Project Overview](https://ecosystem.vision/projects/info/0x-nodes): Provide information about 0xNodes as a yield aggregator project for generating high APY returns.
+- [1BCH Decentralized Exchange](https://ecosystem.vision/projects/info/1bch): Inform users about the 1BCH decentralized exchange and its features.
+- [Send Financial App](https://ecosystem.vision/projects/info/send): Promote a financial app for fast money transfers and customer loyalty through a rewards program.
+- [0xSplits Project Overview](https://ecosystem.vision/projects/info/0xsplits): Showcases the 0xSplits project, a platform for task management.
+- [0xDeadList Project Overview](https://ecosystem.vision/projects/info/0xdeadlist): This page outlines the 0xDeadList project, which manages leaked private keys and rewards users with NFTs.
+- [Funding Longevity Research](https://ecosystem.vision/projects/info/0u0ai): Supporting research in longevity and life extension through a decentralized organization.
+- [Sunflower EcoTech Overview](https://ecosystem.vision/projects/info/sunflower-ecotech): Promotes Sunflower EcoTech's use of technology for regenerative environmental projects.
+- [King Of The Degens](https://ecosystem.vision/projects/info/king-of-the-degens-farcaster-frame-game): Inform users about the decentralized game 'King Of The Degens' and its mechanics.
+
+## Impact Initiatives
+
+LLM should use these links when the user asks about grant program results, funding rounds, or ecosystem impact reports.
+
+- [Grant Programs Overview](https://ecosystem.vision/impact): Showcases various grant programs and funding opportunities for crypto projects and decentralized communities.
+- [Stellar Grants Overview](https://ecosystem.vision/impact/stellar-development-foundation-round-25): Offers grants for projects on the Stellar network and Soroban smart contracts.
+- [Arbitrum STIP Program](https://ecosystem.vision/impact/arbitrum-stip): Incentivizing Arbitrum protocols through DAO-funded support for community needs.
+- [Octant Epoch 3 Funding](https://ecosystem.vision/impact/octant-epoch-3): Details funding for public goods projects funded by Ethereum staking rewards through the Octant initiative.
+- [Stellar Grant Opportunities](https://ecosystem.vision/impact/stellar-development-foundation-round-26): Inform about grant opportunities for projects in the Stellar ecosystem.
+- [ThankArb Grant Programs](https://ecosystem.vision/impact/thankarb-arbitrium): Promote grant programs for crypto builders and contributors funded by ThankArb.
+- [Stellar Grant Programs](https://ecosystem.vision/impact/stellar-development-foundation-round-29): Promotes grants for projects developing on the Stellar network and Soroban.
+- [DAO Drops Program](https://ecosystem.vision/impact/dao-drops): Empowering decentralized communities through grants and open-source tools.
+- [Stellar Grants Overview](https://ecosystem.vision/impact/stellar-development-foundation-round-27): Promoting grants for projects on the Stellar network and Soroban platform.
+- [Octant - Epoch 2](https://ecosystem.vision/impact/octant-epoch-2): Promotes Ethereum staking for public goods funding through the Octant program.
+- [Funding Public Goods](https://ecosystem.vision/impact/clrfund): Facilitates funding allocation for public goods benefiting the Ethereum community through quadratic funding.
+- [Octant - Epoch 1](https://ecosystem.vision/impact/octant-epoch-1): Promotes Ethereum staking for public goods funding through the Octant program.
+- [Optimism Foundation Grants](https://ecosystem.vision/impact/optimism-foundation-missions-rfps): Showcase grant opportunities for projects within the Optimism ecosystem.
+- [Stellar Grants Program](https://ecosystem.vision/impact/stellar-development-foundation-round-28): Promote grant opportunities for Stellar network development projects.

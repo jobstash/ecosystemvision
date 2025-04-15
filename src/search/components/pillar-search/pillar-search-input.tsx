@@ -27,6 +27,7 @@ export const PillarSearchInput = ({ isFullWidth }: Props) => {
   return (
     <div className={cn('inline-block p-1', { 'w-full': isFullWidth })}>
       <input
+        id="search-input"
         ref={inputRef}
         type="text"
         placeholder={PLACEHOLDER}
