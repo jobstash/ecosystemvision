@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 
@@ -58,8 +57,6 @@ export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
 
   return (
     <Button
-      as={Link}
-      href={href}
       radius="md"
       ref={inViewRef}
       className={className}
