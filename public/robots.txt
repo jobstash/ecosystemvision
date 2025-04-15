@@ -1,0 +1,19 @@
+User-agent: *
+
+# Allow URLs that have at least one query parameter.
+Allow: /*?*=
+
+# Disallow any URL that has an ampersand (&),
+# which indicates multiple query parameters.
+Disallow: /*?*&
+
+# Disallow pages with filter query parameters
+# Disallow: /*?*investors=
+# Disallow: /*?*locations=
+# Disallow: /*?*projects=
+# Disallow: /*?*chains=
+# Disallow: /*?*fundingRounds=
+# Disallow: /*?*names=
+# Disallow: /*?*tags=
+# Disallow: /*?*categories=
+# Disallow: /*?*organizations=
