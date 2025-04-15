@@ -1,5 +1,8 @@
+import { Metadata } from 'next';
+
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
+import { FRONTEND_URL } from '@/shared/core/envs';
 import { getQueryClient } from '@/shared/utils/get-query-client';
 
 import { projectQueryKeys } from '@/projects/core/query-keys';
@@ -59,3 +62,9 @@ const ProjectListPage = async ({ searchParams }: Props) => {
 };
 
 export default ProjectListPage;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: `${FRONTEND_URL}/projects`,
+  },
+};

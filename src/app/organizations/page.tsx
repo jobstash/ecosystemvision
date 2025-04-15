@@ -1,5 +1,8 @@
+import { Metadata } from 'next';
+
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
+import { FRONTEND_URL } from '@/shared/core/envs';
 import { getQueryClient } from '@/shared/utils/get-query-client';
 
 import { orgQueryKeys } from '@/orgs/core/query-keys';
@@ -60,3 +63,9 @@ const OrgListPage = async ({ searchParams }: Props) => {
 };
 
 export default OrgListPage;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: `${FRONTEND_URL}/organizations`,
+  },
+};
