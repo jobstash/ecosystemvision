@@ -1,45 +1,40 @@
 import { Grant, GrantDto } from '@/grants/core/schemas';
 
 export const dtoToGrant = (dto: GrantDto): Grant => {
-  const {
-    id,
-    name,
-    slug,
-    socialLinks,
-    metadata: {
-      networks,
-      ecosystems,
-      programBudget,
-      amountDistributedToDate,
-      description,
-      categories,
-      type,
-      logoImg,
-      grantsToDate,
-      website,
-    },
-  } = dto;
+  const { id, name, slug, socialLinks, metadata } = dto;
+
+  const networks =
+    metadata && metadata.networks.length > 0
+      ? [{ name: metadata.networks[0], logo: null }]
+      : [];
+
+  const ecosystem =
+    metadata && metadata.ecosystems.length > 0 ? metadata.ecosystems[0] : '';
 
   return {
     id,
     name,
     slug,
     // TODO: ui expects { name: string, logo: string }[], dto is string[]
-    networks: networks.length > 0 ? [{ name: networks[0], logo: null }] : [],
+    networks,
     // TODO: ui expects string, dto is string[]
-    ecosystem: ecosystems.length > 0 ? ecosystems[0] : '',
+    ecosystem,
     // TODO: which field? programBudget (current), amount, minGrant, maxGrant
-    totalFunds: programBudget ?? 0,
-    totalDisbursedFunds: amountDistributedToDate ?? 0,
-    summary: description ?? '',
-    categories,
-    type: type ?? '',
+    totalFunds: metadata?.programBudget ?? 0,
+    totalDisbursedFunds: metadata?.amountDistributedToDate ?? 0,
+    summary: metadata?.description ?? '',
+    categories: metadata?.categories ?? [],
+    type: metadata?.type ?? '',
     // TODO: where to get this? { text: string, logo: string }[]
     reputations: [],
-    logo: logoImg,
-    url: website ?? socialLinks?.website ?? socialLinks?.orgWebsite ?? null,
+    logo: metadata?.logoImg ?? null,
+    url:
+      metadata?.website ??
+      socialLinks?.website ??
+      socialLinks?.orgWebsite ??
+      null,
     twitter: socialLinks?.twitter ?? null,
     discord: socialLinks?.discord ?? null,
-    granteesCount: grantsToDate ?? 0,
+    granteesCount: metadata?.grantsToDate ?? 0,
   };
 };
