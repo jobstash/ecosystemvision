@@ -29,6 +29,12 @@ export const getGrantList = async ({
     url,
     label: 'getGrantList',
     responseSchema: grantDtoInfiniteListPageSchema,
+    options: {
+      next: {
+        revalidate: 43200, // 12 hours
+        tags: ['grants'],
+      },
+    },
   });
 
   return { ...response, data: response.data.map(dtoToGrant) };
