@@ -8,19 +8,14 @@ export async function register() {
 
   Sentry.init({
     dsn: SENTRY_DSN,
-    tracesSampleRate: 1,
+    tracesSampleRate: 0,
+    replaysSessionSampleRate: 0,
+    replaysOnErrorSampleRate: 0,
     debug: false,
     denyUrls: [/extensions\//i, /^chrome:\/\//i, /^chrome-extension:\/\//i],
     beforeSend(event) {
-      const hasStackTrace = event?.exception?.values?.some(
-        (exceptionValue) => exceptionValue.stacktrace,
-      );
-
-      if (!hasStackTrace) {
-        return null;
-      }
-
-      return event;
+      const hasStack = event.exception?.values?.some((e) => e.stacktrace);
+      return hasStack ? event : null;
     },
   });
 }

@@ -33,7 +33,6 @@ const client = new BrowserClient({
     httpClientIntegration(),
     httpContextIntegration(),
   ],
-
   denyUrls: [/extensions\//i, /^chrome:\/\//i, /^chrome-extension:\/\//i],
   beforeSend(event) {
     const hasStack = event.exception?.values?.some((e) => e.stacktrace);
