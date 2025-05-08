@@ -38,7 +38,7 @@ export const InitOrgCard = () => {
       projectCount: initOrg.projects.length,
       lastFundingAmount,
       lastFundingDate,
-      community: [], // TODO: require mw to return community in org details
+      ecosystems: [], // TODO: require mw to return community in org details
     };
     return (
       <OrgCard

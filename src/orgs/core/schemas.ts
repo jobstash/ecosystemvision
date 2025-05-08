@@ -32,7 +32,7 @@ export const orgListItemSchema = orgInfoSchema
       projectCount: z.number(),
       lastFundingDate: z.number(),
       lastFundingAmount: z.number(),
-      community: z.array(z.string()),
+      ecosystems: z.array(z.string()),
     }),
   );
 export type OrgListItem = z.infer<typeof orgListItemSchema>;
