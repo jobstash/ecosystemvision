@@ -15,11 +15,11 @@ import {
 } from '@sentry/nextjs';
 
 const client = new BrowserClient({
-  dsn: 'https://9a7126eecba5734903eb209d2a1bd935@o4509231087812608.ingest.de.sentry.io/4509231092793424',
+  dsn: 'https://d9c07cf404c1777bcf744cb901dfc7c2@o4504495959703552.ingest.us.sentry.io/4504526099447808',
   tunnel: '/sentry-tunnel',
-  tracesSampleRate: 1,
-  replaysSessionSampleRate: 1,
-  replaysOnErrorSampleRate: 1,
+  tracesSampleRate: 0,
+  replaysSessionSampleRate: 0,
+  replaysOnErrorSampleRate: 0,
   debug: false,
   transport: makeFetchTransport,
   stackParser: defaultStackParser,
