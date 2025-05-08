@@ -28,6 +28,7 @@ const config: Config = {
         spin: 'spin 2.4s linear infinite',
         spin2: 'spin 0.4s linear infinite',
         'spin-slow': 'spin 220s linear infinite',
+        gradient: 'animatedgradient 6s ease infinite alternate',
       },
       keyframes: {
         slideDown: {
@@ -41,6 +42,11 @@ const config: Config = {
           to: {
             transform: 'rotate(360deg)',
           },
+        },
+        animatedgradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
         },
       },
       borderRadius: {
