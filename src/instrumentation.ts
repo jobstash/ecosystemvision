@@ -1,16 +1,16 @@
 import * as Sentry from '@sentry/nextjs';
 
 const SENTRY_DSN =
-  'https://0d295254822c41989ea49baec3c31a6d@o4504495959703552.ingest.us.sentry.io/4504526099447808';
+  'https://9a7126eecba5734903eb209d2a1bd935@o4509231087812608.ingest.de.sentry.io/4509231092793424';
 
 export async function register() {
   if (process.env.NODE_ENV !== 'production') return;
 
   Sentry.init({
     dsn: SENTRY_DSN,
-    tracesSampleRate: 0,
-    replaysSessionSampleRate: 0,
-    replaysOnErrorSampleRate: 0,
+    tracesSampleRate: 1,
+    replaysSessionSampleRate: 1,
+    replaysOnErrorSampleRate: 1,
     debug: false,
     denyUrls: [/extensions\//i, /^chrome:\/\//i, /^chrome-extension:\/\//i],
     beforeSend(event) {
