@@ -22,7 +22,7 @@ export const GrantDetailsPage = ({ grant }: Props) => {
         searchResults={<ActiveSearchResults />}
       />
       <ActiveSearchHiddenWrapper>
-        <div className="pt-8">
+        <div className="pt-36">
           <FullGrantCard grant={grant} isRounded={false} />
         </div>
       </ActiveSearchHiddenWrapper>
