@@ -28,11 +28,7 @@ export const dtoToGrant = (dto: GrantDto): Grant => {
     // TODO: where to get this? { text: string, logo: string }[]
     reputations: [],
     logo: metadata?.logoImg ?? null,
-    url:
-      metadata?.website ??
-      socialLinks?.website ??
-      socialLinks?.orgWebsite ??
-      null,
+    url: socialLinks?.grantsSite || socialLinks?.orgWebsite || null,
     twitter: socialLinks?.twitter ?? null,
     discord: socialLinks?.discord ?? null,
     granteesCount: metadata?.grantsToDate ?? 0,

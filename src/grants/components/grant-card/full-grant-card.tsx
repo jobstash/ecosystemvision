@@ -35,6 +35,8 @@ export const FullGrantCard = ({ grant, isRounded = true }: Props) => {
     hasWebLinks,
   } = getGrantCardData(grant);
 
+  if (!url) return null;
+
   return (
     <div
       className={cn(

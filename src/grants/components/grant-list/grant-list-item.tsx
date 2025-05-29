@@ -35,6 +35,8 @@ export const GrantListItem = ({ grant, isLink = true, isInfo }: Props) => {
     hasWebLinks,
   } = getGrantCardData(grant);
 
+  if (!url) return null;
+
   const wrapperClassName =
     'flex flex-wrap items-center justify-between rounded-2xl bg-gradient-to-r  from-[#191919] to-[#0D0D0D] p-4 text-13 text-white transition-all duration-300 md:p-5 lg:flex-nowrap';
 
