@@ -1,12 +1,11 @@
 import { Metadata } from 'next';
 
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-
+// import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { FRONTEND_URL } from '@/shared/core/envs';
-import { getQueryClient } from '@/shared/utils/get-query-client';
 
-import { orgQueryKeys } from '@/orgs/core/query-keys';
-import { getOrgList } from '@/orgs/data/get-org-list';
+// import { getQueryClient } from '@/shared/utils/get-query-client';
+// import { orgQueryKeys } from '@/orgs/core/query-keys';
+// import { getOrgList } from '@/orgs/data/get-org-list';
 import { OrgListClient } from '@/orgs/components/org-list/org-list-client';
 
 import { PillarPage } from '@/search/pages/pillar-page';
@@ -20,7 +19,7 @@ interface Props {
 
 const OrgListPage = async ({ searchParams }: Props) => {
   const rawSearchParams = await searchParams;
-  const queryClient = getQueryClient();
+  // const queryClient = getQueryClient();
 
   // const [orgListResult] = await Promise.all([
   //   // Prefetch list
@@ -43,22 +42,22 @@ const OrgListPage = async ({ searchParams }: Props) => {
   //     ),
   // );
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: orgQueryKeys.list(rawSearchParams),
-    queryFn: async ({ pageParam }) => getOrgList(pageParam, rawSearchParams),
-    initialPageParam: 1,
-  });
+  // await queryClient.prefetchInfiniteQuery({
+  //   queryKey: orgQueryKeys.list(rawSearchParams),
+  //   queryFn: async ({ pageParam }) => getOrgList(pageParam, rawSearchParams),
+  //   initialPageParam: 1,
+  // });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <PillarPage
-        isIndex
-        nav="organizations"
-        params={{ pillar: '', item: '' }}
-        searchParams={rawSearchParams}
-        content={<OrgListClient searchParams={rawSearchParams} />}
-      />
-    </HydrationBoundary>
+    // <HydrationBoundary state={dehydrate(queryClient)}>
+    <PillarPage
+      isIndex
+      nav="organizations"
+      params={{ pillar: '', item: '' }}
+      searchParams={rawSearchParams}
+      content={<OrgListClient searchParams={rawSearchParams} />}
+    />
+    // </HydrationBoundary>
   );
 };
 
