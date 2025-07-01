@@ -23,15 +23,7 @@ export const DetailsTabs = ({ tabs }: Props) => {
       }}
     >
       {tabs.map((tab) => (
-        <Tab
-          key={tab.key}
-          title={tab.text}
-          href={tab.href}
-          as={Link}
-          replace={true}
-          // @ts-expect-error - routerOptions
-          routerOptions={{ replace: true }}
-        />
+        <Tab key={tab.key} title={tab.text} href={tab.href} as={Link} />
       ))}
     </Tabs>
   );
