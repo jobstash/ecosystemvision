@@ -11,14 +11,12 @@ interface Props {
 }
 
 export const InfoTagLink = ({ className, href, content }: Props) => {
-  const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const onPress = () => {
     window.open(href, '_blank');
   };
 
   return (
-    <Button className={`${className} max-w-full`} onClick={onClick}>
+    <Button className={`${className} max-w-full`} onPress={onPress}>
       <div className="flex max-w-full items-center gap-x-2">{content}</div>
     </Button>
   );
