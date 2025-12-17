@@ -2,7 +2,7 @@ FROM node:18-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 COPY package.json pnpm-lock.yaml* .npmrc ./
 RUN yarn global add pnpm && pnpm i --frozen-lockfile
