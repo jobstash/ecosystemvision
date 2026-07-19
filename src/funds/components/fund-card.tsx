@@ -2,7 +2,12 @@
 
 import Link from 'next/link';
 
-import { BriefcaseBusinessIcon, CalendarClockIcon, WalletIcon } from 'lucide-react';
+import {
+  BriefcaseBusinessIcon,
+  CalendarClockIcon,
+  ChartNoAxesCombinedIcon,
+  WalletIcon,
+} from 'lucide-react';
 
 import { formatNumber } from '@/shared/utils/format-number';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
@@ -19,9 +24,16 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
     {
       icon: <WalletIcon size={14} />,
       label:
-        fund.totalInvestedCapital === null
-          ? 'Fund investment not disclosed'
-          : `$${formatNumber(fund.totalInvestedCapital)} disclosed fund investment`,
+        fund.knownRoundCapital === null
+          ? 'No disclosed round capital'
+          : `$${formatNumber(fund.knownRoundCapital)} across ${fund.knownRoundCount.toLocaleString()} disclosed rounds`,
+    },
+    {
+      icon: <ChartNoAxesCombinedIcon size={14} />,
+      label:
+        fund.progressionRate === null
+          ? 'No progression sample'
+          : `${fund.progressionRate}% portfolio progression (${fund.progressedCompanyCount}/${fund.portfolioCount})`,
     },
     {
       icon: <CalendarClockIcon size={14} />,
@@ -55,6 +67,19 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
             {fund.socialStaffCount.toLocaleString()} team profiles with socials
           </span>
         )}
+        {fund.soloRoundCount > 0 && (
+          <span>
+            {fund.soloRoundCount.toLocaleString()} recorded-solo rounds
+          </span>
+        )}
+        {fund.topSectors.map((sector) => (
+          <span
+            className="rounded-full bg-white/[0.06] px-2 py-0.5 text-xs"
+            key={sector.name}
+          >
+            {sector.name} · {sector.companyCount}
+          </span>
+        ))}
         {fund.jobCount > 0 && (
           <span className="text-emerald-300/80">
             {fund.jobCount.toLocaleString()} open jobs

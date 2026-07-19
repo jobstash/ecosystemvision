@@ -7,6 +7,7 @@ import {
   ArrowLeftIcon,
   BriefcaseBusinessIcon,
   CalendarClockIcon,
+  ChartNoAxesCombinedIcon,
   ExternalLinkIcon,
   LinkedinIcon,
   MapPinIcon,
@@ -31,6 +32,8 @@ import type {
 const externalLinkClass =
   'inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/75 transition hover:border-white/35 hover:text-white';
 const INVESTMENT_PAGE_SIZE = 24;
+const formatMultiple = (value: number | null) =>
+  value === null ? 'Not available' : `${value.toFixed(2)}×`;
 
 const TeamMember = ({ member }: { member: FundTeamMember }) => (
   <article className="flex min-h-28 items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
@@ -102,6 +105,18 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
         </span>
       )}
     </div>
+    {investment.sectors.length > 0 && (
+      <div className="mt-3 flex flex-wrap gap-2">
+        {investment.sectors.map((sector) => (
+          <span
+            className="rounded-full bg-white/[0.06] px-2.5 py-1 text-xs text-white/50"
+            key={sector}
+          >
+            {sector}
+          </span>
+        ))}
+      </div>
+    )}
     {investment.summary && (
       <p className="mt-4 line-clamp-3 text-sm leading-6 text-white/55">
         {investment.summary}
@@ -113,20 +128,26 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
         .sort((a, b) => b.date - a.date)
         .map((round) => (
           <div
-            className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/55"
+            className={`flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg px-2 py-1.5 text-xs text-white/55 ${
+              round.fundParticipated ? 'bg-emerald-300/[0.06]' : ''
+            }`}
             key={round.id}
           >
             <span className="font-medium text-white/75">{round.roundName}</span>
             {round.date > 0 && <span>{shortTimestamp(round.date)}</span>}
             {round.raisedAmount > 0 && (
               <span>
-                $
-                {formatNumber(
-                  round.source
-                    ? round.raisedAmount
-                    : round.raisedAmount * 1_000_000,
-                )}{' '}
-                round
+                ${formatNumber(round.raisedAmount)} round
+              </span>
+            )}
+            {round.valuation !== null && round.valuation > 0 && (
+              <span>${formatNumber(round.valuation)} valuation</span>
+            )}
+            {round.fundParticipated && (
+              <span className="font-medium text-emerald-300/80">
+                {round.investmentRole === 'recorded-solo'
+                  ? 'Recorded solo · lead signal'
+                  : `Syndicated · ${round.investorCount} disclosed investors`}
               </span>
             )}
             {round.investedAmount !== null && (
@@ -218,11 +239,15 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
                 <WalletIcon className="mb-3 text-white/50" size={18} />
                 <strong className="block text-xl text-white">
                   {fund.totalInvestedCapital === null
-                    ? 'Not disclosed'
+                    ? fund.knownRoundCapital === null
+                      ? 'Not available'
+                      : `$${formatNumber(fund.knownRoundCapital)}`
                     : `$${formatNumber(fund.totalInvestedCapital)}`}
                 </strong>
                 <span className="text-white/50">
-                  disclosed fund investment
+                  {fund.totalInvestedCapital === null
+                    ? 'disclosed portfolio round capital'
+                    : 'disclosed fund investment'}
                 </span>
               </div>
               <div className="rounded-2xl bg-white/5 p-4">
@@ -245,7 +270,7 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
                 <strong className="block text-xl text-white">
                   {fund.portfolioCount.toLocaleString()}
                 </strong>
-                <span className="text-white/50">investments</span>
+                <span className="text-white/50">portfolio companies</span>
               </div>
               <div className="rounded-2xl bg-white/5 p-4">
                 <UsersIcon className="mb-3 text-white/50" size={18} />
@@ -262,6 +287,84 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
             </p>
           )}
         </header>
+
+        <section className="space-y-5">
+          <div>
+            <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+              Analyst signals
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">
+              Portfolio activity and matriculation
+            </h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <ChartNoAxesCombinedIcon
+                className="mb-3 text-white/45"
+                size={18}
+              />
+              <strong className="block text-xl text-white">
+                {fund.progressionRate === null
+                  ? 'Not available'
+                  : `${fund.progressionRate}%`}
+              </strong>
+              <span className="text-sm text-white/50">
+                companies with a later round ·{' '}
+                {fund.progressedCompanyCount}/{fund.portfolioCount}
+              </span>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <strong className="block text-xl text-white">
+                {formatMultiple(fund.medianRoundSizeStepUp)}
+              </strong>
+              <span className="text-sm text-white/50">
+                median round-size step-up · n={fund.roundSizeStepUpSample}
+              </span>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <strong className="block text-xl text-white">
+                {formatMultiple(fund.medianValuationStepUp)}
+              </strong>
+              <span className="text-sm text-white/50">
+                median valuation step-up · n={fund.valuationStepUpSample}
+              </span>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <strong className="block text-xl text-white">
+                {fund.soloRate === null ? 'Not available' : `${fund.soloRate}%`}
+              </strong>
+              <span className="text-sm text-white/50">
+                recorded-solo rate · {fund.soloRoundCount} solo /{' '}
+                {fund.syndicatedRoundCount} syndicated
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {fund.topSectors.map((sector) => (
+              <span
+                className="rounded-full border border-white/10 px-3 py-1.5 text-sm text-white/60"
+                key={sector.name}
+              >
+                {sector.name} · {sector.companyCount} companies
+              </span>
+            ))}
+          </div>
+          <p className="rounded-2xl border border-amber-200/15 bg-amber-200/[0.04] p-4 text-sm leading-6 text-white/55">
+            These are activity signals, not fund-return metrics. Round capital is
+            the full disclosed financing amount, not this fund&apos;s check size.
+            “Recorded solo” means only one investor is present in the source data
+            and is a lead signal, not verified lead status; syndicated rounds are
+            a co-investor or follower signal. IRR, TVPI, DPI, ownership, exits,
+            and market beta cannot be calculated from the available records.
+            {fund.ambiguousRoundCount > 0 && (
+              <>
+                {' '}
+                {fund.ambiguousRoundCount.toLocaleString()} ambiguous legacy
+                rounds were excluded.
+              </>
+            )}
+          </p>
+        </section>
 
         {fund.jobs.length > 0 && (
           <section className="space-y-5">
@@ -340,7 +443,8 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
               Investments
             </h2>
             <p className="mt-2 text-sm text-white/45">
-              Financing rounds in which {fund.name} is recorded as an investor.
+              Full financing histories for portfolio companies. Highlighted
+              rounds are those where {fund.name} is recorded as an investor.
             </p>
           </div>
           {fund.investments.length > 0 ? (

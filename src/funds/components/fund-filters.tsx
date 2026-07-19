@@ -3,7 +3,18 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { FormEvent } from 'react';
 
-import { ArrowDownWideNarrowIcon, ArrowUpWideNarrowIcon, SearchIcon, XIcon } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import {
+  ArrowDownWideNarrowIcon,
+  ArrowUpWideNarrowIcon,
+  SearchIcon,
+  XIcon,
+} from 'lucide-react';
+
+import { QUERY_STALETIME } from '@/shared/core/constants';
+
+import { fundQueryKeys } from '@/funds/core/query-keys';
+import { getFundSectors } from '@/funds/data/get-fund-sectors';
 
 const inputClass =
   'h-10 rounded-xl border border-white/15 bg-white/[0.04] px-3 text-sm text-white outline-none transition placeholder:text-white/35 hover:border-white/25 focus:border-white/40';
@@ -12,9 +23,15 @@ export const FundFilters = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const sectors = useQuery({
+    queryKey: fundQueryKeys.sectors(),
+    queryFn: getFundSectors,
+    staleTime: QUERY_STALETIME.DEFAULT,
+  });
 
   const updateParams = (updates: Record<string, string | null>) => {
     const next = new URLSearchParams(searchParams);
+    next.delete('page');
     Object.entries(updates).forEach(([key, value]) => {
       if (!value) next.delete(key);
       else next.set(key, value);
@@ -31,6 +48,11 @@ export const FundFilters = () => {
   const order = searchParams.get('order') === 'asc' ? 'asc' : 'desc';
   const requestedOrderBy = searchParams.get('orderBy');
   const orderBy =
+    requestedOrderBy === 'knownRoundCapital' ||
+    requestedOrderBy === 'progressionRate' ||
+    requestedOrderBy === 'medianRoundSizeStepUp' ||
+    requestedOrderBy === 'medianValuationStepUp' ||
+    requestedOrderBy === 'soloRate' ||
     requestedOrderBy === 'portfolioCount' ||
     requestedOrderBy === 'staffCount' ||
     requestedOrderBy === 'name'
@@ -72,6 +94,11 @@ export const FundFilters = () => {
           value={orderBy}
         >
           <option value="lastInvestmentDate">Last investment</option>
+          <option value="knownRoundCapital">Disclosed round capital</option>
+          <option value="progressionRate">Portfolio progression</option>
+          <option value="medianRoundSizeStepUp">Round-size step-up</option>
+          <option value="medianValuationStepUp">Valuation step-up</option>
+          <option value="soloRate">Recorded-solo rate</option>
           <option value="portfolioCount">Portfolio size</option>
           <option value="staffCount">Team size</option>
           <option value="name">Name</option>
@@ -94,6 +121,21 @@ export const FundFilters = () => {
         </button>
 
         <select
+          aria-label="Minimum disclosed round capital"
+          className={inputClass}
+          onChange={(event) =>
+            updateParams({ minKnownRoundCapital: event.target.value || null })
+          }
+          value={searchParams.get('minKnownRoundCapital') ?? ''}
+        >
+          <option value="">Any round capital</option>
+          <option value="10000000">$10M+ round capital</option>
+          <option value="100000000">$100M+ round capital</option>
+          <option value="1000000000">$1B+ round capital</option>
+          <option value="10000000000">$10B+ round capital</option>
+        </select>
+
+        <select
           aria-label="Minimum portfolio size"
           className={inputClass}
           onChange={(event) =>
@@ -106,6 +148,39 @@ export const FundFilters = () => {
           <option value="10">10+ companies</option>
           <option value="25">25+ companies</option>
           <option value="50">50+ companies</option>
+        </select>
+
+        <select
+          aria-label="Minimum portfolio progression"
+          className={inputClass}
+          onChange={(event) =>
+            updateParams({ minProgressionRate: event.target.value || null })
+          }
+          value={searchParams.get('minProgressionRate') ?? ''}
+        >
+          <option value="">Any progression</option>
+          <option value="25">25%+ progressed</option>
+          <option value="50">50%+ progressed</option>
+          <option value="75">75%+ progressed</option>
+        </select>
+
+        <select
+          aria-label="Portfolio sector"
+          className={inputClass}
+          disabled={sectors.isPending || sectors.isError}
+          onChange={(event) =>
+            updateParams({ sector: event.target.value || null })
+          }
+          value={searchParams.get('sector') ?? ''}
+        >
+          <option value="">
+            {sectors.isPending ? 'Loading sectors…' : 'Any sector'}
+          </option>
+          {sectors.data?.map((sector) => (
+            <option key={sector.name} value={sector.name}>
+              {sector.name} ({sector.companyCount.toLocaleString()})
+            </option>
+          ))}
         </select>
 
         <button
@@ -124,6 +199,26 @@ export const FundFilters = () => {
           type="button"
         >
           Open jobs
+        </button>
+
+        <button
+          aria-pressed={searchParams.get('hasSoloInvestments') === 'true'}
+          className={`${inputClass} ${
+            searchParams.get('hasSoloInvestments') === 'true'
+              ? 'border-violet-300/50 bg-violet-300/10 text-violet-200'
+              : ''
+          }`}
+          onClick={() =>
+            updateParams({
+              hasSoloInvestments:
+                searchParams.get('hasSoloInvestments') === 'true'
+                  ? null
+                  : 'true',
+            })
+          }
+          type="button"
+        >
+          Recorded solo
         </button>
 
         <button

@@ -70,6 +70,9 @@ export const FundList = ({ searchParams }: Props) => {
           <Loader />
         </div>
       )}
+      {!query.hasNextPage && funds.length > 0 && (
+        <p className="p-4 lg:p-8">No more funds available.</p>
+      )}
     </div>
   );
 };

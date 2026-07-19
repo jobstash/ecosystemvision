@@ -13,6 +13,30 @@ export const fundListItemSchema = z.object({
   socialStaffCount: z.number(),
   portfolioCount: z.number(),
   totalInvestedCapital: z.number().nullable(),
+  knownRoundCapital: z.number().nullable(),
+  knownRoundCount: z.number(),
+  valuationRoundCount: z.number(),
+  investmentRoundCount: z.number(),
+  ambiguousRoundCount: z.number(),
+  soloRoundCount: z.number(),
+  syndicatedRoundCount: z.number(),
+  soloRate: z.number().nullable(),
+  progressedCompanyCount: z.number(),
+  progressionRate: z.number().nullable(),
+  stageProgressedCompanyCount: z.number(),
+  stageTrackedCompanyCount: z.number(),
+  stageProgressionRate: z.number().nullable(),
+  followOnRoundCapital: z.number().nullable(),
+  medianRoundSizeStepUp: z.number().nullable(),
+  roundSizeStepUpSample: z.number(),
+  medianValuationStepUp: z.number().nullable(),
+  valuationStepUpSample: z.number(),
+  topSectors: z.array(
+    z.object({
+      name: z.string(),
+      companyCount: z.number(),
+    }),
+  ),
   lastInvestmentDate: z.number().nullable(),
   jobCount: z.number(),
 });
@@ -22,6 +46,13 @@ export type FundListItem = z.infer<typeof fundListItemSchema>;
 export const fundListPageSchema = infiniteListPageSchema.extend({
   data: z.array(fundListItemSchema),
 });
+
+export const fundSectorSchema = z.object({
+  name: z.string(),
+  companyCount: z.number(),
+});
+
+export const fundSectorsSchema = z.array(fundSectorSchema);
 
 export type FundListPage = z.infer<typeof fundListPageSchema>;
 
@@ -41,6 +72,10 @@ export const fundInvestmentRoundSchema = z.object({
   date: z.number(),
   raisedAmount: z.number(),
   investedAmount: z.number().nullable(),
+  valuation: z.number().nullable(),
+  investorCount: z.number(),
+  fundParticipated: z.boolean(),
+  investmentRole: z.enum(['recorded-solo', 'co-investor']).nullable(),
   sourceLink: z.string().nullable(),
   source: z.string().nullable(),
 });
@@ -53,6 +88,7 @@ export const fundInvestmentSchema = z.object({
   logoUrl: z.string().nullable(),
   website: z.string().nullable(),
   vertical: z.string().nullable(),
+  sectors: z.array(z.string()),
   rounds: z.array(fundInvestmentRoundSchema),
 });
 
