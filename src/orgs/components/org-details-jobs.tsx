@@ -1,3 +1,6 @@
+import Link from 'next/link';
+
+import { JOBSTASH_URL } from '@/shared/core/envs';
 import { CompactJobCard } from '@/shared/components/compact-job-card';
 import { Heading } from '@/shared/components/heading';
 
@@ -17,23 +20,37 @@ export const OrgDetailsJobs = ({ org }: Props) => {
   }
 
   return (
-    <>
+    <section aria-labelledby="organization-crypto-jobs">
       <Heading
-        text="Job Listings"
-        className="mb-4 text-2xl font-semibold text-white"
+        text={`${org.name} crypto jobs`}
+        className="text-2xl font-semibold text-white"
+        id="organization-crypto-jobs"
       />
-      <div className="grid gap-2 lg:grid-cols-2">
+      <p className="mb-4 mt-2 text-sm text-white/50">
+        Explore open blockchain and Web3 roles at {org.name}, sourced from{' '}
+        <Link
+          className="text-emerald-300/80 transition hover:text-emerald-200"
+          href={JOBSTASH_URL}
+          rel="external noopener"
+          target="_blank"
+        >
+          JobStash&apos;s crypto job board
+        </Link>
+        .
+      </p>
+      <div className="grid gap-2 lg:grid-cols-2" role="list">
         {jobs.map((job) => (
-          <CompactJobCard
-            job={{
-              ...job,
-              organizationName: org.name,
-              publishedTimestamp: job.timestamp,
-            }}
-            key={job.id}
-          />
+          <div key={job.id} role="listitem">
+            <CompactJobCard
+              job={{
+                ...job,
+                organizationName: org.name,
+                publishedTimestamp: job.timestamp,
+              }}
+            />
+          </div>
         ))}
       </div>
-    </>
+    </section>
   );
 };

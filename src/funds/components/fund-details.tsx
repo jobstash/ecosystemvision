@@ -15,6 +15,7 @@ import {
   WalletIcon,
 } from 'lucide-react';
 
+import { JOBSTASH_URL } from '@/shared/core/envs';
 import { formatNumber } from '@/shared/utils/format-number';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { shortTimestamp } from '@/shared/utils/short-timestamp';
@@ -60,8 +61,9 @@ const TeamMember = ({ member }: { member: FundTeamMember }) => (
           <Link
             aria-label={`${member.name} on LinkedIn`}
             href={member.linkedinUrl}
-            rel="noreferrer"
+            rel="external noopener"
             target="_blank"
+            title={`View ${member.name} on LinkedIn`}
           >
             <LinkedinIcon size={16} />
           </Link>
@@ -70,8 +72,9 @@ const TeamMember = ({ member }: { member: FundTeamMember }) => (
           <Link
             aria-label={`${member.name} on X`}
             href={member.twitterUrl}
-            rel="noreferrer"
+            rel="external noopener"
             target="_blank"
+            title={`View ${member.name} on X`}
           >
             <TwitterIcon size={16} />
           </Link>
@@ -254,11 +257,20 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
                 Opportunities
               </p>
               <h2 className="mt-2 text-2xl font-semibold text-white">
-                Open jobs across the portfolio
+                Crypto jobs across {fund.name}&apos;s portfolio
               </h2>
               <p className="mt-2 text-sm text-white/45">
                 {fund.jobCount.toLocaleString()} current roles at companies backed
-                by {fund.name}.
+                by {fund.name}, sourced from{' '}
+                <Link
+                  className="text-emerald-300/80 transition hover:text-emerald-200"
+                  href={JOBSTASH_URL}
+                  rel="external noopener"
+                  target="_blank"
+                >
+                  JobStash&apos;s crypto job board
+                </Link>
+                .
               </p>
             </div>
             <div className="grid gap-2 lg:grid-cols-2">
