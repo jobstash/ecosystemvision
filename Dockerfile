@@ -4,7 +4,7 @@ FROM node:24-alpine AS base
 FROM base AS deps
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
-COPY package.json pnpm-lock.yaml* .npmrc ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml .npmrc ./
 RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
 RUN pnpm i --frozen-lockfile
 
