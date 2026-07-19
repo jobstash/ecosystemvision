@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import type { FormEvent } from 'react';
+import { type FormEvent, useRef } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -42,6 +42,7 @@ export const FundFilters = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const roundDetailsRef = useRef<HTMLDetailsElement>(null);
   const sectorParams = selectParams(new URLSearchParams(searchParams.toString()), [
     'activityWindow',
     'fromDate',
@@ -174,7 +175,7 @@ export const FundFilters = () => {
           </>
         )}
 
-        <details className="group relative">
+        <details className="group relative" ref={roundDetailsRef}>
           <summary
             className={`${inputClass} flex cursor-pointer list-none items-center gap-2`}
           >
@@ -205,6 +206,7 @@ export const FundFilters = () => {
                     const next = new Set(selectedRounds);
                     if (next.has(stage.slug)) next.delete(stage.slug);
                     else next.add(stage.slug);
+                    roundDetailsRef.current?.removeAttribute('open');
                     updateParams({
                       rounds: next.size ? [...next].join(',') : null,
                     });
