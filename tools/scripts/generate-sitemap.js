@@ -19,8 +19,6 @@ const minimalSitemap = () => {
     '/organizations',
     '/projects',
     '/funds',
-    '/grants',
-    '/impact',
   ];
   const entries = paths
     .map(

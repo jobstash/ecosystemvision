@@ -44,12 +44,6 @@ export const Footer = () => {
           <li>
             <Link href={HREFS.ORGS_PAGE}>Organizations</Link>
           </li>
-          <li>
-            <Link href={HREFS.GRANTS_PAGE}>Active Grants</Link>
-          </li>
-          <li>
-            <Link href={HREFS.IMPACT_PAGE}>Grant Impact</Link>
-          </li>
         </ul>
       </div>
       <div className="border-t border-white md:flex md:items-center md:justify-between md:pt-6">

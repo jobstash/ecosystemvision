@@ -163,30 +163,6 @@ export const fakeSearchResultsDto = (): SearchResultsDto => {
         { value: 'LESS', link: '/projects/skills/less' },
       ],
     },
-    grants: {
-      names: [
-        {
-          value: 'Thank Arb',
-          link: '/grants/names/thank-arb',
-        },
-        {
-          value: 'Gitcoin',
-          link: '/grants/names/gitcoin',
-        },
-      ],
-    },
-    grantImpact: {
-      names: [
-        {
-          value: 'Arbitrum Stip',
-          link: '/grants/names/arbitrum-stip',
-        },
-        {
-          value: 'DAO Drops',
-          link: '/grants/names/dao-drops',
-        },
-      ],
-    },
     vcs: {},
   };
 };

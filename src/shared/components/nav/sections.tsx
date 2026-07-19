@@ -1,22 +1,10 @@
-import dynamic from 'next/dynamic';
-
 import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
 import { cn } from '@/shared/utils/cn';
 import { Brand } from '@/shared/components/brand';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
-import { GRANTS_PORTAL_IDS } from '@/grants/core/constants';
-
 import { Bartab } from './bartab';
 import { CloseButton } from './close-button';
-
-const AiGrantProgramFinderSkeleton = dynamic(
-  () =>
-    import(
-      '@/grants/components/ai-grant-program-finder/ai-grant-program-finder-skeleton'
-    ).then((m) => m.AiGrantProgramFinderSkeleton),
-  { ssr: true },
-);
 
 const SECTIONS = [
   {
@@ -33,14 +21,6 @@ const SECTIONS = [
       {
         text: A11Y.LINK.NAV.FUNDS,
         href: HREFS.FUNDS_PAGE,
-      },
-      {
-        text: A11Y.LINK.NAV.GRANTS,
-        href: HREFS.GRANTS_PAGE,
-      },
-      {
-        text: A11Y.LINK.NAV.IMPACT,
-        href: HREFS.IMPACT_PAGE,
       },
     ],
   },
@@ -94,17 +74,6 @@ export const NavSections = ({ isMobile }: Props) => {
             </div>
           </div>
         ))}
-
-        <div
-          id={GRANTS_PORTAL_IDS.AI_FINDER_DESKTOP}
-          className="w-full grow"
-          style={{
-            borderImageSource:
-              'linear-gradient(162.12deg, #EAEAEA -14.01%, rgba(187, 190, 223, 0) 27.11%, rgba(132, 132, 132, 0) 62.3%, rgba(133, 133, 134, 0) 68.01%, #999999 92.7%)',
-          }}
-        >
-          <AiGrantProgramFinderSkeleton isDesktop />
-        </div>
       </div>
     </nav>
   );

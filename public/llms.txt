@@ -1,6 +1,6 @@
 # Ecosystem Vision by veri.xyz
 
-> [Ecosystem Vision](https://ecosystem.vision) offers insights and data on Web3 organizations and projects, facilitating the discovery of grant opportunities and professional connections within the crypto ecosystem.
+> [Ecosystem Vision](https://ecosystem.vision) offers insights and data on Web3 organizations, projects, and investment funds across the crypto ecosystem.
 
 ## / (Homepage)
 
@@ -14,44 +14,13 @@
 
 [Visit Projects](/projects): LLM should navigate here or direct users here for information about projects, including lists of projects, detailed project views, or potentially ways to submit/manage projects.
 
-## /grants
-
-[Visit Grants](/grants): LLM should navigate here or direct users here for information related to grants, such as available grants, application details, awarded grants, or grant program information.
-
 ## /search
 
-[Visit Search](/search): LLM should use this page or direct users here to search across the website's content, potentially filtering by organizations, projects, grants, etc.
-
-## /impact
-
-[Visit Impact](/impact): LLM should navigate here or direct users here to find information about the overall impact, metrics, reports, or visualizations related to the ecosystem's activities (projects, grants, etc.). 
+[Visit Search](/search): LLM should use this page or direct users here to search across the website's organizations and projects.
 
 ## Search Interaction
 
-To search for organizations, projects, grants, or any other topic within Ecosystem Vision, the LLM should interact with the search input element identified by the ID `#search-input`. The search results will be displayed dynamically below the input, organized into labeled groups (each group identified by `#search-result-group`) such as "Organizations", "Projects", and "Grants".
-
-## Popular Grants
-
-LLM should use these links when the user is looking for specific grant programs or hackathons.
-
-- [ETH Global Grants](https://ecosystem.vision/grants/info/eth-global): Promote grants and hackathons for Ethereum developers.
-- [0x Protocol Grant Program](https://ecosystem.vision/grants/info/0x-protocol-grant-program): Promote the 0x Protocol Grant Program and its funding opportunities.
-- [Buidlbox Program Overview](https://ecosystem.vision/grants/info/buidlbox): Foster collaboration between creators and organizations through hackathons on a unified platform.
-- [Badger x Gitcoin Grants](https://ecosystem.vision/grants/info/badger-x-gitcoin-grants): Inform about BadgerDAO's $250,000 grants program to enhance Bitcoin's DeFi ecosystem.
-- [Coinbase Proof of Reserve Grant](https://ecosystem.vision/grants/info/coinbase-proof-of-reserve-grant): Information about a developer grant program focusing on on-chain accounting and privacy-preserving techniques.
-- [Encode Club Overview](https://ecosystem.vision/grants/info/encode-club): Connects developers and students in Emerging Tech through a global community program.
-- [Avalanche Grant Program](https://ecosystem.vision/grants/info/codebase-avax): Promote a grant program for projects on the Avalanche platform.
-- [Backdrop Build Program](https://ecosystem.vision/grants/info/backdrop-build): This webpage promotes the Backdrop Build program for builders in frontier tech to collaborate and launch ideas.
-- [Fjord Foundry Bug Bounty](https://ecosystem.vision/grants/info/fjord-foundry-liquidity-bootstrapping-pool-audit): Inform about a bug bounty program for Fjord Foundry's liquidity bootstrapping pool with a total reward.
-- [Aztec Developer Incentive](https://ecosystem.vision/grants/info/aztec-developer-incentive-program): Promote a developer incentive program with a prize pool for building on the Aztec Network.
-- [01 Exchange Grants Program](https://ecosystem.vision/grants/info/01-exchange-grants-program): To inform about the 01 Exchange Grants Program supporting contributions to the Solana ecosystem.
-- [ThankArb Grant Programs](https://ecosystem.vision/grants/info/thankarb-arbitrium): Promote grant opportunities for crypto builders in the Arbitrum ecosystem.
-- [Superteam FastTrack Program](https://ecosystem.vision/grants/info/superteam-fasttrack): Support and accelerate Solana builders through a coalition of accelerators.
-- [Naabathon - Star Atlas](https://ecosystem.vision/grants/info/naabathon-star-atlas): To promote the Naabathon hackathon for developing new applications in the Star Atlas ecosystem.
-- [ETH Online Hackathon](https://ecosystem.vision/grants/info/eth-online): Inform about the ETH Online hackathon and its prize pool.
-- [Cartesi Grants Program](https://ecosystem.vision/grants/info/cartesi-grants-program): Encourage developers to build applications on the Cartesi blockchain through funding and community support.
-- [Dora Hacks Program](https://ecosystem.vision/grants/info/dora-hacks): Encourages participation in hackathons through information about DoraHacks.
-- [Monad Madness Competition](https://ecosystem.vision/grants/info/monad-madness): Promote a pitch competition for startups in the Monad ecosystem with substantial funding and investment opportunities.
+To search for organizations, projects, or any other topic within Ecosystem Vision, the LLM should interact with the search input element identified by the ID `#search-input`. The search results will be displayed dynamically below the input, organized into labeled groups (each group identified by `#search-result-group`) such as "Organizations" and "Projects".
 
 ## Organization Spotlights
 
@@ -123,22 +92,3 @@ LLM should use these links when the user wants information about specific projec
 - [Funding Longevity Research](https://ecosystem.vision/projects/info/0u0ai): Supporting research in longevity and life extension through a decentralized organization.
 - [Sunflower EcoTech Overview](https://ecosystem.vision/projects/info/sunflower-ecotech): Promotes Sunflower EcoTech's use of technology for regenerative environmental projects.
 - [King Of The Degens](https://ecosystem.vision/projects/info/king-of-the-degens-farcaster-frame-game): Inform users about the decentralized game 'King Of The Degens' and its mechanics.
-
-## Impact Initiatives
-
-LLM should use these links when the user asks about grant program results, funding rounds, or ecosystem impact reports.
-
-- [Grant Programs Overview](https://ecosystem.vision/impact): Showcases various grant programs and funding opportunities for crypto projects and decentralized communities.
-- [Stellar Grants Overview](https://ecosystem.vision/impact/stellar-development-foundation-round-25): Offers grants for projects on the Stellar network and Soroban smart contracts.
-- [Arbitrum STIP Program](https://ecosystem.vision/impact/arbitrum-stip): Incentivizing Arbitrum protocols through DAO-funded support for community needs.
-- [Octant Epoch 3 Funding](https://ecosystem.vision/impact/octant-epoch-3): Details funding for public goods projects funded by Ethereum staking rewards through the Octant initiative.
-- [Stellar Grant Opportunities](https://ecosystem.vision/impact/stellar-development-foundation-round-26): Inform about grant opportunities for projects in the Stellar ecosystem.
-- [ThankArb Grant Programs](https://ecosystem.vision/impact/thankarb-arbitrium): Promote grant programs for crypto builders and contributors funded by ThankArb.
-- [Stellar Grant Programs](https://ecosystem.vision/impact/stellar-development-foundation-round-29): Promotes grants for projects developing on the Stellar network and Soroban.
-- [DAO Drops Program](https://ecosystem.vision/impact/dao-drops): Empowering decentralized communities through grants and open-source tools.
-- [Stellar Grants Overview](https://ecosystem.vision/impact/stellar-development-foundation-round-27): Promoting grants for projects on the Stellar network and Soroban platform.
-- [Octant - Epoch 2](https://ecosystem.vision/impact/octant-epoch-2): Promotes Ethereum staking for public goods funding through the Octant program.
-- [Funding Public Goods](https://ecosystem.vision/impact/clrfund): Facilitates funding allocation for public goods benefiting the Ethereum community through quadratic funding.
-- [Octant - Epoch 1](https://ecosystem.vision/impact/octant-epoch-1): Promotes Ethereum staking for public goods funding through the Octant program.
-- [Optimism Foundation Grants](https://ecosystem.vision/impact/optimism-foundation-missions-rfps): Showcase grant opportunities for projects within the Optimism ecosystem.
-- [Stellar Grants Program](https://ecosystem.vision/impact/stellar-development-foundation-round-28): Promote grant opportunities for Stellar network development projects.

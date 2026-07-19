@@ -13,7 +13,6 @@ import { FeatureSwiper } from '@/home/components/feature-swiper';
 import { Footer } from '@/home/components/footer';
 import { FlashIcon } from '@/home/components/icons/flash';
 import { Marquee } from '@/home/components/marquee';
-import { TestimonialSwiper } from '@/home/components/testimonial-swiper';
 import { ActiveSearchHiddenWrapper } from '@/search/components/active-search-hidden-wrapper';
 import { ActiveSearchResults } from '@/search/components/active-search-results';
 import { SearchResultInput } from '@/search/components/search-result-input';
@@ -45,17 +44,17 @@ export const HomePage = () => {
               <div className="my-10 h-px bg-custom"></div>
               <h2 className="w-full pb-12 text-base font-normal leading-5 md:w-10/12 	lg:w-2/3 lg:text-xl">
                 Discover insights. Uncover opportunities. Dive into data on
-                thousands of organizations and projects, and find grants using
-                our AI grant finder.
+                thousands of organizations, projects, and investment funds
+                across the crypto ecosystem.
               </h2>
             </div>
             <Button
               as={Link}
-              href={HREFS.GRANTS_PAGE}
+              href={HREFS.PROJECTS_PAGE}
               className="mx-auto h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-medium text-black"
             >
               <span className="text-base font-medium">
-                Explore Ecosystem Grants
+                Explore Ecosystem Projects
               </span>
             </Button>
           </section>
@@ -65,47 +64,6 @@ export const HomePage = () => {
 
           <FeatureSwiper />
 
-          <section className="pt-20 md:pt-32">
-            <div className="flex flex-wrap lg:items-center">
-              <div className="md:w-3/5 lg:w-2/5 lg:pr-24">
-                <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased  md:text-40 md:leading-tight lg:text-48">
-                  See Grant Impact Like Never Before
-                </h2>
-                <p className="text-base leading-5 lg:text-xl lg:leading-tight">
-                  Gain unprecedented insights into grant programs with our
-                  detailed impact analysis. Explore how funding drives
-                  innovation in the Web3 space through our collaboration with
-                  ThankArb and the Cartographer Syndicate.
-                </p>
-              </div>
-              <div className="w-full lg:w-3/5">
-                <div className="aspect-h-1 aspect-w-1 relative mt-16 lg:mt-0">
-                  <Image
-                    src={'/placeholder.png'}
-                    alt={'placeholder'}
-                    width={749}
-                    height={776}
-                    className="absolute inset-0 size-full object-cover object-center"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="my-10 h-px bg-custom-mobile md:my-14 lg:my-20 lg:bg-custom"></div>
-
-            <TestimonialSwiper />
-
-            <Button
-              as={Link}
-              href={HREFS.IMPACT_PAGE}
-              className="mx-auto mt-6 h-auto w-full max-w-[280px] bg-gradient-to-r from-white to-white/50 py-3 font-semibold text-black"
-            >
-              <span className="text-base font-medium">
-                Explore Grant Impact
-              </span>
-            </Button>
-            <div className="mt-20 h-px bg-custom-mobile lg:bg-custom"></div>
-          </section>
           <section className="relative pt-16 md:pt-20">
             <div className="relative z-10">
               <h2 className="pb-6 font-grotesk text-32 font-medium leading-10 tracking-tighter antialiased md:w-2/3 md:text-40 md:leading-tight lg:text-48">

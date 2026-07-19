@@ -19,7 +19,7 @@ type WaitlistPayload = z.infer<typeof waitlistPayloadSchema>;
 
 const addToWaitlist = async (payload: WaitlistPayload) => {
   const { success, message } = await mwPOST({
-    url: `${MW_URL}/grants/mail`,
+    url: `${MW_URL}/app/waitlist`,
     label: 'addToWaitlist',
     payload,
     payloadSchema: waitlistPayloadSchema,

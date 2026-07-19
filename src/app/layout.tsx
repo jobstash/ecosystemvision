@@ -14,17 +14,16 @@ import { GsapInit } from '@/shared/components/gsap-init';
 import { InitPathSyncer } from '@/shared/components/init-path-syncer';
 import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
+import { Toaster } from '@/shared/components/toaster';
 import { HeroUIProvider } from '@/shared/providers/hero-ui-provider';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
-
-import { Toaster } from '@/grants/components/toaster';
 
 import { PendingRouteProvider } from '@/shared/contexts/pending-route-context';
 
 export const metadata: Metadata = {
   title: 'Ecosystem Vision',
   description:
-    'Explore and visualize grants and ecosystem trends with actionable insights.',
+    'Explore Web3 organizations, projects, funds, and ecosystem trends with actionable insights.',
 };
 
 export const viewport: Viewport = {
