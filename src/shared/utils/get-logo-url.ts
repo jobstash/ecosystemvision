@@ -1,8 +1,10 @@
 import { getWebsiteText } from './get-website-text';
 
 const getGoogleLogoUrl = (url: string) => {
-  const { link } = getWebsiteText(url);
-  return link ? `https://www.google.com/s2/favicons?domain=${link}&sz=128` : '';
+  const { hostname } = getWebsiteText(url);
+  return hostname
+    ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hostname)}&sz=128`
+    : '';
 };
 
 export const getLogoUrl = (url: string | null, logo?: string | null) => {
@@ -11,5 +13,5 @@ export const getLogoUrl = (url: string | null, logo?: string | null) => {
   // Ignore Twitter shortened URLs
   const sanitizedUrl = url?.startsWith('https://t.co') ? '' : (url ?? '');
 
-  return getGoogleLogoUrl(logo ?? sanitizedUrl);
+  return getGoogleLogoUrl(sanitizedUrl || logo || '');
 };

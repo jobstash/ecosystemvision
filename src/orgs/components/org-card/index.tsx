@@ -47,7 +47,7 @@ export const OrgCard = (props: Props) => {
         prefetch={true}
         className="flex flex-col gap-3 p-6"
       >
-        <LogoTitle src={src}>
+        <LogoTitle src={src} name={name}>
           <div className="flex flex-col">
             <h3 className="text-lg font-bold">{name}</h3>
             <h4 className="text-sm text-white/60">{location}</h4>

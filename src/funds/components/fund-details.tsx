@@ -90,10 +90,7 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
       >
         <LogoTitle
           name={investment.name}
-          src={
-            getLogoUrl(investment.website ?? '', investment.logoUrl) ||
-            '/placeholder.png'
-          }
+          src={getLogoUrl(investment.website ?? '', investment.logoUrl)}
         />
       </Link>
       {investment.vertical && (
@@ -165,7 +162,8 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start">
             <div className="space-y-5">
               <LogoTitle
-                src={getLogoUrl(website, fund.logoUrl) || '/placeholder.png'}
+                src={getLogoUrl(website, fund.logoUrl)}
+                name={fund.name}
               >
                 <h1 className="text-3xl font-semibold text-white md:text-4xl">
                   {fund.name}

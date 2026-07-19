@@ -1,8 +1,7 @@
-import Image from 'next/image';
-
 import { InfoTagProps } from '@/shared/core/types';
 import { Heading } from '@/shared/components/heading';
 import { InfoTags } from '@/shared/components/info-tags';
+import { LogoImage } from '@/shared/components/logo-title';
 import { Text } from '@/shared/components/text';
 
 interface Props {
@@ -19,9 +18,12 @@ export const DetailsHeader = (props: Props) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
-        <div className="relative size-20 min-h-20 min-w-20 overflow-hidden rounded-full object-cover">
-          <Image fill src={src} alt={name ?? ''} sizes="(max-width: 128px)" />
-        </div>
+        <LogoImage
+          src={src}
+          name={name}
+          className="size-20 min-h-20 min-w-20 text-xl"
+          sizes="80px"
+        />
         <div className="flex flex-col">
           <Heading text={name} className="text-2xl" />
           <div className="max-w-2xl ">

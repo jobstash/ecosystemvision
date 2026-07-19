@@ -35,7 +35,7 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
   const content = (
     <div className="flex flex-col gap-3 p-6">
       <LogoTitle
-        src={getLogoUrl(fund.website ?? '', fund.logoUrl) || '/placeholder.png'}
+        src={getLogoUrl(fund.website ?? '', fund.logoUrl)}
         name={fund.name}
       />
       <Divider />
