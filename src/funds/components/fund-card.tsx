@@ -11,11 +11,10 @@ import type { FundListItem } from '@/funds/core/schemas';
 import { activeFundSlugAtom } from '@/funds/core/atoms';
 
 export const FundCard = ({ fund }: { fund: FundListItem }) => {
-  const website = fund.website ?? '';
   const content = (
     <div className="flex flex-col gap-3 p-6">
       <LogoTitle
-        src={getLogoUrl(website, fund.logoUrl) || '/placeholder.png'}
+        src={getLogoUrl(fund.website ?? '', fund.logoUrl) || '/placeholder.png'}
         name={fund.name}
       />
       <Divider />
@@ -28,13 +27,9 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
 
   return (
     <CardWrapper id={fund.normalizedName} idAtom={activeFundSlugAtom}>
-      {website ? (
-        <Link href={website} target="_blank" rel="noreferrer">
-          {content}
-        </Link>
-      ) : (
-        content
-      )}
+      <Link href={`/funds/${encodeURIComponent(fund.normalizedName)}`}>
+        {content}
+      </Link>
     </CardWrapper>
   );
 };

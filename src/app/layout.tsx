@@ -57,7 +57,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
       <InitPathSyncer />
       <Toaster />
 
-      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID ?? ''} />
+      {GOOGLE_ANALYTICS_ID && <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />}
     </body>
   </html>
 );
