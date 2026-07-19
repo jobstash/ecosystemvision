@@ -18,7 +18,10 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
   const metrics = [
     {
       icon: <WalletIcon size={14} />,
-      label: `$${formatNumber(fund.totalInvestedCapital)} invested capital`,
+      label:
+        fund.totalInvestedCapital === null
+          ? 'Fund investment not disclosed'
+          : `$${formatNumber(fund.totalInvestedCapital)} disclosed fund investment`,
     },
     {
       icon: <CalendarClockIcon size={14} />,
@@ -47,6 +50,11 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
           </span>
         ))}
         <span>{fund.staffCount.toLocaleString()} team members</span>
+        {fund.socialStaffCount > 0 && (
+          <span className="text-sky-300/80">
+            {fund.socialStaffCount.toLocaleString()} team profiles with socials
+          </span>
+        )}
         {fund.jobCount > 0 && (
           <span className="text-emerald-300/80">
             {fund.jobCount.toLocaleString()} open jobs

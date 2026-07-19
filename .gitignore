@@ -62,3 +62,4 @@ instructions/
 *.dummy*
 
 sitemap.xml
+sitemap-*.xml

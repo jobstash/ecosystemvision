@@ -129,6 +129,11 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
                 round
               </span>
             )}
+            {round.investedAmount !== null && (
+              <span className="text-emerald-300/75">
+                Fund invested ${formatNumber(round.investedAmount)}
+              </span>
+            )}
             {round.sourceLink && (
               <Link
                 aria-label={`Source for ${investment.name} ${round.roundName}`}
@@ -148,8 +153,12 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
 export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
   const [visibleInvestmentCount, setVisibleInvestmentCount] =
     useState(INVESTMENT_PAGE_SIZE);
+  const [showOnlySocialTeam, setShowOnlySocialTeam] = useState(false);
   const website = fund.website ?? '';
   const visibleInvestments = fund.investments.slice(0, visibleInvestmentCount);
+  const visibleTeam = showOnlySocialTeam
+    ? fund.team.filter((member) => member.linkedinUrl || member.twitterUrl)
+    : fund.team;
   return (
     <main className="glow-gradient min-h-screen px-4 pb-16 pt-24 md:px-8 lg:pt-12">
       <div className="mx-auto max-w-6xl space-y-12">
@@ -208,9 +217,13 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
               <div className="rounded-2xl bg-white/5 p-4">
                 <WalletIcon className="mb-3 text-white/50" size={18} />
                 <strong className="block text-xl text-white">
-                  ${formatNumber(fund.totalInvestedCapital)}
+                  {fund.totalInvestedCapital === null
+                    ? 'Not disclosed'
+                    : `$${formatNumber(fund.totalInvestedCapital)}`}
                 </strong>
-                <span className="text-white/50">invested capital</span>
+                <span className="text-white/50">
+                  disclosed fund investment
+                </span>
               </div>
               <div className="rounded-2xl bg-white/5 p-4">
                 <CalendarClockIcon
@@ -282,15 +295,32 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
         )}
 
         <section className="space-y-5">
-          <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-white/35">
-              People
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-white">Team</h2>
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+                People
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">Team</h2>
+            </div>
+            {fund.socialStaffCount > 0 && (
+              <button
+                aria-pressed={showOnlySocialTeam}
+                className={`rounded-full border px-4 py-2 text-sm transition ${
+                  showOnlySocialTeam
+                    ? 'border-sky-300/50 bg-sky-300/10 text-sky-200'
+                    : 'border-white/15 text-white/60 hover:border-white/30 hover:text-white'
+                }`}
+                onClick={() => setShowOnlySocialTeam((current) => !current)}
+                type="button"
+              >
+                {showOnlySocialTeam ? 'Showing' : 'Show'} team socials (
+                {fund.socialStaffCount.toLocaleString()})
+              </button>
+            )}
           </div>
           {fund.team.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {fund.team.map((member) => (
+              {visibleTeam.map((member) => (
                 <TeamMember key={member.id} member={member} />
               ))}
             </div>

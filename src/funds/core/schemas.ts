@@ -10,8 +10,9 @@ export const fundListItemSchema = z.object({
   website: z.string().nullable(),
   twitter: z.string().nullable(),
   staffCount: z.number(),
+  socialStaffCount: z.number(),
   portfolioCount: z.number(),
-  totalInvestedCapital: z.number(),
+  totalInvestedCapital: z.number().nullable(),
   lastInvestmentDate: z.number().nullable(),
   jobCount: z.number(),
 });
@@ -39,6 +40,7 @@ export const fundInvestmentRoundSchema = z.object({
   roundName: z.string(),
   date: z.number(),
   raisedAmount: z.number(),
+  investedAmount: z.number().nullable(),
   sourceLink: z.string().nullable(),
   source: z.string().nullable(),
 });

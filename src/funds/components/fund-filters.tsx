@@ -29,6 +29,13 @@ export const FundFilters = () => {
   };
 
   const order = searchParams.get('order') === 'asc' ? 'asc' : 'desc';
+  const requestedOrderBy = searchParams.get('orderBy');
+  const orderBy =
+    requestedOrderBy === 'portfolioCount' ||
+    requestedOrderBy === 'staffCount' ||
+    requestedOrderBy === 'name'
+      ? requestedOrderBy
+      : 'lastInvestmentDate';
   const hasFilters = searchParams.size > 0;
 
   return (
@@ -62,10 +69,9 @@ export const FundFilters = () => {
                   : event.target.value,
             })
           }
-          value={searchParams.get('orderBy') ?? 'lastInvestmentDate'}
+          value={orderBy}
         >
           <option value="lastInvestmentDate">Last investment</option>
-          <option value="totalInvestedCapital">Invested capital</option>
           <option value="portfolioCount">Portfolio size</option>
           <option value="staffCount">Team size</option>
           <option value="name">Name</option>
@@ -86,22 +92,6 @@ export const FundFilters = () => {
           )}
           {order === 'desc' ? 'Descending' : 'Ascending'}
         </button>
-
-        <select
-          aria-label="Minimum invested capital"
-          className={inputClass}
-          onChange={(event) =>
-            updateParams({ minInvestedCapital: event.target.value || null })
-          }
-          value={searchParams.get('minInvestedCapital') ?? ''}
-        >
-          <option value="">Any capital</option>
-          <option value="10000000">$10M+ capital</option>
-          <option value="50000000">$50M+ capital</option>
-          <option value="100000000">$100M+ capital</option>
-          <option value="500000000">$500M+ capital</option>
-          <option value="1000000000">$1B+ capital</option>
-        </select>
 
         <select
           aria-label="Minimum portfolio size"
@@ -134,6 +124,24 @@ export const FundFilters = () => {
           type="button"
         >
           Open jobs
+        </button>
+
+        <button
+          aria-pressed={searchParams.get('hasTeamSocials') === 'true'}
+          className={`${inputClass} ${
+            searchParams.get('hasTeamSocials') === 'true'
+              ? 'border-sky-300/50 bg-sky-300/10 text-sky-200'
+              : ''
+          }`}
+          onClick={() =>
+            updateParams({
+              hasTeamSocials:
+                searchParams.get('hasTeamSocials') === 'true' ? null : 'true',
+            })
+          }
+          type="button"
+        >
+          Team socials
         </button>
 
         {hasFilters && (

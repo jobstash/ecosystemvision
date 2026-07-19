@@ -12,6 +12,14 @@ interface Props {
 
 const FundsPage = async ({ searchParams }: Props) => {
   const rawSearchParams = await searchParams;
+  const listSearchParams = { ...rawSearchParams };
+
+  // Older shared URLs may still contain the round-size-based capital filters.
+  // Ignore them now that only disclosed fund-specific investments are valid.
+  delete listSearchParams.minInvestedCapital;
+  if (listSearchParams.orderBy === 'totalInvestedCapital') {
+    delete listSearchParams.orderBy;
+  }
 
   return (
     <main className="min-h-screen bg-[#070708]">
@@ -20,15 +28,16 @@ const FundsPage = async ({ searchParams }: Props) => {
         <div className="flex max-w-3xl flex-col gap-4">
           <h1 className="text-2xl font-bold md:text-3xl">Funds</h1>
           <p className="text-sm text-white/70 lg:text-base">
-            Explore crypto funds by their latest investments, aggregate capital,
-            portfolio companies, teams, and open roles.
+            Explore crypto funds by their latest investments, portfolio
+            companies, team profiles, and open roles. Fund-specific investment
+            totals appear only when disclosed.
           </p>
         </div>
       </section>
       <section className="p-4 lg:px-8">
         <FundFilters />
       </section>
-      <FundList searchParams={rawSearchParams} />
+      <FundList searchParams={listSearchParams} />
     </main>
   );
 };
