@@ -31,11 +31,18 @@ const selectParams = (
     }),
   );
 
+const formatLocalDate = (date: Date) =>
+  [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0'),
+  ].join('-');
+
 const defaultCustomRange = () => {
   const now = new Date();
-  const toDate = now.toISOString().slice(0, 10);
-  now.setUTCFullYear(now.getUTCFullYear() - 1);
-  return { fromDate: now.toISOString().slice(0, 10), toDate };
+  const toDate = formatLocalDate(now);
+  now.setFullYear(now.getFullYear() - 1);
+  return { fromDate: formatLocalDate(now), toDate };
 };
 
 export const FundFilters = () => {

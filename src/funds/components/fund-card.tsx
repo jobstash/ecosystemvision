@@ -17,6 +17,7 @@ import { Divider } from '@/shared/components/divider';
 import { LogoTitle } from '@/shared/components/logo-title';
 
 import type { FundListItem } from '@/funds/core/schemas';
+import { formatActivityDate } from '@/funds/utils/format-activity-date';
 import { activeFundSlugAtom } from '@/funds/core/atoms';
 
 export const FundCard = ({
@@ -28,8 +29,8 @@ export const FundCard = ({
 }) => {
   const detailQuery = new URLSearchParams(searchParams).toString();
   const activityPeriod = fund.activityFromDate
-    ? `${shortTimestamp(fund.activityFromDate)}–${shortTimestamp(fund.activityToDate)}`
-    : `All time–${shortTimestamp(fund.activityToDate)}`;
+    ? `${formatActivityDate(fund.activityFromDate)}–${formatActivityDate(fund.activityToDate)}`
+    : `All time–${formatActivityDate(fund.activityToDate)}`;
   const metrics = [
     {
       icon: <WalletIcon size={14} />,

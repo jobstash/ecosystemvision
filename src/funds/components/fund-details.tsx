@@ -28,6 +28,7 @@ import type {
   FundInvestment,
   FundTeamMember,
 } from '@/funds/core/schemas';
+import { formatActivityDate } from '@/funds/utils/format-activity-date';
 
 const externalLinkClass =
   'inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/75 transition hover:border-white/35 hover:text-white';
@@ -305,8 +306,8 @@ export const FundDetails = ({
             <p className="mt-2 text-sm text-white/45">
               Metrics use{' '}
               {fund.activityFromDate
-                ? `${shortTimestamp(fund.activityFromDate)} through ${shortTimestamp(fund.activityToDate)}`
-                : `all recorded activity through ${shortTimestamp(fund.activityToDate)}`}
+                ? `${formatActivityDate(fund.activityFromDate)} through ${formatActivityDate(fund.activityToDate)}`
+                : `all recorded activity through ${formatActivityDate(fund.activityToDate)}`}
               {fund.roundStages.length > 0 && (
                 <>
                   {' '}
