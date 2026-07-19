@@ -15,16 +15,16 @@ const months = [
 
 export const shortTimestamp = (ts: number) => {
   const d = new Date(toMilliseconds(ts));
-  const year = d.getFullYear();
-  const month = months[d.getMonth()];
-  const date = d.getDate();
+  const year = d.getUTCFullYear();
+  const month = months[d.getUTCMonth()];
+  const date = d.getUTCDate();
 
   return `${date} ${month}, ${year}`;
 };
 
 export const getTimestampYear = (ts: number) => {
   const d = new Date(toMilliseconds(ts));
-  return d.getFullYear();
+  return d.getUTCFullYear();
 };
 
 const toMilliseconds = (timestamp: number) =>
