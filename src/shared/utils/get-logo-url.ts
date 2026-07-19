@@ -5,11 +5,11 @@ const getGoogleLogoUrl = (url: string) => {
   return link ? `https://www.google.com/s2/favicons?domain=${link}&sz=128` : '';
 };
 
-export const getLogoUrl = (url: string, logo?: string | null) => {
+export const getLogoUrl = (url: string | null, logo?: string | null) => {
   if (!url && !logo) return '';
 
   // Ignore Twitter shortened URLs
-  const sanitizedUrl = url.startsWith('https://t.co') ? '' : url;
+  const sanitizedUrl = url?.startsWith('https://t.co') ? '' : (url ?? '');
 
   return getGoogleLogoUrl(logo ?? sanitizedUrl);
 };
