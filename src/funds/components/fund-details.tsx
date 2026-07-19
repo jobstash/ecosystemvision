@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 import {
   ArrowLeftIcon,
@@ -23,6 +26,7 @@ import type {
 
 const externalLinkClass =
   'inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/75 transition hover:border-white/35 hover:text-white';
+const INVESTMENT_PAGE_SIZE = 24;
 
 const TeamMember = ({ member }: { member: FundTeamMember }) => (
   <article className="flex min-h-28 items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
@@ -112,7 +116,15 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
             <span className="font-medium text-white/75">{round.roundName}</span>
             {round.date > 0 && <span>{shortTimestamp(round.date)}</span>}
             {round.raisedAmount > 0 && (
-              <span>${formatNumber(round.raisedAmount * 1_000_000)} round</span>
+              <span>
+                $
+                {formatNumber(
+                  round.source
+                    ? round.raisedAmount
+                    : round.raisedAmount * 1_000_000,
+                )}{' '}
+                round
+              </span>
             )}
             {round.sourceLink && (
               <Link
@@ -131,7 +143,10 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
 );
 
 export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
+  const [visibleInvestmentCount, setVisibleInvestmentCount] =
+    useState(INVESTMENT_PAGE_SIZE);
   const website = fund.website ?? '';
+  const visibleInvestments = fund.investments.slice(0, visibleInvestmentCount);
   return (
     <main className="glow-gradient min-h-screen px-4 pb-16 pt-24 md:px-8 lg:pt-12">
       <div className="mx-auto max-w-6xl space-y-12">
@@ -246,7 +261,7 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
           </div>
           {fund.investments.length > 0 ? (
             <div className="grid gap-4 lg:grid-cols-2">
-              {fund.investments.map((investment) => (
+              {visibleInvestments.map((investment) => (
                 <Investment
                   investment={investment}
                   key={investment.organizationId}
@@ -257,6 +272,25 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
             <p className="rounded-2xl border border-white/10 p-6 text-white/45">
               No portfolio investments are available yet.
             </p>
+          )}
+          {visibleInvestmentCount < fund.investments.length && (
+            <div className="flex justify-center pt-2">
+              <button
+                className="rounded-full border border-white/15 px-5 py-2.5 text-sm text-white/70 transition hover:border-white/35 hover:bg-white/5 hover:text-white"
+                onClick={() =>
+                  setVisibleInvestmentCount((count) =>
+                    Math.min(
+                      count + INVESTMENT_PAGE_SIZE,
+                      fund.investments.length,
+                    ),
+                  )
+                }
+                type="button"
+              >
+                Show more investments ({visibleInvestmentCount.toLocaleString()}{' '}
+                of {fund.investments.length.toLocaleString()})
+              </button>
+            </div>
           )}
         </section>
       </div>

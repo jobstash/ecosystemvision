@@ -37,6 +37,7 @@ export const fundInvestmentRoundSchema = z.object({
   date: z.number(),
   raisedAmount: z.number(),
   sourceLink: z.string().nullable(),
+  source: z.string().nullable(),
 });
 
 export const fundInvestmentSchema = z.object({
