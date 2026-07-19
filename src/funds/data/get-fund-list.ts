@@ -1,5 +1,4 @@
-import { MW_URL, PAGE_SIZE } from '@/shared/core/envs';
-import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search-params';
+import { PAGE_SIZE } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import { fundListPageSchema } from '@/funds/core/schemas';
@@ -7,12 +6,16 @@ import { fundListPageSchema } from '@/funds/core/schemas';
 export const getFundList = (
   page: number,
   searchParams: Record<string, string>,
-) =>
-  mwGET({
-    url: createUrlWithSearchParams(
-      `${MW_URL}/funds/list?page=${page}&limit=${PAGE_SIZE}`,
-      searchParams,
-    ),
+) => {
+  const params = new URLSearchParams({
+    ...searchParams,
+    limit: PAGE_SIZE,
+    page: String(page),
+  });
+
+  return mwGET({
+    url: `/api/funds/list?${params.toString()}`,
     label: 'getFundList',
     responseSchema: fundListPageSchema,
   });
+};

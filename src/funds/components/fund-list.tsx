@@ -8,7 +8,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_STALETIME } from '@/shared/core/constants';
 import { PAGE_SIZE } from '@/shared/core/envs';
 import { cn } from '@/shared/utils/cn';
-import { reloadPage } from '@/shared/utils/reload-page';
 import { InternalErrorResult } from '@/shared/components/internal-error-result';
 import { Loader } from '@/shared/components/loader';
 import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
@@ -49,7 +48,9 @@ export const FundList = ({ searchParams }: Props) => {
       </div>
     );
   }
-  if (query.error) return <InternalErrorResult onReset={reloadPage} />;
+  if (query.error) {
+    return <InternalErrorResult onReset={() => void query.refetch()} />;
+  }
 
   return (
     <div>
