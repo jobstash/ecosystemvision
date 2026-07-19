@@ -2,6 +2,7 @@ export const ROUTE_SECTIONS = {
   SEARCH: 'search' as const,
   ORGS: 'organizations' as const,
   PROJECTS: 'projects' as const,
+  FUNDS: 'funds' as const,
   GRANTS: 'grants' as const,
   IMPACT: 'impact' as const,
 } as const;
@@ -23,6 +24,7 @@ export const HREFS = {
   HOME_PAGE: '/',
   ORGS_PAGE: `/${ROUTE_SECTIONS.ORGS}`,
   PROJECTS_PAGE: `/${ROUTE_SECTIONS.PROJECTS}`,
+  FUNDS_PAGE: `/${ROUTE_SECTIONS.FUNDS}`,
   IMPACT_PAGE: `/${ROUTE_SECTIONS.IMPACT}`,
   GRANTS_PAGE: `/${ROUTE_SECTIONS.GRANTS}`,
 } as const;
@@ -35,6 +37,7 @@ export const A11Y = {
       HOME: 'Home',
       ORGS: 'Organizations',
       PROJECTS: 'Projects',
+      FUNDS: 'Funds',
       IMPACT: 'Impact',
       GRANTS: 'Grants',
     },

@@ -2,6 +2,7 @@
   "name": "projectsfyi",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "dev": "next dev",
     "prebuild": "node tools/scripts/generate-sitemap.js",

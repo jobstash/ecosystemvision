@@ -5,7 +5,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 COPY package.json pnpm-lock.yaml* .npmrc ./
-RUN yarn global add pnpm && pnpm i --frozen-lockfile
+RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
+RUN pnpm i --frozen-lockfile
 
 
 # Rebuild the source code only when needed
@@ -13,7 +14,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN yarn global add pnpm
+RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_MW_URL=https://middleware.jobstash.xyz
 ENV NEXT_PUBLIC_FRONTEND_URL=https://ecosystem.vision
