@@ -1,23 +1,37 @@
 import type { Metadata } from 'next';
 
 import { FRONTEND_URL } from '@/shared/core/envs';
+import { AppHeader } from '@/shared/components/app-header';
 
+import { FundFilters } from '@/funds/components/fund-filters';
 import { FundList } from '@/funds/components/fund-list';
 
-const FundsPage = () => (
-  <main className="glow-gradient min-h-screen px-4 pb-12 pt-24 md:px-8 lg:pt-12">
-    <div className="mx-auto max-w-4xl space-y-8">
-      <header className="space-y-3">
-        <h1 className="text-4xl font-semibold text-white">Funds</h1>
-        <p className="max-w-2xl text-white/65">
-          Explore crypto funds and the teams and portfolio companies connected
-          to them across the JobStash dataset.
-        </p>
-      </header>
-      <FundList />
-    </div>
-  </main>
-);
+interface Props {
+  searchParams: Promise<Record<string, string>>;
+}
+
+const FundsPage = async ({ searchParams }: Props) => {
+  const rawSearchParams = await searchParams;
+
+  return (
+    <main className="min-h-screen bg-[#070708]">
+      <AppHeader />
+      <section className="glow-gradient px-4 pb-8 pt-[154px] lg:px-8">
+        <div className="flex max-w-3xl flex-col gap-4">
+          <h1 className="text-2xl font-bold md:text-3xl">Funds</h1>
+          <p className="text-sm text-white/70 lg:text-base">
+            Explore crypto funds by their latest investments, aggregate capital,
+            portfolio companies, teams, and open roles.
+          </p>
+        </div>
+      </section>
+      <section className="p-4 lg:px-8">
+        <FundFilters />
+      </section>
+      <FundList searchParams={rawSearchParams} />
+    </main>
+  );
+};
 
 export default FundsPage;
 

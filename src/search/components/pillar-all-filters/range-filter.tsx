@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Slider } from '@heroui/slider';
 import { useAtom } from 'jotai';
@@ -22,16 +22,31 @@ interface Props {
 export const RangeFilter = (props: Props) => {
   const { label, min, max, prefix } = props;
 
-  const [, setCurrentFilterParams] = useAtom(currentFilterParamsAtom);
+  const [currentFilterParams, setCurrentFilterParams] = useAtom(
+    currentFilterParamsAtom,
+  );
 
   const step = (max.value - min.value) / 100;
+  const selectedValue = useMemo(() => {
+    const selectedMin = Number(
+      currentFilterParams[min.paramKey]?.current?.[0] ?? min.value,
+    );
+    const selectedMax = Number(
+      currentFilterParams[max.paramKey]?.current?.[0] ?? max.value,
+    );
+    return [
+      Math.max(min.value, Math.min(selectedMin, max.value)),
+      Math.max(min.value, Math.min(selectedMax, max.value)),
+    ];
+  }, [currentFilterParams, max, min]);
+  const [value, setValue] = useState(selectedValue);
 
-  const defaultValue = [min.value + step * 30, max.value - step * 30];
-
-  const [value, setValue] = useState(defaultValue);
+  useEffect(() => {
+    setValue(selectedValue);
+  }, [selectedValue]);
 
   const marks = SLIDER_MARKS.map((mark) => {
-    const value = max.value * (mark / 100);
+    const value = min.value + (max.value - min.value) * (mark / 100);
     return {
       value,
       label: formatItemValue(prefix, value),
@@ -43,15 +58,28 @@ export const RangeFilter = (props: Props) => {
       setValue(value);
     }
 
-    setCurrentFilterParams((prev) => ({
-      ...prev,
-      [min.paramKey]: {
-        init: (value as number[])[0]!.toString(),
-      },
-      [max.paramKey]: {
-        init: (value as number[])[1]!.toString(),
-      },
-    }));
+    const [nextMin, nextMax] = value as number[];
+    setCurrentFilterParams((prev) => {
+      const next = { ...prev };
+
+      if (nextMin <= min.value) delete next[min.paramKey];
+      else {
+        next[min.paramKey] = {
+          init: prev[min.paramKey]?.init ?? '',
+          current: [nextMin.toString()],
+        };
+      }
+
+      if (nextMax >= max.value) delete next[max.paramKey];
+      else {
+        next[max.paramKey] = {
+          init: prev[max.paramKey]?.init ?? '',
+          current: [nextMax.toString()],
+        };
+      }
+
+      return next;
+    });
   };
 
   return (
@@ -68,7 +96,6 @@ export const RangeFilter = (props: Props) => {
         const maxLabel = formatItemValue(prefix, (value as number[])[1]);
         return `${minLabel} - ${maxLabel}`;
       }}
-      defaultValue={defaultValue}
       value={value}
       onChange={onChange}
     />

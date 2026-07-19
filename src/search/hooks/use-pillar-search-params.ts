@@ -3,9 +3,10 @@ import { useParams, useSearchParams } from 'next/navigation';
 export const usePillarSearchParams = () => {
   const params = useParams();
   const searchParams = useSearchParams();
+  const existingSearchParams = Object.fromEntries(searchParams.entries());
 
   if (typeof params.pillar !== 'string' || typeof params.item !== 'string') {
-    return {};
+    return existingSearchParams;
   }
 
   const pillarKey = params.pillar as string;
@@ -17,7 +18,7 @@ export const usePillarSearchParams = () => {
     : itemValue;
 
   return {
-    ...Object.fromEntries(searchParams.entries()),
+    ...existingSearchParams,
     [pillarKey]: newPillarValue,
   };
 };

@@ -42,6 +42,7 @@ export const orgJobSchema = jobInfoSchema
     id: true,
     title: true,
     shortUUID: true,
+    timestamp: true,
     summary: true,
   })
   .merge(jobInfoTagsSchema);

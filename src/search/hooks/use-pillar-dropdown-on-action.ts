@@ -37,15 +37,21 @@ export const usePillarDropdownOnAction = (options: Options) => {
       const pathPrefix = `/${nav}/${params.pillar}/${params.item}`;
 
       const slug = normalizeString(key as string);
-      const href = isIndex
-        ? `/${nav}/${pillar}/${slug}`
-        : createPillarItemHref({
+      let href: string;
+      if (isIndex) {
+        const nextSearchParams = new URLSearchParams(searchParams);
+        nextSearchParams.delete(pillar);
+        const query = nextSearchParams.toString();
+        href = `/${nav}/${pillar}/${slug}${query ? `?${query}` : ''}`;
+      } else {
+        href = createPillarItemHref({
             isActive,
             pathPrefix,
             searchParams,
             pillar,
             slug,
           });
+      }
 
       startTransition(() => {
         router.push(href);

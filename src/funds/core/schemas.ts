@@ -11,6 +11,9 @@ export const fundListItemSchema = z.object({
   twitter: z.string().nullable(),
   staffCount: z.number(),
   portfolioCount: z.number(),
+  totalInvestedCapital: z.number(),
+  lastInvestmentDate: z.number().nullable(),
+  jobCount: z.number(),
 });
 
 export type FundListItem = z.infer<typeof fundListItemSchema>;
@@ -51,14 +54,26 @@ export const fundInvestmentSchema = z.object({
   rounds: z.array(fundInvestmentRoundSchema),
 });
 
+export const fundJobSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  shortUUID: z.string(),
+  organizationName: z.string(),
+  location: z.string().nullable(),
+  commitment: z.string().nullable(),
+  publishedTimestamp: z.number().nullable(),
+});
+
 export const fundDetailsSchema = fundListItemSchema.extend({
   summary: z.string().nullable(),
   description: z.string().nullable(),
   location: z.string().nullable(),
   team: z.array(fundTeamMemberSchema),
   investments: z.array(fundInvestmentSchema),
+  jobs: z.array(fundJobSchema),
 });
 
 export type FundDetails = z.infer<typeof fundDetailsSchema>;
 export type FundTeamMember = z.infer<typeof fundTeamMemberSchema>;
 export type FundInvestment = z.infer<typeof fundInvestmentSchema>;
+export type FundJob = z.infer<typeof fundJobSchema>;

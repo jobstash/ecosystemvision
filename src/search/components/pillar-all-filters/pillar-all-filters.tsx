@@ -47,14 +47,19 @@ export const PillarAllFilters = ({
     const pillarKeys = new Set(pillarSelections.map(({ pillar }) => pillar));
     const initFilterParams: PillarFilterState = {};
     Object.entries(activeSearchParams).forEach(([pillar, initValue]) => {
+      const activeValues = initValue.split(',').filter(Boolean);
+      const selectedPillarLabels = pillarKeys.has(pillar)
+        ? pillarSelections
+            .find((selection) => selection.pillar === pillar)!
+            .items.filter((item) => item.isActive)
+            .map((item) => item.label)
+        : [];
       initFilterParams[pillar] = {
         init: initValue,
-        ...(pillarKeys.has(pillar) && {
-          current: pillarSelections
-            .find((p) => p.pillar === pillar)!
-            .items.filter((item) => item.isActive)
-            .map((item) => item.label),
-        }),
+        current:
+          selectedPillarLabels.length > 0
+            ? selectedPillarLabels
+            : activeValues,
       };
     });
 
@@ -74,6 +79,7 @@ export const PillarAllFilters = ({
         <PillarAllFiltersHeader
           nav={nav}
           activeSearchParams={activeSearchParams}
+          pillarKeys={pillarSelections.map(({ pillar }) => pillar)}
           onClear={resetState}
         />
 

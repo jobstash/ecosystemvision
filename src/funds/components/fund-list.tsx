@@ -7,18 +7,24 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { QUERY_STALETIME } from '@/shared/core/constants';
 import { PAGE_SIZE } from '@/shared/core/envs';
+import { cn } from '@/shared/utils/cn';
 import { reloadPage } from '@/shared/utils/reload-page';
 import { InternalErrorResult } from '@/shared/components/internal-error-result';
 import { Loader } from '@/shared/components/loader';
+import { VirtualWrapper } from '@/shared/components/virtual-wrapper';
 
 import { fundQueryKeys } from '@/funds/core/query-keys';
 import { getFundList } from '@/funds/data/get-fund-list';
 import { FundCard } from '@/funds/components/fund-card';
 
-export const FundList = () => {
+interface Props {
+  searchParams: Record<string, string>;
+}
+
+export const FundList = ({ searchParams }: Props) => {
   const query = useInfiniteQuery({
-    queryKey: fundQueryKeys.list(),
-    queryFn: ({ pageParam }) => getFundList(pageParam),
+    queryKey: fundQueryKeys.list(searchParams),
+    queryFn: ({ pageParam }) => getFundList(pageParam, searchParams),
     initialPageParam: 1,
     getNextPageParam: (page) =>
       page.data.length > 0 && page.page * Number(PAGE_SIZE) < page.total
@@ -46,12 +52,20 @@ export const FundList = () => {
   if (query.error) return <InternalErrorResult onReset={reloadPage} />;
 
   return (
-    <div className="space-y-6">
-      {funds.map((fund) => (
-        <FundCard key={fund.id} fund={fund} />
-      ))}
+    <div>
+      {funds.length > 0 ? (
+        <VirtualWrapper count={funds.length} className="m-4 lg:m-8">
+          {(index) => (
+            <div className={cn({ 'pt-8': index > 0 })}>
+              <FundCard fund={funds[index]} />
+            </div>
+          )}
+        </VirtualWrapper>
+      ) : (
+        <p className="p-4 lg:p-8">No funds match these filters.</p>
+      )}
       {query.hasNextPage && (
-        <div ref={ref} className="flex justify-center py-4">
+        <div ref={ref} className="m-4 flex justify-center py-4 lg:m-8">
           <Loader />
         </div>
       )}

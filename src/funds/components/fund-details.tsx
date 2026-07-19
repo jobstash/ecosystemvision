@@ -6,16 +6,19 @@ import { useState } from 'react';
 import {
   ArrowLeftIcon,
   BriefcaseBusinessIcon,
+  CalendarClockIcon,
   ExternalLinkIcon,
   LinkedinIcon,
   MapPinIcon,
   TwitterIcon,
   UsersIcon,
+  WalletIcon,
 } from 'lucide-react';
 
 import { formatNumber } from '@/shared/utils/format-number';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { shortTimestamp } from '@/shared/utils/short-timestamp';
+import { CompactJobCard } from '@/shared/components/compact-job-card';
 import { LogoTitle } from '@/shared/components/logo-title';
 
 import type {
@@ -83,7 +86,7 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <Link
         className="min-w-0 transition hover:opacity-80"
-        href={`/organizations/info/${encodeURIComponent(investment.normalizedName)}/details`}
+        href={`/organizations/info/${encodeURIComponent(investment.normalizedName)}`}
       >
         <LogoTitle
           name={investment.name}
@@ -202,6 +205,25 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
             </div>
             <div className="grid shrink-0 grid-cols-2 gap-3 text-sm">
               <div className="rounded-2xl bg-white/5 p-4">
+                <WalletIcon className="mb-3 text-white/50" size={18} />
+                <strong className="block text-xl text-white">
+                  ${formatNumber(fund.totalInvestedCapital)}
+                </strong>
+                <span className="text-white/50">invested capital</span>
+              </div>
+              <div className="rounded-2xl bg-white/5 p-4">
+                <CalendarClockIcon
+                  className="mb-3 text-white/50"
+                  size={18}
+                />
+                <strong className="block text-base text-white">
+                  {fund.lastInvestmentDate
+                    ? shortTimestamp(fund.lastInvestmentDate)
+                    : 'Not available'}
+                </strong>
+                <span className="text-white/50">last investment</span>
+              </div>
+              <div className="rounded-2xl bg-white/5 p-4">
                 <BriefcaseBusinessIcon
                   className="mb-3 text-white/50"
                   size={18}
@@ -226,6 +248,28 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
             </p>
           )}
         </header>
+
+        {fund.jobs.length > 0 && (
+          <section className="space-y-5">
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+                Opportunities
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">
+                Open jobs across the portfolio
+              </h2>
+              <p className="mt-2 text-sm text-white/45">
+                {fund.jobCount.toLocaleString()} current roles at companies backed
+                by {fund.name}.
+              </p>
+            </div>
+            <div className="grid gap-2 lg:grid-cols-2">
+              {fund.jobs.map((job) => (
+                <CompactJobCard job={job} key={job.id} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="space-y-5">
           <div>

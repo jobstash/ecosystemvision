@@ -20,12 +20,14 @@ import { usePendingRoute } from '@/shared/contexts/pending-route-context';
 interface Props {
   nav: string;
   activeSearchParams: Record<string, string>;
+  pillarKeys: string[];
   onClear: () => void;
 }
 
 export const PillarAllFiltersHeader = ({
   nav,
   activeSearchParams,
+  pillarKeys,
   onClear,
 }: Props) => {
   const [currentFilterParams] = useAtom(currentFilterParamsAtom);
@@ -33,16 +35,23 @@ export const PillarAllFiltersHeader = ({
 
   const { activeParams, currentParams } = useMemo(() => {
     const activeParams = parseCsvParams(activeSearchParams);
-    const currentParams = parseCsvParams(stateToParams(currentFilterParams));
+    const currentParams = parseCsvParams(
+      stateToParams(currentFilterParams, new Set(pillarKeys)),
+    );
 
     return { activeParams, currentParams };
-  }, [activeSearchParams, currentFilterParams]);
+  }, [activeSearchParams, currentFilterParams, pillarKeys]);
 
   const hasChanges = useMemo(() => {
-    const activeValues = Object.values(activeParams).flat().sort();
-    const currentValues = Object.values(currentParams).flat().sort();
+    const normalizedEntries = (values: Record<string, string[]>) =>
+      Object.entries(values)
+        .map(([key, items]) => [key, [...items].sort()] as const)
+        .sort(([first], [second]) => first.localeCompare(second));
 
-    return JSON.stringify(activeValues) !== JSON.stringify(currentValues);
+    return (
+      JSON.stringify(normalizedEntries(activeParams)) !==
+      JSON.stringify(normalizedEntries(currentParams))
+    );
   }, [activeParams, currentParams]);
 
   const router = useRouter();
@@ -114,11 +123,13 @@ const parseCsvParams = (
   );
 };
 
-const stateToParams = (state: PillarFilterState) => {
+const stateToParams = (state: PillarFilterState, pillarKeys: Set<string>) => {
   return Object.fromEntries(
     Object.entries(state).map(([key, value]) => [
       key,
-      value.current?.map((v) => normalizeString(v)).join(',') || '',
+      value.current
+        ?.map((item) => (pillarKeys.has(key) ? normalizeString(item) : item))
+        .join(',') || '',
     ]),
   );
 };
