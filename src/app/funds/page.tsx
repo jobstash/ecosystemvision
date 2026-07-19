@@ -28,9 +28,10 @@ const FundsPage = async ({ searchParams }: Props) => {
         <div className="flex max-w-3xl flex-col gap-4">
           <h1 className="text-2xl font-bold md:text-3xl">Funds</h1>
           <p className="text-sm text-white/70 lg:text-base">
-            Compare crypto funds by activity, portfolio progression, sector mix,
-            disclosed round capital, team profiles, and open roles. Round
-            capital is kept separate from each fund&apos;s undisclosed check size.
+            Find active crypto funds by investment period, round stage, sector,
+            portfolio progression, and financing step-ups. Activity defaults to
+            the last 12 months; disclosed round capital remains separate from a
+            fund&apos;s undisclosed check size.
           </p>
         </div>
       </section>

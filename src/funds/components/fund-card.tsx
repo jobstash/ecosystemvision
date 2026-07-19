@@ -19,7 +19,17 @@ import { LogoTitle } from '@/shared/components/logo-title';
 import type { FundListItem } from '@/funds/core/schemas';
 import { activeFundSlugAtom } from '@/funds/core/atoms';
 
-export const FundCard = ({ fund }: { fund: FundListItem }) => {
+export const FundCard = ({
+  fund,
+  searchParams,
+}: {
+  fund: FundListItem;
+  searchParams: Record<string, string>;
+}) => {
+  const detailQuery = new URLSearchParams(searchParams).toString();
+  const activityPeriod = fund.activityFromDate
+    ? `${shortTimestamp(fund.activityFromDate)}–${shortTimestamp(fund.activityToDate)}`
+    : `All time–${shortTimestamp(fund.activityToDate)}`;
   const metrics = [
     {
       icon: <WalletIcon size={14} />,
@@ -55,6 +65,9 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
       />
       <Divider />
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/60">
+        <span className="w-full text-xs font-medium uppercase tracking-[0.14em] text-white/40">
+          Activity {activityPeriod}
+        </span>
         {metrics.map((metric) => (
           <span className="inline-flex items-center gap-2" key={metric.label}>
             {metric.icon}
@@ -80,6 +93,14 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
             {sector.name} · {sector.companyCount}
           </span>
         ))}
+        {fund.roundStages.slice(0, 5).map((stage) => (
+          <span
+            className="rounded-full border border-white/10 px-2 py-0.5 text-xs capitalize"
+            key={stage}
+          >
+            {stage.replaceAll('-', ' ')}
+          </span>
+        ))}
         {fund.jobCount > 0 && (
           <span className="text-emerald-300/80">
             {fund.jobCount.toLocaleString()} open jobs
@@ -91,7 +112,11 @@ export const FundCard = ({ fund }: { fund: FundListItem }) => {
 
   return (
     <CardWrapper id={fund.normalizedName} idAtom={activeFundSlugAtom}>
-      <Link href={`/funds/${encodeURIComponent(fund.normalizedName)}`}>
+      <Link
+        href={`/funds/${encodeURIComponent(fund.normalizedName)}${
+          detailQuery ? `?${detailQuery}` : ''
+        }`}
+      >
         {content}
       </Link>
     </CardWrapper>

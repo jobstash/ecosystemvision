@@ -58,7 +58,7 @@ export const FundList = ({ searchParams }: Props) => {
         <VirtualWrapper count={funds.length} className="m-4 lg:m-8">
           {(index) => (
             <div className={cn({ 'pt-8': index > 0 })}>
-              <FundCard fund={funds[index]} />
+              <FundCard fund={funds[index]} searchParams={searchParams} />
             </div>
           )}
         </VirtualWrapper>

@@ -171,7 +171,13 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
   </article>
 );
 
-export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
+export const FundDetails = ({
+  fund,
+  backHref = '/funds',
+}: {
+  fund: FundDetailsData;
+  backHref?: string;
+}) => {
   const [visibleInvestmentCount, setVisibleInvestmentCount] =
     useState(INVESTMENT_PAGE_SIZE);
   const [showOnlySocialTeam, setShowOnlySocialTeam] = useState(false);
@@ -185,7 +191,7 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
       <div className="mx-auto max-w-6xl space-y-12">
         <Link
           className="inline-flex items-center gap-2 text-sm text-white/55 transition hover:text-white"
-          href="/funds"
+          href={backHref}
         >
           <ArrowLeftIcon size={16} />
           All funds
@@ -296,6 +302,19 @@ export const FundDetails = ({ fund }: { fund: FundDetailsData }) => {
             <h2 className="mt-2 text-2xl font-semibold text-white">
               Portfolio activity and matriculation
             </h2>
+            <p className="mt-2 text-sm text-white/45">
+              Metrics use{' '}
+              {fund.activityFromDate
+                ? `${shortTimestamp(fund.activityFromDate)} through ${shortTimestamp(fund.activityToDate)}`
+                : `all recorded activity through ${shortTimestamp(fund.activityToDate)}`}
+              {fund.roundStages.length > 0 && (
+                <>
+                  {' '}
+                  across {fund.roundStages.join(', ').replaceAll('-', ' ')}
+                </>
+              )}
+              . Later-round outcomes are capped at the period end.
+            </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">

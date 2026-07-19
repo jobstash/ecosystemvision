@@ -14,18 +14,54 @@ import {
 import { QUERY_STALETIME } from '@/shared/core/constants';
 
 import { fundQueryKeys } from '@/funds/core/query-keys';
+import { getFundRoundStages } from '@/funds/data/get-fund-round-stages';
 import { getFundSectors } from '@/funds/data/get-fund-sectors';
 
 const inputClass =
   'h-10 rounded-xl border border-white/15 bg-white/[0.04] px-3 text-sm text-white outline-none transition placeholder:text-white/35 hover:border-white/25 focus:border-white/40';
 
+const selectParams = (
+  searchParams: URLSearchParams,
+  keys: string[],
+): Record<string, string> =>
+  Object.fromEntries(
+    keys.flatMap((key) => {
+      const value = searchParams.get(key);
+      return value ? [[key, value]] : [];
+    }),
+  );
+
+const defaultCustomRange = () => {
+  const now = new Date();
+  const toDate = now.toISOString().slice(0, 10);
+  now.setUTCFullYear(now.getUTCFullYear() - 1);
+  return { fromDate: now.toISOString().slice(0, 10), toDate };
+};
+
 export const FundFilters = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const sectorParams = selectParams(new URLSearchParams(searchParams.toString()), [
+    'activityWindow',
+    'fromDate',
+    'toDate',
+    'rounds',
+  ]);
+  const roundParams = selectParams(new URLSearchParams(searchParams.toString()), [
+    'activityWindow',
+    'fromDate',
+    'toDate',
+    'sector',
+  ]);
   const sectors = useQuery({
-    queryKey: fundQueryKeys.sectors(),
-    queryFn: getFundSectors,
+    queryKey: fundQueryKeys.sectors(sectorParams),
+    queryFn: () => getFundSectors(sectorParams),
+    staleTime: QUERY_STALETIME.DEFAULT,
+  });
+  const roundStages = useQuery({
+    queryKey: fundQueryKeys.rounds(roundParams),
+    queryFn: () => getFundRoundStages(roundParams),
     staleTime: QUERY_STALETIME.DEFAULT,
   });
 
@@ -47,6 +83,10 @@ export const FundFilters = () => {
 
   const order = searchParams.get('order') === 'asc' ? 'asc' : 'desc';
   const requestedOrderBy = searchParams.get('orderBy');
+  const activityWindow = searchParams.get('activityWindow') ?? '1y';
+  const selectedRounds = (searchParams.get('rounds') ?? '')
+    .split(',')
+    .filter(Boolean);
   const orderBy =
     requestedOrderBy === 'knownRoundCapital' ||
     requestedOrderBy === 'progressionRate' ||
@@ -80,6 +120,109 @@ export const FundFilters = () => {
       </form>
 
       <div className="flex flex-wrap items-center gap-2">
+        <select
+          aria-label="Fund activity period"
+          className={inputClass}
+          onChange={(event) => {
+            if (event.target.value === 'custom') {
+              const range = defaultCustomRange();
+              updateParams({ activityWindow: 'custom', ...range });
+              return;
+            }
+            updateParams({
+              activityWindow:
+                event.target.value === '1y' ? null : event.target.value,
+              fromDate: null,
+              toDate: null,
+            });
+          }}
+          value={activityWindow}
+        >
+          <option value="30d">Last 30 days</option>
+          <option value="90d">Last 90 days</option>
+          <option value="6m">Last 6 months</option>
+          <option value="1y">Last 12 months</option>
+          <option value="2y">Last 2 years</option>
+          <option value="5y">Last 5 years</option>
+          <option value="all">All time</option>
+          <option value="custom">Custom dates</option>
+        </select>
+
+        {activityWindow === 'custom' && (
+          <>
+            <input
+              aria-label="Activity start date"
+              className={inputClass}
+              max={searchParams.get('toDate') ?? undefined}
+              onChange={(event) =>
+                updateParams({ fromDate: event.target.value || null })
+              }
+              type="date"
+              value={searchParams.get('fromDate') ?? ''}
+            />
+            <span className="text-sm text-white/40">to</span>
+            <input
+              aria-label="Activity end date"
+              className={inputClass}
+              min={searchParams.get('fromDate') ?? undefined}
+              onChange={(event) =>
+                updateParams({ toDate: event.target.value || null })
+              }
+              type="date"
+              value={searchParams.get('toDate') ?? ''}
+            />
+          </>
+        )}
+
+        <details className="group relative">
+          <summary
+            className={`${inputClass} flex cursor-pointer list-none items-center gap-2`}
+          >
+            {selectedRounds.length > 0
+              ? `Rounds (${selectedRounds.length})`
+              : 'Any round'}
+          </summary>
+          <div className="absolute right-0 z-30 mt-2 max-h-80 min-w-72 overflow-y-auto rounded-xl border border-white/15 bg-[#111113] p-2 shadow-2xl">
+            {roundStages.isPending && (
+              <p className="px-3 py-2 text-sm text-white/45">
+                Loading round stages…
+              </p>
+            )}
+            {roundStages.isError && (
+              <p className="px-3 py-2 text-sm text-rose-300/70">
+                Round stages unavailable
+              </p>
+            )}
+            {roundStages.data?.map((stage) => (
+              <label
+                className="flex cursor-pointer items-start gap-3 rounded-lg px-3 py-2 text-sm transition hover:bg-white/[0.06]"
+                key={stage.slug}
+              >
+                <input
+                  checked={selectedRounds.includes(stage.slug)}
+                  className="mt-1 accent-white"
+                  onChange={() => {
+                    const next = new Set(selectedRounds);
+                    if (next.has(stage.slug)) next.delete(stage.slug);
+                    else next.add(stage.slug);
+                    updateParams({
+                      rounds: next.size ? [...next].join(',') : null,
+                    });
+                  }}
+                  type="checkbox"
+                />
+                <span className="flex-1">
+                  <span className="block text-white/80">{stage.name}</span>
+                  <span className="text-xs text-white/40">
+                    {stage.fundCount.toLocaleString()} funds ·{' '}
+                    {stage.investmentCount.toLocaleString()} investments
+                  </span>
+                </span>
+              </label>
+            ))}
+          </div>
+        </details>
+
         <select
           aria-label="Sort funds by"
           className={inputClass}

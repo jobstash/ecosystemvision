@@ -7,12 +7,14 @@ import { FundDetails } from '@/funds/components/fund-details';
 
 interface Props {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string>>;
 }
 
-const FundDetailsPage = async ({ params }: Props) => {
-  const { slug } = await params;
-  const fund = await getFundDetails(slug);
-  return <FundDetails fund={fund} />;
+const FundDetailsPage = async ({ params, searchParams }: Props) => {
+  const [{ slug }, filters] = await Promise.all([params, searchParams]);
+  const fund = await getFundDetails(slug, filters);
+  const query = new URLSearchParams(filters).toString();
+  return <FundDetails fund={fund} backHref={`/funds${query ? `?${query}` : ''}`} />;
 };
 
 export const generateMetadata = async ({

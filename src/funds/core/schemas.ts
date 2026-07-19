@@ -39,6 +39,19 @@ export const fundListItemSchema = z.object({
   ),
   lastInvestmentDate: z.number().nullable(),
   jobCount: z.number(),
+  activityWindow: z.enum([
+    '30d',
+    '90d',
+    '6m',
+    '1y',
+    '2y',
+    '5y',
+    'all',
+    'custom',
+  ]),
+  activityFromDate: z.number().nullable(),
+  activityToDate: z.number(),
+  roundStages: z.array(z.string()),
 });
 
 export type FundListItem = z.infer<typeof fundListItemSchema>;
@@ -53,6 +66,15 @@ export const fundSectorSchema = z.object({
 });
 
 export const fundSectorsSchema = z.array(fundSectorSchema);
+
+export const fundRoundStageSchema = z.object({
+  slug: z.string(),
+  name: z.string(),
+  fundCount: z.number(),
+  investmentCount: z.number(),
+});
+
+export const fundRoundStagesSchema = z.array(fundRoundStageSchema);
 
 export type FundListPage = z.infer<typeof fundListPageSchema>;
 
