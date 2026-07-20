@@ -39,7 +39,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
 
   if (lastFundingAmount) {
     tags.push({
-      text: `Last Funding: $${formatNumber(lastFundingAmount * 1_000_000)}`,
+      text: `Last Funding: $${formatNumber(lastFundingAmount)}`,
       icon: <PaperbillIcon />,
     });
   }

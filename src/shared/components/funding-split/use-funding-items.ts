@@ -8,8 +8,6 @@ import {
 } from '@/shared/utils/short-timestamp';
 import { LineItem } from '@/shared/components/funding-split/types';
 
-const FUNDING_MULTIPLIER = 1_000_000;
-
 const createLineItem = (
   round: FundingRound,
   activeGroups: Set<string>,
@@ -18,7 +16,7 @@ const createLineItem = (
   const { raisedAmount, roundName, date } = round;
   if (!raisedAmount) return null;
 
-  const amount = raisedAmount * FUNDING_MULTIPLIER;
+  const amount = raisedAmount;
   const year = getTimestampYear(date).toString();
   const percentage = (amount / grandTotal) * 100;
   const isActive = activeGroups.has(year);
@@ -43,10 +41,7 @@ export const useFundingItems = (fundingRounds: FundingRound[]) => {
 
   const grandTotal = useMemo(
     () =>
-      fundingRounds.reduce(
-        (acc, round) => acc + (round.raisedAmount ?? 0) * FUNDING_MULTIPLIER,
-        0,
-      ),
+      fundingRounds.reduce((acc, round) => acc + (round.raisedAmount ?? 0), 0),
     [fundingRounds],
   );
 

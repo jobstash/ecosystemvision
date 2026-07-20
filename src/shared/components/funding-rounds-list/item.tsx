@@ -29,7 +29,7 @@ export const FundingRoundItem = (props: Props) => {
       icon: <HandCoinsIcon size={16} />,
     },
     amount && {
-      text: `Raised Amount: $${formatNumber(amount * 1_000_000)}`,
+      text: `Raised Amount: $${formatNumber(amount)}`,
       icon: <PaperbillIcon />,
     },
   ].filter(Boolean) as InfoTagProps[];
