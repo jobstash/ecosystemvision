@@ -23,9 +23,11 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
     const res = await fetch(url, {
       method: 'GET',
       ...options,
-      next: {
-        revalidate: 43200, // 12 hours
-      },
+      // Organization, project, and funding projections are updated by the
+      // ingestion workers. Serving a persisted Next.js fetch-cache entry here
+      // can therefore expose superseded data for hours after the database and
+      // middleware are already correct.
+      cache: 'no-store',
     });
 
     if (!res.ok) {
