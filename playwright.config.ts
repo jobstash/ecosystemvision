@@ -3,6 +3,11 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+const isLocal = Boolean(process.env.IS_LOCAL);
+const baseURL =
+  process.env.NEXT_PUBLIC_FRONTEND_URL ??
+  (isLocal ? 'http://127.0.0.1:3000' : 'https://ecosystem.vision');
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -11,7 +16,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'list',
   use: {
-    baseURL: process.env.NEXT_PUBLIC_FRONTEND_URL,
+    baseURL,
     actionTimeout: 0,
     trace: 'on-first-retry',
     video: 'off',
@@ -72,7 +77,7 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: process.env.IS_LOCAL
+  webServer: isLocal
     ? [
         {
           command: 'pnpm start',
