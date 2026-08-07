@@ -1,12 +1,15 @@
 import { expect, Locator, Page } from '@playwright/test';
 
 export const assertPageUrl = async (page: Page, url: string) =>
-  expect(page).toHaveURL(url);
+  expect(page).toHaveURL(url, { timeout: 15_000 });
 
 export const assertActiveAttribute = async (
   locator: Locator,
   isActive: boolean,
-) => expect(locator).toHaveAttribute('data-active', isActive.toString());
+) =>
+  expect(locator).toHaveAttribute('data-active', isActive.toString(), {
+    timeout: 10_000,
+  });
 
 export const assertInitCardNotVisible = async (page: Page) => {
   await expect(page.locator('[data-is-init="true"]')).toBeHidden();

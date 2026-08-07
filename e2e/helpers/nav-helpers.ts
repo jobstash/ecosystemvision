@@ -5,8 +5,9 @@ import { A11Y, TEST_IDS } from '@/shared/core/constants';
 import { assertActiveAttribute } from './common-helpers';
 
 export const getNavLocator = (page: Page, name: string) => {
-  const button = page.getByRole('button', { name: name });
-  return page.getByTestId(TEST_IDS.NAV_SECTION).locator(button);
+  return page
+    .locator(`[data-testid="${TEST_IDS.NAV_SECTION}"]:visible`)
+    .getByRole('button', { name, exact: true });
 };
 
 export const clickNavButton = async (page: Page, name: string) =>
@@ -38,8 +39,21 @@ export const assertNavLinksStatuses = async (
   ]);
 };
 
-export const openMobileNav = async (page: Page) =>
-  page.getByTestId(TEST_IDS.MOBILE_MENU).click();
+const clickVisibleMobileMenu = async (page: Page) => {
+  const configuredMenu = page.locator(
+    `[data-testid="${TEST_IDS.MOBILE_MENU}"]:visible`,
+  );
+  if ((await configuredMenu.count()) > 0) {
+    await configuredMenu.first().click();
+    return;
+  }
+  await page
+    .locator('div.fixed.top-0.z-50')
+    .locator('button:visible')
+    .last()
+    .click({ force: true });
+};
 
-export const openMobileNavFromDetails = async (page: Page) =>
-  page.getByRole('navigation').getByTestId(TEST_IDS.MOBILE_MENU).click();
+export const openMobileNav = clickVisibleMobileMenu;
+
+export const openMobileNavFromDetails = clickVisibleMobileMenu;

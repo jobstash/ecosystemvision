@@ -35,8 +35,10 @@ export const PillarAppHeader = (props: Props) => {
       <div
         className={cn(
           'fixed z-[999]  w-full transition-all duration-300',
-          { 'top-0': isCollapsed },
-          { '-top-full': !isCollapsed && !isActiveSearch },
+          { 'pointer-events-auto top-0': isCollapsed },
+          {
+            'pointer-events-none -top-full': !isCollapsed && !isActiveSearch,
+          },
         )}
       >
         {appHeader}

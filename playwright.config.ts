@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const isLocal = Boolean(process.env.IS_LOCAL);
+const isLocal = ['1', 'true'].includes(process.env.IS_LOCAL ?? '');
 const baseURL =
   process.env.NEXT_PUBLIC_FRONTEND_URL ??
   (isLocal ? 'http://127.0.0.1:3000' : 'https://ecosystem.vision');
@@ -82,6 +82,7 @@ export default defineConfig({
         {
           command: 'pnpm start',
           port: 3000,
+          reuseExistingServer: !process.env.CI,
         },
       ]
     : undefined,

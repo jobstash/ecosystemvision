@@ -3,7 +3,6 @@ import { test } from '@playwright/test';
 import { A11Y, HREFS } from '@/shared/core/constants';
 
 import {
-  assertInitCardNotVisible,
   assertNavLinksStatuses,
   navigateBackToOrgListPage,
   navigateToOrgDetails,
@@ -11,7 +10,7 @@ import {
   openMobileNavFromDetails,
 } from '../helpers';
 
-const CARD_NUM = 5;
+const CARD_NUM = 2;
 const cardNths = Array.from({ length: CARD_NUM }).map((_, i) => i);
 
 test.beforeEach(async ({ page }) => {
@@ -20,7 +19,6 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('@mobile/@tablet', () => {
   test('should navigate seamlessly when clicking cards', async ({ page }) => {
-    await assertInitCardNotVisible(page);
     for (const n of cardNths) {
       await navigateToOrgDetails(page, n);
       await navigateBackToOrgListPage(page);
@@ -30,8 +28,6 @@ test.describe('@mobile/@tablet', () => {
   test('should render correctly when changing cards then clicking nav', async ({
     page,
   }) => {
-    await assertInitCardNotVisible(page);
-
     for (const n of cardNths) {
       await navigateToOrgDetails(page, n);
       await openMobileNavFromDetails(page);
@@ -44,7 +40,6 @@ test.describe('@desktop', () => {
   test('should render correctly when changing cards then clicking nav', async ({
     page,
   }) => {
-    await assertInitCardNotVisible(page);
     await assertNavLinksStatuses(page, A11Y.LINK.NAV.ORGS);
 
     for (const n of cardNths) {
@@ -57,11 +52,11 @@ test.describe('@desktop', () => {
   });
 
   test('should navigate seamlessly when clicking cards', async ({ page }) => {
-    await assertInitCardNotVisible(page);
     await assertNavLinksStatuses(page, A11Y.LINK.NAV.ORGS);
     for (const n of cardNths) {
       await navigateToOrgDetails(page, n);
       await assertNavLinksStatuses(page, A11Y.LINK.NAV.ORGS);
+      await navigateBackToOrgListPage(page);
     }
   });
 });

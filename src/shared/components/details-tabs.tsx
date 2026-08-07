@@ -5,6 +5,8 @@ import { useParams } from 'next/navigation';
 
 import { Tab, Tabs } from '@heroui/tabs';
 
+import { TEST_IDS } from '@/shared/core/constants';
+
 interface Props {
   tabs: { key: string; text: string; href: string }[];
 }
@@ -16,6 +18,7 @@ export const DetailsTabs = ({ tabs }: Props) => {
   return (
     <Tabs
       aria-label="Details Tabs"
+      data-testid={TEST_IDS.DETAILS_PANEL_TABS}
       variant="light"
       selectedKey={selectedTab}
       classNames={{

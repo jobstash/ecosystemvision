@@ -1,5 +1,6 @@
 import { Button } from '@heroui/button';
 
+import { TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
 import { MenuButton } from '@/shared/components/menu-button';
 
@@ -45,7 +46,7 @@ export const AppHeader = (props: Props) => {
                 Connect Wallet
               </Button> */}
             </div>
-            <MenuButton />
+            <MenuButton testId={TEST_IDS.MOBILE_MENU} />
           </div>
         </div>
       </AppHeaderProvider>

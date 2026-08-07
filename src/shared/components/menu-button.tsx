@@ -19,6 +19,7 @@ export const MenuButton = ({ testId }: Props) => {
   return (
     <Button
       isIconOnly
+      aria-label="Open navigation"
       className="bg-transparent lg:hidden"
       onClick={openNav}
       data-testid={testId}

@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 
-import { A11Y, HREFS, TEST_IDS } from '@/shared/core/constants';
+import { A11Y, HREFS } from '@/shared/core/constants';
 
 import { ORG_TEST_IDS } from '@/orgs/core/constants';
 
@@ -14,23 +14,23 @@ export const navigateToOrgDetails = async (page: Page, n: number) => {
   // Click on the upper right corner (ensure buttons w/in the card is not clicked)
   await card.click({ position: { x: 10, y: 10 } });
 
-  await expect(page).toHaveURL(`/organizations/names/${uuid}/details`);
+  await expect(page).toHaveURL(`/organizations/info/${uuid}`, {
+    timeout: 15_000,
+  });
 };
 
 export const navigateBackToOrgListPage = async (page: Page) => {
-  // Assert mobile/tablet devices are currently on details-page
-  await expect(page).toHaveURL(/\/organizations\/names\/[^/]+\/details/);
+  await expect(page).toHaveURL(/\/organizations\/info\/[^/]+/);
 
-  // Click back button
-  await page.getByTestId(TEST_IDS.DETAILS_BACK).last().click();
+  await page.goBack();
 
   // Assert currently on org-list page
-  await expect(page).toHaveURL(HREFS.ORGS_PAGE);
+  await expect(page).toHaveURL(HREFS.ORGS_PAGE, { timeout: 15_000 });
 };
 
 export const navigateToOrgListPage = async (page: Page) => {
   await getNavLocator(page, A11Y.LINK.NAV.ORGS).click();
-  await expect(page).toHaveURL(HREFS.ORGS_PAGE);
+  await expect(page).toHaveURL(HREFS.ORGS_PAGE, { timeout: 15_000 });
 };
 
 export const getOrgCardId = async (page: Page, n: number) => {
@@ -51,7 +51,7 @@ export const getFirstTwoOrgIds = async (page: Page) => {
 };
 
 export const reloadToOrgDetails = (page: Page, id: string) =>
-  page.goto(`/organizations/names/${id}/details`);
+  page.goto(`/organizations/info/${id}`);
 
 export const assertOrgCardsSwapped = async (
   page: Page,
