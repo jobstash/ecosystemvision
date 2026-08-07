@@ -29,6 +29,16 @@ export const createOrgDetailsTabs = (org: OrgDetails) => {
     });
   }
 
+  if (org.teamCoverageStatus === 'current') {
+    const currentMaintainers = org.currentMaintainerCount;
+    tabs.push({
+      key: 'team',
+      text:
+        currentMaintainers === null ? 'Team' : `Team (${currentMaintainers})`,
+      href: `${hrefPrefix}/team`,
+    });
+  }
+
   const jobsCount = org.jobs.length;
   if (jobsCount > 0) {
     const jobsTitle = jobsCount === 1 ? 'Job' : `Jobs (${jobsCount})`;

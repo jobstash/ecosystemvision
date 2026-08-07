@@ -11,6 +11,7 @@ import { LogoTitle } from '@/shared/components/logo-title';
 import { ORG_TEST_IDS } from '@/orgs/core/constants';
 import { OrgListItem } from '@/orgs/core/schemas';
 import { activeOrgSlugAtom } from '@/orgs/core/atoms';
+import { OrganizationIntelligenceBadges } from '@/orgs/components/organization-intelligence-badges';
 
 import { createOrgCardTags } from './create-org-card-tags';
 
@@ -59,6 +60,8 @@ export const OrgCard = (props: Props) => {
             <p className="text-sm text-white/80">{summary}</p>
           </>
         )}
+
+        <OrganizationIntelligenceBadges isCompact intelligence={orgItem} />
 
         {hasTags && (
           <>

@@ -14,6 +14,24 @@ import {
 
 import { ORG_REVIEW_LOCATIONS, ORG_REVIEW_TIMEZONES } from './constants';
 
+export const organizationIntelligenceSchema = z.object({
+  fundingStage: z.string().nullable().optional().default(null),
+  recentlyFunded: z.boolean().optional().default(false),
+  teamCoverageStatus: z
+    .enum(['current', 'unknown'])
+    .nullable()
+    .optional()
+    .default(null),
+  teamSignalsAsOf: z.string().nullable().optional().default(null),
+  currentMaintainerCount: z.number().nullable().optional().default(null),
+  growingTeam: z.boolean().nullable().optional().default(null),
+  shrinkingTeam: z.boolean().nullable().optional().default(null),
+  earlyTeamShrinkage: z.boolean().nullable().optional().default(null),
+});
+export type OrganizationIntelligence = z.infer<
+  typeof organizationIntelligenceSchema
+>;
+
 export const orgListItemSchema = orgInfoSchema
   .pick({
     orgId: true,
@@ -34,7 +52,8 @@ export const orgListItemSchema = orgInfoSchema
       lastFundingAmount: z.number(),
       ecosystems: z.array(z.string()),
     }),
-  );
+  )
+  .merge(organizationIntelligenceSchema);
 export type OrgListItem = z.infer<typeof orgListItemSchema>;
 
 export const orgJobSchema = jobInfoSchema
@@ -111,8 +130,62 @@ export const orgDetailsSchema = z
     reviews: z.array(orgReviewSchema.omit({ compensation: true })),
     tags: z.array(tagSchema),
   })
-  .merge(orgInfoSchema);
+  .merge(orgInfoSchema)
+  .merge(organizationIntelligenceSchema);
 export type OrgDetails = z.infer<typeof orgDetailsSchema>;
+
+const orgTeamPageSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
+  z.object({
+    page: z.number(),
+    count: z.number(),
+    total: z.number(),
+    data: z.array(itemSchema),
+  });
+
+export const orgMaintainerSchema = z.object({
+  githubUserId: z.string(),
+  login: z.string(),
+  firstWriteAt: z.string(),
+  qualifiedAt: z.string(),
+  lastWriteAt: z.string(),
+  writeOperations: z.number(),
+  current: z.boolean(),
+  earlyCohort: z.boolean(),
+});
+export type OrgMaintainer = z.infer<typeof orgMaintainerSchema>;
+
+export const orgMaintainerMovementSchema = z.object({
+  githubUserId: z.string(),
+  login: z.string(),
+  destinationOrganizationId: z.string(),
+  destinationOrganizationName: z.string(),
+  destinationOrganizationSlug: z.string(),
+  sourceLastWriteAt: z.string(),
+  destinationFirstWriteAt: z.string(),
+  confirmedAt: z.string(),
+  earlyCohort: z.boolean(),
+  status: z.enum(['active', 'observed', 'returned', 'superseded']),
+  returnedAt: z.string().nullable(),
+});
+export type OrgMaintainerMovement = z.infer<typeof orgMaintainerMovementSchema>;
+
+export const orgTeamDetailsSchema = z.object({
+  organizationId: z.string(),
+  organizationName: z.string(),
+  coverageStatus: z.enum(['current', 'unknown']).nullable(),
+  asOf: z.string().nullable(),
+  currentMaintainerCount: z.number().nullable(),
+  newMaintainerCount: z.number().nullable(),
+  movedMaintainerCount: z.number().nullable(),
+  earlyMovedMaintainerCount: z.number().nullable(),
+  growingTeam: z.boolean().nullable(),
+  shrinkingTeam: z.boolean().nullable(),
+  earlyTeamShrinkage: z.boolean().nullable(),
+  githubOrganizations: z.array(z.string()),
+  maintainers: orgTeamPageSchema(orgMaintainerSchema),
+  movements: orgTeamPageSchema(orgMaintainerMovementSchema),
+});
+export type OrgTeamDetails = z.infer<typeof orgTeamDetailsSchema>;
 
 export const orgInfiniteListPageSchema = infiniteListPageSchema.extend({
   data: z.array(orgListItemSchema),
