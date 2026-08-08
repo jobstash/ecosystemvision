@@ -16,7 +16,7 @@ export const PillarAllFiltersTrigger = (props: GetPillarFiltersProps) => {
 
   return (
     <Button endContent={<CaretRightIcon />} isDisabled={!data} onClick={toggle}>
-      All Filters
+      {props.nav === 'organizations' ? 'Team & All Filters' : 'All Filters'}
     </Button>
   );
 };
