@@ -8,7 +8,6 @@ import { OrganizationIntelligence } from '@/orgs/core/schemas';
 interface Props {
   intelligence: OrganizationIntelligence;
   isCompact?: boolean;
-  showCoverage?: boolean;
 }
 
 const BADGE_CLASS_NAME =
@@ -17,13 +16,17 @@ const BADGE_CLASS_NAME =
 export const OrganizationIntelligenceBadges = ({
   intelligence,
   isCompact = false,
-  showCoverage = false,
 }: Props) => {
   const {
     fundingStage,
     recentlyFunded,
     teamCoverageStatus,
     currentMaintainerCount,
+    activeLeadCount,
+    newActiveLeadCount,
+    steppedDownLeadCount,
+    movedLeadCount,
+    earlyLeadDepartureCount,
     growingTeam,
     shrinkingTeam,
     earlyTeamShrinkage,
@@ -56,37 +59,59 @@ export const OrganizationIntelligenceBadges = ({
           {currentMaintainerCount === 1 ? 'maintainer' : 'maintainers'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && growingTeam ? (
+      {hasCurrentTeamCoverage && activeLeadCount !== null ? (
+        <span className={BADGE_CLASS_NAME}>
+          {activeLeadCount} active {activeLeadCount === 1 ? 'lead' : 'leads'}
+        </span>
+      ) : null}
+      {hasCurrentTeamCoverage && (newActiveLeadCount ?? 0) > 0 ? (
         <span
           className={cn(
             BADGE_CLASS_NAME,
             'border-emerald-300/25 text-emerald-200',
           )}
         >
-          Growing maintainer team
+          {newActiveLeadCount} new active{' '}
+          {newActiveLeadCount === 1 ? 'lead' : 'leads'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && shrinkingTeam ? (
+      {hasCurrentTeamCoverage && (steppedDownLeadCount ?? 0) > 0 ? (
         <span
           className={cn(BADGE_CLASS_NAME, 'border-amber-300/25 text-amber-200')}
         >
-          Maintainer movements detected
+          {steppedDownLeadCount} lead{' '}
+          {steppedDownLeadCount === 1 ? 'step-down' : 'step-downs'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && earlyTeamShrinkage ? (
+      {hasCurrentTeamCoverage && (movedLeadCount ?? 0) > 0 ? (
+        <span className={cn(BADGE_CLASS_NAME, 'text-violet-200')}>
+          {movedLeadCount} lead{' '}
+          {movedLeadCount === 1 ? 'movement' : 'movements'}
+        </span>
+      ) : null}
+      {hasCurrentTeamCoverage && (earlyLeadDepartureCount ?? 0) > 0 ? (
         <span
           className={cn(
             BADGE_CLASS_NAME,
             'border-orange-300/25 text-orange-200',
           )}
         >
-          Early-team movements detected
+          {earlyLeadDepartureCount} early lead{' '}
+          {earlyLeadDepartureCount === 1 ? 'departure' : 'departures'}
         </span>
       ) : null}
-      {showCoverage && teamCoverageStatus === 'unknown' ? (
-        <span className={cn(BADGE_CLASS_NAME, 'text-white/45')}>
-          Maintainer coverage unavailable
-        </span>
+      {hasCurrentTeamCoverage && newActiveLeadCount === null && growingTeam ? (
+        <span className={BADGE_CLASS_NAME}>New active leads</span>
+      ) : null}
+      {hasCurrentTeamCoverage &&
+      steppedDownLeadCount === null &&
+      shrinkingTeam ? (
+        <span className={BADGE_CLASS_NAME}>Lead step-downs</span>
+      ) : null}
+      {hasCurrentTeamCoverage &&
+      earlyLeadDepartureCount === null &&
+      earlyTeamShrinkage ? (
+        <span className={BADGE_CLASS_NAME}>Early lead departures</span>
       ) : null}
     </div>
   );

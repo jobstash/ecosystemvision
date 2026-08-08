@@ -111,6 +111,7 @@ export type PillarInputLabelsResponseDto = z.infer<
 const pillarFiltersSharedPropsDto = z.object({
   position: z.number().positive(),
   label: z.string(),
+  show: z.boolean().optional().default(true),
   googleAnalyticsEventName: z.string(),
 });
 export type PillarFiltersSharedPropsDto = z.infer<

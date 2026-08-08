@@ -27,7 +27,7 @@ export const OrgDetailsHeader = ({ org }: Props) => {
         infoTags={infoTags}
         socialTags={socialTags}
       />
-      <OrganizationIntelligenceBadges intelligence={org} showCoverage />
+      <OrganizationIntelligenceBadges intelligence={org} />
       {org.teamCoverageStatus === 'current' && org.teamSignalsAsOf ? (
         <p className="text-xs text-white/45">
           Maintainer signals as of {formatAsOf(org.teamSignalsAsOf)}

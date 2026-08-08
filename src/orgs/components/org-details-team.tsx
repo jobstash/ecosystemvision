@@ -21,20 +21,24 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
       <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-4">
         <Heading text="Maintainer intelligence" className="text-xl" />
         <p className="mt-2 text-sm text-white/60">
-          This dataset includes only GitHub identities with demonstrated write
-          authority: at least three direct pushes or merges performed. External
-          contributors and bots are excluded.
+          This view starts from the canonical internal-employee model. A
+          maintainer is an internal employee who merged at least one pull
+          request in a non-fork repository; external contributors, bots, and PR
+          authors are not treated as causal. Active leads have merged within the
+          last three months.
         </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <Metric
             label="Current maintainers"
             value={team.currentMaintainerCount}
           />
-          <Metric label="New maintainers" value={team.newMaintainerCount} />
-          <Metric label="Moved maintainers" value={team.movedMaintainerCount} />
+          <Metric label="Active leads" value={team.activeLeadCount} />
+          <Metric label="New active leads" value={team.newActiveLeadCount} />
+          <Metric label="Lead step-downs" value={team.steppedDownLeadCount} />
+          <Metric label="Lead movements" value={team.movedLeadCount} />
           <Metric
-            label="Early-team moves"
-            value={team.earlyMovedMaintainerCount}
+            label="Early lead departures"
+            value={team.earlyLeadDepartureCount}
           />
         </div>
         <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/50">
@@ -55,67 +59,78 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
         </div>
       </section>
 
-      <section aria-labelledby="qualified-maintainers">
+      <section aria-labelledby="maintainers">
         <Heading
-          id="qualified-maintainers"
-          text={`Qualified maintainers (${team.maintainers.total})`}
+          id="maintainers"
+          text={`Maintainers (${team.maintainers.total})`}
           className="text-xl"
         />
         {team.maintainers.data.length ? (
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            {team.maintainers.data.map((maintainer) => (
-              <article
-                className="rounded-2xl border border-white/10 bg-white/[0.02] p-4"
-                key={maintainer.githubUserId}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <Link
-                    className="font-semibold text-sky-200 transition hover:text-sky-100"
-                    href={`https://github.com/${encodeURIComponent(maintainer.login)}`}
-                    rel="external noopener"
-                    target="_blank"
-                  >
-                    @{maintainer.login}
-                  </Link>
-                  <span
-                    className={
-                      maintainer.current
-                        ? 'text-xs text-emerald-200'
-                        : 'text-xs text-white/45'
-                    }
-                  >
-                    {maintainer.current ? 'Current' : 'Former'}
-                  </span>
-                </div>
-                <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                  <Stat
-                    label="Write operations"
-                    value={maintainer.writeOperations}
-                  />
-                  <Stat
-                    label="First write"
-                    value={formatDate(maintainer.firstWriteAt)}
-                  />
-                  <Stat
-                    label="Qualified"
-                    value={formatDate(maintainer.qualifiedAt)}
-                  />
-                  <Stat
-                    label="Last write"
-                    value={formatDate(maintainer.lastWriteAt)}
-                  />
-                </dl>
-                {maintainer.earlyCohort ? (
-                  <p className="mt-3 text-xs text-violet-200">
-                    Early-team cohort
-                  </p>
-                ) : null}
-              </article>
-            ))}
+            {team.maintainers.data.map((maintainer) => {
+              const isCurrent =
+                maintainer.currentEmployee ?? maintainer.current;
+              return (
+                <article
+                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-4"
+                  key={maintainer.githubUserId}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <Link
+                      className="font-semibold text-sky-200 transition hover:text-sky-100"
+                      href={`https://github.com/${encodeURIComponent(maintainer.login)}`}
+                      rel="external noopener"
+                      target="_blank"
+                    >
+                      @{maintainer.login}
+                    </Link>
+                    <span
+                      className={
+                        isCurrent
+                          ? 'text-xs text-emerald-200'
+                          : 'text-xs text-white/45'
+                      }
+                    >
+                      {isCurrent ? 'Current employee' : 'Former employee'}
+                    </span>
+                  </div>
+                  <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    <Stat
+                      label="PRs merged"
+                      value={maintainer.mergeCount ?? 'Unknown'}
+                    />
+                    <Stat
+                      label="First merge"
+                      value={
+                        maintainer.firstMergeAt
+                          ? formatDate(maintainer.firstMergeAt)
+                          : 'Unknown'
+                      }
+                    />
+                    <Stat
+                      label="Last merge"
+                      value={
+                        maintainer.lastMergeAt
+                          ? formatDate(maintainer.lastMergeAt)
+                          : 'Unknown'
+                      }
+                    />
+                  </dl>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                    {maintainer.activeLead ? (
+                      <span className="text-emerald-200">Active lead</span>
+                    ) : null}
+                    {(maintainer.earlyMaintainer ?? maintainer.earlyCohort) ? (
+                      <span className="text-violet-200">Early maintainer</span>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         ) : (
           <p className="mt-3 text-sm text-white/50">
-            No qualified maintainers on this page.
+            No maintainers on this page.
           </p>
         )}
       </section>
@@ -142,7 +157,7 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
                   >
                     @{movement.login}
                   </Link>{' '}
-                  moved write activity to{' '}
+                  moved lead merge authority to{' '}
                   <Link
                     className="font-semibold text-white transition hover:text-sky-100"
                     href={`/organizations/info/${movement.destinationOrganizationSlug}`}
@@ -154,8 +169,18 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
                 <p className="mt-2 text-xs text-white/45">
                   Confirmed {formatDate(movement.confirmedAt)} ·{' '}
                   {formatStatus(movement.status)}
-                  {movement.earlyCohort ? ' · Early-team cohort' : ''}
+                  {(movement.earlyMaintainer ?? movement.earlyCohort)
+                    ? ' · Early maintainer'
+                    : ''}
                 </p>
+                {movement.sourceLastMergeAt &&
+                movement.destinationFirstMergeAt ? (
+                  <p className="mt-1 text-xs text-white/40">
+                    Last source merge {formatDate(movement.sourceLastMergeAt)} ·
+                    First destination merge{' '}
+                    {formatDate(movement.destinationFirstMergeAt)}
+                  </p>
+                ) : null}
               </article>
             ))}
           </div>
