@@ -44,7 +44,9 @@ const clickVisibleMobileMenu = async (page: Page) => {
     `[data-testid="${TEST_IDS.MOBILE_MENU}"]:visible`,
   );
   if ((await configuredMenu.count()) > 0) {
-    await configuredMenu.first().click();
+    // Route transitions can briefly retain the previous fixed header. The
+    // newest header is painted last and is the one users can actually click.
+    await configuredMenu.last().click();
     return;
   }
   await page

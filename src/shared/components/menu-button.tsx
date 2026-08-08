@@ -25,6 +25,7 @@ export const MenuButton = ({ testId }: Props) => {
       data-testid={testId}
     >
       <svg
+        className="pointer-events-none"
         width="32"
         height="33"
         viewBox="0 0 32 33"
