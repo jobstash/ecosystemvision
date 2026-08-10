@@ -78,9 +78,7 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
                   <div className="flex items-center justify-between gap-3">
                     <Link
                       className="font-semibold text-sky-200 transition hover:text-sky-100"
-                      href={`https://github.com/${encodeURIComponent(maintainer.login)}`}
-                      rel="external noopener"
-                      target="_blank"
+                      href={`/people/${encodeURIComponent(maintainer.login)}`}
                     >
                       @{maintainer.login}
                     </Link>
@@ -97,7 +95,21 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
                   <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
                     <Stat
                       label="PRs merged"
-                      value={maintainer.mergeCount ?? 'Unknown'}
+                      value={
+                        maintainer.mergedPrCount ??
+                        maintainer.mergeCount ??
+                        'Unknown'
+                      }
+                    />
+                    <Stat
+                      label="Internal authors supported"
+                      value={maintainer.internalAuthorsSupported ?? 'Unknown'}
+                    />
+                    <Stat
+                      label="Currently active authors"
+                      value={
+                        maintainer.currentInternalAuthorsSupported ?? 'Unknown'
+                      }
                     />
                     <Stat
                       label="First merge"
@@ -124,6 +136,34 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
                       <span className="text-violet-200">Early maintainer</span>
                     ) : null}
                   </div>
+                  {maintainer.supportedAuthorLogins.length ? (
+                    <div className="mt-3 border-t border-white/10 pt-3">
+                      <p className="text-xs text-white/40">
+                        Internal authors whose PRs they merged
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+                        {maintainer.supportedAuthorLogins
+                          .slice(0, 12)
+                          .map((login) => (
+                            <Link
+                              className="text-sky-200 transition hover:text-sky-100"
+                              href={`/people/${encodeURIComponent(login)}`}
+                              key={login}
+                            >
+                              @{login}
+                            </Link>
+                          ))}
+                      </div>
+                    </div>
+                  ) : null}
+                  <Link
+                    className="mt-3 inline-block text-xs text-white/40 transition hover:text-white"
+                    href={`https://github.com/${encodeURIComponent(maintainer.login)}`}
+                    rel="external noopener"
+                    target="_blank"
+                  >
+                    Open GitHub profile ↗
+                  </Link>
                 </article>
               );
             })}
@@ -151,9 +191,7 @@ export const OrgDetailsTeam = ({ slug, page, team }: Props) => {
                 <p className="text-sm text-white/75">
                   <Link
                     className="font-semibold text-sky-200 transition hover:text-sky-100"
-                    href={`https://github.com/${encodeURIComponent(movement.login)}`}
-                    rel="external noopener"
-                    target="_blank"
+                    href={`/people/${encodeURIComponent(movement.login)}`}
                   >
                     @{movement.login}
                   </Link>{' '}

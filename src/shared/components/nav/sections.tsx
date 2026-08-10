@@ -22,6 +22,10 @@ const SECTIONS = [
         text: A11Y.LINK.NAV.FUNDS,
         href: HREFS.FUNDS_PAGE,
       },
+      {
+        text: A11Y.LINK.NAV.PEOPLE,
+        href: HREFS.PEOPLE_PAGE,
+      },
     ],
   },
 ];

@@ -1,40 +1,22 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { FRONTEND_URL } from '@/shared/core/envs';
-import { cn } from '@/shared/utils/cn';
-
-const BRAND_NAME = 'veri';
+import { EcosystemMark } from '@/shared/components/ecosystem-mark';
 
 export const Brand = () => {
   return (
-    <div className="flex h-16 items-center gap-1 px-0 md:gap-3 md:px-4">
-      <Link href={FRONTEND_URL}>
-        <div className="md:ml-[-12px]">
-          <Image
-            priority
-            width={48}
-            height={48}
-            quality={100}
-            src="/veri-logo.png"
-            alt="Ecosystem Vision Logo"
-            style={{ objectFit: 'contain' }}
-          />
-        </div>
+    <div className="flex h-16 items-center px-0 md:px-2">
+      <Link
+        aria-label="Ecosystem Vision home"
+        className="group flex items-center gap-2.5"
+        href={FRONTEND_URL}
+      >
+        <EcosystemMark className="size-11 transition-transform duration-300 group-hover:scale-105" />
+        <span className="hidden font-grotesk text-lg font-medium leading-5 tracking-tight text-white md:block">
+          ecosystem
+          <span className="block text-white/45">vision</span>
+        </span>
       </Link>
-      <div className="hidden flex-col justify-center md:flex">
-        <Link
-          href={FRONTEND_URL}
-          className={cn(
-            '-ml-1',
-            'bg-300% bg-gradient-to-r from-[#11c1ef] via-[#45f4d0] to-[#a1fe43] bg-clip-text text-transparent',
-            'animate-gradient-text',
-            'text-4xl font-bold leading-none tracking-wider md:text-3xl',
-          )}
-        >
-          {BRAND_NAME}
-        </Link>
-      </div>
     </div>
   );
 };
