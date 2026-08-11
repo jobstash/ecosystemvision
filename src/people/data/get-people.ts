@@ -49,15 +49,19 @@ export const getPeopleActivityMap = async ({
 
 export const getPeopleAtlas = async ({
   at,
-  compareAt,
   organizationKey,
+  windowMonths = 36,
 }: {
   at?: string;
-  compareAt?: string;
   organizationKey?: string;
+  windowMonths?: number;
 } = {}) =>
   mwGET({
-    url: endpoint('atlas', { at, compareAt, organizationKey }),
+    url: endpoint('atlas', {
+      at,
+      organizationKey,
+      windowMonths: windowMonths.toString(),
+    }),
     label: 'getPeopleAtlas',
     responseSchema: peopleAtlasSchema,
   });
@@ -79,8 +83,7 @@ export const getPeopleDirectory = async ({
     url: endpoint('directory', {
       query,
       organizationKey,
-      maintainer:
-        maintainer === undefined ? undefined : maintainer.toString(),
+      maintainer: maintainer === undefined ? undefined : maintainer.toString(),
       current: current === undefined ? undefined : current.toString(),
       cursor,
       limit: '50',

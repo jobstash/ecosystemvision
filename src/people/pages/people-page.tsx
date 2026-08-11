@@ -27,10 +27,7 @@ import {
   PeopleMetric,
   PeopleOverview,
 } from '@/people/core/schemas';
-import {
-  getPeopleActivityMap,
-  getPeopleAtlas,
-} from '@/people/data/get-people';
+import { getPeopleActivityMap, getPeopleAtlas } from '@/people/data/get-people';
 
 import { PeopleActivityMapView } from '../components/people-activity-map';
 import { PeopleDirectory as PeopleDirectoryView } from '../components/people-directory';
@@ -46,7 +43,7 @@ const EcosystemAtlas = dynamic(
     ssr: false,
     loading: () => (
       <div className="flex h-[620px] items-center justify-center rounded-2xl border border-white/10 text-sm text-white/40">
-        Loading ecosystem atlas…
+        Loading movement timeline…
       </div>
     ),
   },
@@ -61,12 +58,7 @@ type SelectedOrganization = Pick<
   | 'organizationSlug'
   | 'logoUrl'
 > &
-  Partial<
-    Pick<
-      PeopleAtlasNode,
-      'activePeople' | 'activeMaintainers' | 'activeLeads' | 'joins' | 'exits' | 'change'
-    >
-  >;
+  Partial<Pick<PeopleAtlasNode, 'activePeople' | 'activeMaintainers'>>;
 
 interface Props {
   initialOverview: PeopleOverview;
@@ -94,7 +86,7 @@ export const PeoplePage = ({
   initialAtlas,
   initialDirectory,
 }: Props) => {
-  const [view, setView] = useState<View>('activity-map');
+  const [view, setView] = useState<View>('atlas');
   const [metric, setMetric] = useState<PeopleMetric>('activePeople');
   const [organizationQuery, setOrganizationQuery] = useState('');
   const debouncedOrganizationQuery = useDebouncedValue(
@@ -143,7 +135,7 @@ export const PeoplePage = ({
       }),
     placeholderData: (previous) => previous,
     initialData:
-      initialAtlas.period === selectedPeriod && !selectedOrganization
+      initialAtlas.toPeriod === selectedPeriod && !selectedOrganization
         ? initialAtlas
         : undefined,
   });
@@ -212,22 +204,21 @@ export const PeoplePage = ({
                 Ecosystem through time
               </h2>
               <p className="mt-1 max-w-2xl text-sm text-white/45">
-                The matrix supports exact comparison. The Atlas reveals
-                organization neighborhoods and selected movement flows without
-                turning the complete graph into a hairball.
+                Scrub through confirmed moves on fixed organization lanes, or
+                inspect every organization as an exact monthly history.
               </p>
             </div>
             <div className="flex rounded-xl border border-white/10 bg-white/[0.025] p-1">
               <ViewButton
                 isActive={view === 'activity-map'}
                 icon={<Grid3X3 className="size-4" />}
-                label="Activity map"
+                label="Organization history"
                 onClick={() => setView('activity-map')}
               />
               <ViewButton
                 isActive={view === 'atlas'}
                 icon={<Network className="size-4" />}
-                label="Atlas"
+                label="Movement flows"
                 onClick={() => setView('atlas')}
               />
             </div>
@@ -242,7 +233,9 @@ export const PeoplePage = ({
                   <input
                     type="search"
                     value={organizationQuery}
-                    onChange={(event) => setOrganizationQuery(event.target.value)}
+                    onChange={(event) =>
+                      setOrganizationQuery(event.target.value)
+                    }
                     placeholder="Search all organizations"
                     className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
                   />
@@ -280,7 +273,7 @@ export const PeoplePage = ({
               <div className="my-5 flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-3 md:flex-row md:items-center">
                 <label className="grow text-xs text-white/45">
                   <span className="flex items-center justify-between">
-                    <span>Atlas month</span>
+                    <span>Timeline ends</span>
                     <span className="text-white/70">
                       {selectedPeriod ? formatPeriod(selectedPeriod) : 'Latest'}
                     </span>
@@ -291,13 +284,15 @@ export const PeoplePage = ({
                     max={Math.max(0, periods.length - 1)}
                     value={periodIndex}
                     disabled={!periods.length}
-                    onChange={(event) => setPeriodIndex(Number(event.target.value))}
+                    onChange={(event) =>
+                      setPeriodIndex(Number(event.target.value))
+                    }
                     className="mt-2 w-full accent-emerald-300"
                   />
                 </label>
                 <p className="text-xs text-white/35 md:max-w-60">
-                  Node positions stay stable. Color compares this month with
-                  the previous three-month baseline.
+                  The chart keeps organizations on fixed lanes and uses time
+                  horizontally, so movement never depends on animated layout.
                 </p>
               </div>
               <EcosystemAtlas
@@ -386,7 +381,7 @@ const SelectedOrganizationCard = ({
   atlas?: PeopleAtlas;
   onClear: () => void;
 }) => {
-  const node = atlas?.nodes.find(
+  const node = atlas?.organizations.find(
     (candidate) => candidate.organizationKey === organization.organizationKey,
   );
   return (
@@ -407,7 +402,7 @@ const SelectedOrganizationCard = ({
         </h3>
         <p className="mt-1 text-xs text-white/45">
           {node
-            ? `${node.activePeople.toLocaleString()} active people · ${node.activeMaintainers.toLocaleString()} maintainers · ${node.activeLeads.toLocaleString()} active leads`
+            ? `${node.activePeople.toLocaleString()} active people · ${node.activeMaintainers.toLocaleString()} maintainers`
             : 'The People directory is now filtered to this organization.'}
         </p>
       </div>

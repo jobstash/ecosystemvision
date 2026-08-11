@@ -60,36 +60,38 @@ export const peopleActivityMapSchema = z.object({
   rows: z.array(peopleActivityMapRowSchema),
 });
 export type PeopleActivityMap = z.infer<typeof peopleActivityMapSchema>;
-export type PeopleActivityMapRow = z.infer<
-  typeof peopleActivityMapRowSchema
->;
+export type PeopleActivityMapRow = z.infer<typeof peopleActivityMapRowSchema>;
 
-export const peopleAtlasNodeSchema = z.object({
+export const peopleFlowOrganizationSchema = z.object({
   organizationKey: z.string(),
   organizationId: z.string().nullable(),
   organizationName: z.string(),
   organizationSlug: z.string(),
   logoUrl: z.string().nullable(),
   githubOrganizations: z.array(z.string()),
-  x: z.number(),
-  y: z.number(),
-  communityId: z.number(),
   activePeople: z.number(),
   activeMaintainers: z.number(),
-  activeLeads: z.number(),
-  joins: z.number(),
-  exits: z.number(),
-  change: z.number(),
+  series: z.array(
+    z.object({
+      period: z.string(),
+      activePeople: z.number(),
+      activeMaintainers: z.number(),
+    }),
+  ),
 });
 
 export const peopleAtlasSchema = z.object({
   available: z.boolean(),
   asOf: z.string().nullable(),
-  period: z.string().nullable(),
-  comparePeriod: z.string().nullable(),
-  nodes: z.array(peopleAtlasNodeSchema),
-  edges: z.array(
+  fromPeriod: z.string().nullable(),
+  toPeriod: z.string().nullable(),
+  focusOrganizationKey: z.string().nullable(),
+  totalMovements: z.number(),
+  visibleMovements: z.number(),
+  organizations: z.array(peopleFlowOrganizationSchema),
+  flows: z.array(
     z.object({
+      period: z.string(),
       sourceOrganizationKey: z.string(),
       destinationOrganizationKey: z.string(),
       people: z.number(),
@@ -98,7 +100,7 @@ export const peopleAtlasSchema = z.object({
   ),
 });
 export type PeopleAtlas = z.infer<typeof peopleAtlasSchema>;
-export type PeopleAtlasNode = z.infer<typeof peopleAtlasNodeSchema>;
+export type PeopleAtlasNode = z.infer<typeof peopleFlowOrganizationSchema>;
 
 export const peopleDirectoryItemSchema = z.object({
   personId: z.string(),
