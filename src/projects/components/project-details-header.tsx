@@ -9,20 +9,18 @@ interface Props {
   project: ProjectDetails;
 }
 
-const SUMMARY =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus felis in nisi tincidunt, vitae facilisis enim tempor. ';
-
 export const ProjectDetailsHeader = ({ project }: Props) => {
-  const { name, logo, website } = project;
+  const { name, logo, website, summary, description } = project;
   const src = getLogoUrl(website!, logo);
   const infoTags = createProjectInfoTagProps(project, undefined, website);
   const socialTags = createSocialsInfoTagProps(project, { website: false });
+  const headerSummary = summary?.trim() || description?.trim() || '';
 
   return (
     <DetailsHeader
       src={src}
       name={name}
-      summary={SUMMARY}
+      summary={headerSummary}
       infoTags={infoTags}
       socialTags={socialTags}
     />
