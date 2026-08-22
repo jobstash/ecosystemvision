@@ -3,7 +3,7 @@ import { Divider } from '@/shared/components/divider';
 import { GrantsList } from '@/shared/components/grants-list';
 import { Heading } from '@/shared/components/heading';
 
-const HEADING_TEXT = 'Grants';
+const HEADING_TEXT = 'Historical grant funding';
 
 interface Props {
   grants: GrantFunding[];

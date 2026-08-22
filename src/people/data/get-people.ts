@@ -2,12 +2,15 @@ import { MW_URL } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
 import {
+  suppressPeopleActivityMap,
+  suppressPeopleAtlas,
+  suppressPeopleOverview,
+} from '@/people/core/public-aggregation';
+import {
   peopleActivityMapSchema,
   peopleAtlasSchema,
-  peopleDirectorySchema,
   PeopleMetric,
   peopleOverviewSchema,
-  personProfileSchema,
 } from '@/people/core/schemas';
 
 const endpoint = (path: string, params: Record<string, string | undefined>) => {
@@ -19,11 +22,13 @@ const endpoint = (path: string, params: Record<string, string | undefined>) => {
 };
 
 export const getPeopleOverview = async (bucket = 'month') =>
-  mwGET({
-    url: endpoint('overview', { bucket }),
-    label: 'getPeopleOverview',
-    responseSchema: peopleOverviewSchema,
-  });
+  suppressPeopleOverview(
+    await mwGET({
+      url: endpoint('overview', { bucket }),
+      label: 'getPeopleOverview',
+      responseSchema: peopleOverviewSchema,
+    }),
+  );
 
 export const getPeopleActivityMap = async ({
   metric = 'activePeople',
@@ -36,16 +41,18 @@ export const getPeopleActivityMap = async ({
   page?: number;
   limit?: number;
 } = {}) =>
-  mwGET({
-    url: endpoint('activity-map', {
-      metric,
-      query,
-      page: page.toString(),
-      limit: limit.toString(),
+  suppressPeopleActivityMap(
+    await mwGET({
+      url: endpoint('activity-map', {
+        metric,
+        query,
+        page: page.toString(),
+        limit: limit.toString(),
+      }),
+      label: 'getPeopleActivityMap',
+      responseSchema: peopleActivityMapSchema,
     }),
-    label: 'getPeopleActivityMap',
-    responseSchema: peopleActivityMapSchema,
-  });
+  );
 
 export const getPeopleAtlas = async ({
   at,
@@ -56,45 +63,14 @@ export const getPeopleAtlas = async ({
   organizationKey?: string;
   windowMonths?: number;
 } = {}) =>
-  mwGET({
-    url: endpoint('atlas', {
-      at,
-      organizationKey,
-      windowMonths: windowMonths.toString(),
+  suppressPeopleAtlas(
+    await mwGET({
+      url: endpoint('atlas', {
+        at,
+        organizationKey,
+        windowMonths: windowMonths.toString(),
+      }),
+      label: 'getPeopleAtlas',
+      responseSchema: peopleAtlasSchema,
     }),
-    label: 'getPeopleAtlas',
-    responseSchema: peopleAtlasSchema,
-  });
-
-export const getPeopleDirectory = async ({
-  query,
-  organizationKey,
-  maintainer,
-  current,
-  cursor,
-}: {
-  query?: string;
-  organizationKey?: string;
-  maintainer?: boolean;
-  current?: boolean;
-  cursor?: string;
-} = {}) =>
-  mwGET({
-    url: endpoint('directory', {
-      query,
-      organizationKey,
-      maintainer: maintainer === undefined ? undefined : maintainer.toString(),
-      current: current === undefined ? undefined : current.toString(),
-      cursor,
-      limit: '50',
-    }),
-    label: 'getPeopleDirectory',
-    responseSchema: peopleDirectorySchema,
-  });
-
-export const getPersonProfile = async (login: string) =>
-  mwGET({
-    url: `${MW_URL}/people/${encodeURIComponent(login)}`,
-    label: 'getPersonProfile',
-    responseSchema: personProfileSchema,
-  });
+  );

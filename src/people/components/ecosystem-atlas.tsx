@@ -75,7 +75,9 @@ export const EcosystemAtlas = ({
   const maximumActivity = Math.max(
     1,
     ...organizations.flatMap((organization) =>
-      organization.series.map((point) => point.activePeople),
+      organization.series.flatMap((point) =>
+        point.activePeople === null ? [] : [point.activePeople],
+      ),
     ),
   );
   const activityOpacity = scaleLinear()
@@ -119,8 +121,8 @@ export const EcosystemAtlas = ({
           )}
         </p>
         <p className="shrink-0 tabular-nums text-white/35">
-          {atlas.visibleMovements.toLocaleString()} of{' '}
-          {atlas.totalMovements.toLocaleString()} moves visible
+          {formatAggregate(atlas.visibleMovements)} of{' '}
+          {formatAggregate(atlas.totalMovements)} moves visible
         </p>
       </div>
       <svg
@@ -199,7 +201,11 @@ export const EcosystemAtlas = ({
                     y={TOP + organizationIndex * ROW_HEIGHT + 6}
                     width={Math.max(1, nextX - monthX)}
                     height={ROW_HEIGHT - 12}
-                    fill={`rgba(89,225,183,${activityOpacity(value ?? 0)})`}
+                  fill={
+                    value === null
+                      ? 'rgba(255,255,255,0.015)'
+                      : `rgba(89,225,183,${activityOpacity(value ?? 0)})`
+                  }
                   />
                 );
               })}
@@ -254,14 +260,14 @@ export const EcosystemAtlas = ({
                     {organization.organizationName}
                   </span>
                   <span className="shrink-0 tabular-nums text-white/40">
-                    {organization.activePeople.toLocaleString()}
+                    {formatAggregate(organization.activePeople)}
                   </span>
                 </div>
               </foreignObject>
               <title>
                 {organization.organizationName} ·{' '}
-                {organization.activePeople.toLocaleString()} active people ·{' '}
-                {organization.activeMaintainers.toLocaleString()} maintainers
+                {formatAggregate(organization.activePeople)} active people ·{' '}
+                {formatAggregate(organization.activeMaintainers)} maintainers
               </title>
             </g>
           );
@@ -338,3 +344,6 @@ const Empty = ({ text }: { text: string }) => (
     {text}
   </div>
 );
+
+const formatAggregate = (value: number | null) =>
+  value === null ? 'suppressed' : value.toLocaleString();

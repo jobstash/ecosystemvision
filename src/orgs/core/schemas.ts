@@ -29,9 +29,6 @@ export const organizationIntelligenceSchema = z.object({
   steppedDownLeadCount: z.number().nullable().optional().default(null),
   movedLeadCount: z.number().nullable().optional().default(null),
   earlyLeadDepartureCount: z.number().nullable().optional().default(null),
-  growingTeam: z.boolean().nullable().optional().default(null),
-  shrinkingTeam: z.boolean().nullable().optional().default(null),
-  earlyTeamShrinkage: z.boolean().nullable().optional().default(null),
 });
 export type OrganizationIntelligence = z.infer<
   typeof organizationIntelligenceSchema
@@ -138,78 +135,6 @@ export const orgDetailsSchema = z
   .merge(orgInfoSchema)
   .merge(organizationIntelligenceSchema);
 export type OrgDetails = z.infer<typeof orgDetailsSchema>;
-
-const orgTeamPageSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
-  z.object({
-    page: z.number(),
-    count: z.number(),
-    total: z.number(),
-    data: z.array(itemSchema),
-  });
-
-export const orgMaintainerSchema = z.object({
-  githubUserId: z.string(),
-  login: z.string(),
-  firstMergeAt: z.string().optional(),
-  lastMergeAt: z.string().optional(),
-  mergeCount: z.number().optional(),
-  mergedPrCount: z.number().optional(),
-  internalAuthorsSupported: z.number().optional(),
-  currentInternalAuthorsSupported: z.number().optional(),
-  supportedAuthorLogins: z.array(z.string()).optional().default([]),
-  currentEmployee: z.boolean().optional(),
-  currentMaintainer: z.boolean().optional(),
-  activeLead: z.boolean().optional(),
-  earlyMaintainer: z.boolean().optional(),
-  firstWriteAt: z.string(),
-  qualifiedAt: z.string(),
-  lastWriteAt: z.string(),
-  writeOperations: z.number(),
-  current: z.boolean(),
-  earlyCohort: z.boolean(),
-});
-export type OrgMaintainer = z.infer<typeof orgMaintainerSchema>;
-
-export const orgMaintainerMovementSchema = z.object({
-  githubUserId: z.string(),
-  login: z.string(),
-  destinationOrganizationId: z.string(),
-  destinationOrganizationName: z.string(),
-  destinationOrganizationSlug: z.string(),
-  sourceLastMergeAt: z.string().optional(),
-  destinationFirstMergeAt: z.string().optional(),
-  sourceLastWriteAt: z.string(),
-  destinationFirstWriteAt: z.string(),
-  confirmedAt: z.string(),
-  earlyMaintainer: z.boolean().optional(),
-  earlyCohort: z.boolean(),
-  status: z.enum(['active', 'observed', 'returned', 'superseded']),
-  returnedAt: z.string().nullable(),
-});
-export type OrgMaintainerMovement = z.infer<typeof orgMaintainerMovementSchema>;
-
-export const orgTeamDetailsSchema = z.object({
-  organizationId: z.string(),
-  organizationName: z.string(),
-  coverageStatus: z.enum(['current', 'unknown']).nullable(),
-  asOf: z.string().nullable(),
-  currentMaintainerCount: z.number().nullable(),
-  activeLeadCount: z.number().nullable().optional().default(null),
-  newActiveLeadCount: z.number().nullable().optional().default(null),
-  steppedDownLeadCount: z.number().nullable().optional().default(null),
-  movedLeadCount: z.number().nullable().optional().default(null),
-  earlyLeadDepartureCount: z.number().nullable().optional().default(null),
-  newMaintainerCount: z.number().nullable(),
-  movedMaintainerCount: z.number().nullable(),
-  earlyMovedMaintainerCount: z.number().nullable(),
-  growingTeam: z.boolean().nullable(),
-  shrinkingTeam: z.boolean().nullable(),
-  earlyTeamShrinkage: z.boolean().nullable(),
-  githubOrganizations: z.array(z.string()),
-  maintainers: orgTeamPageSchema(orgMaintainerSchema),
-  movements: orgTeamPageSchema(orgMaintainerMovementSchema),
-});
-export type OrgTeamDetails = z.infer<typeof orgTeamDetailsSchema>;
 
 export const orgInfiniteListPageSchema = infiniteListPageSchema.extend({
   data: z.array(orgListItemSchema),

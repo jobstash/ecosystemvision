@@ -1,6 +1,7 @@
 import { MW_URL } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
+import { suppressOrganizationIntelligence } from '@/orgs/core/public-aggregation';
 import { orgDetailsSchema } from '@/orgs/core/schemas';
 
 const label = 'getOrgDetails';
@@ -8,9 +9,11 @@ const label = 'getOrgDetails';
 export const getOrgDetails = async (slug: string) => {
   const url = `${MW_URL}/organizations/details/slug/${slug}`;
 
-  return mwGET({
+  return suppressOrganizationIntelligence(
+    await mwGET({
     url,
     label,
     responseSchema: orgDetailsSchema,
-  });
+    }),
+  );
 };

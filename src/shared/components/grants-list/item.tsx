@@ -36,7 +36,7 @@ export const GrantsListItem = (props: Props) => {
       icon: <BankIcon />,
     },
     amount && {
-      text: `Raised Amount: $${formatNumber(amount)}`,
+      text: `Funding amount: $${formatNumber(amount)}`,
       icon: <PaperbillIcon />,
     },
     ...(hasTokenAmount

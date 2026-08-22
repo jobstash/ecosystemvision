@@ -12,7 +12,7 @@
     "lint:staged": "lint-staged",
     "lint:fix": "eslint ./src --fix",
     "format": "prettier --write 'src/**/*.{js,ts,tsx,jsx,json,css,html}'",
-    "test": "echo \"Skipping tests ...\" && exit 0",
+    "test": "node --test tools/scripts/*.test.js",
     "prepare": "husky",
     "push": "git push origin $(git rev-parse --abbrev-ref HEAD)",
     "pull": "node scripts/pull-remote.js",

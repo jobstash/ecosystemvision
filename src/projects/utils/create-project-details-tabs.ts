@@ -20,7 +20,10 @@ export const createProjectDetailsTabs = (project: ProjectDetails) => {
 
   const grantsCount = project.grants.length;
   if (grantsCount > 0) {
-    const text = grantsCount === 1 ? 'Grant' : `Grants (${grantsCount})`;
+    const text =
+      grantsCount === 1
+        ? 'Historical grant funding'
+        : `Historical grant funding (${grantsCount})`;
     tabs.push({
       key: 'grants',
       text,

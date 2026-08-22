@@ -25,7 +25,7 @@ const DISCOVERY_PATHS = [
   {
     title: 'Organizations',
     description:
-      'Inspect teams, maintainers, projects, funding, and current hiring activity.',
+      'Inspect projects, funding, aggregate developer signals, and current hiring activity.',
     href: HREFS.ORGS_PAGE,
     icon: Building2,
   },
@@ -46,7 +46,7 @@ const DISCOVERY_PATHS = [
   {
     title: 'People',
     description:
-      'Follow internal contributors, maintainers, lead developers, and organization movement over time.',
+      'Follow privacy-preserving developer and maintainer trends across organizations over time.',
     href: HREFS.PEOPLE_PAGE,
     icon: Users,
   },
@@ -73,19 +73,19 @@ export const HomePage = () => (
               Ecosystem intelligence
             </p>
             <h1 className="mt-5 font-grotesk text-48 font-medium leading-[1.03] -tracking-wider md:text-64 lg:text-[78px]">
-              See the organizations—and the people moving between them.
+              See organizations and aggregate ecosystem movement.
             </h1>
             <p className="mt-7 max-w-3xl text-base leading-7 text-white/55 md:text-xl md:leading-8">
               Ecosystem Vision turns organization, project, fund, and GitHub
-              work history into an explorable map. Find a company, inspect its
-              maintainers, or watch an ecosystem grow and contract over time.
+              activity into an explorable map. Find a company or watch an
+              ecosystem grow and contract through privacy-preserving trends.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-5 text-sm font-medium text-black transition hover:bg-emerald-100"
                 href={HREFS.PEOPLE_PAGE}
               >
-                Explore people
+                Explore aggregate activity
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
               <Link

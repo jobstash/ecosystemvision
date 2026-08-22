@@ -11,18 +11,14 @@ const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
 const MAX_ATTEMPTS = 5;
 const MAX_URLS_PER_SITEMAP = 45_000;
 const SITEMAP_CHUNK_PATTERN = /^sitemap-\d+\.xml$/;
+const PEOPLE_AGGREGATE_URL = 'https://ecosystem.vision/people';
 
 const wait = (milliseconds) =>
   new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 const minimalSitemap = () => {
   const updated = new Date().toISOString();
-  const paths = [
-    '',
-    '/organizations',
-    '/projects',
-    '/funds',
-  ];
+  const paths = ['', '/organizations', '/projects', '/funds', '/people'];
   const entries = paths
     .map(
       (pathname) =>
@@ -79,18 +75,53 @@ const removeStaleChunks = (activeChunkNames) => {
   }
 };
 
-const writeSitemap = (rawSitemap) => {
-  const urlEntries = rawSitemap.match(/<url\b[\s\S]*?<\/url>/g) ?? [];
-
-  if (urlEntries.length <= MAX_URLS_PER_SITEMAP) {
-    removeStaleChunks(new Set());
-    writeIfChanged(SITEMAP_PATH, rawSitemap);
-    return;
+const pathnameFromEntry = (entry) => {
+  const location = entry.match(/<loc>([^<]+)<\/loc>/)?.[1];
+  if (!location) return null;
+  try {
+    return new URL(location).pathname;
+  } catch {
+    return undefined;
   }
+};
 
+const isRemovedIdentityPath = (pathname) =>
+  /^\/people\/[^/]+\/?$/.test(pathname) ||
+  /^\/organizations\/(?:info|names)\/[^/]+\/team\/?$/.test(pathname);
+
+const sanitizeSitemapEntries = (rawSitemap) => {
+  const entries = rawSitemap.match(/<url\b[\s\S]*?<\/url>/g) ?? [];
+  const retained = entries.filter((entry) => {
+    const pathname = pathnameFromEntry(entry);
+    return (
+      pathname !== undefined &&
+      (pathname === null || !isRemovedIdentityPath(pathname))
+    );
+  });
+  const hasPeopleAggregate = retained.some(
+    (entry) => pathnameFromEntry(entry) === '/people',
+  );
+
+  if (!hasPeopleAggregate) {
+    retained.push(`  <url><loc>${PEOPLE_AGGREGATE_URL}</loc></url>`);
+  }
+  return retained;
+};
+
+const renderUrlset = (urlsetTag, entries) =>
+  `<?xml version="1.0" encoding="UTF-8"?>\n${urlsetTag}\n${entries.join('\n')}\n</urlset>\n`;
+
+const writeSitemap = (rawSitemap) => {
+  const urlEntries = sanitizeSitemapEntries(rawSitemap);
   const urlsetTag = rawSitemap.match(/<urlset\b[^>]*>/)?.[0];
   if (!urlsetTag) {
     throw new Error('Middleware sitemap is missing its urlset root element');
+  }
+
+  if (urlEntries.length <= MAX_URLS_PER_SITEMAP) {
+    removeStaleChunks(new Set());
+    writeIfChanged(SITEMAP_PATH, renderUrlset(urlsetTag, urlEntries));
+    return;
   }
 
   const chunkNames = new Set();
@@ -101,7 +132,7 @@ const writeSitemap = (rawSitemap) => {
   ) {
     const filename = `sitemap-${chunkNumber}.xml`;
     const chunk = urlEntries.slice(offset, offset + MAX_URLS_PER_SITEMAP);
-    const contents = `<?xml version="1.0" encoding="UTF-8"?>\n${urlsetTag}\n${chunk.join('\n')}\n</urlset>\n`;
+    const contents = renderUrlset(urlsetTag, chunk);
     chunkNames.add(filename);
     writeIfChanged(path.join(PUBLIC_DIR, filename), contents);
   }
@@ -152,7 +183,16 @@ async function generateSitemap() {
   writeSitemap(newSitemap);
 }
 
-generateSitemap().catch((err) => {
-  console.error('Error generating sitemap:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  generateSitemap().catch((err) => {
+    console.error('Error generating sitemap:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  isRemovedIdentityPath,
+  pathnameFromEntry,
+  renderUrlset,
+  sanitizeSitemapEntries,
+};

@@ -27,9 +27,6 @@ export const OrganizationIntelligenceBadges = ({
     steppedDownLeadCount,
     movedLeadCount,
     earlyLeadDepartureCount,
-    growingTeam,
-    shrinkingTeam,
-    earlyTeamShrinkage,
   } = intelligence;
   const hasCurrentTeamCoverage = teamCoverageStatus === 'current';
 
@@ -53,18 +50,18 @@ export const OrganizationIntelligenceBadges = ({
           Funded in the last 6 months
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && currentMaintainerCount !== null ? (
+      {hasCurrentTeamCoverage && canPublishCount(currentMaintainerCount) ? (
         <span className={BADGE_CLASS_NAME}>
           {currentMaintainerCount} current{' '}
           {currentMaintainerCount === 1 ? 'maintainer' : 'maintainers'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && activeLeadCount !== null ? (
+      {hasCurrentTeamCoverage && canPublishCount(activeLeadCount) ? (
         <span className={BADGE_CLASS_NAME}>
           {activeLeadCount} active {activeLeadCount === 1 ? 'lead' : 'leads'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && (newActiveLeadCount ?? 0) > 0 ? (
+      {hasCurrentTeamCoverage && (newActiveLeadCount ?? 0) >= 5 ? (
         <span
           className={cn(
             BADGE_CLASS_NAME,
@@ -75,7 +72,7 @@ export const OrganizationIntelligenceBadges = ({
           {newActiveLeadCount === 1 ? 'lead' : 'leads'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && (steppedDownLeadCount ?? 0) > 0 ? (
+      {hasCurrentTeamCoverage && (steppedDownLeadCount ?? 0) >= 5 ? (
         <span
           className={cn(BADGE_CLASS_NAME, 'border-amber-300/25 text-amber-200')}
         >
@@ -83,13 +80,13 @@ export const OrganizationIntelligenceBadges = ({
           {steppedDownLeadCount === 1 ? 'step-down' : 'step-downs'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && (movedLeadCount ?? 0) > 0 ? (
+      {hasCurrentTeamCoverage && (movedLeadCount ?? 0) >= 5 ? (
         <span className={cn(BADGE_CLASS_NAME, 'text-violet-200')}>
           {movedLeadCount} lead{' '}
           {movedLeadCount === 1 ? 'movement' : 'movements'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && (earlyLeadDepartureCount ?? 0) > 0 ? (
+      {hasCurrentTeamCoverage && (earlyLeadDepartureCount ?? 0) >= 5 ? (
         <span
           className={cn(
             BADGE_CLASS_NAME,
@@ -100,19 +97,8 @@ export const OrganizationIntelligenceBadges = ({
           {earlyLeadDepartureCount === 1 ? 'departure' : 'departures'}
         </span>
       ) : null}
-      {hasCurrentTeamCoverage && newActiveLeadCount === null && growingTeam ? (
-        <span className={BADGE_CLASS_NAME}>New active leads</span>
-      ) : null}
-      {hasCurrentTeamCoverage &&
-      steppedDownLeadCount === null &&
-      shrinkingTeam ? (
-        <span className={BADGE_CLASS_NAME}>Lead step-downs</span>
-      ) : null}
-      {hasCurrentTeamCoverage &&
-      earlyLeadDepartureCount === null &&
-      earlyTeamShrinkage ? (
-        <span className={BADGE_CLASS_NAME}>Early lead departures</span>
-      ) : null}
     </div>
   );
 };
+const canPublishCount = (value: number | null) =>
+  value !== null && (value === 0 || value >= 5);

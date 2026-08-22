@@ -34,9 +34,8 @@ export const HomePeopleSnapshot = () => {
             Work history makes ecosystem change visible.
           </h2>
           <p className="mt-3 text-sm leading-6 text-white/50 md:text-base">
-            Canonical internal contributors are counted once per month.
-            Maintainers are the employees who merge pull requests; active leads
-            are the maintainers still merging recently.
+            Developer and maintainer activity is shown only as aggregate trends.
+            Public cells representing fewer than five people are suppressed.
           </p>
         </div>
         <Link
@@ -71,11 +70,11 @@ const SnapshotMetric = ({
   value,
 }: {
   label: string;
-  value?: number;
+  value?: number | null;
 }) => (
   <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-4">
     <p className="text-3xl font-medium tabular-nums text-white">
-      {value?.toLocaleString() ?? '—'}
+      {value === null ? 'Suppressed' : (value?.toLocaleString() ?? '—')}
     </p>
     <p className="mt-1 text-xs text-white/40">{label}</p>
   </div>

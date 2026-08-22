@@ -2,6 +2,7 @@ import { MW_URL, PAGE_SIZE } from '@/shared/core/envs';
 import { createUrlWithSearchParams } from '@/shared/utils/create-url-with-search-params';
 import { mwGET } from '@/shared/utils/mw-get';
 
+import { suppressOrganizationIntelligence } from '@/orgs/core/public-aggregation';
 import { orgInfiniteListPageSchema } from '@/orgs/core/schemas';
 
 export const getOrgList = async (
@@ -13,9 +14,13 @@ export const getOrgList = async (
     searchParams,
   );
 
-  return mwGET({
+  const pageData = await mwGET({
     url,
     label: 'getOrgList',
     responseSchema: orgInfiniteListPageSchema,
   });
+  return {
+    ...pageData,
+    data: pageData.data.map(suppressOrganizationIntelligence),
+  };
 };

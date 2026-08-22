@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
@@ -23,16 +22,13 @@ import {
   PeopleActivityMapRow,
   PeopleAtlas,
   PeopleAtlasNode,
-  PeopleDirectory,
   PeopleMetric,
   PeopleOverview,
 } from '@/people/core/schemas';
 import { getPeopleActivityMap, getPeopleAtlas } from '@/people/data/get-people';
 
 import { PeopleActivityMapView } from '../components/people-activity-map';
-import { PeopleDirectory as PeopleDirectoryView } from '../components/people-directory';
 import { PeoplePulseChart } from '../components/people-pulse-chart';
-import { PersonDrawer } from '../components/person-drawer';
 
 const EcosystemAtlas = dynamic(
   () =>
@@ -64,7 +60,6 @@ interface Props {
   initialOverview: PeopleOverview;
   initialActivityMap: PeopleActivityMap;
   initialAtlas: PeopleAtlas;
-  initialDirectory: PeopleDirectory;
 }
 
 const METRICS: Array<{ value: PeopleMetric; label: string }> = [
@@ -84,7 +79,6 @@ export const PeoplePage = ({
   initialOverview,
   initialActivityMap,
   initialAtlas,
-  initialDirectory,
 }: Props) => {
   const [view, setView] = useState<View>('atlas');
   const [metric, setMetric] = useState<PeopleMetric>('activePeople');
@@ -96,7 +90,6 @@ export const PeoplePage = ({
   const [page, setPage] = useState(1);
   const [selectedOrganization, setSelectedOrganization] =
     useState<SelectedOrganization>();
-  const [selectedPerson, setSelectedPerson] = useState<string>();
   const periods = useMemo(
     () => initialOverview.points.map((point) => point.period),
     [initialOverview.points],
@@ -158,9 +151,9 @@ export const PeoplePage = ({
             Watch an ecosystem form, grow, and move.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-7 text-white/55 md:text-lg">
-            Explore the canonical internal employees behind open-source
-            organizations, the maintainers who merge their work, and how those
-            people move through the ecosystem over time.
+            Explore privacy-preserving aggregate developer activity,
+            maintainer trends, and organization movement over time. Counts and
+            flows smaller than five are suppressed.
           </p>
         </header>
 
@@ -312,20 +305,7 @@ export const PeoplePage = ({
           ) : null}
         </section>
 
-        <div className="mt-20">
-          <PeopleDirectoryView
-            initialData={initialDirectory}
-            organizationKey={selectedOrganization?.organizationKey}
-            organizationName={selectedOrganization?.organizationName}
-            onClearOrganization={() => setSelectedOrganization(undefined)}
-            onSelectPerson={setSelectedPerson}
-          />
-        </div>
       </div>
-      <PersonDrawer
-        login={selectedPerson}
-        onClose={() => setSelectedPerson(undefined)}
-      />
     </main>
   );
 };
@@ -337,12 +317,12 @@ const HeadlineMetric = ({
 }: {
   icon: React.ReactNode;
   label: string;
-  value?: number;
+  value?: number | null;
 }) => (
   <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-4">
     <div className="text-emerald-200/75">{icon}</div>
     <p className="mt-4 text-3xl font-medium tabular-nums">
-      {value?.toLocaleString() ?? '—'}
+      {value === null ? 'Suppressed' : (value?.toLocaleString() ?? '—')}
     </p>
     <p className="mt-1 text-xs text-white/40">{label}</p>
   </div>
@@ -402,19 +382,11 @@ const SelectedOrganizationCard = ({
         </h3>
         <p className="mt-1 text-xs text-white/45">
           {node
-            ? `${node.activePeople.toLocaleString()} active people · ${node.activeMaintainers.toLocaleString()} maintainers`
-            : 'The People directory is now filtered to this organization.'}
+            ? `${formatAggregate(node.activePeople)} active people · ${formatAggregate(node.activeMaintainers)} maintainers`
+            : 'Select a period to inspect this organization’s aggregate trend.'}
         </p>
       </div>
       <div className="flex gap-2">
-        {organization.organizationId ? (
-          <Link
-            href={`/organizations/info/${organization.organizationSlug}/team`}
-            className="rounded-lg border border-white/10 px-3 py-2 text-sm text-white/70 hover:bg-white/10"
-          >
-            Team detail
-          </Link>
-        ) : null}
         <button
           type="button"
           className="rounded-lg border border-white/10 px-3 py-2 text-sm text-white/50 hover:bg-white/10"
@@ -426,6 +398,9 @@ const SelectedOrganizationCard = ({
     </div>
   );
 };
+
+const formatAggregate = (value: number | null) =>
+  value === null ? 'suppressed' : value.toLocaleString();
 
 const formatPeriod = (value: string) =>
   new Intl.DateTimeFormat('en', {

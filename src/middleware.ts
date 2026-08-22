@@ -1,13 +1,32 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import {
+  isRemovedIdentityPath,
+  REMOVED_IDENTITY_BODY,
+  REMOVED_IDENTITY_HEADERS,
+} from '@/privacy/removed-identity-routes';
+
 export const config = {
-  matcher: ['/_next/static/chunks/:path*', '/organizations/:slug/details'],
+  matcher: [
+    '/_next/static/chunks/:path*',
+    '/organizations/:slug/details',
+    '/organizations/info/:slug/team',
+    '/organizations/names/:slug/team',
+    '/people/:path+',
+  ],
 };
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { pathname } = url;
+
+  if (isRemovedIdentityPath(pathname)) {
+    return new NextResponse(REMOVED_IDENTITY_BODY, {
+      status: 410,
+      headers: REMOVED_IDENTITY_HEADERS,
+    });
+  }
 
   // Handle organization details redirect
   const orgDetailsMatch = pathname.match(/^\/organizations\/([^/]+)\/details$/);

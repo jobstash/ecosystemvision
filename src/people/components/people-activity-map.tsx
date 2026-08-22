@@ -42,7 +42,11 @@ export const PeopleActivityMapView = ({
     () =>
       Math.max(
         1,
-        ...data.rows.flatMap((row) => row.series.map((point) => point.value)),
+        ...data.rows.flatMap((row) =>
+          row.series.flatMap((point) =>
+            point.value === null ? [] : [point.value],
+          ),
+        ),
       ),
     [data.rows],
   );
@@ -131,22 +135,28 @@ export const PeopleActivityMapView = ({
                       {row.organizationName}
                     </span>
                     <span className="text-xs tabular-nums text-white/45">
-                      {row.currentValue.toLocaleString()}
+                      {formatAggregate(row.currentValue)}
                     </span>
                   </button>
                   {periods.map((period) => {
-                    const value = values.get(period) ?? 0;
+                    const value = values.get(period);
+                    const suppressed = value === null;
+                    const description = suppressed
+                      ? 'suppressed (fewer than 5)'
+                      : (value ?? 0).toLocaleString();
                     return (
                       <button
                         type="button"
                         key={period}
-                        aria-label={`${row.organizationName}, ${period}: ${value.toLocaleString()}`}
+                        aria-label={`${row.organizationName}, ${period}: ${description}`}
                         className="shrink-0 border-r border-white/[0.035] transition hover:outline hover:outline-1 hover:outline-white/70"
                         style={{
                           width: CELL_WIDTH,
-                          backgroundColor: color(value),
+                          backgroundColor: suppressed
+                            ? 'rgba(255,255,255,0.015)'
+                            : color(value ?? 0),
                         }}
-                        title={`${row.organizationName} · ${period} · ${value.toLocaleString()}`}
+                        title={`${row.organizationName} · ${period} · ${description}`}
                         onClick={() => onSelect(row)}
                       />
                     );
@@ -209,3 +219,6 @@ const Empty = ({ text }: { text: string }) => (
     {text}
   </div>
 );
+
+const formatAggregate = (value: number | null) =>
+  value === null ? 'suppressed' : value.toLocaleString();
