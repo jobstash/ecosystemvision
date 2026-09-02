@@ -24,7 +24,7 @@ export const LinkWrapper = ({ nav, slug, children }: Props) => {
   };
 
   return (
-    <Link href={href} onClick={onClick}>
+    <Link href={href} prefetch={false} onClick={onClick}>
       {children}
     </Link>
   );

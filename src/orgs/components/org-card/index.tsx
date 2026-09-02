@@ -45,7 +45,7 @@ export const OrgCard = (props: Props) => {
         data-testid={ORG_TEST_IDS.ORG_CARD}
         data-uuid={slug}
         data-is-init={isInit ?? undefined}
-        prefetch={true}
+        prefetch={false}
         className="flex flex-col gap-3 p-6"
       >
         <LogoTitle src={src} name={name}>

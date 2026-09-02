@@ -44,7 +44,7 @@ export const ProjectCard = (props: Props) => {
         data-testid={PROJECT_TEST_IDS.PROJECT_CARD}
         data-uuid={slug}
         data-is-init={isInit ?? undefined}
-        prefetch={true}
+        prefetch={false}
         className="flex flex-col gap-3 p-6"
       >
         <LogoTitle src={src} name={name} />
