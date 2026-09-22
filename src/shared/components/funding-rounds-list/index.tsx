@@ -1,4 +1,5 @@
 import { FundingRound } from '@/shared/core/schemas';
+import { sortFundingRounds } from '@/shared/utils/funding-rounds';
 
 import { FundingRoundItem } from './item';
 
@@ -10,7 +11,7 @@ export const FundingRoundsList = ({ fundingRounds }: Props) => {
   const count = fundingRounds.length;
   const isGrid = count > 1;
 
-  const sortedFundingRounds = fundingRounds.sort((a, b) => b.date - a.date);
+  const sortedFundingRounds = sortFundingRounds(fundingRounds);
 
   return (
     <div className="flex flex-col gap-x-4 gap-y-2">
