@@ -3,7 +3,7 @@ import { HandCoinsIcon } from 'lucide-react';
 import { InfoTagProps } from '@/shared/core/types';
 import { cn } from '@/shared/utils/cn';
 import { formatNumber } from '@/shared/utils/format-number';
-import { shortTimestamp } from '@/shared/utils/short-timestamp';
+import { fundingDateLabel } from '@/shared/utils/funding-rounds';
 import { BankIcon } from '@/shared/components/icons/bank-icon';
 import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 import { InfoTag } from '@/shared/components/info-tag';
@@ -11,7 +11,7 @@ import { InfoTag } from '@/shared/components/info-tag';
 interface Props {
   showDivider: boolean;
   round: string | null;
-  date: number;
+  date: number | null;
   amount: number | null;
   isGrid?: boolean;
 }
@@ -25,7 +25,7 @@ export const FundingRoundItem = (props: Props) => {
       icon: <BankIcon />,
     },
     {
-      text: `Funding Date: ${shortTimestamp(date)}`,
+      text: `Funding Date: ${fundingDateLabel(date)}`,
       icon: <HandCoinsIcon size={16} />,
     },
     amount && {

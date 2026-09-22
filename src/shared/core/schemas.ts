@@ -22,7 +22,7 @@ export type Investor = z.infer<typeof investorSchema>;
 
 export const fundingRoundSchema = z.object({
   id: z.string().uuid(),
-  date: z.number(),
+  date: z.number().nullable(),
   roundName: z.string().nullable(),
   raisedAmount: z.number().nullable(),
   sourceLink: z.string().nullable(),

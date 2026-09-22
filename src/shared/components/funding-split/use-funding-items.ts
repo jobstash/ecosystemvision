@@ -2,10 +2,8 @@ import { useMemo, useState } from 'react';
 
 import { FundingRound } from '@/shared/core/schemas';
 import { formatNumber } from '@/shared/utils/format-number';
-import {
-  getTimestampYear,
-  shortTimestamp,
-} from '@/shared/utils/short-timestamp';
+import { fundingYearLabel } from '@/shared/utils/funding-rounds';
+import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { LineItem } from '@/shared/components/funding-split/types';
 
 const createLineItem = (
@@ -17,7 +15,7 @@ const createLineItem = (
   if (!raisedAmount) return null;
 
   const amount = raisedAmount;
-  const year = getTimestampYear(date).toString();
+  const year = fundingYearLabel(date);
   const percentage = (amount / grandTotal) * 100;
   const isActive = activeGroups.has(year);
   const title = roundName ?? 'Unknown';
