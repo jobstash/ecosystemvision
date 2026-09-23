@@ -3,6 +3,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { getQueryClient } from '@/shared/utils/get-query-client';
 
 import { orgQueryKeys } from '@/orgs/core/query-keys';
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 import { getOrgDetails } from '@/orgs/data/get-org-details';
 import { getOrgList } from '@/orgs/data/get-org-list';
 
@@ -32,12 +33,13 @@ const OrgListPage = async ({ searchParams }: Props) => {
   await Promise.all(
     orgListResult.pages
       .flatMap((page) => page.data)
-      .map(({ normalizedName: slug }) =>
-        queryClient.prefetchQuery({
+      .map((org) => {
+        const slug = organizationRouteKey(org);
+        return queryClient.prefetchQuery({
           queryKey: orgQueryKeys.details(slug),
           queryFn: () => getOrgDetails(slug),
-        }),
-      ),
+        });
+      }),
   );
 
   return (

@@ -6,6 +6,7 @@ import { use } from 'react';
 import { ROUTE_TABS } from '@/shared/core/constants';
 import { FRONTEND_URL } from '@/shared/core/envs';
 
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 import { useProjectDetails } from '@/projects/hooks/use-project-details';
 
 const ProjectDetailsCard = dynamic(() =>
@@ -39,7 +40,7 @@ export const ProjectParamsPage = ({ params }: Props) => {
     return (
       <OrgDetailsCard
         org={data.organizations[0]}
-        actionHref={`${FRONTEND_URL}/organizations/info/${data.organizations[0].normalizedName}`}
+        actionHref={`${FRONTEND_URL}/organizations/info/${organizationRouteKey(data.organizations[0])}`}
       />
     );
   }

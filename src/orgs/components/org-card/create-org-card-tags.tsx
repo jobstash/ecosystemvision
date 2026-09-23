@@ -8,10 +8,10 @@ import { PaperbillIcon } from '@/shared/components/icons/paperbill-icon';
 import { UsersThreeIcon } from '@/shared/components/icons/users-three-icon';
 
 import { OrgListItem } from '@/orgs/core/schemas';
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 
 export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
   const {
-    normalizedName: slug,
     headcountEstimate,
     projectCount,
     lastFundingAmount,
@@ -19,7 +19,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): InfoTagProps[] => {
   } = orgListItem;
 
   const tags: InfoTagProps[] = [];
-  const baseRoute = `/organizations/${slug}`;
+  const baseRoute = `/organizations/info/${organizationRouteKey(orgListItem)}`;
 
   if (projectCount > 0) {
     tags.push({

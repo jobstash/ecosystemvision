@@ -6,6 +6,8 @@ import { Divider } from '@/shared/components/divider';
 import { Heading } from '@/shared/components/heading';
 import { Text } from '@/shared/components/text';
 
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
+
 import { FundingRounds } from './funding-rounds';
 import { Investors } from './investors';
 
@@ -13,6 +15,7 @@ const CTA_TEXT = 'Explore Organization';
 
 interface Props {
   org: {
+    orgId?: string | null;
     name: string;
     normalizedName: string;
     description: string;
@@ -23,10 +26,12 @@ interface Props {
 }
 
 export const OrgDetailsCard = ({
-  org: { name, description, fundingRounds, investors, normalizedName },
+  org: { name, description, fundingRounds, investors, normalizedName, orgId },
   actionHref,
 }: Props) => {
-  const exploreHref = actionHref || `/organizations/info/${normalizedName}`;
+  const exploreHref =
+    actionHref ||
+    `/organizations/info/${organizationRouteKey({ normalizedName, orgId })}`;
 
   return (
     <DetailsPanelCardWrapper>
