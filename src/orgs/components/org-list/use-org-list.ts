@@ -7,6 +7,7 @@ import { HREFS } from '@/shared/core/constants';
 import { getQueryClient } from '@/shared/utils/get-query-client';
 
 import { orgQueryKeys } from '@/orgs/core/query-keys';
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 import { initOrgAtom, orgTotalCountAtom } from '@/orgs/core/atoms';
 import { initPathAtom } from '@/shared/core/atoms';
 import { getOrgDetails } from '@/orgs/data/get-org-details';
@@ -44,7 +45,7 @@ export const useOrgList = ({ searchParams }: Props) => {
     if (isSuccess && data) {
       const items = data.pages.flatMap((d) => d.data);
       for (const item of items) {
-        const { normalizedName: slug } = item;
+        const slug = organizationRouteKey(item);
         queryClient.prefetchQuery({
           queryKey: orgQueryKeys.details(slug),
           queryFn: () => getOrgDetails(slug),
@@ -69,7 +70,7 @@ export const useOrgList = ({ searchParams }: Props) => {
 
   // Dedupe init-card if not list-page ssr
   const orgs = !isOrgListSSR
-    ? allOrgs.filter((d) => d.normalizedName !== initOrg?.normalizedName)
+    ? allOrgs.filter((d) => d.orgId !== initOrg?.orgId)
     : allOrgs;
 
   return {

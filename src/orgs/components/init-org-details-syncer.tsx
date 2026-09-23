@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 
 import { useIsDesktop } from '@/shared/hooks/use-media-query';
 
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 import { activeOrgSlugAtom, initOrgAtom } from '@/orgs/core/atoms';
 import { useOrgDetails } from '@/orgs/hooks/use-org-details';
 
@@ -31,7 +32,7 @@ export const InitOrgDetailsSyncer = ({ slug }: Props) => {
   // Set active org slug on desktop
   useEffect(() => {
     if (isDesktop && !activeOrgSlug && data) {
-      setActiveOrgSlug(data.normalizedName);
+      setActiveOrgSlug(organizationRouteKey(data));
     }
   }, [activeOrgSlug, data, isDesktop, setActiveOrgSlug]);
 

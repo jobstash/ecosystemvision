@@ -7,6 +7,7 @@ import { getPluralText } from '@/shared/utils/get-plural-text';
 import { DetailsPanelTabs } from '@/shared/components/details-panel/tabs';
 
 import { OrgDetails } from '@/orgs/core/schemas';
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 import { useOrgDetails } from '@/orgs/hooks/use-org-details';
 
 interface Props {
@@ -43,7 +44,7 @@ const createTabs = (org: OrgDetails) => {
   return tabs.map((tab) => ({
     ...tab,
     href: encodeURI(
-      `${HREFS.ORGS_PAGE}/names/${org.normalizedName}${tab.href}`,
+      `${HREFS.ORGS_PAGE}/names/${organizationRouteKey(org)}${tab.href}`,
     ).toString(),
   }));
 };

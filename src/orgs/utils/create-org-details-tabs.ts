@@ -1,9 +1,10 @@
 import { ROUTE_SECTIONS } from '@/shared/core/constants';
 
 import { OrgDetails } from '@/orgs/core/schemas';
+import { organizationRouteKey } from '@/orgs/utils/organization-route';
 
 export const createOrgDetailsTabs = (org: OrgDetails) => {
-  const hrefPrefix = `/${ROUTE_SECTIONS.ORGS}/info/${org.normalizedName}`;
+  const hrefPrefix = `/${ROUTE_SECTIONS.ORGS}/info/${organizationRouteKey(org)}`;
 
   const tabs = [{ key: 'overview', text: 'Overview', href: `${hrefPrefix}` }];
 
