@@ -9,6 +9,12 @@ Pillar lookup responses distinguish missing content from backend failures:
 malformed successful payloads, and upstream service failures remain errors.
 Job identifiers are nonempty opaque strings, not necessarily UUIDs; imported
 source identifiers must survive organization detail and job rendering unchanged.
+Job publication timestamps follow middleware's `number | null` contract:
+finite timestamps are preserved and `null` means the publication date is unknown.
+Organization job cards omit unknown dates without inventing a date or hiding the
+job. Missing fields, strings, and non-finite numbers remain contract errors.
+The AQ/AR regression covers three unknown-date jobs, mixed known/unknown dates,
+the organization route entrypoints, and the real compact job card rendering.
 
 Middleware GET failures retain their HTTP status, endpoint path, and schema
 issue codes/paths; network failures retain their original error and cause.

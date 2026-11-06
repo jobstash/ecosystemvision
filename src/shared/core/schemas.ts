@@ -67,7 +67,7 @@ export const jobInfoSchema = z
     url: z.string().url(),
     title: z.string(),
     shortUUID: z.string().length(6),
-    timestamp: z.number(),
+    timestamp: z.number().finite().nullable(),
 
     // Details
     requirements: z.array(z.string()),

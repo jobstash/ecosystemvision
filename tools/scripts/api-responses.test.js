@@ -30,10 +30,14 @@ const loadAPI = (fetchResponse) => {
       if (name === 'next/navigation') {
         return { notFound: () => { throw missing; } };
       }
+      if (name === 'lucide-react') {
+        return { ExternalLinkIcon: () => null };
+      }
       if (name === '@/shared/core/envs') {
         return {
           MW_URL: 'http://127.0.0.1:4319',
           FRONTEND_URL: 'https://ecosystem.example',
+          JOBSTASH_URL: 'https://jobs.example',
           PAGE_SIZE: '20',
         };
       }
@@ -74,6 +78,10 @@ const loadAPI = (fetchResponse) => {
     ...load(path.join(root, 'shared/core/errors.ts')),
     loadPillarRoute: (nav) =>
       load(path.join(root, `app/${nav}/[pillar]/[item]/page.tsx`)),
+    loadOrganizationRoute: (entrypoint) =>
+      load(path.join(root, `app/organizations/info/[slug]/${entrypoint}.tsx`)),
+    loadJobCard: () => load(path.join(root, 'shared/components/compact-job-card.tsx')),
+    jobTimestampSchema: load(path.join(root, 'shared/core/schemas.ts')).jobInfoSchema.shape.timestamp,
     missing,
     requests,
     diagnostics,
@@ -338,6 +346,65 @@ test('AP: organization details accept imported job IDs and UUIDs unchanged', asy
   const result = await getOrgDetails('source-id-org');
   assert.deepEqual(result.jobs.map(({ id }) => id), organization.jobs.map(({ id }) => id));
   assert.equal(result.name, organization.name);
+});
+
+test('AQ/AR: three jobs with unknown publication dates survive parsing and organization routes', async () => {
+  for (const timestamps of [[null, null, null], [1700000000000, null, 1700000100000]]) {
+    const payload = {
+      ...organization,
+      jobs: timestamps.map((timestamp, index) => ({
+        ...organization.jobs[0], id: `fixture-job-${index}`, timestamp,
+      })),
+    };
+    const api = loadAPI(() => Response.json(payload));
+    const result = await api.getOrgDetails('loopscale');
+    assert.deepEqual(result.jobs.map(({ timestamp }) => timestamp), timestamps);
+    assert.deepEqual(result.jobs.map(({ id }) => id), payload.jobs.map(({ id }) => id));
+    for (const entrypoint of ['layout', 'page', '[tab]/page']) {
+      const rendered = await api.loadOrganizationRoute(entrypoint).default({
+        params: Promise.resolve({ slug: 'loopscale', tab: 'jobs' }),
+        children: null,
+      });
+      assert.ok(rendered, entrypoint);
+    }
+    assert.deepEqual(api.diagnostics, []);
+  }
+});
+
+test('AQ/AR: missing and malformed job dates remain errors, not missing organizations', async () => {
+  for (const timestamp of [undefined, '1700000000000', '', {}, true]) {
+    const api = loadAPI(() => Response.json({
+      ...organization,
+      jobs: [{ ...organization.jobs[0], timestamp }],
+    }));
+    await assert.rejects(api.getOrgDetails('loopscale'), (error) => {
+      assert.ok(error instanceof api.ResponseError);
+      assert.notEqual(error, api.missing);
+      assert.deepEqual(JSON.parse(error.info).details[0].path, ['jobs', 0, 'timestamp']);
+      return true;
+    });
+  }
+  // JSON serializes non-finite numbers to null; check the actual schema directly.
+  const { jobTimestampSchema } = loadAPI(() => Response.json(organization));
+  for (const timestamp of [NaN, Infinity, -Infinity]) {
+    assert.equal(jobTimestampSchema.safeParse(timestamp).success, false);
+  }
+});
+
+test('AQ/AR: actual job card keeps undated jobs visible without inventing publication metadata', () => {
+  const { renderToStaticMarkup } = require('react-dom/server');
+  const { createElement } = require('react');
+  const { CompactJobCard } = loadAPI(() => Response.json(organization)).loadJobCard();
+  for (const publishedTimestamp of [null, 1700000000000]) {
+    const html = renderToStaticMarkup(createElement(CompactJobCard, {
+      job: { ...organization.jobs[0], organizationName: organization.name, publishedTimestamp },
+    }));
+    assert.match(html, /Example Engineer/);
+    assert.match(html, /abc123/);
+    assert.doesNotMatch(html, /Invalid Date|1970|undefined|null/);
+    if (publishedTimestamp === null) assert.doesNotMatch(html, /Nov|2023/);
+    else assert.match(html, /2023/);
+  }
 });
 
 test('AP: empty, numeric, or missing job IDs still fail the detail contract', async () => {
