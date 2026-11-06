@@ -5,6 +5,9 @@ export class ResponseError extends Error {
   constructor(message: string, res: Response, info?: string) {
     super(message);
     this.res = res;
+    // Preserve the response for callers, but do not log its URL, headers, or body
+    // when Next.js or an error reporter inspects enumerable error properties.
+    Object.defineProperty(this, 'res', { enumerable: false });
     this.info = info ?? null;
   }
 

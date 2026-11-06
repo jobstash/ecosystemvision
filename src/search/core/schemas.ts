@@ -60,11 +60,17 @@ export const pillarInfoDtoSchema = z.object({
 });
 export type PillarInfoDto = z.infer<typeof pillarInfoDtoSchema>;
 
-export const pillarInfoResponseSchema = z.object({
-  success: z.boolean(),
-  message: z.string(),
-  data: pillarInfoDtoSchema,
-});
+export const pillarInfoResponseSchema = z.discriminatedUnion('success', [
+  z.object({
+    success: z.literal(true),
+    message: z.string(),
+    data: pillarInfoDtoSchema.nullable(),
+  }),
+  z.object({
+    success: z.literal(false),
+    message: z.string(),
+  }),
+]);
 export type PillarInfoResponse = z.infer<typeof pillarInfoResponseSchema>;
 
 export const pillarInfoSchema = z.object({
