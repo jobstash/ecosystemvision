@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@heroui/spinner';
+import { Spinner } from '@heroui/react';
 
 import { DetailsPanelHeader } from '@/shared/components/details-panel/header';
 
@@ -13,7 +13,7 @@ interface Props {
 export const ProjectDetailsPanelHeader = ({ slug }: Props) => {
   const { data } = useProjectDetails(slug);
 
-  if (!data) return <Spinner size="sm" color="white" />;
+  if (!data) return <Spinner size="sm" color="current"  />;
   if (data.organizations.length === 0) return null;
 
   return <DetailsPanelHeader org={data.organizations[0]} />;

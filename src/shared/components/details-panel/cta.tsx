@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 
-import { PrimaryButton } from '@/shared/components/primary-button';
+import { buttonVariants } from '@heroui/react';
+
+import { cn } from '@/shared/utils/cn';
 
 interface Props {
   text: string;
@@ -15,13 +17,16 @@ export const DetailsPanelCTA = (props: Props) => {
   const { text, href, isNewTab, isActive = true } = props;
 
   return (
-    <PrimaryButton
-      as={Link}
-      text={text}
+    <Link
       href={href}
       target={isNewTab ? '_blank' : undefined}
       rel={isNewTab ? 'noopener noreferrer' : undefined}
-      isActive={isActive}
-    />
+      className={cn(buttonVariants(), 'flex items-center rounded-lg p-2 px-4', {
+        'is-active': isActive,
+        'bg-white/10': !isActive,
+      })}
+    >
+      <span className="shrink-0 text-xs sm:text-sm">{text}</span>
+    </Link>
   );
 };

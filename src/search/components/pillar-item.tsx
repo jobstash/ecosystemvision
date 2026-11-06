@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 import { useSetAtom } from 'jotai';
 
 import { cn } from '@/shared/utils/cn';
@@ -32,9 +32,11 @@ export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
 
         const hiddenItems = newState[pillar] || [];
 
-        inView
-          ? hiddenItems.splice(hiddenItems.indexOf(label), 1)
-          : hiddenItems.unshift(label);
+        if (inView) {
+          hiddenItems.splice(hiddenItems.indexOf(label), 1);
+        } else {
+          hiddenItems.unshift(label);
+        }
 
         newState[pillar] = hiddenItems;
 
@@ -49,22 +51,16 @@ export const PillarItem = ({ isActive, pillar, label, href }: Props) => {
     });
   };
 
-  const className = cn({
+  const className = cn('rounded-xl', {
     'border border-white/60': isActive,
   });
 
-  const variant = isActive || !href ? 'bordered' : undefined;
+  const variant = isActive || !href ? 'outline' : 'secondary';
 
   return (
-    <Button
-      radius="md"
-      ref={inViewRef}
-      className={className}
-      variant={variant}
-      isDisabled={isLoading}
-      onClick={onClick}
-    >
-      {label}
-    </Button>
+    <Button ref={inViewRef}
+    className={className}
+    variant={variant}
+    isDisabled={isLoading} onPress={onClick} >{label}</Button>
   );
 };

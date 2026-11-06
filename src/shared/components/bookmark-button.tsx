@@ -1,9 +1,12 @@
-import { Button } from '@heroui/button';
+'use client';
+
+import { Button } from '@heroui/react';
 
 export const BookmarkButton = () => {
   return (
     <Button
       isIconOnly
+      aria-label="Bookmark"
       className="flex w-10 items-center justify-center rounded-md bg-white/10"
     >
       <svg

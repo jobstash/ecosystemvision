@@ -11,7 +11,11 @@ export const useAdvancedDebouncedValue = <T>(
   delay: number,
 ): Result<T> => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [pending, setPending] = useState({ value, delay, isPending: true });
+
+  if (!Object.is(pending.value, value) || pending.delay !== delay) {
+    setPending({ value, delay, isPending: true });
+  }
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -19,22 +23,22 @@ export const useAdvancedDebouncedValue = <T>(
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
-      setIsPending(false);
+      setPending((current) => ({ ...current, isPending: false }));
     }
   };
 
   useEffect(() => {
-    setIsPending(true);
-    cancel();
-
     timeoutRef.current = setTimeout(() => {
       setDebouncedValue(value);
-      setIsPending(false);
+      setPending((current) => ({ ...current, isPending: false }));
       timeoutRef.current = null;
     }, delay);
 
-    return () => cancel();
+    return () => {
+      clearTimeout(timeoutRef.current ?? undefined);
+      timeoutRef.current = null;
+    };
   }, [value, delay]);
 
-  return { debouncedValue, isPending, cancel };
+  return { debouncedValue, isPending: pending.isPending, cancel };
 };

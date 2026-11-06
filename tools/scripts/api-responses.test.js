@@ -371,6 +371,29 @@ test('AQ/AR: three jobs with unknown publication dates survive parsing and organ
   }
 });
 
+test('organization JSON-LD cannot terminate its HTML script element', async () => {
+  const { renderToStaticMarkup } = require('react-dom/server');
+  const attack = '</ScRiPt><script>globalThis.__jsonLdInjected = true</script>';
+  const payload = {
+    ...organization, name: attack, description: `Description ${attack} literal \\u003c`,
+    discord: attack, website: `https://example.invalid/${attack}`, headcountEstimate: 12,
+  };
+  const api = loadAPI(() => Response.json(payload));
+  const layout = await api.loadOrganizationRoute('layout').default({
+    params: Promise.resolve({ slug: 'fixture-organization' }), children: null,
+  });
+  const html = renderToStaticMarkup(layout);
+  assert.equal((html.match(/<script/g) || []).length, 1);
+  assert.equal((html.match(/<\/script>/gi) || []).length, 1);
+  const encoded = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1];
+  assert.doesNotMatch(encoded, /</);
+  assert.equal(JSON.parse(encoded).name, attack);
+  assert.equal(JSON.parse(encoded).description, payload.description);
+  assert.ok(JSON.parse(encoded).sameAs.includes(attack));
+  assert.equal(JSON.parse(encoded).url, payload.website);
+  assert.deepEqual(JSON.parse(encoded).numberOfEmployees, { '@type': 'QuantitativeValue', value: 12 });
+});
+
 test('AQ/AR: missing and malformed job dates remain errors, not missing organizations', async () => {
   for (const timestamp of [undefined, '1700000000000', '', {}, true]) {
     const api = loadAPI(() => Response.json({

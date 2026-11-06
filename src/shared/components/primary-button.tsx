@@ -1,4 +1,6 @@
-import { Button, ButtonProps } from '@heroui/button';
+'use client';
+
+import { Button, ButtonProps } from '@heroui/react';
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';

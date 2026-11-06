@@ -86,7 +86,7 @@ export const TechWrapper = ({ id, nav, slug, children, isFilled }: Props) => {
       )} */}
         <div
           className={cn(
-            'flex items-center justify-center rounded-sm p-1 px-1.5',
+            'flex items-center justify-center rounded-xs p-1 px-1.5',
             `border border-${skillColor} hover:border-${skillColor}-hover`,
             `text-${skillColor} hover:text-${skillColor}-hover`,
             { [`bg-${skillColor} text-${filledFontColor}`]: isFilled },

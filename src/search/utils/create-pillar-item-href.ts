@@ -17,9 +17,11 @@ export const createPillarItemHref = (options: Options) => {
     : [...currentItems, slug];
 
   const shouldRemoveParam = updatedItems.length === 0;
-  shouldRemoveParam
-    ? newSearchParams.delete(pillar)
-    : newSearchParams.set(pillar, updatedItems.join(','));
+  if (shouldRemoveParam) {
+    newSearchParams.delete(pillar);
+  } else {
+    newSearchParams.set(pillar, updatedItems.join(','));
+  }
 
   const searchParamsString = newSearchParams.toString();
 

@@ -134,7 +134,7 @@ export const PeopleActivityMapView = ({
                     <span className="min-w-0 grow truncate text-xs text-white/80">
                       {row.organizationName}
                     </span>
-                    <span className="text-xs tabular-nums text-white/45">
+                    <span className="text-xs text-white/45 tabular-nums">
                       {formatAggregate(row.currentValue)}
                     </span>
                   </button>
@@ -149,7 +149,7 @@ export const PeopleActivityMapView = ({
                         type="button"
                         key={period}
                         aria-label={`${row.organizationName}, ${period}: ${description}`}
-                        className="shrink-0 border-r border-white/[0.035] transition hover:outline hover:outline-1 hover:outline-white/70"
+                        className="shrink-0 border-r border-white/[0.035] transition hover:outline-1 hover:outline-white/70"
                         style={{
                           width: CELL_WIDTH,
                           backgroundColor: suppressed

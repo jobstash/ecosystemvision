@@ -2,12 +2,7 @@
 
 import React, { useMemo } from 'react';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { Listbox, ListboxItem } from '@heroui/listbox';
-import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
-import { ScrollShadow } from '@heroui/scroll-shadow';
-import { Spinner } from '@heroui/spinner';
+import { Button, InputGroup, ListBox, Popover, ScrollShadow, Spinner } from '@heroui/react';
 
 import { capitalize } from '@/shared/utils/capitalize';
 import { cn } from '@/shared/utils/cn';
@@ -82,111 +77,64 @@ export const PillarRowDropdownContent = ({
   const showCounts = hasActiveItems || hasOptionItems;
 
   return (
-    <Popover placement="bottom-end">
-      <PopoverTrigger>
-        <Button
-          radius="md"
-          variant="bordered"
-          className={cn('border border-white/20', {})}
-          endContent={<CaretDownIcon />}
-        >
-          <span>More</span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="flex flex-col gap-4 p-4">
-        <Input
-          radius="sm"
-          aria-label={ariaLabel}
-          placeholder={ariaLabel}
-          isDisabled={isLoadingRoute}
-          value={value}
-          onChange={onChange}
-          endContent={
-            list.isLoading ? <Spinner size="sm" color="white" /> : null
-          }
-          description={
-            showCounts ? (
-              <div className="flex w-full justify-between pt-2">
-                {hasActiveItems ? (
-                  <Text
-                    className="text-xs text-white/50"
-                    text={`Selected  ${capitalize(pillar)}: ${activeItems.length}`}
-                  />
-                ) : null}
-                {hasOptionItems ? (
-                  <Text
-                    className="text-xs text-white/50"
-                    text={`Total Count: ${formatNumber(total)}`}
-                  />
-                ) : null}
-              </div>
-            ) : null
-          }
-        />
+    <Popover>
+      <Button variant="outline" className="rounded-xl border border-white/20">
+        <span>More</span><CaretDownIcon />
+      </Button>
+      <Popover.Content placement="bottom end">
+      <Popover.Dialog aria-label={`More ${pillar}`} className="flex flex-col gap-4 p-4">
+        <InputGroup className="rounded-lg">
+          <InputGroup.Input
+            aria-label={ariaLabel}
+            placeholder={ariaLabel}
+            disabled={isLoadingRoute}
+            value={value}
+            onChange={onChange}
+          />
+          <InputGroup.Suffix>
+            {list.isLoading && <Spinner size="sm" color="current" />}
+          </InputGroup.Suffix>
+        </InputGroup>
+        {showCounts && (
+          <div className="flex w-full justify-between pt-2">
+            {hasActiveItems && <Text className="text-xs text-white/50" text={`Selected ${capitalize(pillar)}: ${activeItems.length}`} />}
+            {hasOptionItems && <Text className="text-xs text-white/50" text={`Total Count: ${formatNumber(total)}`} />}
+          </div>
+        )}
 
         <ScrollShadow
           className={cn('h-60 w-80', {
             'opacity-60 pointer-events-none': isLoadingRoute,
           })}
         >
-          <Listbox
-            hideEmptyContent
+          <ListBox
             aria-label={`${pillar} items`}
-            disabledKeys={['no-results', 'empty', mainLabel!]}
+            disabledKeys={['no-results', 'empty', ...(mainLabel ? [mainLabel] : [])]}
             onAction={onAction}
           >
-            <>
-              {optionItems.length === 0 && !isPendingDebounce ? (
-                <ListboxItem key="empty">No results found.</ListboxItem>
-              ) : null}
-
-              {hasActiveItems &&
-                activeItems.map((label) => {
-                  const classNames = {
-                    base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
-                  };
-
-                  const isMainItem = params.item === normalizeString(label);
-                  const endContent = isMainItem ? (
-                    <LockIcon />
-                  ) : (
-                    <CheckmarkIcon />
-                  );
-
-                  return (
-                    <ListboxItem
-                      key={label}
-                      classNames={classNames}
-                      textValue={label}
-                      endContent={endContent}
-                      isReadOnly={isMainItem}
-                    >
-                      {label}
-                    </ListboxItem>
-                  );
-                })}
-
-              {hasOptionItems &&
-                optionItems.map((label, i) => (
-                  <ListboxItem
-                    key={label}
-                    classNames={{
-                      base: 'py-3',
-                    }}
-                    textValue={label}
-                  >
-                    <div
-                      key={label}
-                      ref={i === optionItems.length - 1 ? inViewRef : undefined}
-                    >
-                      {label}
-                    </div>
-                  </ListboxItem>
-                ))}
-            </>
-          </Listbox>
+            {optionItems.length === 0 && !isPendingDebounce ? (
+              <ListBox.Item id="empty" textValue="No results found.">No results found.</ListBox.Item>
+            ) : null}
+            {activeItems.map((label) => (
+              <ListBox.Item
+                key={label}
+                id={label}
+                className="bg-accent2/5 py-3 font-bold text-accent2 hover:bg-accent2/20 data-[hovered]:bg-accent2/20"
+                textValue={label}
+              >
+                {label}
+                {params.item === normalizeString(label) ? <LockIcon /> : <CheckmarkIcon />}
+              </ListBox.Item>
+            ))}
+            {optionItems.map((label, i) => (
+              <ListBox.Item key={label} id={label} className="py-3" textValue={label}>
+                <div ref={i === optionItems.length - 1 ? inViewRef : undefined}>{label}</div>
+              </ListBox.Item>
+            ))}
+          </ListBox>
         </ScrollShadow>
-      </PopoverContent>
+      </Popover.Dialog>
+      </Popover.Content>
     </Popover>
   );
 };

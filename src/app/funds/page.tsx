@@ -24,7 +24,7 @@ const FundsPage = async ({ searchParams }: Props) => {
   return (
     <main className="min-h-screen bg-[#070708]">
       <AppHeader />
-      <section className="glow-gradient px-4 pb-8 pt-[154px] lg:px-8">
+      <section className="glow-gradient px-4 pt-[154px] pb-8 lg:px-8">
         <div className="flex max-w-3xl flex-col gap-4">
           <h1 className="text-2xl font-bold md:text-3xl">Funds</h1>
           <p className="text-sm text-white/70 lg:text-base">

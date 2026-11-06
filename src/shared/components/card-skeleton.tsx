@@ -1,4 +1,6 @@
-import { Skeleton } from '@heroui/skeleton';
+'use client';
+
+import { Skeleton } from '@heroui/react';
 
 import { Divider } from './divider';
 

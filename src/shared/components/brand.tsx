@@ -12,7 +12,7 @@ export const Brand = () => {
         href={FRONTEND_URL}
       >
         <EcosystemMark className="size-11 transition-transform duration-300 group-hover:scale-105" />
-        <span className="hidden font-grotesk text-lg font-medium leading-5 tracking-tight text-white md:block">
+        <span className="hidden font-grotesk text-lg leading-5 font-medium tracking-tight text-white md:block">
           ecosystem
           <span className="block text-white/45">vision</span>
         </span>

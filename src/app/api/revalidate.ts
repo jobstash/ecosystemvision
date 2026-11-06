@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest) => {
 
     const tagList = Array.isArray(tags) ? tags : [tags];
 
-    for (const tag of tagList) revalidateTag(tag);
+    for (const tag of tagList) revalidateTag(tag, { expire: 0 });
 
     return Response.json({ revalidated: tagList });
   } catch {

@@ -2,10 +2,12 @@ FROM node:24-alpine3.24 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
-COPY package.json pnpm-lock.yaml* .npmrc ./
-RUN yarn global add pnpm && pnpm i --frozen-lockfile
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml .npmrc ./
+COPY patches ./patches
+RUN corepack enable && corepack prepare pnpm@12.18.0 --activate
+RUN pnpm i --frozen-lockfile
 
 
 # Rebuild the source code only when needed
@@ -13,14 +15,21 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN yarn global add pnpm
+RUN corepack enable && corepack prepare pnpm@12.18.0 --activate
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_MW_URL=https://middleware.dev.jobstash.xyz
-ENV NEXT_PUBLIC_FRONTEND_URL=https://dev.ecosystem.vision
-ENV NEXT_PUBLIC_VERI_URL=https://veri.xyz
-ENV NEXT_PUBLIC_PAGE_SIZE=20
-ENV NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=G-9ZY0R2T7KR
-RUN pnpm build
+ARG NEXT_PUBLIC_MW_URL=https://middleware.dev.jobstash.xyz
+ARG NEXT_PUBLIC_FRONTEND_URL=https://dev.ecosystem.vision
+ARG NEXT_PUBLIC_JOBSTASH_URL=https://jobstash.xyz
+ARG NEXT_PUBLIC_VERI_URL=https://veri.xyz
+ARG NEXT_PUBLIC_PAGE_SIZE=20
+ARG NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=G-9ZY0R2T7KR
+ENV NEXT_PUBLIC_MW_URL=$NEXT_PUBLIC_MW_URL
+ENV NEXT_PUBLIC_FRONTEND_URL=$NEXT_PUBLIC_FRONTEND_URL
+ENV NEXT_PUBLIC_JOBSTASH_URL=$NEXT_PUBLIC_JOBSTASH_URL
+ENV NEXT_PUBLIC_VERI_URL=$NEXT_PUBLIC_VERI_URL
+ENV NEXT_PUBLIC_PAGE_SIZE=$NEXT_PUBLIC_PAGE_SIZE
+ENV NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=$NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+RUN pnpm build:app
 
 # Production image, copy all the files and run next
 FROM base AS runner

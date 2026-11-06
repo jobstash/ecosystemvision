@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 import { useSetAtom } from 'jotai';
 
 import { CaretRightIcon } from '@/shared/components/icons/caret-right-icon';
@@ -15,8 +15,6 @@ export const PillarAllFiltersTrigger = (props: GetPillarFiltersProps) => {
   const toggle = () => setIsActive((prev) => !prev);
 
   return (
-    <Button endContent={<CaretRightIcon />} isDisabled={!data} onClick={toggle}>
-      {props.nav === 'organizations' ? 'Team & All Filters' : 'All Filters'}
-    </Button>
+    <Button isDisabled={!data} onPress={toggle} >{props.nav === 'organizations' ? 'Team & All Filters' : 'All Filters'}{<CaretRightIcon />}</Button>
   );
 };

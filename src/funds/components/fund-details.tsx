@@ -9,9 +9,7 @@ import {
   CalendarClockIcon,
   ChartNoAxesCombinedIcon,
   ExternalLinkIcon,
-  LinkedinIcon,
   MapPinIcon,
-  TwitterIcon,
   UsersIcon,
   WalletIcon,
 } from 'lucide-react';
@@ -21,6 +19,8 @@ import { formatNumber } from '@/shared/utils/format-number';
 import { getLogoUrl } from '@/shared/utils/get-logo-url';
 import { shortTimestamp } from '@/shared/utils/short-timestamp';
 import { CompactJobCard } from '@/shared/components/compact-job-card';
+import { LinkedinIcon } from '@/shared/components/icons/linkedin-icon';
+import { TwitterTagIcon } from '@/shared/components/icons/twitter-tag-icon';
 import { LogoTitle } from '@/shared/components/logo-title';
 
 import type {
@@ -69,7 +69,7 @@ const TeamMember = ({ member }: { member: FundTeamMember }) => (
             target="_blank"
             title={`View ${member.name} on LinkedIn`}
           >
-            <LinkedinIcon size={16} />
+            <LinkedinIcon />
           </Link>
         )}
         {member.twitterUrl && (
@@ -80,7 +80,7 @@ const TeamMember = ({ member }: { member: FundTeamMember }) => (
             target="_blank"
             title={`View ${member.name} on X`}
           >
-            <TwitterIcon size={16} />
+            <TwitterTagIcon />
           </Link>
         )}
       </div>
@@ -101,7 +101,7 @@ const Investment = ({ investment }: { investment: FundInvestment }) => (
         />
       </Link>
       {investment.vertical && (
-        <span className="rounded-full bg-white/10 px-3 py-1 text-xs capitalize text-white/60">
+        <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/60 capitalize">
           {investment.vertical.replaceAll('_', ' ')}
         </span>
       )}
@@ -188,7 +188,7 @@ export const FundDetails = ({
     ? fund.team.filter((member) => member.linkedinUrl || member.twitterUrl)
     : fund.team;
   return (
-    <main className="glow-gradient min-h-screen px-4 pb-16 pt-24 md:px-8 lg:pt-12">
+    <main className="glow-gradient min-h-screen px-4 pt-24 pb-16 md:px-8 lg:pt-12">
       <div className="mx-auto max-w-6xl space-y-12">
         <Link
           className="inline-flex items-center gap-2 text-sm text-white/55 transition hover:text-white"
@@ -210,7 +210,7 @@ export const FundDetails = ({
                 </h1>
               </LogoTitle>
               {(fund.description || fund.summary) && (
-                <p className="max-w-3xl whitespace-pre-line leading-7 text-white/65">
+                <p className="max-w-3xl leading-7 whitespace-pre-line text-white/65">
                   {fund.description || fund.summary}
                 </p>
               )}
@@ -236,7 +236,7 @@ export const FundDetails = ({
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <TwitterIcon size={15} /> X
+                    <TwitterTagIcon /> X
                   </Link>
                 )}
               </div>
@@ -297,7 +297,7 @@ export const FundDetails = ({
 
         <section className="space-y-5">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+            <p className="text-sm tracking-[0.2em] text-white/35 uppercase">
               Analyst signals
             </p>
             <h2 className="mt-2 text-2xl font-semibold text-white">
@@ -389,7 +389,7 @@ export const FundDetails = ({
         {fund.jobs.length > 0 && (
           <section className="space-y-5">
             <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+              <p className="text-sm tracking-[0.2em] text-white/35 uppercase">
                 Opportunities
               </p>
               <h2 className="mt-2 text-2xl font-semibold text-white">
@@ -420,7 +420,7 @@ export const FundDetails = ({
         <section className="space-y-5">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+              <p className="text-sm tracking-[0.2em] text-white/35 uppercase">
                 People
               </p>
               <h2 className="mt-2 text-2xl font-semibold text-white">Team</h2>
@@ -456,7 +456,7 @@ export const FundDetails = ({
 
         <section className="space-y-5">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-white/35">
+            <p className="text-sm tracking-[0.2em] text-white/35 uppercase">
               Portfolio
             </p>
             <h2 className="mt-2 text-2xl font-semibold text-white">

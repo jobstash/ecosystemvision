@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { Button } from '@heroui/button';
+import { buttonVariants } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 
@@ -43,31 +43,28 @@ export const Bartab = (props: BartabProps) => {
     });
   };
 
-  const buttonClassName = cn('justify-start hover:bg-white/15', {
+  const buttonClassName = cn(buttonVariants({ fullWidth: true }), 'justify-start rounded-lg hover:bg-white/15', {
     'bg-transparent': isMobile,
     'bg-white/5': !isActive && !isMobile,
     'is-active': isActive && !isMobile,
   });
 
   return (
-    <Button
-      fullWidth
-      as={Link}
-      href={href}
-      radius="sm"
-      startContent={icon}
-      className={buttonClassName}
-      onClick={handleClick}
-      data-active={isActive}
+    <Link
+    href={href}
+    className={buttonClassName}
+    onClick={(event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      handleClick();
+    }}
+    data-active={isActive}>{icon}<span
+      className={cn('grow text-2xl text-white md:text-sm', {
+        'text-black fill-black': isActive && !isMobile,
+      })}
     >
-      <span
-        className={cn('grow text-2xl text-white md:text-sm', {
-          'text-black fill-black': isActive && !isMobile,
-        })}
-      >
-        {text}
-      </span>
-      {endContent}
-    </Button>
+      {text}
+    </span>
+    {endContent}</Link>
   );
 };

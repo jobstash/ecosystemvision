@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -99,7 +99,17 @@ export const PeoplePage = ({
   );
   const selectedPeriod = periods[periodIndex];
 
-  useEffect(() => setPage(1), [metric, debouncedOrganizationQuery]);
+  const [pageFilters, setPageFilters] = useState({
+    metric,
+    query: debouncedOrganizationQuery,
+  });
+  if (
+    pageFilters.metric !== metric ||
+    pageFilters.query !== debouncedOrganizationQuery
+  ) {
+    setPageFilters({ metric, query: debouncedOrganizationQuery });
+    setPage(1);
+  }
 
   const activityMap = useQuery({
     queryKey: ['people-activity-map', metric, debouncedOrganizationQuery, page],
@@ -141,10 +151,10 @@ export const PeoplePage = ({
   };
 
   return (
-    <main className="min-h-screen bg-[#070708] px-4 pb-24 pt-28 text-white md:px-8 lg:px-10">
+    <main className="min-h-screen bg-[#070708] px-4 pt-28 pb-24 text-white md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1500px]">
         <header className="max-w-4xl">
-          <p className="text-xs uppercase tracking-[0.25em] text-emerald-200/70">
+          <p className="text-xs tracking-[0.25em] text-emerald-200/70 uppercase">
             People
           </p>
           <h1 className="mt-3 font-grotesk text-4xl font-medium tracking-tight md:text-6xl">
@@ -157,7 +167,7 @@ export const PeoplePage = ({
           </p>
         </header>
 
-        <section className="xl:grid-cols-4 mt-10 grid gap-3 sm:grid-cols-2">
+        <section className="mt-10 grid gap-3 xl:grid-cols-4 sm:grid-cols-2">
           <HeadlineMetric
             icon={<Users className="size-4" />}
             label="Active internal people"
@@ -187,7 +197,7 @@ export const PeoplePage = ({
         <section className="mt-14" aria-labelledby="ecosystem-view-heading">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+              <p className="text-xs tracking-[0.2em] text-emerald-200/70 uppercase">
                 Coordinated views
               </p>
               <h2

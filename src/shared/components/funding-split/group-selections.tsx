@@ -1,6 +1,6 @@
 'use client';
 
-import { Chip } from '@heroui/chip';
+import { Button } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 
@@ -29,19 +29,18 @@ export const GroupSelections = ({ type }: Props) => {
       {groups.map((group) => {
         const isActive = activeGroups.has(group);
         return (
-          <Chip
+          <Button
             key={group}
-            onClick={() => toggleGroup(group)}
-            radius="sm"
-            classNames={{
-              base: cn('select-none hover:cursor-pointer', {
-                'bg-white/30': isActive,
-              }),
-              content: cn({ 'font-bold': isActive }),
-            }}
+            onPress={() => toggleGroup(group)}
+            aria-pressed={isActive}
+            size="sm"
+            variant="secondary"
+            className={cn('rounded-lg select-none', {
+              'bg-white/30 font-bold': isActive,
+            })}
           >
             {group}
-          </Chip>
+          </Button>
         );
       })}
     </div>

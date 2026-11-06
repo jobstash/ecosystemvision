@@ -1,5 +1,6 @@
-import { Button } from '@heroui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@heroui/popover';
+'use client';
+
+import { Button, Popover } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 
@@ -10,30 +11,15 @@ interface Props {
 export const PillarItemsDropdown = ({ children }: Props) => {
   return (
     <div className="flex justify-end p-1 pt-0">
-      <Popover placement="bottom-end">
-        <PopoverTrigger>
-          <Button
-            radius="md"
-            variant="bordered"
-            className={cn('border border-white/20', {
-              // 'text-accent2 border-accent2/60': !!hiddenItem,
-            })}
-            endContent={
-              <CaretDown
-              // className={cn({ 'stroke-2 text-accent2': !!hiddenItem })}
-              />
-            }
-          >
-            <span
-            // className={cn({ 'font-bold': !!hiddenItem })}
-            >
-              More
-            </span>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="flex flex-col gap-4 p-4">
-          {children}
-        </PopoverContent>
+      <Popover>
+        <Button variant="outline" className="rounded-xl border border-white/20">
+          <span>More</span><CaretDown />
+        </Button>
+        <Popover.Content placement="bottom end">
+          <Popover.Dialog aria-label="More filters" className="flex flex-col gap-4 p-4">
+            {children}
+          </Popover.Dialog>
+        </Popover.Content>
       </Popover>
     </div>
   );

@@ -7,8 +7,8 @@ import {
 
 export const searchQueryKeys = {
   all: ['search'] as const,
-  search: (query: string, nav?: string) =>
-    [...searchQueryKeys.all, 'search', query, nav] as const,
+  search: (query: string, nav?: string, excluded?: string) =>
+    [...searchQueryKeys.all, 'search', query, nav, excluded] as const,
   getPillarItems: (props: GetPillarItemsProps) =>
     [...searchQueryKeys.all, 'pillar-items', props] as const,
   getPillarInfo: (props: GetPillarInfoProps) =>

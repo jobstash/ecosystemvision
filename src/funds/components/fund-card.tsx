@@ -66,7 +66,7 @@ export const FundCard = ({
       />
       <Divider />
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/60">
-        <span className="w-full text-xs font-medium uppercase tracking-[0.14em] text-white/40">
+        <span className="w-full text-xs font-medium tracking-[0.14em] text-white/40 uppercase">
           Activity {activityPeriod}
         </span>
         {metrics.map((metric) => (

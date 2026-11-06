@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import { Button } from '@heroui/button';
-
 import { cn } from '@/shared/utils/cn';
 import { getGradientBorderStyle } from '@/shared/utils/get-gradient-border-style';
 
@@ -22,8 +20,7 @@ export const DetailsPanelTab = ({ href, isActive, text }: TabProps) => {
   });
 
   return (
-    <Button
-      as={Link}
+    <Link
       href={href}
       data-active={isActive}
       className={wrapperClassName}
@@ -31,6 +28,6 @@ export const DetailsPanelTab = ({ href, isActive, text }: TabProps) => {
       scroll={false}
     >
       <span className={contentClassName}>{text}</span>
-    </Button>
+    </Link>
   );
 };

@@ -2,7 +2,7 @@
 
 import { useInView } from 'react-intersection-observer';
 
-import { Spinner } from '@heroui/spinner';
+import { Spinner } from '@heroui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { QUERY_STALETIME } from '@/shared/core/constants';
@@ -44,7 +44,7 @@ export const FundList = ({ searchParams }: Props) => {
   if (query.isPending) {
     return (
       <div className="flex justify-center py-16">
-        <Spinner color="white" />
+        <Spinner  color="current"  />
       </div>
     );
   }

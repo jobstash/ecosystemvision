@@ -3,9 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { Chip } from '@heroui/chip';
-import { Skeleton } from '@heroui/skeleton';
-import { Tooltip } from '@heroui/tooltip';
+import { Button, Chip, Skeleton, Tooltip } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 
@@ -37,24 +35,25 @@ export const PillarSearchInputItem = ({ item }: Props) => {
   if (showSpinner) return <Skeleton className="flex h-7 w-20 rounded-lg" />;
 
   return (
-    <Tooltip
-      isDisabled={!!item.href}
-      content={
-        !label ? <TooltipContent pillarSlug={pillar} slug={slug} /> : null
-      }
-    >
-      <Chip
-        key={label}
-        classNames={{
-          base: cn('rounded-lg bg-white/10', {
+    <Tooltip isDisabled={!!item.href || !!label}>
+      <Tooltip.Trigger tabIndex={0}>
+        <Chip
+          key={label}
+          className={cn('rounded-lg bg-white/10', {
             'border border-red-800 text-red-500 bg-transparent': !label,
-          }),
-        }}
-        isDisabled={isLoading}
-        onClose={() => onClose(item)}
-      >
-        {label || slug}
-      </Chip>
+          })}
+        >
+          <Chip.Label>{label || slug}</Chip.Label>
+          <Button isIconOnly size="sm" variant="ghost"
+            className="size-5 min-h-0 min-w-0"
+            aria-label={`Remove ${label || slug}`}
+            isDisabled={isLoading}
+            onPress={() => onClose(item)}>
+            <span aria-hidden="true">×</span>
+          </Button>
+        </Chip>
+      </Tooltip.Trigger>
+      <Tooltip.Content><TooltipContent pillarSlug={pillar} slug={slug} /></Tooltip.Content>
     </Tooltip>
   );
 };

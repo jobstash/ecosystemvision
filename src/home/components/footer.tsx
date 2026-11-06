@@ -18,7 +18,7 @@ export const Footer = () => {
               ecosystem.vision
             </span>
           </Link>
-          <ul className="flex gap-4 pb-12 pt-8 [&_svg]:w-4 [&_svg]:fill-white [&_svg]:stroke-white">
+          <ul className="flex gap-4 pt-8 pb-12 [&_svg]:w-4 [&_svg]:fill-white [&_svg]:stroke-white">
             <li>
               <Link
                 aria-label="Ecosystem Vision on X"
@@ -67,7 +67,7 @@ export const Footer = () => {
         </ul>
       </div>
       <div className="border-t border-white md:flex md:items-center md:justify-between md:pt-6">
-        <div className="pb-12 pt-6 text-13 md:py-0">
+        <div className="pt-6 pb-12 text-13 md:py-0">
           © {new Date().getFullYear()} Ecosystem.vision
         </div>
         <ul className="flex flex-col gap-y-3 md:flex-row md:items-center md:gap-x-6">

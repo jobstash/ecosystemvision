@@ -11,8 +11,7 @@ export const useSearchResults = (nav?: string, excluded?: string) => {
   const { debounced: query } = useAtomValue(searchQueryAtom);
 
   const fetchResult = useQuery({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: searchQueryKeys.search(query.toLowerCase(), nav),
+    queryKey: searchQueryKeys.search(query.toLowerCase(), nav, excluded),
     queryFn: () => search({ query, nav, excluded }),
     staleTime: QUERY_STALETIME.DEFAULT,
     enabled: query.length !== 1,

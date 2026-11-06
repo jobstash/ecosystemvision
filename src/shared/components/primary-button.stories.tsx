@@ -6,6 +6,7 @@ const meta: Meta<typeof PrimaryButton> = {
   component: PrimaryButton,
   args: {
     text: 'Default',
+    isActive: false,
   },
 };
 

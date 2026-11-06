@@ -2,14 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@heroui/button';
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from '@heroui/dropdown';
-import { Skeleton } from '@heroui/skeleton';
+import { Button, Dropdown, Skeleton } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 import { CaretDownIcon } from '@/shared/components/icons/caret-down-icon';
@@ -59,21 +52,19 @@ export const PillarSortByButton = (props: GetPillarFiltersProps) => {
   };
 
   const onAction = (key: React.Key) => {
-    const queryString = getQueryString(`${key}`);
+    const queryString = getQueryString(String(key));
     startTransition(() => {
       router.push(`${pathname}${queryString}`);
     });
   };
 
   return (
-    <Dropdown placement="bottom-end">
-      <DropdownTrigger>
-        <Button endContent={<CaretDownIcon />}>
-          Sort By{currentSortLabel && `: ${currentSortLabel}`}
-        </Button>
-      </DropdownTrigger>
-
-      <DropdownMenu aria-label="Sort By" onAction={onAction}>
+    <Dropdown>
+      <Button variant="secondary">
+        Sort By{currentSortLabel && `: ${currentSortLabel}`}<CaretDownIcon />
+      </Button>
+      <Dropdown.Popover placement="bottom end">
+      <Dropdown.Menu aria-label="Sort By" onAction={onAction}>
         {orderByFilter.options.map((option) => {
           const isActive = option.value === currentSortValue;
           const itemClasses = cn('py-3', {
@@ -81,16 +72,19 @@ export const PillarSortByButton = (props: GetPillarFiltersProps) => {
           });
 
           return (
-            <DropdownItem
+            <Dropdown.Item
               key={option.label}
-              classNames={{ base: itemClasses }}
-              endContent={isActive && <CheckmarkIcon />}
+              id={option.label}
+              textValue={option.label}
+              className={itemClasses}
             >
               {option.label}
-            </DropdownItem>
+              {isActive && <CheckmarkIcon />}
+            </Dropdown.Item>
           );
         })}
-      </DropdownMenu>
+      </Dropdown.Menu>
+      </Dropdown.Popover>
     </Dropdown>
   );
 };

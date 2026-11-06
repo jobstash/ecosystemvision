@@ -3,7 +3,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { normalizeString } from '@/shared/utils/normalize-string';
@@ -100,10 +100,10 @@ export const PillarAllFiltersHeader = ({
       <div className="flex w-full items-center justify-between">
         <h2 className="text-lg font-bold">All Filters</h2>
         <div className="flex items-center gap-4">
-          <Button size="sm" isDisabled={isDisabled} onClick={onApply}>
+          <Button size="sm" isDisabled={isDisabled} onPress={onApply} >
             Apply Filters
           </Button>
-          <Button isIconOnly size="sm" onClick={onClose}>
+          <Button isIconOnly aria-label="Close all filters" size="sm" onPress={onClose}>
             X
           </Button>
         </div>

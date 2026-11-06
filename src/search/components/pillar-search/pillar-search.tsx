@@ -1,4 +1,6 @@
-import { Spinner } from '@heroui/spinner';
+'use client';
+
+import { Spinner } from '@heroui/react';
 
 import { DraggableWrapper } from '@/shared/components/draggable-wrapper';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
@@ -24,7 +26,7 @@ export const PillarSearch = ({ mainLabel, labeledItems }: Props) => {
         <PillarLoadingWrapper
           className="size-6"
           shouldReduceOpacity={false}
-          loadingIcon={<Spinner size="sm" color="white" />}
+          loadingIcon={<Spinner size="sm" color="current"  />}
         >
           <SearchIcon />
         </PillarLoadingWrapper>

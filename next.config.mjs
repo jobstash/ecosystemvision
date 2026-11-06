@@ -1,4 +1,4 @@
-import { withSentryConfig } from '@sentry/nextjs';
+import { withSentryConfig } from '@sentry/nextjs/config';
 import bundleAnalyzer from '@next/bundle-analyzer';
 
 const withBundleAnalyzer = bundleAnalyzer({
@@ -60,12 +60,15 @@ export default withSentryConfig(withBundleAnalyzer(nextConfig), {
   project: 'ecosystemvision',
   silent: !process.env.CI,
   widenClientFileUpload: true,
-  reactComponentAnnotation: {
-    enabled: true,
+  webpack: {
+    reactComponentAnnotation: {
+      enabled: true,
+    },
+    treeshake: {
+      removeDebugLogging: true,
+    },
   },
   tunnelRoute: '/sentry-tunnel',
-  hideSourceMaps: true,
-  disableLogger: true,
   sourcemaps: {
     deleteSourcemapsAfterUpload: true,
   },

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Navigation, Pagination } from 'swiper/modules';
+import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
 import { Swiper } from 'swiper/react';
 
 interface MySwiperProps {
@@ -26,12 +26,13 @@ export const MySwiper: React.FC<MySwiperProps> = ({
 }) => {
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
+      modules={[A11y, Keyboard, Navigation, Pagination]}
+      keyboard={{ enabled: true, onlyInViewport: true }}
       spaceBetween={spaceBetween}
       slidesPerView={1.3}
       autoHeight={false}
       navigation={hasNavigation}
-      pagination={hasPagination}
+      pagination={hasPagination ? { clickable: true } : false}
       breakpoints={breakpoints}
     >
       {children}

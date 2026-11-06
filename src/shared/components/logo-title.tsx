@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { Skeleton } from '@heroui/skeleton';
+import { Skeleton } from '@heroui/react';
 
 interface Props {
   src: string;

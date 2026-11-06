@@ -23,7 +23,7 @@ export const mwPOST = async <R extends z.ZodTypeAny, P extends z.ZodTypeAny>(
 
   const payloadResult = payloadSchema.safeParse(payload);
   if (!payloadResult.success) {
-    throw new Error(payloadResult.error.errors[0].message);
+    throw new Error(payloadResult.error.issues[0].message);
   }
 
   try {

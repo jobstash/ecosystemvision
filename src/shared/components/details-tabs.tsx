@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-import { Tab, Tabs } from '@heroui/tabs';
+import { Tabs } from '@heroui/react';
 
 import { TEST_IDS } from '@/shared/core/constants';
 
@@ -17,17 +16,17 @@ export const DetailsTabs = ({ tabs }: Props) => {
 
   return (
     <Tabs
-      aria-label="Details Tabs"
       data-testid={TEST_IDS.DETAILS_PANEL_TABS}
-      variant="light"
       selectedKey={selectedTab}
-      classNames={{
-        cursor: 'bg-white/15',
-      }}
     >
-      {tabs.map((tab) => (
-        <Tab key={tab.key} title={tab.text} href={tab.href} as={Link} />
-      ))}
+      <Tabs.List aria-label="Details Tabs">
+        {tabs.map((tab) => (
+          <Tabs.Tab key={tab.key} id={tab.key} href={tab.href}>
+            {tab.text}
+            <Tabs.Indicator className="bg-white/15" />
+          </Tabs.Tab>
+        ))}
+      </Tabs.List>
     </Tabs>
   );
 };

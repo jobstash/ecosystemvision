@@ -3,9 +3,7 @@
 import { useEffect } from 'react';
 import { useRef } from 'react';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { Spinner } from '@heroui/spinner';
+import { Button, InputGroup, Spinner } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { useAppHeaderContext } from '@/shared/components/app-header/context';
@@ -40,40 +38,29 @@ export const AppHeaderDetailsSearchInput = () => {
   };
 
   return (
-    <Input
-      ref={inputRef}
-      placeholder="Search ..."
-      startContent={
-        isPendingPillarRoute ? (
-          <Spinner size="sm" color="white" />
-        ) : (
-          <div className="shrink-0">
-            <SearchIcon />
-          </div>
-        )
-      }
-      radius="sm"
-      classNames={{
-        input: 'focus:ring-red-500 focus:border-red-500',
-      }}
-      endContent={
-        isPendingPillarRoute ? null : (
-          <Button
-            isIconOnly
-            size="sm"
-            onClick={onClose}
-            variant="light"
-            className="bg-white/5"
-          >
+    <InputGroup className="rounded-lg">
+      <InputGroup.Prefix>
+        {isPendingPillarRoute ? <Spinner size="sm" color="current" /> : <SearchIcon />}
+      </InputGroup.Prefix>
+      <InputGroup.Input
+        ref={inputRef}
+        aria-label="Search"
+        placeholder="Search ..."
+        className="focus:border-red-500 focus:ring-red-500"
+        disabled={isPendingPillarRoute}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
+      <InputGroup.Suffix>
+        {!isPendingPillarRoute && (
+          <Button isIconOnly aria-label="Close search" size="sm"
+            onPress={onClose} variant="ghost" className="bg-white/5">
             <CloseIcon />
           </Button>
-        )
-      }
-      isDisabled={isPendingPillarRoute}
-      value={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
-    />
+        )}
+      </InputGroup.Suffix>
+    </InputGroup>
   );
 };

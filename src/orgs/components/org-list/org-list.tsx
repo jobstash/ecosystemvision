@@ -1,4 +1,6 @@
-import { Spinner } from '@heroui/spinner';
+'use client';
+
+import { Spinner } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 import { reloadPage } from '@/shared/utils/reload-page';
@@ -32,7 +34,7 @@ export const OrgList = ({ searchParams }: Props) => {
       {isPendingOrgs ? (
         // <CardSkeleton />
         <div className="flex w-full justify-center pt-8">
-          <Spinner size="md" color="white" />
+          <Spinner size="md" color="current"  />
         </div>
       ) : (
         isSuccess &&

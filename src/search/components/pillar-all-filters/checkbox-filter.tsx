@@ -1,4 +1,6 @@
-import { Checkbox, CheckboxGroup } from '@heroui/checkbox';
+'use client';
+
+import { Checkbox, CheckboxGroup, Label } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { Divider } from '@/shared/components/divider';
@@ -36,14 +38,17 @@ export const CheckboxFilter = ({ label, items, paramKey }: Props) => {
 
   return (
     <>
-      <CheckboxGroup label={label} value={value} onValueChange={onValueChange}>
+      <CheckboxGroup value={value} onChange={onValueChange}>
+        <Label>{label}</Label>
         {items.map((item) => (
           <Checkbox
             key={item.value as string}
-            color="default"
             value={item.value as string}
           >
-            {item.label}
+            <Checkbox.Content>
+            <Checkbox.Control><Checkbox.Indicator /></Checkbox.Control>
+            <Label>{item.label}</Label>
+            </Checkbox.Content>
           </Checkbox>
         ))}
       </CheckboxGroup>

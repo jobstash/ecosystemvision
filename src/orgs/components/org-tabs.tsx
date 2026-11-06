@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@heroui/spinner';
+import { Spinner } from '@heroui/react';
 
 import { HREFS, ROUTE_TABS } from '@/shared/core/constants';
 import { getPluralText } from '@/shared/utils/get-plural-text';
@@ -17,7 +17,7 @@ interface Props {
 export const OrgTabs = ({ slug }: Props) => {
   const { data } = useOrgDetails(slug);
 
-  if (!data) return <Spinner size="sm" color="white" />;
+  if (!data) return <Spinner size="sm" color="current"  />;
 
   const tabs = createTabs(data);
 

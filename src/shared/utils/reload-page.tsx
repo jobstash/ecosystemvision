@@ -1,5 +1,9 @@
 export const reloadPage = (href?: string) => {
   if (typeof window !== 'undefined') {
-    href ? (window.location.href = href) : window.location.reload();
+    if (href) {
+      window.location.href = href;
+    } else {
+      window.location.reload();
+    }
   }
 };

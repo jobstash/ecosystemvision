@@ -1,4 +1,6 @@
-import { Spinner } from '@heroui/spinner';
+'use client';
+
+import { Spinner } from '@heroui/react';
 import { ClassValue } from 'clsx';
 
 import { cn } from '@/shared/utils/cn';
@@ -29,7 +31,7 @@ export const Loader = (props: Props) => {
         },
       )}
     >
-      <Spinner size="sm" color="white" className={cn(classNames?.spinner)} />
+      <Spinner size="sm" color="current" className={cn(classNames?.spinner)} />
     </div>
   );
 };

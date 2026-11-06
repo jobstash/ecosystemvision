@@ -31,9 +31,9 @@ export const SearchResults = ({
       </div>
     );
   return (
-    <div className="mt-[132px] pb-8 md:gap-8 lg:mx-0 lg:pb-12 lg:pl-12 lg:pr-8">
+    <div className="mt-[132px] pb-8 md:gap-8 lg:mx-0 lg:pr-8 lg:pb-12 lg:pl-12">
       <div className="glow-background top-0 lg:w-[calc(100vw-236px)]"></div>
-      <div className="fixed left-[232px] top-0 z-[999] hidden h-screen w-6 bg-gradient-to-r from-[#070708] to-[#101012] lg:block"></div>
+      <div className="fixed top-0 left-[232px] z-[999] hidden h-screen w-6 bg-linear-to-r from-[#070708] to-[#101012] lg:block"></div>
       <div className="flex flex-col gap-6 px-4">
         {data.map(({ title, items }, index) => (
           <Fragment key={title}>

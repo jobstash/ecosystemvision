@@ -1,21 +1,6 @@
-import { heroui } from '@heroui/theme';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
-  ],
-  safelist: [
-    {
-      pattern: /^(text|border|bg)-skill(([1-9]|1[0-3]))(fg)?$/,
-    },
-    // Tech hover colors
-    ...Array.from({ length: 12 }, (_, i) => `hover:border-skill${i + 1}-hover`),
-    ...Array.from({ length: 12 }, (_, i) => `hover:text-skill${i + 1}-hover`),
-    ...Array.from({ length: 12 }, (_, i) => `hover:bg-skill${i + 1}-hover`),
-  ],
   theme: {
     screens: {
       sm: '360px',
@@ -69,28 +54,28 @@ const config: Config = {
         '64': '64px',
       },
       colors: {
-        white: 'rgb(var(--color-white) / <alpha-value>)',
-        'base-dark': 'rgb(var(--color-base-dark) / <alpha-value>)',
-        dark: 'rgb(var(--color-dark) / <alpha-value>)',
-        gray: 'rgb(var(--color-gray) / <alpha-value>)',
-        'darker-gray': 'rgb(var(--color-darker-gray) / <alpha-value>)',
-        'base-black': 'var(--color-base-black)',
-        'dark-gray': 'rgb(var(--color-dark-gray)  / <alpha-value>)',
-        'app-bg': 'rgb(var( --color-bg-app))',
-        'light-gray': 'rgb(var(--color-light-gray))',
-        'cool-gray': 'rgb(var(--color-cool-gray))',
-        'medium-gray': 'rgb(var(--color-medium-gray))',
-        labels: 'rgb(var(--color-labels) / <alpha-value>)',
-        primary: 'rgb(var(--color-primary) / <alpha-value>)',
-        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
-        tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
-        divider: 'rgb(var(--color-border) / <alpha-value>)',
-        'grantee-item': 'rgb(var(--color-grantee-item) / <alpha-value>)',
-        'gradient-1': 'rgb(var(--color-gradient-1) / <alpha-value>)',
-        'gradient-2': 'rgb(var(--color-gradient-2) / <alpha-value>)',
-        innovate: 'rgb(var(--color-innovate) / <alpha-value>)',
-        accent: 'rgb(var(--color-accent) / <alpha-value>)',
-        accent2: 'rgb(var(--color-accent2) / <alpha-value>)',
+        white: 'rgb(var(--app-color-white) / <alpha-value>)',
+        'base-dark': 'rgb(var(--app-color-base-dark) / <alpha-value>)',
+        dark: 'rgb(var(--app-color-dark) / <alpha-value>)',
+        gray: 'rgb(var(--app-color-gray) / <alpha-value>)',
+        'darker-gray': 'rgb(var(--app-color-darker-gray) / <alpha-value>)',
+        'base-black': 'var(--app-color-base-black)',
+        'dark-gray': 'rgb(var(--app-color-dark-gray) / <alpha-value>)',
+        'app-bg': 'rgb(var(--app-color-bg-app))',
+        'light-gray': 'rgb(var(--app-color-light-gray))',
+        'cool-gray': 'rgb(var(--app-color-cool-gray))',
+        'medium-gray': 'rgb(var(--app-color-medium-gray))',
+        labels: 'rgb(var(--app-color-labels) / <alpha-value>)',
+        primary: 'rgb(var(--app-color-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--app-color-secondary) / <alpha-value>)',
+        tertiary: 'rgb(var(--app-color-tertiary) / <alpha-value>)',
+        divider: 'rgb(var(--app-color-border) / <alpha-value>)',
+        'grantee-item': 'rgb(var(--app-color-grantee-item) / <alpha-value>)',
+        'gradient-1': 'rgb(var(--app-color-gradient-1) / <alpha-value>)',
+        'gradient-2': 'rgb(var(--app-color-gradient-2) / <alpha-value>)',
+        innovate: 'rgb(var(--app-color-innovate) / <alpha-value>)',
+        'brand-accent': 'rgb(var(--app-color-accent) / <alpha-value>)',
+        accent2: 'rgb(var(--app-color-accent2) / <alpha-value>)',
         skill1: '#F7FD36',
         skill2: '#CAE402',
         skill3: '#E2BF2B',
@@ -146,36 +131,5 @@ const config: Config = {
       },
     },
   },
-  darkMode: 'class',
-  corePlugins: {
-    aspectRatio: false,
-  },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    heroui({
-      defaultTheme: 'dark',
-      defaultExtendTheme: 'dark',
-      themes: {
-        dark: {
-          colors: {
-            default: {
-              50: '#1E1E1E',
-              100: '#353535',
-              200: '#4D4D4D',
-              300: '#656565',
-              400: '#7D7D7D',
-              500: '#959595',
-              600: '#ADADAD',
-              700: '#C5C5C5',
-              800: '#DDDDDD',
-              900: '#F5F5F5',
-              DEFAULT: '#1E1E1E',
-            },
-            focus: '#14996b',
-          },
-        },
-      },
-    }),
-  ],
 };
 export default config;

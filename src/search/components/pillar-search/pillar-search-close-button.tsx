@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { CloseIcon } from '@/shared/components/icons/close-icon';
@@ -17,14 +17,7 @@ export const PillarSearchCloseButton = () => {
   if (!isActive) return null;
 
   return (
-    <Button
-      isIconOnly
-      size="sm"
-      variant="light"
-      className="bg-white/5"
-      onClick={onClick}
-    >
-      <CloseIcon />
-    </Button>
+    <Button isIconOnly aria-label="Close search"
+    size="sm" variant="ghost" className="bg-white/5" onPress={onClick} ><CloseIcon /></Button>
   );
 };

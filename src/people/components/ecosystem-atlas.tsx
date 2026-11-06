@@ -120,7 +120,7 @@ export const EcosystemAtlas = ({
             </>
           )}
         </p>
-        <p className="shrink-0 tabular-nums text-white/35">
+        <p className="shrink-0 text-white/35 tabular-nums">
           {formatAggregate(atlas.visibleMovements)} of{' '}
           {formatAggregate(atlas.totalMovements)} moves visible
         </p>
@@ -259,7 +259,7 @@ export const EcosystemAtlas = ({
                   <span className="line-clamp-2 leading-4">
                     {organization.organizationName}
                   </span>
-                  <span className="shrink-0 tabular-nums text-white/40">
+                  <span className="shrink-0 text-white/40 tabular-nums">
                     {formatAggregate(organization.activePeople)}
                   </span>
                 </div>

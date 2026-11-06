@@ -15,7 +15,7 @@ import { InitPathSyncer } from '@/shared/components/init-path-syncer';
 import { NavLayout } from '@/shared/components/nav-space-layout';
 import { PageScrollDisabler } from '@/shared/components/page-scroll-disabler';
 import { Toaster } from '@/shared/components/toaster';
-import { HeroUIProvider } from '@/shared/providers/hero-ui-provider';
+import { AppRouterProvider } from '@/shared/providers/app-router-provider';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 
 import { PendingRouteProvider } from '@/shared/contexts/pending-route-context';
@@ -40,17 +40,17 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
-    className={`bg-[#070708] ${inter.variable} ${grotesk.variable}`}
+    className={`dark bg-[#070708] ${inter.variable} ${grotesk.variable}`}
   >
     <body className={`overflow-x-hidden ${inter.className}`}>
       <GsapInit />
-      <HeroUIProvider>
+      <AppRouterProvider>
         <ReactQueryProvider>
           <PendingRouteProvider>
             <NavLayout>{children}</NavLayout>
           </PendingRouteProvider>
         </ReactQueryProvider>
-      </HeroUIProvider>
+      </AppRouterProvider>
 
       <PageScrollDisabler />
       <InitPathSyncer />

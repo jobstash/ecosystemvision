@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@heroui/spinner';
+import { Spinner } from '@heroui/react';
 
 import { useTagsSectionContext } from './context';
 
@@ -9,5 +9,5 @@ export const TagsSectionSpinner = () => {
 
   if (!isLoading) return null;
 
-  return <Spinner size="sm" color="white" />;
+  return <Spinner size="sm" color="current"  />;
 };

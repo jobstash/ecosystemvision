@@ -1,34 +1,79 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@heroui/styles";
+@config "../../tailwind.config.ts";
+@source inline("{text,border,bg}-skill{1..12}{,fg}");
+@source inline("hover:{border,text,bg}-skill{1..12}-hover");
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  :root {
+  :root, .dark {
+    --background: #070708;
+    --foreground: #ffffff;
+    --surface: #1e1e1e;
+    --surface-foreground: #ffffff;
+    --overlay: #1e1e1e;
+    --overlay-foreground: #ffffff;
+    --default: #1e1e1e;
+    --default-foreground: #ffffff;
+    --focus: #14996b;
+    --accent: #1e1e1e;
+    --accent-foreground: #ffffff;
+    --accent-soft-foreground: #ffffff;
+    --field-background: #353535;
+    --field-foreground: #ffffff;
+    --field-radius: 8px;
     /* TODO: review values of the variables primary/secondary */
-    --color-bg-app: 7 7 8; /* #070708 */
-    --color-base-dark: 13 13 13; /* #0D0D0D */
-    --color-dark-gray: 25 25 25; /* #191919 */
-    --color-medium-gray: 32 32 32; /* #202020 */
-    --color-light-gray: 153 153 153; /*  #999999 */
-    --color-cool-gray: 156 163 175; /* #9CA3AF */
-    --color-white: 255 255 255; /* #FFFFFF */
-    --color-primary: 65 54 241; /* #4136F1 */
-    --color-secondary: 135 67 255; /* #8743FF */
-    --color-labels: 239 239 239; /* #EFEFEF */
-    --color-border: 240 238 237; /* #F0EEED */
-    --color-tertiary: 219 217 251; /* #DBD9FB */
-    --color-grantee-item: 117 112 141;
+    --app-color-bg-app: 7 7 8; /* #070708 */
+    --app-color-base-dark: 13 13 13; /* #0D0D0D */
+    --app-color-dark-gray: 25 25 25; /* #191919 */
+    --app-color-medium-gray: 32 32 32; /* #202020 */
+    --app-color-light-gray: 153 153 153; /* #999999 */
+    --app-color-cool-gray: 156 163 175; /* #9CA3AF */
+    --app-color-white: 255 255 255; /* #FFFFFF */
+    --app-color-primary: 65 54 241; /* #4136F1 */
+    --app-color-secondary: 135 67 255; /* #8743FF */
+    --app-color-labels: 239 239 239; /* #EFEFEF */
+    --app-color-border: 240 238 237; /* #F0EEED */
+    --app-color-tertiary: 219 217 251; /* #DBD9FB */
+    --app-color-grantee-item: 117 112 141;
 
     /* HP variables to rearrange */
-    --color-gradient-1: 117 117 117; /* #757575 */
-    --color-gradient-2: 117 112 141; /* #75708D */
-    --color-innovate: 31 31 38; /* #1F1F26 */
+    --app-color-gradient-1: 117 117 117; /* #757575 */
+    --app-color-gradient-2: 117 112 141; /* #75708D */
+    --app-color-innovate: 31 31 38; /* #1F1F26 */
 
-    --color-accent: 252 186 159; /* #FCBAAF */
-    --color-accent2: 0 222 192; /* #98EEBE */
-    --color-accent2-dark: 20 153 107; /* #14996B */
+    --app-color-accent: 252 186 159; /* #FCBAAF */
+    --app-color-accent2: 0 222 192; /* #98EEBE */
+    --app-color-accent2-dark: 20 153 107; /* #14996B */
   }
 }
+
+@layer components {
+  .button {
+    @apply h-10 min-w-20 rounded-xl;
+  }
+
+  .button--sm {
+    @apply h-8;
+  }
+
+  .button--lg {
+    @apply h-12;
+  }
+
+  .button--icon-only {
+    @apply w-10 min-w-0;
+  }
+
+  .button--icon-only.button--sm {
+    @apply w-8;
+  }
+
+  .button--icon-only.button--lg {
+    @apply w-12;
+  }
+}
+
 
 html {
   scrollbar-gutter: stable;
@@ -65,7 +110,7 @@ html {
 }
 
 .is-active {
-  @apply bg-gradient-to-r from-white to-white/40 text-black;
+  @apply bg-linear-to-r from-white to-white/40 text-black;
 }
 
 /* remove padding in storybook to easily work on the homepage */
@@ -93,12 +138,12 @@ html {
 .marquee__item {
   width: 115px;
 }
-@screen md {
+@media (min-width: 640px) {
   .marquee__item {
     width: 170px;
   }
 }
-@screen lg {
+@media (min-width: 1280px) {
   .marquee__item {
     width: 228px;
   }
