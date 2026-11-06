@@ -83,6 +83,14 @@ const responseFor = (url) => {
   if (route === '/search/pillar/labels') return { data: (url.searchParams.get('slugs') || '').split(',').filter(Boolean).map((slug) => ({ slug, label: slug.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join(' ') })) };
   if (route === '/search') return { organizations: { names: [{ value: organization.name, link: '/organizations/info/fixture-organization~90001' }] }, projects: { categories: [{ value: 'Infrastructure', link: '/projects/categories/infrastructure' }] } };
   if (route === '/organizations/list') return list([orgListItem], url);
+  if (route === '/organizations/details/slug/fixture-script') return {
+    ...organization,
+    name: '</ScRiPt><script>globalThis.__jsonLdInjected = true</script>',
+    description: '</script><img src=x onerror="globalThis.__jsonLdInjected = true">',
+    discord: '</script><script>globalThis.__jsonLdInjected = true</script>',
+    website: 'https://example.invalid/</script><script>globalThis.__jsonLdInjected = true</script>',
+    jobs: organization.jobs.map((job) => ({ ...job, timestamp: null })),
+  };
   if (route.startsWith('/organizations/details/')) return organization;
   if (route === '/projects/search') return list([project], url);
   if (route.startsWith('/projects/details/')) return { ...project, organizations: [{ ...organization, tags: [], investors: [], fundingRounds: [] }], grants: [], fundingRounds: [] };

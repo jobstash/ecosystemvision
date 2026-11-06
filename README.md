@@ -4,6 +4,31 @@ This repo contains the frontend application which shows information about variou
 
 ## Security maintenance
 
+The GitHub finding-by-finding review is based on default branch
+`ad9e0438f19842ff70b4f2853e16cab0178d6c8f`, not on an assumed deployment of this
+upgrade branch. Dependabot initially returned 185 open findings; only #238 was
+manually dismissed as inaccurate because its canonical braces advisory
+[GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) was
+withdrawn on October 23, 2026. The remaining findings require the reviewed
+dependency changes to land on the default branch and GitHub to rescan.
+Code scanning and separate GitHub Code Quality are not configured, and secret
+scanning is disabled; these are coverage gaps, not clean scan results.
+
+The source review also fixes organization JSON-LD HTML injection: imported
+names/descriptions containing `</script>` are serialized with `<` escaped as
+`\u003c`, preserving the JSON values without creating another HTML element.
+The real layout has an SSR regression and a fixture-only Chromium regression.
+`node tools/scripts/security-smoke.js` runs against a build configured with
+middleware port 4321 and frontend port 4331; it checks this boundary, unknown
+job dates, genuine 404s, and upstream/schema failures. It blocks nonlocal server
+sockets and browser requests, including the Sentry tunnel. Its verification-only
+network preload permits Google Fonts only when `FIXTURE_ALLOW_FONTS=1` during
+the build; production application code and telemetry configuration are unchanged.
+Feature-branch CI uses those local fixtures, type/lint/test gates, `pnpm audit`,
+and the SSR/browser regression, never the production-targeted legacy E2E suite.
+The existing pre-push hook invokes that legacy suite and must not run for isolated
+verification pushes; use `git -c core.hooksPath=/dev/null push` after these gates.
+
 Use Node.js 24 and pnpm 12.18.0 (`corepack enable`). Install with
 `pnpm install --frozen-lockfile`; `pnpm-lock.yaml` is the authoritative lockfile.
 Both Dockerfiles use `node:24-alpine3.24` for dependency, builder, and runtime

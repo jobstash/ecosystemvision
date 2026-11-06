@@ -5,8 +5,11 @@ on:
     branches-ignore: [main] # run only on feature-branch
   workflow_dispatch: # option to manual trigger workflow
 
-concurrency: # cancel duplicate
-  group: feature-branch
+permissions:
+  contents: read
+
+concurrency: # cancel duplicate runs on the same branch only
+  group: feature-branch-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -15,9 +18,13 @@ jobs:
     name: Run Lint/Build/Test
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_MW_URL: https://middleware.jobstash.xyz
-      NEXT_PUBLIC_FRONTEND_URL: https://projects.fyi
+      NEXT_PUBLIC_MW_URL: http://127.0.0.1:4321
+      NEXT_PUBLIC_FRONTEND_URL: http://127.0.0.1:4331
+      NEXT_PUBLIC_JOBSTASH_URL: http://127.0.0.1:4331
+      NEXT_PUBLIC_VERI_URL: http://127.0.0.1:4331
       NEXT_PUBLIC_PAGE_SIZE: 20
+      NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ''
+      NEXT_TELEMETRY_DISABLED: 1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,12 +40,22 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install --frozen-lockfile
+      - name: Audit locked dependencies
+        run: pnpm audit
+      - name: Check types
+        run: pnpm exec tsc --noEmit --incremental false
       - name: Run Lint
         run: pnpm lint
-      - name: Run Build
-        run: pnpm build:app
+      - name: Build against isolated fixtures
+        run: |
+          node tools/scripts/fixtures/browser-api.js &
+          fixture_pid=$!
+          trap 'kill "$fixture_pid"' EXIT
+          FIXTURE_ALLOW_FONTS=1 NODE_OPTIONS="--require=$PWD/tools/scripts/fixtures/network-guard.cjs" pnpm build:app
       - name: Run Test
         run: pnpm test
 
-  # TODO: deploy staging
-  # TODO: e2e test
+      - name: Install browser
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Verify SSR and browser security contracts
+        run: node tools/scripts/security-smoke.js
