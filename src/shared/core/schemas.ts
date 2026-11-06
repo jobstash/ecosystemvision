@@ -63,7 +63,7 @@ export type JobInfoTags = z.infer<typeof jobInfoTagsSchema>;
 export const jobInfoSchema = z
   .object({
     // Basic
-    id: z.string().uuid(),
+    id: z.string().min(1),
     url: z.string().url(),
     title: z.string(),
     shortUUID: z.string().length(6),
