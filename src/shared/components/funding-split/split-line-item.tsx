@@ -1,4 +1,6 @@
-import { Tooltip } from '@heroui/tooltip';
+'use client';
+
+import { Tooltip } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 import { Heading } from '@/shared/components/heading';
@@ -19,10 +21,19 @@ interface Props {
 
 export const SplitLineItem = ({ item, index }: Props) => {
   return (
-    <Tooltip
-      delay={0}
-      placement="bottom"
-      content={
+    <Tooltip delay={0}>
+      <Tooltip.Trigger
+        tabIndex={0}
+        aria-label={item.title}
+        className={cn('h-full hover:bg-white/80', {
+          'bg-blue-500/80': item.isActive,
+        })}
+        style={{
+          width: `${item.percentage}%`,
+          backgroundImage: createStripePattern(index),
+        }}
+      />
+      <Tooltip.Content placement="bottom">
         <div className="flex flex-col gap-2 p-2">
           <Heading text={item.title} className="text-lg" />
           {item.raised && (
@@ -35,17 +46,7 @@ export const SplitLineItem = ({ item, index }: Props) => {
             <span className="text-xs text-white/80">Date: {item.date}</span>
           )}
         </div>
-      }
-    >
-      <div
-        className={cn('h-full hover:bg-white/80', {
-          'bg-blue-500/80': item.isActive,
-        })}
-        style={{
-          width: `${item.percentage}%`,
-          backgroundImage: createStripePattern(index),
-        }}
-      />
+      </Tooltip.Content>
     </Tooltip>
   );
 };

@@ -1,8 +1,6 @@
 packages:
   - .
 
-publicHoistPattern:
-  - '*@heroui/*'
 
 allowBuilds:
   '@sentry/cli': true
@@ -10,3 +8,51 @@ allowBuilds:
   esbuild: true
   msw: true
   sharp: true
+
+# Upgrade only the reviewed consumers, not unrelated glob/minimatch APIs.
+overrides:
+  '@storybook/react-vite@10.6.6>@joshwooding/vite-plugin-react-docgen-typescript': 0.9.1
+  '@typescript-eslint/typescript-estree@8.72.1>minimatch': 11.0.4
+
+# Exact exceptions are required by the requested latest stable releases.
+minimumReleaseAgeStrict: true
+minimumReleaseAgeExclude:
+  - '@joshwooding/vite-plugin-react-docgen-typescript@0.9.1'
+  - '@playwright/test@1.65.0'
+  - '@sentry/browser-utils@11.11.0'
+  - '@sentry/browser@11.11.0'
+  - '@sentry/bundler-plugins@11.11.0'
+  - '@sentry/cloudflare@11.11.0'
+  - '@sentry/core@11.11.0'
+  - '@sentry/feedback@11.11.0'
+  - '@sentry/nextjs@11.11.0'
+  - '@sentry/node@11.11.0'
+  - '@sentry/opentelemetry@11.11.0'
+  - '@sentry/react@11.11.0'
+  - '@sentry/replay-canvas@11.11.0'
+  - '@sentry/replay@11.11.0'
+  - '@sentry/server-runtime-injection@11.11.0'
+  - '@sentry/server-utils@11.11.0'
+  - '@sentry/vercel-edge@11.11.0'
+  - '@splinetool/react-spline@4.2.0'
+  - '@splinetool/runtime@2.0.146'
+  - '@storybook/addon-docs@10.6.6'
+  - '@storybook/addon-links@10.6.6'
+  - '@storybook/addon-onboarding@10.6.6'
+  - '@storybook/builder-vite@10.6.6'
+  - '@storybook/nextjs-vite@10.6.6'
+  - '@storybook/react-dom-shim@10.6.6'
+  - '@storybook/react-vite@10.6.6'
+  - '@storybook/react@10.6.6'
+  - eslint-plugin-storybook@10.6.6
+  - framer-motion@14.10.0
+  - lucide-react@1.70.0
+  - motion-dom@14.10.0
+  - msw@3.0.4
+  - playwright-core@1.65.0
+  - playwright@1.65.0
+  - storybook@10.6.6
+  - vite-plugin-storybook-nextjs@10.6.6
+
+patchedDependencies:
+  zod@4.6.7: patches/zod@4.6.7.patch

@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import { MW_URL } from '@/shared/core/envs';
 import { mwGET } from '@/shared/utils/mw-get';
 
@@ -52,17 +54,9 @@ export const getPillarInfo = async (
     throw new Error(response.message);
   }
 
+  if (response.data === null) {
+    notFound();
+  }
+
   return dtoToPillarInfo(response.data);
 };
-
-// import { TPillarInfo } from '@/search/core/schemas';
-// import { GetPillarInfoProps } from '@/search/core/types';
-
-// import { fakePillarInfo } from '@/search/testutils/fake-pillar-info';
-
-// export const getPillarInfo = async (
-//   props: GetPillarInfoProps,
-// ): Promise<TPillarInfo> => {
-//   await new Promise((r) => setTimeout(r, 500));
-//   return fakePillarInfo(props.limit);
-// };

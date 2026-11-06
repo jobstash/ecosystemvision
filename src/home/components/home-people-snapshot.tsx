@@ -24,7 +24,7 @@ export const HomePeopleSnapshot = () => {
     >
       <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+          <p className="text-xs tracking-[0.2em] text-emerald-200/70 uppercase">
             People pulse
           </p>
           <h2
@@ -73,7 +73,7 @@ const SnapshotMetric = ({
   value?: number | null;
 }) => (
   <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-4">
-    <p className="text-3xl font-medium tabular-nums text-white">
+    <p className="text-3xl font-medium text-white tabular-nums">
       {value === null ? 'Suppressed' : (value?.toLocaleString() ?? '—')}
     </p>
     <p className="mt-1 text-xs text-white/40">{label}</p>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 
 import { reloadPage } from '@/shared/utils/reload-page';
 
@@ -16,11 +16,6 @@ export const ErrorActionButton = (props: Props) => {
   const { text = DEFAULT_TEXT, onClick = DEFAULT_ONCLICK } = props;
 
   return (
-    <Button
-      className="is-active flex items-center rounded-lg p-2 px-4"
-      onClick={onClick}
-    >
-      <span className="shrink-0 text-xs font-semibold sm:text-sm">{text}</span>
-    </Button>
+    <Button className="is-active flex items-center rounded-lg p-2 px-4" onPress={onClick} ><span className="shrink-0 text-xs font-semibold sm:text-sm">{text}</span></Button>
   );
 };

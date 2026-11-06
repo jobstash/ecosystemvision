@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 import { useSetAtom } from 'jotai';
 
 import { TSearchResultItem } from '@/search/core/schemas';
@@ -70,14 +70,9 @@ export const SearchResultItem = ({
   };
 
   return (
-    <Button
-      size="sm"
-      className="shrink-0"
-      isDisabled={isPendingPillarRoute}
-      onClick={onClick}
-    >
-      <span className="text-13">{highlightText(label, query)}</span>
-    </Button>
+    <Button size="sm"
+    className="shrink-0"
+    isDisabled={isPendingPillarRoute} onPress={onClick} ><span className="text-13">{highlightText(label, query)}</span></Button>
   );
 };
 

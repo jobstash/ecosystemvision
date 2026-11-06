@@ -15,7 +15,7 @@ export const OrgDetailsJobs = ({ org }: Props) => {
 
   if (!jobs || jobs.length === 0) {
     return (
-      <p className="text-gray-500 text-center">No job listings available.</p>
+      <p className="text-center text-gray-500">No job listings available.</p>
     );
   }
 
@@ -26,7 +26,7 @@ export const OrgDetailsJobs = ({ org }: Props) => {
         className="text-2xl font-semibold text-white"
         id="organization-crypto-jobs"
       />
-      <p className="mb-4 mt-2 text-sm text-white/50">
+      <p className="mt-2 mb-4 text-sm text-white/50">
         Explore open blockchain and Web3 roles at {org.name}, sourced from{' '}
         <Link
           className="text-emerald-300/80 transition hover:text-emerald-200"

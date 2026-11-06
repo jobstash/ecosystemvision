@@ -2,19 +2,19 @@
 
 import { useRouter } from 'next/navigation';
 
-import { HeroUIProvider as BaseProvider } from '@heroui/react';
+import { RouterProvider } from '@heroui/react';
 
-export const HeroUIProvider = ({ children }: { children: React.ReactNode }) => {
+export const AppRouterProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   return (
-    <BaseProvider navigate={router.push}>
+    <RouterProvider navigate={router.push}>
       <main>{children}</main>
-    </BaseProvider>
+    </RouterProvider>
   );
 };
 
-declare module '@react-types/shared' {
+declare module 'react-aria-components' {
   interface RouterConfig {
     routerOptions: NonNullable<
       Parameters<ReturnType<typeof useRouter>['push']>[1]

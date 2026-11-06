@@ -16,7 +16,7 @@ export const MobileNav = () => {
     <>
       {/* Mobile Fullscreen Nav */}
       <FullscreenWrapper>
-        <div className="fixed left-0 top-0 z-[9999] flex size-full shrink-0 flex-col bg-black bg-gradient-to-l from-base-dark to-tertiary/25 px-4 lg:hidden">
+        <div className="fixed top-0 left-0 z-[9999] flex size-full shrink-0 flex-col bg-black bg-linear-to-l from-base-dark to-tertiary/25 px-4 lg:hidden">
           <NavSections isMobile />
         </div>
       </FullscreenWrapper>

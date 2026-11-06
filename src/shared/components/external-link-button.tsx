@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, ButtonProps } from '@heroui/button';
+import { Button, ButtonProps } from '@heroui/react';
 
 import { openNewTab } from '@/shared/utils/open-new-tab';
 
@@ -9,13 +9,8 @@ interface Props extends ButtonProps {
 }
 
 export const ExternalLinkButton = ({ href, children, ...props }: Props) => {
-  const onClick: React.MouseEventHandler = (e) => {
-    e.preventDefault();
-    openNewTab(href);
-  };
-
   return (
-    <Button {...props} onClick={onClick}>
+    <Button {...props} onPress={() => openNewTab(href)}>
       {children}
     </Button>
   );

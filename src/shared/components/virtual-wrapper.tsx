@@ -31,7 +31,7 @@ export const useVirtualWrapper = (count: number) => {
 interface Props {
   count: number;
   className?: ClassValue;
-  children: (index: number) => JSX.Element;
+  children: (index: number) => React.JSX.Element;
 }
 
 export const VirtualWrapper = ({ count, className, children }: Props) => {
@@ -49,7 +49,7 @@ export const VirtualWrapper = ({ count, className, children }: Props) => {
         style={{ height: getTotalSize }}
       >
         <div
-          className="absolute left-0 top-0 w-full"
+          className="absolute top-0 left-0 w-full"
           style={{ transform: `translateY(${translateY}px)` }}
         >
           {items.map((item) => (

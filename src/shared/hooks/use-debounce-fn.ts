@@ -5,7 +5,7 @@ export const useDebounceFn = (
   func: (...args: any[]) => void,
   delay: number,
 ) => {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const debouncedFunction = useCallback(
     (...args: any[]) => {

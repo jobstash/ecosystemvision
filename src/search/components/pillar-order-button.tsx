@@ -2,8 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Button } from '@heroui/button';
-import { Skeleton } from '@heroui/skeleton';
+import { Button, Skeleton } from '@heroui/react';
 import {
   ArrowDownWideNarrowIcon,
   ArrowUpWideNarrowIcon,
@@ -67,12 +66,6 @@ export const PillarOrderButton = (props: GetPillarFiltersProps) => {
   const { text, Icon, size } = getDisplayValues();
 
   return (
-    <Button
-      className="min-w-[96px]"
-      endContent={<Icon size={size} />}
-      onClick={handleOrderChange}
-    >
-      {text.replace(/-/g, ' - ')}
-    </Button>
+    <Button className="min-w-[96px]" onPress={handleOrderChange} >{text.replace(/-/g, ' - ')}{<Icon size={size} />}</Button>
   );
 };

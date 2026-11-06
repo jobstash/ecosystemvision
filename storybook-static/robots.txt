@@ -1,0 +1,15 @@
+User-agent: *
+
+# Disallow all URLs w/ query params
+Disallow: /*?*
+
+# Disallow pages with filter query parameters
+# Disallow: /*?*investors=
+# Disallow: /*?*locations=
+# Disallow: /*?*projects=
+# Disallow: /*?*chains=
+# Disallow: /*?*fundingRounds=
+# Disallow: /*?*names=
+# Disallow: /*?*tags=
+# Disallow: /*?*categories=
+# Disallow: /*?*organizations=

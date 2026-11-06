@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 import { ChevronLeftIcon } from 'lucide-react';
 
 import { capitalize } from '@/shared/utils/capitalize';
@@ -27,14 +27,16 @@ export const AppHeaderBackButton = ({ nav }: Props) => {
     const shouldNavigate =
       typeof window !== 'undefined' && window.history.length < 3;
 
-    shouldNavigate ? navigate() : router.back();
+    if (shouldNavigate) {
+      navigate();
+    } else {
+      router.back();
+    }
   };
 
   return (
     <div className="flex items-center gap-4">
-      <Button isIconOnly onClick={onBack}>
-        <ChevronLeftIcon size={20} />
-      </Button>
+      <Button isIconOnly aria-label={`Back to ${capitalize(nav)}`} onPress={onBack}><ChevronLeftIcon size={20} /></Button>
       <span>Back to {capitalize(nav)}</span>
     </div>
   );

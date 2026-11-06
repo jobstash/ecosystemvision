@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -41,7 +41,7 @@ export const PillarAllFilters = ({
 
   const activeSearchParams = usePillarSearchParams();
   const [, setCurrentFilterParams] = useAtom(currentFilterParamsAtom);
-  const [initialized, setInitialized] = useState(false);
+  const initialized = useRef(false);
 
   const resetState = useCallback(() => {
     const pillarKeys = new Set(pillarSelections.map(({ pillar }) => pillar));
@@ -67,11 +67,11 @@ export const PillarAllFilters = ({
   }, [activeSearchParams, pillarSelections, setCurrentFilterParams]);
 
   useEffect(() => {
-    if (!initialized) {
-      setInitialized(true);
+    if (!initialized.current) {
+      initialized.current = true;
       resetState();
     }
-  }, [initialized, resetState]);
+  }, [resetState]);
 
   return (
     <div className="relative flex min-h-screen justify-center bg-neutral-900 pb-24">

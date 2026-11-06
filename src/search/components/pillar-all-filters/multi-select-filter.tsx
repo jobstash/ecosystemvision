@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox } from '@heroui/checkbox';
+import { Checkbox, Label } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { Divider } from '@/shared/components/divider';
@@ -49,12 +49,14 @@ export const MultiSelectFilter = ({ label, items, paramKey }: Props) => {
           const value = item.value.toString();
           return (
             <Checkbox
-              color="default"
               isSelected={selected.includes(value)}
               key={value}
-              onValueChange={(isSelected) => toggle(value, isSelected)}
+              onChange={(isSelected) => toggle(value, isSelected)}
             >
-              {item.label}
+              <Checkbox.Content>
+              <Checkbox.Control><Checkbox.Indicator /></Checkbox.Control>
+              <Label>{item.label}</Label>
+              </Checkbox.Content>
             </Checkbox>
           );
         })}

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 
 import { A11Y, TEST_IDS } from '@/shared/core/constants';
 
@@ -22,13 +22,6 @@ export const DetailsPanelBackButton = ({
   };
 
   return (
-    <Button
-      variant="bordered"
-      className="rounded-lg border-white/10"
-      onClick={onClick}
-      data-testid={TEST_IDS.DETAILS_BACK}
-    >
-      {text}
-    </Button>
+    <Button variant="outline" className="rounded-lg border-white/10" onPress={onClick} data-testid={TEST_IDS.DETAILS_BACK}>{text}</Button>
   );
 };

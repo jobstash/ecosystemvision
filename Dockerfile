@@ -1,11 +1,12 @@
-FROM node:24-alpine3.24.4 AS base
+FROM node:24-alpine3.24 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml .npmrc ./
-RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
+COPY patches ./patches
+RUN corepack enable && corepack prepare pnpm@12.18.0 --activate
 RUN pnpm i --frozen-lockfile
 
 
@@ -14,7 +15,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
+RUN corepack enable && corepack prepare pnpm@12.18.0 --activate
 ENV NODE_ENV=production
 ARG NEXT_PUBLIC_MW_URL
 ARG NEXT_PUBLIC_FRONTEND_URL
@@ -28,7 +29,7 @@ ENV NEXT_PUBLIC_JOBSTASH_URL=$NEXT_PUBLIC_JOBSTASH_URL
 ENV NEXT_PUBLIC_VERI_URL=$NEXT_PUBLIC_VERI_URL
 ENV NEXT_PUBLIC_PAGE_SIZE=$NEXT_PUBLIC_PAGE_SIZE
 ENV NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=$NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
-RUN pnpm build
+RUN pnpm build:app
 
 # Production image, copy all the files and run next
 FROM base AS runner

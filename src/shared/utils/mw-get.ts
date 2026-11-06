@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { z } from 'zod';
 
 import { errMsg, ResponseError } from '@/shared/core/errors';
-import { sentryMessage } from '@/shared/utils/sentry-message';
 
 interface Props<T> {
   url: string;
@@ -19,51 +18,51 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
 
   const { url, responseSchema, options, label } = props;
 
-  try {
-    const res = await fetch(url, {
-      method: 'GET',
-      ...options,
-      // Organization, project, and funding projections are updated by the
-      // ingestion workers. Serving a persisted Next.js fetch-cache entry here
-      // can therefore expose superseded data for hours after the database and
-      // middleware are already correct.
-      cache: 'no-store',
-    });
+  const res = await fetch(url, {
+    method: 'GET',
+    ...options,
+    // Organization, project, and funding projections are updated by the
+    // ingestion workers. Serving a persisted Next.js fetch-cache entry here
+    // can therefore expose superseded data for hours after the database and
+    // middleware are already correct.
+    cache: 'no-store',
+  });
 
-    if (!res.ok) {
-      throw new ResponseError(errMsg.ERR_RESPONSE, res);
-    }
-
-    const jsonData = await res.json();
-    const result = responseSchema.safeParse(jsonData);
-    if (!result.success) {
-      throw new ResponseError(
-        errMsg.INVALID_RESPONSE_SCHEMA,
-        res,
-        JSON.stringify({ details: result.error.issues }),
-      );
-    }
-
-    return result.data as z.infer<typeof responseSchema>;
-  } catch (err: unknown) {
-    if (err instanceof ResponseError) {
-      const errInfo = await err.toJSON();
-      sentryMessage(label, JSON.stringify({ url, ...errInfo }));
-
-      if (err.res.status === 404) {
-        notFound();
-      } else if (err.res.status === 400) {
-        const jsonRes = await err.res.json();
-        throw new Error(jsonRes.message || errMsg.ERR_BAD_REQUEST);
-      }
-
-      throw new Error(errMsg.INTERNAL);
-    } else {
-      sentryMessage(
-        label,
-        JSON.stringify({ url, msg: (err as Error).message }),
-      );
-      throw new Error(errMsg.INTERNAL);
-    }
+  if (res.status === 404) {
+    notFound();
   }
+
+  // A fixed base supports relative browser requests for diagnostics only.
+  // Never change the fetch URL or expose credentials, queries, or response bodies.
+  const pathname = new URL(url, 'http://diagnostic.invalid').pathname;
+  const context = `${label} (${res.status} ${pathname})`;
+  if (!res.ok) {
+    throw new ResponseError(`${context}: ${errMsg.ERR_RESPONSE}`, res);
+  }
+
+  let jsonData: unknown;
+  try {
+    jsonData = await res.json();
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new ResponseError(`${context}: ${errMsg.INVALID_JSON}`, res);
+    }
+    throw error;
+  }
+
+  const result = responseSchema.safeParse(jsonData);
+  if (!result.success) {
+    const details = result.error.issues.map(({ code, path }) => ({
+      code,
+      path,
+    }));
+    const info = JSON.stringify({ details });
+    throw new ResponseError(
+      `${context}: ${errMsg.INVALID_RESPONSE_SCHEMA}: ${info}`,
+      res,
+      info,
+    );
+  }
+
+  return result.data as z.infer<typeof responseSchema>;
 };

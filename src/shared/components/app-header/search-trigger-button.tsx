@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/button';
+import { Button } from '@heroui/react';
 
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
 
@@ -13,9 +13,7 @@ export const SearchTriggerButton = () => {
 
   return (
     <div className="ml-auto">
-      <Button className="w-[200px]" onClick={toggleInput}>
-        <SearchIcon />
-      </Button>
+      <Button aria-label="Open search" className="w-[200px]" onPress={toggleInput}><SearchIcon /></Button>
     </div>
   );
 };

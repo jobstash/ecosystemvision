@@ -2,10 +2,7 @@
 
 import { useMemo } from 'react';
 
-import { Input } from '@heroui/input';
-import { Listbox, ListboxItem } from '@heroui/listbox';
-import { ScrollShadow } from '@heroui/scroll-shadow';
-import { Spinner } from '@heroui/spinner';
+import { InputGroup, ListBox, ScrollShadow, Spinner } from '@heroui/react';
 
 import { cn } from '@/shared/utils/cn';
 import { CheckmarkIcon } from '@/shared/components/icons/checkmark-icon';
@@ -73,67 +70,50 @@ export const PillarFilterDropdownContent = (props: Props) => {
 
   return (
     <>
-      <Input
-        radius="sm"
-        aria-label={ariaLabel}
-        placeholder={ariaLabel}
-        isDisabled={isLoadingRoute}
-        value={value}
-        onChange={onChange}
-        endContent={isLoading ? <Spinner size="sm" color="white" /> : null}
-      />
+      <InputGroup className="rounded-lg">
+        <InputGroup.Input
+          aria-label={ariaLabel}
+          placeholder={ariaLabel}
+          disabled={isLoadingRoute}
+          value={value}
+          onChange={onChange}
+        />
+        <InputGroup.Suffix>
+          {isLoading && <Spinner size="sm" color="current" />}
+        </InputGroup.Suffix>
+      </InputGroup>
 
       <ScrollShadow
         className={cn('h-60 w-80', {
           'opacity-60 pointer-events-none': isLoadingRoute,
         })}
       >
-        <Listbox
-          hideEmptyContent
+        <ListBox
           aria-label={`${pillar} items`}
           disabledKeys={['no-results', 'empty']}
           onAction={onAction}
         >
-          <>
-            {optionItems.length === 0 && !isPendingDebounce ? (
-              <ListboxItem key="empty">No results found.</ListboxItem>
-            ) : null}
-
-            {activeItems.map((label) => {
-              const classNames = {
-                base: 'py-3 text-accent2 font-bold bg-accent2/5 hover:bg-accent2/20 data-[hover="true"]:bg-accent2/20',
-              };
-
-              return (
-                <ListboxItem
-                  key={label}
-                  classNames={classNames}
-                  textValue={label}
-                  endContent={<CheckmarkIcon />}
-                >
-                  {label}
-                </ListboxItem>
-              );
-            })}
-
-            {optionItems.map((label, i) => (
-              <ListboxItem
-                key={label}
-                classNames={{
-                  base: 'py-3',
-                }}
-                textValue={label}
-              >
-                <div
-                  key={label}
-                  ref={i === optionItems.length - 1 ? inViewRef : undefined}
-                >
-                  {label}
-                </div>
-              </ListboxItem>
-            ))}
-          </>
-        </Listbox>
+          {optionItems.length === 0 && !isPendingDebounce ? (
+            <ListBox.Item id="empty" textValue="No results found.">No results found.</ListBox.Item>
+          ) : null}
+          {activeItems.map((label) => (
+            <ListBox.Item
+              key={label}
+              id={label}
+              className="bg-accent2/5 py-3 font-bold text-accent2 hover:bg-accent2/20 data-[hovered]:bg-accent2/20"
+              textValue={label}
+            >
+              {label}<CheckmarkIcon />
+            </ListBox.Item>
+          ))}
+          {optionItems.map((label, i) => (
+            <ListBox.Item key={label} id={label} className="py-3" textValue={label}>
+              <div ref={i === optionItems.length - 1 ? inViewRef : undefined}>
+                {label}
+              </div>
+            </ListBox.Item>
+          ))}
+        </ListBox>
       </ScrollShadow>
     </>
   );

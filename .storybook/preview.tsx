@@ -5,8 +5,10 @@ import 'swiper/css/pagination';
 import '../src/app/swiper.css';
 
 import type { Preview } from '@storybook/react';
-import { HeroUIProvider } from '@/shared/providers/hero-ui-provider';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { AppRouterProvider } from '@/shared/providers/app-router-provider';
+import { PendingRouteProvider } from '@/shared/contexts/pending-route-context';
+import { setupWorker } from 'msw/browser';
+import { mswLoader } from 'msw-storybook-addon/csf3';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryProvider } from '@/shared/providers/react-query-provider';
 import { useEffect } from 'react';
@@ -17,16 +19,18 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Initialize MSW
-initialize({
-  onUnhandledRequest({ method, url }) {
-    if (url.startsWith('/api')) {
-      console.error(`Unhandled ${method} request to "${url}"`);
-    }
-  },
-});
-
-const loaders: Preview['loaders'] = [mswLoader];
+const loaders: Preview['loaders'] = [
+  mswLoader(async () => {
+    const worker = setupWorker();
+    worker.events.on('request:unhandled', ({ request }) => {
+      if (new URL(request.url).pathname.startsWith('/api')) {
+        console.error(`Unhandled ${request.method} request to "${request.url}"`);
+      }
+    });
+    await worker.start({ onUnhandledFrame: 'bypass' });
+    return worker;
+  }),
+];
 
 const parameters: Preview['parameters'] = {
   controls: {
@@ -36,8 +40,9 @@ const parameters: Preview['parameters'] = {
     },
   },
   backgrounds: {
-    default: 'default',
-    values: [{ name: 'default', value: '#070708' }],
+    options: {
+      default: { name: 'default', value: '#070708' },
+    },
   },
   nextjs: {
     appDirectory: true,
@@ -57,11 +62,11 @@ const queryClient = new QueryClient({
 });
 
 const Providers = ({ children }: { children: React.ReactNode }) => (
-  <HeroUIProvider>
+  <AppRouterProvider>
     <ReactQueryProvider queryClient={queryClient}>
-      {children}
+      <PendingRouteProvider>{children}</PendingRouteProvider>
     </ReactQueryProvider>
-  </HeroUIProvider>
+  </AppRouterProvider>
 );
 
 const ClearReactQuery = () => {
@@ -78,7 +83,7 @@ const ClearReactQuery = () => {
 
 const decorators: Preview['decorators'] = [
   (Story) => (
-    <div className={`${inter.variable} ${grotesk.variable}`}>
+    <div className={`dark ${inter.variable} ${grotesk.variable}`}>
       <Providers>
         <Story />
         <ClearReactQuery />
@@ -89,6 +94,9 @@ const decorators: Preview['decorators'] = [
 
 const preview: Preview = {
   parameters,
+  initialGlobals: {
+    backgrounds: { value: 'default' },
+  },
   decorators,
   loaders,
 };

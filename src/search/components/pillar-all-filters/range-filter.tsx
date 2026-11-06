@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { Slider } from '@heroui/slider';
+import { Label, Slider } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { formatNumber } from '@/shared/utils/format-number';
@@ -27,7 +27,7 @@ export const RangeFilter = (props: Props) => {
   );
 
   const step = (max.value - min.value) / 100;
-  const selectedValue = useMemo(() => {
+  const value = useMemo(() => {
     const selectedMin = Number(
       currentFilterParams[min.paramKey]?.current?.[0] ?? min.value,
     );
@@ -39,11 +39,6 @@ export const RangeFilter = (props: Props) => {
       Math.max(min.value, Math.min(selectedMax, max.value)),
     ];
   }, [currentFilterParams, max, min]);
-  const [value, setValue] = useState(selectedValue);
-
-  useEffect(() => {
-    setValue(selectedValue);
-  }, [selectedValue]);
 
   const marks = SLIDER_MARKS.map((mark) => {
     const value = min.value + (max.value - min.value) * (mark / 100);
@@ -54,11 +49,9 @@ export const RangeFilter = (props: Props) => {
   });
 
   const onChange = (value: number | number[]) => {
-    if (Array.isArray(value)) {
-      setValue(value);
-    }
+    if (!Array.isArray(value)) return;
 
-    const [nextMin, nextMax] = value as number[];
+    const [nextMin, nextMax] = value;
     setCurrentFilterParams((prev) => {
       const next = { ...prev };
 
@@ -84,21 +77,28 @@ export const RangeFilter = (props: Props) => {
 
   return (
     <Slider
-      size="sm"
       className="px-4"
-      label={label}
       minValue={min.value}
       maxValue={max.value}
       step={step}
-      marks={marks}
-      getValue={(value) => {
-        const minLabel = formatItemValue(prefix, (value as number[])[0]);
-        const maxLabel = formatItemValue(prefix, (value as number[])[1]);
-        return `${minLabel} - ${maxLabel}`;
-      }}
       value={value}
       onChange={onChange}
-    />
+    >
+        <Label>{label}</Label>
+        <Slider.Output>
+          {`${formatItemValue(prefix, value[0])} - ${formatItemValue(prefix, value[1])}`}
+        </Slider.Output>
+      <Slider.Track>
+        <Slider.Fill className="bg-primary" />
+        <Slider.Thumb className="bg-primary" index={0} aria-label={`Minimum ${label}`} />
+        <Slider.Thumb className="bg-primary" index={1} aria-label={`Maximum ${label}`} />
+      </Slider.Track>
+      <Slider.Marks>
+        {marks.map((mark) => (
+          <Slider.Mark key={mark.value} value={mark.value}>{mark.label}</Slider.Mark>
+        ))}
+      </Slider.Marks>
+    </Slider>
   );
 };
 

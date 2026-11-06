@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
-import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
-import { Chip } from '@heroui/chip';
+import { Button, Chip, ComboBox, Input, Label, ListBox, Spinner } from '@heroui/react';
 import { useAtom } from 'jotai';
 
 import { capitalize } from '@/shared/utils/capitalize';
@@ -112,35 +111,45 @@ export const PillarSelection = ({
 
   return (
     <div className="space-y-8">
-      <Autocomplete
+      <ComboBox
         className="max-w-sm"
-        label={capitalize(pillar)}
-        labelPlacement="outside"
-        placeholder={`Search ${pillar} ...`}
         isDisabled={isLoadingRoute}
-        isLoading={isLoading}
-        listboxProps={{
-          emptyContent: isLoading ? 'Loading ...' : 'No results found.',
-        }}
-        defaultItems={optionItems}
-        value={value}
+        items={optionItems}
         inputValue={value}
         onInputChange={onChangeValue}
-        onSelectionChange={addSelection}
+        value={null}
+        onChange={addSelection}
+        allowsEmptyCollection
       >
-        {optionItems.map(({ label }, i) => (
-          <AutocompleteItem key={label} textValue={label}>
-            <div ref={i === optionItems.length - 1 ? inViewRef : undefined}>
-              {label}
-            </div>
-          </AutocompleteItem>
-        ))}
-      </Autocomplete>
+        <Label>{capitalize(pillar)}</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder={`Search ${pillar} ...`} />
+          {isLoading && <Spinner size="sm" color="current" />}
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Popover>
+          <ListBox
+            renderEmptyState={() => isLoading ? 'Loading ...' : 'No results found.'}
+          >
+            {optionItems.map(({ label }, i) => (
+              <ListBox.Item key={label} id={label} textValue={label}>
+                <div ref={i === optionItems.length - 1 ? inViewRef : undefined}>{label}</div>
+              </ListBox.Item>
+            ))}
+          </ListBox>
+        </ComboBox.Popover>
+      </ComboBox>
 
       <div className="flex flex-wrap items-center gap-4">
         {currentSelections.map((label) => (
-          <Chip key={label} onClose={() => removeSelection(label)}>
-            {label}
+          <Chip key={label}>
+            <Chip.Label>{label}</Chip.Label>
+            <Button isIconOnly size="sm" variant="ghost"
+              className="size-5 min-h-0 min-w-0"
+              aria-label={`Remove ${label}`}
+              onPress={() => removeSelection(label)}>
+              <span aria-hidden="true">×</span>
+            </Button>
           </Chip>
         ))}
       </div>

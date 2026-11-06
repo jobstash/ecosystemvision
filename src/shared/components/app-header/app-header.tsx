@@ -1,4 +1,6 @@
-import { Button } from '@heroui/button';
+'use client';
+
+import { Button } from '@heroui/react';
 
 import { TEST_IDS } from '@/shared/core/constants';
 import { Brand } from '@/shared/components/brand';
@@ -40,11 +42,8 @@ export const AppHeader = (props: Props) => {
           </div>
           <div className="flex items-center gap-x-4">
             <div className="hidden gap-2 lg:flex">
-              <Button variant="light">Get Listed</Button>
-              <Button variant="light">Subscribe on TG</Button>
-              {/* <Button radius="sm" className="bg-white text-black">
-                Connect Wallet
-              </Button> */}
+              <Button  variant="ghost" >Get Listed</Button>
+              <Button  variant="ghost" >Subscribe on TG</Button>
             </div>
             <MenuButton testId={TEST_IDS.MOBILE_MENU} />
           </div>

@@ -2,8 +2,7 @@
 
 import { useMemo } from 'react';
 
-import { Avatar, AvatarGroup } from '@heroui/avatar';
-import { Tooltip } from '@heroui/tooltip';
+import { Avatar, AvatarGroup, Tooltip } from '@heroui/react';
 
 import { Chain } from '@/shared/core/schemas';
 import { getPluralText } from '@/shared/utils/get-plural-text';
@@ -20,10 +19,11 @@ const CHAIN_COUNTS = {
 } as const;
 
 const AvatarGroupCount = ({ count }: { count: number }) => (
-  <Tooltip content={`${count} other ${getPluralText('chain', count)}`}>
-    <div className="z-10 ml-[-10px] flex size-[30px] items-center justify-center rounded-full bg-[#E5ECF6]">
+  <Tooltip>
+    <Tooltip.Trigger tabIndex={0} className="z-10 ml-[-10px] flex size-[30px] items-center justify-center rounded-full bg-[#E5ECF6]">
       <Text className="text-sm text-black" text={`+${count}`} />
-    </div>
+    </Tooltip.Trigger>
+    <Tooltip.Content>{`${count} other ${getPluralText('chain', count)}`}</Tooltip.Content>
   </Tooltip>
 );
 
@@ -46,31 +46,24 @@ export const ChainsInfoTag = ({ chains, max }: Props) => {
   if (!chains.length) return null;
 
   const tag = { text: 'Chains:', icon: <ChainsIcon /> };
-  const renderCount = (count: number) => <AvatarGroupCount count={count} />;
-  const avatarClassNames = {
-    base: 'h-7 w-7 text-red-500',
-  };
 
   return (
     <div className="flex items-center gap-1">
       <InfoTag isCompact tag={tag} />
 
-      <AvatarGroup max={maxChainCount} renderCount={renderCount}>
-        {chains.map(({ name, logo }) => (
-          <Tooltip
-            key={name}
-            content={name}
-            classNames={{
-              base: 'text-white font-medium',
-            }}
-          >
-            <Avatar
-              name={name}
-              src={logo ?? ''}
-              classNames={avatarClassNames}
-            />
+      <AvatarGroup>
+        {chains.slice(0, maxChainCount).map(({ name, logo }) => (
+          <Tooltip key={name}>
+            <Tooltip.Trigger tabIndex={0}>
+              <Avatar className="h-7 w-7 text-red-500">
+                <Avatar.Image src={logo ?? ''} alt={name} />
+                <Avatar.Fallback>{name.slice(0, 2)}</Avatar.Fallback>
+              </Avatar>
+            </Tooltip.Trigger>
+            <Tooltip.Content className="font-medium text-white">{name}</Tooltip.Content>
           </Tooltip>
         ))}
+        {chains.length > maxChainCount && <AvatarGroupCount count={chains.length - maxChainCount} />}
       </AvatarGroup>
     </div>
   );

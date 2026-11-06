@@ -2,9 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { Spinner } from '@heroui/spinner';
+import { Button, InputGroup, Spinner } from '@heroui/react';
 
 import { CloseIcon } from '@/shared/components/icons/close-icon';
 import { SearchIcon } from '@/shared/components/icons/sidebar-search-icon';
@@ -26,37 +24,26 @@ export const PlainSearchInput = () => {
   }, []);
 
   return (
-    <Input
-      ref={inputRef}
-      placeholder="Search ..."
-      startContent={
-        <div className="shrink-0">
-          <SearchIcon />
-        </div>
-      }
-      radius="sm"
-      classNames={{
-        input: 'focus:ring-red-500 focus:border-red-500',
-      }}
-      endContent={
-        <>
-          {isPendingPillarRoute && <Spinner size="sm" color="white" />}
-          {value && (
-            <Button
-              isIconOnly
-              size="sm"
-              onClick={onClear}
-              variant="light"
-              className="bg-white/5"
-            >
-              <CloseIcon />
-            </Button>
-          )}
-        </>
-      }
-      isDisabled={isPendingPillarRoute}
-      value={value}
-      onChange={onChange}
-    />
+    <InputGroup className="rounded-lg">
+      <InputGroup.Prefix><SearchIcon /></InputGroup.Prefix>
+      <InputGroup.Input
+        ref={inputRef}
+        aria-label="Search"
+        placeholder="Search ..."
+        className="focus:border-red-500 focus:ring-red-500"
+        disabled={isPendingPillarRoute}
+        value={value}
+        onChange={onChange}
+      />
+      <InputGroup.Suffix>
+        {isPendingPillarRoute && <Spinner size="sm" color="current" />}
+        {value && (
+          <Button isIconOnly aria-label="Clear search" size="sm"
+            onPress={onClear} variant="ghost" className="bg-white/5">
+            <CloseIcon />
+          </Button>
+        )}
+      </InputGroup.Suffix>
+    </InputGroup>
   );
 };

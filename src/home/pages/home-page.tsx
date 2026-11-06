@@ -61,18 +61,18 @@ export const HomePage = () => (
       />
     </AppHeaderProvider>
     <ActiveSearchHiddenWrapper>
-      <main className="relative mx-auto mt-[122px] max-w-[1500px] px-5 pb-28 pt-12 md:px-10 lg:px-12 lg:pt-20">
+      <main className="relative mx-auto mt-[122px] max-w-[1500px] px-5 pt-12 pb-28 md:px-10 lg:px-12 lg:pt-20">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-28 -top-28 size-[520px] rounded-full bg-emerald-300/[0.055] blur-3xl"
+          className="pointer-events-none absolute -top-28 -right-28 size-[520px] rounded-full bg-emerald-300/[0.055] blur-3xl"
         />
         <section className="relative grid gap-10 border-b border-white/10 pb-16 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end lg:pb-24">
           <div className="max-w-4xl">
-            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-emerald-200/70">
+            <p className="flex items-center gap-2 text-xs tracking-[0.24em] text-emerald-200/70 uppercase">
               <Network className="size-4" aria-hidden="true" />
               Ecosystem intelligence
             </p>
-            <h1 className="mt-5 font-grotesk text-48 font-medium leading-[1.03] -tracking-wider md:text-64 lg:text-[78px]">
+            <h1 className="mt-5 font-grotesk text-48 leading-[1.03] font-medium -tracking-wider md:text-64 lg:text-[78px]">
               See organizations and aggregate ecosystem movement.
             </h1>
             <p className="mt-7 max-w-3xl text-base leading-7 text-white/55 md:text-xl md:leading-8">
@@ -106,7 +106,7 @@ export const HomePage = () => (
 
         <section className="py-16 lg:py-24" aria-labelledby="explore-heading">
           <div className="max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+            <p className="text-xs tracking-[0.2em] text-emerald-200/70 uppercase">
               Start with a question
             </p>
             <h2

@@ -109,11 +109,11 @@ export const FundFilters = () => {
   const hasFilters = searchParams.size > 0;
 
   return (
-    <div className="xl:flex-row xl:items-center xl:justify-between flex flex-col gap-3 rounded-2xl border border-white/15 p-3">
+    <div className="flex flex-col gap-3 rounded-2xl border border-white/15 p-3 xl:flex-row xl:items-center xl:justify-between">
       <form className="relative min-w-64 flex-1" onSubmit={onSearch}>
         <SearchIcon
           aria-hidden="true"
-          className="pointer-events-none absolute left-3 top-3 text-white/40"
+          className="pointer-events-none absolute top-3 left-3 text-white/40"
           size={16}
         />
         <input
@@ -190,7 +190,7 @@ export const FundFilters = () => {
               ? `Rounds (${selectedRounds.length})`
               : 'Any round'}
           </summary>
-          <div className="absolute right-0 z-30 mt-2 max-h-80 min-w-72 overflow-y-auto rounded-xl border border-white/15 bg-[#111113] p-2 shadow-2xl">
+          <div className="z-30 mt-2 max-h-80 min-w-64 overflow-y-auto rounded-xl border border-white/15 bg-[#111113] p-2 shadow-2xl md:absolute md:right-0 md:min-w-72">
             {roundStages.isPending && (
               <p className="px-3 py-2 text-sm text-white/45">
                 Loading round stages…
