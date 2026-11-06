@@ -196,6 +196,9 @@ the organization route entrypoints, and the real compact job card rendering.
 Middleware GET failures retain their HTTP status, endpoint path, and schema
 issue codes/paths; network failures retain their original error and cause.
 Diagnostics exclude URL credentials, query strings, and response bodies.
+The original response remains available to callers as a non-enumerable error
+property, preventing console/error-property inspection from exposing its URL,
+headers, or body. `toJSON()` retains only the safe diagnostic fields.
 There are no retries or successful fallbacks for failed backend requests.
 Relative same-origin funds URLs remain unchanged for fetch. Diagnostic pathname
 extraction uses a fixed parsing base only, never a claimed upstream endpoint.
