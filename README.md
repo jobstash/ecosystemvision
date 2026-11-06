@@ -29,6 +29,16 @@ and the SSR/browser regression, never the production-targeted legacy E2E suite.
 The existing pre-push hook invokes that legacy suite and must not run for isolated
 verification pushes; use `git -c core.hooksPath=/dev/null push` after these gates.
 
+The integrated review passed 40 Node regressions, TypeScript, lint, Storybook,
+and a fresh fixture-configured Next build. A real isolated Chrome run passed
+seven SSR status checks plus JSON-LD injection prevention, both unknown-date
+job cards, and missing-pillar `noindex`. The unsafe original JSON serializer
+executed the injection sentinel in a separate positive-control browser page.
+Navigation readiness uses the document event and visible job assertions, not
+`networkidle` (which is unsuitable for pages with background client requests).
+Next 16's required `react-jsx` compiler mode and development route types are
+recorded in `tsconfig.json`, rather than leaving every build to rewrite it.
+
 Use Node.js 24 and pnpm 12.18.0 (`corepack enable`). Install with
 `pnpm install --frozen-lockfile`; `pnpm-lock.yaml` is the authoritative lockfile.
 Both Dockerfiles use `node:24-alpine3.24` for dependency, builder, and runtime

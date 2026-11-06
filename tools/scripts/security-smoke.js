@@ -53,16 +53,18 @@ const run = async () => {
     assert.equal(await unsafe.evaluate(() => globalThis.__jsonLdInjected), true);
     await unsafe.close();
     const page = await context.newPage();
-    await page.goto(`${origin}/organizations/info/fixture-script`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/organizations/info/fixture-script`, { waitUntil: 'domcontentloaded' });
     assert.equal(await page.evaluate(() => globalThis.__jsonLdInjected), undefined);
     assert.equal(await page.locator('script[type="application/ld+json"]').count(), 1);
     const jsonLd = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
     assert.match(jsonLd.name, /<\/ScRiPt>/);
     assert.ok(jsonLd.sameAs.some((value) => value.includes('</script>')));
-    await page.goto(`${origin}/organizations/info/fixture-script/jobs`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/organizations/info/fixture-script/jobs`, { waitUntil: 'domcontentloaded' });
+    await page.getByText('Example Engineer', { exact: true }).first().waitFor({ state: 'visible' });
+    assert.equal(await page.getByText('Example Engineer', { exact: true }).count(), 2);
     assert.equal(await page.evaluate(() => globalThis.__jsonLdInjected), undefined);
     assert.ok((await page.locator('body').innerText()).includes('Example Engineer'));
-    await page.goto(`${origin}/organizations/tags/fixture-missing`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/organizations/tags/fixture-missing`, { waitUntil: 'domcontentloaded' });
     assert.match(await page.locator('meta[name="robots"]').getAttribute('content'), /noindex/);
     console.log(JSON.stringify({ ssrRoutes: 7, browserJsonLd: 'escaped and inert', nullableJob: 'visible', missingPillar: 'noindex', blockedExternalRequests: blocked }));
   } finally {
