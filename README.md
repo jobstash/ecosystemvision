@@ -39,7 +39,7 @@ Navigation readiness uses the document event and visible job assertions, not
 Next 16's required `react-jsx` compiler mode and development route types are
 recorded in `tsconfig.json`, rather than leaving every build to rewrite it.
 
-Use Node.js 24 and pnpm 12.18.0 (`corepack enable`). Install with
+Use Node.js 24.22.3 or a newer 24.x release and pnpm 12.18.0 (`corepack enable`). Install with
 `pnpm install --frozen-lockfile`; `pnpm-lock.yaml` is the authoritative lockfile.
 Both Dockerfiles use `node:24.22.3-alpine3.24` for dependency, builder, and runtime
 stages. Node type declarations intentionally follow the latest 24.x release
